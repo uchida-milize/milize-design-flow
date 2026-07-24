@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'シャープファイナンス株式会社';
-const basePath = '/sharp-finance';
+const clientName = 'ã·ã£ã¼ããã¡ã¤ãã³ã¹æ ªå¼ä¼ç¤¾';
+const basePath = '/sharp-finance-corp';
 const primaryColor = '#004A99';
 const secondaryColor = '#0071BC';
 const accentColor = '#F5A623';
@@ -33,9 +33,9 @@ export default function ComponentsPage() {
           <p className="section-label" style={{ color: primaryColor }}>
             COMPONENTS
           </p>
-          <h1 className="section-title">UIコンポーネント</h1>
+          <h1 className="section-title">UIã³ã³ãã¼ãã³ã</h1>
           <p className="section-desc">
-            ブランドカラーを適用した実装済みコンポーネントのサンプル集です。
+            ãã©ã³ãã«ã©ã¼ãé©ç¨ããå®è£æ¸ã¿ã³ã³ãã¼ãã³ãã®ãµã³ãã«éã§ãã
           </p>
         </div>
 
@@ -73,11 +73,11 @@ export default function ComponentsPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  お申し込みはこちら
+                  ãç³ãè¾¼ã¿ã¯ãã¡ã
                 </button>
               </div>
               <div className="code-block">{`<button className="btn-primary">
-  お申し込みはこちら
+  ãç³ãè¾¼ã¿ã¯ãã¡ã
 </button>`}</div>
             </div>
 
@@ -96,11 +96,11 @@ export default function ComponentsPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  詳細を見る
+                  è©³ç´°ãè¦ã
                 </button>
               </div>
               <div className="code-block">{`<button className="btn-secondary">
-  詳細を見る
+  è©³ç´°ãè¦ã
 </button>`}</div>
             </div>
 
@@ -119,11 +119,11 @@ export default function ComponentsPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  今すぐ相談する
+                  ä»ããç¸è«ãã
                 </button>
               </div>
               <div className="code-block">{`<button className="btn-accent">
-  今すぐ相談する
+  ä»ããç¸è«ãã
 </button>`}</div>
             </div>
 
@@ -142,11 +142,11 @@ export default function ComponentsPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  資料をダウンロード
+                  è³æããã¦ã³ã­ã¼ã
                 </button>
               </div>
               <div className="code-block">{`<button className="btn-outline">
-  資料をダウンロード
+  è³æããã¦ã³ã­ã¼ã
 </button>`}</div>
             </div>
           </div>
@@ -167,10 +167,10 @@ export default function ComponentsPage() {
                     borderRadius: 999,
                   }}
                 >
-                  法人向け
+                  æ³äººåã
                 </span>
               </div>
-              <div className="code-block">{`<span className="badge-primary">法人向け</span>`}</div>
+              <div className="code-block">{`<span className="badge-primary">æ³äººåã</span>`}</div>
             </div>
 
             <div className="component-card">
@@ -186,10 +186,10 @@ export default function ComponentsPage() {
                     borderRadius: 999,
                   }}
                 >
-                  おすすめ
+                  ãããã
                 </span>
               </div>
-              <div className="code-block">{`<span className="badge-accent">おすすめ</span>`}</div>
+              <div className="code-block">{`<span className="badge-accent">ãããã</span>`}</div>
             </div>
 
             <div className="component-card">
@@ -230,10 +230,10 @@ export default function ComponentsPage() {
                   }}
                 >
                   <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-main)' }}>
-                    法人向け融資プラン
+                    æ³äººåãèè³ãã©ã³
                   </p>
                   <p style={{ fontSize: 14, color: 'var(--text-sub)', marginTop: 8 }}>
-                    信頼と実績に基づいた柔軟な資金調達をサポートします。
+                    ä¿¡é ¼ã¨å®ç¸¾ã«åºã¥ããæè»ãªè³éèª¿éããµãã¼ããã¾ãã
                   </p>
                   <span
                     style={{
@@ -244,14 +244,14 @@ export default function ComponentsPage() {
                       color: primaryColor,
                     }}
                   >
-                    詳しく見る →
+                    è©³ããè¦ã â
                   </span>
                 </div>
               </div>
               <div className="code-block">{`<div className="service-card">
-  <h3>法人向け融資プラン</h3>
-  <p>信頼と実績に基づいた柔軟な資金調達をサポートします。</p>
-  <a href="#">詳しく見る →</a>
+  <h3>æ³äººåãèè³ãã©ã³</h3>
+  <p>ä¿¡é ¼ã¨å®ç¸¾ã«åºã¥ããæè»ãªè³éèª¿éããµãã¼ããã¾ãã</p>
+  <a href="#">è©³ããè¦ã â</a>
 </div>`}</div>
             </div>
 
@@ -269,17 +269,17 @@ export default function ComponentsPage() {
                 >
                   <p style={{ fontSize: 12, fontWeight: 700, color: accentColor }}>PREMIUM</p>
                   <p style={{ fontSize: 18, fontWeight: 700, marginTop: 8 }}>
-                    プレミアムサポートプラン
+                    ãã¬ãã¢ã ãµãã¼ããã©ã³
                   </p>
                   <p style={{ fontSize: 14, marginTop: 8, opacity: 0.85 }}>
-                    専任担当者による手厚いサポートをご提供します。
+                    å°ä»»æå½èã«ããæåããµãã¼ãããæä¾ãã¾ãã
                   </p>
                 </div>
               </div>
               <div className="code-block">{`<div className="highlight-card">
   <span className="label">PREMIUM</span>
-  <h3>プレミアムサポートプラン</h3>
-  <p>専任担当者による手厚いサポートをご提供します。</p>
+  <h3>ãã¬ãã¢ã ãµãã¼ããã©ã³</h3>
+  <p>å°ä»»æå½èã«ããæåããµãã¼ãããæä¾ãã¾ãã</p>
 </div>`}</div>
             </div>
           </div>
@@ -299,11 +299,11 @@ export default function ComponentsPage() {
                     marginBottom: 6,
                   }}
                 >
-                  会社名
+                  ä¼ç¤¾å
                 </label>
                 <input
                   type="text"
-                  placeholder="株式会社サンプル"
+                  placeholder="æ ªå¼ä¼ç¤¾ãµã³ãã«"
                   style={{
                     width: '100%',
                     padding: '10px 12px',
@@ -314,8 +314,8 @@ export default function ComponentsPage() {
                   }}
                 />
               </div>
-              <div className="code-block">{`<label>会社名</label>
-<input type="text" placeholder="株式会社サンプル" className="form-input" />`}</div>
+              <div className="code-block">{`<label>ä¼ç¤¾å</label>
+<input type="text" placeholder="æ ªå¼ä¼ç¤¾ãµã³ãã«" className="form-input" />`}</div>
             </div>
 
             <div className="component-card">
@@ -330,7 +330,7 @@ export default function ComponentsPage() {
                     marginBottom: 6,
                   }}
                 >
-                  ご相談内容
+                  ãç¸è«åå®¹
                 </label>
                 <select
                   style={{
@@ -343,14 +343,14 @@ export default function ComponentsPage() {
                     background: '#fff',
                   }}
                 >
-                  <option>資金調達について</option>
-                  <option>リースについて</option>
-                  <option>その他</option>
+                  <option>è³éèª¿éã«ã¤ãã¦</option>
+                  <option>ãªã¼ã¹ã«ã¤ãã¦</option>
+                  <option>ãã®ä»</option>
                 </select>
               </div>
-              <div className="code-block">{`<label>ご相談内容</label>
+              <div className="code-block">{`<label>ãç¸è«åå®¹</label>
 <select className="form-select">
-  <option>資金調達について</option>
+  <option>è³éèª¿éã«ã¤ãã¦</option>
 </select>`}</div>
             </div>
 
@@ -367,12 +367,12 @@ export default function ComponentsPage() {
                   }}
                 >
                   <input type="checkbox" style={{ accentColor: primaryColor }} />
-                  プライバシーポリシーに同意する
+                  ãã©ã¤ãã·ã¼ããªã·ã¼ã«åæãã
                 </label>
               </div>
               <div className="code-block">{`<label>
   <input type="checkbox" />
-  プライバシーポリシーに同意する
+  ãã©ã¤ãã·ã¼ããªã·ã¼ã«åæãã
 </label>`}</div>
             </div>
           </div>
