@@ -2,5 +2,5 @@ import './globals.css';
 export default function Layout({
   children,
 }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <div className="sf-corp-portal">{children}</div>;
 }
