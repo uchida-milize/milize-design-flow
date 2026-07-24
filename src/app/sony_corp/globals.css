@@ -10,12 +10,11 @@
   --portal-bg: #f5f7fa;
 }
 
-* {
+.sony-corp-portal * {
   box-sizing: border-box;
 }
 
-html,
-body {
+.sony-corp-portal {
   padding: 0;
   margin: 0;
   background: var(--portal-bg);
@@ -27,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Inter', 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
 }
 
-a {
+.sony-corp-portal a {
   color: inherit;
   text-decoration: none;
 }
