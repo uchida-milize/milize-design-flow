@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+:root {
+  --color-primary: #005bac;
+  --color-secondary: #007acc;
+  --color-accent: #f5a623;
+  --color-text: #333333;
+  --color-bg: #ffffff;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--color-secondary);
+  color: #ffffff;
+}
