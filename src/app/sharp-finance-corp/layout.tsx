@@ -1,3 +1,4 @@
+// SF Corp portal layout — CSS scoped to .sf-corp-portal
 import './globals.css';
 export default function Layout({
   children,
