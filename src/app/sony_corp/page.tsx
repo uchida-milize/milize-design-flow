@@ -1,7 +1,7 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'ソニー株式会社';
-const basePath = '/sony';
+const clientName = 'ã½ãã¼æ ªå¼ä¼ç¤¾';
+const basePath = '/sony_corp';
 const primaryColor = '#000000';
 
 export default function HomePage() {
@@ -28,10 +28,10 @@ export default function HomePage() {
             BRAND PORTAL
           </div>
           <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#111827', margin: 0 }}>
-            {clientName} ブランドポータル
+            {clientName} ãã©ã³ããã¼ã¿ã«
           </h1>
           <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '8px' }}>
-            ブランドガイドラインとUIコンポーネントをご確認いただけます。
+            ãã©ã³ãã¬ã¤ãã©ã¤ã³ã¨UIã³ã³ãã¼ãã³ãããç¢ºèªããã ãã¾ãã
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export default function HomePage() {
                 Guidelines
               </h2>
               <p style={{ fontSize: '14px', color: '#6b7280', margin: 0 }}>
-                ブランドカラー、タイポグラフィ、トンマナなどのガイドラインを確認できます。
+                ãã©ã³ãã«ã©ã¼ãã¿ã¤ãã°ã©ãã£ããã³ãããªã©ã®ã¬ã¤ãã©ã¤ã³ãç¢ºèªã§ãã¾ãã
               </p>
             </div>
           </a>
@@ -107,7 +107,7 @@ export default function HomePage() {
                 Components
               </h2>
               <p style={{ fontSize: '14px', color: '#6b7280', margin: 0 }}>
-                UIコンポーネントの実装例とコードスニペットを確認できます。
+                UIã³ã³ãã¼ãã³ãã®å®è£ä¾ã¨ã³ã¼ãã¹ãããããç¢ºèªã§ãã¾ãã
               </p>
             </div>
           </a>
