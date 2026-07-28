@@ -60,7 +60,16 @@ async function getClients(): Promise<ClientInfo[]> {
     const contents = (await res.json()) as Array<{ name: string; type: string }>;
     const clientSlugs = contents
       .filter((item) => item.type === 'dir' && !EXCLUDED_DIRS.has(item.name))
-      .map((item) => item.name);
+      .map((item) => item.name)
+      .sort((a, b) => {
+        const ORDER = ['hitachi', 'sony_corp', 'sharp-finance-corp', 'milize', 'api'];
+        const ai = ORDER.indexOf(a);
+        const bi = ORDER.indexOf(b);
+        if (ai === -1 && bi === -1) return a.localeCompare(b);
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      });
 
     const clients = await Promise.all(
       clientSlugs.map(async (slug): Promise<ClientInfo> => {
