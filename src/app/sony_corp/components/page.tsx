@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'ã½ãã¼æ ªå¼ä¼ç¤¾';
+const clientName = 'ソニー株式会社';
 const basePath = '/sony_corp';
 const primaryColor = '#000000';
 const accentColor = '#0071BC';
@@ -50,8 +50,8 @@ function ComponentCard({
       </div>
       <pre
         style={{
-          background: '#0f172a',
-          color: '#94a3b8',
+          background: '#EFEFEF',
+          color: '#333333',
           fontFamily: 'monospace',
           fontSize: '12px',
           padding: '12px 16px',
@@ -91,10 +91,10 @@ export default function ComponentsPage() {
             UI COMPONENTS
           </div>
           <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#111827', margin: 0 }}>
-            ã³ã³ãã¼ãã³ãä¸è¦§
+            コンポーネント一覧
           </h1>
           <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '8px' }}>
-            {clientName} ãã©ã³ãã«åºã¥ãUIã³ã³ãã¼ãã³ãã®å®è£ä¾ã§ãã
+            {clientName} ブランドに基づくUIコンポーネントの実装例です。
           </p>
         </div>
 
@@ -126,7 +126,7 @@ export default function ComponentsPage() {
                 Buttons
               </h2>
               <p style={{ fontSize: '14px', color: '#6b7280', margin: 0 }}>
-                ä¸»è¦ãªã¢ã¯ã·ã§ã³ã«ä½¿ç¨ãããã¿ã³ã³ã³ãã¼ãã³ã
+                主要なアクションに使用するボタンコンポーネント
               </p>
             </div>
 
@@ -199,7 +199,7 @@ export default function ComponentsPage() {
                 Cards
               </h2>
               <p style={{ fontSize: '14px', color: '#6b7280', margin: 0 }}>
-                ã³ã³ãã³ããã¾ã¨ããããã®ã«ã¼ãã³ã³ãã¼ãã³ã
+                コンテンツをまとめるためのカードコンポーネント
               </p>
             </div>
 
@@ -221,7 +221,7 @@ export default function ComponentsPage() {
                   Card Title
                 </h3>
                 <p style={{ fontSize: '13px', color: '#6b7280', margin: 0 }}>
-                  ã«ã¼ãã®èª¬æãã­ã¹ããããã«å¥ãã¾ãã
+                  カードの説明テキストがここに入ります。
                 </p>
               </div>
             </ComponentCard>
@@ -245,7 +245,7 @@ export default function ComponentsPage() {
                   Accent Card
                 </h3>
                 <p style={{ fontSize: '13px', color: '#6b7280', margin: 0 }}>
-                  ã¢ã¯ã»ã³ãã«ã©ã¼ãä½¿ã£ãã«ã¼ãã§ãã
+                  アクセントカラーを使ったカードです。
                 </p>
               </div>
             </ComponentCard>
@@ -259,7 +259,7 @@ export default function ComponentsPage() {
                 Forms
               </h2>
               <p style={{ fontSize: '14px', color: '#6b7280', margin: 0 }}>
-                å¥åãã©ã¼ã ã§ä½¿ç¨ããã³ã³ãã¼ãã³ã
+                入力フォームで使用するコンポーネント
               </p>
             </div>
 
