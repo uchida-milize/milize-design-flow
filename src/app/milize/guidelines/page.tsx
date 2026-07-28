@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'シャープファイナンス株式会社';
-const basePath = '/sharp-finance-corp';
+const clientName = 'Milize';
+const basePath = '/milize';
 const primaryColor = '#0055A4';
 
 const colors = [
@@ -25,7 +25,7 @@ export default function GuidelinesPage() {
   const [tab, setTab] = useState('color');
 
   return (
-    <div className="sharp-finance-corp-portal">
+    <div className="milize-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
