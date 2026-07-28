@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation';
 
 export function NewClientButton() {
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ query: '', slug: '' });
+  const [form, setForm] = useState({ company_name: '', client_slug: '' });
   const [progress, setProgress] = useState(0);
   const [running, setRunning] = useState(false);
   const [statusMsg, setStatusMsg] = useState('');
   const router = useRouter();
 
   function reset() {
-    setForm({ query: '', slug: '' });
+    setForm({ company_name: '', client_slug: '' });
     setProgress(0);
     setRunning(false);
     setStatusMsg('');
@@ -144,34 +144,31 @@ export function NewClientButton() {
                   新規クライアント追加
                 </h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>
-                  会社名またはURLを入力するとDifyがポータルを自動生成します
+                  会社名を入力するとDifyがポータルを自動生成します
                 </p>
                 <form onSubmit={handleSubmit}>
                   <div style={{ marginBottom: '18px' }}>
-                    <label style={labelStyle}>会社名（日本語）または WebサイトURL</label>
+                    <label style={labelStyle}>会社名（日本語）</label>
                     <input
                       style={inputStyle}
-                      placeholder="例：日立製作所　または　https://www.hitachi.co.jp"
-                      value={form.query}
-                      onChange={e => setForm(f => ({ ...f, query: e.target.value }))}
+                      placeholder="例：シャープファイナンス株式会社"
+                      value={form.company_name}
+                      onChange={e => setForm(f => ({ ...f, company_name: e.target.value }))}
                       required
                     />
-                    <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>
-                      会社名 → Webリサーチ／URL → サイトからデザイン要素を抽出
-                    </div>
                   </div>
                   <div style={{ marginBottom: '28px' }}>
-                    <label style={labelStyle}>スラッグ（URL用ID）</label>
+                    <label style={labelStyle}>スラッグ（URL用ID・英小文字とハイフンのみ）</label>
                     <input
                       style={inputStyle}
-                      placeholder="例：hitachi"
-                      value={form.slug}
-                      onChange={e => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, '') }))}
+                      placeholder="例：sharp-finance-corp"
+                      value={form.client_slug}
+                      onChange={e => setForm(f => ({ ...f, client_slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))}
                       required
                     />
-                    {form.slug && (
+                    {form.client_slug && (
                       <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>
-                        URL: milize-design-flow.vercel.app/{form.slug}
+                        URL: milize-design-flow.vercel.app/{form.client_slug}
                       </div>
                     )}
                   </div>
@@ -202,7 +199,7 @@ export function NewClientButton() {
                   ポータルを生成中...
                 </h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
-                  {form.query} のポータルをDifyが構築しています
+                  {form.company_name} のポータルをDifyが構築しています
                 </p>
                 <div style={{
                   background: '#f3f4f6', borderRadius: '999px',
