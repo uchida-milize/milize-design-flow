@@ -23,6 +23,7 @@ export function NewClientButton() {
     setProgress(5);
     setStatusMsg('Difyワークフローを起動中...');
 
+    let difyDone = false;
     try {
       const res = await fetch('/api/dify-create', {
         method: 'POST',
@@ -43,13 +44,8 @@ export function NewClientButton() {
             const data = JSON.parse(line.slice(6));
             if (data.progress !== undefined) setProgress(data.progress);
             if (data.status) setStatusMsg(data.status);
-            if (data.done) {
-              setProgress(100);
-              setStatusMsg('完了！');
-              await new Promise(r => setTimeout(r, 1200));
-              setOpen(false);
-              reset();
-              router.refresh();
+            if (data.dify_done) {
+              difyDone = true;
             }
             if (data.error) {
               setStatusMsg('エラー: ' + data.error);
@@ -58,6 +54,34 @@ export function NewClientButton() {
           } catch {}
         }
       }
+
+    if (difyDone) {
+      const slug = form.client_slug;
+      let deployed = false;
+      let attempts = 0;
+      while (!deployed && attempts < 60) {
+        setStatusMsg('Vercelデプロイ待機中...');
+        setProgress(prev => Math.min(95, prev + 0.7));
+        await new Promise(r => setTimeout(r, 5000));
+        attempts++;
+        try {
+          const r = await fetch('/' + slug, { method: 'HEAD', cache: 'no-store' });
+          if (r.ok) {
+            deployed = true;
+            setProgress(100);
+            setStatusMsg('デプロイ完了！');
+            await new Promise(r => setTimeout(r, 1200));
+            setOpen(false);
+            reset();
+            router.refresh();
+          }
+        } catch {}
+      }
+      if (!deployed) {
+        setStatusMsg('デプロイタイムアウト');
+        setRunning(false);
+      }
+    }
     } catch {
       setStatusMsg('接続エラーが発生しました');
       setRunning(false);
