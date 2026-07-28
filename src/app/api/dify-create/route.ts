@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { companyName, slug, url } = await req.json();
+  const { company_name, client_slug } = await req.json();
 
   const encoder = new TextEncoder();
 
@@ -22,9 +22,8 @@ export async function POST(req: NextRequest) {
           },
           body: JSON.stringify({
             inputs: {
-              company_name: companyName,
-              slug,
-              website_url: url,
+              company_name,
+              client_slug,
             },
             response_mode: 'streaming',
             user: 'milize-admin',
