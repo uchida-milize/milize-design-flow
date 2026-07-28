@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 
-:root {
+.hitachi-portal {
   --primary-color: #E60012;
   --secondary-color: #000000;
   --accent-color: #0071BC;
@@ -8,14 +8,14 @@
   --bg-color: #FFFFFF;
 }
 
-* {
+.hitachi-portal * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 html,
-body {
+.hitachi-portal {
   background: #f5f7fa;
   color: var(--text-color);
   font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
