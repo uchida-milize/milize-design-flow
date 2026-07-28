@@ -34,26 +34,47 @@ export default function HitachiHome() {
     <>
       <style>{`@import url('https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap');`}</style>
       <div style={{ minHeight: '100vh' }}>
-        <ClientPortalHeader clientName={clientName} basePath={basePath} active="home" primaryColor={primaryColor} />
+        <ClientPortalHeader
+          clientName={clientName}
+          basePath={basePath}
+          active="home"
+          primaryColor={primaryColor}
+        />
+
+        {/* ブランドカラー比率バー — ヘッダー直下・全幅 */}
+        <div style={{ display: 'flex', width: '100%', height: '130px' }}>
+          {brandColors.map((c) => {
+            const textColor = getTextColor(c.hex);
+            const chillax = "'Chillax', sans-serif";
+            return (
+              <div
+                key={c.hex}
+                style={{
+                  width: c.ratio + '%',
+                  backgroundColor: c.hex,
+                  border: c.hex === '#FFFFFF' ? '1px solid #e0e0e0' : 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  padding: '0 6px',
+                  gap: '2px',
+                }}
+              >
+                <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.3, textAlign: 'center', whiteSpace: 'nowrap' }}>{hexToRgb(c.hex)}</span>
+                <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.3, textAlign: 'center', whiteSpace: 'nowrap' }}>{c.hex}</span>
+                <span style={{ display: 'flex', alignItems: 'baseline', gap: '1px' }}>
+                  <span style={{ color: textColor, fontSize: '26px', fontWeight: 600, fontFamily: chillax, lineHeight: 1.2 }}>{c.ratio}</span>
+                  <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.2 }}>%</span>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* コンテンツ */}
         <main style={{ padding: '40px 24px', maxWidth: '960px', margin: '0 auto' }}>
-
-          <div style={{ display: 'flex', height: '130px', borderRadius: '8px', overflow: 'hidden', marginBottom: '32px' }}>
-            {brandColors.map((c) => {
-              const textColor = getTextColor(c.hex);
-              const chillax = "'Chillax', sans-serif";
-              return (
-                <div key={c.hex} style={{ width: c.ratio + '%', backgroundColor: c.hex, border: c.hex === '#FFFFFF' ? '1px solid #e0e0e0' : 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '0 6px', gap: '2px' }}>
-                  <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.3, textAlign: 'center', whiteSpace: 'nowrap' }}>{hexToRgb(c.hex)}</span>
-                  <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.3, textAlign: 'center', whiteSpace: 'nowrap' }}>{c.hex}</span>
-                  <span style={{ display: 'flex', alignItems: 'baseline', gap: '1px' }}>
-                    <span style={{ color: textColor, fontSize: '26px', fontWeight: 600, fontFamily: chillax, lineHeight: 1.2 }}>{c.ratio}</span>
-                    <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.2 }}>%</span>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
           <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '16px' }}>コンテンツ</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
             <Link href={`${basePath}/guidelines`} style={{ textDecoration: 'none' }}>
@@ -69,8 +90,8 @@ export default function HitachiHome() {
               </div>
             </Link>
           </div>
-
         </main>
+
       </div>
     </>
   );
