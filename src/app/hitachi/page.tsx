@@ -26,7 +26,7 @@ export default function HitachiHome() {
         <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '12px' }}>
           ブランドカラー比率
         </h2>
-        <div style={{ display: 'flex', height: '24px', borderRadius: '6px', overflow: 'hidden', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', height: '48px', borderRadius: '6px', overflow: 'hidden', marginBottom: '12px' }}>
           {brandColors.map((c) => (
             <div
               key={c.hex}
