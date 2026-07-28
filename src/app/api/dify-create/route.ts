@@ -54,17 +54,17 @@ export async function POST(req: NextRequest) {
               const data = JSON.parse(line.slice(6));
 
               if (data.event === 'workflow_started') {
-                progressVal = 30;
+                progressVal = 20;
                 send({ progress: progressVal, status: 'ワークフロー開始...' });
               } else if (data.event === 'node_started') {
-                progressVal = Math.min(progressVal + 12, 85);
+                progressVal = Math.min(progressVal + 8, 55);
                 const title = data.data?.title || '';
                 send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
               } else if (data.event === 'node_finished') {
-                progressVal = Math.min(progressVal + 3, 90);
+                progressVal = Math.min(progressVal + 2, 58);
                 send({ progress: progressVal });
               } else if (data.event === 'workflow_finished') {
-                send({ progress: 100, status: '完了！', done: true });
+                send({ progress: 60, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
               }
             } catch {}
           }
