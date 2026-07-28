@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { NewClientButton } from '@/components/NewClientButton';
 
 // クライアントディレクトリから除外するディレクトリ名（旧DC残骸 + Next.js予約名）
 const EXCLUDED_DIRS = new Set([
@@ -199,42 +200,7 @@ export default async function ClientsIndex() {
                 </div>
               </Link>
             ))}
-
-            {/* 新規クライアント追加プレースホルダー */}
-            <div
-              style={{
-                background: '#f9fafb',
-                border: '2px dashed #d1d5db',
-                borderRadius: 16,
-                padding: 28,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: 200,
-              }}
-            >
-              <div
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '50%',
-                  background: '#e5e7eb',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 12,
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M10 4v12M4 10h12" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <p className="text-sm font-medium" style={{ color: '#6b7280' }}>新規クライアント</p>
-              <p className="text-xs mt-1" style={{ color: '#9ca3af' }}>Difyで自動生成</p>
-            </div>
-          </div>
-        )}
+            <NewClientButton />
       </div>
     </div>
   );
