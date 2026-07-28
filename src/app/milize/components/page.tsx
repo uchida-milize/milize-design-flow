@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'シャープファイナンス株式会社';
-const basePath = '/sharp-finance-corp';
+const clientName = 'Milize';
+const basePath = '/milize';
 const primaryColor = '#0055A4';
 const secondaryColor = '#00A0E9';
 const accentColor = '#F5A623';
@@ -19,7 +19,7 @@ export default function ComponentsPage() {
   const [tab, setTab] = useState('buttons');
 
   return (
-    <div className="sharp-finance-corp-portal">
+    <div className="milize-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
