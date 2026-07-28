@@ -14,6 +14,21 @@ const brandColors = [
   { name: 'White', hex: '#FFFFFF', ratio: 10 },
 ];
 
+function getTextColor(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.5 ? '#333333' : '#FFFFFF';
+}
+
+function hexToRgb(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 export default function HitachiHome() {
   return (
     <div style={{ minHeight: '100vh' }}>
@@ -26,41 +41,53 @@ export default function HitachiHome() {
       <main style={{ padding: '40px 24px', maxWidth: '960px', margin: '0 auto' }}>
 
         {/* ブランドカラー比率バー */}
-        <div style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '12px' }}>
-            ブランドカラー比率
-          </h2>
-          <div style={{ display: 'flex', height: '48px', borderRadius: '6px', overflow: 'hidden', marginBottom: '12px' }}>
-            {brandColors.map((c) => (
+        <div style={{ display: 'flex', height: '140px', borderRadius: '8px', overflow: 'hidden', marginBottom: '32px' }}>
+          {brandColors.map((c) => {
+            const textColor = getTextColor(c.hex);
+            return (
               <div
                 key={c.hex}
                 style={{
                   width: c.ratio + '%',
                   backgroundColor: c.hex,
                   border: c.hex === '#FFFFFF' ? '1px solid #e0e0e0' : 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  padding: '0 6px',
                 }}
-                title={c.name + ' ' + c.ratio + '%'}
-              />
-            ))}
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-            {brandColors.map((c) => (
-              <div key={c.hex} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#333' }}>
+                title={c.name + ' ' + hexToRgb(c.hex) + ' ' + c.ratio + '%'}
+              >
                 <span style={{
-                  display: 'inline-block', width: '14px', height: '14px', borderRadius: '3px',
-                  backgroundColor: c.hex,
-                  border: c.hex === '#FFFFFF' ? '1px solid #ccc' : 'none',
-                  flexShrink: 0,
-                }} />
-                <span>{c.name}</span>
-                <span style={{ color: '#888' }}>{c.hex}</span>
-                <span style={{ color: '#888' }}>{c.ratio}%</span>
+                  color: textColor,
+                  fontSize: '52px',
+                  fontWeight: 700,
+                  lineHeight: 1.1,
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap',
+                }}>
+                  {hexToRgb(c.hex)}
+                </span>
+                <span style={{
+                  color: textColor,
+                  fontSize: '52px',
+                  fontWeight: 700,
+                  lineHeight: 1.1,
+                  textAlign: 'center',
+                }}>
+                  {c.ratio}%
+                </span>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* ナビゲーションカード */}
+        {/* コンテンツ */}
+        <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '16px' }}>
+          コンテンツ
+        </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           <Link href={`${basePath}/guidelines`} style={{ textDecoration: 'none' }}>
             <div style={{
@@ -68,9 +95,9 @@ export default function HitachiHome() {
               boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer',
               transition: 'box-shadow 0.2s',
             }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>
                 ブランドガイドライン
-              </h2>
+              </h3>
               <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>
                 ブランドカラー、タイポグラフィ、ロゴの使用方法など、日立ブランドの基本ルールをご確認ください。
               </p>
@@ -82,9 +109,9 @@ export default function HitachiHome() {
               boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer',
               transition: 'box-shadow 0.2s',
             }}>
-              <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>
                 UIコンポーネント
-              </h2>
+              </h3>
               <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>
                 ボタン、フォーム、カード、ナビゲーションなど、UIコンポーネントの仕様と実装例をご覧ください。
               </p>
