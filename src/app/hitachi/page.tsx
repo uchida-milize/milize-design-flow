@@ -31,95 +31,70 @@ function hexToRgb(hex: string): string {
 
 export default function HitachiHome() {
   return (
-    <div style={{ minHeight: '100vh' }}>
-      <ClientPortalHeader
-        clientName={clientName}
-        basePath={basePath}
-        active="home"
-        primaryColor={primaryColor}
-      />
-      <main style={{ padding: '40px 24px', maxWidth: '960px', margin: '0 auto' }}>
+    <>
+      <style>{`@import url('https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap');`}</style>
+      <div style={{ minHeight: '100vh' }}>
+        <ClientPortalHeader
+          clientName={clientName}
+          basePath={basePath}
+          active="home"
+          primaryColor={primaryColor}
+        />
+        <main style={{ padding: '40px 24px', maxWidth: '960px', margin: '0 auto' }}>
 
-        {/* ブランドカラー比率バー */}
-        <div style={{ display: 'flex', height: '140px', borderRadius: '8px', overflow: 'hidden', marginBottom: '32px' }}>
-          {brandColors.map((c) => {
-            const textColor = getTextColor(c.hex);
-            return (
-              <div
-                key={c.hex}
-                style={{
-                  width: c.ratio + '%',
-                  backgroundColor: c.hex,
-                  border: c.hex === '#FFFFFF' ? '1px solid #e0e0e0' : 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  overflow: 'hidden',
-                  padding: '0 6px',
-                }}
-                title={c.name + ' ' + hexToRgb(c.hex) + ' ' + c.ratio + '%'}
-              >
-                <span style={{
-                  color: textColor,
-                  fontSize: '52px',
-                  fontWeight: 700,
-                  lineHeight: 1.1,
-                  textAlign: 'center',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {hexToRgb(c.hex)}
-                </span>
-                <span style={{
-                  color: textColor,
-                  fontSize: '52px',
-                  fontWeight: 700,
-                  lineHeight: 1.1,
-                  textAlign: 'center',
-                }}>
-                  {c.ratio}%
-                </span>
+          <div style={{ display: 'flex', height: '130px', borderRadius: '8px', overflow: 'hidden', marginBottom: '32px' }}>
+            {brandColors.map((c) => {
+              const textColor = getTextColor(c.hex);
+              const chillax = "'Chillax', sans-serif";
+              return (
+                <div
+                  key={c.hex}
+                  style={{
+                    width: c.ratio + '%',
+                    backgroundColor: c.hex,
+                    border: c.hex === '#FFFFFF' ? '1px solid #e0e0e0' : 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden',
+                    padding: '0 6px',
+                  }}
+                >
+                  <span style={{ color: textColor, fontSize: '26px', fontWeight: 600, fontFamily: chillax, lineHeight: 1.2, textAlign: 'center', whiteSpace: 'nowrap' }}>
+                    {hexToRgb(c.hex)}
+                  </span>
+                  <span style={{ color: textColor, fontSize: '26px', fontWeight: 600, fontFamily: chillax, lineHeight: 1.2, textAlign: 'center', whiteSpace: 'nowrap' }}>
+                    {c.hex}
+                  </span>
+                  <span style={{ color: textColor, fontSize: '26px', fontWeight: 700, fontFamily: chillax, lineHeight: 1.2, textAlign: 'center' }}>
+                    {c.ratio}%
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '16px' }}>
+            コンテンツ
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+            <Link href={`${basePath}/guidelines`} style={{ textDecoration: 'none' }}>
+              <div style={{ background: '#fff', borderRadius: '12px', padding: '28px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>ブランドガイドライン</h3>
+                <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>ブランドカラー、タイポグラフィ、ロゴの使用方法など、日立ブランドの基本ルールをご確認ください。</p>
               </div>
-            );
-          })}
-        </div>
+            </Link>
+            <Link href={`${basePath}/components`} style={{ textDecoration: 'none' }}>
+              <div style={{ background: '#fff', borderRadius: '12px', padding: '28px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>UIコンポーネント</h3>
+                <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>ボタン、フォーム、カード、ナビゲーションなど、UIコンポーネントの仕様と実装例をご覧ください。</p>
+              </div>
+            </Link>
+          </div>
 
-        {/* コンテンツ */}
-        <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '16px' }}>
-          コンテンツ
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-          <Link href={`${basePath}/guidelines`} style={{ textDecoration: 'none' }}>
-            <div style={{
-              background: '#fff', borderRadius: '12px', padding: '28px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer',
-              transition: 'box-shadow 0.2s',
-            }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>
-                ブランドガイドライン
-              </h3>
-              <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>
-                ブランドカラー、タイポグラフィ、ロゴの使用方法など、日立ブランドの基本ルールをご確認ください。
-              </p>
-            </div>
-          </Link>
-          <Link href={`${basePath}/components`} style={{ textDecoration: 'none' }}>
-            <div style={{
-              background: '#fff', borderRadius: '12px', padding: '28px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer',
-              transition: 'box-shadow 0.2s',
-            }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>
-                UIコンポーネント
-              </h3>
-              <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>
-                ボタン、フォーム、カード、ナビゲーションなど、UIコンポーネントの仕様と実装例をご覧ください。
-              </p>
-            </div>
-          </Link>
-        </div>
-
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
