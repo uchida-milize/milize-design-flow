@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation';
 
 export function NewClientButton() {
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ companyName: '', slug: '', url: '' });
+  const [form, setForm] = useState({ query: '', slug: '' });
   const [progress, setProgress] = useState(0);
   const [running, setRunning] = useState(false);
   const [statusMsg, setStatusMsg] = useState('');
   const router = useRouter();
 
   function reset() {
-    setForm({ companyName: '', slug: '', url: '' });
+    setForm({ query: '', slug: '' });
     setProgress(0);
     setRunning(false);
     setStatusMsg('');
@@ -58,7 +58,7 @@ export function NewClientButton() {
           } catch {}
         }
       }
-    } catch (err) {
+    } catch {
       setStatusMsg('接続エラーが発生しました');
       setRunning(false);
     }
@@ -86,7 +86,6 @@ export function NewClientButton() {
 
   return (
     <>
-      {/* 新規クライアントカード */}
       <div
         onClick={() => { reset(); setOpen(true); }}
         style={{
@@ -125,7 +124,6 @@ export function NewClientButton() {
         </div>
       </div>
 
-      {/* モーダルオーバーレイ */}
       {open && (
         <div
           onClick={e => { if (!running && e.target === e.currentTarget) setOpen(false); }}
@@ -146,20 +144,23 @@ export function NewClientButton() {
                   新規クライアント追加
                 </h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>
-                  情報を入力するとDifyがポータルを自動生成します
+                  会社名またはURLを入力するとDifyがポータルを自動生成します
                 </p>
                 <form onSubmit={handleSubmit}>
                   <div style={{ marginBottom: '18px' }}>
-                    <label style={labelStyle}>会社名（日本語）</label>
+                    <label style={labelStyle}>会社名（日本語）または WebサイトURL</label>
                     <input
                       style={inputStyle}
-                      placeholder="例：日立製作所"
-                      value={form.companyName}
-                      onChange={e => setForm(f => ({ ...f, companyName: e.target.value }))}
+                      placeholder="例：日立製作所　または　https://www.hitachi.co.jp"
+                      value={form.query}
+                      onChange={e => setForm(f => ({ ...f, query: e.target.value }))}
                       required
                     />
+                    <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>
+                      会社名 → Webリサーチ／URL → サイトからデザイン要素を抽出
+                    </div>
                   </div>
-                  <div style={{ marginBottom: '18px' }}>
+                  <div style={{ marginBottom: '28px' }}>
                     <label style={labelStyle}>スラッグ（URL用ID）</label>
                     <input
                       style={inputStyle}
@@ -169,21 +170,10 @@ export function NewClientButton() {
                       required
                     />
                     {form.slug && (
-                      <div style={{ fontSize: '12px', color: '#9ca3af', marginTop: '4px' }}>
+                      <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>
                         URL: milize-design-flow.vercel.app/{form.slug}
                       </div>
                     )}
-                  </div>
-                  <div style={{ marginBottom: '28px' }}>
-                    <label style={labelStyle}>WebサイトURL</label>
-                    <input
-                      style={inputStyle}
-                      placeholder="例：https://www.hitachi.co.jp"
-                      type="url"
-                      value={form.url}
-                      onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
-                      required
-                    />
                   </div>
                   <div style={{ display: 'flex', gap: '12px' }}>
                     <button
@@ -212,7 +202,7 @@ export function NewClientButton() {
                   ポータルを生成中...
                 </h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
-                  {form.companyName} のポータルをDifyが構築しています
+                  {form.query} のポータルをDifyが構築しています
                 </p>
                 <div style={{
                   background: '#f3f4f6', borderRadius: '999px',
