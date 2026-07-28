@@ -1,5 +1,54 @@
 import { NextRequest } from 'next/server';
 
+
+async function fixTemplateRefs(slug: string, companyName: string, token: string) {
+  const OWNER = 'uchida-milize';
+  const REPO  = 'milize-design-flow';
+  const API   = 'https://api.github.com';
+  const h = {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
+  async function listFiles(path: string): Promise<Array<{path: string; sha: string; type: string}>> {
+    const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+    if (!r.ok) return [];
+    const items: Array<{path: string; sha: string; type: string}> = await r.json();
+    const out: typeof items = [];
+    for (const item of items) {
+      if (item.type === 'file') out.push(item);
+      else if (item.type === 'dir') out.push(...await listFiles(item.path));
+    }
+    return out;
+  }
+
+  const files = await listFiles(`src/app/${slug}`);
+  const TPL_SLUG = 'sharp-finance-corp';
+  const TPL_NAME = 'シャープファイナンス株式会社';
+
+  for (const file of files) {
+    const ext = file.path.split('.').pop() ?? '';
+    if (!['tsx', 'ts', 'css'].includes(ext)) continue;
+    const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${file.path}`, { headers: h });
+    if (!r.ok) continue;
+    const data: { content: string; sha: string } = await r.json();
+    const raw = Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8');
+    if (!raw.includes(TPL_SLUG) && !raw.includes(TPL_NAME)) continue;
+    const fixed = raw.split(TPL_SLUG).join(slug).split(TPL_NAME).join(companyName);
+    await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${file.path}`, {
+      method: 'PUT',
+      headers: { ...h, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `fix: replace template refs in ${file.path.split('/').pop()}`,
+        content: Buffer.from(fixed, 'utf-8').toString('base64'),
+        sha: data.sha,
+        branch: 'main',
+      }),
+    });
+  }
+}
+
 export async function POST(req: NextRequest) {
   const { company_name, client_slug } = await req.json();
 
@@ -64,6 +113,8 @@ export async function POST(req: NextRequest) {
                 progressVal = Math.min(progressVal + 2, 58);
                 send({ progress: progressVal });
               } else if (data.event === 'workflow_finished') {
+                const githubToken = process.env.GITHUB_TOKEN ?? '';
+                await fixTemplateRefs(client_slug, company_name, githubToken);
                 send({ progress: 60, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
               }
             } catch {}
