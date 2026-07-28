@@ -56,6 +56,8 @@ export default function GuidelinesPage() {
                 <div className="swatch-info">
                   <div className="swatch-hex">{c.hex}</div>
                   <div className="swatch-name">{c.name}</div>
+                  <div style={{ fontSize: '13px', color: '#888', marginTop: '2px' }}>{c.ratio}%</div>
+                  <div style={{ fontSize: '13px', color: '#888', marginTop: '2px' }}>{c.ratio}%</div>
                 </div>
               </div>
             ))}
