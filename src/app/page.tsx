@@ -8,6 +8,30 @@ const EXCLUDED_DIRS = new Set([
   'screens',
 ]);
 
+
+const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
+  'hitachi': [
+    { hex: '#E60012', ratio: 40 },
+    { hex: '#000000', ratio: 20 },
+    { hex: '#0071BC', ratio: 15 },
+    { hex: '#333333', ratio: 15 },
+    { hex: '#FFFFFF', ratio: 10 },
+  ],
+  'sharp-finance-corp': [
+    { hex: '#004A99', ratio: 40 },
+    { hex: '#0071BC', ratio: 25 },
+    { hex: '#F5A623', ratio: 15 },
+    { hex: '#333333', ratio: 12 },
+    { hex: '#f0f0f0', ratio: 8 },
+  ],
+  'sony_corp': [
+    { hex: '#000000', ratio: 40 },
+    { hex: '#0071BC', ratio: 25 },
+    { hex: '#FFFFFF', ratio: 25 },
+    { hex: '#F5A623', ratio: 5 },
+    { hex: '#333333', ratio: 5 },
+  ],
+};
 type ClientInfo = {
   slug: string;
   name: string;
@@ -114,20 +138,25 @@ export default async function ClientsIndex() {
                   background: '#ffffff',
                   border: '1px solid #e5e7eb',
                   borderRadius: 16,
-                  padding: 28,
+                  padding: 0,
+                  overflow: 'hidden',
                   boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
                   textDecoration: 'none',
                 }}
               >
-                <div
-                  style={{
-                    width: 40,
-                    height: 6,
-                    borderRadius: 999,
-                    background: client.primaryColor,
-                    marginBottom: 16,
-                  }}
-                />
+                <div style={{ display: 'flex', height: 40 }}>
+                  {(BRAND_COLORS[client.slug] || [{ hex: client.primaryColor, ratio: 100 }]).map((c) => (
+                    <div
+                      key={c.hex}
+                      style={{
+                        width: c.ratio + '%',
+                        backgroundColor: c.hex,
+                        border: (c.hex.toUpperCase() === '#FFFFFF' || c.hex === '#f0f0f0') ? '1px solid #e0e0e0' : 'none',
+                      }}
+                    />
+                  ))}
+                </div>
+                <div style={{ padding: 28 }}>
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <p className="font-bold" style={{ fontSize: 18, color: '#111827' }}>{client.name}</p>
@@ -166,6 +195,7 @@ export default async function ClientsIndex() {
                       <path d="M7 5l5 5-5 5" stroke={client.primaryColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
+                </div>
                 </div>
               </Link>
             ))}
