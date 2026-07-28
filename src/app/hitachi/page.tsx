@@ -42,36 +42,11 @@ export default function HitachiHome() {
         />
 
         {/* ブランドカラー比率バー — ヘッダー直下・全幅 */}
-        <div style={{ display: 'flex', width: '100%', height: '130px' }}>
-          {brandColors.map((c) => {
-            const textColor = getTextColor(c.hex);
-            const chillax = "'Chillax', sans-serif";
-            return (
-              <div
-                key={c.hex}
-                style={{
-                  width: c.ratio + '%',
-                  backgroundColor: c.hex,
-                  border: c.hex === '#FFFFFF' ? '1px solid #e0e0e0' : 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  overflow: 'hidden',
-                  padding: '0 6px',
-                  gap: '2px',
-                }}
-              >
-                <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.3, textAlign: 'center', whiteSpace: 'nowrap' }}>{hexToRgb(c.hex)}</span>
-                <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.3, textAlign: 'center', whiteSpace: 'nowrap' }}>{c.hex}</span>
-                <span style={{ display: 'flex', alignItems: 'baseline', gap: '1px' }}>
-                  <span style={{ color: textColor, fontSize: '26px', fontWeight: 600, fontFamily: chillax, lineHeight: 1.2 }}>{c.ratio}</span>
-                  <span style={{ color: textColor, fontSize: '13px', fontWeight: 400, fontFamily: chillax, lineHeight: 1.2 }}>%</span>
-                </span>
-              </div>
-            );
-          })}
-        </div>
+        <div style={{ display: 'flex', width: '100%', height: '4px' }}>
+        {brandColors.map((c) => (
+          <div key={c.hex} style={{ flex: c.ratio, backgroundColor: c.hex }} />
+        ))}
+      </div>
 
         {/* コンテンツ */}
         <main style={{ padding: '40px 24px', maxWidth: '960px', margin: '0 auto' }}>
