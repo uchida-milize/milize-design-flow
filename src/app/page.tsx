@@ -201,7 +201,6 @@ export default async function ClientsIndex() {
               </Link>
             ))}
             <NewClientButton />
-      </div>
     </div>
   );
 }
