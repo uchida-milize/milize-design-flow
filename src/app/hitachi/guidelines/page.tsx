@@ -43,35 +43,6 @@ export default function GuidelinesPage() {
             伝統的かつ力強い赤を基調に、黒やブルーをアクセントとして使用します。
           </p>
 
-          <div className="color-ratio-bar">
-            {colorRatios.map((c) => (
-              <div
-                key={c.hex}
-                style={{
-                  width: `${c.ratio}%`,
-                  background: c.hex,
-                  border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
-                }}
-              />
-            ))}
-          </div>
-          <div className="color-ratio-labels">
-            {colorRatios.map((c) => (
-              <div className="color-ratio-label-item" key={c.hex}>
-                <span
-                  className="color-ratio-swatch"
-                  style={{
-                    background: c.hex,
-                    border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
-                  }}
-                />
-                <span>
-                  {c.hex}（{c.ratio}%）
-                </span>
-              </div>
-            ))}
-          </div>
-
           <div className="swatch-grid">
             {colorRatios.map((c) => (
               <div className="swatch-item" key={c.hex}>
