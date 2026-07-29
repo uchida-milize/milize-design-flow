@@ -183,3 +183,11 @@
   border-radius: 2px;
   display: inline-block;
 }
+/* 標準カラー変数（カラーバー自動生成用） */
+:root {
+  --primary-color: #004A99;
+  --secondary-color: #000000;
+  --accent-color: #B7282E;
+  --text-color: #333333;
+  --bg-color: #f0f0f0;
+}

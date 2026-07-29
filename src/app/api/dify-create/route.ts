@@ -140,8 +140,8 @@ return out;
 }
 
 const files = await listFiles(`src/app/${slug}`);
-const TPL_SLUG = 'client-template';
-const TPL_NAME = '\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u540d';
+const TPL_SLUG = 'sharp-finance-corp';
+const TPL_NAME = '\u30b7\u30e3\u30fc\u30d7\u30d5\u30a1\u30a4\u30ca\u30f3\u30b9\u682a\u5f0f\u4f1a\u793e';
 
 for (const file of files) {
 const ext = file.path.split('.').pop() ?? '';

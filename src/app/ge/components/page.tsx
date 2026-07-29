@@ -1,13 +1,13 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = '重工業株式会社';
-const basePath = '/heavy-industries-corp';
+const clientName = 'ゼネラル・エレクトリック';
+const basePath = '/ge';
 const primaryColor: string = '#004A99';
 const accentRed = '#B7282E';
 
 export default function ComponentsPage() {
   return (
-    <div className="heavy-industries-corp-portal">
+    <div className="ge-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
