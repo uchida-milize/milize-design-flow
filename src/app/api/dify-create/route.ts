@@ -234,11 +234,51 @@ progressVal = Math.min(progressVal + 2, 58);
 send({ progress: progressVal });
 } else if (data.event === 'workflow_finished') {
 const githubToken = process.env.GITHUB_TOKEN ?? '';
+const vercelToken = process.env.VERCEL_TOKEN ?? '';
+const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
+
+send({ progress: 60, status: 'GitHub\u306b\u30b3\u30df\u30c3\u30c8\u4e2d...' });
+const commitStart = Date.now();
 await fixTemplateRefs(client_slug, company_name, githubToken);
 await ensureLayoutTsx(client_slug, githubToken);
 await normalizeColorVars(client_slug, githubToken);
 await removeFromExcludedDirs(client_slug, githubToken);
-send({ progress: 60, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u5f85\u6a5f\u4e2d...', dify_done: true });
+send({ progress: 65, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u8d77\u52d5\u5f85\u3061...' });
+
+if (vercelToken && vercelProjectId) {
+  // Vercel API \u3067\u30c7\u30d7\u30ed\u30a4\u5b8c\u4e86\u3092\u691c\u77e5
+  let deployProgress = 65;
+  let deployed = false;
+  for (let i = 0; i < 36; i++) { // max 3\u5206 (36 * 5s)
+    await new Promise(r => setTimeout(r, 5000));
+    deployProgress = Math.min(deployProgress + 0.8, 95);
+    try {
+      const vRes = await fetch(
+        `https://api.vercel.com/v6/deployments?projectId=${vercelProjectId}&limit=5`,
+        { headers: { Authorization: `Bearer ${vercelToken}` } }
+      );
+      if (!vRes.ok) { send({ progress: deployProgress }); continue; }
+      const vData: { deployments: Array<{ createdAt: number; state: string; readyState: string }> } = await vRes.json();
+      const dep = (vData.deployments ?? []).find(d => d.createdAt >= commitStart - 30000);
+      if (!dep) { send({ progress: deployProgress, status: 'Vercel\u30c7\u30d7\u30ed\u30a4\u8d77\u52d5\u5f85\u3061...' }); continue; }
+      if (dep.state === 'READY' || dep.readyState === 'READY') {
+        send({ progress: 100, status: '\u30c7\u30d7\u30ed\u30a4\u5b8c\u4e86\uff01', deploy_done: true });
+        deployed = true; break;
+      } else if (dep.state === 'ERROR' || dep.readyState === 'ERROR') {
+        send({ error: 'Vercel\u30c7\u30d7\u30ed\u30a4\u304c\u5931\u6557\u3057\u307e\u3057\u305f' });
+        deployed = true; break;
+      } else if (dep.state === 'BUILDING' || dep.readyState === 'BUILDING') {
+        send({ progress: deployProgress, status: 'Vercel\u30d3\u30eb\u30c9\u4e2d...' });
+      } else {
+        send({ progress: deployProgress, status: `Vercel: ${dep.state ?? dep.readyState}` });
+      }
+    } catch { send({ progress: deployProgress }); }
+  }
+  if (!deployed) send({ error: '\u30c7\u30d7\u30ed\u30a4\u30bf\u30a4\u30e0\u30a2\u30a6\u30c8\uff083\u5206\uff09' });
+} else {
+  // VERCEL_TOKEN\u672a\u8a2d\u5b9a\u306e\u30d5\u30a9\u30fc\u30eb\u30d0\u30c3\u30af\uff1a\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u5074URL\u30dd\u30fc\u30ea\u30f3\u30b0\u306b\u59d4\u8b72
+  send({ progress: 65, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u5f85\u6a5f\u4e2d...', dify_done: true });
+}
 }
 } catch {}
 }

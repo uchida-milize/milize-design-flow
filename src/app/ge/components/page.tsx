@@ -22,7 +22,7 @@ export default function ComponentsPage() {
           </div>
           <h1 className="hi-section-title">コンポーネント集</h1>
           <p className="hi-section-desc">
-            ブランドガイドラインに準拠したUIコンポーネントのサンプルです。
+            デザインガイドラインに準拠したUIコンポーネントのサンプルです。
           </p>
         </div>
 

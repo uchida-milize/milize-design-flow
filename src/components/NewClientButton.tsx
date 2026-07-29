@@ -64,12 +64,22 @@ export function NewClientButton() {
             if (data.progress !== undefined) setProgress(data.progress);
             if (data.status) setStatusMsg(data.status);
             if (data.dify_done) { difyDone = true; }
+            if (data.deploy_done) {
+              setProgress(100);
+              setStatusMsg('デプロイ完了！');
+              await new Promise(r => setTimeout(r, 1200));
+              setOpen(false);
+              reset();
+              router.refresh();
+              return;
+            }
             if (data.error) { setStatusMsg('エラー: ' + data.error); setRunning(false); }
           } catch {}
         }
       }
 
       if (difyDone) {
+        // VERCEL_TOKEN未設定時のフォールバック：URLポーリング
         let deployed = false;
         let attempts = 0;
         while (!deployed && attempts < 60) {
@@ -78,19 +88,21 @@ export function NewClientButton() {
           await new Promise(r => setTimeout(r, 5000));
           attempts++;
           try {
-            const r = await fetch('/' + slug, { method: 'HEAD', cache: 'no-store' });
-            if (r.ok) {
-              deployed = true;
-              setProgress(100);
-              setStatusMsg('デプロイ完了！');
-              await new Promise(r => setTimeout(r, 1200));
-              setOpen(false);
-              reset();
-              router.refresh();
-            }
+            const r = await fetch('/' + slug + '?_t=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+            if (r.ok) { deployed = true; }
           } catch {}
         }
-        if (!deployed) { setStatusMsg('デプロイタイムアウト'); setRunning(false); }
+        if (deployed) {
+          setProgress(100);
+          setStatusMsg('デプロイ完了！');
+          await new Promise(r => setTimeout(r, 1200));
+          setOpen(false);
+          reset();
+          router.refresh();
+        } else {
+          setStatusMsg('デプロイタイムアウト');
+          setRunning(false);
+        }
       }
     } catch {
       setStatusMsg('接続エラーが発生しました');

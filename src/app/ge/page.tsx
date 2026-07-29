@@ -25,11 +25,11 @@ export default function HomePage() {
       <div className="hi-container" style={{ paddingTop: 48, paddingBottom: 64 }}>
         <div style={{ marginBottom: 40 }}>
           <div className="hi-section-label" style={{ color: primaryColor }}>
-            BRAND PORTAL
+            RESEARCH
           </div>
-          <h1 className="hi-section-title">{clientName} ブランドポータル</h1>
+          <h1 className="hi-section-title">{clientName} リサーチ</h1>
           <p className="hi-section-desc">
-            信頼感・先進性・誠実さを軸にした、伝統と革新が融合するブランドガイドラインです。
+            信頼感・先進性・誠実さを軸にした、伝統と革新が融合するガイドラインリサーチ資料です。
           </p>
         </div>
 
@@ -78,10 +78,10 @@ export default function HomePage() {
                 GUIDELINES
               </div>
               <h2 className="hi-section-title" style={{ fontSize: 20 }}>
-                ブランドガイドライン
+                ガイドラインリサーチ
               </h2>
               <p className="hi-section-desc" style={{ marginBottom: 0 }}>
-                カラー、タイポグラフィ、トンマナなどブランドの基本方針を確認できます。
+                カラー、タイポグラフィ、トンマナなどデザインの基本方針を確認できます。
               </p>
             </div>
           </a>
@@ -95,7 +95,7 @@ export default function HomePage() {
                 コンポーネント集
               </h2>
               <p className="hi-section-desc" style={{ marginBottom: 0 }}>
-                ブランドに準拠したUIコンポーネントのサンプルとコードを確認できます。
+                デザインガイドラインに準拠したUIコンポーネントのサンプルとコードを確認できます。
               </p>
             </div>
           </a>

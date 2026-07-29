@@ -27,9 +27,9 @@ export default function GuidelinesPage() {
           <div className="hi-section-label" style={{ color: primaryColor }}>
             GUIDELINES
           </div>
-          <h1 className="hi-section-title">ブランドガイドライン</h1>
+          <h1 className="hi-section-title">ガイドラインリサーチ</h1>
           <p className="hi-section-desc">
-            {clientName}のブランド資産、カラー、タイポグラフィ、トンマナを定義します。
+            {clientName}のデザインリサーチ資産、カラー、タイポグラフィ、トンマナを定義します。
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function GuidelinesPage() {
             COLOR
           </div>
           <h2 className="hi-section-title" style={{ fontSize: 20 }}>
-            ブランドカラー
+            カラーガイドライン
           </h2>
           <p className="hi-section-desc">
             プライマリ、セカンダリ、アクセントカラーと使用比率の定義。
@@ -86,7 +86,7 @@ export default function GuidelinesPage() {
                 本文フォント（読みやすさ重視のサンセリフ体）
               </div>
               <div style={{ fontSize: 14, color: '#333333', lineHeight: 1.8 }}>
-                私たちは、グローバルな重工業ブランドとして伝統と革新の融合を目指しています。
+                私たちは、グローバルな重工業企業として伝統と革新の融合を目指しています。
                 安心感と先進性を兼ね備えた青を基調としたデザインで、世界中のお客様に信頼をお届けします。
               </div>
             </div>
@@ -100,7 +100,7 @@ export default function GuidelinesPage() {
           <h2 className="hi-section-title" style={{ fontSize: 20 }}>
             トンマナ
           </h2>
-          <p className="hi-section-desc">ブランドが体現すべき3つのキーワード。</p>
+          <p className="hi-section-desc">体現すべき3つのキーワード。</p>
 
           <div
             style={{
@@ -120,7 +120,7 @@ export default function GuidelinesPage() {
 
           <div className="hi-card" style={{ marginTop: 16 }}>
             <p style={{ fontSize: 14, color: '#333333', lineHeight: 1.8 }}>
-              伝統と革新が融合したグローバルな重工業ブランド。青を基調にした色使いで安心感と先進性を演出しつつ、
+              伝統と革新が融合したゼネラル・エレクトリック。青を基調にした色使いで安心感と先進性を演出しつつ、
               日本市場向けには文化的要素（水引）を取り入れて誠意と親近感を表現。デジタル化・ユーザー体験向上に重きを置き、
               洗練されたシンプルかつ機能的なデザインで幅広い顧客層にアプローチしています。
             </p>
