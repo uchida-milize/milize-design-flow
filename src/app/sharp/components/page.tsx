@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'シャープファイナンス株式会社';
-const basePath = '/sharp-finance-corp';
+const clientName = 'シャープ株式会社';
+const basePath = '/sharp';
 const primaryColor = '#FF0000';
 
 const tabs = [
@@ -17,7 +17,7 @@ export default function ComponentsPage() {
   const [activeTab, setActiveTab] = useState('buttons');
 
   return (
-    <div className="sharp-finance-corp-portal">
+    <div className="sharp-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
@@ -29,9 +29,9 @@ export default function ComponentsPage() {
           <div className="section-label" style={{ color: primaryColor }}>
             COMPONENTS
           </div>
-          <div className="section-title">UIコンポーネント</div>
+          <div className="section-title">コンポーネント</div>
           <div className="section-desc">
-            ブランドガイドラインに基づいたUIコンポーネント集です。
+            デザインガイドラインに基づいたコンポーネントです。
           </div>
         </div>
 
