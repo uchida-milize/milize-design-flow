@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+.panasonic-portal {
+  --portal-bg: #f5f7fa;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --code-bg: #0f172a;
+  --code-text: #94a3b8;
+
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  color: var(--text-primary);
+}
+
+.panasonic-portal * {
+  box-sizing: border-box;
+}
+
+.panasonic-portal .portal-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.panasonic-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.panasonic-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.panasonic-portal .section-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.panasonic-portal .card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+/* 色比率バー */
+.panasonic-portal .color-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.panasonic-portal .color-bar-segment {
+  height: 100%;
+}
+
+.panasonic-portal .color-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.panasonic-portal .color-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.panasonic-portal .color-legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* カラースウォッチグリッド（guidelines） */
+.panasonic-portal .color-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.panasonic-portal .color-swatch {
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.panasonic-portal .color-swatch-top {
+  height: 80px;
+}
+
+.panasonic-portal .color-swatch-bottom {
+  padding: 8px 12px;
+}
+
+.panasonic-portal .color-swatch-hex {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.panasonic-portal .color-swatch-name {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ナビカード（home） */
+.panasonic-portal .nav-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.panasonic-portal .nav-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.panasonic-portal .nav-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.panasonic-portal .nav-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.panasonic-portal .nav-card-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* タブナビゲーション */
+.panasonic-portal .tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.panasonic-portal .tab-item {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.panasonic-portal .tab-item.active {
+  color: #ffffff;
+}
+
+/* コンポーネント展示カード */
+.panasonic-portal .component-card {
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: var(--card-bg);
+}
+
+.panasonic-portal .component-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--card-border);
+  font-family: monospace;
+}
+
+.panasonic-portal .component-render {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.panasonic-portal .component-code {
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+
+.panasonic-portal .typography-sample {
+  margin-bottom: 24px;
+}
+
+.panasonic-portal .typography-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.panasonic-portal .keyword-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
