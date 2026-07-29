@@ -25,11 +25,11 @@ export default function Page() {
       <div className="container">
         <div className="page-header">
           <div className="section-label" style={{ color: primaryColor }}>
-            BRAND PORTAL
+            RESEARCH
           </div>
-          <div className="section-title">{clientName} ブランドポータル</div>
+          <div className="section-title">{clientName} リサーチ</div>
           <div className="section-desc">
-            信頼感・先進性・親しみやすさを軸としたブランドガイドラインとコンポーネント集です。
+            信頼感・先進性・親しみやすさを軸としたガイドラインリサーチとコンポーネントです。
           </div>
         </div>
 
@@ -65,15 +65,15 @@ export default function Page() {
 
         <div className="nav-grid">
           <a href={`${basePath}/guidelines`} className="nav-card">
-            <div className="nav-card-title">ガイドライン</div>
+            <div className="nav-card-title">ガイドラインリサーチ</div>
             <div className="nav-card-desc">
-              ブランドカラー、タイポグラフィ、トンマナなどのデザインガイドラインを確認できます。
+              カラーガイドライン、タイポグラフィ、トンマナなどのデザインガイドラインリサーチを確認できます。
             </div>
           </a>
           <a href={`${basePath}/components`} className="nav-card">
             <div className="nav-card-title">コンポーネント</div>
             <div className="nav-card-desc">
-              ボタンやカードなど、実装済みのUIコンポーネント集を確認できます。
+              ボタンやカードなど、実装済みのコンポーネントを確認できます。
             </div>
           </a>
         </div>
