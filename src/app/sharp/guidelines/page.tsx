@@ -1,7 +1,7 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'シャープファイナンス株式会社';
-const basePath = '/sharp-finance-corp';
+const clientName = 'シャープ株式会社';
+const basePath = '/sharp';
 const primaryColor = '#FF0000';
 
 const colors = [
@@ -14,7 +14,7 @@ const colors = [
 
 export default function GuidelinesPage() {
   return (
-    <div className="sharp-finance-corp-portal">
+    <div className="sharp-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
@@ -26,9 +26,9 @@ export default function GuidelinesPage() {
           <div className="section-label" style={{ color: primaryColor }}>
             GUIDELINES
           </div>
-          <div className="section-title">ブランドガイドライン</div>
+          <div className="section-title">ガイドラインリサーチ</div>
           <div className="section-desc">
-            シャープファイナンスのブランドカラー・タイポグラフィ・トンマナをまとめています。
+            シャープのカラーガイドライン・タイポグラフィ・トンマナをまとめています。
           </div>
         </div>
 
@@ -38,7 +38,7 @@ export default function GuidelinesPage() {
           </div>
           <div className="section-title">カラー</div>
           <div className="section-desc" style={{ marginBottom: 24 }}>
-            ブランドを象徴するカラーパレットです。
+            カラーガイドラインです。
           </div>
           <div className="swatch-grid">
             {colors.map((c) => (
@@ -107,7 +107,7 @@ export default function GuidelinesPage() {
           </div>
           <div className="portal-card">
             <div className="section-desc" style={{ color: '#333333', lineHeight: 1.8 }}>
-              シャープは「ひとの願いの、半歩先。」をブランドスローガンに掲げ、誠実かつ創造的に顧客の日常に寄り添う姿勢を大切にしています。デザインはシンプルでありながら力強さを感じさせ、赤を基調としたカラーリングがブランドの先進性と信頼感を象徴。フォントは現代的で読みやすく、清潔感のある白背景とダークテキストのコントラストで情報を明確に伝えます。トーンは温かみと堅実さを兼ね備え、生活者に寄り添いながら新しい価値を提供するブランドイメージを強く表現しています。
+              シャープは「ひとの願いの、半歩先。」をスローガンに掲げ、誠実かつ創造的に顧客の日常に寄り添う姿勢を大切にしています。デザインはシンプルでありながら力強さを感じさせ、赤を基調としたカラーリングがブランドの先進性と信頼感を象徴。フォントは現代的で読みやすく、清潔感のある白背景とダークテキストのコントラストで情報を明確に伝えます。トーンは温かみと堅実さを兼ね備え、生活者に寄り添いながら新しい価値を提供するイメージを強く表現しています。
             </div>
           </div>
         </section>
