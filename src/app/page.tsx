@@ -120,11 +120,11 @@ export default async function ClientsIndex() {
       <header style={{ background: '#ffffff', borderBottom: '1px solid #e5e7eb' }}>
         <div className="mx-auto flex items-center" style={{ maxWidth: 1120, padding: '16px 24px', gap: 12 }}>
           <span className="font-bold text-sm" style={{ color: '#111827', letterSpacing: '-0.01em' }}>
-            MILIZE Design Flow
+            MILIZE Asset Portal
           </span>
           <span style={{ color: '#e5e7eb' }}>|</span>
           <span className="text-xs font-medium" style={{ color: '#9ca3af' }}>
-            クライアント設計システム管理ポータル
+            クライアント別アセット管理
           </span>
         </div>
       </header>
