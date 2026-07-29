@@ -35,7 +35,11 @@ async function fixTemplateRefs(slug: string, companyName: string, token: string)
     const data: { content: string; sha: string } = await r.json();
     const raw = Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8');
     if (!raw.includes(TPL_SLUG) && !raw.includes(TPL_NAME)) continue;
-    const fixed = raw.split(TPL_SLUG).join(slug).split(TPL_NAME).join(companyName);
+    const fixed = raw
+      .split(TPL_SLUG).join(slug)
+      .split(TPL_NAME).join(companyName)
+      .replace('background: #0f172a;', 'background: #efefef;')
+      .replace('color: #94a3b8;', 'color: #333333;');
     await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${file.path}`, {
       method: 'PUT',
       headers: { ...h, 'Content-Type': 'application/json' },
