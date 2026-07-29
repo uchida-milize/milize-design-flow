@@ -9,12 +9,12 @@ const EXCLUDED_DIRS = new Set([
 
 // サブディレクトリ名 → カテゴリラベルのマッピング
 const SUBDIR_TO_LABEL: Record<string, string> = {
-  guidelines: 'ブランドリサーチ',
-  components: 'UIコンポーネント',
+  guidelines: 'ガイドラインリサーチ',
+  components: 'コンポーネント',
   pptx: 'PPTX',
 };
 
-const CATEGORY_ORDER = ['ブランドリサーチ', 'UIコンポーネント', 'PPTX'];
+const CATEGORY_ORDER = ['ガイドラインリサーチ', 'コンポーネント', 'PPTX'];
 
 type ClientInfo = {
   slug: string;
