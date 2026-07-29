@@ -123,7 +123,7 @@ export default function ComponentsPage() {
                 </button>
               </div>
               <div className="component-code-block">
-{`<button style={{ background: 'transparent', color: primaryColor, border: `1px solid ${primaryColor}`, borderRadius: 6 }}>
+{`<button style={{ background: 'transparent', color: primaryColor, border: '1px solid ' + primaryColor, borderRadius: 6 }}>
   もっと見る
 </button>`}
               </div>
