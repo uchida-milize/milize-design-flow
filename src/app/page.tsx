@@ -40,11 +40,18 @@ async function getClients() {
         const defaultColors = [{ hex: '#004A99', ratio: 100 }];
         let colors = defaultColors;
         let description = '';
+        let name = slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
         try {
-          const [cssRes, guideRes] = await Promise.all([
+          const [cssRes, guideRes, pageRes] = await Promise.all([
             fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css`, { next: { revalidate: 60 } }),
             fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/guidelines/page.tsx`, { next: { revalidate: 60 } }),
+            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/page.tsx`, { next: { revalidate: 60 } }),
           ]);
+          if (pageRes.ok) {
+            const pageSrc = await pageRes.text();
+            const m = pageSrc.match(/const clientName\s*(?::\s*string)?\s*=\s*['"`]([^'"`]+)['"`]/);
+            if (m) name = m[1];
+          }
           if (cssRes.ok) {
             const css = await cssRes.text();
             const vars = [
@@ -75,7 +82,7 @@ async function getClients() {
             if (m) description = m[1].trim();
           }
         } catch { /* ignore */ }
-        return { slug, name: slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), colors, description };
+        return { slug, name, colors, description };
       })
     );
 
