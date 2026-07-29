@@ -7,10 +7,11 @@ type ClientInfo = {
   slug: string;
   name: string;
   primaryColor: string;
+  categories: string[];
 };
 
 const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
-  'hitachi': [
+  hitachi: [
     { hex: '#E60012', ratio: 40 },
     { hex: '#000000', ratio: 20 },
     { hex: '#0071BC', ratio: 15 },
@@ -24,14 +25,14 @@ const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
     { hex: '#333333', ratio: 12 },
     { hex: '#f0f0f0', ratio: 8 },
   ],
-  'sony_corp': [
+  sony_corp: [
     { hex: '#000000', ratio: 40 },
     { hex: '#0071BC', ratio: 25 },
     { hex: '#FFFFFF', ratio: 25 },
     { hex: '#F5A623', ratio: 5 },
     { hex: '#333333', ratio: 5 },
   ],
-  'milize': [
+  milize: [
     { hex: '#0055A4', ratio: 38 },
     { hex: '#00A0E9', ratio: 22 },
     { hex: '#F5A623', ratio: 12 },
@@ -44,6 +45,12 @@ const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
     { hex: '#94a3b8', ratio: 15 },
     { hex: '#FFFFFF', ratio: 15 },
   ],
+};
+
+const CATEGORY_STYLE: Record<string, { bg: string; color: string }> = {
+  'ブランドリサーチ': { bg: '#f0f4ff', color: '#4b5563' },
+  'UIコンポーネント': { bg: '#fef3c7', color: '#92400e' },
+  PPTX: { bg: '#f0fdf4', color: '#166634' },
 };
 
 export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
@@ -76,7 +83,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
       {hidden.size > 0 && (
         <div style={{ textAlign: 'right', fontSize: 12, color: '#9ca3af', marginBottom: 10 }}>
           {hidden.size}
-          {'件を非表示中'} ·{' '}
+          {'件を非表示中'} {'·'}{' '}
           <button
             onClick={restoreAll}
             style={{ color: '#6b7280', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', fontSize: 12 }}
@@ -92,36 +99,12 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
         <NewClientButton />
         {visible.map((client) => (
           <div key={client.slug} style={{ position: 'relative' }}>
-            <button
-              onClick={(e) => { e.preventDefault(); setConfirmSlug(confirmSlug === client.slug ? null : client.slug); }}
-              style={{
-                position: 'absolute',
-                top: 10,
-                right: 10,
-                zIndex: 10,
-                background: 'rgba(255,255,255,0.85)',
-                border: '1px solid #e5e7eb',
-                borderRadius: '50%',
-                width: 26,
-                height: 26,
-                fontSize: 14,
-                color: '#9ca3af',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                lineHeight: 1,
-              }}
-              title={'非表示にする'}
-            >
-              ×
-            </button>
             {confirmSlug === client.slug && (
               <div
                 style={{
                   position: 'absolute',
-                  top: 44,
-                  right: 10,
+                  top: 102,
+                  right: 22,
                   zIndex: 20,
                   background: '#fff',
                   border: '1px solid #e5e7eb',
@@ -173,17 +156,45 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                     <p className="font-bold" style={{ fontSize: 18, color: '#111827' }}>{client.name}</p>
                     <p className="text-xs" style={{ color: '#9ca3af', marginTop: 2 }}>{client.slug}</p>
                   </div>
-                  <span className="text-xs font-semibold" style={{ background: '#dcfce7', color: '#16a34a', borderRadius: 999, padding: '3px 10px' }}>
-                    Live
-                  </span>
+                  <button
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmSlug(confirmSlug === client.slug ? null : client.slug); }}
+                    style={{
+                      background: 'rgba(0,0,0,0.05)',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '50%',
+                      width: 26,
+                      height: 26,
+                      fontSize: 14,
+                      color: '#9ca3af',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      lineHeight: 1,
+                      flexShrink: 0,
+                    }}
+                    title={'非表示にする'}
+                  >
+                    {'×'}
+                  </button>
                 </div>
                 <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
                   {'デザインガイドライン・コンポーネントカタログを確認できます。'}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold" style={{ background: '#f0f4ff', color: '#4b5563', borderRadius: 999, padding: '4px 10px' }}>
-                    {'デザインシステム'}
-                  </span>
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', flex: 1, marginRight: 12 }}>
+                    {(client.categories.length > 0
+                      ? client.categories
+                      : ['ブランドリサーチ', 'UIコンポーネント']
+                    ).map((cat) => {
+                      const s = CATEGORY_STYLE[cat] || { bg: '#f0f4ff', color: '#4b5563' };
+                      return (
+                        <span key={cat} className="text-xs font-semibold" style={{ background: s.bg, color: s.color, borderRadius: 999, padding: '4px 10px', whiteSpace: 'nowrap' }}>
+                          {cat}
+                        </span>
+                      );
+                    })}
+                  </div>
                   <span className="text-sm font-semibold flex items-center" style={{ color: '#6b7280', gap: 4 }}>
                     {'開く'}
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
