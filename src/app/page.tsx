@@ -5,6 +5,7 @@ const EXCLUDED_DIRS = new Set([
   'guidelines',
   'prototype',
   'screens',
+  'client-template',  // 汎用テンプレートディレクトリ
   'hitachi',
   'sony_corp',
   'sharp-finance-corp',
@@ -35,19 +36,45 @@ async function getClients() {
 
     const clients = await Promise.all(
       clientSlugs.map(async (slug) => {
-        let primaryColor = '#004A99';
+        const defaultColors = [{ hex: '#004A99', ratio: 100 }];
+        let colors = defaultColors;
+        let description = '';
         try {
-          const cssRes = await fetch(
-            `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css`,
-            { next: { revalidate: 60 } }
-          );
+          const [cssRes, guideRes] = await Promise.all([
+            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css`, { next: { revalidate: 60 } }),
+            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/guidelines/page.tsx`, { next: { revalidate: 60 } }),
+          ]);
           if (cssRes.ok) {
             const css = await cssRes.text();
-            const match = css.match(/--color-secondary:\s*(#[0-9a-fA-F]{3,6})/);
-            if (match) primaryColor = match[1];
+            const vars = [
+              { key: '--primary-color',   ratio: 35 },
+              { key: '--secondary-color', ratio: 25 },
+              { key: '--accent-color',    ratio: 20 },
+              { key: '--text-color',      ratio: 15 },
+              { key: '--bg-color',        ratio: 5  },
+              { key: '--color-secondary', ratio: 100 },
+            ];
+            const extracted: { hex: string; ratio: number }[] = [];
+            for (const v of vars) {
+              const m = css.match(new RegExp(v.key.replace(/-/g, '\\-') + ':\\s*(#[0-9a-fA-F]{3,6})'));
+              if (m) extracted.push({ hex: m[1], ratio: v.ratio });
+            }
+            if (extracted.length === 1 && extracted[0].ratio === 100) {
+              colors = extracted;
+            } else if (extracted.length > 1) {
+              colors = extracted.filter(c => c.ratio !== 100);
+            }
+          }
+          if (guideRes.ok) {
+            const src = await guideRes.text();
+            // TONE & MANNER セクション内の説明文を抽出
+            const toneIdx = src.search(/TONE\s*[&＆]\s*MANNER/);
+            const searchSrc = toneIdx > -1 ? src.slice(toneIdx) : src;
+            const m = searchSrc.match(/lineHeight:\s*1\.8[^}]*\}}>([^<\n]+)/);
+            if (m) description = m[1].trim();
           }
         } catch { /* ignore */ }
-        return { slug, name: slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), primaryColor };
+        return { slug, name: slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), colors, description };
       })
     );
 
@@ -82,17 +109,13 @@ export default async function ClientsIndex() {
             {`プロダクト＆セールスアセットポータル`}
           </h1>
           <p className="text-sm leading-relaxed" style={{ maxWidth: 560, color: '#6b7280' }}>
-            {`WEB・アプリのリサーチから開発仕様の参照、営業資料（PPTX）作成時のトンマナ確認やサンプル出力まで対応。クライアントごとの全デジタル資産を統合管理します。`}
+            {`WEB・アプリのリサーチから開発仕様の参照、営業資料（PPTX）作成時のトンマナ確認やサンプル出力まで対応。クライアントごとの全デジタル資産の管理を推進します。`}
           </p>
         </div>
       </div>
 
       <div className="mx-auto" style={{ maxWidth: 1120, padding: '0 24px 96px' }}>
-        {clients.length === 0 ? (
-          <p className="text-sm" style={{ color: '#9ca3af' }}>{`クライアントが見つかりませんでした。`}</p>
-        ) : (
-          <ClientCardGrid clients={clients} />
-        )}
+        <ClientCardGrid clients={clients} />
       </div>
     </div>
   );

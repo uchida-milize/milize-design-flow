@@ -1,5 +1,38 @@
 import { NextRequest } from 'next/server';
 
+async function removeFromExcludedDirs(slug: string, token: string) {
+  const OWNER = 'uchida-milize';
+  const REPO  = 'milize-design-flow';
+  const path  = 'src/app/page.tsx';
+  const h = {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+  if (!res.ok) return;
+  const data: { content: string; sha: string } = await res.json();
+  const raw = Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8');
+
+  // スラッグが EXCLUDED_DIRS に含まれていなければ何もしない
+  if (!raw.includes(`'${slug}'`)) return;
+
+  // 該当行を削除（行単位で処理）
+  const fixed = raw.split('\n').filter(line => !line.includes(`'${slug}'`)).join('\n');
+
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...h, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message: `feat: activate client ${slug}`,
+      content: Buffer.from(fixed, 'utf-8').toString('base64'),
+      sha: data.sha,
+      branch: 'main',
+    }),
+  });
+}
+
 async function ensureLayoutTsx(slug: string, token: string) {
   const OWNER = 'uchida-milize';
   const REPO  = 'milize-design-flow';
@@ -54,8 +87,8 @@ return out;
 }
 
 const files = await listFiles(`src/app/${slug}`);
-const TPL_SLUG = 'sharp-finance-corp';
-const TPL_NAME = '\u30b7\u30e3\u30fc\u30d7\u30d5\u30a1\u30a4\u30ca\u30f3\u30b9\u682a\u5f0f\u4f1a\u793e';
+const TPL_SLUG = 'client-template';
+const TPL_NAME = '\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u540d';
 
 for (const file of files) {
 const ext = file.path.split('.').pop() ?? '';
@@ -150,6 +183,7 @@ send({ progress: progressVal });
 const githubToken = process.env.GITHUB_TOKEN ?? '';
 await fixTemplateRefs(client_slug, company_name, githubToken);
 await ensureLayoutTsx(client_slug, githubToken);
+await removeFromExcludedDirs(client_slug, githubToken);
 send({ progress: 60, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u5f85\u6a5f\u4e2d...', dify_done: true });
 }
 } catch {}

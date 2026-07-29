@@ -6,59 +6,10 @@ import { NewClientButton } from '@/components/NewClientButton';
 type ClientInfo = {
   slug: string;
   name: string;
-  primaryColor: string;
+  colors: Array<{ hex: string; ratio: number }>;
+  description: string;
 };
 
-const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
-  hitachi: [
-    { hex: '#E60012', ratio: 40 },
-    { hex: '#000000', ratio: 20 },
-    { hex: '#0071BC', ratio: 15 },
-    { hex: '#333333', ratio: 15 },
-    { hex: '#FFFFFF', ratio: 10 },
-  ],
-  'sharp-finance-corp': [
-    { hex: '#004A99', ratio: 40 },
-    { hex: '#0071BC', ratio: 25 },
-    { hex: '#F5A623', ratio: 15 },
-    { hex: '#333333', ratio: 12 },
-    { hex: '#f0f0f0', ratio: 8 },
-  ],
-  sony_corp: [
-    { hex: '#000000', ratio: 40 },
-    { hex: '#0071BC', ratio: 25 },
-    { hex: '#FFFFFF', ratio: 25 },
-    { hex: '#F5A623', ratio: 5 },
-    { hex: '#333333', ratio: 5 },
-  ],
-  milize: [
-    { hex: '#0055A4', ratio: 38 },
-    { hex: '#00A0E9', ratio: 22 },
-    { hex: '#F5A623', ratio: 12 },
-    { hex: '#333333', ratio: 18 },
-    { hex: '#FFFFFF', ratio: 10 },
-  ],
-  'group-softbank': [
-    { hex: '#0f172a', ratio: 50 },
-    { hex: '#374151', ratio: 20 },
-    { hex: '#94a3b8', ratio: 15 },
-    { hex: '#FFFFFF', ratio: 15 },
-  ],
-  panasonic: [
-    { hex: '#003d7c', ratio: 40 },
-    { hex: '#0071bc', ratio: 20 },
-    { hex: '#f5a623', ratio: 10 },
-    { hex: '#333333', ratio: 15 },
-    { hex: '#f0f0f0', ratio: 15 },
-  ],
-  sharp: [
-    { hex: '#FF0000', ratio: 40 },
-    { hex: '#000000', ratio: 20 },
-    { hex: '#F5A623', ratio: 10 },
-    { hex: '#333333', ratio: 20 },
-    { hex: '#ffffff', ratio: 10 },
-  ],
-};
 
 export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
   const [hidden, setHidden] = useState<Set<string>>(new Set());
@@ -145,14 +96,13 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
               className="block"
               style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 16, padding: 0, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', textDecoration: 'none' }}
             >
-              <div style={{ display: 'flex', height: 40 }}>
-                {(BRAND_COLORS[client.slug] || [{ hex: client.primaryColor, ratio: 100 }]).map((c) => (
+              <div style={{ display: 'flex', height: 40, borderBottom: '1px solid #e0e0e0' }}>
+                {client.colors.map((c) => (
                   <div
                     key={c.hex}
                     style={{
                       flex: c.ratio,
                       backgroundColor: c.hex,
-                      border: (c.hex.toUpperCase() === '#FFFFFF' || c.hex === '#f0f0f0') ? '1px solid #e0e0e0' : 'none',
                     }}
                   />
                 ))}
@@ -166,27 +116,32 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   <button
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmSlug(confirmSlug === client.slug ? null : client.slug); }}
                     style={{
-                      background: 'rgba(0,0,0,0.05)',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '50%',
+                      background: 'none',
+                      border: 'none',
                       width: 26,
                       height: 26,
-                      fontSize: 14,
+                      fontSize: 16,
                       color: '#9ca3af',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      lineHeight: 1,
                       flexShrink: 0,
+                      padding: 0,
                     }}
                     title={'非表示にする'}
                   >
-                    {'×'}
+                    {'︙'}
                   </button>
                 </div>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
-                  {'デザインガイドライン・コンポーネントカタログを確認できます。'}
+                <p className="text-sm leading-relaxed mb-4" style={{
+                  color: '#6b7280',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                }}>
+                  {client.description || 'デザインガイドライン・コンポーネントカタログを確認できます。'}
                 </p>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'nowrap', overflow: 'hidden' }}>
                   {['ガイドラインリサーチ', 'コンポーネント'].map((cat) => (

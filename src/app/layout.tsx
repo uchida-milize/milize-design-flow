@@ -3,8 +3,8 @@ import './globals.css';
 import { AppProvider } from '@/lib/store';
 
 export const metadata: Metadata = {
-  title: 'DOCTOR COMPASS Ver2 | 医師開業適正診断',
-  description: '5分でわかる、数字で動ける。医師の開業適正を診断するアプリ。',
+  title: 'MILIZE Asset Portal | クライアント別デジタル資産ポータル',
+  description: 'クライアントごとのデザインガイドライン・コンポーネント・営業資料を統合管理するMILIZEのデジタル資産ポータル。',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
