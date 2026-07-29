@@ -7,7 +7,6 @@ type ClientInfo = {
   slug: string;
   name: string;
   primaryColor: string;
-  categories: string[];
 };
 
 const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
@@ -190,10 +189,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   {'デザインガイドライン・コンポーネントカタログを確認できます。'}
                 </p>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'nowrap', overflow: 'hidden' }}>
-                  {(client.categories.length > 0
-                    ? client.categories
-                    : ['ガイドラインリサーチ', 'コンポーネント']
-                  ).map((cat) => (
+                  {['ガイドラインリサーチ', 'コンポーネント'].map((cat) => (
                     <span
                       key={cat}
                       style={{
