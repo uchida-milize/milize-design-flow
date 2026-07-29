@@ -132,13 +132,13 @@ export default async function ClientsIndex() {
       {/* Hero */}
       <div style={{ background: '#f7f9fc' }}>
         <div className="mx-auto" style={{ maxWidth: 1120, padding: '64px 24px 48px' }}>
-          <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Design Flow Portal</p>
+          <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Client Production Portal</p>
           <h1 className="font-bold mb-4" style={{ fontSize: 36, lineHeight: 1.3, color: '#111827' }}>
-            クライアント別<br />デジタルプロダクトシステム
+            クライアント別<br />プロダクト＆セールスアセットポータル
           </h1>
           <p className="text-sm leading-relaxed" style={{ maxWidth: 560, color: '#6b7280' }}>
-            各クライアントのデザインガイドライン・コンポーネントカタログを管理します。
-            プロジェクトを選択して詳細を確認してください。
+            WEB・アプリのリサーチから開発仕様の参照、営業資料（PPTX）作成時のトンマナ確認やサンプル出力まで対応。
+            クライアントごとの全デジタル資産を統合管理します。
           </p>
         </div>
       </div>
