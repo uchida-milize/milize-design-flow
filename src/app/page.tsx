@@ -32,6 +32,19 @@ const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
     { hex: '#F5A623', ratio: 5 },
     { hex: '#333333', ratio: 5 },
   ],
+  'milize': [
+    { hex: '#0055A4', ratio: 38 },
+    { hex: '#00A0E9', ratio: 22 },
+    { hex: '#F5A623', ratio: 12 },
+    { hex: '#333333', ratio: 18 },
+    { hex: '#FFFFFF', ratio: 10 },
+  ],
+  'group-softbank': [
+    { hex: '#0f172a', ratio: 50 },
+    { hex: '#374151', ratio: 20 },
+    { hex: '#94a3b8', ratio: 15 },
+    { hex: '#FFFFFF', ratio: 15 },
+  ],
 };
 type ClientInfo = {
   slug: string;
@@ -119,9 +132,9 @@ export default async function ClientsIndex() {
       {/* Hero */}
       <div style={{ background: '#f7f9fc' }}>
         <div className="mx-auto" style={{ maxWidth: 1120, padding: '64px 24px 48px' }}>
-          <p className="text-sm font-bold mb-3" style={{ color: '#2563eb' }}>Design Flow Portal</p>
+          <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Design Flow Portal</p>
           <h1 className="font-bold mb-4" style={{ fontSize: 36, lineHeight: 1.3, color: '#111827' }}>
-            クライアント別<br />デザインシステム一覧
+            クライアント別<br />デジタルプロダクトシステム
           </h1>
           <p className="text-sm leading-relaxed" style={{ maxWidth: 560, color: '#6b7280' }}>
             各クライアントのデザインガイドライン・コンポーネントカタログを管理します。
@@ -139,6 +152,7 @@ export default async function ClientsIndex() {
             className="grid"
             style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}
           >
+            <NewClientButton />
             {clients.map((client) => (
               <Link
                 key={client.slug}
@@ -159,7 +173,7 @@ export default async function ClientsIndex() {
                     <div
                       key={c.hex}
                       style={{
-                        width: c.ratio + '%',
+                        flex: c.ratio,
                         backgroundColor: c.hex,
                         border: (c.hex.toUpperCase() === '#FFFFFF' || c.hex === '#f0f0f0') ? '1px solid #e0e0e0' : 'none',
                       }}
@@ -209,7 +223,6 @@ export default async function ClientsIndex() {
                 </div>
               </Link>
             ))}
-            <NewClientButton />
           </div>
         )}
       </div>
