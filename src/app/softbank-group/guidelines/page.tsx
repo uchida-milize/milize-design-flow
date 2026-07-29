@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'ソフトバンクグループ株式会社';
 const basePath = '/softbank-group';
-const primaryColor = '#C0C0C0';
+const primaryColor: string = '#C0C0C0';
 
 const colors = [
   { hex: '#C0C0C0', name: 'プライマリ シルバー' },
