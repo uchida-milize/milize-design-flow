@@ -1,0 +1,201 @@
+'use client';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { NewClientButton } from '@/components/NewClientButton';
+
+type ClientInfo = {
+  slug: string;
+  name: string;
+  primaryColor: string;
+};
+
+const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
+  'hitachi': [
+    { hex: '#E60012', ratio: 40 },
+    { hex: '#000000', ratio: 20 },
+    { hex: '#0071BC', ratio: 15 },
+    { hex: '#333333', ratio: 15 },
+    { hex: '#FFFFFF', ratio: 10 },
+  ],
+  'sharp-finance-corp': [
+    { hex: '#004A99', ratio: 40 },
+    { hex: '#0071BC', ratio: 25 },
+    { hex: '#F5A623', ratio: 15 },
+    { hex: '#333333', ratio: 12 },
+    { hex: '#f0f0f0', ratio: 8 },
+  ],
+  'sony_corp': [
+    { hex: '#000000', ratio: 40 },
+    { hex: '#0071BC', ratio: 25 },
+    { hex: '#FFFFFF', ratio: 25 },
+    { hex: '#F5A623', ratio: 5 },
+    { hex: '#333333', ratio: 5 },
+  ],
+  'milize': [
+    { hex: '#0055A4', ratio: 38 },
+    { hex: '#00A0E9', ratio: 22 },
+    { hex: '#F5A623', ratio: 12 },
+    { hex: '#333333', ratio: 18 },
+    { hex: '#FFFFFF', ratio: 10 },
+  ],
+  'group-softbank': [
+    { hex: '#0f172a', ratio: 50 },
+    { hex: '#374151', ratio: 20 },
+    { hex: '#94a3b8', ratio: 15 },
+    { hex: '#FFFFFF', ratio: 15 },
+  ],
+};
+
+export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
+  const [hidden, setHidden] = useState<Set<string>>(new Set());
+  const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('hidden_clients');
+    if (stored) {
+      try { setHidden(new Set(JSON.parse(stored))); } catch { /* ignore */ }
+    }
+  }, []);
+
+  const hideClient = (slug: string) => {
+    const next = new Set([...hidden, slug]);
+    setHidden(next);
+    localStorage.setItem('hidden_clients', JSON.stringify([...next]));
+    setConfirmSlug(null);
+  };
+
+  const restoreAll = () => {
+    setHidden(new Set());
+    localStorage.removeItem('hidden_clients');
+  };
+
+  const visible = clients.filter((c) => !hidden.has(c.slug));
+
+  return (
+    <>
+      {hidden.size > 0 && (
+        <div style={{ textAlign: 'right', fontSize: 12, color: '#9ca3af', marginBottom: 10 }}>
+          {hidden.size}
+          {'件を非表示中'} ·{' '}
+          <button
+            onClick={restoreAll}
+            style={{ color: '#6b7280', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', fontSize: 12 }}
+          >
+            {'全て表示に戻す'}
+          </button>
+        </div>
+      )}
+      <div
+        className="grid"
+        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}
+      >
+        <NewClientButton />
+        {visible.map((client) => (
+          <div key={client.slug} style={{ position: 'relative' }}>
+            <button
+              onClick={(e) => { e.preventDefault(); setConfirmSlug(confirmSlug === client.slug ? null : client.slug); }}
+              style={{
+                position: 'absolute',
+                top: 10,
+                right: 10,
+                zIndex: 10,
+                background: 'rgba(255,255,255,0.85)',
+                border: '1px solid #e5e7eb',
+                borderRadius: '50%',
+                width: 26,
+                height: 26,
+                fontSize: 14,
+                color: '#9ca3af',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: 1,
+              }}
+              title={'非表示にする'}
+            >
+              ×
+            </button>
+            {confirmSlug === client.slug && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 44,
+                  right: 10,
+                  zIndex: 20,
+                  background: '#fff',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: 10,
+                  padding: '12px 14px',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+                  minWidth: 160,
+                }}
+              >
+                <p style={{ fontSize: 13, color: '#111827', fontWeight: 600, margin: '0 0 10px' }}>
+                  {'非表示にしますか？'}
+                </p>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <button
+                    onClick={() => hideClient(client.slug)}
+                    style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+                  >
+                    {'非表示'}
+                  </button>
+                  <button
+                    onClick={() => setConfirmSlug(null)}
+                    style={{ background: '#f3f4f6', color: '#6b7280', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer' }}
+                  >
+                    {'キャンセル'}
+                  </button>
+                </div>
+              </div>
+            )}
+            <Link
+              href={`/${client.slug}`}
+              className="block"
+              style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 16, padding: 0, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', textDecoration: 'none' }}
+            >
+              <div style={{ display: 'flex', height: 40 }}>
+                {(BRAND_COLORS[client.slug] || [{ hex: client.primaryColor, ratio: 100 }]).map((c) => (
+                  <div
+                    key={c.hex}
+                    style={{
+                      flex: c.ratio,
+                      backgroundColor: c.hex,
+                      border: (c.hex.toUpperCase() === '#FFFFFF' || c.hex === '#f0f0f0') ? '1px solid #e0e0e0' : 'none',
+                    }}
+                  />
+                ))}
+              </div>
+              <div style={{ padding: 28 }}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="font-bold" style={{ fontSize: 18, color: '#111827' }}>{client.name}</p>
+                    <p className="text-xs" style={{ color: '#9ca3af', marginTop: 2 }}>{client.slug}</p>
+                  </div>
+                  <span className="text-xs font-semibold" style={{ background: '#dcfce7', color: '#16a34a', borderRadius: 999, padding: '3px 10px' }}>
+                    Live
+                  </span>
+                </div>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
+                  {'デザインガイドライン・コンポーネントカタログを確認できます。'}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold" style={{ background: '#f0f4ff', color: '#4b5563', borderRadius: 999, padding: '4px 10px' }}>
+                    {'デザインシステム'}
+                  </span>
+                  <span className="text-sm font-semibold flex items-center" style={{ color: '#6b7280', gap: 4 }}>
+                    {'開く'}
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                      <path d="M7 5l5 5-5 5" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
