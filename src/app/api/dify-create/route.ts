@@ -60,30 +60,39 @@ async function removeFromExcludedDirs(slug: string, token: string) {
     'X-GitHub-Api-Version': '2022-11-28',
   };
 
-  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
-  if (!res.ok) return;
-  const data: { content: string; sha: string } = await res.json();
-  const raw = Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8');
+  // SHA競合に備えて最大3回リトライ
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, 2000 * attempt));
 
-  // スラッグが EXCLUDED_DIRS に含まれていなければ何もしない
-  if (!raw.includes(`'${slug}'`)) return;
+    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+    if (!res.ok) return;
+    const data: { content: string; sha: string } = await res.json();
+    const raw = Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8');
 
-  // 古いバージョンの page.tsx（colors/description がない）は絶対に上書きしない
-  if (!raw.includes('colors') || !raw.includes('description')) return;
+    // スラッグが EXCLUDED_DIRS に含まれていなければ何もしない
+    if (!raw.includes(`'${slug}'`)) return;
 
-  // 該当行を削除（行単位で処理）
-  const fixed = raw.split('\n').filter(line => !line.includes(`'${slug}'`)).join('\n');
+    // 古いバージョンの page.tsx（colors/description がない）は絶対に上書きしない
+    if (!raw.includes('colors') || !raw.includes('description')) return;
 
-  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
-    method: 'PUT',
-    headers: { ...h, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      message: `feat: activate client ${slug}`,
-      content: Buffer.from(fixed, 'utf-8').toString('base64'),
-      sha: data.sha,
-      branch: 'main',
-    }),
-  });
+    // 該当行を削除（行単位で処理）
+    const fixed = raw.split('\n').filter(line => !line.includes(`'${slug}'`)).join('\n');
+
+    const putRes = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+      method: 'PUT',
+      headers: { ...h, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `feat: activate client ${slug}`,
+        content: Buffer.from(fixed, 'utf-8').toString('base64'),
+        sha: data.sha,
+        branch: 'main',
+      }),
+    });
+
+    if (putRes.ok) return; // 成功
+    // 409 (SHA競合) の場合はリトライ、それ以外は諦める
+    if (putRes.status !== 409) return;
+  }
 }
 
 async function ensureLayoutTsx(slug: string, token: string) {

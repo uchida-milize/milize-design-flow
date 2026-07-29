@@ -9,7 +9,6 @@ const EXCLUDED_DIRS = new Set([
   'hitachi',
   'sony_corp',
   'sharp-finance-corp',
-  'milize',
   'api',
   'dena',
   'group-softbank',
