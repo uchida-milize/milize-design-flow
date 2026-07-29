@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+.toyota-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.toyota-portal {
+  min-height: 100vh;
+  background: #f5f7fa;
+  color: #111827;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Meiryo', sans-serif;
+  --portal-bg: #f5f7fa;
+  --primary-color: #EB0A1E;
+  --secondary-color: #000000;
+  --accent-color: #FFFFFF;
+  --text-color: #333333;
+  --bg-color: #F8F8F8;
+}
+
+.toyota-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.toyota-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.toyota-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.toyota-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.toyota-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.toyota-portal .nav-card {
+  display: block;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.toyota-portal .nav-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.toyota-portal .nav-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.toyota-portal .nav-card-desc {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.toyota-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.toyota-portal .swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.toyota-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.toyota-portal .swatch-info {
+  padding: 8px 12px;
+  background: #ffffff;
+}
+
+.toyota-portal .swatch-hex {
+  font-family: 'Menlo', 'Consolas', monospace;
+  font-size: 13px;
+  color: #111827;
+  font-weight: 500;
+}
+
+.toyota-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.toyota-portal .tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.toyota-portal .tab {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: #6b7280;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.toyota-portal .tab.active {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.toyota-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.toyota-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-family: 'Menlo', 'Consolas', monospace;
+}
+
+.toyota-portal .component-render {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toyota-portal .component-code {
+  background: #0f172a;
+  color: #94a3b8;
+  font-family: 'Menlo', 'Consolas', monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+
+.toyota-portal .color-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.toyota-portal .color-bar-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.toyota-portal .color-bar-label-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.toyota-portal .color-bar-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.toyota-portal .page-header {
+  padding: 48px 0 32px;
+}
+
+.toyota-portal .btn-primary {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 6px;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toyota-portal .btn-secondary {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 6px;
+  background: #000000;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toyota-portal .btn-outline {
+  display: inline-block;
+  padding: 9px 23px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.toyota-portal .nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding-bottom: 48px;
+}
+
+@media (max-width: 640px) {
+  .toyota-portal .nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
