@@ -47,12 +47,6 @@ const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
   ],
 };
 
-const CATEGORY_STYLE: Record<string, { bg: string; color: string }> = {
-  'ブランドリサーチ': { bg: '#f0f4ff', color: '#4b5563' },
-  'UIコンポーネント': { bg: '#fef3c7', color: '#92400e' },
-  PPTX: { bg: '#f0fdf4', color: '#166634' },
-};
-
 export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
@@ -181,26 +175,26 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                 <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
                   {'デザインガイドライン・コンポーネントカタログを確認できます。'}
                 </p>
-                <div className="flex items-center justify-between">
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', flex: 1, marginRight: 12 }}>
-                    {(client.categories.length > 0
-                      ? client.categories
-                      : ['ブランドリサーチ', 'UIコンポーネント']
-                    ).map((cat) => {
-                      const s = CATEGORY_STYLE[cat] || { bg: '#f0f4ff', color: '#4b5563' };
-                      return (
-                        <span key={cat} className="text-xs font-semibold" style={{ background: s.bg, color: s.color, borderRadius: 999, padding: '4px 10px', whiteSpace: 'nowrap' }}>
-                          {cat}
-                        </span>
-                      );
-                    })}
-                  </div>
-                  <span className="text-sm font-semibold flex items-center" style={{ color: '#6b7280', gap: 4 }}>
-                    {'開く'}
-                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-                      <path d="M7 5l5 5-5 5" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
+                <div style={{ display: 'flex', gap: 4, flexWrap: 'nowrap', overflow: 'hidden' }}>
+                  {(client.categories.length > 0
+                    ? client.categories
+                    : ['ガイドラインリサーチ', 'コンポーネント']
+                  ).map((cat) => (
+                    <span
+                      key={cat}
+                      style={{
+                        background: '#f3f4f6',
+                        color: '#6b7280',
+                        borderRadius: 999,
+                        padding: '3px 8px',
+                        fontSize: '0.7rem',
+                        whiteSpace: 'nowrap',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {cat}
+                    </span>
+                  ))}
                 </div>
               </div>
             </Link>
