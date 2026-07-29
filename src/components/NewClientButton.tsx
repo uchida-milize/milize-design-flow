@@ -165,7 +165,7 @@ export function NewClientButton() {
           onClick={e => { if (!running && e.target === e.currentTarget) setOpen(false); }}
           style={{
             position: 'fixed', inset: 0, zIndex: 1000,
-            background: 'rgba(0,0,0,0.6)',
+            background: 'rgba(255,255,255,0.85)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             animation: 'ncb-backdrop-in 0.3s ease forwards',
           }}
