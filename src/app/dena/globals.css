@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+.dena-portal {
+  --portal-bg: #f5f7fa;
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent-blue: #00B3E6;
+  --accent-cyan: #00C5CD;
+  --accent-green: #00D193;
+  --accent-red: #FF6B6B;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-faint: #9ca3af;
+  --border-color: #e5e7eb;
+
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  background: var(--portal-bg);
+  color: var(--text-main);
+}
+
+.dena-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.dena-portal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.dena-portal .portal-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.dena-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.dena-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.dena-portal .section-desc {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+}
+
+.dena-portal .card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.dena-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.dena-portal .swatch-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.dena-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.dena-portal .swatch-info {
+  padding: 8px 12px;
+}
+
+.dena-portal .swatch-hex {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 13px;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.dena-portal .swatch-name {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.dena-portal .tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.dena-portal .tab-item {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: var(--text-sub);
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.dena-portal .tab-item.active {
+  color: #ffffff;
+}
+
+.dena-portal .component-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 24px;
+}
+
+.dena-portal .component-label {
+  font-size: 12px;
+  color: var(--text-faint);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'SFMono-Regular', Consolas, monospace;
+}
+
+.dena-portal .component-preview {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dena-portal .component-code {
+  background: #0f172a;
+  color: #94a3b8;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.dena-portal .nav-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dena-portal .nav-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dena-portal .nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .dena-portal .nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dena-portal .color-ratio-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.dena-portal .color-ratio-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dena-portal .color-ratio-label-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.dena-portal .color-ratio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dena-portal .page-header {
+  padding: 40px 0 24px;
+}
+
+.dena-portal .page-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text-main);
+}
+
+.dena-portal .page-sub {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin-top: 4px;
+}
+
+.dena-portal .content-section {
+  padding: 32px 0;
+}
