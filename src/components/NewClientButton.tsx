@@ -238,7 +238,7 @@ export function NewClientButton() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '13px', color: '#777' }}>{statusMsg}</span>
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{progress}%</span>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{Math.round(progress)}%</span>
                 </div>
               </>
             )}
