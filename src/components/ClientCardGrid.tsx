@@ -51,6 +51,12 @@ const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
     { hex: '#f5a623', ratio: 10 },
     { hex: '#333333', ratio: 15 },
     { hex: '#f0f0f0', ratio: 15 },
+    sharp: [
+    { hex: '#FF0000', ratio: 40 },
+    { hex: '#000000', ratio: 20 },
+    { hex: '#F5A623', ratio: 10 },
+    { hex: '#333333', ratio: 20 },
+    { hex: '#ffffff', ratio: 10 },
   ],
 };
 
