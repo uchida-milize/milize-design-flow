@@ -45,6 +45,13 @@ const BRAND_COLORS: Record<string, Array<{ hex: string; ratio: number }>> = {
     { hex: '#94a3b8', ratio: 15 },
     { hex: '#FFFFFF', ratio: 15 },
   ],
+  panasonic: [
+    { hex: '#003d7c', ratio: 40 },
+    { hex: '#0071bc', ratio: 20 },
+    { hex: '#f5a623', ratio: 10 },
+    { hex: '#333333', ratio: 15 },
+    { hex: '#f0f0f0', ratio: 15 },
+  ],
 };
 
 export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
