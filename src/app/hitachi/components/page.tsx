@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = '日立製作所';
 const basePath = '/hitachi';
-const primaryColor = '#E60012';
+const primaryColor: string = '#E60012';
 const accentColor = '#0071BC';
 
 const tabs = [

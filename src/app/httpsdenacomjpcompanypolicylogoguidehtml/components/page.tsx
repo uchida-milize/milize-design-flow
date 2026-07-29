@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'シャープ株式会社';
 const basePath = '/sharp-corp';
-const primaryColor = '#E60012';
+const primaryColor: string = '#E60012';
 const accentColor = '#0071BC';
 
 export default function ComponentsPage() {

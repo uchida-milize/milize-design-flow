@@ -4,7 +4,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const basePath = '/hitachi';
 const clientName = '日立製作所';
-const primaryColor = '#E60012';
+const primaryColor: string = '#E60012';
 
 const brandColors = [
   { name: 'Hitachi Red', hex: '#E60012', ratio: 40 },

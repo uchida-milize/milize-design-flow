@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'シャープファイナンス株式会社';
 const basePath = '/sharp-finance-corp';
-const primaryColor = '#004A99';
+const primaryColor: string = '#004A99';
 
 const colorRatios = [
   { hex: '#004A99', name: 'Primary Blue', ratio: 40 },

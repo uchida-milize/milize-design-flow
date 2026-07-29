@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'パナソニック株式会社';
 const basePath = '/panasonic';
-const primaryColor = '#003d7c';
+const primaryColor: string = '#003d7c';
 const secondaryColor = '#0071bc';
 const accentColor = '#f5a623';
 

@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'シャープ株式会社';
 const basePath = '/sharp';
-const primaryColor = '#FF0000';
+const primaryColor: string = '#FF0000';
 
 const tabs = [
   { key: 'buttons', label: 'Buttons' },

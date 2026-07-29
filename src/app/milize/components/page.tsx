@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'Milize';
 const basePath = '/milize';
-const primaryColor = '#0055A4';
+const primaryColor: string = '#0055A4';
 const secondaryColor = '#00A0E9';
 const accentColor = '#F5A623';
 

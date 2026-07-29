@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'DeNA株式会社';
 const basePath = '/dena';
-const primaryColor = '#000000';
+const primaryColor: string = '#000000';
 
 const colorRatios = [
   { hex: '#000000', name: 'ブラック', percent: 40, isWhite: false },

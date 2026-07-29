@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'ソフトバンクグループ株式会社';
 const basePath = '/group-softbank';
-const primaryColor = '#000000';
+const primaryColor: string = '#000000';
 
 // SoftBankサイトから実測したデザイントークン
 const tokens = {

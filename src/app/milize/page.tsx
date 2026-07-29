@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'Milize';
 const basePath = '/milize';
-const primaryColor = '#0055A4';
+const primaryColor: string = '#0055A4';
 
 const colorRatios = [
   { hex: '#0055A4', name: 'Primary Blue', percent: 38 },

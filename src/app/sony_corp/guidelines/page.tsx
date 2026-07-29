@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'ソニー株式会社';
 const basePath = '/sony_corp';
-const primaryColor = '#000000';
+const primaryColor: string = '#000000';
 
 const colorRatios = [
   { hex: '#000000', name: 'ブラック（プライマリ）', ratio: 40 },

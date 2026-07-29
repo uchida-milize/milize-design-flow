@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const clientName = 'パナソニック株式会社';
 const basePath = '/panasonic';
-const primaryColor = '#003d7c';
+const primaryColor: string = '#003d7c';
 
 const colorRatios = [
   { hex: '#003d7c', name: 'Primary Blue', percent: 40 },
