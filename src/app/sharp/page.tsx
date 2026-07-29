@@ -1,7 +1,7 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'シャープファイナンス株式会社';
-const basePath = '/sharp-finance-corp';
+const clientName = 'シャープ株式会社';
+const basePath = '/sharp';
 const primaryColor = '#FF0000';
 
 const colorRatios = [
@@ -14,7 +14,7 @@ const colorRatios = [
 
 export default function Page() {
   return (
-    <div className="sharp-finance-corp-portal">
+    <div className="sharp-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
@@ -24,11 +24,11 @@ export default function Page() {
       <div className="portal-container">
         <div className="page-header">
           <div className="section-label" style={{ color: primaryColor }}>
-            BRAND PORTAL
+            RESEARCH
           </div>
-          <div className="section-title">{clientName} ブランドポータル</div>
+          <div className="section-title">{clientName} リサーチ</div>
           <div className="section-desc">
-            ブランドガイドラインとUIコンポーネントを確認できます。
+            デザインガイドラインとコンポーネントを確認できます。
           </div>
         </div>
 
@@ -63,15 +63,15 @@ export default function Page() {
 
         <div className="nav-grid">
           <a href={`${basePath}/guidelines`} className="nav-card">
-            <div className="nav-card-title">ガイドライン</div>
+            <div className="nav-card-title">ガイドラインリサーチ</div>
             <div className="nav-card-desc">
-              ブランドカラー、タイポグラフィ、トンマナなどのデザイン原則を確認できます。
+              カラーガイドライン、タイポグラフィ、トンマナなどのデザイン原則を確認できます。
             </div>
           </a>
           <a href={`${basePath}/components`} className="nav-card">
             <div className="nav-card-title">コンポーネント</div>
             <div className="nav-card-desc">
-              ブランドに基づいたUIコンポーネントのサンプルを確認できます。
+              コンポーネントのサンプルを確認できます。
             </div>
           </a>
         </div>
