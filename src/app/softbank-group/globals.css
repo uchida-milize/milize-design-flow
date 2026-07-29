@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+  --primary-silver: #C0C0C0;
+  --secondary-black: #000000;
+  --accent-darkgray: #444444;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-note: #9ca3af;
+}
+
+.softbank-group-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.softbank-group-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+  color: var(--text-main);
+}
+
+.softbank-group-portal h1,
+.softbank-group-portal h2,
+.softbank-group-portal h3 {
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+}
+
+.softbank-group-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.softbank-group-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.softbank-group-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.softbank-group-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.softbank-group-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.softbank-group-portal .nav-card {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.softbank-group-portal .nav-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.softbank-group-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.softbank-group-portal .swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.softbank-group-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.softbank-group-portal .swatch-info {
+  padding: 8px 10px;
+}
+
+.softbank-group-portal .swatch-hex {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #111827;
+}
+
+.softbank-group-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.softbank-group-portal .tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.softbank-group-portal .tab {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: #6b7280;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.softbank-group-portal .tab.active {
+  color: #ffffff;
+}
+
+.softbank-group-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.softbank-group-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-family: 'Courier New', monospace;
+}
+
+.softbank-group-portal .component-render {
+  padding: 24px;
+}
+
+.softbank-group-portal .component-code {
+  background: #0f172a;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.softbank-group-portal .color-bar {
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.softbank-group-portal .color-bar-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.softbank-group-portal .color-bar-label-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.softbank-group-portal .color-bar-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
