@@ -9,46 +9,46 @@
   --portal-border: #e5e7eb;
 }
 
-.sharp-finance-corp-portal * {
+.sharp-portal * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-.sharp-finance-corp-portal {
+.sharp-portal {
   min-height: 100vh;
   background: var(--portal-bg);
   font-family: 'Yu Gothic', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
   color: var(--portal-text-main);
 }
 
-.sharp-finance-corp-portal .portal-container {
+.sharp-portal .portal-container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-.sharp-finance-corp-portal .section-label {
+.sharp-portal .section-label {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.sharp-finance-corp-portal .section-title {
+.sharp-portal .section-title {
   font-size: 24px;
   font-weight: 700;
   color: #111827;
   margin-top: 4px;
 }
 
-.sharp-finance-corp-portal .section-desc {
+.sharp-portal .section-desc {
   font-size: 14px;
   color: #6b7280;
   margin-top: 8px;
 }
 
-.sharp-finance-corp-portal .portal-card {
+.sharp-portal .portal-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
@@ -56,7 +56,7 @@
   padding: 24px;
 }
 
-.sharp-finance-corp-portal .nav-card {
+.sharp-portal .nav-card {
   display: block;
   text-decoration: none;
   background: #ffffff;
@@ -67,30 +67,30 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.sharp-finance-corp-portal .nav-card:hover {
+.sharp-portal .nav-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.sharp-finance-corp-portal .nav-card-title {
+.sharp-portal .nav-card-title {
   font-size: 18px;
   font-weight: 700;
   color: #111827;
   margin-bottom: 8px;
 }
 
-.sharp-finance-corp-portal .nav-card-desc {
+.sharp-portal .nav-card-desc {
   font-size: 14px;
   color: #6b7280;
 }
 
-.sharp-finance-corp-portal .nav-grid {
+.sharp-portal .nav-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-.sharp-finance-corp-portal .color-ratio-bar {
+.sharp-portal .color-ratio-bar {
   display: flex;
   height: 32px;
   border-radius: 8px;
@@ -98,14 +98,14 @@
   margin-bottom: 16px;
 }
 
-.sharp-finance-corp-portal .color-ratio-labels {
+.sharp-portal .color-ratio-labels {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 32px;
 }
 
-.sharp-finance-corp-portal .color-ratio-label-item {
+.sharp-portal .color-ratio-label-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -113,53 +113,53 @@
   color: #6b7280;
 }
 
-.sharp-finance-corp-portal .color-ratio-swatch {
+.sharp-portal .color-ratio-swatch {
   width: 12px;
   height: 12px;
   border-radius: 3px;
   flex-shrink: 0;
 }
 
-.sharp-finance-corp-portal .swatch-grid {
+.sharp-portal .swatch-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 12px;
 }
 
-.sharp-finance-corp-portal .swatch-item {
+.sharp-portal .swatch-item {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
   background: #ffffff;
 }
 
-.sharp-finance-corp-portal .swatch-color-block {
+.sharp-portal .swatch-color-block {
   height: 80px;
 }
 
-.sharp-finance-corp-portal .swatch-info {
+.sharp-portal .swatch-info {
   padding: 8px 12px;
 }
 
-.sharp-finance-corp-portal .swatch-hex {
+.sharp-portal .swatch-hex {
   font-family: 'SFMono-Regular', Consolas, monospace;
   font-size: 13px;
   color: #111827;
 }
 
-.sharp-finance-corp-portal .swatch-name {
+.sharp-portal .swatch-name {
   font-size: 12px;
   color: #6b7280;
   margin-top: 2px;
 }
 
-.sharp-finance-corp-portal .tab-nav {
+.sharp-portal .tab-nav {
   display: flex;
   gap: 8px;
   margin-bottom: 32px;
 }
 
-.sharp-finance-corp-portal .tab-item {
+.sharp-portal .tab-item {
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 14px;
@@ -170,11 +170,11 @@
   cursor: pointer;
 }
 
-.sharp-finance-corp-portal .tab-item.active {
+.sharp-portal .tab-item.active {
   color: #ffffff;
 }
 
-.sharp-finance-corp-portal .component-card {
+.sharp-portal .component-card {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
@@ -182,7 +182,7 @@
   background: #ffffff;
 }
 
-.sharp-finance-corp-portal .component-label-row {
+.sharp-portal .component-label-row {
   padding: 8px 16px;
   font-size: 12px;
   color: #9ca3af;
@@ -190,19 +190,19 @@
   font-family: 'SFMono-Regular', Consolas, monospace;
 }
 
-.sharp-finance-corp-portal .component-render-area {
+.sharp-portal .component-render-area {
   padding: 24px;
 }
 
-.sharp-finance-corp-portal .component-code-block {
-  background: #0f172a;
-  color: #94a3b8;
+.sharp-portal .component-code-block {
+  background: #efefef;
+  color: #333333;
   font-family: 'SFMono-Regular', Consolas, monospace;
   font-size: 12px;
   padding: 12px 16px;
   overflow-x: auto;
 }
 
-.sharp-finance-corp-portal .page-header {
+.sharp-portal .page-header {
   padding: 40px 0 24px;
 }
