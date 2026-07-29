@@ -1,26 +1,28 @@
 import { ClientCardGrid } from '@/components/ClientCardGrid';
 
+// クライアントディレクトリから除外するディレクトリ名（旧DC残骸 + Next.js予約名 + 削除済みクライアント）
 const EXCLUDED_DIRS = new Set([
   'components',
   'guidelines',
   'prototype',
   'screens',
+  'hitachi',
+  'sony_corp',
+  'sharp-finance-corp',
+  'milize',
+  'api',
+  'dena',
+  'group-softbank',
+  'httpsdenacomjpcompanypolicylogoguidehtml',
+  'panasonic',
+  'sharp',
+  'toyota',
 ]);
-
-// サブディレクトリ名 → カテゴリラベルのマッピング
-const SUBDIR_TO_LABEL: Record<string, string> = {
-  guidelines: 'ガイドラインリサーチ',
-  components: 'コンポーネント',
-  pptx: 'PPTX',
-};
-
-const CATEGORY_ORDER = ['ガイドラインリサーチ', 'コンポーネント', 'PPTX'];
 
 type ClientInfo = {
   slug: string;
   name: string;
   primaryColor: string;
-  categories: string[];
 };
 
 function slugToName(slug: string): string {
@@ -45,48 +47,25 @@ async function getClients(): Promise<ClientInfo[]> {
     const clientSlugs = contents
       .filter((item) => item.type === 'dir' && !EXCLUDED_DIRS.has(item.name))
       .map((item) => item.name)
-      .sort((a, b) => {
-        const ORDER = ['hitachi', 'sony_corp', 'sharp-finance-corp', 'milize', 'api'];
-        const ai = ORDER.indexOf(a);
-        const bi = ORDER.indexOf(b);
-        if (ai === -1 && bi === -1) return a.localeCompare(b);
-        if (ai === -1) return 1;
-        if (bi === -1) return -1;
-        return ai - bi;
-      });
+      .sort((a, b) => a.localeCompare(b));
 
     const clients = await Promise.all(
       clientSlugs.map(async (slug): Promise<ClientInfo> => {
         let primaryColor = '#004A99';
-        let categories: string[] = [];
-
-        const [cssRes, dirRes] = await Promise.all([
-          fetch(
+        try {
+          const cssRes = await fetch(
             `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css`,
             { next: { revalidate: 60 } }
-          ).catch(() => null),
-          fetch(
-            `https://api.github.com/repos/uchida-milize/milize-design-flow/contents/src/app/${slug}`,
-            { headers: { Accept: 'application/vnd.github.v3+json' }, next: { revalidate: 60 } }
-          ).catch(() => null),
-        ]);
-
-        if (cssRes?.ok) {
-          const css = await cssRes.text();
-          const match = css.match(/--color-secondary:\s*(#[0-9a-fA-F]{3,6})/);
-          if (match) primaryColor = match[1];
+          );
+          if (cssRes.ok) {
+            const css = await cssRes.text();
+            const match = css.match(/--color-secondary:\s*(#[0-9a-fA-F]{3,6})/);
+            if (match) primaryColor = match[1];
+          }
+        } catch {
+          // ignore
         }
-
-        if (dirRes?.ok) {
-          const dirContents = (await dirRes.json()) as Array<{ name: string; type: string }>;
-          const labels = dirContents
-            .filter((x) => x.type === 'dir')
-            .map((x) => SUBDIR_TO_LABEL[x.name])
-            .filter(Boolean) as string[];
-          categories = CATEGORY_ORDER.filter((l) => labels.includes(l));
-        }
-
-        return { slug, name: slugToName(slug), primaryColor, categories };
+        return { slug, name: slugToName(slug), primaryColor };
       })
     );
 
