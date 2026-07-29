@@ -32,6 +32,12 @@ export function NewClientButton() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    // 既に非表示になっているスラッグなら hidden_clients から除外
+    const slug = form.client_slug;
+    const hidden: string[] = JSON.parse(localStorage.getItem('hidden_clients') || '[]');
+    localStorage.setItem('hidden_clients', JSON.stringify(hidden.filter(s => s !== slug)));
+
     setRunning(true);
     setProgress(5);
     setStatusMsg('Difyワークフローを起動中...');
@@ -64,7 +70,6 @@ export function NewClientButton() {
       }
 
       if (difyDone) {
-        const slug = form.client_slug;
         let deployed = false;
         let attempts = 0;
         while (!deployed && attempts < 60) {
