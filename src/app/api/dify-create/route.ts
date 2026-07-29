@@ -68,6 +68,9 @@ async function removeFromExcludedDirs(slug: string, token: string) {
   // スラッグが EXCLUDED_DIRS に含まれていなければ何もしない
   if (!raw.includes(`'${slug}'`)) return;
 
+  // 古いバージョンの page.tsx（colors/description がない）は絶対に上書きしない
+  if (!raw.includes('colors') || !raw.includes('description')) return;
+
   // 該当行を削除（行単位で処理）
   const fixed = raw.split('\n').filter(line => !line.includes(`'${slug}'`)).join('\n');
 

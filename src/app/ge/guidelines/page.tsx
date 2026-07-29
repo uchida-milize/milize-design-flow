@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = '重工業株式会社';
 const basePath = '/heavy-industries-corp';
-const primaryColor = '#004A99';
+const primaryColor: string = '#004A99';
 
 const colors = [
   { hex: '#004A99', name: 'Primary Blue' },
