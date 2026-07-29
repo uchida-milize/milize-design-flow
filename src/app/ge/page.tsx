@@ -2,10 +2,10 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'ゼネラル・エレクトリック';
 const basePath = '/ge';
-const primaryColor: string = '#004A99';
+const primaryColor: string = '#3B73B9';
 
 const colorRatios = [
-  { hex: '#004A99', name: 'Primary Blue', pct: 45 },
+  { hex: '#3B73B9', name: 'Primary Blue', pct: 45 },
   { hex: '#000000', name: 'Corporate Black', pct: 25 },
   { hex: '#B7282E', name: 'Accent Red（水引）', pct: 10 },
   { hex: '#333333', name: 'Text Black', pct: 15 },

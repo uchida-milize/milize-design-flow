@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'ゼネラル・エレクトリック';
 const basePath = '/ge';
-const primaryColor: string = '#004A99';
+const primaryColor: string = '#3B73B9';
 const accentRed = '#B7282E';
 
 export default function ComponentsPage() {
