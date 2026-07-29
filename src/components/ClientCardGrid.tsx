@@ -214,3 +214,4 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
     </>
   );
 }
+
