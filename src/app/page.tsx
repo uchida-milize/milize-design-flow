@@ -1,6 +1,5 @@
 import { ClientCardGrid } from '@/components/ClientCardGrid';
 
-// クライアントディレクトリから除外するディレクトリ名（旧DC残骸 + Next.js予約名 + 削除済みクライアント）
 const EXCLUDED_DIRS = new Set([
   'components',
   'guidelines',
@@ -19,20 +18,7 @@ const EXCLUDED_DIRS = new Set([
   'toyota',
 ]);
 
-type ClientInfo = {
-  slug: string;
-  name: string;
-  primaryColor: string;
-};
-
-function slugToName(slug: string): string {
-  return slug
-    .split('-')
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-}
-
-async function getClients(): Promise<ClientInfo[]> {
+async function getClients() {
   try {
     const res = await fetch(
       'https://api.github.com/repos/uchida-milize/milize-design-flow/contents/src/app',
@@ -50,7 +36,7 @@ async function getClients(): Promise<ClientInfo[]> {
       .sort((a, b) => a.localeCompare(b));
 
     const clients = await Promise.all(
-      clientSlugs.map(async (slug): Promise<ClientInfo> => {
+      clientSlugs.map(async (slug) => {
         let primaryColor = '#004A99';
         try {
           const cssRes = await fetch(
@@ -62,10 +48,8 @@ async function getClients(): Promise<ClientInfo[]> {
             const match = css.match(/--color-secondary:\s*(#[0-9a-fA-F]{3,6})/);
             if (match) primaryColor = match[1];
           }
-        } catch {
-          // ignore
-        }
-        return { slug, name: slugToName(slug), primaryColor };
+        } catch { /* ignore */ }
+        return { slug, name: slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), primaryColor };
       })
     );
 
@@ -80,7 +64,6 @@ export default async function ClientsIndex() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#f7f9fc' }}>
-      {/* Header */}
       <header style={{ background: '#ffffff', borderBottom: '1px solid #e5e7eb' }}>
         <div className="mx-auto flex items-center" style={{ maxWidth: 1120, padding: '16px 24px', gap: 12 }}>
           <span className="font-bold text-sm" style={{ color: '#111827', letterSpacing: '-0.01em' }}>
@@ -93,7 +76,6 @@ export default async function ClientsIndex() {
         </div>
       </header>
 
-      {/* Hero */}
       <div style={{ background: '#f7f9fc' }}>
         <div className="mx-auto" style={{ maxWidth: 1120, padding: '64px 24px 48px' }}>
           <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Client Production Portal</p>
@@ -107,7 +89,6 @@ export default async function ClientsIndex() {
         </div>
       </div>
 
-      {/* Client cards */}
       <div className="mx-auto" style={{ maxWidth: 1120, padding: '0 24px 96px' }}>
         {clients.length === 0 ? (
           <p className="text-sm" style={{ color: '#9ca3af' }}>{`クライアントが見つかりませんでした。`}</p>
