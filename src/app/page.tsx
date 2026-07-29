@@ -15,7 +15,6 @@ const EXCLUDED_DIRS = new Set([
   'httpsdenacomjpcompanypolicylogoguidehtml',
   'panasonic',
   'sharp',
-  'toyota',
 ]);
 
 async function getClients() {
