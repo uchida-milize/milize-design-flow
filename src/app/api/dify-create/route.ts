@@ -1,5 +1,55 @@
 import { NextRequest } from 'next/server';
 
+// Dify が生成した globals.css の変数名がバラバラでも、標準変数を自動注入する
+async function normalizeColorVars(slug: string, token: string) {
+  const OWNER = 'uchida-milize';
+  const REPO  = 'milize-design-flow';
+  const path  = `src/app/${slug}/globals.css`;
+  const h = {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+  if (!res.ok) return;
+  const data: { content: string; sha: string } = await res.json();
+  const css = Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8');
+
+  // 既に標準変数が揃っていればスキップ
+  if (css.includes('--primary-color:')) return;
+
+  // どんな変数名でも色値を抽出するヘルパー
+  const extract = (patterns: string[]): string | null => {
+    for (const p of patterns) {
+      const m = css.match(new RegExp(p + ':\\s*(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\))'));
+      if (m) return m[1];
+    }
+    return null;
+  };
+
+  const primary   = extract(['--primary(?!-color)[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
+  const secondary = extract(['--secondary(?!-color)[\\w-]*', '--color-secondary', '--sub-color'])               ?? '#333333';
+  const accent    = extract(['--accent(?!-color)[\\w-]*', '--color-accent'])                                    ?? '#F5A623';
+  const textColor = extract(['--text-main', '--text-color', '--color-text', '--text-primary'])                  ?? '#111827';
+  const bgColor   = extract(['--bg(?!-color)[\\w-]*', '--background(?!-color)[\\w-]*', '--portal-bg'])         ?? '#FFFFFF';
+
+  // 標準変数ブロックを末尾に追加
+  const injection = `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n}\n`;
+  const fixed = css + injection;
+
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...h, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message: `fix: inject standard color vars into ${slug}/globals.css`,
+      content: Buffer.from(fixed, 'utf-8').toString('base64'),
+      sha: data.sha,
+      branch: 'main',
+    }),
+  });
+}
+
 async function removeFromExcludedDirs(slug: string, token: string) {
   const OWNER = 'uchida-milize';
   const REPO  = 'milize-design-flow';
@@ -183,6 +233,7 @@ send({ progress: progressVal });
 const githubToken = process.env.GITHUB_TOKEN ?? '';
 await fixTemplateRefs(client_slug, company_name, githubToken);
 await ensureLayoutTsx(client_slug, githubToken);
+await normalizeColorVars(client_slug, githubToken);
 await removeFromExcludedDirs(client_slug, githubToken);
 send({ progress: 60, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u5f85\u6a5f\u4e2d...', dify_done: true });
 }
