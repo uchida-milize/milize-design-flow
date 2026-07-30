@@ -15,157 +15,223 @@ const MODAL_KEYFRAMES = `
 }
 `;
 
+const PURPOSE_OPTIONS = [
+  '全般',
+  'カラー・ブランド',
+  'UIコンポーネント',
+  'タイポグラフィ',
+  'ロゴ・アイコン',
+  'レイアウト',
+];
+
+interface UrlItem {
+  url: string;
+  title: string;
+  description: string;
+}
+
+interface SelectedUrl {
+  url: string;
+  title: string;
+  purpose: string;
+  checked: boolean;
+}
+
+type Step = 'form' | 'collecting' | 'urls' | 'generating';
+
 export function NewClientButton() {
   const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<Step>('form');
   const [form, setForm] = useState({ company_name: '', client_slug: '' });
-  const [progress, setProgress] = useState(0);
-  const [running, setRunning] = useState(false);
-  const [statusMsg, setStatusMsg] = useState('');
+  const [collectProgress, setCollectProgress] = useState(0);
+  const [collectStatus, setCollectStatus] = useState('');
+  const [selectedUrls, setSelectedUrls] = useState<SelectedUrl[]>([]);
+  const [genProgress, setGenProgress] = useState(0);
+  const [genStatus, setGenStatus] = useState('');
   const router = useRouter();
 
   function reset() {
     setForm({ company_name: '', client_slug: '' });
-    setProgress(0);
-    setRunning(false);
-    setStatusMsg('');
+    setStep('form');
+    setCollectProgress(0);
+    setCollectStatus('');
+    setSelectedUrls([]);
+    setGenProgress(0);
+    setGenStatus('');
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  // Step 1→2: URL収集
+  async function handleCollect(e: React.FormEvent) {
     e.preventDefault();
+    setStep('collecting');
+    setCollectProgress(5);
+    setCollectStatus('URL収集ワークフローを起動中...');
 
-    // 既に非表示になっているスラッグなら hidden_clients から除外
+    try {
+      const res = await fetch('/api/dify-urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company_name: form.company_name }),
+      });
+
+      const reader = res.body!.getReader();
+      const decoder = new TextDecoder();
+      let lineBuffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        lineBuffer += decoder.decode(value, { stream: true });
+        const lines = lineBuffer.split('\n');
+        lineBuffer = lines.pop() ?? '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          try {
+            const data = JSON.parse(line.slice(6));
+            if (data.progress !== undefined) setCollectProgress(data.progress);
+            if (data.status) setCollectStatus(data.status);
+            if (data.error) {
+              setCollectStatus('エラー: ' + data.error);
+              return;
+            }
+            if (data.urls) {
+              const items: UrlItem[] = data.urls;
+              setSelectedUrls(items.map(u => ({
+                url: u.url,
+                title: u.title || u.url,
+                purpose: '全般',
+                checked: true,
+              })));
+              setStep('urls');
+            }
+          } catch { /* skip */ }
+        }
+      }
+    } catch (err) {
+      setCollectStatus('接続エラー: ' + String(err));
+    }
+  }
+
+  // Step 3: 生成
+  async function handleGenerate() {
+    const checkedUrls = selectedUrls.filter(u => u.checked);
+    if (checkedUrls.length === 0) {
+      alert('URLを1件以上選択してください');
+      return;
+    }
+
+    setStep('generating');
+    setGenProgress(5);
+    setGenStatus('Difyワークフローを起動中...');
+
     const slug = form.client_slug;
     const hidden: string[] = JSON.parse(localStorage.getItem('hidden_clients') || '[]');
     localStorage.setItem('hidden_clients', JSON.stringify(hidden.filter(s => s !== slug)));
 
-    setRunning(true);
-    setProgress(5);
-    setStatusMsg('Difyワークフローを起動中...');
+    const selectedUrlsJson = JSON.stringify(
+      checkedUrls.map(u => ({ url: u.url, purpose: u.purpose }))
+    );
 
     let difyDone = false;
     try {
       const res = await fetch('/api/dify-create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          company_name: form.company_name,
+          client_slug: slug,
+          selected_urls: selectedUrlsJson,
+        }),
       });
 
       const reader = res.body!.getReader();
       const decoder = new TextDecoder();
+      let lineBuffer = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const text = decoder.decode(value);
-        for (const line of text.split('\n')) {
+        lineBuffer += decoder.decode(value, { stream: true });
+        const lines = lineBuffer.split('\n');
+        lineBuffer = lines.pop() ?? '';
+
+        for (const line of lines) {
           if (!line.startsWith('data: ')) continue;
           try {
             const data = JSON.parse(line.slice(6));
-            if (data.progress !== undefined) setProgress(data.progress);
-            if (data.status) setStatusMsg(data.status);
+            if (data.progress !== undefined) setGenProgress(data.progress);
+            if (data.status) setGenStatus(data.status);
             if (data.dify_done) { difyDone = true; }
             if (data.deploy_done) {
-              setProgress(100);
-              setStatusMsg('デプロイ完了！');
+              setGenProgress(100);
+              setGenStatus('デプロイ完了！');
               await new Promise(r => setTimeout(r, 1200));
-              setOpen(false);
-              reset();
-              router.refresh();
+              setOpen(false); reset(); router.refresh();
               return;
             }
-            if (data.error) { setStatusMsg('エラー: ' + data.error); setRunning(false); }
-          } catch {}
+            if (data.error) { setGenStatus('エラー: ' + data.error); }
+          } catch { /* skip */ }
         }
       }
 
       if (difyDone) {
-        // VERCEL_TOKEN未設定時のフォールバック：URLポーリング
         let deployed = false;
         let attempts = 0;
         while (!deployed && attempts < 60) {
-          setStatusMsg('Vercelデプロイ待機中...');
-          setProgress(prev => Math.min(95, prev + 0.7));
+          setGenStatus('Vercelデプロイ待機中...');
+          setGenProgress(prev => Math.min(95, prev + 0.7));
           await new Promise(r => setTimeout(r, 5000));
           attempts++;
           try {
             const r = await fetch('/' + slug + '?_t=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
             if (r.ok) { deployed = true; }
-          } catch {}
+          } catch { /* ignore */ }
         }
         if (deployed) {
-          setProgress(100);
-          setStatusMsg('デプロイ完了！');
+          setGenProgress(100);
+          setGenStatus('デプロイ完了！');
           await new Promise(r => setTimeout(r, 1200));
-          setOpen(false);
-          reset();
-          router.refresh();
+          setOpen(false); reset(); router.refresh();
         } else {
-          setStatusMsg('デプロイタイムアウト');
-          setRunning(false);
+          setGenStatus('デプロイタイムアウト');
         }
       }
     } catch {
-      setStatusMsg('接続エラーが発生しました');
-      setRunning(false);
+      setGenStatus('接続エラーが発生しました');
     }
   }
 
   const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '10px 14px',
-    border: '1.5px solid #e0e0e0',
-    borderRadius: '8px',
-    fontSize: '14px',
-    outline: 'none',
-    fontFamily: 'inherit',
-    boxSizing: 'border-box',
-    background: '#fafafa',
+    width: '100%', padding: '10px 14px',
+    border: '1.5px solid #e0e0e0', borderRadius: '8px',
+    fontSize: '14px', outline: 'none',
+    fontFamily: 'inherit', boxSizing: 'border-box', background: '#fafafa',
+  };
+  const labelStyle: React.CSSProperties = {
+    display: 'block', fontSize: '12px', fontWeight: 600,
+    color: '#555', marginBottom: '6px',
   };
 
-  const labelStyle: React.CSSProperties = {
-    display: 'block',
-    fontSize: '12px',
-    fontWeight: 600,
-    color: '#555',
-    marginBottom: '6px',
-  };
+  const modalWidth = step === 'urls' ? '640px' : '480px';
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: MODAL_KEYFRAMES }} />
 
+      {/* トリガーカード */}
       <div
         onClick={() => { reset(); setOpen(true); }}
         style={{
-          background: '#f9fafb',
-          border: '2px dashed #d1d5db',
-          borderRadius: '12px',
-          padding: '28px',
-          cursor: 'pointer',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12px',
-          minHeight: '140px',
+          background: '#f9fafb', border: '2px dashed #d1d5db', borderRadius: '12px',
+          padding: '28px', cursor: 'pointer', display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center', gap: '12px', minHeight: '140px',
           transition: 'border-color 0.2s, background 0.2s',
         }}
-        onMouseEnter={e => {
-          const el = e.currentTarget as HTMLDivElement;
-          el.style.borderColor = '#9ca3af';
-          el.style.background = '#f3f4f6';
-        }}
-        onMouseLeave={e => {
-          const el = e.currentTarget as HTMLDivElement;
-          el.style.borderColor = '#d1d5db';
-          el.style.background = '#f9fafb';
-        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = '#9ca3af'; (e.currentTarget as HTMLDivElement).style.background = '#f3f4f6'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = '#d1d5db'; (e.currentTarget as HTMLDivElement).style.background = '#f9fafb'; }}
       >
-        <div style={{
-          width: '48px', height: '48px', borderRadius: '50%',
-          background: '#e5e7eb', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', fontSize: '24px', color: '#9ca3af',
-        }}>+</div>
+        <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', color: '#9ca3af' }}>+</div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '15px', fontWeight: 600, color: '#374151' }}>{'新規クライアント'}</div>
           <div style={{ fontSize: '13px', color: '#9ca3af', marginTop: '4px' }}>Difyで自動生成</div>
@@ -174,7 +240,7 @@ export function NewClientButton() {
 
       {open && (
         <div
-          onClick={e => { if (!running && e.target === e.currentTarget) setOpen(false); }}
+          onClick={e => { if ((step === 'form' || step === 'urls') && e.target === e.currentTarget) { setOpen(false); reset(); } }}
           style={{
             position: 'fixed', inset: 0, zIndex: 1000,
             background: 'rgba(255,255,255,0.85)',
@@ -183,47 +249,28 @@ export function NewClientButton() {
           }}
         >
           <div style={{
-            background: '#fff',
-            borderRadius: '20px',
-            padding: '40px',
-            width: '480px',
-            maxWidth: '90vw',
-            boxShadow: [
-              '0 0 0 1px rgba(255,255,255,0.5)',
-              '0 0 30px 14px rgba(255,255,255,0.55)',
-              '0 0 80px 30px rgba(255,255,255,0.2)',
-              '0 32px 80px rgba(0,0,0,0.22)',
-            ].join(', '),
+            background: '#fff', borderRadius: '20px', padding: '40px',
+            width: modalWidth, maxWidth: '92vw', maxHeight: '90vh', overflowY: 'auto',
+            boxShadow: ['0 0 0 1px rgba(255,255,255,0.5)', '0 0 30px 14px rgba(255,255,255,0.55)', '0 32px 80px rgba(0,0,0,0.22)'].join(', '),
             animation: 'ncb-modal-in 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards',
           }}>
-            {!running ? (
+
+            {/* Step 1: フォーム */}
+            {step === 'form' && (
               <>
-                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>
-                  {'新規クライアント追加'}
-                </h2>
-                <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>
-                  {'会社名を入力するとDifyがポータルを自動生成します'}
-                </p>
-                <form onSubmit={handleSubmit}>
+                <StepIndicator current={1} />
+                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'新規クライアント追加'}</h2>
+                <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>{'会社名を入力してURLを収集します'}</p>
+                <form onSubmit={handleCollect}>
                   <div style={{ marginBottom: '18px' }}>
                     <label style={labelStyle}>{'会社名（日本語） or URL'}</label>
-                    <input
-                      style={inputStyle}
-                      placeholder={'例：シャープファイナンス株式会社'}
-                      value={form.company_name}
-                      onChange={e => setForm(f => ({ ...f, company_name: e.target.value }))}
-                      required
-                    />
+                    <input style={inputStyle} placeholder={'例：ゼネラル・エレクトリック'} value={form.company_name}
+                      onChange={e => setForm(f => ({ ...f, company_name: e.target.value }))} required />
                   </div>
                   <div style={{ marginBottom: '28px' }}>
                     <label style={labelStyle}>{'スラッグ（URL用ID・英小文字とハイフンのみ）'}</label>
-                    <input
-                      style={inputStyle}
-                      placeholder={'例：sharp-finance-corp'}
-                      value={form.client_slug}
-                      onChange={e => setForm(f => ({ ...f, client_slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))}
-                      required
-                    />
+                    <input style={inputStyle} placeholder={'例：ge'} value={form.client_slug}
+                      onChange={e => setForm(f => ({ ...f, client_slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} required />
                     {form.client_slug && (
                       <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>
                         URL: milize-design-flow.vercel.app/{form.client_slug}
@@ -231,54 +278,175 @@ export function NewClientButton() {
                     )}
                   </div>
                   <div style={{ display: 'flex', gap: '12px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setOpen(false)}
-                      style={{
-                        flex: 1, padding: '12px', border: '1.5px solid #e0e0e0',
-                        borderRadius: '8px', background: '#fff', cursor: 'pointer',
-                        fontSize: '14px', fontWeight: 500, color: '#555',
-                      }}
-                    >{'キャンセル'}</button>
-                    <button
-                      type="submit"
-                      style={{
-                        flex: 2, padding: '12px', border: 'none',
-                        borderRadius: '8px', background: '#111', cursor: 'pointer',
-                        fontSize: '14px', fontWeight: 600, color: '#fff',
-                      }}
-                    >{'生成開始'}</button>
+                    <button type="button" onClick={() => { setOpen(false); reset(); }}
+                      style={{ flex: 1, padding: '12px', border: '1.5px solid #e0e0e0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '14px', fontWeight: 500, color: '#555' }}>
+                      {'キャンセル'}
+                    </button>
+                    <button type="submit"
+                      style={{ flex: 2, padding: '12px', border: 'none', borderRadius: '8px', background: '#111', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: '#fff' }}>
+                      {'URLを収集する →'}
+                    </button>
                   </div>
                 </form>
               </>
-            ) : (
+            )}
+
+            {/* Step 2: URL収集中 */}
+            {step === 'collecting' && (
               <>
-                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>
-                  {'ポータルを生成中...'}
-                </h2>
-                <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
-                  {form.company_name} {'のポータルをDifyが構築しています'}
-                </p>
-                <div style={{
-                  background: '#f3f4f6', borderRadius: '999px',
-                  height: '8px', overflow: 'hidden', marginBottom: '12px',
-                }}>
-                  <div style={{
-                    height: '100%', borderRadius: '999px',
-                    background: 'linear-gradient(90deg, #111 0%, #555 100%)',
-                    width: progress + '%',
-                    transition: 'width 0.6s ease',
-                  }} />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '13px', color: '#777' }}>{statusMsg}</span>
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{Math.round(progress)}%</span>
+                <StepIndicator current={1} />
+                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'URLを収集中...'}</h2>
+                <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>{form.company_name}{'のURLを検索・収集しています'}</p>
+                <ProgressBar progress={collectProgress} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
+                  <span style={{ fontSize: '13px', color: '#777' }}>{collectStatus}</span>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{Math.round(collectProgress)}%</span>
                 </div>
               </>
             )}
+
+            {/* Step 3: URL選択 */}
+            {step === 'urls' && (
+              <>
+                <StepIndicator current={2} />
+                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '4px' }}>{'URLを確認・選択'}</h2>
+                <p style={{ fontSize: '14px', color: '#777', marginBottom: '20px' }}>
+                  {'生成に使用するURLを選択し、用途を指定してください'}
+                </p>
+
+                {/* 全選択/解除 */}
+                <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+                  <button onClick={() => setSelectedUrls(u => u.map(x => ({ ...x, checked: true })))}
+                    style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: '1px solid #e5e7eb', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
+                    {'全選択'}
+                  </button>
+                  <button onClick={() => setSelectedUrls(u => u.map(x => ({ ...x, checked: false })))}
+                    style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: '1px solid #e5e7eb', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
+                    {'全解除'}
+                  </button>
+                  <span style={{ fontSize: '12px', color: '#9ca3af', marginLeft: 'auto', alignSelf: 'center' }}>
+                    {selectedUrls.filter(u => u.checked).length}{'件選択中'}
+                  </span>
+                </div>
+
+                {/* URLリスト */}
+                <div style={{ border: '1px solid #e5e7eb', borderRadius: '10px', overflow: 'hidden', marginBottom: '20px' }}>
+                  {selectedUrls.map((item, i) => (
+                    <div key={item.url} style={{
+                      display: 'flex', alignItems: 'center', gap: '12px',
+                      padding: '12px 14px',
+                      background: item.checked ? '#fff' : '#f9fafb',
+                      borderBottom: i < selectedUrls.length - 1 ? '1px solid #f0f0f0' : 'none',
+                      opacity: item.checked ? 1 : 0.5,
+                    }}>
+                      {/* チェックボックス */}
+                      <input type="checkbox" checked={item.checked}
+                        onChange={e => setSelectedUrls(u => u.map((x, j) => j === i ? { ...x, checked: e.target.checked } : x))}
+                        style={{ width: '16px', height: '16px', flexShrink: 0, cursor: 'pointer', accentColor: '#111' }} />
+
+                      {/* URL情報 */}
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: '13px', fontWeight: 500, color: '#111', marginBottom: '2px',
+                          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {item.title}
+                        </div>
+                        <a href={item.url} target="_blank" rel="noopener noreferrer"
+                          style={{ fontSize: '11px', color: '#6b7280', textDecoration: 'none',
+                            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                          onClick={e => e.stopPropagation()}>
+                          {item.url}
+                        </a>
+                      </div>
+
+                      {/* purpose選択 */}
+                      <select
+                        value={item.purpose}
+                        onChange={e => setSelectedUrls(u => u.map((x, j) => j === i ? { ...x, purpose: e.target.value } : x))}
+                        disabled={!item.checked}
+                        style={{
+                          fontSize: '12px', padding: '4px 8px',
+                          border: '1px solid #e5e7eb', borderRadius: '6px',
+                          background: '#f9fafb', color: '#374151',
+                          cursor: item.checked ? 'pointer' : 'default', flexShrink: 0,
+                        }}>
+                        {PURPOSE_OPTIONS.map(p => <option key={p} value={p}>{p}</option>)}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <button onClick={() => setStep('form')}
+                    style={{ flex: 1, padding: '12px', border: '1.5px solid #e0e0e0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '14px', fontWeight: 500, color: '#555' }}>
+                    {'← 戻る'}
+                  </button>
+                  <button onClick={handleGenerate}
+                    style={{ flex: 2, padding: '12px', border: 'none', borderRadius: '8px', background: '#111', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: '#fff' }}>
+                    {'生成開始 →'}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* Step 4: 生成中 */}
+            {step === 'generating' && (
+              <>
+                <StepIndicator current={3} />
+                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'ポータルを生成中...'}</h2>
+                <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
+                  {form.company_name}{'のポータルをDifyが構築しています'}
+                </p>
+                <ProgressBar progress={genProgress} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
+                  <span style={{ fontSize: '13px', color: '#777' }}>{genStatus}</span>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{Math.round(genProgress)}%</span>
+                </div>
+              </>
+            )}
+
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function StepIndicator({ current }: { current: 1 | 2 | 3 }) {
+  const steps = ['入力', 'URL確認', '生成'];
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '20px' }}>
+      {steps.map((label, i) => {
+        const num = i + 1;
+        const active = num === current;
+        const done = num < current;
+        return (
+          <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{
+              width: '22px', height: '22px', borderRadius: '50%', fontSize: '11px', fontWeight: 700,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: done ? '#22c55e' : active ? '#111' : '#e5e7eb',
+              color: done || active ? '#fff' : '#9ca3af',
+              flexShrink: 0,
+            }}>
+              {done ? '✓' : num}
+            </div>
+            <span style={{ fontSize: '12px', fontWeight: active ? 600 : 400, color: active ? '#111' : '#9ca3af' }}>{label}</span>
+            {i < steps.length - 1 && <div style={{ width: '24px', height: '1px', background: '#e5e7eb', margin: '0 2px' }} />}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ProgressBar({ progress }: { progress: number }) {
+  return (
+    <div style={{ background: '#f3f4f6', borderRadius: '999px', height: '8px', overflow: 'hidden' }}>
+      <div style={{
+        height: '100%', borderRadius: '999px',
+        background: 'linear-gradient(90deg, #111 0%, #555 100%)',
+        width: progress + '%', transition: 'width 0.6s ease',
+      }} />
+    </div>
   );
 }

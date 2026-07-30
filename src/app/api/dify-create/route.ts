@@ -430,7 +430,7 @@ async function readAndFixDifyFiles(
 }
 
 export async function POST(req: NextRequest) {
-  const { company_name, client_slug } = await req.json();
+  const { company_name, client_slug, selected_urls } = await req.json();
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -449,7 +449,11 @@ export async function POST(req: NextRequest) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            inputs: { company_name, client_slug },
+            inputs: {
+              company_name,
+              client_slug,
+              ...(selected_urls ? { selected_urls } : {}),
+            },
             response_mode: 'streaming',
             user: 'milize-admin',
           }),
