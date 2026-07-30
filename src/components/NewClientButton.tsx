@@ -15,37 +15,12 @@ const MODAL_KEYFRAMES = `
 }
 `;
 
-const PURPOSE_OPTIONS = [
-  '全般',
-  'カラー・ブランド',
-  'UIコンポーネント',
-  'タイポグラフィ',
-  'ロゴ・アイコン',
-  'レイアウト',
-];
-
-interface UrlItem {
-  url: string;
-  title: string;
-  description: string;
-}
-
-interface SelectedUrl {
-  url: string;
-  title: string;
-  purpose: string;
-  checked: boolean;
-}
-
-type Step = 'form' | 'collecting' | 'urls' | 'generating';
+type Step = 'form' | 'generating';
 
 export function NewClientButton() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>('form');
   const [form, setForm] = useState({ company_name: '', client_slug: '' });
-  const [collectProgress, setCollectProgress] = useState(0);
-  const [collectStatus, setCollectStatus] = useState('');
-  const [selectedUrls, setSelectedUrls] = useState<SelectedUrl[]>([]);
   const [genProgress, setGenProgress] = useState(0);
   const [genStatus, setGenStatus] = useState('');
   const router = useRouter();
@@ -53,74 +28,12 @@ export function NewClientButton() {
   function reset() {
     setForm({ company_name: '', client_slug: '' });
     setStep('form');
-    setCollectProgress(0);
-    setCollectStatus('');
-    setSelectedUrls([]);
     setGenProgress(0);
     setGenStatus('');
   }
 
-  // Step 1→2: URL収集
-  async function handleCollect(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStep('collecting');
-    setCollectProgress(5);
-    setCollectStatus('URL収集ワークフローを起動中...');
-
-    try {
-      const res = await fetch('/api/dify-urls', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ company_name: form.company_name }),
-      });
-
-      const reader = res.body!.getReader();
-      const decoder = new TextDecoder();
-      let lineBuffer = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        lineBuffer += decoder.decode(value, { stream: true });
-        const lines = lineBuffer.split('\n');
-        lineBuffer = lines.pop() ?? '';
-
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          try {
-            const data = JSON.parse(line.slice(6));
-            if (data.progress !== undefined) setCollectProgress(data.progress);
-            if (data.status) setCollectStatus(data.status);
-            if (data.error) {
-              setCollectStatus('エラー: ' + data.error);
-              return;
-            }
-            if (data.urls) {
-              const items: UrlItem[] = data.urls;
-              setSelectedUrls(items.map(u => ({
-                url: u.url,
-                title: u.title || u.url,
-                purpose: '全般',
-                checked: true,
-              })));
-              setStep('urls');
-            }
-          } catch { /* skip */ }
-        }
-      }
-    } catch (err) {
-      setCollectStatus('接続エラー: ' + String(err));
-    }
-  }
-
-  // Step 3: 生成
-  async function handleGenerate() {
-    const checkedUrls = selectedUrls.filter(u => u.checked);
-    if (checkedUrls.length === 0) {
-      alert('URLを1件以上選択してください');
-      return;
-    }
-
     setStep('generating');
     setGenProgress(5);
     setGenStatus('Difyワークフローを起動中...');
@@ -128,10 +41,6 @@ export function NewClientButton() {
     const slug = form.client_slug;
     const hidden: string[] = JSON.parse(localStorage.getItem('hidden_clients') || '[]');
     localStorage.setItem('hidden_clients', JSON.stringify(hidden.filter(s => s !== slug)));
-
-    const selectedUrlsJson = JSON.stringify(
-      checkedUrls.map(u => ({ url: u.url, purpose: u.purpose }))
-    );
 
     let difyDone = false;
     try {
@@ -141,7 +50,6 @@ export function NewClientButton() {
         body: JSON.stringify({
           company_name: form.company_name,
           client_slug: slug,
-          selected_urls: selectedUrlsJson,
         }),
       });
 
@@ -213,8 +121,6 @@ export function NewClientButton() {
     color: '#555', marginBottom: '6px',
   };
 
-  const modalWidth = step === 'urls' ? '640px' : '480px';
-
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: MODAL_KEYFRAMES }} />
@@ -240,7 +146,7 @@ export function NewClientButton() {
 
       {open && (
         <div
-          onClick={e => { if ((step === 'form' || step === 'urls') && e.target === e.currentTarget) { setOpen(false); reset(); } }}
+          onClick={e => { if (step === 'form' && e.target === e.currentTarget) { setOpen(false); reset(); } }}
           style={{
             position: 'fixed', inset: 0, zIndex: 1000,
             background: 'rgba(255,255,255,0.85)',
@@ -250,7 +156,7 @@ export function NewClientButton() {
         >
           <div style={{
             background: '#fff', borderRadius: '20px', padding: '40px',
-            width: modalWidth, maxWidth: '92vw', maxHeight: '90vh', overflowY: 'auto',
+            width: '480px', maxWidth: '92vw',
             boxShadow: ['0 0 0 1px rgba(255,255,255,0.5)', '0 0 30px 14px rgba(255,255,255,0.55)', '0 32px 80px rgba(0,0,0,0.22)'].join(', '),
             animation: 'ncb-modal-in 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards',
           }}>
@@ -260,10 +166,10 @@ export function NewClientButton() {
               <>
                 <StepIndicator current={1} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'新規クライアント追加'}</h2>
-                <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>{'会社名を入力してURLを収集します'}</p>
-                <form onSubmit={handleCollect}>
+                <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>{'会社名とスラッグを入力してポータルを生成します'}</p>
+                <form onSubmit={handleSubmit}>
                   <div style={{ marginBottom: '18px' }}>
-                    <label style={labelStyle}>{'会社名（日本語） or URL'}</label>
+                    <label style={labelStyle}>{'会社名（日本語）'}</label>
                     <input style={inputStyle} placeholder={'例：ゼネラル・エレクトリック'} value={form.company_name}
                       onChange={e => setForm(f => ({ ...f, company_name: e.target.value }))} required />
                   </div>
@@ -284,114 +190,17 @@ export function NewClientButton() {
                     </button>
                     <button type="submit"
                       style={{ flex: 2, padding: '12px', border: 'none', borderRadius: '8px', background: '#111', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: '#fff' }}>
-                      {'URLを収集する →'}
+                      {'生成開始 →'}
                     </button>
                   </div>
                 </form>
               </>
             )}
 
-            {/* Step 2: URL収集中 */}
-            {step === 'collecting' && (
-              <>
-                <StepIndicator current={1} />
-                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'URLを収集中...'}</h2>
-                <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>{form.company_name}{'のURLを検索・収集しています'}</p>
-                <ProgressBar progress={collectProgress} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
-                  <span style={{ fontSize: '13px', color: '#777' }}>{collectStatus}</span>
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#111' }}>{Math.round(collectProgress)}%</span>
-                </div>
-              </>
-            )}
-
-            {/* Step 3: URL選択 */}
-            {step === 'urls' && (
-              <>
-                <StepIndicator current={2} />
-                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '4px' }}>{'URLを確認・選択'}</h2>
-                <p style={{ fontSize: '14px', color: '#777', marginBottom: '20px' }}>
-                  {'生成に使用するURLを選択し、用途を指定してください'}
-                </p>
-
-                {/* 全選択/解除 */}
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                  <button onClick={() => setSelectedUrls(u => u.map(x => ({ ...x, checked: true })))}
-                    style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: '1px solid #e5e7eb', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
-                    {'全選択'}
-                  </button>
-                  <button onClick={() => setSelectedUrls(u => u.map(x => ({ ...x, checked: false })))}
-                    style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: '1px solid #e5e7eb', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
-                    {'全解除'}
-                  </button>
-                  <span style={{ fontSize: '12px', color: '#9ca3af', marginLeft: 'auto', alignSelf: 'center' }}>
-                    {selectedUrls.filter(u => u.checked).length}{'件選択中'}
-                  </span>
-                </div>
-
-                {/* URLリスト */}
-                <div style={{ border: '1px solid #e5e7eb', borderRadius: '10px', overflow: 'hidden', marginBottom: '20px' }}>
-                  {selectedUrls.map((item, i) => (
-                    <div key={item.url} style={{
-                      display: 'flex', alignItems: 'center', gap: '12px',
-                      padding: '12px 14px',
-                      background: item.checked ? '#fff' : '#f9fafb',
-                      borderBottom: i < selectedUrls.length - 1 ? '1px solid #f0f0f0' : 'none',
-                      opacity: item.checked ? 1 : 0.5,
-                    }}>
-                      {/* チェックボックス */}
-                      <input type="checkbox" checked={item.checked}
-                        onChange={e => setSelectedUrls(u => u.map((x, j) => j === i ? { ...x, checked: e.target.checked } : x))}
-                        style={{ width: '16px', height: '16px', flexShrink: 0, cursor: 'pointer', accentColor: '#111' }} />
-
-                      {/* URL情報 */}
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: '13px', fontWeight: 500, color: '#111', marginBottom: '2px',
-                          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                          {item.title}
-                        </div>
-                        <a href={item.url} target="_blank" rel="noopener noreferrer"
-                          style={{ fontSize: '11px', color: '#6b7280', textDecoration: 'none',
-                            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
-                          onClick={e => e.stopPropagation()}>
-                          {item.url}
-                        </a>
-                      </div>
-
-                      {/* purpose選択 */}
-                      <select
-                        value={item.purpose}
-                        onChange={e => setSelectedUrls(u => u.map((x, j) => j === i ? { ...x, purpose: e.target.value } : x))}
-                        disabled={!item.checked}
-                        style={{
-                          fontSize: '12px', padding: '4px 8px',
-                          border: '1px solid #e5e7eb', borderRadius: '6px',
-                          background: '#f9fafb', color: '#374151',
-                          cursor: item.checked ? 'pointer' : 'default', flexShrink: 0,
-                        }}>
-                        {PURPOSE_OPTIONS.map(p => <option key={p} value={p}>{p}</option>)}
-                      </select>
-                    </div>
-                  ))}
-                </div>
-
-                <div style={{ display: 'flex', gap: '12px' }}>
-                  <button onClick={() => setStep('form')}
-                    style={{ flex: 1, padding: '12px', border: '1.5px solid #e0e0e0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '14px', fontWeight: 500, color: '#555' }}>
-                    {'← 戻る'}
-                  </button>
-                  <button onClick={handleGenerate}
-                    style={{ flex: 2, padding: '12px', border: 'none', borderRadius: '8px', background: '#111', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: '#fff' }}>
-                    {'生成開始 →'}
-                  </button>
-                </div>
-              </>
-            )}
-
-            {/* Step 4: 生成中 */}
+            {/* Step 2: 生成中 */}
             {step === 'generating' && (
               <>
-                <StepIndicator current={3} />
+                <StepIndicator current={2} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'ポータルを生成中...'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
                   {form.company_name}{'のポータルをDifyが構築しています'}
@@ -411,8 +220,8 @@ export function NewClientButton() {
   );
 }
 
-function StepIndicator({ current }: { current: 1 | 2 | 3 }) {
-  const steps = ['入力', 'URL確認', '生成'];
+function StepIndicator({ current }: { current: 1 | 2 }) {
+  const steps = ['入力', '生成'];
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '20px' }}>
       {steps.map((label, i) => {
