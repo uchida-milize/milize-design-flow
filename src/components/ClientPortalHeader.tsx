@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
 
-type ClientNavKey = 'home' | 'guidelines' | 'components';
+type ClientNavKey = 'home' | 'guidelines' | 'components' | 'resources';
 
 const NAV_ITEMS: { key: ClientNavKey; label: string; path: string }[] = [
-  { key: 'home', label: 'ホーム', path: '' },
-  { key: 'guidelines', label: 'ガイドライン', path: '/guidelines' },
+  { key: 'home',       label: 'ホーム',         path: '' },
+  { key: 'guidelines', label: 'ガイドライン',   path: '/guidelines' },
   { key: 'components', label: 'コンポーネント', path: '/components' },
+  { key: 'resources',  label: 'リソース',       path: '/resources' },
 ];
 
 interface ClientPortalHeaderProps {

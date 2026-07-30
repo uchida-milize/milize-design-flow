@@ -95,6 +95,130 @@ async function removeFromExcludedDirs(slug: string, token: string) {
   }
 }
 
+async function saveResourcesJson(slug: string, nodeOutputs: Record<string, string>, token: string) {
+  const OWNER = 'uchida-milize';
+  const REPO  = 'milize-design-flow';
+  const path  = `src/app/${slug}/resources.json`;
+  const h = {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+  const content = Buffer.from(JSON.stringify(nodeOutputs, null, 2), 'utf-8').toString('base64');
+  const existing = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+  const body: Record<string, string> = {
+    message: `feat: save resources.json for ${slug}`,
+    content,
+    branch: 'main',
+  };
+  if (existing.ok) {
+    const data: { sha: string } = await existing.json();
+    body.sha = data.sha;
+  }
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...h, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+}
+
+async function ensureResourcesPage(slug: string, companyName: string, token: string) {
+  const OWNER = 'uchida-milize';
+  const REPO  = 'milize-design-flow';
+  const path  = `src/app/${slug}/resources/page.tsx`;
+  const h = {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+  const pageContent = `'use client';
+import { useState, useEffect } from 'react';
+import { ClientPortalHeader } from '@/components/ClientPortalHeader';
+
+const clientName = '${companyName}';
+const basePath = '/${slug}';
+
+export default function ResourcesPage() {
+  const [primaryColor, setPrimaryColor] = useState('#2563eb');
+  const [tabs, setTabs] = useState<string[]>([]);
+  const [active, setActive] = useState('');
+  const [data, setData] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      fetch(\`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css?t=\${Date.now()}\`).then(r => r.text()),
+      fetch(\`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/resources.json?t=\${Date.now()}\`).then(r => r.json()),
+    ]).then(([css, json]) => {
+      const m = css.match(/--primary-color:\\s*(#[0-9a-fA-F]{3,8})/);
+      if (m) setPrimaryColor(m[1]);
+      setData(json);
+      const keys = Object.keys(json);
+      setTabs(keys);
+      if (keys.length > 0) setActive(keys[0]);
+    }).catch(() => {}).finally(() => setLoading(false));
+  }, []);
+
+  return (
+    <div className="${slug}-portal">
+      <ClientPortalHeader clientName={clientName} basePath={basePath} active="resources" primaryColor={primaryColor} />
+      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '48px 24px 96px' }}>
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>RESOURCES</div>
+          <h1 style={{ fontSize: 24, fontWeight: 700, color: '#111827' }}>生成リソース</h1>
+          <p style={{ fontSize: 14, color: '#6b7280', marginTop: 8 }}>Difyワークフローの各ノード出力を確認できます</p>
+        </div>
+        {loading ? (
+          <div style={{ color: '#9ca3af', fontSize: 14 }}>読み込み中...</div>
+        ) : tabs.length === 0 ? (
+          <div style={{ color: '#9ca3af', fontSize: 14 }}>データがありません</div>
+        ) : (
+          <>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
+              {tabs.map(tab => (
+                <button key={tab} onClick={() => setActive(tab)} style={{
+                  padding: '6px 16px', borderRadius: 999, fontSize: 13, fontWeight: 500,
+                  background: active === tab ? primaryColor : '#f3f4f6',
+                  color: active === tab ? '#ffffff' : '#6b7280',
+                  border: 'none', cursor: 'pointer', transition: 'all 0.15s',
+                }}>{tab}</button>
+              ))}
+            </div>
+            <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden' }}>
+              <div style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb', padding: '10px 20px' }}>
+                <span style={{ fontSize: 12, color: '#9ca3af', fontFamily: 'monospace' }}>{active}</span>
+              </div>
+              <pre style={{
+                padding: 24, margin: 0, fontSize: 12, lineHeight: 1.8,
+                color: '#374151', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+                maxHeight: '65vh', overflowY: 'auto', fontFamily: "'Courier New', monospace",
+              }}>{data[active] ?? '（データなし）'}</pre>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+`;
+  const encoded = Buffer.from(pageContent, 'utf-8').toString('base64');
+  const existing = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+  const body: Record<string, string> = {
+    message: `feat: add resources page for ${slug}`,
+    content: encoded,
+    branch: 'main',
+  };
+  if (existing.ok) {
+    const d: { sha: string } = await existing.json();
+    body.sha = d.sha;
+  }
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...h, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+}
+
 async function ensureLayoutTsx(slug: string, token: string) {
   const OWNER = 'uchida-milize';
   const REPO  = 'milize-design-flow';
@@ -220,6 +344,8 @@ send({ progress: 20, status: '\u30ef\u30fc\u30af\u30d5\u30ed\u30fc\u5b9f\u884c\u
 const reader = difyRes.body!.getReader();
 const decoder = new TextDecoder();
 let progressVal = 20;
+// \u5168\u30ce\u30fc\u30c9\u51fa\u529b\u3092\u53ce\u96c6 { \u30ce\u30fc\u30c9\u30bf\u30a4\u30c8\u30eb: \u51fa\u529b\u30c6\u30ad\u30b9\u30c8 }
+const nodeOutputs: Record<string, string> = {};
 
 while (true) {
 const { done, value } = await reader.read();
@@ -240,6 +366,15 @@ const title = data.data?.title || '';
 send({ progress: progressVal, status: title ? `${title}\u3092\u51e6\u7406\u4e2d...` : '\u51e6\u7406\u4e2d...' });
 } else if (data.event === 'node_finished') {
 progressVal = Math.min(progressVal + 2, 58);
+// \u30ce\u30fc\u30c9\u51fa\u529b\u3092\u53ce\u96c6
+const title = data.data?.title || `\u30ce\u30fc\u30c9_${Object.keys(nodeOutputs).length + 1}`;
+const outputs = data.data?.outputs;
+if (outputs) {
+  const text = Object.values(outputs)
+    .map(v => typeof v === 'string' ? v : JSON.stringify(v, null, 2))
+    .join('\n\n');
+  if (text.trim()) nodeOutputs[title] = text;
+}
 send({ progress: progressVal });
 } else if (data.event === 'workflow_finished') {
 const githubToken = process.env.GITHUB_TOKEN ?? '';
@@ -251,6 +386,8 @@ const commitStart = Date.now();
 await fixTemplateRefs(client_slug, company_name, githubToken);
 await ensureLayoutTsx(client_slug, githubToken);
 await normalizeColorVars(client_slug, githubToken);
+await saveResourcesJson(client_slug, nodeOutputs, githubToken);
+await ensureResourcesPage(client_slug, company_name, githubToken);
 await removeFromExcludedDirs(client_slug, githubToken);
 send({ progress: 65, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u8d77\u52d5\u5f85\u3061...' });
 
