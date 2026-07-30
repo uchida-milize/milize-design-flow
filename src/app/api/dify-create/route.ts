@@ -55,6 +55,8 @@ export async function POST(req: NextRequest) {
         const nodeOutputs: Record<string, string> = {};
         let lineBuffer = '';
         let taskId = '';
+        let workflowRunId = '';
+        let formToken = '';
         let capturedUrls: string[] = [];
         let workflowFinished = false;
 
@@ -71,8 +73,12 @@ export async function POST(req: NextRequest) {
             try {
               const data = JSON.parse(line.slice(6));
 
-              // task_id を最初のイベントから取得
+              // task_id / workflow_run_id を取得
               if (data.task_id && !taskId) taskId = data.task_id;
+              if (data.workflow_run_id && !workflowRunId) workflowRunId = data.workflow_run_id;
+              if (data.event === 'workflow_started' && data.data?.id && !workflowRunId) {
+                workflowRunId = data.data.id;
+              }
 
               if (data.event === 'workflow_started') {
                 progressVal = 20;
@@ -104,11 +110,21 @@ export async function POST(req: NextRequest) {
                 data.event === 'human_input_required' ||
                 data.event === 'node_interrupted'
               ) {
+                // form_token を取得（human_input_required イベントに含まれる）
+                const ft =
+                  data.data?.form_token ||
+                  data.form_token ||
+                  data.data?.node_data?.form_token ||
+                  '';
+                if (ft) formToken = ft;
+
                 // 人間の入力ノードで一時停止 → フロントへ返す
-                workflowFinished = true; // これ以上処理不要
+                workflowFinished = true;
                 send({
                   interrupted: true,
                   task_id: taskId || data.task_id || '',
+                  workflow_run_id: workflowRunId || data.workflow_run_id || '',
+                  form_token: formToken,
                   urls: capturedUrls,
                   progress: progressVal,
                   status: 'URL確認待ち',
@@ -194,6 +210,8 @@ export async function POST(req: NextRequest) {
           send({
             interrupted: true,
             task_id: taskId,
+            workflow_run_id: workflowRunId,
+            form_token: formToken,
             urls: capturedUrls,
             progress: progressVal,
             status: 'URL確認待ち',

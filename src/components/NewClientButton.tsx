@@ -66,6 +66,8 @@ export function NewClientButton() {
   const [genProgress, setGenProgress] = useState(0);
   const [genStatus, setGenStatus] = useState('');
   const [taskId, setTaskId] = useState('');
+  const [workflowRunId, setWorkflowRunId] = useState('');
+  const [formToken, setFormToken] = useState('');
   const [urlItems, setUrlItems] = useState<UrlItem[]>([]);
   const [excludedCount, setExcludedCount] = useState(0);
   const router = useRouter();
@@ -76,6 +78,8 @@ export function NewClientButton() {
     setGenProgress(0);
     setGenStatus('');
     setTaskId('');
+    setWorkflowRunId('');
+    setFormToken('');
     setUrlItems([]);
     setExcludedCount(0);
   }
@@ -102,6 +106,8 @@ export function NewClientButton() {
         if (data.interrupted) {
           // 人間の入力ノードで停止 → URL選択ステップへ
           setTaskId(typeof data.task_id === 'string' ? data.task_id : '');
+          setWorkflowRunId(typeof data.workflow_run_id === 'string' ? data.workflow_run_id : '');
+          setFormToken(typeof data.form_token === 'string' ? data.form_token : '');
           const urls: string[] = Array.isArray(data.urls) ? (data.urls as string[]) : [];
           const { items, excluded } = initUrlItems(urls);
           setUrlItems(items);
@@ -141,6 +147,8 @@ export function NewClientButton() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           task_id: taskId,
+          workflow_run_id: workflowRunId,
+          form_token: formToken,
           selected_urls: selected,
           company_name: form.company_name,
           client_slug: form.client_slug,
