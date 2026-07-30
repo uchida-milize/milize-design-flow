@@ -21,7 +21,7 @@ const EXCLUDED_DIRS = new Set([
 function extractBrandColors(css: string): Array<{ hex: string; ratio: number }> {
   // design.md由来の明示的なカラーバー変数を優先（--brand-color-1〜3）
   const explicit: Array<{ hex: string; ratio: number }> = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 5; i++) {
     const hexMatch = css.match(new RegExp(`--brand-color-${i}:\\s*(#[0-9a-fA-F]{6})`));
     const ratioMatch = css.match(new RegExp(`--brand-ratio-${i}:\\s*(\\d+)`));
     if (hexMatch) {

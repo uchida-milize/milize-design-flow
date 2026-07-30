@@ -271,14 +271,11 @@ function parseColorEntry(line: string): BrandColor | null {
   };
 }
 
-/** テキスト全体からhexに対応する使用比率(%)を探す（カラー使用比率セクション対応） */
+/** テキスト全体からhexに対応する使用比率(%)を探す */
 function findRatioInText(text: string, hex: string): number {
-  // "#XXXXXX" を含む行に "%数値" があれば採用
-  const escaped = hex.replace('#', '#?');
-  const pattern = new RegExp(`${escaped}[^\\n]*(\\d{1,3})\\s*%|%(\\d{1,3})[^\\n]*${escaped}`, 'i');
+  const pattern = new RegExp(`${hex}[^\\n]*(\\d{1,3})\\s*%`, 'i');
   const m = text.match(pattern);
-  if (m) return parseInt(m[1] ?? m[2]);
-  return 0;
+  return m ? parseInt(m[1]) : 0;
 }
 
 /** nodeOutputs の Design.md ノード出力からブランドカラーを抽出する */
@@ -308,27 +305,35 @@ function parseDesignMdColors(nodeOutputs: Record<string, string>): DesignColors 
 
   if (!primaryHex) return null;
 
-  // 各色の比率を「カラー使用比率」セクション等から取得（同一行 or 全文検索）
-  const hexEntries: Array<{ hex: string }> = [{ hex: primaryHex }];
-  if (secondaryHex) hexEntries.push({ hex: secondaryHex });
-  if (accentHex)    hexEntries.push({ hex: accentHex });
+  // 「カラー使用比率」セクションから全色をパース（最大5色）
+  const ratioSectionMatch = text.match(/カラー使用比率([\s\S]*?)(?:\n#[^#]|\n##\s|$)/);
+  const allBrandColors: BrandColor[] = [];
+  if (ratioSectionMatch) {
+    const section = ratioSectionMatch[1];
+    const lineRe = /#([0-9a-fA-F]{6})[^\n]*?(\d{1,3})\s*%/gi;
+    let lm: RegExpExecArray | null;
+    while ((lm = lineRe.exec(section)) !== null && allBrandColors.length < 5) {
+      allBrandColors.push({ hex: '#' + lm[1].toUpperCase(), ratio: parseInt(lm[2]) });
+    }
+  }
 
-  const brandWithRatio: BrandColor[] = hexEntries.map(e => ({
-    hex: e.hex,
-    ratio: findRatioInText(text, e.hex),
-  }));
+  // セクションが取れなければ primary/secondary/accent から生成
+  const fallbackEntries = [{ hex: primaryHex }, ...(secondaryHex ? [{ hex: secondaryHex }] : []), ...(accentHex ? [{ hex: accentHex }] : [])];
+  const rawColors = allBrandColors.length > 0
+    ? allBrandColors
+    : fallbackEntries.map(e => ({ hex: e.hex, ratio: findRatioInText(text, e.hex) }));
 
-  // 比率を正規化
-  const totalRatio = brandWithRatio.reduce((s, c) => s + c.ratio, 0);
+  // 比率を正規化（合計100%）
+  const totalRatio = rawColors.reduce((s, c) => s + c.ratio, 0);
   let brandColors: BrandColor[];
   if (totalRatio > 0) {
-    brandColors = brandWithRatio.map(c => ({ hex: c.hex, ratio: Math.round(c.ratio * 100 / totalRatio) }));
+    brandColors = rawColors.map(c => ({ hex: c.hex, ratio: Math.round(c.ratio * 100 / totalRatio) }));
     const sum = brandColors.reduce((s, c) => s + c.ratio, 0);
     if (sum !== 100) brandColors[0].ratio += 100 - sum;
   } else {
-    const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15] };
-    const ratios = evenRatios[brandWithRatio.length] ?? [60, 25, 15];
-    brandColors = brandWithRatio.map((c, i) => ({ hex: c.hex, ratio: ratios[i] ?? 15 }));
+    const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15], 4: [55, 25, 12, 8], 5: [50, 22, 13, 9, 6] };
+    const ratios = evenRatios[rawColors.length] ?? [50, 22, 13, 9, 6];
+    brandColors = rawColors.map((c, i) => ({ hex: c.hex, ratio: ratios[i] ?? 6 }));
   }
 
   return {

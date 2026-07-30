@@ -96,7 +96,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
               className="block"
               style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 16, padding: 0, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', textDecoration: 'none' }}
             >
-              <div style={{ display: 'flex', height: 40, borderBottom: '1px solid #e0e0e0' }}>
+              <div style={{ display: 'flex', height: 40, borderBottom: '1px solid #c8c8c8', boxShadow: 'inset 0 0 0 1px #c8c8c8' }}>
                 {client.colors.map((c) => (
                   <div
                     key={c.hex}
