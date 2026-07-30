@@ -6,7 +6,7 @@ const clientName = 'ゼネラル・エレクトリック';
 const basePath = '/ge';
 
 export default function ResourcesPage() {
-  const [primaryColor, setPrimaryColor] = useState('#3B73B9');
+  const [primaryColor, setPrimaryColor] = useState('#2563eb');
   const [tabs, setTabs] = useState<string[]>([]);
   const [active, setActive] = useState('');
   const [data, setData] = useState<Record<string, string>>({});
@@ -38,7 +38,7 @@ export default function ResourcesPage() {
         {loading ? (
           <div style={{ color: '#9ca3af', fontSize: 14 }}>読み込み中...</div>
         ) : tabs.length === 0 ? (
-          <div style={{ color: '#9ca3af', fontSize: 14 }}>データがありません（再生成するとノード出力が表示されます）</div>
+          <div style={{ color: '#9ca3af', fontSize: 14 }}>データがありません</div>
         ) : (
           <>
             <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
