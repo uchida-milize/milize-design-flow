@@ -271,6 +271,16 @@ function parseColorEntry(line: string): BrandColor | null {
   };
 }
 
+/** テキスト全体からhexに対応する使用比率(%)を探す（カラー使用比率セクション対応） */
+function findRatioInText(text: string, hex: string): number {
+  // "#XXXXXX" を含む行に "%数値" があれば採用
+  const escaped = hex.replace('#', '#?');
+  const pattern = new RegExp(`${escaped}[^\\n]*(\\d{1,3})\\s*%|%(\\d{1,3})[^\\n]*${escaped}`, 'i');
+  const m = text.match(pattern);
+  if (m) return parseInt(m[1] ?? m[2]);
+  return 0;
+}
+
 /** nodeOutputs の Design.md ノード出力からブランドカラーを抽出する */
 function parseDesignMdColors(nodeOutputs: Record<string, string>): DesignColors | null {
   const designKey = Object.keys(nodeOutputs).find(k =>
@@ -280,64 +290,53 @@ function parseDesignMdColors(nodeOutputs: Record<string, string>): DesignColors 
 
   const text = nodeOutputs[designKey];
 
-  // キーワードに続く行を探してBrandColorを抽出
-  const findEntry = (patterns: RegExp[]): BrandColor | null => {
+  const findHexOnLine = (patterns: RegExp[]): string | null => {
     for (const p of patterns) {
       const m = text.match(p);
-      if (m) return parseColorEntry(m[0]);
+      if (!m) continue;
+      const entry = parseColorEntry(m[0]);
+      if (entry) return entry.hex;
     }
     return null;
   };
 
-  const findHex = (patterns: RegExp[]): string | null => {
-    for (const p of patterns) {
-      const m = text.match(p);
-      if (m) {
-        const e = parseColorEntry(m[0]);
-        return e?.hex ?? null;
-      }
-    }
-    return null;
-  };
+  const primaryHex   = findHexOnLine([/プライマリ[^\n]*/, /primary[^\n]*/i,   /メイン[^\n]*/,   /コーポレート[^\n]*/]);
+  const secondaryHex = findHexOnLine([/セカンダリ[^\n]*/, /secondary[^\n]*/i, /サブ[^\n]*/]);
+  const accentHex    = findHexOnLine([/アクセント[^\n]*/, /accent[^\n]*/i,     /補色[^\n]*/]);
+  const textHex      = findHexOnLine([/テキスト[^\n]*/,   /文字色[^\n]*/,      /text\s*color[^\n]*/i]);
+  const bgHex        = findHexOnLine([/背景色?[^\n]*/,    /バックグラウンド[^\n]*/, /background[^\n]*/i]);
 
-  const primaryEntry   = findEntry([/プライマリ[^\n]*/,   /primary[^\n]*/i,    /メイン[^\n]*/,   /ブランド[^\n]*/,  /コーポレート[^\n]*/]);
-  const secondaryEntry = findEntry([/セカンダリ[^\n]*/,   /secondary[^\n]*/i,  /サブ[^\n]*/]);
-  const accentEntry    = findEntry([/アクセント[^\n]*/,   /accent[^\n]*/i,     /補色[^\n]*/]);
-  const textHex        = findHex([/テキスト[^\n]*/,       /文字色[^\n]*/,      /text\s*color[^\n]*/i]);
-  const bgHex          = findHex([/背景色?[^\n]*/,        /バックグラウンド[^\n]*/, /background[^\n]*/i]);
+  if (!primaryHex) return null;
 
-  if (!primaryEntry) return null;
+  // 各色の比率を「カラー使用比率」セクション等から取得（同一行 or 全文検索）
+  const hexEntries: Array<{ hex: string }> = [{ hex: primaryHex }];
+  if (secondaryHex) hexEntries.push({ hex: secondaryHex });
+  if (accentHex)    hexEntries.push({ hex: accentHex });
 
-  // カラーバー用: 定義された色のみ（なし扱いはnull）
-  const brandEntries: BrandColor[] = [primaryEntry];
-  if (secondaryEntry) brandEntries.push(secondaryEntry);
-  if (accentEntry)    brandEntries.push(accentEntry);
+  const brandWithRatio: BrandColor[] = hexEntries.map(e => ({
+    hex: e.hex,
+    ratio: findRatioInText(text, e.hex),
+  }));
 
-  // 比率を正規化: 全て0なら色数で均等分配
-  const totalRatio = brandEntries.reduce((s, c) => s + c.ratio, 0);
+  // 比率を正規化
+  const totalRatio = brandWithRatio.reduce((s, c) => s + c.ratio, 0);
   let brandColors: BrandColor[];
   if (totalRatio > 0) {
-    // 指定あり → 合計100%に正規化
-    brandColors = brandEntries.map((c, i, arr) => {
-      const normalized = Math.round(c.ratio * 100 / totalRatio);
-      return { hex: c.hex, ratio: normalized };
-    });
-    // 端数調整: 合計を100に揃える
+    brandColors = brandWithRatio.map(c => ({ hex: c.hex, ratio: Math.round(c.ratio * 100 / totalRatio) }));
     const sum = brandColors.reduce((s, c) => s + c.ratio, 0);
     if (sum !== 100) brandColors[0].ratio += 100 - sum;
   } else {
-    // 未指定 → 色数別の均等比率
     const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15] };
-    const ratios = evenRatios[brandEntries.length] ?? [60, 25, 15];
-    brandColors = brandEntries.map((c, i) => ({ hex: c.hex, ratio: ratios[i] ?? 15 }));
+    const ratios = evenRatios[brandWithRatio.length] ?? [60, 25, 15];
+    brandColors = brandWithRatio.map((c, i) => ({ hex: c.hex, ratio: ratios[i] ?? 15 }));
   }
 
   return {
-    primary:   primaryEntry.hex,
-    secondary: secondaryEntry?.hex ?? '#333333',
-    accent:    accentEntry?.hex    ?? primaryEntry.hex,
-    text:      textHex             ?? '#111827',
-    bg:        bgHex               ?? '#FFFFFF',
+    primary:   primaryHex,
+    secondary: secondaryHex ?? '#333333',
+    accent:    accentHex    ?? primaryHex,
+    text:      textHex      ?? '#111827',
+    bg:        bgHex        ?? '#FFFFFF',
     brandColors,
   };
 }

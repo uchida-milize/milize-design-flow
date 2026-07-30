@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;700;900&display=swap');
 
 :root {
-  --portal-bg: #f5f7fa;
-  --portal-primary: #3B73B9;
+  --portal-bg: #F0F0F0;
+  --portal-primary: #0071BC;
   --portal-black: #000000;
-  --portal-accent-red: #B7282E;
+  --portal-accent: #FFFFFF;
   --portal-text: #333333;
-  --portal-bg-gray: #f0f0f0;
+  --portal-bg-gray: #F0F0F0;
 }
 
 .ge-portal * {
@@ -188,12 +188,12 @@
   --primary-color: #0071BC;
   --secondary-color: #000000;
   --accent-color: #FFFFFF;
-  --text-color: #111827;
-  --bg-color: #FFFFFF;
+  --text-color: #333333;
+  --bg-color: #F0F0F0;
   --brand-color-1: #0071BC;
-  --brand-ratio-1: 60;
+  --brand-ratio-1: 40;
   --brand-color-2: #000000;
   --brand-ratio-2: 25;
   --brand-color-3: #FFFFFF;
-  --brand-ratio-3: 15;
+  --brand-ratio-3: 20;
 }
