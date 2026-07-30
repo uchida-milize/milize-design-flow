@@ -367,13 +367,13 @@ send({ progress: progressVal, status: title ? `${title}\u3092\u51e6\u7406\u4e2d.
 } else if (data.event === 'node_finished') {
 progressVal = Math.min(progressVal + 2, 58);
 // \u30ce\u30fc\u30c9\u51fa\u529b\u3092\u53ce\u96c6
-const title = data.data?.title || `\u30ce\u30fc\u30c9_${Object.keys(nodeOutputs).length + 1}`;
+const nodeTitle = data.data?.title || `\u30ce\u30fc\u30c9_${Object.keys(nodeOutputs).length + 1}`;
 const outputs = data.data?.outputs;
-if (outputs) {
-  const text = Object.values(outputs)
-    .map(v => typeof v === 'string' ? v : JSON.stringify(v, null, 2))
-    .join('\n\n');
-  if (text.trim()) nodeOutputs[title] = text;
+if (outputs && typeof outputs === 'object') {
+  const nodeText = Object.entries(outputs)
+    .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+    .join('\n\n---\n\n');
+  if (nodeText.trim()) nodeOutputs[nodeTitle] = nodeText;
 }
 send({ progress: progressVal });
 } else if (data.event === 'workflow_finished') {
