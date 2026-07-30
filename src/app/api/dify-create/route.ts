@@ -245,17 +245,34 @@ export default function ResourcesPage() {
 `;
 }
 
+interface BrandColor {
+  hex: string;
+  ratio: number; // 0 = 未指定
+}
+
 interface DesignColors {
   primary: string;
   secondary: string;
   accent: string;
   text: string;
   bg: string;
+  brandColors: BrandColor[]; // カラーバー用（1〜3色）
+}
+
+/** 1行からhex+ratio(%)を抽出する。"なし"行はnullを返す */
+function parseColorEntry(line: string): BrandColor | null {
+  if (/なし|none|n\/a/i.test(line) && !/#[0-9a-fA-F]{3,8}/.test(line)) return null;
+  const hexMatch = line.match(/#([0-9a-fA-F]{6})/i);
+  if (!hexMatch) return null;
+  const ratioMatch = line.match(/(\d{1,3})\s*%/);
+  return {
+    hex: '#' + hexMatch[1].toUpperCase(),
+    ratio: ratioMatch ? parseInt(ratioMatch[1]) : 0,
+  };
 }
 
 /** nodeOutputs の Design.md ノード出力からブランドカラーを抽出する */
 function parseDesignMdColors(nodeOutputs: Record<string, string>): DesignColors | null {
-  // Design.md 系のノードキーを探す
   const designKey = Object.keys(nodeOutputs).find(k =>
     /design/i.test(k) || /デザイン/.test(k) || /ブランド/.test(k) || /カラー/.test(k)
   );
@@ -263,50 +280,65 @@ function parseDesignMdColors(nodeOutputs: Record<string, string>): DesignColors 
 
   const text = nodeOutputs[designKey];
 
-  const findHex = (patterns: RegExp[]): string | null => {
+  // キーワードに続く行を探してBrandColorを抽出
+  const findEntry = (patterns: RegExp[]): BrandColor | null => {
     for (const p of patterns) {
       const m = text.match(p);
-      if (m) return '#' + m[1].toUpperCase();
+      if (m) return parseColorEntry(m[0]);
     }
     return null;
   };
 
-  const primary = findHex([
-    /プライマリ[^\n#]*#([0-9a-fA-F]{6})/,
-    /primary[^\n#]*#([0-9a-fA-F]{6})/i,
-    /メイン[^\n#]*#([0-9a-fA-F]{6})/,
-    /ブランド[^\n#]*#([0-9a-fA-F]{6})/,
-    /コーポレート[^\n#]*#([0-9a-fA-F]{6})/,
-  ]);
-  const secondary = findHex([
-    /セカンダリ[^\n#]*#([0-9a-fA-F]{6})/,
-    /secondary[^\n#]*#([0-9a-fA-F]{6})/i,
-    /サブ[^\n#]*#([0-9a-fA-F]{6})/,
-  ]);
-  const accent = findHex([
-    /アクセント[^\n#]*#([0-9a-fA-F]{6})/,
-    /accent[^\n#]*#([0-9a-fA-F]{6})/i,
-    /補色[^\n#]*#([0-9a-fA-F]{6})/,
-  ]);
-  const textColor = findHex([
-    /テキスト[^\n#]*#([0-9a-fA-F]{6})/,
-    /文字[^\n#]*#([0-9a-fA-F]{6})/,
-    /text[^\n#]*#([0-9a-fA-F]{6})/i,
-  ]);
-  const bg = findHex([
-    /背景[^\n#]*#([0-9a-fA-F]{6})/,
-    /バックグラウンド[^\n#]*#([0-9a-fA-F]{6})/,
-    /background[^\n#]*#([0-9a-fA-F]{6})/i,
-  ]);
+  const findHex = (patterns: RegExp[]): string | null => {
+    for (const p of patterns) {
+      const m = text.match(p);
+      if (m) {
+        const e = parseColorEntry(m[0]);
+        return e?.hex ?? null;
+      }
+    }
+    return null;
+  };
 
-  if (!primary) return null; // プライマリが取れなければ使わない
+  const primaryEntry   = findEntry([/プライマリ[^\n]*/,   /primary[^\n]*/i,    /メイン[^\n]*/,   /ブランド[^\n]*/,  /コーポレート[^\n]*/]);
+  const secondaryEntry = findEntry([/セカンダリ[^\n]*/,   /secondary[^\n]*/i,  /サブ[^\n]*/]);
+  const accentEntry    = findEntry([/アクセント[^\n]*/,   /accent[^\n]*/i,     /補色[^\n]*/]);
+  const textHex        = findHex([/テキスト[^\n]*/,       /文字色[^\n]*/,      /text\s*color[^\n]*/i]);
+  const bgHex          = findHex([/背景色?[^\n]*/,        /バックグラウンド[^\n]*/, /background[^\n]*/i]);
+
+  if (!primaryEntry) return null;
+
+  // カラーバー用: 定義された色のみ（なし扱いはnull）
+  const brandEntries: BrandColor[] = [primaryEntry];
+  if (secondaryEntry) brandEntries.push(secondaryEntry);
+  if (accentEntry)    brandEntries.push(accentEntry);
+
+  // 比率を正規化: 全て0なら色数で均等分配
+  const totalRatio = brandEntries.reduce((s, c) => s + c.ratio, 0);
+  let brandColors: BrandColor[];
+  if (totalRatio > 0) {
+    // 指定あり → 合計100%に正規化
+    brandColors = brandEntries.map((c, i, arr) => {
+      const normalized = Math.round(c.ratio * 100 / totalRatio);
+      return { hex: c.hex, ratio: normalized };
+    });
+    // 端数調整: 合計を100に揃える
+    const sum = brandColors.reduce((s, c) => s + c.ratio, 0);
+    if (sum !== 100) brandColors[0].ratio += 100 - sum;
+  } else {
+    // 未指定 → 色数別の均等比率
+    const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15] };
+    const ratios = evenRatios[brandEntries.length] ?? [60, 25, 15];
+    brandColors = brandEntries.map((c, i) => ({ hex: c.hex, ratio: ratios[i] ?? 15 }));
+  }
 
   return {
-    primary,
-    secondary: secondary ?? '#333333',
-    accent:    accent    ?? primary,
-    text:      textColor ?? '#111827',
-    bg:        bg        ?? '#FFFFFF',
+    primary:   primaryEntry.hex,
+    secondary: secondaryEntry?.hex ?? '#333333',
+    accent:    accentEntry?.hex    ?? primaryEntry.hex,
+    text:      textHex             ?? '#111827',
+    bg:        bgHex               ?? '#FFFFFF',
+    brandColors,
   };
 }
 
@@ -370,7 +402,10 @@ async function readAndFixDifyFiles(
           bgColor   = extract(['--bg(?!-color)[\\w-]*', '--background(?!-color)[\\w-]*', '--portal-bg']) ?? '#FFFFFF';
         }
 
-        const standardBlock = `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n}\n`;
+        const brandLines = (designColors?.brandColors ?? [])
+          .map((c, i) => `  --brand-color-${i + 1}: ${c.hex};\n  --brand-ratio-${i + 1}: ${c.ratio};`)
+          .join('\n');
+        const standardBlock = `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n${brandLines ? brandLines + '\n' : ''}}\n`;
 
         // 既存ブロックがあれば置換、なければ末尾に追加
         if (content.includes('--primary-color:')) {

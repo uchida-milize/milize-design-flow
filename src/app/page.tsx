@@ -19,6 +19,32 @@ const EXCLUDED_DIRS = new Set([
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
 function extractBrandColors(css: string): Array<{ hex: string; ratio: number }> {
+  // design.md由来の明示的なカラーバー変数を優先（--brand-color-1〜3）
+  const explicit: Array<{ hex: string; ratio: number }> = [];
+  for (let i = 1; i <= 3; i++) {
+    const hexMatch = css.match(new RegExp(`--brand-color-${i}:\\s*(#[0-9a-fA-F]{6})`));
+    const ratioMatch = css.match(new RegExp(`--brand-ratio-${i}:\\s*(\\d+)`));
+    if (hexMatch) {
+      explicit.push({
+        hex: hexMatch[1].toLowerCase(),
+        ratio: ratioMatch ? parseInt(ratioMatch[1]) : 0,
+      });
+    }
+  }
+  if (explicit.length > 0) {
+    // 比率が全て0なら均等分配
+    const total = explicit.reduce((s, c) => s + c.ratio, 0);
+    if (total === 0) {
+      const even = [100, 65, 60];
+      const rest = [0, 35, 25, 15];
+      return explicit.map((c, i) => ({
+        hex: c.hex,
+        ratio: i === 0 ? (even[explicit.length - 1] ?? 60) : (rest[i] ?? 15),
+      }));
+    }
+    return explicit;
+  }
+
   const varRe = /--([\w-]+):\s*(#[0-9a-fA-F]{3,8}|rgb[a]?\([^)]+\))/g;
   const allVars: Array<{ name: string; hex: string }> = [];
   let m: RegExpExecArray | null;

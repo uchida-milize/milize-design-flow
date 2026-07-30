@@ -183,11 +183,15 @@
   border-radius: 2px;
   display: inline-block;
 }
-/* 標準カラー変数（カラーバー自動生成用） */
+/* 標準カラー変数（自動注入） */
 :root {
   --primary-color: #004A99;
   --secondary-color: #000000;
   --accent-color: #0071BC;
   --text-color: #333333;
   --bg-color: #f5f7fa;
+  --brand-color-1: #004A99;
+  --brand-ratio-1: 60;
+  --brand-color-2: #0071BC;
+  --brand-ratio-2: 40;
 }
