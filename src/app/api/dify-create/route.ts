@@ -3,6 +3,8 @@ import { NextRequest } from 'next/server';
 const OWNER = 'uchida-milize';
 const REPO  = 'milize-design-flow';
 const API   = 'https://api.github.com';
+const TPL_SLUG = 'sharp-finance-corp';
+const TPL_NAME = 'シャープファイナンス株式会社';
 
 function ghHeaders(token: string) {
   return {
@@ -13,70 +15,96 @@ function ghHeaders(token: string) {
   };
 }
 
+async function getFileContent(path: string, token: string): Promise<{ content: string; sha: string } | null> {
+  const h = ghHeaders(token);
+  const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+  if (!r.ok) return null;
+  const data: { content: string; sha: string } = await r.json();
+  return {
+    content: Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8'),
+    sha: data.sha,
+  };
+}
+
 // GitHub Trees API で複数ファイルを1コミットにまとめる
 async function batchGitCommit(
   files: Array<{ path: string; content: string }>,
   message: string,
   token: string,
-): Promise<boolean> {
+): Promise<{ ok: boolean; error?: string }> {
   const h = ghHeaders(token);
 
-  // 1. HEAD SHA 取得
-  const refRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/refs/heads/main`, { headers: h });
-  if (!refRes.ok) return false;
-  const refData = await refRes.json();
-  const headSha: string = refData.object.sha;
+  try {
+    // 1. HEAD SHA 取得
+    const refRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/refs/heads/main`, { headers: h });
+    if (!refRes.ok) return { ok: false, error: `ref fetch failed: ${refRes.status}` };
+    const refData = await refRes.json();
+    const headSha: string = refData.object.sha;
 
-  // 2. 現在のツリー SHA 取得
-  const commitRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/commits/${headSha}`, { headers: h });
-  if (!commitRes.ok) return false;
-  const commitData = await commitRes.json();
-  const treeSha: string = commitData.tree.sha;
+    // 2. 現在のツリー SHA 取得
+    const commitRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/commits/${headSha}`, { headers: h });
+    if (!commitRes.ok) return { ok: false, error: `commit fetch failed: ${commitRes.status}` };
+    const commitData = await commitRes.json();
+    const treeSha: string = commitData.tree.sha;
 
-  // 3. 各ファイルの blob を作成
-  const treeItems = await Promise.all(
-    files.map(async (f) => {
-      const blobRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/blobs`, {
-        method: 'POST',
-        headers: h,
-        body: JSON.stringify({
-          content: Buffer.from(f.content, 'utf-8').toString('base64'),
-          encoding: 'base64',
-        }),
-      });
-      const blobData = await blobRes.json();
-      return { path: f.path, mode: '100644' as const, type: 'blob' as const, sha: blobData.sha };
-    }),
-  );
+    // 3. 各ファイルの blob を作成（重複パスを排除）
+    const uniqueFiles = Array.from(
+      new Map(files.map(f => [f.path, f])).values()
+    );
+    const treeItems = await Promise.all(
+      uniqueFiles.map(async (f) => {
+        const blobRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/blobs`, {
+          method: 'POST',
+          headers: h,
+          body: JSON.stringify({
+            content: Buffer.from(f.content, 'utf-8').toString('base64'),
+            encoding: 'base64',
+          }),
+        });
+        if (!blobRes.ok) throw new Error(`blob failed for ${f.path}: ${blobRes.status}`);
+        const blobData = await blobRes.json();
+        return { path: f.path, mode: '100644' as const, type: 'blob' as const, sha: blobData.sha };
+      }),
+    );
 
-  // 4. 新しいツリーを作成
-  const treeRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/trees`, {
-    method: 'POST',
-    headers: h,
-    body: JSON.stringify({ base_tree: treeSha, tree: treeItems }),
-  });
-  if (!treeRes.ok) return false;
-  const treeData = await treeRes.json();
+    // 4. 新しいツリーを作成
+    const treeRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/trees`, {
+      method: 'POST',
+      headers: h,
+      body: JSON.stringify({ base_tree: treeSha, tree: treeItems }),
+    });
+    if (!treeRes.ok) {
+      const errBody = await treeRes.text();
+      return { ok: false, error: `tree failed: ${treeRes.status} ${errBody.slice(0, 100)}` };
+    }
+    const treeData = await treeRes.json();
 
-  // 5. コミットを作成
-  const newCommitRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/commits`, {
-    method: 'POST',
-    headers: h,
-    body: JSON.stringify({ message, tree: treeData.sha, parents: [headSha] }),
-  });
-  if (!newCommitRes.ok) return false;
-  const newCommitData = await newCommitRes.json();
+    // 5. コミットを作成
+    const newCommitRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/commits`, {
+      method: 'POST',
+      headers: h,
+      body: JSON.stringify({ message, tree: treeData.sha, parents: [headSha] }),
+    });
+    if (!newCommitRes.ok) return { ok: false, error: `commit create failed: ${newCommitRes.status}` };
+    const newCommitData = await newCommitRes.json();
 
-  // 6. refs/heads/main を更新（競合時は失敗を返す）
-  const updateRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/refs/heads/main`, {
-    method: 'PATCH',
-    headers: h,
-    body: JSON.stringify({ sha: newCommitData.sha, force: false }),
-  });
-  return updateRes.ok;
+    // 6. refs/heads/main を更新
+    const updateRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/refs/heads/main`, {
+      method: 'PATCH',
+      headers: h,
+      body: JSON.stringify({ sha: newCommitData.sha, force: false }),
+    });
+    if (!updateRes.ok) {
+      const errBody = await updateRes.text();
+      return { ok: false, error: `ref update failed: ${updateRes.status} ${errBody.slice(0, 80)}` };
+    }
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
 }
 
-// page.tsx から slug を EXCLUDED_DIRS に含まれていたら除外する（別コミット）
+// page.tsx から slug を EXCLUDED_DIRS から除外する（別コミット）
 async function removeFromExcludedDirs(slug: string, token: string) {
   const h = ghHeaders(token);
   const path = 'src/app/page.tsx';
@@ -108,36 +136,7 @@ async function removeFromExcludedDirs(slug: string, token: string) {
   }
 }
 
-// slug ディレクトリ以下の全ファイルを取得
-async function listClientFiles(slug: string, token: string): Promise<Array<{ path: string; sha: string }>> {
-  const h = ghHeaders(token);
-  async function walk(p: string): Promise<Array<{ path: string; sha: string }>> {
-    const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${p}`, { headers: h });
-    if (!r.ok) return [];
-    const items: Array<{ path: string; sha: string; type: string }> = await r.json();
-    const out: Array<{ path: string; sha: string }> = [];
-    for (const item of items) {
-      if (item.type === 'file') out.push({ path: item.path, sha: item.sha });
-      else if (item.type === 'dir') out.push(...await walk(item.path));
-    }
-    return out;
-  }
-  return walk(`src/app/${slug}`);
-}
-
-// ファイル内容を取得
-async function getFileContent(path: string, token: string): Promise<{ content: string; sha: string } | null> {
-  const h = ghHeaders(token);
-  const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
-  if (!r.ok) return null;
-  const data: { content: string; sha: string } = await r.json();
-  return {
-    content: Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8'),
-    sha: data.sha,
-  };
-}
-
-function buildResourcesPageContent(slug: string, companyName: string): string {
+function buildResourcesPage(slug: string, companyName: string): string {
   return `'use client';
 import { useState, useEffect } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
@@ -208,6 +207,58 @@ export default function ResourcesPage() {
   );
 }
 `;
+}
+
+// Dify生成の4ファイルを読み込み、テンプレート参照を修正してメモリ上に返す
+async function readAndFixDifyFiles(
+  slug: string,
+  companyName: string,
+  token: string,
+): Promise<Array<{ path: string; content: string }>> {
+  const targetPaths = [
+    `src/app/${slug}/globals.css`,
+    `src/app/${slug}/page.tsx`,
+    `src/app/${slug}/guidelines/page.tsx`,
+    `src/app/${slug}/components/page.tsx`,
+  ];
+
+  const results = await Promise.all(
+    targetPaths.map(async (path) => {
+      const f = await getFileContent(path, token);
+      if (!f) return null;
+      let content = f.content;
+
+      // テンプレート参照を修正
+      if (content.includes(TPL_SLUG) || content.includes(TPL_NAME)) {
+        content = content
+          .split(TPL_SLUG).join(slug)
+          .split(TPL_NAME).join(companyName)
+          .replace('background: #0f172a;', 'background: #efefef;')
+          .replace('color: #94a3b8;', 'color: #333333;');
+      }
+
+      // globals.css: 標準カラー変数を注入（未定義の場合のみ）
+      if (path.endsWith('globals.css') && !content.includes('--primary-color:')) {
+        const extract = (patterns: string[]): string | null => {
+          for (const p of patterns) {
+            const m = content.match(new RegExp(p + ':\\s*(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\))'));
+            if (m) return m[1];
+          }
+          return null;
+        };
+        const primary   = extract(['--primary(?!-color)[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
+        const secondary = extract(['--secondary(?!-color)[\\w-]*', '--color-secondary', '--sub-color']) ?? '#333333';
+        const accent    = extract(['--accent(?!-color)[\\w-]*', '--color-accent']) ?? '#F5A623';
+        const textColor = extract(['--text-main', '--text-color', '--color-text', '--text-primary']) ?? '#111827';
+        const bgColor   = extract(['--bg(?!-color)[\\w-]*', '--background(?!-color)[\\w-]*', '--portal-bg']) ?? '#FFFFFF';
+        content += `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n}\n`;
+      }
+
+      return { path, content };
+    }),
+  );
+
+  return results.filter((r): r is { path: string; content: string } => r !== null);
 }
 
 export async function POST(req: NextRequest) {
@@ -300,90 +351,54 @@ export async function POST(req: NextRequest) {
                 send({ progress: 60, status: `GitHubにコミット中... (ノード出力: ${nodeKeys.length}件)` });
                 const commitStart = Date.now();
 
-                // ===== ファイルを全て読み込んでメモリ上で変更し、1コミットにまとめる =====
-                const TPL_SLUG = 'sharp-finance-corp';
-                const TPL_NAME = 'シャープファイナンス株式会社';
+                // Dify生成ファイルを読み込み・修正
+                send({ progress: 61, status: 'Dify生成ファイルを読み込み中...' });
+                const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken);
 
-                send({ progress: 61, status: 'ファイルを読み込み中...' });
-                const existingFiles = await listClientFiles(client_slug, githubToken);
-                const filesToCommit: Array<{ path: string; content: string }> = [];
-
-                // 1) Dify生成ファイルのテンプレート参照を修正
-                for (const file of existingFiles) {
-                  const ext = file.path.split('.').pop() ?? '';
-                  if (!['tsx', 'ts', 'css'].includes(ext)) continue;
-                  const f = await getFileContent(file.path, githubToken);
-                  if (!f) continue;
-                  let content = f.content;
-                  const needsFix = content.includes(TPL_SLUG) || content.includes(TPL_NAME);
-                  if (needsFix) {
-                    content = content
-                      .split(TPL_SLUG).join(client_slug)
-                      .split(TPL_NAME).join(company_name)
-                      .replace('background: #0f172a;', 'background: #efefef;')
-                      .replace('color: #94a3b8;', 'color: #333333;');
-                  }
-                  // globals.css: 標準カラー変数を注入（未定義の場合のみ）
-                  if (file.path.endsWith('globals.css') && !content.includes('--primary-color:')) {
-                    const extract = (patterns: string[]): string | null => {
-                      for (const p of patterns) {
-                        const m = content.match(new RegExp(p + ':\\s*(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\))'));
-                        if (m) return m[1];
-                      }
-                      return null;
-                    };
-                    const primary   = extract(['--primary(?!-color)[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
-                    const secondary = extract(['--secondary(?!-color)[\\w-]*', '--color-secondary', '--sub-color']) ?? '#333333';
-                    const accent    = extract(['--accent(?!-color)[\\w-]*', '--color-accent']) ?? '#F5A623';
-                    const textColor = extract(['--text-main', '--text-color', '--color-text', '--text-primary']) ?? '#111827';
-                    const bgColor   = extract(['--bg(?!-color)[\\w-]*', '--background(?!-color)[\\w-]*', '--portal-bg']) ?? '#FFFFFF';
-                    content += `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n}\n`;
-                  }
-                  // layout.tsx を上書き（正しいラッパーを保証）
-                  if (file.path.endsWith('layout.tsx') && file.path.includes(`/${client_slug}/layout.tsx`)) {
-                    content = `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`;
-                  }
-                  filesToCommit.push({ path: file.path, content });
-                }
-
-                // 2) layout.tsx が存在しない場合は新規作成
-                const hasLayout = existingFiles.some(f => f.path === `src/app/${client_slug}/layout.tsx`);
-                if (!hasLayout) {
-                  filesToCommit.push({
+                // コミットするファイル一覧（重複なし）
+                const filesToCommit: Array<{ path: string; content: string }> = [
+                  ...difyFiles,
+                  // layout.tsx（常に正しいラッパーで上書き）
+                  {
                     path: `src/app/${client_slug}/layout.tsx`,
                     content: `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
-                  });
-                }
+                  },
+                  // resources.json
+                  {
+                    path: `src/app/${client_slug}/resources.json`,
+                    content: JSON.stringify(nodeOutputs, null, 2),
+                  },
+                  // resources/page.tsx
+                  {
+                    path: `src/app/${client_slug}/resources/page.tsx`,
+                    content: buildResourcesPage(client_slug, company_name),
+                  },
+                ];
 
-                // 3) resources.json
-                filesToCommit.push({
-                  path: `src/app/${client_slug}/resources.json`,
-                  content: JSON.stringify(nodeOutputs, null, 2),
-                });
+                send({ progress: 62, status: `${filesToCommit.length}ファイルをバッチコミット中...` });
 
-                // 4) resources/page.tsx
-                filesToCommit.push({
-                  path: `src/app/${client_slug}/resources/page.tsx`,
-                  content: buildResourcesPageContent(client_slug, company_name),
-                });
-
-                // ===== 1回のバッチコミット =====
-                send({ progress: 63, status: `${filesToCommit.length}ファイルを1コミットで保存中...` });
-                let retries = 0;
                 let committed = false;
-                while (retries < 3 && !committed) {
-                  if (retries > 0) await new Promise(r => setTimeout(r, 2000 * retries));
-                  committed = await batchGitCommit(
+                let lastError = '';
+                for (let attempt = 0; attempt < 3; attempt++) {
+                  if (attempt > 0) await new Promise(r => setTimeout(r, 3000 * attempt));
+                  const result = await batchGitCommit(
                     filesToCommit,
-                    `feat: generate portal for ${client_slug} [${nodeKeys.length} node outputs]`,
+                    `feat: generate portal for ${client_slug} [${nodeKeys.length} nodes]`,
                     githubToken,
                   );
-                  retries++;
+                  if (result.ok) { committed = true; break; }
+                  lastError = result.error ?? 'unknown';
+                  send({ progress: 62 + attempt, status: `コミット再試行 (${attempt + 1}/3): ${lastError.slice(0, 60)}` });
                 }
 
-                // ===== page.tsx から除外ディレクトリを解除（別コミット） =====
-                await removeFromExcludedDirs(client_slug, githubToken);
+                if (!committed) {
+                  send({ progress: 63, status: `バッチコミット失敗: ${lastError.slice(0, 80)}` });
+                } else {
+                  send({ progress: 64, status: 'バッチコミット完了！' });
+                }
 
+                // page.tsx から除外ディレクトリを解除
+                await removeFromExcludedDirs(client_slug, githubToken);
                 send({ progress: 65, status: 'GitHubコミット完了。Vercelデプロイ起動待ち...' });
 
                 if (vercelToken && vercelProjectId) {
@@ -408,7 +423,7 @@ export async function POST(req: NextRequest) {
                         send({ error: 'Vercelデプロイが失敗しました' });
                         deployed = true; break;
                       } else {
-                        send({ progress: deployProgress, status: `Vercelビルド中...` });
+                        send({ progress: deployProgress, status: 'Vercelビルド中...' });
                       }
                     } catch { send({ progress: deployProgress }); }
                   }
