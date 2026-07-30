@@ -5,6 +5,42 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 const clientName = 'ゼネラル・エレクトリック';
 const basePath = '/ge';
 
+const TOKEN_RE = /(https?:\/\/[^\s"',\]}\)]+)|(#[0-9a-fA-F]{6,8}|#[0-9a-fA-F]{3}(?![0-9a-fA-F])|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+)?\s*\))/g;
+
+function renderRich(text: string) {
+  const parts: React.ReactNode[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  TOKEN_RE.lastIndex = 0;
+  while ((m = TOKEN_RE.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    const [full, url, color] = m;
+    if (url) {
+      parts.push(
+        <a key={m.index} href={url} target="_blank" rel="noopener noreferrer"
+          style={{ color: '#3b82f6', textDecoration: 'underline', wordBreak: 'break-all' }}>
+          {url}
+        </a>
+      );
+    } else if (color) {
+      parts.push(
+        <span key={m.index}>
+          <span style={{
+            display: 'inline-block', color, fontSize: 14, lineHeight: 1,
+            marginRight: 3, verticalAlign: 'middle',
+          }}>■</span>
+          {color}
+        </span>
+      );
+    } else {
+      parts.push(full);
+    }
+    last = m.index + full.length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
 export default function ResourcesPage() {
   const [primaryColor, setPrimaryColor] = useState('#2563eb');
   const [tabs, setTabs] = useState<string[]>([]);
@@ -59,7 +95,7 @@ export default function ResourcesPage() {
                 padding: 24, margin: 0, fontSize: 12, lineHeight: 1.8,
                 color: '#374151', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
                 maxHeight: '65vh', overflowY: 'auto', fontFamily: "'Courier New', monospace",
-              }}>{data[active] ?? '（データなし）'}</pre>
+              }}>{renderRich(data[active] ?? '（データなし）')}</pre>
             </div>
           </>
         )}
