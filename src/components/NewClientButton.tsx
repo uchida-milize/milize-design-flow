@@ -17,9 +17,39 @@ const MODAL_KEYFRAMES = `
 
 type Step = 'form' | 'urls' | 'generating';
 
+const PURPOSES = [
+  { key: 'color',     label: 'カラー' },
+  { key: 'ci',        label: 'ロゴ・CI' },
+  { key: 'font',      label: 'フォント' },
+  { key: 'form',      label: 'フォーム' },
+] as const;
+type PurposeKey = typeof PURPOSES[number]['key'];
+
 interface UrlItem {
   url: string;
   checked: boolean;
+  purposes: Record<PurposeKey, boolean>;
+}
+
+/** %XX エンコードが多い（日本語パス等）URLを判定 */
+function isHeavilyEncoded(url: string): boolean {
+  const encoded = (url.match(/%[0-9A-Fa-f]{2}/g) ?? []).length;
+  return encoded > 6;
+}
+
+/** URLリストを初期化（エンコードURL除外 + デフォルト目的を全ON） */
+function initUrlItems(urls: string[]): { items: UrlItem[]; excluded: number } {
+  const items: UrlItem[] = [];
+  let excluded = 0;
+  for (const url of urls) {
+    if (isHeavilyEncoded(url)) { excluded++; continue; }
+    items.push({
+      url,
+      checked: true,
+      purposes: { color: true, ci: true, font: true, form: true },
+    });
+  }
+  return { items, excluded };
 }
 
 export function NewClientButton() {
@@ -30,6 +60,7 @@ export function NewClientButton() {
   const [genStatus, setGenStatus] = useState('');
   const [taskId, setTaskId] = useState('');
   const [urlItems, setUrlItems] = useState<UrlItem[]>([]);
+  const [excludedCount, setExcludedCount] = useState(0);
   const router = useRouter();
 
   function reset() {
@@ -39,6 +70,7 @@ export function NewClientButton() {
     setGenStatus('');
     setTaskId('');
     setUrlItems([]);
+    setExcludedCount(0);
   }
 
   /** 第1フェーズ: /api/dify-create を実行し、interrupted で止まったら urls ステップへ */
@@ -64,7 +96,9 @@ export function NewClientButton() {
           // 人間の入力ノードで停止 → URL選択ステップへ
           setTaskId(typeof data.task_id === 'string' ? data.task_id : '');
           const urls: string[] = Array.isArray(data.urls) ? (data.urls as string[]) : [];
-          setUrlItems(urls.map(u => ({ url: String(u), checked: true })));
+          const { items, excluded } = initUrlItems(urls);
+          setUrlItems(items);
+          setExcludedCount(excluded);
           setGenProgress(typeof data.progress === 'number' ? data.progress : 50);
           setStep('urls');
           return true; // signal: interrupted
@@ -86,7 +120,13 @@ export function NewClientButton() {
     setStep('generating');
     setGenStatus('URLを送信してワークフローを再開中...');
 
-    const selected = urlItems.filter(u => u.checked).map(u => u.url);
+    // 選択済みURLを「URL [目的1,目的2]」形式にして送信
+    const selected = urlItems
+      .filter(u => u.checked)
+      .map(u => {
+        const tags = PURPOSES.filter(p => u.purposes[p.key]).map(p => p.label);
+        return tags.length > 0 ? `${u.url} [${tags.join(',')}]` : u.url;
+      });
 
     try {
       const res = await fetch('/api/dify-resume', {
@@ -280,7 +320,7 @@ export function NewClientButton() {
                 ) : (
                   <div style={{ marginBottom: '20px' }}>
                     {/* 一括操作 */}
-                    <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+                    <div style={{ display: 'flex', gap: '8px', marginBottom: '10px', alignItems: 'center' }}>
                       <button onClick={() => setUrlItems(u => u.map(i => ({ ...i, checked: true })))}
                         style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 0', textDecoration: 'underline' }}>
                         すべて選択
@@ -292,35 +332,73 @@ export function NewClientButton() {
                       </button>
                       <span style={{ marginLeft: 'auto', fontSize: '12px', color: '#9ca3af' }}>
                         {urlItems.filter(u => u.checked).length} / {urlItems.length} 件選択
+                        {excludedCount > 0 && <span style={{ color: '#f59e0b', marginLeft: 6 }}>（エンコードURL {excludedCount}件除外）</span>}
                       </span>
                     </div>
 
+                    {/* 目的ラベル凡例 */}
+                    <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: '11px', color: '#9ca3af', alignSelf: 'center' }}>参照目的：</span>
+                      {PURPOSES.map(p => (
+                        <span key={p.key} style={{ fontSize: '11px', padding: '2px 8px', borderRadius: 999, background: '#f3f4f6', color: '#6b7280' }}>{p.label}</span>
+                      ))}
+                    </div>
+
                     {/* URLリスト */}
-                    <div style={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
+                    <div style={{ maxHeight: '340px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                       {urlItems.map((item, idx) => (
                         <div key={item.url} style={{
-                          display: 'flex', alignItems: 'flex-start', gap: '10px',
                           padding: '10px 14px',
                           borderBottom: idx < urlItems.length - 1 ? '1px solid #f3f4f6' : 'none',
-                          background: item.checked ? '#f0f9ff' : '#fff',
+                          background: item.checked ? '#f8faff' : '#fff',
                           transition: 'background 0.1s',
                         }}>
-                          <input
-                            type="checkbox"
-                            checked={item.checked}
-                            onChange={e => setUrlItems(u => u.map((i, j) => j === idx ? { ...i, checked: e.target.checked } : i))}
-                            style={{ marginTop: '3px', flexShrink: 0, cursor: 'pointer' }}
-                          />
-                          <a
-                            href={item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ fontSize: '12px', color: '#2563eb', wordBreak: 'break-all', lineHeight: 1.5, textDecoration: 'none' }}
-                            onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
-                            onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
-                          >
-                            {item.url}
-                          </a>
+                          {/* URL行 */}
+                          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
+                            <input
+                              type="checkbox"
+                              checked={item.checked}
+                              onChange={e => setUrlItems(u => u.map((i, j) => j === idx ? { ...i, checked: e.target.checked } : i))}
+                              style={{ marginTop: '3px', flexShrink: 0, cursor: 'pointer' }}
+                            />
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ fontSize: '12px', color: '#2563eb', wordBreak: 'break-all', lineHeight: 1.5, textDecoration: 'none' }}
+                              onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
+                              onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
+                            >
+                              {item.url}
+                            </a>
+                          </div>
+                          {/* 目的タグ（チェック済みURLのみ表示） */}
+                          {item.checked && (
+                            <div style={{ display: 'flex', gap: '6px', paddingLeft: '22px', flexWrap: 'wrap' }}>
+                              {PURPOSES.map(p => {
+                                const active = item.purposes[p.key];
+                                return (
+                                  <button
+                                    key={p.key}
+                                    onClick={() => setUrlItems(u => u.map((i, j) => j === idx
+                                      ? { ...i, purposes: { ...i.purposes, [p.key]: !i.purposes[p.key] } }
+                                      : i
+                                    ))}
+                                    style={{
+                                      fontSize: '11px', padding: '2px 10px', borderRadius: 999,
+                                      border: `1px solid ${active ? '#2563eb' : '#e5e7eb'}`,
+                                      background: active ? '#eff6ff' : '#f9fafb',
+                                      color: active ? '#2563eb' : '#9ca3af',
+                                      cursor: 'pointer', fontWeight: active ? 600 : 400,
+                                      transition: 'all 0.1s',
+                                    }}
+                                  >
+                                    {active ? '✓ ' : ''}{p.label}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
