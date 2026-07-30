@@ -245,11 +245,77 @@ export default function ResourcesPage() {
 `;
 }
 
+interface DesignColors {
+  primary: string;
+  secondary: string;
+  accent: string;
+  text: string;
+  bg: string;
+}
+
+/** nodeOutputs の Design.md ノード出力からブランドカラーを抽出する */
+function parseDesignMdColors(nodeOutputs: Record<string, string>): DesignColors | null {
+  // Design.md 系のノードキーを探す
+  const designKey = Object.keys(nodeOutputs).find(k =>
+    /design/i.test(k) || /デザイン/.test(k) || /ブランド/.test(k) || /カラー/.test(k)
+  );
+  if (!designKey) return null;
+
+  const text = nodeOutputs[designKey];
+
+  const findHex = (patterns: RegExp[]): string | null => {
+    for (const p of patterns) {
+      const m = text.match(p);
+      if (m) return '#' + m[1].toUpperCase();
+    }
+    return null;
+  };
+
+  const primary = findHex([
+    /プライマリ[^\n#]*#([0-9a-fA-F]{6})/,
+    /primary[^\n#]*#([0-9a-fA-F]{6})/i,
+    /メイン[^\n#]*#([0-9a-fA-F]{6})/,
+    /ブランド[^\n#]*#([0-9a-fA-F]{6})/,
+    /コーポレート[^\n#]*#([0-9a-fA-F]{6})/,
+  ]);
+  const secondary = findHex([
+    /セカンダリ[^\n#]*#([0-9a-fA-F]{6})/,
+    /secondary[^\n#]*#([0-9a-fA-F]{6})/i,
+    /サブ[^\n#]*#([0-9a-fA-F]{6})/,
+  ]);
+  const accent = findHex([
+    /アクセント[^\n#]*#([0-9a-fA-F]{6})/,
+    /accent[^\n#]*#([0-9a-fA-F]{6})/i,
+    /補色[^\n#]*#([0-9a-fA-F]{6})/,
+  ]);
+  const textColor = findHex([
+    /テキスト[^\n#]*#([0-9a-fA-F]{6})/,
+    /文字[^\n#]*#([0-9a-fA-F]{6})/,
+    /text[^\n#]*#([0-9a-fA-F]{6})/i,
+  ]);
+  const bg = findHex([
+    /背景[^\n#]*#([0-9a-fA-F]{6})/,
+    /バックグラウンド[^\n#]*#([0-9a-fA-F]{6})/,
+    /background[^\n#]*#([0-9a-fA-F]{6})/i,
+  ]);
+
+  if (!primary) return null; // プライマリが取れなければ使わない
+
+  return {
+    primary,
+    secondary: secondary ?? '#333333',
+    accent:    accent    ?? primary,
+    text:      textColor ?? '#111827',
+    bg:        bg        ?? '#FFFFFF',
+  };
+}
+
 // Dify生成の4ファイルを読み込み、テンプレート参照を修正してメモリ上に返す
 async function readAndFixDifyFiles(
   slug: string,
   companyName: string,
   token: string,
+  designColors?: DesignColors | null,
 ): Promise<Array<{ path: string; content: string }>> {
   const targetPaths = [
     `src/app/${slug}/globals.css`,
@@ -273,21 +339,48 @@ async function readAndFixDifyFiles(
           .replace('color: #94a3b8;', 'color: #333333;');
       }
 
-      // globals.css: 標準カラー変数を注入（未定義の場合のみ）
-      if (path.endsWith('globals.css') && !content.includes('--primary-color:')) {
-        const extract = (patterns: string[]): string | null => {
-          for (const p of patterns) {
-            const m = content.match(new RegExp(p + ':\\s*(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\))'));
-            if (m) return m[1];
-          }
-          return null;
-        };
-        const primary   = extract(['--primary(?!-color)[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
-        const secondary = extract(['--secondary(?!-color)[\\w-]*', '--color-secondary', '--sub-color']) ?? '#333333';
-        const accent    = extract(['--accent(?!-color)[\\w-]*', '--color-accent']) ?? '#F5A623';
-        const textColor = extract(['--text-main', '--text-color', '--color-text', '--text-primary']) ?? '#111827';
-        const bgColor   = extract(['--bg(?!-color)[\\w-]*', '--background(?!-color)[\\w-]*', '--portal-bg']) ?? '#FFFFFF';
-        content += `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n}\n`;
+      // globals.css: 標準カラー変数を注入（design.md優先、なければCSS変数から抽出）
+      if (path.endsWith('globals.css')) {
+        let primary: string;
+        let secondary: string;
+        let accent: string;
+        let textColor: string;
+        let bgColor: string;
+
+        if (designColors) {
+          // design.md から抽出した色を最優先で使用
+          primary   = designColors.primary;
+          secondary = designColors.secondary;
+          accent    = designColors.accent;
+          textColor = designColors.text;
+          bgColor   = designColors.bg;
+        } else {
+          // フォールバック: CSS変数から抽出
+          const extract = (patterns: string[]): string | null => {
+            for (const p of patterns) {
+              const m = content.match(new RegExp(p + ':\\s*(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\))'));
+              if (m) return m[1];
+            }
+            return null;
+          };
+          primary   = extract(['--primary(?!-color)[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
+          secondary = extract(['--secondary(?!-color)[\\w-]*', '--color-secondary', '--sub-color']) ?? '#333333';
+          accent    = extract(['--accent(?!-color)[\\w-]*', '--color-accent']) ?? '#F5A623';
+          textColor = extract(['--text-main', '--text-color', '--color-text', '--text-primary']) ?? '#111827';
+          bgColor   = extract(['--bg(?!-color)[\\w-]*', '--background(?!-color)[\\w-]*', '--portal-bg']) ?? '#FFFFFF';
+        }
+
+        const standardBlock = `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n}\n`;
+
+        // 既存ブロックがあれば置換、なければ末尾に追加
+        if (content.includes('--primary-color:')) {
+          content = content.replace(
+            /\/\*\s*標準カラー変数[^*]*\*\/\s*:root\s*\{[^}]*--primary-color:[^}]*\}/,
+            standardBlock.trim(),
+          );
+        } else {
+          content += standardBlock;
+        }
       }
 
       return { path, content };
@@ -389,7 +482,8 @@ export async function POST(req: NextRequest) {
 
                 // Dify生成ファイルを読み込み・修正
                 send({ progress: 61, status: 'Dify生成ファイルを読み込み中...' });
-                const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken);
+                const designColors = parseDesignMdColors(nodeOutputs);
+                const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken, designColors);
 
                 // コミットするファイル一覧（重複なし）
                 const filesToCommit: Array<{ path: string; content: string }> = [
