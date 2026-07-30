@@ -1,5 +1,7 @@
 import { NextRequest } from 'next/server';
 
+export const maxDuration = 300;
+
 const OWNER = 'uchida-milize';
 const REPO  = 'milize-design-flow';
 const API   = 'https://api.github.com';
@@ -373,6 +375,30 @@ async function readAndFixDifyFiles(
           .split(TPL_NAME).join(companyName)
           .replace('background: #0f172a;', 'background: #efefef;')
           .replace('color: #94a3b8;', 'color: #333333;');
+      }
+
+      // page.tsx: resourcesカードが無ければ注入
+      if (path.endsWith(`${slug}/page.tsx`) && !content.includes('/resources')) {
+        // componentsリンクの直後にresourcesカードを挿入
+        const resourcesCard = `
+          <a href={\`\${basePath}/resources\`} className="hi-nav-card">
+            <div className="hi-card">
+              <div className="hi-section-label" style={{ color: primaryColor }}>
+                RESOURCES
+              </div>
+              <h2 className="hi-section-title" style={{ fontSize: 20 }}>
+                収集リソース
+              </h2>
+              <p className="hi-section-desc" style={{ marginBottom: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>`;
+        // componentsへのリンクブロックの末尾 </a> の後に挿入
+        content = content.replace(
+          /(<a[^>]*components[^>]*>[\s\S]*?<\/a>)(\s*\n\s*<\/div>)/,
+          `$1${resourcesCard}$2`
+        );
       }
 
       // globals.css: 標準カラー変数を注入（design.md優先、なければCSS変数から抽出）

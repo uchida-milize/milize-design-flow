@@ -1,5 +1,7 @@
 import { NextRequest } from 'next/server';
 
+export const maxDuration = 300;
+
 export interface UrlItem {
   url: string;
   title: string;
