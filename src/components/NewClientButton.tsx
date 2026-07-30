@@ -298,9 +298,9 @@ export function NewClientButton() {
                     {/* URLリスト */}
                     <div style={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                       {urlItems.map((item, idx) => (
-                        <label key={item.url} style={{
+                        <div key={item.url} style={{
                           display: 'flex', alignItems: 'flex-start', gap: '10px',
-                          padding: '10px 14px', cursor: 'pointer',
+                          padding: '10px 14px',
                           borderBottom: idx < urlItems.length - 1 ? '1px solid #f3f4f6' : 'none',
                           background: item.checked ? '#f0f9ff' : '#fff',
                           transition: 'background 0.1s',
@@ -309,12 +309,19 @@ export function NewClientButton() {
                             type="checkbox"
                             checked={item.checked}
                             onChange={e => setUrlItems(u => u.map((i, j) => j === idx ? { ...i, checked: e.target.checked } : i))}
-                            style={{ marginTop: '2px', flexShrink: 0 }}
+                            style={{ marginTop: '3px', flexShrink: 0, cursor: 'pointer' }}
                           />
-                          <span style={{ fontSize: '12px', color: '#374151', wordBreak: 'break-all', lineHeight: 1.5 }}>
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ fontSize: '12px', color: '#2563eb', wordBreak: 'break-all', lineHeight: 1.5, textDecoration: 'none' }}
+                            onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
+                            onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
+                          >
                             {item.url}
-                          </span>
-                        </label>
+                          </a>
+                        </div>
                       ))}
                     </div>
                   </div>
