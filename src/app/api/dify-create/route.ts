@@ -346,13 +346,18 @@ const decoder = new TextDecoder();
 let progressVal = 20;
 // \u5168\u30ce\u30fc\u30c9\u51fa\u529b\u3092\u53ce\u96c6 { \u30ce\u30fc\u30c9\u30bf\u30a4\u30c8\u30eb: \u51fa\u529b\u30c6\u30ad\u30b9\u30c8 }
 const nodeOutputs: Record<string, string> = {};
+// SSE\u30c1\u30e3\u30f3\u30af\u5206\u5272\u5bfe\u7b56\uff1a\u4e0d\u5b8c\u5168\u306a\u884c\u3092\u30d0\u30c3\u30d5\u30a1\u30ea\u30f3\u30b0
+let lineBuffer = '';
 
 while (true) {
 const { done, value } = await reader.read();
 if (done) break;
 
-const text = decoder.decode(value);
-for (const line of text.split('\n')) {
+lineBuffer += decoder.decode(value, { stream: true });
+const lines = lineBuffer.split('\n');
+lineBuffer = lines.pop() ?? ''; // \u672b\u5c3e\u306e\u4e0d\u5b8c\u5168\u306a\u884c\u3092\u6b21\u306e\u30c1\u30e3\u30f3\u30af\u3078
+
+for (const line of lines) {
 if (!line.startsWith('data: ')) continue;
 try {
 const data = JSON.parse(line.slice(6));
@@ -380,6 +385,15 @@ send({ progress: progressVal });
 const githubToken = process.env.GITHUB_TOKEN ?? '';
 const vercelToken = process.env.VERCEL_TOKEN ?? '';
 const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
+
+// workflow_finished の outputs を追加（node_finished が空の場合のフォールバック）
+const wfOutputs = data.data?.outputs;
+if (wfOutputs && typeof wfOutputs === 'object') {
+  const wfText = Object.entries(wfOutputs)
+    .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+    .join('\n\n---\n\n');
+  if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
+}
 
 const nodeKeys = Object.keys(nodeOutputs);
 send({ progress: 60, status: `GitHub\u306b\u30b3\u30df\u30c3\u30c8\u4e2d... (\u30ce\u30fc\u30c9\u51fa\u529b: ${nodeKeys.length}\u4ef6: ${nodeKeys.join(', ').slice(0, 80)})` });
