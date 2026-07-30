@@ -11,10 +11,10 @@ import {
 export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
-  const { task_id, selected_urls, company_name, client_slug } = await req.json();
+  const { task_id, workflow_run_id, selected_urls, company_name, client_slug } = await req.json();
 
-  if (!task_id) {
-    return Response.json({ error: 'task_id が指定されていません' }, { status: 400 });
+  if (!task_id && !workflow_run_id) {
+    return Response.json({ error: 'task_id または workflow_run_id が指定されていません' }, { status: 400 });
   }
 
   const encoder = new TextEncoder();
@@ -27,30 +27,41 @@ export async function POST(req: NextRequest) {
       try {
         send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
 
-        // Dify 人間の入力ノード再開 API
-        const resumeRes = await fetch(
-          `${process.env.DIFY_BASE_URL}/workflows/tasks/${task_id}/resume`,
-          {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${process.env.DIFY_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              inputs: {
-                selected_urls: Array.isArray(selected_urls)
-                  ? JSON.stringify(selected_urls)
-                  : selected_urls,
-              },
-              action: 'action_1', // 人間の入力ノードの「確認」ボタン
-              user: 'milize-admin',
-            }),
+        const resumeBody = JSON.stringify({
+          inputs: {
+            selected_urls: Array.isArray(selected_urls)
+              ? JSON.stringify(selected_urls)
+              : selected_urls,
           },
-        );
+          action: 'action_1',
+          user: 'milize-admin',
+        });
+        const resumeHeaders = {
+          Authorization: `Bearer ${process.env.DIFY_API_KEY}`,
+          'Content-Type': 'application/json',
+        };
 
-        if (!resumeRes.ok) {
-          const errText = await resumeRes.text();
-          send({ error: `Dify resume error ${resumeRes.status}: ${errText.slice(0, 200)}` });
+        // task_id と workflow_run_id の両方のエンドポイントを試す
+        const candidateIds = [task_id, workflow_run_id].filter(Boolean);
+        let resumeRes: Response | null = null;
+
+        for (const id of candidateIds) {
+          const r = await fetch(
+            `${process.env.DIFY_BASE_URL}/workflows/tasks/${id}/resume`,
+            { method: 'POST', headers: resumeHeaders, body: resumeBody },
+          );
+          if (r.ok) { resumeRes = r; break; }
+          // 404なら次を試す、それ以外はエラー
+          if (r.status !== 404) {
+            const errText = await r.text();
+            send({ error: `Dify resume error ${r.status}: ${errText.slice(0, 200)}` });
+            controller.close();
+            return;
+          }
+        }
+
+        if (!resumeRes) {
+          send({ error: `Dify resume 404: task_id="${task_id}" workflow_run_id="${workflow_run_id}" が見つかりません` });
           controller.close();
           return;
         }
