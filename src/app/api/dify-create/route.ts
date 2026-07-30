@@ -188,9 +188,9 @@ export async function POST(req: NextRequest) {
           }
         }
 
-        // フォールバック: workflow_interrupted イベントが来ずにストリームが終了した場合
-        // → task_id があり workflow_finished でもなければ人間の入力待ちとみなす
-        if (!workflowFinished && taskId && capturedUrls.length > 0) {
+        // フォールバック: workflow_finished が来ずにストリームが終了
+        // → 人間の入力ノードで停止したとみなす（URLがなくても送信）
+        if (!workflowFinished && taskId) {
           send({
             interrupted: true,
             task_id: taskId,

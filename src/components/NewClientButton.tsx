@@ -37,16 +37,23 @@ function isHeavilyEncoded(url: string): boolean {
   return encoded > 6;
 }
 
-/** URLリストを初期化（エンコードURL除外 + デフォルト目的を全ON） */
+/** URLリストを初期化（エンコードURL除外 + デフォルト目的を設定） */
 function initUrlItems(urls: string[]): { items: UrlItem[]; excluded: number } {
   const items: UrlItem[] = [];
   let excluded = 0;
   for (const url of urls) {
     if (isHeavilyEncoded(url)) { excluded++; continue; }
+    // Wikipedia: ロゴ・CIのみデフォルトON
+    const isWiki = url.includes('wikipedia.org');
     items.push({
       url,
       checked: true,
-      purposes: { color: true, ci: true, font: true, form: true },
+      purposes: {
+        color: !isWiki,
+        ci:    true,
+        font:  !isWiki,
+        form:  !isWiki,
+      },
     });
   }
   return { items, excluded };
