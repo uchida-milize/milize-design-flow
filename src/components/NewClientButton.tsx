@@ -15,7 +15,12 @@ const MODAL_KEYFRAMES = `
 }
 `;
 
-type Step = 'form' | 'generating';
+type Step = 'form' | 'urls' | 'generating';
+
+interface UrlItem {
+  url: string;
+  checked: boolean;
+}
 
 export function NewClientButton() {
   const [open, setOpen] = useState(false);
@@ -23,6 +28,8 @@ export function NewClientButton() {
   const [form, setForm] = useState({ company_name: '', client_slug: '' });
   const [genProgress, setGenProgress] = useState(0);
   const [genStatus, setGenStatus] = useState('');
+  const [taskId, setTaskId] = useState('');
+  const [urlItems, setUrlItems] = useState<UrlItem[]>([]);
   const router = useRouter();
 
   function reset() {
@@ -30,8 +37,11 @@ export function NewClientButton() {
     setStep('form');
     setGenProgress(0);
     setGenStatus('');
+    setTaskId('');
+    setUrlItems([]);
   }
 
+  /** 第1フェーズ: /api/dify-create を実行し、interrupted で止まったら urls ステップへ */
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStep('generating');
@@ -42,72 +52,129 @@ export function NewClientButton() {
     const hidden: string[] = JSON.parse(localStorage.getItem('hidden_clients') || '[]');
     localStorage.setItem('hidden_clients', JSON.stringify(hidden.filter(s => s !== slug)));
 
-    let difyDone = false;
     try {
       const res = await fetch('/api/dify-create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          company_name: form.company_name,
-          client_slug: slug,
-        }),
+        body: JSON.stringify({ company_name: form.company_name, client_slug: slug }),
       });
 
-      const reader = res.body!.getReader();
-      const decoder = new TextDecoder();
-      let lineBuffer = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        lineBuffer += decoder.decode(value, { stream: true });
-        const lines = lineBuffer.split('\n');
-        lineBuffer = lines.pop() ?? '';
-
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          try {
-            const data = JSON.parse(line.slice(6));
-            if (data.progress !== undefined) setGenProgress(data.progress);
-            if (data.status) setGenStatus(data.status);
-            if (data.dify_done) { difyDone = true; }
-            if (data.deploy_done) {
-              setGenProgress(100);
-              setGenStatus('デプロイ完了！');
-              await new Promise(r => setTimeout(r, 1200));
-              setOpen(false); reset(); router.refresh();
-              return;
-            }
-            if (data.error) { setGenStatus('エラー: ' + data.error); }
-          } catch { /* skip */ }
+      const interrupted = await consumeSseStream(res, (data) => {
+        if (data.interrupted) {
+          // 人間の入力ノードで停止 → URL選択ステップへ
+          setTaskId(typeof data.task_id === 'string' ? data.task_id : '');
+          const urls: string[] = Array.isArray(data.urls) ? (data.urls as string[]) : [];
+          setUrlItems(urls.map(u => ({ url: String(u), checked: true })));
+          setGenProgress(typeof data.progress === 'number' ? data.progress : 50);
+          setStep('urls');
+          return true; // signal: interrupted
         }
-      }
+        return false;
+      });
 
-      if (difyDone) {
-        let deployed = false;
-        let attempts = 0;
-        while (!deployed && attempts < 60) {
-          setGenStatus('Vercelデプロイ待機中...');
-          setGenProgress(prev => Math.min(95, prev + 0.7));
-          await new Promise(r => setTimeout(r, 5000));
-          attempts++;
-          try {
-            const r = await fetch('/' + slug + '?_t=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
-            if (r.ok) { deployed = true; }
-          } catch { /* ignore */ }
-        }
-        if (deployed) {
-          setGenProgress(100);
-          setGenStatus('デプロイ完了！');
-          await new Promise(r => setTimeout(r, 1200));
-          setOpen(false); reset(); router.refresh();
-        } else {
-          setGenStatus('デプロイタイムアウト');
-        }
+      if (!interrupted) {
+        // 中断なし = ワークフローが1フェーズで完走（deploy_done は consumeSseStream 内で処理済み）
+        // do nothing, handled inside
       }
     } catch {
       setGenStatus('接続エラーが発生しました');
     }
+  }
+
+  /** 第2フェーズ: 選択URLを /api/dify-resume に送る */
+  async function handleResume() {
+    setStep('generating');
+    setGenStatus('URLを送信してワークフローを再開中...');
+
+    const selected = urlItems.filter(u => u.checked).map(u => u.url);
+
+    try {
+      const res = await fetch('/api/dify-resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          task_id: taskId,
+          selected_urls: selected,
+          company_name: form.company_name,
+          client_slug: form.client_slug,
+        }),
+      });
+
+      await consumeSseStream(res, () => false);
+    } catch {
+      setGenStatus('接続エラーが発生しました');
+    }
+  }
+
+  /**
+   * SSEストリームを消費し、各イベントを処理する。
+   * onData が true を返したら「中断」として読み取りを止める。
+   * deploy_done を受け取ったら modal を閉じてリフレッシュ。
+   * Returns true if stream was interrupted by human_input.
+   */
+  async function consumeSseStream(
+    res: Response,
+    onData: (data: Record<string, unknown>) => boolean,
+  ): Promise<boolean> {
+    const reader = res.body!.getReader();
+    const decoder = new TextDecoder();
+    let lineBuffer = '';
+    let difyDone = false;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      lineBuffer += decoder.decode(value, { stream: true });
+      const lines = lineBuffer.split('\n');
+      lineBuffer = lines.pop() ?? '';
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        try {
+          const data: Record<string, unknown> = JSON.parse(line.slice(6));
+          if (typeof data.progress === 'number') setGenProgress(data.progress);
+          if (typeof data.status === 'string') setGenStatus(data.status);
+          if (data.dify_done) difyDone = true;
+          if (data.deploy_done) {
+            setGenProgress(100);
+            setGenStatus('デプロイ完了！');
+            await new Promise(r => setTimeout(r, 1200));
+            setOpen(false); reset(); router.refresh();
+            return false;
+          }
+          if (data.error) setGenStatus('エラー: ' + data.error);
+
+          if (onData(data)) return true; // interrupted
+        } catch { /* skip */ }
+      }
+    }
+
+    // dify_done: Vercel のポーリングを自前で実施
+    if (difyDone) {
+      const slug = form.client_slug;
+      let deployed = false;
+      let attempts = 0;
+      while (!deployed && attempts < 60) {
+        setGenStatus('Vercelデプロイ待機中...');
+        setGenProgress(prev => Math.min(95, prev + 0.7));
+        await new Promise(r => setTimeout(r, 5000));
+        attempts++;
+        try {
+          const r = await fetch('/' + slug + '?_t=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+          if (r.ok) deployed = true;
+        } catch { /* ignore */ }
+      }
+      if (deployed) {
+        setGenProgress(100);
+        setGenStatus('デプロイ完了！');
+        await new Promise(r => setTimeout(r, 1200));
+        setOpen(false); reset(); router.refresh();
+      } else {
+        setGenStatus('デプロイタイムアウト');
+      }
+    }
+
+    return false;
   }
 
   const inputStyle: React.CSSProperties = {
@@ -156,7 +223,7 @@ export function NewClientButton() {
         >
           <div style={{
             background: '#fff', borderRadius: '20px', padding: '40px',
-            width: '480px', maxWidth: '92vw',
+            width: step === 'urls' ? '560px' : '480px', maxWidth: '92vw',
             boxShadow: ['0 0 0 1px rgba(255,255,255,0.5)', '0 0 30px 14px rgba(255,255,255,0.55)', '0 32px 80px rgba(0,0,0,0.22)'].join(', '),
             animation: 'ncb-modal-in 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards',
           }}>
@@ -197,10 +264,79 @@ export function NewClientButton() {
               </>
             )}
 
-            {/* Step 2: 生成中 */}
-            {step === 'generating' && (
+            {/* Step 2: URL選択 */}
+            {step === 'urls' && (
               <>
                 <StepIndicator current={2} />
+                <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'参照URLを選択'}</h2>
+                <p style={{ fontSize: '14px', color: '#777', marginBottom: '20px' }}>
+                  {'Difyがリサーチ対象として収集したURLです。使用するURLを選んで生成を続行してください。'}
+                </p>
+
+                {urlItems.length === 0 ? (
+                  <div style={{ color: '#9ca3af', fontSize: '14px', marginBottom: '24px', padding: '16px', background: '#f9fafb', borderRadius: '8px' }}>
+                    URLが取得できませんでした。このまま続行するとDifyのデフォルトURLを使用します。
+                  </div>
+                ) : (
+                  <div style={{ marginBottom: '20px' }}>
+                    {/* 一括操作 */}
+                    <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+                      <button onClick={() => setUrlItems(u => u.map(i => ({ ...i, checked: true })))}
+                        style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 0', textDecoration: 'underline' }}>
+                        すべて選択
+                      </button>
+                      <span style={{ color: '#d1d5db' }}>|</span>
+                      <button onClick={() => setUrlItems(u => u.map(i => ({ ...i, checked: false })))}
+                        style={{ fontSize: '12px', color: '#6b7280', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 0', textDecoration: 'underline' }}>
+                        すべて解除
+                      </button>
+                      <span style={{ marginLeft: 'auto', fontSize: '12px', color: '#9ca3af' }}>
+                        {urlItems.filter(u => u.checked).length} / {urlItems.length} 件選択
+                      </span>
+                    </div>
+
+                    {/* URLリスト */}
+                    <div style={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
+                      {urlItems.map((item, idx) => (
+                        <label key={item.url} style={{
+                          display: 'flex', alignItems: 'flex-start', gap: '10px',
+                          padding: '10px 14px', cursor: 'pointer',
+                          borderBottom: idx < urlItems.length - 1 ? '1px solid #f3f4f6' : 'none',
+                          background: item.checked ? '#f0f9ff' : '#fff',
+                          transition: 'background 0.1s',
+                        }}>
+                          <input
+                            type="checkbox"
+                            checked={item.checked}
+                            onChange={e => setUrlItems(u => u.map((i, j) => j === idx ? { ...i, checked: e.target.checked } : i))}
+                            style={{ marginTop: '2px', flexShrink: 0 }}
+                          />
+                          <span style={{ fontSize: '12px', color: '#374151', wordBreak: 'break-all', lineHeight: 1.5 }}>
+                            {item.url}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <button type="button" onClick={() => { setOpen(false); reset(); }}
+                    style={{ flex: 1, padding: '12px', border: '1.5px solid #e0e0e0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '14px', fontWeight: 500, color: '#555' }}>
+                    {'キャンセル'}
+                  </button>
+                  <button type="button" onClick={handleResume}
+                    style={{ flex: 2, padding: '12px', border: 'none', borderRadius: '8px', background: '#111', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: '#fff' }}>
+                    {'この内容で生成 →'}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* Step 3: 生成中 */}
+            {step === 'generating' && (
+              <>
+                <StepIndicator current={3} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'ポータルを生成中...'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
                   {form.company_name}{'のポータルをDifyが構築しています'}
@@ -220,8 +356,8 @@ export function NewClientButton() {
   );
 }
 
-function StepIndicator({ current }: { current: 1 | 2 }) {
-  const steps = ['入力', '生成'];
+function StepIndicator({ current }: { current: 1 | 2 | 3 }) {
+  const steps = ['入力', 'URL選択', '生成'];
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '20px' }}>
       {steps.map((label, i) => {
@@ -240,7 +376,7 @@ function StepIndicator({ current }: { current: 1 | 2 }) {
               {done ? '✓' : num}
             </div>
             <span style={{ fontSize: '12px', fontWeight: active ? 600 : 400, color: active ? '#111' : '#9ca3af' }}>{label}</span>
-            {i < steps.length - 1 && <div style={{ width: '24px', height: '1px', background: '#e5e7eb', margin: '0 2px' }} />}
+            {i < steps.length - 1 && <div style={{ width: '20px', height: '1px', background: '#e5e7eb', margin: '0 2px' }} />}
           </div>
         );
       })}

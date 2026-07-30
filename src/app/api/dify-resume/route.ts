@@ -11,7 +11,11 @@ import {
 export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
-  const { company_name, client_slug, selected_urls } = await req.json();
+  const { task_id, selected_urls, company_name, client_slug } = await req.json();
+
+  if (!task_id) {
+    return Response.json({ error: 'task_id が指定されていません' }, { status: 400 });
+  }
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -21,42 +25,43 @@ export async function POST(req: NextRequest) {
       };
 
       try {
-        send({ progress: 10, status: 'Difyに接続中...' });
+        send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
 
-        const difyRes = await fetch(`${process.env.DIFY_BASE_URL}/workflows/run`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${process.env.DIFY_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            inputs: {
-              company_name,
-              client_slug,
-              ...(selected_urls ? { selected_urls } : {}),
+        // Dify 人間の入力ノード再開 API
+        const resumeRes = await fetch(
+          `${process.env.DIFY_BASE_URL}/workflows/tasks/${task_id}/resume`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${process.env.DIFY_API_KEY}`,
+              'Content-Type': 'application/json',
             },
-            response_mode: 'streaming',
-            user: 'milize-admin',
-          }),
-        });
+            body: JSON.stringify({
+              inputs: {
+                selected_urls: Array.isArray(selected_urls)
+                  ? JSON.stringify(selected_urls)
+                  : selected_urls,
+              },
+              action: 'action_1', // 人間の入力ノードの「確認」ボタン
+              user: 'milize-admin',
+            }),
+          },
+        );
 
-        if (!difyRes.ok) {
-          const errText = await difyRes.text();
-          send({ error: `Dify API error ${difyRes.status}: ${errText.slice(0, 200)}` });
+        if (!resumeRes.ok) {
+          const errText = await resumeRes.text();
+          send({ error: `Dify resume error ${resumeRes.status}: ${errText.slice(0, 200)}` });
           controller.close();
           return;
         }
 
-        send({ progress: 20, status: 'ワークフロー実行中...' });
+        send({ progress: 60, status: 'ワークフロー再開。残りのノードを実行中...' });
 
-        const reader = difyRes.body!.getReader();
+        const reader = resumeRes.body!.getReader();
         const decoder = new TextDecoder();
-        let progressVal = 20;
+        let progressVal = 60;
         const nodeOutputs: Record<string, string> = {};
         let lineBuffer = '';
-        let taskId = '';
-        let capturedUrls: string[] = [];
-        let workflowFinished = false;
 
         while (true) {
           const { done, value } = await reader.read();
@@ -71,52 +76,22 @@ export async function POST(req: NextRequest) {
             try {
               const data = JSON.parse(line.slice(6));
 
-              // task_id を最初のイベントから取得
-              if (data.task_id && !taskId) taskId = data.task_id;
-
-              if (data.event === 'workflow_started') {
-                progressVal = 20;
-                send({ progress: progressVal, status: 'ワークフロー開始...' });
-              } else if (data.event === 'node_started') {
-                progressVal = Math.min(progressVal + 8, 55);
+              if (data.event === 'node_started') {
+                progressVal = Math.min(progressVal + 5, 75);
                 const title = data.data?.title || '';
                 send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
               } else if (data.event === 'node_finished') {
-                progressVal = Math.min(progressVal + 2, 58);
+                progressVal = Math.min(progressVal + 2, 78);
                 const nodeTitle = data.data?.title || `ノード_${Object.keys(nodeOutputs).length + 1}`;
                 const outputs = data.data?.outputs;
                 if (outputs && typeof outputs === 'object') {
-                  // URL一覧をキャプチャ（配列 or 改行区切り文字列どちらも対応）
-                  const urlList = outputs.url_list ?? outputs.urls ?? outputs.result;
-                  if (Array.isArray(urlList) && urlList.length > 0) {
-                    capturedUrls = urlList.map((u: unknown) => typeof u === 'string' ? u : String(u));
-                  } else if (typeof urlList === 'string' && urlList.includes('http')) {
-                    capturedUrls = urlList.split('\n').map(u => u.trim()).filter(u => u.startsWith('http'));
-                  }
                   const nodeText = Object.entries(outputs)
                     .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
                     .join('\n\n---\n\n');
                   if (nodeText.trim()) nodeOutputs[nodeTitle] = nodeText;
                 }
                 send({ progress: progressVal });
-              } else if (
-                data.event === 'workflow_interrupted' ||
-                data.event === 'human_input_required' ||
-                data.event === 'node_interrupted'
-              ) {
-                // 人間の入力ノードで一時停止 → フロントへ返す
-                workflowFinished = true; // これ以上処理不要
-                send({
-                  interrupted: true,
-                  task_id: taskId || data.task_id || '',
-                  urls: capturedUrls,
-                  progress: progressVal,
-                  status: 'URL確認待ち',
-                });
-                controller.close();
-                return;
               } else if (data.event === 'workflow_finished') {
-                workflowFinished = true;
                 const githubToken = process.env.GITHUB_TOKEN ?? '';
                 const vercelToken = process.env.VERCEL_TOKEN ?? '';
                 const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
@@ -130,10 +105,10 @@ export async function POST(req: NextRequest) {
                 }
 
                 const nodeKeys = Object.keys(nodeOutputs);
-                send({ progress: 60, status: `GitHubにコミット中... (ノード出力: ${nodeKeys.length}件)` });
+                send({ progress: 80, status: `GitHubにコミット中... (ノード出力: ${nodeKeys.length}件)` });
                 const commitStart = Date.now();
 
-                send({ progress: 61, status: 'Dify生成ファイルを読み込み中...' });
+                send({ progress: 81, status: 'Dify生成ファイルを読み込み中...' });
                 const designColors = parseDesignMdColors(nodeOutputs);
                 const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken, designColors);
 
@@ -153,7 +128,7 @@ export async function POST(req: NextRequest) {
                   },
                 ];
 
-                send({ progress: 62, status: `${filesToCommit.length}ファイルをバッチコミット中...` });
+                send({ progress: 82, status: `${filesToCommit.length}ファイルをバッチコミット中...` });
 
                 let committed = false;
                 let lastError = '';
@@ -161,43 +136,31 @@ export async function POST(req: NextRequest) {
                   if (attempt > 0) await new Promise(r => setTimeout(r, 3000 * attempt));
                   const result = await batchGitCommit(
                     filesToCommit,
-                    `feat: generate portal for ${client_slug} [${nodeKeys.length} nodes]`,
+                    `feat: generate portal for ${client_slug} [resumed, ${nodeKeys.length} nodes]`,
                     githubToken,
                   );
                   if (result.ok) { committed = true; break; }
                   lastError = result.error ?? 'unknown';
-                  send({ progress: 62 + attempt, status: `コミット再試行 (${attempt + 1}/3): ${lastError.slice(0, 60)}` });
+                  send({ progress: 82 + attempt, status: `コミット再試行 (${attempt + 1}/3): ${lastError.slice(0, 60)}` });
                 }
 
                 if (!committed) {
-                  send({ progress: 63, status: `バッチコミット失敗: ${lastError.slice(0, 80)}` });
+                  send({ progress: 83, status: `バッチコミット失敗: ${lastError.slice(0, 80)}` });
                 } else {
-                  send({ progress: 64, status: 'バッチコミット完了！' });
+                  send({ progress: 84, status: 'バッチコミット完了！' });
                 }
 
                 await removeFromExcludedDirs(client_slug, githubToken);
-                send({ progress: 65, status: 'GitHubコミット完了。Vercelデプロイ起動待ち...' });
+                send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ起動待ち...' });
 
                 if (vercelToken && vercelProjectId) {
                   await waitForVercelDeploy(commitStart, vercelToken, vercelProjectId, send);
                 } else {
-                  send({ progress: 65, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
+                  send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
                 }
               }
             } catch { /* JSON parse error — skip */ }
           }
-        }
-
-        // フォールバック: workflow_interrupted イベントが来ずにストリームが終了した場合
-        // → task_id があり workflow_finished でもなければ人間の入力待ちとみなす
-        if (!workflowFinished && taskId && capturedUrls.length > 0) {
-          send({
-            interrupted: true,
-            task_id: taskId,
-            urls: capturedUrls,
-            progress: progressVal,
-            status: 'URL確認待ち',
-          });
         }
       } catch (err) {
         send({ error: String(err) });
