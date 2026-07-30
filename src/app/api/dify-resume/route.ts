@@ -36,30 +36,40 @@ export async function POST(req: NextRequest) {
           return;
         }
 
-        // 正しいエンドポイント: POST /form/human_input/{form_token}
-        const submitRes = await fetch(
+        // フォーム送信エンドポイント候補を試す
+        // DIFY_BASE_URL が https://host/v1 の場合、/form/... は /v1 の外にある可能性がある
+        const baseWithoutVersion = baseUrl.replace(/\/v\d+\/?$/, '');
+        const formEndpointCandidates = [
           `${baseUrl}/form/human_input/${form_token}`,
-          {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              inputs: {
-                selected_urls: Array.isArray(selected_urls)
-                  ? selected_urls.join('\n')
-                  : selected_urls,
-              },
-              action: 'action_1',
-              user: 'milize-admin',
-            }),
-          },
-        );
+          `${baseWithoutVersion}/form/human_input/${form_token}`,
+        ];
 
-        if (!submitRes.ok) {
-          const errText = await submitRes.text();
-          send({ error: `Human Input submit error ${submitRes.status}: ${errText.slice(0, 300)}` });
+        const formBody = JSON.stringify({
+          inputs: {
+            selected_urls: Array.isArray(selected_urls)
+              ? selected_urls.join('\n')
+              : selected_urls,
+          },
+          action: 'action_1',
+          user: 'milize-admin',
+        });
+        const formHeaders = {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        };
+
+        let submitRes: Response | null = null;
+        let lastSubmitError = '';
+        for (const url of formEndpointCandidates) {
+          const r = await fetch(url, { method: 'POST', headers: formHeaders, body: formBody });
+          if (r.ok) { submitRes = r; break; }
+          const txt = await r.text();
+          lastSubmitError = `${url} → ${r.status}: ${txt.slice(0, 150)}`;
+          if (r.status !== 404) break; // 404以外はリトライしない
+        }
+
+        if (!submitRes) {
+          send({ error: `Human Input submit failed: ${lastSubmitError}` });
           controller.close();
           return;
         }
