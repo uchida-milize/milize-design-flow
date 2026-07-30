@@ -5,7 +5,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 const clientName = 'ゼネラル・エレクトリック';
 const basePath = '/ge';
 
-const TOKEN_RE = /(https?:\/\/[^\s"',\]}\)]+)|(#[0-9a-fA-F]{6,8}|#[0-9a-fA-F]{3}(?![0-9a-fA-F])|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+)?\s*\))/g;
+const TOKEN_RE = /(https?:\/\/[^\s"',\]\}\)]+)|(#[0-9a-fA-F]{6,8}|#[0-9a-fA-F]{3}(?![0-9a-fA-F])|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+)?\s*\))/g;
 
 function renderRich(text: string) {
   const parts: React.ReactNode[] = [];
