@@ -381,12 +381,18 @@ const githubToken = process.env.GITHUB_TOKEN ?? '';
 const vercelToken = process.env.VERCEL_TOKEN ?? '';
 const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
 
-send({ progress: 60, status: 'GitHub\u306b\u30b3\u30df\u30c3\u30c8\u4e2d...' });
+const nodeKeys = Object.keys(nodeOutputs);
+send({ progress: 60, status: `GitHub\u306b\u30b3\u30df\u30c3\u30c8\u4e2d... (\u30ce\u30fc\u30c9\u51fa\u529b: ${nodeKeys.length}\u4ef6: ${nodeKeys.join(', ').slice(0, 80)})` });
 const commitStart = Date.now();
 await fixTemplateRefs(client_slug, company_name, githubToken);
 await ensureLayoutTsx(client_slug, githubToken);
 await normalizeColorVars(client_slug, githubToken);
-await saveResourcesJson(client_slug, nodeOutputs, githubToken);
+try {
+  await saveResourcesJson(client_slug, nodeOutputs, githubToken);
+  send({ progress: 62, status: `resources.json\u4fdd\u5b58\u5b8c\u4e86 (${nodeKeys.length}\u30ce\u30fc\u30c9)` });
+} catch (e) {
+  send({ progress: 62, status: `resources.json\u4fdd\u5b58\u30a8\u30e9\u30fc: ${String(e).slice(0, 100)}` });
+}
 await ensureResourcesPage(client_slug, company_name, githubToken);
 await removeFromExcludedDirs(client_slug, githubToken);
 send({ progress: 65, status: 'GitHub\u30b3\u30df\u30c3\u30c8\u5b8c\u4e86\u3002Vercel\u30c7\u30d7\u30ed\u30a4\u8d77\u52d5\u5f85\u3061...' });
