@@ -185,13 +185,15 @@
 }
 /* 標準カラー変数（自動注入） */
 :root {
-  --primary-color: #004A99;
+  --primary-color: #0071BC;
   --secondary-color: #000000;
-  --accent-color: #0071BC;
-  --text-color: #333333;
-  --bg-color: #f5f7fa;
-  --brand-color-1: #004A99;
+  --accent-color: #FFFFFF;
+  --text-color: #111827;
+  --bg-color: #FFFFFF;
+  --brand-color-1: #0071BC;
   --brand-ratio-1: 60;
-  --brand-color-2: #0071BC;
-  --brand-ratio-2: 40;
+  --brand-color-2: #000000;
+  --brand-ratio-2: 25;
+  --brand-color-3: #FFFFFF;
+  --brand-ratio-3: 15;
 }
