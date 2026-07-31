@@ -1,32 +1,49 @@
-2026-07-31T05:41:27.666Z  START form_token="AlW3bRqzaPz61UAt47ZdWb" workflow_run_id="140024b5-d8b0-4d3c-8cb9-16c95879585c" task_id="1076bf4e-86c2-4917-9aab-fb78a46ab030" client="ge"
-2026-07-31T05:41:27.669Z  新規ワークフロー開始: company="ゼネラル・エレクトリック" slug="ge" urls=9件
-2026-07-31T05:41:28.178Z  新規ワークフロー開始 OK: 200
-2026-07-31T05:41:28.466Z  workflow_started run_id=95289189-7b65-4ba5-9df2-b933cbc9f9ce
-2026-07-31T05:41:28.467Z  node_started: "ユーザー入力" data={"id":"47b3e788-79e3-4f4a-a41e-ed7b4caefd98","node_id":"1784275193187","node_type":"start","title":"ユーザー入力","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:41:28.486Z  node_finished: "ユーザー入力" (319 chars)
-2026-07-31T05:41:28.531Z  node_started: "GoogleSearch" data={"id":"4c631dee-2e2d-4c32-852e-4e21f7dcf430","node_id":"1784276775772","node_type":"tool","title":"GoogleSearch","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{"icon":"https://console.dify.milize.com/console/api/workspaces/current/plugin
-2026-07-31T05:41:28.617Z  node_finished: "GoogleSearch" (6159 chars)
-2026-07-31T05:41:28.618Z  node_started: "コード実行" data={"id":"5d997639-20d2-4270-bd98-817d77f57fc3","node_id":"1784279168631","node_type":"code","title":"コード実行","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:41:28.730Z  node_finished: "コード実行" (2124 chars)
-2026-07-31T05:41:28.731Z  node_started: "LLM" data={"id":"a6b90d5d-2a79-4654-9e81-6ed5d0e9625b","node_id":"1784275830150","node_type":"llm","title":"LLM","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:41:33.866Z  node_finished: "LLM" (1150 chars)
-2026-07-31T05:41:33.886Z  node_started: "CSVをURL配列に変換" data={"id":"a6bfa288-0ff2-42ac-9199-2b80b8b9c95e","node_id":"1784796752994","node_type":"code","title":"CSVをURL配列に変換","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476493,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:41:33.951Z  node_finished: "CSVをURL配列に変換" (457 chars)
-2026-07-31T05:41:33.969Z  node_started: "URL選択" data={"id":"00728f94-639e-40f7-980b-3c7483d93910","node_id":"1785410021139","node_type":"human-input","title":"URL選択","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476493,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:41:34.042Z  human_input_required: {"form_id":"019fb6b1-3236-74a7-88b8-28796d063180","node_id":"1785410021139","node_title":"URL選択","form_content":"\n{{#$output.selected_urls#}}\n","inputs":[{"type":"paragraph","output_variable_name":"selected_urls","default":{"type":"variable","selector":["1784796752994","urls"],"value":""}}],"actions":[{"id":"action_1","title":"確認","button_style":"default"}],"display_in_ui":true,"form_token":"I4Gd6MnRBG90RFb6VhKNpE","resolved_default_values":{"selected_urls":"https://ja.wikipedia.org/wiki/%E3%82%BC%E3%83%8D%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%A8%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF\nhttps://www.ge.com/\nhttps://www.ge.com/about-us\nhttps://www.ge.com/brand\nhttps://www.ge.com/news\nhttps://www.ge.com/news/press-releases\nhttps://www.ge.com/investor-relations\nhttps://jobs.ge
-2026-07-31T05:41:34.042Z  freshToken="I4Gd6MnRBG90RFb6VhKNpE" (元 form_token="AlW3bRqzaPz61UAt47ZdWb")
-2026-07-31T05:41:34.501Z  SUBMIT[flat/v1] https://api.dify.milize.com/v1/form/human_input/I4Gd6MnRBG90RFb6VhKNpE → 404 body=<!doctype html>
+2026-07-31T05:47:00.025Z  START form_token="MpCpsus96QoaZfS9Nlyu21" workflow_run_id="5d272f1b-780e-48d9-a86b-9410b40a5071" task_id="2320f201-461b-4a42-921d-c793eb6a0d83" client="ge"
+2026-07-31T05:47:00.028Z  新規ワークフロー開始: company="ゼネラル・エレクトリック" slug="ge" urls=8件
+2026-07-31T05:47:00.579Z  新規ワークフロー開始 OK: 200
+2026-07-31T05:47:00.861Z  workflow_started run_id=514861fd-0648-48e2-982a-4b33250d0e3e
+2026-07-31T05:47:00.862Z  node_started: "ユーザー入力" data={"id":"0e88c7ed-ea84-4e1c-96b2-e07247b9d8d6","node_id":"1784275193187","node_type":"start","title":"ユーザー入力","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476820,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:47:00.877Z  node_finished: "ユーザー入力" (319 chars)
+2026-07-31T05:47:00.924Z  node_started: "GoogleSearch" data={"id":"244695c0-586e-42b0-8543-a3d9fd834579","node_id":"1784276775772","node_type":"tool","title":"GoogleSearch","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476820,"extras":{"icon":"https://console.dify.milize.com/console/api/workspaces/current/plugin
+2026-07-31T05:47:01.015Z  node_finished: "GoogleSearch" (6159 chars)
+2026-07-31T05:47:01.016Z  node_started: "コード実行" data={"id":"4433765e-d34c-4875-8f8d-ab32bb7558e0","node_id":"1784279168631","node_type":"code","title":"コード実行","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476820,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:47:01.124Z  node_finished: "コード実行" (2124 chars)
+2026-07-31T05:47:01.125Z  node_started: "LLM" data={"id":"a34c400b-9c3f-4d1c-870e-0c63c97128d2","node_id":"1784275830150","node_type":"llm","title":"LLM","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476821,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:47:05.589Z  node_finished: "LLM" (1089 chars)
+2026-07-31T05:47:05.609Z  node_started: "CSVをURL配列に変換" data={"id":"6e7fb8b7-93fd-4250-a2a2-7e6be99a1a2d","node_id":"1784796752994","node_type":"code","title":"CSVをURL配列に変換","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476825,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:47:05.667Z  node_finished: "CSVをURL配列に変換" (450 chars)
+2026-07-31T05:47:05.684Z  node_started: "URL選択" data={"id":"982d8d40-e27b-4cbc-8073-eb88233e814f","node_id":"1785410021139","node_type":"human-input","title":"URL選択","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476825,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:47:05.749Z  human_input_required: {"form_id":"019fb6b6-41f6-76a4-b089-ab8cc1c08095","node_id":"1785410021139","node_title":"URL選択","form_content":"\n{{#$output.selected_urls#}}\n","inputs":[{"type":"paragraph","output_variable_name":"selected_urls","default":{"type":"variable","selector":["1784796752994","urls"],"value":""}}],"actions":[{"id":"action_1","title":"確認","button_style":"default"}],"display_in_ui":true,"form_token":"oFa1CVu5Gkbu4pdu73K6Oo","resolved_default_values":{"selected_urls":"https://www.ge.com/\nhttps://www.ge.com/about-us\nhttps://www.ge.com/company\nhttps://www.ge.com/news\nhttps://www.ge.com/investor-rela
+2026-07-31T05:47:05.749Z  freshToken="oFa1CVu5Gkbu4pdu73K6Oo"
+2026-07-31T05:47:06.217Z  SUBMIT[flat/v1] → 404 body=<!doctype html>
 <html lang=en>
 <title>404 Not Found</title>
 <h1>Not Found</h1>
-<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
-2026-07-31T05:41:34.961Z  SUBMIT[flat/noV1] https://api.dify.milize.com/form/human_input/I4Gd6MnRBG90RFb6VhKNpE → 200 body=
-2026-07-31T05:41:34.961Z  workflow_paused: {"workflow_run_id":"95289189-7b65-4ba5-9df2-b933cbc9f9ce","paused_nodes":["1785410021139"],"outputs":{},"reasons":[{"TYPE":"human_input_required","form_id":"019fb6b1-3236-74a7-88b8-28796d063180","form_content":"\n{{#$output.selected_urls#}}\n","inputs":[{"type":"paragraph","output_variable_name":"selected_urls","default":{"type":"variable","selector":["1784796752994","urls"],"value":""}}],"actions":[{"id":"action_1","title":"確認","button_style":"default"}],"display_in_ui":true,"node_id":"1785410021139","node_title":"URL選択","resolved_default_values":{"selected_urls":"https://ja.wikipedia.org/wiki/%E3%82%BC%E3%83%8D%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%A8%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF\nhttps://www.ge.com/\nhttps://www.ge.com/about-us\nhttps://www.ge.com/brand\nhttps://www.
-2026-07-31T05:41:34.962Z  freshToken="" (元 form_token="AlW3bRqzaPz61UAt47ZdWb")
-2026-07-31T05:41:35.119Z  SUBMIT[flat/v1] https://api.dify.milize.com/v1/form/human_input/AlW3bRqzaPz61UAt47ZdWb → 404 body=<!doctype html>
-<html lang=en>
-<title>404 Not Found</title>
-<h1>Not Found</h1>
-<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
-2026-07-31T05:41:35.273Z  SUBMIT[flat/noV1] https://api.dify.milize.com/form/human_input/AlW3bRqzaPz61UAt47ZdWb → 200 body=
-2026-07-31T05:41:35.273Z  SSE完了: nodeOutputs=5件
+<p>The requested URL 
+2026-07-31T05:47:06.665Z  SUBMIT[flat/noV1] → 200 body=
+2026-07-31T05:47:06.666Z  workflow_paused: run_id=514861fd-0648-48e2-982a-4b33250d0e3e
+2026-07-31T05:47:06.752Z  SSE完了: nodeOutputs=5件 formSubmitted=true runId=514861fd-0648-48e2-982a-4b33250d0e3e
+2026-07-31T05:47:06.752Z  ポーリング開始: run_id=514861fd-0648-48e2-982a-4b33250d0e3e
+2026-07-31T05:47:17.319Z  POLL[1] status="paused" finishedAt=null
+2026-07-31T05:47:27.873Z  POLL[2] status="paused" finishedAt=null
+2026-07-31T05:47:38.438Z  POLL[3] status="paused" finishedAt=null
+2026-07-31T05:47:48.996Z  POLL[4] status="paused" finishedAt=null
+2026-07-31T05:47:59.542Z  POLL[5] status="paused" finishedAt=null
+2026-07-31T05:48:10.128Z  POLL[6] status="paused" finishedAt=null
+2026-07-31T05:48:20.692Z  POLL[7] status="paused" finishedAt=null
+2026-07-31T05:48:31.246Z  POLL[8] status="paused" finishedAt=null
+2026-07-31T05:48:41.796Z  POLL[9] status="paused" finishedAt=null
+2026-07-31T05:48:52.355Z  POLL[10] status="paused" finishedAt=null
+2026-07-31T05:49:02.905Z  POLL[11] status="paused" finishedAt=null
+2026-07-31T05:49:13.495Z  POLL[12] status="paused" finishedAt=null
+2026-07-31T05:49:24.064Z  POLL[13] status="paused" finishedAt=null
+2026-07-31T05:49:34.619Z  POLL[14] status="paused" finishedAt=null
+2026-07-31T05:49:45.214Z  POLL[15] status="paused" finishedAt=null
+2026-07-31T05:49:55.767Z  POLL[16] status="paused" finishedAt=null
+2026-07-31T05:50:06.325Z  POLL[17] status="paused" finishedAt=null
+2026-07-31T05:50:16.893Z  POLL[18] status="paused" finishedAt=null
+2026-07-31T05:50:27.452Z  POLL[19] status="paused" finishedAt=null
+2026-07-31T05:50:37.997Z  POLL[20] status="paused" finishedAt=null
+2026-07-31T05:50:48.558Z  POLL[21] status="paused" finishedAt=null
+2026-07-31T05:50:59.118Z  POLL[22] status="paused" finishedAt=null
+2026-07-31T05:51:09.688Z  POLL[23] status="paused" finishedAt=null
