@@ -72,6 +72,9 @@ export async function POST(req: NextRequest) {
           const lines = lineBuffer.split(/\r?\n/);
           lineBuffer = lines.pop() ?? '';
 
+          // Human Input 検知済み & interrupt未受信 → ループを抜ける
+          if (humanInputDetected && !workflowFinished) break;
+
           for (const line of lines) {
             if (!line.startsWith('data: ')) continue;
             try {
@@ -97,13 +100,10 @@ export async function POST(req: NextRequest) {
                 const title = data.data?.title || '';
                 send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
 
-                // Human Input ノード（URL選択）を検知 → 5秒後に強制キャンセル
+                // Human Input ノード（URL選択）を検知 → 即座に中断フラグを立てる
                 if (!humanInputDetected && (title === 'URL選択' || title.includes('選択') || title.includes('human') || title.includes('Human'))) {
                   humanInputDetected = true;
-                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" → 5秒待機中...` });
-                  humanInputTimer = setTimeout(() => {
-                    reader.cancel().catch(() => {});
-                  }, 5000);
+                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" urls=${capturedUrls.length}件` });
                 }
               } else if (data.event === 'node_finished') {
                 progressVal = Math.min(progressVal + 2, 58);
