@@ -60,9 +60,7 @@ export async function POST(req: NextRequest) {
         let capturedUrls: string[] = [];
         let workflowFinished = false;
         let humanInputDetected = false;
-
-        // Human Input ノード検知後に強制キャンセルするタイマー
-        let humanInputTimer: ReturnType<typeof setTimeout> | null = null;
+        let humanInputExtraReads = 0; // 検知後に追加で読むチャンク数
 
         while (true) {
           const { done, value } = await reader.read().catch(() => ({ done: true, value: undefined }));
@@ -71,9 +69,6 @@ export async function POST(req: NextRequest) {
           lineBuffer += decoder.decode(value as Uint8Array, { stream: true });
           const lines = lineBuffer.split(/\r?\n/);
           lineBuffer = lines.pop() ?? '';
-
-          // Human Input 検知済み & interrupt未受信 → ループを抜ける
-          if (humanInputDetected && !workflowFinished) break;
 
           for (const line of lines) {
             if (!line.startsWith('data: ')) continue;
@@ -100,10 +95,14 @@ export async function POST(req: NextRequest) {
                 const title = data.data?.title || '';
                 send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
 
-                // Human Input ノード（URL選択）を検知 → 即座に中断フラグを立てる
+                // Human Input ノード（URL選択）を検知
                 if (!humanInputDetected && (title === 'URL選択' || title.includes('選択') || title.includes('human') || title.includes('Human'))) {
                   humanInputDetected = true;
-                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" urls=${capturedUrls.length}件` });
+                  // node_started のデータからも form_token を探す
+                  const ftFromStart = data.data?.form_token || data.data?.inputs?.form_token
+                    || data.data?.extras?.form_token || data.data?.node_data?.form_token || '';
+                  if (ftFromStart) formToken = ftFromStart;
+                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" ft="${ftFromStart}" urls=${capturedUrls.length}件` });
                 }
               } else if (data.event === 'node_finished') {
                 progressVal = Math.min(progressVal + 2, 58);
@@ -253,6 +252,36 @@ export async function POST(req: NextRequest) {
                 }
               }
             } catch { /* JSON parse error — skip */ }
+          }
+
+          // Human Input 検知済みで workflow が終わっていない場合:
+          // Promise.race で 5 秒タイムアウトしながらもう1チャンク読んで form_token を探す
+          if (humanInputDetected && !workflowFinished) {
+            if (humanInputExtraReads++ === 0) {
+              const timedOut = new Promise<{ done: true; value: undefined }>(r =>
+                setTimeout(() => r({ done: true, value: undefined }), 5000),
+              );
+              const { done: nd, value: nv } = await Promise.race([
+                reader.read().catch(() => ({ done: true as const, value: undefined })),
+                timedOut,
+              ]);
+              if (!nd && nv) {
+                lineBuffer += decoder.decode(nv as Uint8Array, { stream: true });
+                const extraLines = lineBuffer.split(/\r?\n/);
+                lineBuffer = extraLines.pop() ?? '';
+                for (const el of extraLines) {
+                  if (!el.startsWith('data: ')) continue;
+                  try {
+                    const d = JSON.parse(el.slice(6));
+                    const ft = d.data?.form_token || d.form_token || d.data?.node_data?.form_token
+                      || d.data?.extras?.form?.token || d.data?.inputs?.form_token || '';
+                    if (ft) { formToken = ft; send({ status: `INT-EXTRA ft="${ft}"` }); }
+                    else send({ status: `EXTRA-EVT:${d.event ?? 'unknown'} (no ft)` });
+                  } catch { /* skip */ }
+                }
+              }
+            }
+            break; // 最大1回の追加読み取りで終了
           }
         }
 
