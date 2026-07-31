@@ -110,11 +110,16 @@ export async function POST(req: NextRequest) {
                 data.event === 'human_input_required' ||
                 data.event === 'node_interrupted'
               ) {
-                // form_token を取得（human_input_required イベントに含まれる）
+                // デバッグ: interruptイベントの生データを送信
+                send({ progress: progressVal, status: `INTERRUPT event=${data.event} raw=${JSON.stringify(data).slice(0, 300)}` });
+
+                // form_token を取得（様々なパスを試す）
                 const ft =
                   data.data?.form_token ||
                   data.form_token ||
                   data.data?.node_data?.form_token ||
+                  data.data?.extras?.form?.token ||
+                  data.data?.inputs?.form_token ||
                   '';
                 if (ft) formToken = ft;
 
