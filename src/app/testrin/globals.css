@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+.testrin-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.testrin-portal {
+  --portal-bg: #f5f7fa;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-caption: #9ca3af;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  background: var(--portal-bg);
+  color: var(--text-main);
+}
+
+.testrin-portal h1,
+.testrin-portal h2,
+.testrin-portal h3,
+.testrin-portal strong,
+.testrin-portal b {
+  font-weight: 700;
+}
+
+.testrin-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.testrin-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.testrin-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.testrin-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.testrin-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+.testrin-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.testrin-portal .swatch-top {
+  height: 80px;
+  border-radius: 8px 8px 0 0;
+}
+
+.testrin-portal .swatch-bottom {
+  padding: 8px 4px;
+}
+
+.testrin-portal .swatch-hex {
+  font-family: monospace;
+  font-size: 13px;
+  color: #111827;
+}
+
+.testrin-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.testrin-portal .tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.testrin-portal .tab-btn {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.testrin-portal .tab-btn.active {
+  color: #ffffff;
+}
+
+.testrin-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.testrin-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.testrin-portal .component-render {
+  padding: 24px;
+}
+
+.testrin-portal .component-code {
+  background-color: #efefef;
+  color: #333333;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.testrin-portal .nav-card {
+  display: block;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  text-decoration: none;
+  color: #111827;
+  transition: box-shadow 0.2s ease;
+}
+
+.testrin-portal .nav-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.testrin-portal .logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+
+.testrin-portal .logo-grid img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+.testrin-portal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.testrin-portal table th,
+.testrin-portal table td {
+  text-align: left;
+  padding: 10px 12px;
+}
