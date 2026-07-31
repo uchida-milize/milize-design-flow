@@ -11,10 +11,14 @@ import {
 export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
-  const { task_id, form_token, selected_urls, company_name, client_slug } = await req.json();
+  const { task_id, workflow_run_id, form_token, selected_urls, company_name, client_slug } =
+    await req.json();
 
-  if (!form_token && !task_id) {
-    return Response.json({ error: 'form_token が指定されていません' }, { status: 400 });
+  if (!form_token) {
+    return Response.json(
+      { error: 'form_token が指定されていません。DifyのHuman Inputノードを "WebApp" 配信に設定してください。' },
+      { status: 400 },
+    );
   }
 
   const encoder = new TextEncoder();
@@ -27,22 +31,10 @@ export async function POST(req: NextRequest) {
       try {
         const apiKey = process.env.DIFY_API_KEY ?? '';
         const baseUrl = process.env.DIFY_BASE_URL ?? '';
-
-        send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
-
-        if (!form_token) {
-          send({ error: 'form_token が見つかりません。DifyのHuman Inputノードを "WebApp" 配信に設定してください。' });
-          controller.close();
-          return;
-        }
-
-        // フォーム送信エンドポイント候補を試す
-        // DIFY_BASE_URL が https://host/v1 の場合、/form/... は /v1 の外にある可能性がある
         const baseWithoutVersion = baseUrl.replace(/\/v\d+\/?$/, '');
-        const formEndpointCandidates = [
-          `${baseUrl}/form/human_input/${form_token}`,
-          `${baseWithoutVersion}/form/human_input/${form_token}`,
-        ];
+
+        // ─── Step 1: Human Input フォームを送信 ───────────────────────────
+        send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
 
         const formBody = JSON.stringify({
           inputs: {
@@ -58,158 +50,146 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         };
 
-        // デバッグ: form_tokenの最初の8文字とベースURLを表示
-        send({ progress: 59, status: `DEBUG: form_token="${form_token.slice(0, 8)}..." baseUrl="${baseUrl}"` });
+        // /v1/form/... と /form/... の両方を試す
+        const formCandidates = [
+          `${baseUrl}/form/human_input/${form_token}`,
+          `${baseWithoutVersion}/form/human_input/${form_token}`,
+        ];
 
-        let submitRes: Response | null = null;
-        let lastSubmitError = '';
-        for (const url of formEndpointCandidates) {
-          send({ progress: 59, status: `試行中: POST ${url.slice(-60)}` });
+        let submitOk = false;
+        let lastSubmitErr = '';
+        for (const url of formCandidates) {
           const r = await fetch(url, { method: 'POST', headers: formHeaders, body: formBody });
-          if (r.ok) { submitRes = r; break; }
+          if (r.ok) { submitOk = true; break; }
           const txt = await r.text();
-          lastSubmitError = `[${url}] → ${r.status}: ${txt.slice(0, 100)}`;
-          if (r.status !== 404) break; // 404以外はリトライしない
+          lastSubmitErr += `\n[${url}] → ${r.status}: ${txt.slice(0, 80)}`;
+          if (r.status !== 404) break;
         }
 
-        if (!submitRes) {
-          send({ error: `Human Input submit failed:\n${lastSubmitError}` });
+        if (!submitOk) {
+          send({ error: `Human Input submit failed:${lastSubmitErr}` });
           controller.close();
           return;
         }
 
-        send({ progress: 60, status: 'ワークフロー再開。残りのノードを実行中...' });
+        send({ progress: 60, status: 'フォーム送信完了。ワークフロー再開を待機中...' });
 
-        // ワークフローの残りのSSEイベントを受信: GET /workflow/{task_id}/events
-        const eventsRes = await fetch(
-          `${baseUrl}/workflow/${task_id}/events?user=milize-admin`,
-          {
-            headers: { Authorization: `Bearer ${apiKey}` },
-          },
-        );
+        // ─── Step 2: ワークフロー完了をポーリングで待つ ──────────────────
+        // GET /workflows/runs/{workflow_run_id} でステータスを確認
+        const runId = workflow_run_id && workflow_run_id !== 'undefined' ? workflow_run_id : task_id;
+        const pollEndpoints = [
+          `${baseUrl}/workflows/runs/${runId}`,
+          `${baseUrl}/workflow/run-detail?workflow_run_id=${runId}`,
+        ].filter(Boolean);
 
-        if (!eventsRes.ok) {
-          const errText = await eventsRes.text();
-          // eventsエンドポイントが使えない場合はworkflow_finishedを待たず処理続行
-          send({ progress: 62, status: `イベント取得エラー(${eventsRes.status})。GitHubコミットを試みます...` });
-          // fall through to GitHub commit with empty nodeOutputs
-        }
+        const pollHeaders = { Authorization: `Bearer ${apiKey}` };
+        const POLL_INTERVAL_MS = 8000;
+        const MAX_WAIT_MS = 240_000; // 4分
+        const pollStart = Date.now();
 
-        const decoder = new TextDecoder();
+        let runOutputs: Record<string, unknown> = {};
+        let pollSucceeded = false;
         let progressVal = 60;
-        const nodeOutputs: Record<string, string> = {};
-        let workflowFinished = false;
 
-        // eventsエンドポイントが使える場合はSSEを読み取る
-        if (eventsRes.ok && eventsRes.body) {
-          const reader = eventsRes.body.getReader();
-          let lineBuffer = '';
+        while (Date.now() - pollStart < MAX_WAIT_MS) {
+          await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
+          progressVal = Math.min(progressVal + 2, 76);
+          send({ progress: progressVal, status: `ワークフロー完了待機中... (${Math.round((Date.now() - pollStart) / 1000)}s)` });
 
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            lineBuffer += decoder.decode(value, { stream: true });
-            const lines = lineBuffer.split('\n');
-            lineBuffer = lines.pop() ?? '';
-
-            for (const line of lines) {
-              if (!line.startsWith('data: ')) continue;
-              try {
-                const data = JSON.parse(line.slice(6));
-
-                if (data.event === 'node_started') {
-                  progressVal = Math.min(progressVal + 5, 75);
-                  const title = data.data?.title || '';
-                  send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
-                } else if (data.event === 'node_finished') {
-                  progressVal = Math.min(progressVal + 2, 78);
-                  const nodeTitle = data.data?.title || `ノード_${Object.keys(nodeOutputs).length + 1}`;
-                  const outputs = data.data?.outputs;
-                  if (outputs && typeof outputs === 'object') {
-                    const nodeText = Object.entries(outputs)
-                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                      .join('\n\n---\n\n');
-                    if (nodeText.trim()) nodeOutputs[nodeTitle] = nodeText;
-                  }
-                  send({ progress: progressVal });
-                } else if (data.event === 'workflow_finished') {
-                  workflowFinished = true;
-                  const wfOutputs = data.data?.outputs;
-                  if (wfOutputs && typeof wfOutputs === 'object') {
-                    const wfText = Object.entries(wfOutputs)
-                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                      .join('\n\n---\n\n');
-                    if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
-                  }
-                  break;
-                }
-              } catch { /* JSON parse error — skip */ }
-            }
-            if (workflowFinished) break;
+          for (const ep of pollEndpoints) {
+            try {
+              const r = await fetch(ep, { headers: pollHeaders });
+              if (!r.ok) continue;
+              const json = await r.json();
+              const status: string = json.status ?? json.data?.status ?? '';
+              if (status === 'succeeded') {
+                runOutputs = json.outputs ?? json.data?.outputs ?? {};
+                pollSucceeded = true;
+                break;
+              } else if (status === 'failed' || status === 'stopped') {
+                send({ error: `ワークフロー失敗: status=${status}` });
+                controller.close();
+                return;
+              }
+              // running / waiting → continue polling
+            } catch { /* network error — retry */ }
           }
+          if (pollSucceeded) break;
         }
 
-        // GitHub コミット + Vercel デプロイ
-        {
-          const githubToken = process.env.GITHUB_TOKEN ?? '';
-          const vercelToken = process.env.VERCEL_TOKEN ?? '';
-          const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
-          const nodeKeys = Object.keys(nodeOutputs);
+        // ─── Step 3: ノード出力を組み立てる ──────────────────────────────
+        const nodeOutputs: Record<string, string> = {};
+        if (Object.keys(runOutputs).length > 0) {
+          const wfText = Object.entries(runOutputs)
+            .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+            .join('\n\n---\n\n');
+          if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
+        }
 
-          send({ progress: 80, status: `GitHubにコミット中... (ノード出力: ${nodeKeys.length}件)` });
-          const commitStart = Date.now();
+        if (!pollSucceeded) {
+          send({ progress: 77, status: `タイムアウト: ワークフロー未完了。取得済み出力 ${Object.keys(nodeOutputs).length}件で続行します。` });
+        } else {
+          send({ progress: 78, status: `ワークフロー完了！出力 ${Object.keys(nodeOutputs).length}件を取得しました。` });
+        }
 
-          send({ progress: 81, status: 'Dify生成ファイルを読み込み中...' });
-          const designColors = parseDesignMdColors(nodeOutputs);
-          const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken, designColors);
+        // ─── Step 4: GitHub コミット + Vercel デプロイ ────────────────────
+        const githubToken = process.env.GITHUB_TOKEN ?? '';
+        const vercelToken = process.env.VERCEL_TOKEN ?? '';
+        const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
+        const nodeKeys = Object.keys(nodeOutputs);
 
-          const filesToCommit: Array<{ path: string; content: string }> = [
-            ...difyFiles,
-            {
-              path: `src/app/${client_slug}/layout.tsx`,
-              content: `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
-            },
-            {
-              path: `src/app/${client_slug}/resources.json`,
-              content: JSON.stringify(nodeOutputs, null, 2),
-            },
-            {
-              path: `src/app/${client_slug}/resources/page.tsx`,
-              content: buildResourcesPage(client_slug, company_name),
-            },
-          ];
+        send({ progress: 80, status: `GitHubにコミット中... (ノード出力: ${nodeKeys.length}件)` });
+        const commitStart = Date.now();
 
-          send({ progress: 82, status: `${filesToCommit.length}ファイルをバッチコミット中...` });
+        send({ progress: 81, status: 'Dify生成ファイルを読み込み中...' });
+        const designColors = parseDesignMdColors(nodeOutputs);
+        const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken, designColors);
 
-          let committed = false;
-          let lastError = '';
-          for (let attempt = 0; attempt < 3; attempt++) {
-            if (attempt > 0) await new Promise(r => setTimeout(r, 3000 * attempt));
-            const result = await batchGitCommit(
-              filesToCommit,
-              `feat: generate portal for ${client_slug} [resumed, ${nodeKeys.length} nodes]`,
-              githubToken,
-            );
-            if (result.ok) { committed = true; break; }
-            lastError = result.error ?? 'unknown';
-            send({ progress: 82 + attempt, status: `コミット再試行 (${attempt + 1}/3): ${lastError.slice(0, 60)}` });
-          }
+        const filesToCommit: Array<{ path: string; content: string }> = [
+          ...difyFiles,
+          {
+            path: `src/app/${client_slug}/layout.tsx`,
+            content: `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
+          },
+          {
+            path: `src/app/${client_slug}/resources.json`,
+            content: JSON.stringify(nodeOutputs, null, 2),
+          },
+          {
+            path: `src/app/${client_slug}/resources/page.tsx`,
+            content: buildResourcesPage(client_slug, company_name),
+          },
+        ];
 
-          if (!committed) {
-            send({ progress: 83, status: `バッチコミット失敗: ${lastError.slice(0, 80)}` });
-          } else {
-            send({ progress: 84, status: 'バッチコミット完了！' });
-          }
+        send({ progress: 82, status: `${filesToCommit.length}ファイルをバッチコミット中...` });
 
-          await removeFromExcludedDirs(client_slug, githubToken);
-          send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ起動待ち...' });
+        let committed = false;
+        let lastError = '';
+        for (let attempt = 0; attempt < 3; attempt++) {
+          if (attempt > 0) await new Promise(r => setTimeout(r, 3000 * attempt));
+          const result = await batchGitCommit(
+            filesToCommit,
+            `feat: generate portal for ${client_slug} [resumed, ${nodeKeys.length} nodes]`,
+            githubToken,
+          );
+          if (result.ok) { committed = true; break; }
+          lastError = result.error ?? 'unknown';
+          send({ progress: 82 + attempt, status: `コミット再試行 (${attempt + 1}/3): ${lastError.slice(0, 60)}` });
+        }
 
-          if (vercelToken && vercelProjectId) {
-            await waitForVercelDeploy(commitStart, vercelToken, vercelProjectId, send);
-          } else {
-            send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
-          }
+        if (!committed) {
+          send({ progress: 83, status: `バッチコミット失敗: ${lastError.slice(0, 80)}` });
+        } else {
+          send({ progress: 84, status: 'バッチコミット完了！' });
+        }
+
+        await removeFromExcludedDirs(client_slug, githubToken);
+        send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ起動待ち...' });
+
+        if (vercelToken && vercelProjectId) {
+          await waitForVercelDeploy(commitStart, vercelToken, vercelProjectId, send);
+        } else {
+          send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
         }
       } catch (err) {
         send({ error: String(err) });
