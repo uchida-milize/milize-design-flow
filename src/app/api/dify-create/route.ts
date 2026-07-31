@@ -60,7 +60,8 @@ export async function POST(req: NextRequest) {
         let capturedUrls: string[] = [];
         let workflowFinished = false;
         let humanInputDetected = false;
-        let humanInputExtraReads = 0; // 検知後に追加で読むチャンク数
+        let humanInputExtraReads = 0; // 検知後に追加で読むチャンク数（未使用変数として残す）
+        let humanInputTimer: ReturnType<typeof setTimeout> | null = null; // interrupt イベント用タイマー（宣言）
 
         while (true) {
           const { done, value } = await reader.read().catch(() => ({ done: true, value: undefined }));
@@ -98,11 +99,15 @@ export async function POST(req: NextRequest) {
                 // Human Input ノード（URL選択）を検知
                 if (!humanInputDetected && (title === 'URL選択' || title.includes('選択') || title.includes('human') || title.includes('Human'))) {
                   humanInputDetected = true;
-                  // node_started のデータからも form_token を探す
+                  // node_started のデータからも form_token を探す（全パスを試す）
                   const ftFromStart = data.data?.form_token || data.data?.inputs?.form_token
-                    || data.data?.extras?.form_token || data.data?.node_data?.form_token || '';
+                    || data.data?.extras?.form?.token || data.data?.extras?.form_token
+                    || data.data?.node_data?.form_token || data.data?.node_run_data?.form_token
+                    || data.data?.metadata?.form_token || '';
                   if (ftFromStart) formToken = ftFromStart;
-                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" ft="${ftFromStart}" urls=${capturedUrls.length}件` });
+                  // デバッグ: node_started の全フィールドをダンプ
+                  const rawDataDump = JSON.stringify(data.data ?? {}).slice(0, 600);
+                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" ft="${ftFromStart}" urls=${capturedUrls.length}件 data=${rawDataDump}` });
                 }
               } else if (data.event === 'node_finished') {
                 progressVal = Math.min(progressVal + 2, 58);
@@ -255,33 +260,116 @@ export async function POST(req: NextRequest) {
           }
 
           // Human Input 検知済みで workflow が終わっていない場合:
-          // Promise.race で 5 秒タイムアウトしながらもう1チャンク読んで form_token を探す
+          // 最大10チャンク × 10秒タイムアウトで form_token を探す（shared pending read 方式）
           if (humanInputDetected && !workflowFinished) {
-            if (humanInputExtraReads++ === 0) {
-              const timedOut = new Promise<{ done: true; value: undefined }>(r =>
-                setTimeout(() => r({ done: true, value: undefined }), 5000),
-              );
-              const { done: nd, value: nv } = await Promise.race([
-                reader.read().catch(() => ({ done: true as const, value: undefined })),
-                timedOut,
+            humanInputExtraReads; // suppress unused warning
+            // pendingRead を共有することで、タイムアウト時にチャンクをスキップしない
+            let pendingRead: Promise<{ done: boolean; value: Uint8Array | undefined }> =
+              reader.read().catch(() => ({ done: true as const, value: undefined }));
+
+            for (let extraIdx = 0; extraIdx < 10 && !formToken; extraIdx++) {
+              let resolved = false;
+              let resolvedDone = false;
+              let resolvedValue: Uint8Array | undefined;
+
+              await Promise.race([
+                pendingRead.then(r => {
+                  resolved = true;
+                  resolvedDone = r.done;
+                  resolvedValue = r.value;
+                }),
+                new Promise<void>(res => setTimeout(res, 10_000)),
               ]);
-              if (!nd && nv) {
-                lineBuffer += decoder.decode(nv as Uint8Array, { stream: true });
-                const extraLines = lineBuffer.split(/\r?\n/);
-                lineBuffer = extraLines.pop() ?? '';
-                for (const el of extraLines) {
-                  if (!el.startsWith('data: ')) continue;
-                  try {
-                    const d = JSON.parse(el.slice(6));
-                    const ft = d.data?.form_token || d.form_token || d.data?.node_data?.form_token
-                      || d.data?.extras?.form?.token || d.data?.inputs?.form_token || '';
-                    if (ft) { formToken = ft; send({ status: `INT-EXTRA ft="${ft}"` }); }
-                    else send({ status: `EXTRA-EVT:${d.event ?? 'unknown'} (no ft)` });
-                  } catch { /* skip */ }
+
+              if (!resolved) {
+                // タイムアウト: pendingRead はまだ pending → 次回も同じ promise を race
+                send({ progress: progressVal, status: `EXTRA-TIMEOUT[${extraIdx + 1}/10]` });
+                continue;
+              }
+
+              if (resolvedDone || !resolvedValue) {
+                send({ progress: progressVal, status: `EXTRA-STREAM-DONE[${extraIdx + 1}]` });
+                break; // ストリーム終了
+              }
+
+              // チャンクを処理して form_token を探す
+              lineBuffer += decoder.decode(resolvedValue, { stream: true });
+              const eLines = lineBuffer.split(/\r?\n/);
+              lineBuffer = eLines.pop() ?? '';
+              for (const el of eLines) {
+                if (!el.startsWith('data: ')) continue;
+                try {
+                  const d = JSON.parse(el.slice(6));
+                  const ft = d.data?.form_token || d.form_token || d.data?.node_data?.form_token
+                    || d.data?.extras?.form?.token || d.data?.inputs?.form_token
+                    || d.data?.node_run_data?.form_token || d.data?.metadata?.form_token || '';
+                  if (ft) {
+                    formToken = ft;
+                    send({ progress: progressVal, status: `INT-EXTRA[${extraIdx + 1}] ft="${ft}"` });
+                  } else {
+                    send({ progress: progressVal, status: `EXTRA-EVT[${extraIdx + 1}]:${d.event ?? 'unknown'} (no ft)` });
+                  }
+                } catch { /* skip */ }
+              }
+
+              if (!formToken) {
+                // 次のチャンクを読み始める（found → break はループ条件で対応）
+                pendingRead = reader.read().catch(() => ({ done: true as const, value: undefined }));
+              }
+            }
+
+            // SSE で form_token が取れない場合: Dify logs API からフォールバック取得
+            if (!formToken && workflowRunId) {
+              send({ progress: progressVal, status: 'SSEでft未取得。Dify logs APIを試行中...' });
+              for (let attempt = 0; attempt < 3 && !formToken; attempt++) {
+                await new Promise(r => setTimeout(r, 3000));
+                try {
+                  const logsRes = await fetch(`${process.env.DIFY_BASE_URL}/workflows/logs?page=1&limit=20`, {
+                    headers: { Authorization: `Bearer ${process.env.DIFY_API_KEY}` },
+                  });
+                  if (!logsRes.ok) continue;
+                  const logsJson = await logsRes.json() as { data?: Record<string, unknown>[] };
+                  const logs = logsJson.data ?? [];
+                  send({ progress: progressVal, status: `logs API[${attempt + 1}]: ${logs.length}件取得` });
+
+                  const matchLog = logs.find((l) =>
+                    l['workflow_run_id'] === workflowRunId ||
+                    l['id'] === workflowRunId ||
+                    (l['workflow_run'] as Record<string, unknown> | undefined)?.['id'] === workflowRunId,
+                  ) ?? logs[0];
+
+                  if (matchLog) {
+                    const logKeys = Object.keys(matchLog).join(',');
+                    const wfRun = (matchLog['workflow_run'] ?? {}) as Record<string, unknown>;
+                    const ftFromLog = matchLog['form_token'] || wfRun['form_token'];
+                    send({ progress: progressVal, status: `matchLog keys=[${logKeys}] wfRun.status=${wfRun['status']} ft="${ftFromLog ?? ''}"` });
+                    if (ftFromLog) { formToken = String(ftFromLog); break; }
+
+                    // 個別ログ詳細 API を試す
+                    const logId = String(matchLog['id'] ?? '');
+                    if (logId) {
+                      const detailRes = await fetch(`${process.env.DIFY_BASE_URL}/workflows/logs/${logId}`, {
+                        headers: { Authorization: `Bearer ${process.env.DIFY_API_KEY}` },
+                      });
+                      const detailText = await detailRes.text();
+                      send({ progress: progressVal, status: `logs/${logId}: ${detailRes.status} ${detailText.slice(0, 300)}` });
+                      if (detailRes.ok) {
+                        try {
+                          const detail = JSON.parse(detailText) as Record<string, unknown>;
+                          const wfRunD = (detail['workflow_run'] ?? {}) as Record<string, unknown>;
+                          const ftDetail = detail['form_token'] || wfRunD['form_token'] || '';
+                          if (ftDetail) { formToken = String(ftDetail); }
+                        } catch { /* ignore */ }
+                      }
+                    }
+                  }
+                } catch (e) {
+                  send({ progress: progressVal, status: `logs API error: ${String(e).slice(0, 80)}` });
                 }
               }
             }
-            break; // 最大1回の追加読み取りで終了
+
+            break; // メインループを終了（FALLBACK へ）
           }
         }
 
