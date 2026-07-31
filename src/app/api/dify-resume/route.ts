@@ -35,22 +35,21 @@ export async function POST(req: NextRequest) {
 
         send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
 
+        const urlsStr = Array.isArray(selected_urls)
+          ? selected_urls.join('\n')
+          : String(selected_urls ?? '');
+
+        // action なし・シンプルな inputs のみで試す
         const formBody = JSON.stringify({
-          inputs: {
-            selected_urls: Array.isArray(selected_urls)
-              ? selected_urls.join('\n')
-              : selected_urls,
-          },
-          action: 'action_1',
+          inputs: { selected_urls: urlsStr },
           user: 'milize-admin',
-          response_mode: 'streaming',
         });
         const authHeaders = {
           Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         };
 
-        // フォーム送信（SSEストリームとして読む）
+        // フォーム送信
         let resumeRes: Response | null = null;
         let lastErr = '';
         for (const url of [
@@ -58,9 +57,16 @@ export async function POST(req: NextRequest) {
           `${baseWithoutVersion}/form/human_input/${form_token}`,
         ]) {
           const r = await fetch(url, { method: 'POST', headers: authHeaders, body: formBody });
-          if (r.ok) { resumeRes = r; break; }
-          const txt = await r.text();
-          lastErr += `\n${url} → ${r.status}: ${txt.slice(0, 80)}`;
+          const bodyText = await r.text();
+          if (r.ok) {
+            send({ progress: 59, status: `フォーム送信OK: ${bodyText.slice(0, 120)}` });
+            // bodyTextをストリームとして再構成
+            resumeRes = new Response(bodyText, {
+              headers: { 'content-type': r.headers.get('content-type') ?? '' },
+            });
+            break;
+          }
+          lastErr += `\n${url} → ${r.status}: ${bodyText.slice(0, 80)}`;
           if (r.status !== 404) break;
         }
 
@@ -156,14 +162,16 @@ export async function POST(req: NextRequest) {
               const status = String(wfRun.status ?? '');
               const finishedAt = wfRun.finished_at;
 
-              if (pollCount === 1) {
-                send({ progress: 63, status: `ポーリング: status="${status}" finished_at=${finishedAt}` });
-              } else if (pollCount % 3 === 0) {
-                send({ progress: Math.min(60 + pollCount, 75), status: `処理中... (${Math.round((Date.now() - pollStart) / 1000)}s) status="${status}"` });
-              }
+              // 毎回ステータスを表示（デバッグ中）
+              send({ progress: Math.min(62 + pollCount, 75), status: `[${pollCount}] status="${status}" finished_at=${finishedAt}` });
 
               if (status === 'succeeded' || (finishedAt && String(finishedAt) !== 'null' && String(finishedAt) !== '0')) {
-                // ポーリング成功 — details からノード出力を取得
+                // 完了時: wfRunの全キーをダンプして出力パスを確認
+                const wfKeys2 = Object.keys(wfRun).join(',');
+                const itemKeys2 = Object.keys(item).join(',');
+                send({ progress: 76, status: `完了! wfRun keys=[${wfKeys2}] item keys=[${itemKeys2}]` });
+
+                // details からノード出力を取得
                 type NodeDetail = Record<string, unknown>;
                 const details = Array.isArray(item.details) ? (item.details as NodeDetail[]) : [];
                 for (const node of details) {
@@ -175,6 +183,14 @@ export async function POST(req: NextRequest) {
                       .join('\n\n---\n\n');
                     if (text.trim()) nodeOutputs[title] = text;
                   }
+                }
+                // item直下のoutputsも試す
+                if (Object.keys(nodeOutputs).length === 0 && item.outputs && typeof item.outputs === 'object') {
+                  const rawOut = item.outputs as Record<string, unknown>;
+                  const text = Object.entries(rawOut)
+                    .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                    .join('\n\n---\n\n');
+                  if (text.trim()) nodeOutputs['workflow_outputs'] = text;
                 }
                 send({ progress: 78, status: `ポーリング完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
                 break;
