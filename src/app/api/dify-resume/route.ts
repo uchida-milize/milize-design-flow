@@ -113,6 +113,7 @@ export async function POST(req: NextRequest) {
 
             // ステータスは workflow_run.status にある（確認済み）
             const status = String(wfRun.status ?? '');
+            const finishedAt = wfRun.finished_at;
 
             // outputs は logs に含まれないため details（ノード実行配列）から取得
             type NodeDetail = Record<string, unknown>;
@@ -129,7 +130,13 @@ export async function POST(req: NextRequest) {
             }
             const hasOutputs = Object.keys(detailOutputs).length > 0;
 
-            if (status === 'succeeded' || hasOutputs) {
+            // デバッグ（1回のみ）
+            if (pollCount === 1) {
+              const d0keys = details.length > 0 ? Object.keys(details[0]).join(',') : 'empty';
+              send({ progress: 63, status: `status="${status}" finished_at=${finishedAt} details=${details.length} d0keys=[${d0keys}] hasOut=${hasOutputs}` });
+            }
+
+            if (status === 'succeeded' || (finishedAt && String(finishedAt) !== 'null' && String(finishedAt) !== '0') || hasOutputs) {
               runOutputs = detailOutputs;
               pollSucceeded = true;
               break;
