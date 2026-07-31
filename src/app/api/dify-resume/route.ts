@@ -85,12 +85,13 @@ export async function POST(req: NextRequest) {
         let runOutputs: Record<string, unknown> = {};
         let pollSucceeded = false;
         let pollCount = 0;
+        let shownDebug = false;
 
         while (Date.now() - pollStart < MAX_WAIT_MS) {
           await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
           pollCount++;
 
-          // 進捗は3回に1回だけ更新（UIを軽くする）
+          // 進捗は3回に1回だけ更新
           if (pollCount % 3 === 0) {
             const elapsed = Math.round((Date.now() - pollStart) / 1000);
             send({ progress: Math.min(60 + pollCount, 75), status: `処理中... (${elapsed}s)` });
@@ -109,11 +110,29 @@ export async function POST(req: NextRequest) {
               x.workflow_run?.id === runId,
             ) ?? (json.data[0] as LogItem);
 
-            const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
-            const status = String(item.status ?? wfRun.status ?? '');
-            const outputs = (item.outputs ?? wfRun.outputs ?? {}) as Record<string, unknown>;
+            // 最初の1回だけ構造を確認（デバッグ）
+            if (!shownDebug) {
+              shownDebug = true;
+              const keys = Object.keys(item).join(',');
+              const wfKeys = item.workflow_run ? Object.keys(item.workflow_run).join(',') : 'none';
+              send({ progress: 62, status: `LOG keys: [${keys}] wf_keys: [${wfKeys}]` });
+            }
 
-            if (status === 'succeeded' || String(wfRun.status) === 'succeeded') {
+            const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
+
+            // あらゆるパスでステータスを探す
+            const status = String(
+              item.status ?? item.run_status ?? item.workflow_run_status ??
+              wfRun.status ?? wfRun.run_status ?? '',
+            );
+            const outputs = (
+              item.outputs ?? item.workflow_outputs ??
+              wfRun.outputs ?? wfRun.workflow_outputs ?? {}
+            ) as Record<string, unknown>;
+
+            const hasOutputs = Object.keys(outputs).length > 0;
+
+            if (status === 'succeeded' || String(wfRun.status) === 'succeeded' || hasOutputs) {
               runOutputs = outputs;
               pollSucceeded = true;
               break;
