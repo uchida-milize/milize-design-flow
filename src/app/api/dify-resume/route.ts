@@ -105,13 +105,8 @@ export async function POST(req: NextRequest) {
               } else if (data.event === 'node_started') {
                 progressVal = Math.min(progressVal + 5, 75);
                 const title = (data.data?.title as string) || '';
-                log(`node_started: "${title}"`);
-                if (title === 'URL選択' || title.includes('Human') || title.includes('human')) {
-                  log(`⚠️ Human Inputノード再検知（新規ラン）: "${title}" → selected_urls がバイパスされなかった可能性`);
-                  send({ progress: progressVal, status: `⚠️ Human Inputノード再検知: "${title}"` });
-                } else {
-                  send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
-                }
+                log(`node_started: "${title}" data=${JSON.stringify(data.data ?? {}).slice(0, 300)}`);
+                send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
               } else if (data.event === 'node_finished') {
                 progressVal = Math.min(progressVal + 2, 78);
                 const nodeTitle = (data.data?.title as string) || `ノード_${Object.keys(nodeOutputs).length + 1}`;
@@ -126,6 +121,41 @@ export async function POST(req: NextRequest) {
                   }
                 }
                 send({ progress: progressVal });
+              } else if (data.event === 'human_input_required' || data.event === 'workflow_paused') {
+                // Human Input 一時停止イベント → フレッシュな form_token を即座に取得して送信
+                const rawDataDump = JSON.stringify(data.data ?? data ?? {}).slice(0, 800);
+                log(`${data.event}: ${rawDataDump}`);
+                send({ progress: 68, status: `${data.event} 検知 → form_token 取得して即送信` });
+
+                // form_token を様々なパスから探す
+                const d = data.data ?? data;
+                const freshToken: string =
+                  d.form_token || d.token || d.human_input?.form_token || d.human_input?.token ||
+                  d.inputs?.form_token || d.extras?.form_token || d.extras?.form?.token || '';
+
+                log(`freshToken="${freshToken}" (元 form_token="${form_token}")`);
+
+                const tokenToUse = freshToken || form_token;
+                if (tokenToUse) {
+                  // フラット形式で送信（inputs ラッパーなし）
+                  const flatBody = JSON.stringify({ selected_urls: urlsStr });
+                  const baseWithoutV1 = baseUrl.replace(/\/v\d+\/?$/, '');
+                  for (const [label, submitUrl, body] of [
+                    ['flat/v1',     `${baseUrl}/form/human_input/${tokenToUse}`,     flatBody],
+                    ['flat/noV1',   `${baseWithoutV1}/form/human_input/${tokenToUse}`, flatBody],
+                    ['nested/noV1', `${baseWithoutV1}/form/human_input/${tokenToUse}`,
+                      JSON.stringify({ inputs: { selected_urls: urlsStr }, user: 'milize-admin' })],
+                  ] as [string, string, string][]) {
+                    const sr = await fetch(submitUrl, {
+                      method: 'POST',
+                      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+                      body,
+                    });
+                    const srText = await sr.text();
+                    log(`SUBMIT[${label}] ${submitUrl} → ${sr.status} body=${srText.slice(0, 200)}`);
+                    if (sr.ok) break;
+                  }
+                }
               } else if (data.event === 'workflow_finished') {
                 workflowDone = true;
                 const wfOutputs = data.data?.outputs as Record<string, unknown> | undefined;
@@ -137,7 +167,7 @@ export async function POST(req: NextRequest) {
                 }
                 log(`workflow_finished: nodeOutputs=${Object.keys(nodeOutputs).length}件`);
               } else {
-                log(`EVT:${data.event}`);
+                log(`EVT:${data.event} data=${JSON.stringify(data.data ?? {}).slice(0, 200)}`);
               }
             } catch { /* JSON parse error */ }
           }
