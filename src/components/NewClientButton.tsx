@@ -170,15 +170,28 @@ export function NewClientButton() {
   async function consumeSseStream(
     res: Response,
     onData: (data: Record<string, unknown>) => boolean,
+    timeoutMs = 320_000,
   ): Promise<boolean> {
-    const reader = res.body!.getReader();
+    if (!res.ok || !res.body) {
+      setGenStatus(`接続エラー: ${res.status}`);
+      return false;
+    }
+    const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let lineBuffer = '';
     let difyDone = false;
+    let lastActivity = Date.now();
+
+    // タイムアウト監視
+    const timeoutId = setTimeout(() => {
+      reader.cancel().catch(() => {});
+    }, timeoutMs);
 
     while (true) {
-      const { done, value } = await reader.read();
+      const { done, value } = await reader.read().catch(() => ({ done: true, value: undefined }));
       if (done) break;
+      lastActivity = Date.now();
+      void lastActivity;
       lineBuffer += decoder.decode(value, { stream: true });
       const lines = lineBuffer.split('\n');
       lineBuffer = lines.pop() ?? '';
@@ -199,10 +212,12 @@ export function NewClientButton() {
           }
           if (data.error) setGenStatus('エラー: ' + data.error);
 
-          if (onData(data)) return true; // interrupted
+          if (onData(data)) { clearTimeout(timeoutId); return true; } // interrupted
         } catch { /* skip */ }
       }
     }
+
+    clearTimeout(timeoutId);
 
     // dify_done: Vercel のポーリングを自前で実施
     if (difyDone) {
