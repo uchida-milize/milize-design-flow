@@ -49,220 +49,104 @@ export async function POST(req: NextRequest) {
           ? selected_urls.join('\n')
           : String(selected_urls ?? '');
 
-        const formBody = JSON.stringify({
-          inputs: { selected_urls: urlsStr },
-          user: 'milize-admin',
+        // ── 新規ワークフロー開始（selected_urls を inputs に渡してバイパス）──
+        // POST /form/human_input/ は 200 を返すが実際には再開しないため、
+        // selected_urls を入力とした新規ランを起動する方式に変更。
+        log(`新規ワークフロー開始: company="${company_name}" slug="${client_slug}" urls=${urlsStr.split('\n').length}件`);
+        send({ progress: 59, status: '新規ワークフロー開始（selected_urls を入力として渡す）...' });
+
+        const difyRes = await fetch(`${baseUrl}/workflows/run`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            inputs: { company_name, client_slug, selected_urls: urlsStr },
+            response_mode: 'streaming',
+            user: 'milize-admin',
+          }),
         });
-        const authHeaders = {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        };
 
-        // フォーム送信（v1付き → v1なし の順で試す）
-        let resumeRes: Response | null = null;
-        let lastErr = '';
-        for (const url of [
-          `${baseUrl}/form/human_input/${form_token}`,
-          `${baseWithoutVersion}/form/human_input/${form_token}`,
-        ]) {
-          console.log('[dify-resume] POST', url);
-          const r = await fetch(url, { method: 'POST', headers: authHeaders, body: formBody });
-          const bodyText = await r.text();
-          const ct = r.headers.get('content-type') ?? 'none';
-          log(`POST ${url} → ${r.status} ct=${ct} body=${bodyText.slice(0, 200)}`);
-          if (r.ok) {
-            send({ progress: 59, status: `フォーム送信OK: ${r.status} ct=${ct} body=${bodyText.slice(0, 100)}` });
-            resumeRes = new Response(bodyText, {
-              headers: { 'content-type': ct },
-            });
-            break;
-          }
-          lastErr += `\n${url} → ${r.status}: ${bodyText.slice(0, 80)}`;
-          if (r.status !== 404) break;
-        }
-
-        if (!resumeRes) {
-          send({ error: `フォーム送信失敗:${lastErr}` });
+        if (!difyRes.ok) {
+          const errText = await difyRes.text();
+          log(`新規ワークフロー開始エラー: ${difyRes.status} ${errText.slice(0, 200)}`);
+          send({ error: `Dify 新規ラン開始エラー ${difyRes.status}: ${errText.slice(0, 200)}` });
           controller.close();
           return;
         }
 
+        log(`新規ワークフロー開始 OK: ${difyRes.status}`);
+        send({ progress: 60, status: 'ワークフロー実行中（SSE受信）...' });
+
         const nodeOutputs: Record<string, string> = {};
-        const contentType = resumeRes.headers.get('content-type') ?? '';
+        const sseReader = difyRes.body!.getReader();
+        const decoder = new TextDecoder();
+        let lineBuffer = '';
+        let progressVal = 60;
+        let workflowDone = false;
 
-        if (contentType.includes('text/event-stream') || contentType.includes('application/x-ndjson')) {
-          // ─── SSEストリームを読む（dify-createと同じロジック）─────────────
-          send({ progress: 60, status: 'ワークフロー再開中（ストリーム受信）...' });
+        while (true) {
+          const { done, value } = await sseReader.read().catch(() => ({ done: true, value: undefined }));
+          if (done) break;
 
-          const reader = resumeRes.body!.getReader();
-          const decoder = new TextDecoder();
-          let lineBuffer = '';
-          let progressVal = 60;
+          lineBuffer += decoder.decode(value as Uint8Array, { stream: true });
+          const lines = lineBuffer.split(/\r?\n/);
+          lineBuffer = lines.pop() ?? '';
 
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            lineBuffer += decoder.decode(value, { stream: true });
-            const lines = lineBuffer.split('\n');
-            lineBuffer = lines.pop() ?? '';
-
-            for (const line of lines) {
-              if (!line.startsWith('data: ')) continue;
-              try {
-                const data = JSON.parse(line.slice(6));
-
-                if (data.event === 'node_started') {
-                  progressVal = Math.min(progressVal + 5, 75);
-                  const title = data.data?.title || '';
-                  send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
-                } else if (data.event === 'node_finished') {
-                  progressVal = Math.min(progressVal + 2, 78);
-                  const nodeTitle = data.data?.title || `ノード_${Object.keys(nodeOutputs).length + 1}`;
-                  const outputs = data.data?.outputs;
-                  if (outputs && typeof outputs === 'object') {
-                    const nodeText = Object.entries(outputs as Record<string, unknown>)
-                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                      .join('\n\n---\n\n');
-                    if (nodeText.trim()) nodeOutputs[nodeTitle] = nodeText;
-                  }
-                  send({ progress: progressVal });
-                } else if (data.event === 'workflow_finished') {
-                  const wfOutputs = data.data?.outputs;
-                  if (wfOutputs && typeof wfOutputs === 'object') {
-                    const wfText = Object.entries(wfOutputs as Record<string, unknown>)
-                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                      .join('\n\n---\n\n');
-                    if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
-                  }
-                  break;
-                }
-              } catch { /* JSON parse error */ }
-            }
-          }
-
-          send({ progress: 79, status: `ストリーム完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
-
-        } else {
-          // ─── SSEでない場合: ポーリングフォールバック ──────────────────────
-          log(`ポーリング開始 runId="${workflow_run_id || task_id}" contentType="${contentType}"`);
-          send({ progress: 60, status: `フォーム送信OK (${contentType || 'no content-type'})。ポーリング中...` });
-
-          const runId = (workflow_run_id && workflow_run_id !== 'undefined') ? workflow_run_id : task_id;
-          const logsUrl = `${baseUrl}/workflows/logs?page=1&limit=20`;
-          const pollHeaders = { Authorization: `Bearer ${apiKey}` };
-          const MAX_WAIT_MS = 240_000;
-          const pollStart = Date.now();
-          let pollCount = 0;
-
-          while (Date.now() - pollStart < MAX_WAIT_MS) {
-            await new Promise(r => setTimeout(r, 12_000));
-            pollCount++;
-
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
             try {
-              const r = await fetch(logsUrl, { headers: pollHeaders });
-              if (!r.ok) { log(`logs API ${r.status}`); continue; }
-              const json = await r.json();
-              if (!Array.isArray(json.data) || json.data.length === 0) continue;
+              const data = JSON.parse(line.slice(6));
 
-              type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
-              const allItems = json.data as LogItem[];
-
-              // runId で一致するものを優先、なければ最新（インデックス0）
-              const item: LogItem = allItems.find((x) =>
-                x.workflow_run_id === runId || x.id === runId || x.workflow_run?.id === runId,
-              ) ?? allItems[0];
-
-              const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
-              const status = String(wfRun.status ?? '');
-              const finishedAt = wfRun.finished_at;
-              const itemRunId = String(item.workflow_run_id ?? (wfRun.id ?? item.id ?? ''));
-
-              log(`[${pollCount}] status="${status}" finishedAt=${finishedAt} runId=${itemRunId}`);
-              send({ progress: Math.min(62 + pollCount, 75), status: `[${pollCount}] status="${status}" finished_at=${finishedAt}` });
-
-              if (status === 'succeeded' || (finishedAt && String(finishedAt) !== 'null' && String(finishedAt) !== '0')) {
-                log(`完了検知: wfRun keys=[${Object.keys(wfRun).join(',')}] item keys=[${Object.keys(item).join(',')}]`);
-                send({ progress: 76, status: `完了! ノード出力を取得中...` });
-
-                // ① list API の details（通常は空）
-                type NodeDetail = Record<string, unknown>;
-                const listDetails = Array.isArray(item.details) ? (item.details as NodeDetail[]) : [];
-                for (const node of listDetails) {
-                  const title = String(node.title ?? node.node_id ?? `node_${Object.keys(nodeOutputs).length + 1}`);
-                  const nodeOut = node.outputs as Record<string, unknown> | undefined;
-                  if (nodeOut && Object.keys(nodeOut).length > 0) {
-                    const text = Object.entries(nodeOut)
-                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                      .join('\n\n---\n\n');
-                    if (text.trim()) nodeOutputs[title] = text;
-                  }
+              if (data.event === 'workflow_started') {
+                log(`workflow_started run_id=${data.data?.id}`);
+                send({ progress: 61, status: 'ワークフロー開始...' });
+              } else if (data.event === 'node_started') {
+                progressVal = Math.min(progressVal + 5, 75);
+                const title = (data.data?.title as string) || '';
+                log(`node_started: "${title}"`);
+                if (title === 'URL選択' || title.includes('Human') || title.includes('human')) {
+                  log(`⚠️ Human Inputノード再検知（新規ラン）: "${title}" → selected_urls がバイパスされなかった可能性`);
+                  send({ progress: progressVal, status: `⚠️ Human Inputノード再検知: "${title}"` });
+                } else {
+                  send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
                 }
-                log(`list details: ${listDetails.length}件 → nodeOutputs=${Object.keys(nodeOutputs).length}件`);
-
-                // ② 個別ログ詳細 API (GET /workflows/logs/{log_id})
-                const logId = String(item.id ?? '');
-                if (logId) {
-                  const detailUrl = `${baseUrl}/workflows/logs/${logId}`;
-                  log(`個別詳細取得: GET ${detailUrl}`);
-                  send({ progress: 77, status: `ログ詳細取得中 (log_id=${logId.slice(0, 12)}...)` });
-                  const detailRes = await fetch(detailUrl, { headers: pollHeaders });
-                  const detailText = await detailRes.text();
-                  log(`log detail ${detailRes.status}: ${detailText.slice(0, 500)}`);
-                  send({ progress: 77, status: `log detail: ${detailRes.status} ${detailText.slice(0, 150)}` });
-
-                  if (detailRes.ok) {
-                    try {
-                      const detail = JSON.parse(detailText) as Record<string, unknown>;
-                      const detailNodes = Array.isArray(detail.details) ? (detail.details as NodeDetail[]) : [];
-                      log(`detail.details: ${detailNodes.length}件`);
-                      for (const node of detailNodes) {
-                        const title = String(node.title ?? node.node_id ?? `node_${Object.keys(nodeOutputs).length + 1}`);
-                        const nodeOut = node.outputs as Record<string, unknown> | undefined;
-                        if (nodeOut && Object.keys(nodeOut).length > 0) {
-                          const text = Object.entries(nodeOut)
-                            .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                            .join('\n\n---\n\n');
-                          if (text.trim()) nodeOutputs[title] = text;
-                        }
-                      }
-                      // workflow_run.outputs も試す
-                      if (Object.keys(nodeOutputs).length === 0) {
-                        const wfRunD = (detail.workflow_run ?? {}) as Record<string, unknown>;
-                        const wfOut = wfRunD.outputs ?? detail.outputs;
-                        if (wfOut && typeof wfOut === 'object') {
-                          const text = Object.entries(wfOut as Record<string, unknown>)
-                            .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                            .join('\n\n---\n\n');
-                          if (text.trim()) nodeOutputs['workflow_outputs'] = text;
-                        }
-                      }
-                    } catch (e) { log(`detail parse error: ${e}`); }
-                  }
-                }
-
-                // ③ item直下のoutputsも試す（fallback）
-                if (Object.keys(nodeOutputs).length === 0 && item.outputs && typeof item.outputs === 'object') {
-                  const rawOut = item.outputs as Record<string, unknown>;
-                  const text = Object.entries(rawOut)
+              } else if (data.event === 'node_finished') {
+                progressVal = Math.min(progressVal + 2, 78);
+                const nodeTitle = (data.data?.title as string) || `ノード_${Object.keys(nodeOutputs).length + 1}`;
+                const outputs = data.data?.outputs as Record<string, unknown> | undefined;
+                if (outputs && typeof outputs === 'object') {
+                  const nodeText = Object.entries(outputs)
                     .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
                     .join('\n\n---\n\n');
-                  if (text.trim()) nodeOutputs['workflow_outputs'] = text;
+                  if (nodeText.trim()) {
+                    nodeOutputs[nodeTitle] = nodeText;
+                    log(`node_finished: "${nodeTitle}" (${nodeText.length} chars)`);
+                  }
                 }
-
-                log(`ポーリング完了 nodeOutputs=${Object.keys(nodeOutputs).length}件`);
-                send({ progress: 78, status: `ポーリング完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
-                break;
+                send({ progress: progressVal });
+              } else if (data.event === 'workflow_finished') {
+                workflowDone = true;
+                const wfOutputs = data.data?.outputs as Record<string, unknown> | undefined;
+                if (wfOutputs && typeof wfOutputs === 'object') {
+                  const wfText = Object.entries(wfOutputs)
+                    .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                    .join('\n\n---\n\n');
+                  if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
+                }
+                log(`workflow_finished: nodeOutputs=${Object.keys(nodeOutputs).length}件`);
+              } else {
+                log(`EVT:${data.event}`);
               }
-              if (status === 'failed' || status === 'stopped') {
-                log(`ワークフロー失敗: ${status}`);
-                send({ error: `ワークフロー失敗: ${status}` });
-                controller.close();
-                return;
-              }
-            } catch (e) { log(`ポーリングエラー: ${e}`); }
+            } catch { /* JSON parse error */ }
           }
+
+          if (workflowDone) break;
         }
+
+        log(`SSE完了: nodeOutputs=${Object.keys(nodeOutputs).length}件`);
+        send({ progress: 79, status: `SSE完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
 
         // ─── GitHub コミット + Vercel デプロイ ───────────────────────────────
         const githubToken = process.env.GITHUB_TOKEN ?? '';
