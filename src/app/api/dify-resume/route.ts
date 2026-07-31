@@ -85,7 +85,6 @@ export async function POST(req: NextRequest) {
         let runOutputs: Record<string, unknown> = {};
         let pollSucceeded = false;
         let pollCount = 0;
-        let shownDebug = false;
 
         while (Date.now() - pollStart < MAX_WAIT_MS) {
           await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
@@ -110,30 +109,28 @@ export async function POST(req: NextRequest) {
               x.workflow_run?.id === runId,
             ) ?? (json.data[0] as LogItem);
 
-            // 最初の1回だけ構造を確認（デバッグ）
-            if (!shownDebug) {
-              shownDebug = true;
-              const keys = Object.keys(item).join(',');
-              const wfKeys = item.workflow_run ? Object.keys(item.workflow_run).join(',') : 'none';
-              send({ progress: 62, status: `LOG keys: [${keys}] wf_keys: [${wfKeys}]` });
-            }
-
             const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
 
-            // あらゆるパスでステータスを探す
-            const status = String(
-              item.status ?? item.run_status ?? item.workflow_run_status ??
-              wfRun.status ?? wfRun.run_status ?? '',
-            );
-            const outputs = (
-              item.outputs ?? item.workflow_outputs ??
-              wfRun.outputs ?? wfRun.workflow_outputs ?? {}
-            ) as Record<string, unknown>;
+            // ステータスは workflow_run.status にある（確認済み）
+            const status = String(wfRun.status ?? '');
 
-            const hasOutputs = Object.keys(outputs).length > 0;
+            // outputs は logs に含まれないため details（ノード実行配列）から取得
+            type NodeDetail = Record<string, unknown>;
+            const details = Array.isArray(item.details)
+              ? (item.details as NodeDetail[])
+              : [];
+            const detailOutputs: Record<string, unknown> = {};
+            for (const node of details) {
+              const title = String(node.title ?? node.node_id ?? `node_${Object.keys(detailOutputs).length + 1}`);
+              const nodeOut = node.outputs as Record<string, unknown> | undefined;
+              if (nodeOut && Object.keys(nodeOut).length > 0) {
+                detailOutputs[title] = nodeOut;
+              }
+            }
+            const hasOutputs = Object.keys(detailOutputs).length > 0;
 
-            if (status === 'succeeded' || String(wfRun.status) === 'succeeded' || hasOutputs) {
-              runOutputs = outputs;
+            if (status === 'succeeded' || hasOutputs) {
+              runOutputs = detailOutputs;
               pollSucceeded = true;
               break;
             }
@@ -157,11 +154,14 @@ export async function POST(req: NextRequest) {
         const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
 
         const nodeOutputs: Record<string, string> = {};
-        if (Object.keys(runOutputs).length > 0) {
-          const wfText = Object.entries(runOutputs)
-            .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-            .join('\n\n---\n\n');
-          if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
+        for (const [nodeName, nodeVal] of Object.entries(runOutputs)) {
+          // nodeVal はノードの outputs オブジェクト
+          const text = typeof nodeVal === 'string'
+            ? nodeVal
+            : Object.entries(nodeVal as Record<string, unknown>)
+                .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                .join('\n\n---\n\n');
+          if (text.trim()) nodeOutputs[nodeName] = text;
         }
 
         const nodeKeys = Object.keys(nodeOutputs);
