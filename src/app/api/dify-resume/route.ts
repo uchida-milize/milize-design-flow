@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
   if (!form_token) {
     return Response.json(
-      { error: 'form_token が指定されていません。DifyのHuman Inputノードを "WebApp" 配信に設定してください。' },
+      { error: 'form_token が指定されていません。' },
       { status: 400 },
     );
   }
@@ -33,7 +33,6 @@ export async function POST(req: NextRequest) {
         const baseUrl = process.env.DIFY_BASE_URL ?? '';
         const baseWithoutVersion = baseUrl.replace(/\/v\d+\/?$/, '');
 
-        // ─── Step 1: Human Input フォームを送信 ───────────────────────────
         send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
 
         const formBody = JSON.stringify({
@@ -44,132 +43,155 @@ export async function POST(req: NextRequest) {
           },
           action: 'action_1',
           user: 'milize-admin',
+          response_mode: 'streaming',
         });
         const authHeaders = {
           Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         };
 
-        let submitOk = false;
-        let lastSubmitErr = '';
+        // フォーム送信（SSEストリームとして読む）
+        let resumeRes: Response | null = null;
+        let lastErr = '';
         for (const url of [
           `${baseUrl}/form/human_input/${form_token}`,
           `${baseWithoutVersion}/form/human_input/${form_token}`,
         ]) {
           const r = await fetch(url, { method: 'POST', headers: authHeaders, body: formBody });
-          if (r.ok) { submitOk = true; break; }
+          if (r.ok) { resumeRes = r; break; }
           const txt = await r.text();
-          lastSubmitErr += `\n${url} → ${r.status}: ${txt.slice(0, 80)}`;
+          lastErr += `\n${url} → ${r.status}: ${txt.slice(0, 80)}`;
           if (r.status !== 404) break;
         }
 
-        if (!submitOk) {
-          send({ error: `フォーム送信失敗:${lastSubmitErr}` });
+        if (!resumeRes) {
+          send({ error: `フォーム送信失敗:${lastErr}` });
           controller.close();
           return;
         }
 
-        send({ progress: 60, status: 'ワークフロー再開中。完了を待機中...' });
+        const nodeOutputs: Record<string, string> = {};
+        const contentType = resumeRes.headers.get('content-type') ?? '';
 
-        // ─── Step 2: /workflows/logs でワークフロー完了をポーリング ────────
-        // このDifyインスタンスでは /workflows/logs が利用可能
-        const runId = (workflow_run_id && workflow_run_id !== 'undefined' && workflow_run_id !== '')
-          ? workflow_run_id
-          : task_id;
-        const logsUrl = `${baseUrl}/workflows/logs?page=1&limit=5`;
-        const pollHeaders = { Authorization: `Bearer ${apiKey}` };
+        if (contentType.includes('text/event-stream') || contentType.includes('application/x-ndjson')) {
+          // ─── SSEストリームを読む（dify-createと同じロジック）─────────────
+          send({ progress: 60, status: 'ワークフロー再開中（ストリーム受信）...' });
 
-        const POLL_INTERVAL_MS = 12_000; // 12秒ごと（軽量化）
-        const MAX_WAIT_MS = 240_000;     // 最大4分
-        const pollStart = Date.now();
-        let runOutputs: Record<string, unknown> = {};
-        let pollSucceeded = false;
-        let pollCount = 0;
+          const reader = resumeRes.body!.getReader();
+          const decoder = new TextDecoder();
+          let lineBuffer = '';
+          let progressVal = 60;
 
-        while (Date.now() - pollStart < MAX_WAIT_MS) {
-          await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
-          pollCount++;
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
-          // 進捗は3回に1回だけ更新
-          if (pollCount % 3 === 0) {
-            const elapsed = Math.round((Date.now() - pollStart) / 1000);
-            send({ progress: Math.min(60 + pollCount, 75), status: `処理中... (${elapsed}s)` });
+            lineBuffer += decoder.decode(value, { stream: true });
+            const lines = lineBuffer.split('\n');
+            lineBuffer = lines.pop() ?? '';
+
+            for (const line of lines) {
+              if (!line.startsWith('data: ')) continue;
+              try {
+                const data = JSON.parse(line.slice(6));
+
+                if (data.event === 'node_started') {
+                  progressVal = Math.min(progressVal + 5, 75);
+                  const title = data.data?.title || '';
+                  send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
+                } else if (data.event === 'node_finished') {
+                  progressVal = Math.min(progressVal + 2, 78);
+                  const nodeTitle = data.data?.title || `ノード_${Object.keys(nodeOutputs).length + 1}`;
+                  const outputs = data.data?.outputs;
+                  if (outputs && typeof outputs === 'object') {
+                    const nodeText = Object.entries(outputs as Record<string, unknown>)
+                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                      .join('\n\n---\n\n');
+                    if (nodeText.trim()) nodeOutputs[nodeTitle] = nodeText;
+                  }
+                  send({ progress: progressVal });
+                } else if (data.event === 'workflow_finished') {
+                  const wfOutputs = data.data?.outputs;
+                  if (wfOutputs && typeof wfOutputs === 'object') {
+                    const wfText = Object.entries(wfOutputs as Record<string, unknown>)
+                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                      .join('\n\n---\n\n');
+                    if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
+                  }
+                  break;
+                }
+              } catch { /* JSON parse error */ }
+            }
           }
 
-          try {
-            const r = await fetch(logsUrl, { headers: pollHeaders });
-            if (!r.ok) continue;
-            const json = await r.json();
-            if (!Array.isArray(json.data) || json.data.length === 0) continue;
+          send({ progress: 79, status: `ストリーム完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
 
-            type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
-            const item: LogItem = (json.data as LogItem[]).find((x) =>
-              x.workflow_run_id === runId ||
-              x.id === runId ||
-              x.workflow_run?.id === runId,
-            ) ?? (json.data[0] as LogItem);
-
-            const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
-
-            // ステータスは workflow_run.status にある（確認済み）
-            const status = String(wfRun.status ?? '');
-            const finishedAt = wfRun.finished_at;
-
-            // outputs は logs に含まれないため details（ノード実行配列）から取得
-            type NodeDetail = Record<string, unknown>;
-            const details = Array.isArray(item.details)
-              ? (item.details as NodeDetail[])
-              : [];
-            const detailOutputs: Record<string, unknown> = {};
-            for (const node of details) {
-              const title = String(node.title ?? node.node_id ?? `node_${Object.keys(detailOutputs).length + 1}`);
-              const nodeOut = node.outputs as Record<string, unknown> | undefined;
-              if (nodeOut && Object.keys(nodeOut).length > 0) {
-                detailOutputs[title] = nodeOut;
-              }
-            }
-            const hasOutputs = Object.keys(detailOutputs).length > 0;
-
-            // デバッグ（1回のみ）
-            if (pollCount === 1) {
-              const d0keys = details.length > 0 ? Object.keys(details[0]).join(',') : 'empty';
-              send({ progress: 63, status: `status="${status}" finished_at=${finishedAt} details=${details.length} d0keys=[${d0keys}] hasOut=${hasOutputs}` });
-            }
-
-            if (status === 'succeeded' || (finishedAt && String(finishedAt) !== 'null' && String(finishedAt) !== '0') || hasOutputs) {
-              runOutputs = detailOutputs;
-              pollSucceeded = true;
-              break;
-            }
-            if (status === 'failed' || status === 'stopped') {
-              send({ error: `ワークフロー失敗: ${status}` });
-              controller.close();
-              return;
-            }
-          } catch { /* ネットワークエラー → 次のポーリングへ */ }
-        }
-
-        if (!pollSucceeded) {
-          send({ progress: 76, status: 'タイムアウト: 取得済みデータでコミットします。' });
         } else {
-          send({ progress: 78, status: 'ワークフロー完了！GitHubにコミット中...' });
+          // ─── SSEでない場合: ポーリングフォールバック ──────────────────────
+          send({ progress: 60, status: `フォーム送信OK (${contentType || 'no content-type'})。ポーリング中...` });
+
+          const runId = (workflow_run_id && workflow_run_id !== 'undefined') ? workflow_run_id : task_id;
+          const logsUrl = `${baseUrl}/workflows/logs?page=1&limit=5`;
+          const pollHeaders = { Authorization: `Bearer ${apiKey}` };
+          const MAX_WAIT_MS = 240_000;
+          const pollStart = Date.now();
+          let pollCount = 0;
+
+          while (Date.now() - pollStart < MAX_WAIT_MS) {
+            await new Promise(r => setTimeout(r, 12_000));
+            pollCount++;
+
+            try {
+              const r = await fetch(logsUrl, { headers: pollHeaders });
+              if (!r.ok) continue;
+              const json = await r.json();
+              if (!Array.isArray(json.data) || json.data.length === 0) continue;
+
+              type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
+              const item: LogItem = (json.data as LogItem[]).find((x) =>
+                x.workflow_run_id === runId || x.id === runId || x.workflow_run?.id === runId,
+              ) ?? (json.data[0] as LogItem);
+
+              const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
+              const status = String(wfRun.status ?? '');
+              const finishedAt = wfRun.finished_at;
+
+              if (pollCount === 1) {
+                send({ progress: 63, status: `ポーリング: status="${status}" finished_at=${finishedAt}` });
+              } else if (pollCount % 3 === 0) {
+                send({ progress: Math.min(60 + pollCount, 75), status: `処理中... (${Math.round((Date.now() - pollStart) / 1000)}s) status="${status}"` });
+              }
+
+              if (status === 'succeeded' || (finishedAt && String(finishedAt) !== 'null' && String(finishedAt) !== '0')) {
+                // ポーリング成功 — details からノード出力を取得
+                type NodeDetail = Record<string, unknown>;
+                const details = Array.isArray(item.details) ? (item.details as NodeDetail[]) : [];
+                for (const node of details) {
+                  const title = String(node.title ?? node.node_id ?? `node_${Object.keys(nodeOutputs).length + 1}`);
+                  const nodeOut = node.outputs as Record<string, unknown> | undefined;
+                  if (nodeOut && Object.keys(nodeOut).length > 0) {
+                    const text = Object.entries(nodeOut)
+                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                      .join('\n\n---\n\n');
+                    if (text.trim()) nodeOutputs[title] = text;
+                  }
+                }
+                send({ progress: 78, status: `ポーリング完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
+                break;
+              }
+              if (status === 'failed' || status === 'stopped') {
+                send({ error: `ワークフロー失敗: ${status}` });
+                controller.close();
+                return;
+              }
+            } catch { /* ネットワークエラー */ }
+          }
         }
 
-        // ─── Step 3: GitHub コミット + Vercel デプロイ ────────────────────
+        // ─── GitHub コミット + Vercel デプロイ ───────────────────────────────
         const githubToken = process.env.GITHUB_TOKEN ?? '';
         const vercelToken = process.env.VERCEL_TOKEN ?? '';
         const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
-
-        const nodeOutputs: Record<string, string> = {};
-        for (const [nodeName, nodeVal] of Object.entries(runOutputs)) {
-          // nodeVal はノードの outputs オブジェクト
-          const text = typeof nodeVal === 'string'
-            ? nodeVal
-            : Object.entries(nodeVal as Record<string, unknown>)
-                .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                .join('\n\n---\n\n');
-          if (text.trim()) nodeOutputs[nodeName] = text;
-        }
 
         const nodeKeys = Object.keys(nodeOutputs);
         send({ progress: 80, status: `GitHubにコミット中... (出力: ${nodeKeys.length}件)` });
