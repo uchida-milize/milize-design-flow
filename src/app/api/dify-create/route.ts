@@ -92,12 +92,38 @@ export async function POST(req: NextRequest) {
                 const nodeTitle = data.data?.title || `ノード_${Object.keys(nodeOutputs).length + 1}`;
                 const outputs = data.data?.outputs;
                 if (outputs && typeof outputs === 'object') {
-                  // URL一覧をキャプチャ（配列 or 改行区切り文字列どちらも対応）
-                  const urlList = outputs.url_list ?? outputs.urls ?? outputs.result;
-                  if (Array.isArray(urlList) && urlList.length > 0) {
-                    capturedUrls = urlList.map((u: unknown) => typeof u === 'string' ? u : String(u));
-                  } else if (typeof urlList === 'string' && urlList.includes('http')) {
-                    capturedUrls = urlList.split('\n').map(u => u.trim()).filter(u => u.startsWith('http'));
+                  // URL一覧をキャプチャ（あらゆる配列・文字列キーを試す）
+                  const outEntries = Object.entries(outputs as Record<string, unknown>);
+                  let foundUrls: string[] = [];
+
+                  // まず既知のキーを優先
+                  const knownKey = (outputs as Record<string, unknown>).url_list
+                    ?? (outputs as Record<string, unknown>).urls
+                    ?? (outputs as Record<string, unknown>).result
+                    ?? (outputs as Record<string, unknown>).output
+                    ?? (outputs as Record<string, unknown>).url_array;
+                  if (Array.isArray(knownKey) && knownKey.length > 0) {
+                    foundUrls = knownKey.map((u: unknown) => typeof u === 'string' ? u : String(u)).filter(u => u.startsWith('http'));
+                  } else if (typeof knownKey === 'string' && knownKey.includes('http')) {
+                    foundUrls = knownKey.split('\n').map(u => u.trim()).filter(u => u.startsWith('http'));
+                  }
+
+                  // 未発見なら全フィールドを検索
+                  if (foundUrls.length === 0) {
+                    for (const [, v] of outEntries) {
+                      if (Array.isArray(v) && v.length > 0 && typeof v[0] === 'string' && v[0].startsWith('http')) {
+                        foundUrls = v.filter((u: unknown) => typeof u === 'string' && u.startsWith('http'));
+                        break;
+                      } else if (typeof v === 'string' && v.includes('http://') || typeof v === 'string' && v.includes('https://')) {
+                        const lines = v.split('\n').map(u => u.trim()).filter(u => u.startsWith('http'));
+                        if (lines.length > 0) { foundUrls = lines; break; }
+                      }
+                    }
+                  }
+
+                  if (foundUrls.length > 0) {
+                    capturedUrls = foundUrls;
+                    send({ progress: progressVal, status: `URL ${capturedUrls.length}件を取得` });
                   }
                   const nodeText = Object.entries(outputs)
                     .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
