@@ -112,13 +112,35 @@ export async function POST(req: NextRequest) {
 
               // ログ一覧レスポンス: { data: [...], has_more: bool }
               if (Array.isArray(json.data) && json.data.length > 0) {
-                const latest = json.data.find((item: Record<string, unknown>) =>
-                  item.workflow_run_id === runId || item.id === runId,
-                ) ?? json.data[0];
-                const status: string = String(latest.status ?? '');
-                send({ progress: progressVal, status: `ポーリング応答(logs): status="${status}" id="${String(latest.id ?? '').slice(0, 8)}"` });
+                type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
+                const latest: LogItem = (json.data as LogItem[]).find((item) =>
+                  item.workflow_run_id === runId ||
+                  item.id === runId ||
+                  item.workflow_run?.id === runId,
+                ) ?? (json.data[0] as LogItem);
+
+                // status は直接 or workflow_run の中にある場合がある
+                const wfRun = latest.workflow_run ?? {};
+                const status: string = String(
+                  latest.status ?? wfRun.status ?? latest.data_status ?? '',
+                );
+                const outputs =
+                  (latest.outputs as Record<string, unknown>) ??
+                  (wfRun.outputs as Record<string, unknown>) ??
+                  {};
+
+                send({
+                  progress: progressVal,
+                  status: `ポーリング応答(logs): status="${status}" wf_status="${wfRun.status ?? ''}" id="${String(latest.id ?? '').slice(0, 8)}"`,
+                });
                 if (status === 'succeeded') {
-                  runOutputs = (latest.outputs as Record<string, unknown>) ?? {};
+                  runOutputs = outputs;
+                  pollSucceeded = true;
+                  break;
+                }
+                // ステータスが空でも workflow_run のステータスで判定
+                if (String(wfRun.status) === 'succeeded') {
+                  runOutputs = outputs;
                   pollSucceeded = true;
                   break;
                 }
