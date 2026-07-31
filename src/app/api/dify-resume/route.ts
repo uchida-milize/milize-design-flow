@@ -45,129 +45,98 @@ export async function POST(req: NextRequest) {
           action: 'action_1',
           user: 'milize-admin',
         });
-        const formHeaders = {
+        const authHeaders = {
           Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         };
 
-        // /v1/form/... と /form/... の両方を試す
-        const formCandidates = [
-          `${baseUrl}/form/human_input/${form_token}`,
-          `${baseWithoutVersion}/form/human_input/${form_token}`,
-        ];
-
         let submitOk = false;
         let lastSubmitErr = '';
-        for (const url of formCandidates) {
-          const r = await fetch(url, { method: 'POST', headers: formHeaders, body: formBody });
+        for (const url of [
+          `${baseUrl}/form/human_input/${form_token}`,
+          `${baseWithoutVersion}/form/human_input/${form_token}`,
+        ]) {
+          const r = await fetch(url, { method: 'POST', headers: authHeaders, body: formBody });
           if (r.ok) { submitOk = true; break; }
           const txt = await r.text();
-          lastSubmitErr += `\n[${url}] → ${r.status}: ${txt.slice(0, 80)}`;
+          lastSubmitErr += `\n${url} → ${r.status}: ${txt.slice(0, 80)}`;
           if (r.status !== 404) break;
         }
 
         if (!submitOk) {
-          send({ error: `Human Input submit failed:${lastSubmitErr}` });
+          send({ error: `フォーム送信失敗:${lastSubmitErr}` });
           controller.close();
           return;
         }
 
-        // デバッグ: 受信したIDを表示
-        send({
-          progress: 60,
-          status: `フォーム送信完了。task_id="${task_id?.slice(0,8)}" wf_run_id="${(workflow_run_id||'').slice(0,8)}" でポーリング開始`,
-        });
+        send({ progress: 60, status: 'ワークフロー再開中。完了を待機中...' });
 
-        // ─── Step 2: ワークフロー完了をポーリングで待つ ──────────────────
-        // GET /workflows/runs/{workflow_run_id} でステータスを確認
-        const runId = workflow_run_id && workflow_run_id !== 'undefined' && workflow_run_id !== '' ? workflow_run_id : task_id;
-        const pollEndpoints = [
-          `${baseUrl}/workflows/runs/${runId}`,           // 最新Dify
-          `${baseUrl}/workflow/runs/${runId}`,            // 旧パス variant
-          `${baseUrl}/workflows/logs?page=1&limit=5`,    // ログ一覧から最新を取得
-        ].filter(Boolean);
-
+        // ─── Step 2: /workflows/logs でワークフロー完了をポーリング ────────
+        // このDifyインスタンスでは /workflows/logs が利用可能
+        const runId = (workflow_run_id && workflow_run_id !== 'undefined' && workflow_run_id !== '')
+          ? workflow_run_id
+          : task_id;
+        const logsUrl = `${baseUrl}/workflows/logs?page=1&limit=5`;
         const pollHeaders = { Authorization: `Bearer ${apiKey}` };
-        const POLL_INTERVAL_MS = 8000;
-        const MAX_WAIT_MS = 240_000; // 4分
-        const pollStart = Date.now();
 
+        const POLL_INTERVAL_MS = 12_000; // 12秒ごと（軽量化）
+        const MAX_WAIT_MS = 240_000;     // 最大4分
+        const pollStart = Date.now();
         let runOutputs: Record<string, unknown> = {};
         let pollSucceeded = false;
-        let progressVal = 60;
+        let pollCount = 0;
 
         while (Date.now() - pollStart < MAX_WAIT_MS) {
           await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
-          progressVal = Math.min(progressVal + 2, 76);
-          send({ progress: progressVal, status: `ワークフロー完了待機中... (${Math.round((Date.now() - pollStart) / 1000)}s)` });
+          pollCount++;
 
-          for (const ep of pollEndpoints) {
-            try {
-              const r = await fetch(ep, { headers: pollHeaders });
-              if (!r.ok) {
-                send({ progress: progressVal, status: `ポーリング ${r.status}: ${ep.slice(-50)}` });
-                continue;
-              }
-              const json = await r.json();
-
-              // ログ一覧レスポンス: { data: [...], has_more: bool }
-              if (Array.isArray(json.data) && json.data.length > 0) {
-                type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
-                const latest: LogItem = (json.data as LogItem[]).find((item) =>
-                  item.workflow_run_id === runId ||
-                  item.id === runId ||
-                  item.workflow_run?.id === runId,
-                ) ?? (json.data[0] as LogItem);
-
-                // status は直接 or workflow_run の中にある場合がある
-                const wfRun = latest.workflow_run ?? {};
-                const status: string = String(
-                  latest.status ?? wfRun.status ?? latest.data_status ?? '',
-                );
-                const outputs =
-                  (latest.outputs as Record<string, unknown>) ??
-                  (wfRun.outputs as Record<string, unknown>) ??
-                  {};
-
-                send({
-                  progress: progressVal,
-                  status: `ポーリング応答(logs): status="${status}" wf_status="${wfRun.status ?? ''}" id="${String(latest.id ?? '').slice(0, 8)}"`,
-                });
-                if (status === 'succeeded') {
-                  runOutputs = outputs;
-                  pollSucceeded = true;
-                  break;
-                }
-                // ステータスが空でも workflow_run のステータスで判定
-                if (String(wfRun.status) === 'succeeded') {
-                  runOutputs = outputs;
-                  pollSucceeded = true;
-                  break;
-                }
-                continue;
-              }
-
-              // 単一ランレスポンス
-              const status: string = json.status ?? json.data?.status ?? '';
-              send({ progress: progressVal, status: `ポーリング応答: status="${status}" ep="${ep.slice(-40)}"` });
-              if (status === 'succeeded') {
-                runOutputs = json.outputs ?? json.data?.outputs ?? {};
-                pollSucceeded = true;
-                break;
-              } else if (status === 'failed' || status === 'stopped') {
-                send({ error: `ワークフロー失敗: status=${status}` });
-                controller.close();
-                return;
-              }
-              // running / waiting → continue polling
-            } catch (e) {
-              send({ progress: progressVal, status: `ポーリングエラー: ${String(e).slice(0,50)}` });
-            }
+          // 進捗は3回に1回だけ更新（UIを軽くする）
+          if (pollCount % 3 === 0) {
+            const elapsed = Math.round((Date.now() - pollStart) / 1000);
+            send({ progress: Math.min(60 + pollCount, 75), status: `処理中... (${elapsed}s)` });
           }
-          if (pollSucceeded) break;
+
+          try {
+            const r = await fetch(logsUrl, { headers: pollHeaders });
+            if (!r.ok) continue;
+            const json = await r.json();
+            if (!Array.isArray(json.data) || json.data.length === 0) continue;
+
+            type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
+            const item: LogItem = (json.data as LogItem[]).find((x) =>
+              x.workflow_run_id === runId ||
+              x.id === runId ||
+              x.workflow_run?.id === runId,
+            ) ?? (json.data[0] as LogItem);
+
+            const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
+            const status = String(item.status ?? wfRun.status ?? '');
+            const outputs = (item.outputs ?? wfRun.outputs ?? {}) as Record<string, unknown>;
+
+            if (status === 'succeeded' || String(wfRun.status) === 'succeeded') {
+              runOutputs = outputs;
+              pollSucceeded = true;
+              break;
+            }
+            if (status === 'failed' || status === 'stopped') {
+              send({ error: `ワークフロー失敗: ${status}` });
+              controller.close();
+              return;
+            }
+          } catch { /* ネットワークエラー → 次のポーリングへ */ }
         }
 
-        // ─── Step 3: ノード出力を組み立てる ──────────────────────────────
+        if (!pollSucceeded) {
+          send({ progress: 76, status: 'タイムアウト: 取得済みデータでコミットします。' });
+        } else {
+          send({ progress: 78, status: 'ワークフロー完了！GitHubにコミット中...' });
+        }
+
+        // ─── Step 3: GitHub コミット + Vercel デプロイ ────────────────────
+        const githubToken = process.env.GITHUB_TOKEN ?? '';
+        const vercelToken = process.env.VERCEL_TOKEN ?? '';
+        const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
+
         const nodeOutputs: Record<string, string> = {};
         if (Object.keys(runOutputs).length > 0) {
           const wfText = Object.entries(runOutputs)
@@ -176,22 +145,10 @@ export async function POST(req: NextRequest) {
           if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
         }
 
-        if (!pollSucceeded) {
-          send({ progress: 77, status: `タイムアウト: ワークフロー未完了。取得済み出力 ${Object.keys(nodeOutputs).length}件で続行します。` });
-        } else {
-          send({ progress: 78, status: `ワークフロー完了！出力 ${Object.keys(nodeOutputs).length}件を取得しました。` });
-        }
-
-        // ─── Step 4: GitHub コミット + Vercel デプロイ ────────────────────
-        const githubToken = process.env.GITHUB_TOKEN ?? '';
-        const vercelToken = process.env.VERCEL_TOKEN ?? '';
-        const vercelProjectId = process.env.VERCEL_PROJECT_ID ?? '';
         const nodeKeys = Object.keys(nodeOutputs);
-
-        send({ progress: 80, status: `GitHubにコミット中... (ノード出力: ${nodeKeys.length}件)` });
+        send({ progress: 80, status: `GitHubにコミット中... (出力: ${nodeKeys.length}件)` });
         const commitStart = Date.now();
 
-        send({ progress: 81, status: 'Dify生成ファイルを読み込み中...' });
         const designColors = parseDesignMdColors(nodeOutputs);
         const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken, designColors);
 
@@ -211,7 +168,7 @@ export async function POST(req: NextRequest) {
           },
         ];
 
-        send({ progress: 82, status: `${filesToCommit.length}ファイルをバッチコミット中...` });
+        send({ progress: 82, status: `${filesToCommit.length}ファイルをコミット中...` });
 
         let committed = false;
         let lastError = '';
@@ -224,22 +181,22 @@ export async function POST(req: NextRequest) {
           );
           if (result.ok) { committed = true; break; }
           lastError = result.error ?? 'unknown';
-          send({ progress: 82 + attempt, status: `コミット再試行 (${attempt + 1}/3): ${lastError.slice(0, 60)}` });
+          send({ progress: 82 + attempt, status: `コミット再試行 (${attempt + 1}/3)...` });
         }
 
         if (!committed) {
-          send({ progress: 83, status: `バッチコミット失敗: ${lastError.slice(0, 80)}` });
+          send({ progress: 83, status: `コミット失敗: ${lastError.slice(0, 80)}` });
         } else {
-          send({ progress: 84, status: 'バッチコミット完了！' });
+          send({ progress: 84, status: 'コミット完了！' });
         }
 
         await removeFromExcludedDirs(client_slug, githubToken);
-        send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ起動待ち...' });
+        send({ progress: 85, status: 'Vercelデプロイ起動待ち...' });
 
         if (vercelToken && vercelProjectId) {
           await waitForVercelDeploy(commitStart, vercelToken, vercelProjectId, send);
         } else {
-          send({ progress: 85, status: 'GitHubコミット完了。Vercelデプロイ待機中...', dify_done: true });
+          send({ progress: 85, status: 'GitHubコミット完了。', dify_done: true });
         }
       } catch (err) {
         send({ error: String(err) });
