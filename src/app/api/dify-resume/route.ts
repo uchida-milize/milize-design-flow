@@ -58,18 +58,22 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         };
 
+        // デバッグ: form_tokenの最初の8文字とベースURLを表示
+        send({ progress: 59, status: `DEBUG: form_token="${form_token.slice(0, 8)}..." baseUrl="${baseUrl}"` });
+
         let submitRes: Response | null = null;
         let lastSubmitError = '';
         for (const url of formEndpointCandidates) {
+          send({ progress: 59, status: `試行中: POST ${url.slice(-60)}` });
           const r = await fetch(url, { method: 'POST', headers: formHeaders, body: formBody });
           if (r.ok) { submitRes = r; break; }
           const txt = await r.text();
-          lastSubmitError = `${url} → ${r.status}: ${txt.slice(0, 150)}`;
+          lastSubmitError = `[${url}] → ${r.status}: ${txt.slice(0, 100)}`;
           if (r.status !== 404) break; // 404以外はリトライしない
         }
 
         if (!submitRes) {
-          send({ error: `Human Input submit failed: ${lastSubmitError}` });
+          send({ error: `Human Input submit failed:\n${lastSubmitError}` });
           controller.close();
           return;
         }
