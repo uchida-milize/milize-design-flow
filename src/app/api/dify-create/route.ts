@@ -80,6 +80,11 @@ export async function POST(req: NextRequest) {
                 workflowRunId = data.data.id;
               }
 
+              // デバッグ: 全イベント名をログ
+              if (data.event && data.event !== 'node_started' && data.event !== 'node_finished' && data.event !== 'workflow_started') {
+                send({ progress: progressVal, status: `EVT:${data.event}` });
+              }
+
               if (data.event === 'workflow_started') {
                 progressVal = 20;
                 send({ progress: progressVal, status: 'ワークフロー開始...' });
@@ -239,6 +244,7 @@ export async function POST(req: NextRequest) {
         // フォールバック: workflow_finished が来ずにストリームが終了
         // → 人間の入力ノードで停止したとみなす（URLがなくても送信）
         if (!workflowFinished && taskId) {
+          send({ progress: progressVal, status: `FALLBACK: urls=${capturedUrls.length} ft="${formToken}"` });
           send({
             interrupted: true,
             task_id: taskId,
