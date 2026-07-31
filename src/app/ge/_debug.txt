@@ -1,28 +1,19 @@
-2026-07-31T05:09:45.774Z  START form_token="grt2ig8eGTd4akNi9is90U" workflow_run_id="7f79ff98-faa8-436f-91e4-b21aaabb9cb3" task_id="fcc8e55c-262a-4169-b4ce-51c104c8df88" client="ge"
-2026-07-31T05:09:45.935Z  POST https://api.dify.milize.com/v1/form/human_input/grt2ig8eGTd4akNi9is90U → 404 ct=text/html; charset=utf-8 body=<!doctype html>
-<html lang=en>
-<title>404 Not Found</title>
-<h1>Not Found</h1>
-<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
-2026-07-31T05:09:46.391Z  POST https://api.dify.milize.com/form/human_input/grt2ig8eGTd4akNi9is90U → 200 ct=none body=
-2026-07-31T05:09:46.391Z  ポーリング開始 runId="7f79ff98-faa8-436f-91e4-b21aaabb9cb3" contentType="none"
-2026-07-31T05:09:58.959Z  [1] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:10:11.502Z  [2] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:10:24.052Z  [3] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:10:36.609Z  [4] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:10:49.174Z  [5] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:11:01.737Z  [6] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:11:14.303Z  [7] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:11:26.889Z  [8] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:11:39.474Z  [9] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:11:52.023Z  [10] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:12:04.583Z  [11] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:12:17.141Z  [12] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:12:29.673Z  [13] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:12:42.235Z  [14] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:12:54.796Z  [15] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:13:07.345Z  [16] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:13:19.910Z  [17] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:13:32.460Z  [18] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:13:44.998Z  [19] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
-2026-07-31T05:13:57.553Z  [20] status="paused" finishedAt=null runId=7f79ff98-faa8-436f-91e4-b21aaabb9cb3
+2026-07-31T05:27:48.234Z  START form_token="d1Qmagl3kVIl46MKkdAMVg" workflow_run_id="4ea71acd-c14d-47e0-bc56-49c7187b433e" task_id="30add8b3-864f-491e-a57c-5d4f4f64f137" client="ge"
+2026-07-31T05:27:48.234Z  新規ワークフロー開始: company="ゼネラル・エレクトリック" slug="ge" urls=11件
+2026-07-31T05:27:48.407Z  新規ワークフロー開始 OK: 200
+2026-07-31T05:27:48.713Z  workflow_started run_id=2ae4ff0f-1e88-4a4c-96e7-a9edc02214c6
+2026-07-31T05:27:48.716Z  node_started: "ユーザー入力"
+2026-07-31T05:27:48.733Z  node_finished: "ユーザー入力" (319 chars)
+2026-07-31T05:27:48.772Z  node_started: "GoogleSearch"
+2026-07-31T05:27:48.838Z  node_finished: "GoogleSearch" (6159 chars)
+2026-07-31T05:27:48.861Z  node_started: "コード実行"
+2026-07-31T05:27:48.923Z  node_finished: "コード実行" (2124 chars)
+2026-07-31T05:27:48.954Z  node_started: "LLM"
+2026-07-31T05:27:55.494Z  node_finished: "LLM" (1265 chars)
+2026-07-31T05:27:55.513Z  node_started: "CSVをURL配列に変換"
+2026-07-31T05:27:55.622Z  node_finished: "CSVをURL配列に変換" (566 chars)
+2026-07-31T05:27:55.647Z  node_started: "URL選択"
+2026-07-31T05:27:55.647Z  ⚠️ Human Inputノード再検知（新規ラン）: "URL選択" → selected_urls がバイパスされなかった可能性
+2026-07-31T05:27:55.714Z  EVT:human_input_required
+2026-07-31T05:27:55.714Z  EVT:workflow_paused
+2026-07-31T05:27:56.717Z  SSE完了: nodeOutputs=5件
