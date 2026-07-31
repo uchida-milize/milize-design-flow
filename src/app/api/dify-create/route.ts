@@ -59,13 +59,17 @@ export async function POST(req: NextRequest) {
         let formToken = '';
         let capturedUrls: string[] = [];
         let workflowFinished = false;
+        let humanInputDetected = false;
+
+        // Human Input ノード検知後に強制キャンセルするタイマー
+        let humanInputTimer: ReturnType<typeof setTimeout> | null = null;
 
         while (true) {
-          const { done, value } = await reader.read();
+          const { done, value } = await reader.read().catch(() => ({ done: true, value: undefined }));
           if (done) break;
 
-          lineBuffer += decoder.decode(value, { stream: true });
-          const lines = lineBuffer.split('\n');
+          lineBuffer += decoder.decode(value as Uint8Array, { stream: true });
+          const lines = lineBuffer.split(/\r?\n/);
           lineBuffer = lines.pop() ?? '';
 
           for (const line of lines) {
@@ -92,6 +96,15 @@ export async function POST(req: NextRequest) {
                 progressVal = Math.min(progressVal + 8, 55);
                 const title = data.data?.title || '';
                 send({ progress: progressVal, status: title ? `${title}を処理中...` : '処理中...' });
+
+                // Human Input ノード（URL選択）を検知 → 5秒後に強制キャンセル
+                if (!humanInputDetected && (title === 'URL選択' || title.includes('選択') || title.includes('human') || title.includes('Human'))) {
+                  humanInputDetected = true;
+                  send({ progress: progressVal, status: `Human Inputノード検知: "${title}" → 5秒待機中...` });
+                  humanInputTimer = setTimeout(() => {
+                    reader.cancel().catch(() => {});
+                  }, 5000);
+                }
               } else if (data.event === 'node_finished') {
                 progressVal = Math.min(progressVal + 2, 58);
                 const nodeTitle = data.data?.title || `ノード_${Object.keys(nodeOutputs).length + 1}`;
@@ -150,6 +163,8 @@ export async function POST(req: NextRequest) {
                   data.data?.inputs?.form_token ||
                   '';
 
+                // interruptイベント受信 → タイマーをキャンセル
+                if (humanInputTimer) { clearTimeout(humanInputTimer); humanInputTimer = null; }
                 // デバッグ: form_tokenの取得パスと値を確認
                 const dataKeys = data.data ? Object.keys(data.data as object).join(',') : 'none';
                 send({ progress: progressVal, status: `INT event=${data.event} ft="${ft}" data_keys=[${dataKeys}]` });
