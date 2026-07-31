@@ -47,31 +47,58 @@ export async function POST(req: NextRequest) {
           : String(selected_urls ?? '');
 
         // ── ワークフロー再開 ──────────────────────────────────────────────────
-        // 正しいペイロード: { inputs: { selected_urls }, action: "action_1" }
-        // コンソール確認済みエンドポイント: console/api/form/human_input/{form_token}
+        // コンソール確認済みペイロード: { inputs: { selected_urls }, action: "action_1" }
+        // エンドポイント: console.dify.../console/api/form/human_input/{form_token}
+        // 認証: Dify admin ログイン → access_token → Bearer
         const resumeBody = JSON.stringify({
           inputs: { selected_urls: urlsStr },
           action: 'action_1',
         });
 
-        // console ドメインを api ドメインから導出
-        const consoleBase = baseUrl.replace('api.', 'console.').replace('/v1', '');
-        const consoleBase2 = baseUrl.replace('/v1', '').replace('api.', 'console.');
+        const consoleBase = baseUrl.replace('api.', 'console.').replace(/\/v\d+\/?$/, '');
+        log(`consoleBase="${consoleBase}"`);
 
-        // 試すエンドポイント一覧（form_token を使う）
+        // ── Step 1: Dify console にログインして access_token を取得 ───────────
+        const adminEmail = process.env.DIFY_ADMIN_EMAIL ?? '';
+        const adminPassword = process.env.DIFY_ADMIN_PASSWORD ?? '';
+        let consoleToken = '';
+
+        if (adminEmail && adminPassword) {
+          log(`コンソールログイン試行: ${adminEmail}`);
+          try {
+            const loginRes = await fetch(`${consoleBase}/console/api/login`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: adminEmail, password: adminPassword }),
+            });
+            const loginText = await loginRes.text();
+            log(`login → ${loginRes.status} body=${loginText.slice(0, 200)}`);
+            if (loginRes.ok) {
+              const loginData = JSON.parse(loginText) as { result?: string; data?: { access_token?: string } };
+              consoleToken = loginData?.data?.access_token ?? '';
+              log(`access_token取得: ${consoleToken ? '成功' : '失敗(token空)'}`);
+            }
+          } catch (e) {
+            log(`login error: ${e}`);
+          }
+        } else {
+          log('DIFY_ADMIN_EMAIL/PASSWORD 未設定 → コンソールログインをスキップ');
+        }
+
+        // ── Step 2: form/human_input で再開 ───────────────────────────────────
         type ResumeCandidate = [string, string, string];
-        const candidates: ResumeCandidate[] = [
-          // 1. console API + API キー
-          ['console+apiKey', `${consoleBase}/console/api/form/human_input/${form_token}`, `Bearer ${apiKey}`],
-          // 2. console API (別パターン)
-          ['console2+apiKey', `${consoleBase2}/console/api/form/human_input/${form_token}`, `Bearer ${apiKey}`],
-          // 3. api ドメイン + action_1 (以前と同じドメインだが action 追加)
-          ['api+action', `${baseUrl.replace('/v1', '')}/form/human_input/${form_token}`, `Bearer ${apiKey}`],
-          // 4. /v1/ なし + action
-          ['apiv1+action', `${baseUrl}/form/human_input/${form_token}`, `Bearer ${apiKey}`],
-          // 5. task_id ベース (旧 Dify バージョン互換)
-          ['task_id/resume', `${baseUrl}/workflows/tasks/${task_id}/resume`, `Bearer ${apiKey}`],
-        ];
+        const candidates: ResumeCandidate[] = [];
+
+        if (consoleToken) {
+          // console API + admin アクセストークン（最優先）
+          candidates.push(['console+adminToken', `${consoleBase}/console/api/form/human_input/${form_token}`, `Bearer ${consoleToken}`]);
+        }
+        // console API + API キー（フォールバック）
+        candidates.push(['console+apiKey', `${consoleBase}/console/api/form/human_input/${form_token}`, `Bearer ${apiKey}`]);
+        // api ドメイン（フォールバック）
+        candidates.push(['api+action', `${baseUrl.replace(/\/v\d+\/?$/, '')}/form/human_input/${form_token}`, `Bearer ${apiKey}`]);
+        // task_id ベース（旧 Dify 互換）
+        candidates.push(['task_id/resume', `${baseUrl}/workflows/tasks/${task_id}/resume`, `Bearer ${apiKey}`]);
 
         let resumeRes: Response | null = null;
         for (const [label, url, auth] of candidates) {
@@ -83,11 +110,12 @@ export async function POST(req: NextRequest) {
               body: resumeBody,
             });
             const ct = r.headers.get('content-type') ?? '';
-            const bodyPreview = await r.clone().text().then(t => t.slice(0, 100));
+            const bodyPreview = await r.clone().text().then(t => t.slice(0, 200));
             log(`結果[${label}]: ${r.status} ct=${ct} body=${bodyPreview}`);
             send({ progress: 59, status: `[${label}] ${r.status}` });
             if (r.ok) {
               resumeRes = r;
+              log(`✓ 再開成功: ${label}`);
               break;
             }
           } catch (e) {
@@ -96,7 +124,7 @@ export async function POST(req: NextRequest) {
         }
 
         if (!resumeRes) {
-          send({ error: 'ワークフロー再開失敗: 全エンドポイントが失敗' });
+          send({ error: 'ワークフロー再開失敗: 全エンドポイントが失敗（_debug.txt を確認してください）' });
           controller.close();
           return;
         }
