@@ -1,19 +1,32 @@
-2026-07-31T05:27:48.234Z  START form_token="d1Qmagl3kVIl46MKkdAMVg" workflow_run_id="4ea71acd-c14d-47e0-bc56-49c7187b433e" task_id="30add8b3-864f-491e-a57c-5d4f4f64f137" client="ge"
-2026-07-31T05:27:48.234Z  新規ワークフロー開始: company="ゼネラル・エレクトリック" slug="ge" urls=11件
-2026-07-31T05:27:48.407Z  新規ワークフロー開始 OK: 200
-2026-07-31T05:27:48.713Z  workflow_started run_id=2ae4ff0f-1e88-4a4c-96e7-a9edc02214c6
-2026-07-31T05:27:48.716Z  node_started: "ユーザー入力"
-2026-07-31T05:27:48.733Z  node_finished: "ユーザー入力" (319 chars)
-2026-07-31T05:27:48.772Z  node_started: "GoogleSearch"
-2026-07-31T05:27:48.838Z  node_finished: "GoogleSearch" (6159 chars)
-2026-07-31T05:27:48.861Z  node_started: "コード実行"
-2026-07-31T05:27:48.923Z  node_finished: "コード実行" (2124 chars)
-2026-07-31T05:27:48.954Z  node_started: "LLM"
-2026-07-31T05:27:55.494Z  node_finished: "LLM" (1265 chars)
-2026-07-31T05:27:55.513Z  node_started: "CSVをURL配列に変換"
-2026-07-31T05:27:55.622Z  node_finished: "CSVをURL配列に変換" (566 chars)
-2026-07-31T05:27:55.647Z  node_started: "URL選択"
-2026-07-31T05:27:55.647Z  ⚠️ Human Inputノード再検知（新規ラン）: "URL選択" → selected_urls がバイパスされなかった可能性
-2026-07-31T05:27:55.714Z  EVT:human_input_required
-2026-07-31T05:27:55.714Z  EVT:workflow_paused
-2026-07-31T05:27:56.717Z  SSE完了: nodeOutputs=5件
+2026-07-31T05:41:27.666Z  START form_token="AlW3bRqzaPz61UAt47ZdWb" workflow_run_id="140024b5-d8b0-4d3c-8cb9-16c95879585c" task_id="1076bf4e-86c2-4917-9aab-fb78a46ab030" client="ge"
+2026-07-31T05:41:27.669Z  新規ワークフロー開始: company="ゼネラル・エレクトリック" slug="ge" urls=9件
+2026-07-31T05:41:28.178Z  新規ワークフロー開始 OK: 200
+2026-07-31T05:41:28.466Z  workflow_started run_id=95289189-7b65-4ba5-9df2-b933cbc9f9ce
+2026-07-31T05:41:28.467Z  node_started: "ユーザー入力" data={"id":"47b3e788-79e3-4f4a-a41e-ed7b4caefd98","node_id":"1784275193187","node_type":"start","title":"ユーザー入力","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:41:28.486Z  node_finished: "ユーザー入力" (319 chars)
+2026-07-31T05:41:28.531Z  node_started: "GoogleSearch" data={"id":"4c631dee-2e2d-4c32-852e-4e21f7dcf430","node_id":"1784276775772","node_type":"tool","title":"GoogleSearch","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{"icon":"https://console.dify.milize.com/console/api/workspaces/current/plugin
+2026-07-31T05:41:28.617Z  node_finished: "GoogleSearch" (6159 chars)
+2026-07-31T05:41:28.618Z  node_started: "コード実行" data={"id":"5d997639-20d2-4270-bd98-817d77f57fc3","node_id":"1784279168631","node_type":"code","title":"コード実行","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:41:28.730Z  node_finished: "コード実行" (2124 chars)
+2026-07-31T05:41:28.731Z  node_started: "LLM" data={"id":"a6b90d5d-2a79-4654-9e81-6ed5d0e9625b","node_id":"1784275830150","node_type":"llm","title":"LLM","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476488,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:41:33.866Z  node_finished: "LLM" (1150 chars)
+2026-07-31T05:41:33.886Z  node_started: "CSVをURL配列に変換" data={"id":"a6bfa288-0ff2-42ac-9199-2b80b8b9c95e","node_id":"1784796752994","node_type":"code","title":"CSVをURL配列に変換","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476493,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:41:33.951Z  node_finished: "CSVをURL配列に変換" (457 chars)
+2026-07-31T05:41:33.969Z  node_started: "URL選択" data={"id":"00728f94-639e-40f7-980b-3c7483d93910","node_id":"1785410021139","node_type":"human-input","title":"URL選択","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476493,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
+2026-07-31T05:41:34.042Z  human_input_required: {"form_id":"019fb6b1-3236-74a7-88b8-28796d063180","node_id":"1785410021139","node_title":"URL選択","form_content":"\n{{#$output.selected_urls#}}\n","inputs":[{"type":"paragraph","output_variable_name":"selected_urls","default":{"type":"variable","selector":["1784796752994","urls"],"value":""}}],"actions":[{"id":"action_1","title":"確認","button_style":"default"}],"display_in_ui":true,"form_token":"I4Gd6MnRBG90RFb6VhKNpE","resolved_default_values":{"selected_urls":"https://ja.wikipedia.org/wiki/%E3%82%BC%E3%83%8D%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%A8%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF\nhttps://www.ge.com/\nhttps://www.ge.com/about-us\nhttps://www.ge.com/brand\nhttps://www.ge.com/news\nhttps://www.ge.com/news/press-releases\nhttps://www.ge.com/investor-relations\nhttps://jobs.ge
+2026-07-31T05:41:34.042Z  freshToken="I4Gd6MnRBG90RFb6VhKNpE" (元 form_token="AlW3bRqzaPz61UAt47ZdWb")
+2026-07-31T05:41:34.501Z  SUBMIT[flat/v1] https://api.dify.milize.com/v1/form/human_input/I4Gd6MnRBG90RFb6VhKNpE → 404 body=<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
+2026-07-31T05:41:34.961Z  SUBMIT[flat/noV1] https://api.dify.milize.com/form/human_input/I4Gd6MnRBG90RFb6VhKNpE → 200 body=
+2026-07-31T05:41:34.961Z  workflow_paused: {"workflow_run_id":"95289189-7b65-4ba5-9df2-b933cbc9f9ce","paused_nodes":["1785410021139"],"outputs":{},"reasons":[{"TYPE":"human_input_required","form_id":"019fb6b1-3236-74a7-88b8-28796d063180","form_content":"\n{{#$output.selected_urls#}}\n","inputs":[{"type":"paragraph","output_variable_name":"selected_urls","default":{"type":"variable","selector":["1784796752994","urls"],"value":""}}],"actions":[{"id":"action_1","title":"確認","button_style":"default"}],"display_in_ui":true,"node_id":"1785410021139","node_title":"URL選択","resolved_default_values":{"selected_urls":"https://ja.wikipedia.org/wiki/%E3%82%BC%E3%83%8D%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%A8%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF\nhttps://www.ge.com/\nhttps://www.ge.com/about-us\nhttps://www.ge.com/brand\nhttps://www.
+2026-07-31T05:41:34.962Z  freshToken="" (元 form_token="AlW3bRqzaPz61UAt47ZdWb")
+2026-07-31T05:41:35.119Z  SUBMIT[flat/v1] https://api.dify.milize.com/v1/form/human_input/AlW3bRqzaPz61UAt47ZdWb → 404 body=<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
+2026-07-31T05:41:35.273Z  SUBMIT[flat/noV1] https://api.dify.milize.com/form/human_input/AlW3bRqzaPz61UAt47ZdWb → 200 body=
+2026-07-31T05:41:35.273Z  SSE完了: nodeOutputs=5件
