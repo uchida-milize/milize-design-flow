@@ -82,8 +82,9 @@ export async function POST(req: NextRequest) {
         // GET /workflows/runs/{workflow_run_id} でステータスを確認
         const runId = workflow_run_id && workflow_run_id !== 'undefined' && workflow_run_id !== '' ? workflow_run_id : task_id;
         const pollEndpoints = [
-          `${baseUrl}/workflows/runs/${runId}`,
-          `${baseUrl}/workflow/run-detail?workflow_run_id=${runId}`,
+          `${baseUrl}/workflows/runs/${runId}`,           // 最新Dify
+          `${baseUrl}/workflow/runs/${runId}`,            // 旧パス variant
+          `${baseUrl}/workflows/logs?page=1&limit=5`,    // ログ一覧から最新を取得
         ].filter(Boolean);
 
         const pollHeaders = { Authorization: `Bearer ${apiKey}` };
@@ -108,6 +109,23 @@ export async function POST(req: NextRequest) {
                 continue;
               }
               const json = await r.json();
+
+              // ログ一覧レスポンス: { data: [...], has_more: bool }
+              if (Array.isArray(json.data) && json.data.length > 0) {
+                const latest = json.data.find((item: Record<string, unknown>) =>
+                  item.workflow_run_id === runId || item.id === runId,
+                ) ?? json.data[0];
+                const status: string = String(latest.status ?? '');
+                send({ progress: progressVal, status: `ポーリング応答(logs): status="${status}" id="${String(latest.id ?? '').slice(0, 8)}"` });
+                if (status === 'succeeded') {
+                  runOutputs = (latest.outputs as Record<string, unknown>) ?? {};
+                  pollSucceeded = true;
+                  break;
+                }
+                continue;
+              }
+
+              // 単一ランレスポンス
               const status: string = json.status ?? json.data?.status ?? '';
               send({ progress: progressVal, status: `ポーリング応答: status="${status}" ep="${ep.slice(-40)}"` });
               if (status === 'succeeded') {
