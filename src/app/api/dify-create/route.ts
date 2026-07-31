@@ -20,7 +20,16 @@ export async function POST(req: NextRequest) {
         controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
       };
 
+      // ── インメモリ デバッグログ ──────────────────────────────────────────
+      const debugLog: string[] = [];
+      const log = (msg: string) => {
+        const line = `${new Date().toISOString()}  ${msg}`;
+        debugLog.push(line);
+        console.log('[dify-create]', msg);
+      };
+
       try {
+        log(`START company="${company_name}" slug="${client_slug}" selected_urls=${selected_urls ? 'yes' : 'no'}`);
         send({ progress: 10, status: 'Difyに接続中...' });
 
         const difyRes = await fetch(`${process.env.DIFY_BASE_URL}/workflows/run`, {
@@ -222,6 +231,10 @@ export async function POST(req: NextRequest) {
                   {
                     path: `src/app/${client_slug}/resources/page.tsx`,
                     content: buildResourcesPage(client_slug, company_name),
+                  },
+                  {
+                    path: `src/app/${client_slug}/_debug.txt`,
+                    content: debugLog.join('\n') + '\n',
                   },
                 ];
 

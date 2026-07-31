@@ -28,18 +28,28 @@ export async function POST(req: NextRequest) {
         controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
       };
 
+      // ── インメモリ デバッグログ（最後に GitHub へコミット）──────────────
+      const debugLog: string[] = [];
+      const log = (msg: string) => {
+        const ts = new Date().toISOString();
+        const line = `${ts}  ${msg}`;
+        debugLog.push(line);
+        console.log('[dify-resume]', msg);
+        return line;
+      };
+
       try {
         const apiKey = process.env.DIFY_API_KEY ?? '';
         const baseUrl = process.env.DIFY_BASE_URL ?? '';
         const baseWithoutVersion = baseUrl.replace(/\/v\d+\/?$/, '');
 
-        send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
+        log(`START form_token="${form_token}" workflow_run_id="${workflow_run_id}" task_id="${task_id}" client="${client_slug}"`);
+        send({ progress: 58, status: `受信: ft="${form_token?.slice(0, 20)}..." wf_run_id="${workflow_run_id?.slice(0, 20)}..."` });
 
         const urlsStr = Array.isArray(selected_urls)
           ? selected_urls.join('\n')
           : String(selected_urls ?? '');
 
-        // action なし・シンプルな inputs のみで試す
         const formBody = JSON.stringify({
           inputs: { selected_urls: urlsStr },
           user: 'milize-admin',
@@ -49,20 +59,22 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         };
 
-        // フォーム送信
+        // フォーム送信（v1付き → v1なし の順で試す）
         let resumeRes: Response | null = null;
         let lastErr = '';
         for (const url of [
           `${baseUrl}/form/human_input/${form_token}`,
           `${baseWithoutVersion}/form/human_input/${form_token}`,
         ]) {
+          console.log('[dify-resume] POST', url);
           const r = await fetch(url, { method: 'POST', headers: authHeaders, body: formBody });
           const bodyText = await r.text();
+          const ct = r.headers.get('content-type') ?? 'none';
+          log(`POST ${url} → ${r.status} ct=${ct} body=${bodyText.slice(0, 200)}`);
           if (r.ok) {
-            send({ progress: 59, status: `フォーム送信OK: ${bodyText.slice(0, 120)}` });
-            // bodyTextをストリームとして再構成
+            send({ progress: 59, status: `フォーム送信OK: ${r.status} ct=${ct} body=${bodyText.slice(0, 100)}` });
             resumeRes = new Response(bodyText, {
-              headers: { 'content-type': r.headers.get('content-type') ?? '' },
+              headers: { 'content-type': ct },
             });
             break;
           }
@@ -134,10 +146,11 @@ export async function POST(req: NextRequest) {
 
         } else {
           // ─── SSEでない場合: ポーリングフォールバック ──────────────────────
+          log(`ポーリング開始 runId="${workflow_run_id || task_id}" contentType="${contentType}"`);
           send({ progress: 60, status: `フォーム送信OK (${contentType || 'no content-type'})。ポーリング中...` });
 
           const runId = (workflow_run_id && workflow_run_id !== 'undefined') ? workflow_run_id : task_id;
-          const logsUrl = `${baseUrl}/workflows/logs?page=1&limit=5`;
+          const logsUrl = `${baseUrl}/workflows/logs?page=1&limit=20`;
           const pollHeaders = { Authorization: `Bearer ${apiKey}` };
           const MAX_WAIT_MS = 240_000;
           const pollStart = Date.now();
@@ -149,32 +162,34 @@ export async function POST(req: NextRequest) {
 
             try {
               const r = await fetch(logsUrl, { headers: pollHeaders });
-              if (!r.ok) continue;
+              if (!r.ok) { log(`logs API ${r.status}`); continue; }
               const json = await r.json();
               if (!Array.isArray(json.data) || json.data.length === 0) continue;
 
               type LogItem = Record<string, unknown> & { workflow_run?: Record<string, unknown> };
-              const item: LogItem = (json.data as LogItem[]).find((x) =>
+              const allItems = json.data as LogItem[];
+
+              // runId で一致するものを優先、なければ最新（インデックス0）
+              const item: LogItem = allItems.find((x) =>
                 x.workflow_run_id === runId || x.id === runId || x.workflow_run?.id === runId,
-              ) ?? (json.data[0] as LogItem);
+              ) ?? allItems[0];
 
               const wfRun = (item.workflow_run ?? {}) as Record<string, unknown>;
               const status = String(wfRun.status ?? '');
               const finishedAt = wfRun.finished_at;
+              const itemRunId = String(item.workflow_run_id ?? (wfRun.id ?? item.id ?? ''));
 
-              // 毎回ステータスを表示（デバッグ中）
+              log(`[${pollCount}] status="${status}" finishedAt=${finishedAt} runId=${itemRunId}`);
               send({ progress: Math.min(62 + pollCount, 75), status: `[${pollCount}] status="${status}" finished_at=${finishedAt}` });
 
               if (status === 'succeeded' || (finishedAt && String(finishedAt) !== 'null' && String(finishedAt) !== '0')) {
-                // 完了時: wfRunの全キーをダンプして出力パスを確認
-                const wfKeys2 = Object.keys(wfRun).join(',');
-                const itemKeys2 = Object.keys(item).join(',');
-                send({ progress: 76, status: `完了! wfRun keys=[${wfKeys2}] item keys=[${itemKeys2}]` });
+                log(`完了検知: wfRun keys=[${Object.keys(wfRun).join(',')}] item keys=[${Object.keys(item).join(',')}]`);
+                send({ progress: 76, status: `完了! ノード出力を取得中...` });
 
-                // details からノード出力を取得
+                // ① list API の details（通常は空）
                 type NodeDetail = Record<string, unknown>;
-                const details = Array.isArray(item.details) ? (item.details as NodeDetail[]) : [];
-                for (const node of details) {
+                const listDetails = Array.isArray(item.details) ? (item.details as NodeDetail[]) : [];
+                for (const node of listDetails) {
                   const title = String(node.title ?? node.node_id ?? `node_${Object.keys(nodeOutputs).length + 1}`);
                   const nodeOut = node.outputs as Record<string, unknown> | undefined;
                   if (nodeOut && Object.keys(nodeOut).length > 0) {
@@ -184,7 +199,50 @@ export async function POST(req: NextRequest) {
                     if (text.trim()) nodeOutputs[title] = text;
                   }
                 }
-                // item直下のoutputsも試す
+                log(`list details: ${listDetails.length}件 → nodeOutputs=${Object.keys(nodeOutputs).length}件`);
+
+                // ② 個別ログ詳細 API (GET /workflows/logs/{log_id})
+                const logId = String(item.id ?? '');
+                if (logId) {
+                  const detailUrl = `${baseUrl}/workflows/logs/${logId}`;
+                  log(`個別詳細取得: GET ${detailUrl}`);
+                  send({ progress: 77, status: `ログ詳細取得中 (log_id=${logId.slice(0, 12)}...)` });
+                  const detailRes = await fetch(detailUrl, { headers: pollHeaders });
+                  const detailText = await detailRes.text();
+                  log(`log detail ${detailRes.status}: ${detailText.slice(0, 500)}`);
+                  send({ progress: 77, status: `log detail: ${detailRes.status} ${detailText.slice(0, 150)}` });
+
+                  if (detailRes.ok) {
+                    try {
+                      const detail = JSON.parse(detailText) as Record<string, unknown>;
+                      const detailNodes = Array.isArray(detail.details) ? (detail.details as NodeDetail[]) : [];
+                      log(`detail.details: ${detailNodes.length}件`);
+                      for (const node of detailNodes) {
+                        const title = String(node.title ?? node.node_id ?? `node_${Object.keys(nodeOutputs).length + 1}`);
+                        const nodeOut = node.outputs as Record<string, unknown> | undefined;
+                        if (nodeOut && Object.keys(nodeOut).length > 0) {
+                          const text = Object.entries(nodeOut)
+                            .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                            .join('\n\n---\n\n');
+                          if (text.trim()) nodeOutputs[title] = text;
+                        }
+                      }
+                      // workflow_run.outputs も試す
+                      if (Object.keys(nodeOutputs).length === 0) {
+                        const wfRunD = (detail.workflow_run ?? {}) as Record<string, unknown>;
+                        const wfOut = wfRunD.outputs ?? detail.outputs;
+                        if (wfOut && typeof wfOut === 'object') {
+                          const text = Object.entries(wfOut as Record<string, unknown>)
+                            .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                            .join('\n\n---\n\n');
+                          if (text.trim()) nodeOutputs['workflow_outputs'] = text;
+                        }
+                      }
+                    } catch (e) { log(`detail parse error: ${e}`); }
+                  }
+                }
+
+                // ③ item直下のoutputsも試す（fallback）
                 if (Object.keys(nodeOutputs).length === 0 && item.outputs && typeof item.outputs === 'object') {
                   const rawOut = item.outputs as Record<string, unknown>;
                   const text = Object.entries(rawOut)
@@ -192,15 +250,18 @@ export async function POST(req: NextRequest) {
                     .join('\n\n---\n\n');
                   if (text.trim()) nodeOutputs['workflow_outputs'] = text;
                 }
+
+                log(`ポーリング完了 nodeOutputs=${Object.keys(nodeOutputs).length}件`);
                 send({ progress: 78, status: `ポーリング完了 (出力: ${Object.keys(nodeOutputs).length}件)` });
                 break;
               }
               if (status === 'failed' || status === 'stopped') {
+                log(`ワークフロー失敗: ${status}`);
                 send({ error: `ワークフロー失敗: ${status}` });
                 controller.close();
                 return;
               }
-            } catch { /* ネットワークエラー */ }
+            } catch (e) { log(`ポーリングエラー: ${e}`); }
           }
         }
 
@@ -229,6 +290,10 @@ export async function POST(req: NextRequest) {
           {
             path: `src/app/${client_slug}/resources/page.tsx`,
             content: buildResourcesPage(client_slug, company_name),
+          },
+          {
+            path: `src/app/${client_slug}/_debug.txt`,
+            content: debugLog.join('\n') + '\n',
           },
         ];
 
