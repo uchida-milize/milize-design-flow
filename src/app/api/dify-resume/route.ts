@@ -72,11 +72,15 @@ export async function POST(req: NextRequest) {
           return;
         }
 
-        send({ progress: 60, status: 'フォーム送信完了。ワークフロー再開を待機中...' });
+        // デバッグ: 受信したIDを表示
+        send({
+          progress: 60,
+          status: `フォーム送信完了。task_id="${task_id?.slice(0,8)}" wf_run_id="${(workflow_run_id||'').slice(0,8)}" でポーリング開始`,
+        });
 
         // ─── Step 2: ワークフロー完了をポーリングで待つ ──────────────────
         // GET /workflows/runs/{workflow_run_id} でステータスを確認
-        const runId = workflow_run_id && workflow_run_id !== 'undefined' ? workflow_run_id : task_id;
+        const runId = workflow_run_id && workflow_run_id !== 'undefined' && workflow_run_id !== '' ? workflow_run_id : task_id;
         const pollEndpoints = [
           `${baseUrl}/workflows/runs/${runId}`,
           `${baseUrl}/workflow/run-detail?workflow_run_id=${runId}`,
@@ -99,9 +103,13 @@ export async function POST(req: NextRequest) {
           for (const ep of pollEndpoints) {
             try {
               const r = await fetch(ep, { headers: pollHeaders });
-              if (!r.ok) continue;
+              if (!r.ok) {
+                send({ progress: progressVal, status: `ポーリング ${r.status}: ${ep.slice(-50)}` });
+                continue;
+              }
               const json = await r.json();
               const status: string = json.status ?? json.data?.status ?? '';
+              send({ progress: progressVal, status: `ポーリング応答: status="${status}" ep="${ep.slice(-40)}"` });
               if (status === 'succeeded') {
                 runOutputs = json.outputs ?? json.data?.outputs ?? {};
                 pollSucceeded = true;
@@ -112,7 +120,9 @@ export async function POST(req: NextRequest) {
                 return;
               }
               // running / waiting → continue polling
-            } catch { /* network error — retry */ }
+            } catch (e) {
+              send({ progress: progressVal, status: `ポーリングエラー: ${String(e).slice(0,50)}` });
+            }
           }
           if (pollSucceeded) break;
         }
