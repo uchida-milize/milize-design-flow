@@ -110,9 +110,6 @@ export async function POST(req: NextRequest) {
                 data.event === 'human_input_required' ||
                 data.event === 'node_interrupted'
               ) {
-                // デバッグ: interruptイベントの生データを送信
-                send({ progress: progressVal, status: `INTERRUPT event=${data.event} raw=${JSON.stringify(data).slice(0, 300)}` });
-
                 // form_token を取得（様々なパスを試す）
                 const ft =
                   data.data?.form_token ||
@@ -121,6 +118,10 @@ export async function POST(req: NextRequest) {
                   data.data?.extras?.form?.token ||
                   data.data?.inputs?.form_token ||
                   '';
+
+                // デバッグ: form_tokenの取得パスと値を確認
+                const dataKeys = data.data ? Object.keys(data.data as object).join(',') : 'none';
+                send({ progress: progressVal, status: `INT event=${data.event} ft="${ft}" data_keys=[${dataKeys}]` });
                 if (ft) formToken = ft;
 
                 // 人間の入力ノードで一時停止 → フロントへ返す
