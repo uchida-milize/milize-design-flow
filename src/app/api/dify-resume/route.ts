@@ -188,7 +188,7 @@ export async function POST(req: NextRequest) {
           let progressVal = 62;
           let workflowDone = false;
           let pollCount = 0;
-          const maxPolls = 15;
+          const maxPolls = 20;
 
           log(`ポーリング開始 pollIds=${JSON.stringify(pollIds)}`);
 
