@@ -168,82 +168,121 @@ export async function POST(req: NextRequest) {
           }
         } else {
           // ── ポーリング（form/human_input は 200 OK + 空ボディ）───────────────
-          // 5秒×48回=240秒（maxDuration=300 以内）
-          // workflow_run_id と task_id の両方で試す
+          // /v1/workflows/runs/{runId} は Dify 1.13.3 で 404 のため代替手段を使用:
+          //   手段1: node-executions（ノード取得 + 完了検出）
+          //   手段2: workflows/logs（ワークフロー完了ステータス確認）
+          // 10秒×15回=150秒（残り~120秒を Vercel 待機に割り当て）
           const pollIds = [workflow_run_id, task_id].filter(Boolean);
           let progressVal = 62;
           let workflowDone = false;
           let pollCount = 0;
-          const maxPolls = 48; // 最大 4分 (5秒×48)
+          const maxPolls = 15;
 
           log(`ポーリング開始 pollIds=${JSON.stringify(pollIds)}`);
 
-          const fetchNodeExecutions = async (runId: string) => {
-            const nodeRes = await fetch(`${baseUrl}/workflows/runs/${runId}/node-executions?limit=100`, {
-              headers: { Authorization: `Bearer ${apiKey}` },
-            });
-            if (!nodeRes.ok) {
-              log(`node-executions[${runId}]: ${nodeRes.status}`);
-              return;
-            }
-            const nodeData = await nodeRes.json() as { data?: Array<{ title?: string; outputs?: Record<string, unknown> }> };
-            let added = 0;
-            for (const node of nodeData.data ?? []) {
-              if (node.outputs && node.title && !nodeOutputs[node.title]) {
-                const nodeText = Object.entries(node.outputs)
-                  .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                  .join('\n\n---\n\n');
-                if (nodeText.trim()) { nodeOutputs[node.title] = nodeText; added++; }
+          // node-executions からノード出力を取得してノード安定を検出
+          let lastDoneCount = 0;
+          let stablePolls = 0;
+
+          const collectNodeExecutions = async (runId: string): Promise<number> => {
+            try {
+              const nodeRes = await fetch(`${baseUrl}/workflows/runs/${runId}/node-executions?limit=100`, {
+                headers: { Authorization: `Bearer ${apiKey}` },
+              });
+              if (!nodeRes.ok) {
+                log(`node-executions[${runId.slice(0, 8)}]: ${nodeRes.status}`);
+                return -1;
               }
+              const nodeData = await nodeRes.json() as {
+                data?: Array<{ title?: string; outputs?: Record<string, unknown>; status?: string }>;
+              };
+              const nodes = nodeData.data ?? [];
+              let added = 0;
+              for (const node of nodes) {
+                if (node.outputs && node.title && !nodeOutputs[node.title]) {
+                  const nodeText = Object.entries(node.outputs)
+                    .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                    .join('\n\n---\n\n');
+                  if (nodeText.trim()) { nodeOutputs[node.title] = nodeText; added++; }
+                }
+              }
+              const doneCount = nodes.filter(n => n.status === 'succeeded' || n.status === 'failed').length;
+              log(`node-execs[${runId.slice(0, 8)}]: total=${nodes.length} done=${doneCount} +${added}追加`);
+              return doneCount;
+            } catch (e) {
+              log(`node-executions error: ${e}`);
+              return -1;
             }
-            log(`node-executions: +${added}件 (合計${Object.keys(nodeOutputs).length}件)`);
           };
 
           while (!workflowDone && pollCount < maxPolls) {
-            await new Promise(r => setTimeout(r, 5000));
+            await new Promise(r => setTimeout(r, 10000));
             pollCount++;
-            progressVal = Math.min(62 + pollCount, 78);
+            progressVal = Math.min(62 + pollCount * 2, 78);
+            send({ progress: progressVal, status: `Dify処理中... (${pollCount}/${maxPolls})` });
 
+            // 手段1: node-executions でノード取得 + 安定検出
             for (const runId of pollIds) {
-              try {
-                const pollRes = await fetch(`${baseUrl}/workflows/runs/${runId}`, {
-                  headers: { Authorization: `Bearer ${apiKey}` },
-                });
-                if (!pollRes.ok) {
-                  log(`poll[${pollCount}][${runId.slice(0, 8)}]: ${pollRes.status}`);
-                  continue;
-                }
-                const pollData = await pollRes.json() as { status: string; error?: string; outputs?: Record<string, unknown> };
-                const status = pollData.status;
-                log(`poll[${pollCount}]: status="${status}"`);
-                send({ progress: progressVal, status: `ワークフロー処理中... (${pollCount}回目)` });
+              if (!runId) continue;
+              const doneCount = await collectNodeExecutions(runId);
+              if (doneCount < 0) continue; // エンドポイント未対応
 
-                if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
+              if (doneCount > 0 && doneCount === lastDoneCount) {
+                stablePolls++;
+                log(`stable[${stablePolls}/2] doneCount=${doneCount}`);
+                if (stablePolls >= 2) {
                   workflowDone = true;
-                  if (pollData.outputs && typeof pollData.outputs === 'object') {
-                    const wfText = Object.entries(pollData.outputs)
-                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                      .join('\n\n---\n\n');
-                    if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
-                  }
-                  await fetchNodeExecutions(runId);
-                  if (status === 'failed') log(`workflow failed: ${pollData.error ?? 'unknown'}`);
-                  break;
+                  log(`ノード数安定(${doneCount}件) → 完了とみなす`);
                 }
-              } catch (e) {
-                log(`poll error[${pollCount}]: ${e}`);
+              } else if (doneCount > lastDoneCount) {
+                lastDoneCount = doneCount;
+                stablePolls = 0;
               }
+              if (workflowDone) break;
             }
             if (workflowDone) break;
+
+            // 手段2: workflows/logs でワークフロー完了を確認
+            try {
+              const logsRes = await fetch(`${baseUrl}/workflows/logs?page=1&limit=10`, {
+                headers: { Authorization: `Bearer ${apiKey}` },
+              });
+              if (logsRes.ok) {
+                type LogEntry = {
+                  id?: string;
+                  workflow_run?: { id?: string; status?: string };
+                  status?: string;
+                };
+                const logsData = await logsRes.json() as { data?: LogEntry[] };
+                const logs = logsData.data ?? [];
+                for (const runId of pollIds) {
+                  if (!runId) continue;
+                  const match = logs.find(l =>
+                    l.id === runId || l.workflow_run?.id === runId,
+                  );
+                  if (match) {
+                    const status = match.status ?? match.workflow_run?.status;
+                    log(`logs[${pollCount}]: run=${runId.slice(0, 8)} status="${status}"`);
+                    if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
+                      workflowDone = true;
+                      break;
+                    }
+                  } else {
+                    log(`logs[${pollCount}]: ${logs.length}件, runId未発見`);
+                  }
+                }
+              }
+            } catch (e) {
+              log(`logs error: ${e}`);
+            }
           }
 
           if (!workflowDone) {
-            log(`ポーリングタイムアウト (${pollCount}回) → node-executions を最終取得`);
-            // タイムアウトでも node-executions だけは取得を試みる
+            log(`ポーリングタイムアウト (${pollCount}回) → 最終 node-executions 取得`);
             for (const runId of pollIds) {
-              await fetchNodeExecutions(runId);
+              if (runId) await collectNodeExecutions(runId);
             }
-            send({ progress: 78, status: 'Difyが処理中です。数分後にポータルをご確認ください。' });
+            send({ progress: 78, status: 'Difyが処理中。取得済み出力でコミットします。' });
           }
         }
 
@@ -309,9 +348,10 @@ export async function POST(req: NextRequest) {
         send({ progress: 85, status: 'Vercelデプロイ起動待ち...' });
 
         if (vercelToken && vercelProjectId) {
-          await waitForVercelDeploy(commitStart, vercelToken, vercelProjectId, send);
+          // maxDuration=300s の残り時間に合わせ 24回×5秒=120秒 に制限
+          await waitForVercelDeploy(commitStart, vercelToken, vercelProjectId, send, 24);
         } else {
-          send({ progress: 85, status: 'GitHubコミット完了。', dify_done: true });
+          send({ progress: 100, status: 'GitHubコミット完了。', deploy_done: true });
         }
       } catch (err) {
         send({ error: String(err) });

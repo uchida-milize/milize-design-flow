@@ -159,6 +159,15 @@ export function NewClientButton() {
     } catch {
       setGenStatus('接続エラーが発生しました');
     }
+
+    // フォールバック: deploy_done が来なかった場合（タイムアウト等）も
+    // モーダルを閉じてリフレッシュする（deploy_done 済みなら reset() でクリア済みなので無害）
+    setGenProgress(100);
+    setGenStatus('完了しました。ページを更新します...');
+    await new Promise(r => setTimeout(r, 1500));
+    setOpen(false);
+    reset();
+    router.refresh();
   }
 
   /**

@@ -446,16 +446,20 @@ export async function readAndFixDifyFiles(
   return results.filter((r): r is { path: string; content: string } => r !== null);
 }
 
-/** Vercel デプロイ完了まで待機してイベントを送信する共通関数 */
+/** Vercel デプロイ完了まで待機してイベントを送信する共通関数
+ * @param maxIterations 最大ポーリング回数（1回=5秒）。デフォルト36回(3分)。
+ *   dify-resume では残り時間が少ないため 24 を推奨（120秒）。
+ */
 export async function waitForVercelDeploy(
   commitStart: number,
   vercelToken: string,
   vercelProjectId: string,
   send: (data: object) => void,
+  maxIterations = 36,
 ) {
   let deployProgress = 65;
   let deployed = false;
-  for (let i = 0; i < 36; i++) {
+  for (let i = 0; i < maxIterations; i++) {
     await new Promise(r => setTimeout(r, 5000));
     deployProgress = Math.min(deployProgress + 0.8, 95);
     try {
