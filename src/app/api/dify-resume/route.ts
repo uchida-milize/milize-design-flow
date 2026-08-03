@@ -268,10 +268,11 @@ export async function POST(req: NextRequest) {
             path: `src/app/${client_slug}/layout.tsx`,
             content: `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
           },
-          {
+          // nodeOutputs が空の場合は resources.json を上書きしない
+          ...(nodeKeys.length > 0 ? [{
             path: `src/app/${client_slug}/resources.json`,
             content: JSON.stringify(nodeOutputs, null, 2),
-          },
+          }] : []),
           {
             path: `src/app/${client_slug}/resources/page.tsx`,
             content: buildResourcesPage(client_slug, company_name),
