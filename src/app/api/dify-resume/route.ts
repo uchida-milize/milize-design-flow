@@ -188,7 +188,7 @@ export async function POST(req: NextRequest) {
           let progressVal = 62;
           let workflowDone = false;
           let pollCount = 0;
-          const maxPolls = 30;
+          const maxPolls = 15;
 
           log(`ポーリング開始 pollIds=${JSON.stringify(pollIds)}`);
 
@@ -228,9 +228,9 @@ export async function POST(req: NextRequest) {
           };
 
           while (!workflowDone && pollCount < maxPolls) {
-            await new Promise(r => setTimeout(r, 5000));
+            await new Promise(r => setTimeout(r, 10000));
             pollCount++;
-            progressVal = Math.min(62 + Math.floor(pollCount / 2), 78);
+            progressVal = Math.min(62 + pollCount * 2, 78);
             send({ progress: progressVal, status: `Dify処理中... (${pollCount}/${maxPolls})` });
 
             // 手段1: node-executions でノード取得 + 安定検出
