@@ -168,74 +168,82 @@ export async function POST(req: NextRequest) {
           }
         } else {
           // ── ポーリング（form/human_input は 200 OK + 空ボディ）───────────────
-          // ワークフロー完了まで /v1/workflows/runs/{runId} をポーリング
-          const runId = workflow_run_id;
+          // 5秒×48回=240秒（maxDuration=300 以内）
+          // workflow_run_id と task_id の両方で試す
+          const pollIds = [workflow_run_id, task_id].filter(Boolean);
           let progressVal = 62;
           let workflowDone = false;
           let pollCount = 0;
-          const maxPolls = 60; // 最大 10分 (10秒×60)
+          const maxPolls = 48; // 最大 4分 (5秒×48)
 
-          log(`ポーリング開始 runId="${runId}"`);
+          log(`ポーリング開始 pollIds=${JSON.stringify(pollIds)}`);
+
+          const fetchNodeExecutions = async (runId: string) => {
+            const nodeRes = await fetch(`${baseUrl}/workflows/runs/${runId}/node-executions?limit=100`, {
+              headers: { Authorization: `Bearer ${apiKey}` },
+            });
+            if (!nodeRes.ok) {
+              log(`node-executions[${runId}]: ${nodeRes.status}`);
+              return;
+            }
+            const nodeData = await nodeRes.json() as { data?: Array<{ title?: string; outputs?: Record<string, unknown> }> };
+            let added = 0;
+            for (const node of nodeData.data ?? []) {
+              if (node.outputs && node.title && !nodeOutputs[node.title]) {
+                const nodeText = Object.entries(node.outputs)
+                  .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                  .join('\n\n---\n\n');
+                if (nodeText.trim()) { nodeOutputs[node.title] = nodeText; added++; }
+              }
+            }
+            log(`node-executions: +${added}件 (合計${Object.keys(nodeOutputs).length}件)`);
+          };
+
           while (!workflowDone && pollCount < maxPolls) {
-            await new Promise(r => setTimeout(r, 10000));
+            await new Promise(r => setTimeout(r, 5000));
             pollCount++;
             progressVal = Math.min(62 + pollCount, 78);
 
-            try {
-              const pollRes = await fetch(`${baseUrl}/workflows/runs/${runId}`, {
-                headers: { Authorization: `Bearer ${apiKey}` },
-              });
-              if (!pollRes.ok) {
-                log(`poll[${pollCount}]: ${pollRes.status}`);
-                continue;
-              }
-              const pollData = await pollRes.json() as { status: string; error?: string; outputs?: Record<string, unknown> };
-              const status = pollData.status;
-              log(`poll[${pollCount}]: status="${status}"`);
-              send({ progress: progressVal, status: `ワークフロー処理中... (${pollCount}回目)` });
-
-              if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
-                workflowDone = true;
-
-                if (pollData.outputs && typeof pollData.outputs === 'object') {
-                  const wfText = Object.entries(pollData.outputs)
-                    .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                    .join('\n\n---\n\n');
-                  if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
-                }
-
-                // ノード個別出力を取得
-                const nodeRes = await fetch(`${baseUrl}/workflows/runs/${runId}/node-executions`, {
+            for (const runId of pollIds) {
+              try {
+                const pollRes = await fetch(`${baseUrl}/workflows/runs/${runId}`, {
                   headers: { Authorization: `Bearer ${apiKey}` },
                 });
-                if (nodeRes.ok) {
-                  const nodeData = await nodeRes.json() as { data?: Array<{ title?: string; outputs?: Record<string, unknown>; status?: string }> };
-                  for (const node of nodeData.data ?? []) {
-                    if (node.outputs && node.title) {
-                      const nodeText = Object.entries(node.outputs)
-                        .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
-                        .join('\n\n---\n\n');
-                      if (nodeText.trim()) nodeOutputs[node.title] = nodeText;
-                    }
-                  }
-                  log(`node-executions: ${Object.keys(nodeOutputs).length}件取得`);
-                } else {
-                  log(`node-executions: ${nodeRes.status}`);
+                if (!pollRes.ok) {
+                  log(`poll[${pollCount}][${runId.slice(0, 8)}]: ${pollRes.status}`);
+                  continue;
                 }
+                const pollData = await pollRes.json() as { status: string; error?: string; outputs?: Record<string, unknown> };
+                const status = pollData.status;
+                log(`poll[${pollCount}]: status="${status}"`);
+                send({ progress: progressVal, status: `ワークフロー処理中... (${pollCount}回目)` });
 
-                if (status === 'failed') {
-                  log(`workflow failed: ${pollData.error ?? 'unknown'}`);
-                  send({ progress: progressVal, status: `ワークフロー失敗: ${pollData.error ?? ''}` });
+                if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
+                  workflowDone = true;
+                  if (pollData.outputs && typeof pollData.outputs === 'object') {
+                    const wfText = Object.entries(pollData.outputs)
+                      .map(([k, v]) => `[${k}]\n${typeof v === 'string' ? v : JSON.stringify(v, null, 2)}`)
+                      .join('\n\n---\n\n');
+                    if (wfText.trim()) nodeOutputs['ワークフロー最終出力'] = wfText;
+                  }
+                  await fetchNodeExecutions(runId);
+                  if (status === 'failed') log(`workflow failed: ${pollData.error ?? 'unknown'}`);
+                  break;
                 }
+              } catch (e) {
+                log(`poll error[${pollCount}]: ${e}`);
               }
-            } catch (e) {
-              log(`poll error[${pollCount}]: ${e}`);
             }
+            if (workflowDone) break;
           }
 
           if (!workflowDone) {
-            log(`ポーリングタイムアウト (${pollCount}回)`);
-            send({ progress: 78, status: 'タイムアウト。GitHub コミットを試みます...' });
+            log(`ポーリングタイムアウト (${pollCount}回) → node-executions を最終取得`);
+            // タイムアウトでも node-executions だけは取得を試みる
+            for (const runId of pollIds) {
+              await fetchNodeExecutions(runId);
+            }
+            send({ progress: 78, status: 'Difyが処理中です。数分後にポータルをご確認ください。' });
           }
         }
 
