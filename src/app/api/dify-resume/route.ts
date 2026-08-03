@@ -42,9 +42,21 @@ export async function POST(req: NextRequest) {
         log(`START task_id="${task_id}" workflow_run_id="${workflow_run_id}" form_token="${form_token}" client="${client_slug}"`);
         send({ progress: 58, status: 'URLを送信してワークフローを再開中...' });
 
+        // selected_urls を「URL||カテゴリ1,カテゴリ2」形式に変換して Dify に渡す
+        // 例: https://ge.com||カラー,ロゴ・CI,フォント,フォーム
+        // （Dify 側の URL配列代入ノードでパースし、カテゴリ別抽出に使用）
+        const buildUrlWithCategories = (u: string): string => {
+          const match = u.match(/^(.+?)\s*\[([^\]]*)\]$/);
+          if (match) {
+            const url = match[1].trim();
+            const cats = match[2].split(',').map(c => c.trim()).filter(Boolean).join(',');
+            return cats ? `${url}||${cats}` : url;
+          }
+          return u.trim();
+        };
         const urlsStr = Array.isArray(selected_urls)
-          ? selected_urls.join('\n')
-          : String(selected_urls ?? '');
+          ? selected_urls.map((u: string) => buildUrlWithCategories(u)).join('\n')
+          : String(selected_urls ?? '').split('\n').map(buildUrlWithCategories).join('\n');
 
         // ── ワークフロー再開 ──────────────────────────────────────────────────
         // 正しいエンドポイント: app.dify.milize.com/api/form/human_input/{form_token}
