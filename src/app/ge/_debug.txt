@@ -1,49 +1,108 @@
-2026-07-31T05:47:00.025Z  START form_token="MpCpsus96QoaZfS9Nlyu21" workflow_run_id="5d272f1b-780e-48d9-a86b-9410b40a5071" task_id="2320f201-461b-4a42-921d-c793eb6a0d83" client="ge"
-2026-07-31T05:47:00.028Z  新規ワークフロー開始: company="ゼネラル・エレクトリック" slug="ge" urls=8件
-2026-07-31T05:47:00.579Z  新規ワークフロー開始 OK: 200
-2026-07-31T05:47:00.861Z  workflow_started run_id=514861fd-0648-48e2-982a-4b33250d0e3e
-2026-07-31T05:47:00.862Z  node_started: "ユーザー入力" data={"id":"0e88c7ed-ea84-4e1c-96b2-e07247b9d8d6","node_id":"1784275193187","node_type":"start","title":"ユーザー入力","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476820,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:47:00.877Z  node_finished: "ユーザー入力" (319 chars)
-2026-07-31T05:47:00.924Z  node_started: "GoogleSearch" data={"id":"244695c0-586e-42b0-8543-a3d9fd834579","node_id":"1784276775772","node_type":"tool","title":"GoogleSearch","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476820,"extras":{"icon":"https://console.dify.milize.com/console/api/workspaces/current/plugin
-2026-07-31T05:47:01.015Z  node_finished: "GoogleSearch" (6159 chars)
-2026-07-31T05:47:01.016Z  node_started: "コード実行" data={"id":"4433765e-d34c-4875-8f8d-ab32bb7558e0","node_id":"1784279168631","node_type":"code","title":"コード実行","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476820,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:47:01.124Z  node_finished: "コード実行" (2124 chars)
-2026-07-31T05:47:01.125Z  node_started: "LLM" data={"id":"a34c400b-9c3f-4d1c-870e-0c63c97128d2","node_id":"1784275830150","node_type":"llm","title":"LLM","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476821,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:47:05.589Z  node_finished: "LLM" (1089 chars)
-2026-07-31T05:47:05.609Z  node_started: "CSVをURL配列に変換" data={"id":"6e7fb8b7-93fd-4250-a2a2-7e6be99a1a2d","node_id":"1784796752994","node_type":"code","title":"CSVをURL配列に変換","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476825,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:47:05.667Z  node_finished: "CSVをURL配列に変換" (450 chars)
-2026-07-31T05:47:05.684Z  node_started: "URL選択" data={"id":"982d8d40-e27b-4cbc-8073-eb88233e814f","node_id":"1785410021139","node_type":"human-input","title":"URL選択","index":1,"predecessor_node_id":null,"inputs":null,"inputs_truncated":false,"created_at":1785476825,"extras":{},"iteration_id":null,"loop_id":null,"agent_strategy":null}
-2026-07-31T05:47:05.749Z  human_input_required: {"form_id":"019fb6b6-41f6-76a4-b089-ab8cc1c08095","node_id":"1785410021139","node_title":"URL選択","form_content":"\n{{#$output.selected_urls#}}\n","inputs":[{"type":"paragraph","output_variable_name":"selected_urls","default":{"type":"variable","selector":["1784796752994","urls"],"value":""}}],"actions":[{"id":"action_1","title":"確認","button_style":"default"}],"display_in_ui":true,"form_token":"oFa1CVu5Gkbu4pdu73K6Oo","resolved_default_values":{"selected_urls":"https://www.ge.com/\nhttps://www.ge.com/about-us\nhttps://www.ge.com/company\nhttps://www.ge.com/news\nhttps://www.ge.com/investor-rela
-2026-07-31T05:47:05.749Z  freshToken="oFa1CVu5Gkbu4pdu73K6Oo"
-2026-07-31T05:47:06.217Z  SUBMIT[flat/v1] → 404 body=<!doctype html>
-<html lang=en>
-<title>404 Not Found</title>
-<h1>Not Found</h1>
-<p>The requested URL 
-2026-07-31T05:47:06.665Z  SUBMIT[flat/noV1] → 200 body=
-2026-07-31T05:47:06.666Z  workflow_paused: run_id=514861fd-0648-48e2-982a-4b33250d0e3e
-2026-07-31T05:47:06.752Z  SSE完了: nodeOutputs=5件 formSubmitted=true runId=514861fd-0648-48e2-982a-4b33250d0e3e
-2026-07-31T05:47:06.752Z  ポーリング開始: run_id=514861fd-0648-48e2-982a-4b33250d0e3e
-2026-07-31T05:47:17.319Z  POLL[1] status="paused" finishedAt=null
-2026-07-31T05:47:27.873Z  POLL[2] status="paused" finishedAt=null
-2026-07-31T05:47:38.438Z  POLL[3] status="paused" finishedAt=null
-2026-07-31T05:47:48.996Z  POLL[4] status="paused" finishedAt=null
-2026-07-31T05:47:59.542Z  POLL[5] status="paused" finishedAt=null
-2026-07-31T05:48:10.128Z  POLL[6] status="paused" finishedAt=null
-2026-07-31T05:48:20.692Z  POLL[7] status="paused" finishedAt=null
-2026-07-31T05:48:31.246Z  POLL[8] status="paused" finishedAt=null
-2026-07-31T05:48:41.796Z  POLL[9] status="paused" finishedAt=null
-2026-07-31T05:48:52.355Z  POLL[10] status="paused" finishedAt=null
-2026-07-31T05:49:02.905Z  POLL[11] status="paused" finishedAt=null
-2026-07-31T05:49:13.495Z  POLL[12] status="paused" finishedAt=null
-2026-07-31T05:49:24.064Z  POLL[13] status="paused" finishedAt=null
-2026-07-31T05:49:34.619Z  POLL[14] status="paused" finishedAt=null
-2026-07-31T05:49:45.214Z  POLL[15] status="paused" finishedAt=null
-2026-07-31T05:49:55.767Z  POLL[16] status="paused" finishedAt=null
-2026-07-31T05:50:06.325Z  POLL[17] status="paused" finishedAt=null
-2026-07-31T05:50:16.893Z  POLL[18] status="paused" finishedAt=null
-2026-07-31T05:50:27.452Z  POLL[19] status="paused" finishedAt=null
-2026-07-31T05:50:37.997Z  POLL[20] status="paused" finishedAt=null
-2026-07-31T05:50:48.558Z  POLL[21] status="paused" finishedAt=null
-2026-07-31T05:50:59.118Z  POLL[22] status="paused" finishedAt=null
-2026-07-31T05:51:09.688Z  POLL[23] status="paused" finishedAt=null
+2026-08-03T08:58:39.827Z  START task_id="2b9e357c-a46a-4779-a46a-c2ad64b429b9" workflow_run_id="89fde2d1-fd2f-4068-b3a6-f335cda7264c" form_token="v6oQLindjiJ1tiktZ7OaaI" client="ge"
+2026-08-03T08:58:39.828Z  formBase="https://app.dify.milize.com"
+2026-08-03T08:58:39.828Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/v6oQLindjiJ1tiktZ7OaaI
+2026-08-03T08:58:40.382Z  結果[app/api]: 200 ct=application/json body={}
+
+2026-08-03T08:58:40.382Z  ✓ 再開成功: app/api
+2026-08-03T08:58:40.382Z  resume 成功: ct=application/json
+2026-08-03T08:58:40.382Z  ポーリング開始 pollIds=["89fde2d1-fd2f-4068-b3a6-f335cda7264c","2b9e357c-a46a-4779-a46a-c2ad64b429b9"]
+2026-08-03T08:58:45.837Z  poll[1][89fde2d1]: 404
+2026-08-03T08:58:46.289Z  poll[1][2b9e357c]: 404
+2026-08-03T08:58:51.759Z  poll[2][89fde2d1]: 404
+2026-08-03T08:58:52.204Z  poll[2][2b9e357c]: 404
+2026-08-03T08:58:57.646Z  poll[3][89fde2d1]: 404
+2026-08-03T08:58:58.094Z  poll[3][2b9e357c]: 404
+2026-08-03T08:59:03.556Z  poll[4][89fde2d1]: 404
+2026-08-03T08:59:04.010Z  poll[4][2b9e357c]: 404
+2026-08-03T08:59:09.456Z  poll[5][89fde2d1]: 404
+2026-08-03T08:59:09.922Z  poll[5][2b9e357c]: 404
+2026-08-03T08:59:15.371Z  poll[6][89fde2d1]: 404
+2026-08-03T08:59:15.838Z  poll[6][2b9e357c]: 404
+2026-08-03T08:59:21.287Z  poll[7][89fde2d1]: 404
+2026-08-03T08:59:21.757Z  poll[7][2b9e357c]: 404
+2026-08-03T08:59:27.216Z  poll[8][89fde2d1]: 404
+2026-08-03T08:59:27.674Z  poll[8][2b9e357c]: 404
+2026-08-03T08:59:33.127Z  poll[9][89fde2d1]: 404
+2026-08-03T08:59:33.575Z  poll[9][2b9e357c]: 404
+2026-08-03T08:59:39.018Z  poll[10][89fde2d1]: 404
+2026-08-03T08:59:39.458Z  poll[10][2b9e357c]: 404
+2026-08-03T08:59:44.920Z  poll[11][89fde2d1]: 404
+2026-08-03T08:59:45.378Z  poll[11][2b9e357c]: 404
+2026-08-03T08:59:50.828Z  poll[12][89fde2d1]: 404
+2026-08-03T08:59:51.280Z  poll[12][2b9e357c]: 404
+2026-08-03T08:59:56.742Z  poll[13][89fde2d1]: 404
+2026-08-03T08:59:57.191Z  poll[13][2b9e357c]: 404
+2026-08-03T09:00:02.698Z  poll[14][89fde2d1]: 404
+2026-08-03T09:00:03.152Z  poll[14][2b9e357c]: 404
+2026-08-03T09:00:08.612Z  poll[15][89fde2d1]: 404
+2026-08-03T09:00:09.070Z  poll[15][2b9e357c]: 404
+2026-08-03T09:00:14.541Z  poll[16][89fde2d1]: 404
+2026-08-03T09:00:14.990Z  poll[16][2b9e357c]: 404
+2026-08-03T09:00:20.437Z  poll[17][89fde2d1]: 404
+2026-08-03T09:00:20.876Z  poll[17][2b9e357c]: 404
+2026-08-03T09:00:26.325Z  poll[18][89fde2d1]: 404
+2026-08-03T09:00:26.797Z  poll[18][2b9e357c]: 404
+2026-08-03T09:00:32.255Z  poll[19][89fde2d1]: 404
+2026-08-03T09:00:32.709Z  poll[19][2b9e357c]: 404
+2026-08-03T09:00:38.156Z  poll[20][89fde2d1]: 404
+2026-08-03T09:00:38.608Z  poll[20][2b9e357c]: 404
+2026-08-03T09:00:44.067Z  poll[21][89fde2d1]: 404
+2026-08-03T09:00:44.530Z  poll[21][2b9e357c]: 404
+2026-08-03T09:00:49.977Z  poll[22][89fde2d1]: 404
+2026-08-03T09:00:50.432Z  poll[22][2b9e357c]: 404
+2026-08-03T09:00:55.883Z  poll[23][89fde2d1]: 404
+2026-08-03T09:00:56.335Z  poll[23][2b9e357c]: 404
+2026-08-03T09:01:01.812Z  poll[24][89fde2d1]: 404
+2026-08-03T09:01:02.281Z  poll[24][2b9e357c]: 404
+2026-08-03T09:01:07.729Z  poll[25][89fde2d1]: 404
+2026-08-03T09:01:08.184Z  poll[25][2b9e357c]: 404
+2026-08-03T09:01:13.631Z  poll[26][89fde2d1]: 404
+2026-08-03T09:01:14.081Z  poll[26][2b9e357c]: 404
+2026-08-03T09:01:19.533Z  poll[27][89fde2d1]: 404
+2026-08-03T09:01:19.991Z  poll[27][2b9e357c]: 404
+2026-08-03T09:01:25.445Z  poll[28][89fde2d1]: 404
+2026-08-03T09:01:25.902Z  poll[28][2b9e357c]: 404
+2026-08-03T09:01:32.116Z  poll[29][89fde2d1]: 404
+2026-08-03T09:01:32.567Z  poll[29][2b9e357c]: 404
+2026-08-03T09:01:38.021Z  poll[30][89fde2d1]: 404
+2026-08-03T09:01:38.469Z  poll[30][2b9e357c]: 404
+2026-08-03T09:01:43.927Z  poll[31][89fde2d1]: 404
+2026-08-03T09:01:44.382Z  poll[31][2b9e357c]: 404
+2026-08-03T09:01:49.848Z  poll[32][89fde2d1]: 404
+2026-08-03T09:01:50.309Z  poll[32][2b9e357c]: 404
+2026-08-03T09:01:55.761Z  poll[33][89fde2d1]: 404
+2026-08-03T09:01:56.210Z  poll[33][2b9e357c]: 404
+2026-08-03T09:02:01.678Z  poll[34][89fde2d1]: 404
+2026-08-03T09:02:02.135Z  poll[34][2b9e357c]: 404
+2026-08-03T09:02:07.593Z  poll[35][89fde2d1]: 404
+2026-08-03T09:02:08.055Z  poll[35][2b9e357c]: 404
+2026-08-03T09:02:13.506Z  poll[36][89fde2d1]: 404
+2026-08-03T09:02:13.965Z  poll[36][2b9e357c]: 404
+2026-08-03T09:02:19.418Z  poll[37][89fde2d1]: 404
+2026-08-03T09:02:19.866Z  poll[37][2b9e357c]: 404
+2026-08-03T09:02:25.335Z  poll[38][89fde2d1]: 404
+2026-08-03T09:02:25.781Z  poll[38][2b9e357c]: 404
+2026-08-03T09:02:31.229Z  poll[39][89fde2d1]: 404
+2026-08-03T09:02:31.685Z  poll[39][2b9e357c]: 404
+2026-08-03T09:02:37.124Z  poll[40][89fde2d1]: 404
+2026-08-03T09:02:37.563Z  poll[40][2b9e357c]: 404
+2026-08-03T09:02:43.025Z  poll[41][89fde2d1]: 404
+2026-08-03T09:02:43.483Z  poll[41][2b9e357c]: 404
+2026-08-03T09:02:48.935Z  poll[42][89fde2d1]: 404
+2026-08-03T09:02:49.404Z  poll[42][2b9e357c]: 404
+2026-08-03T09:02:54.852Z  poll[43][89fde2d1]: 404
+2026-08-03T09:02:55.306Z  poll[43][2b9e357c]: 404
+2026-08-03T09:03:00.779Z  poll[44][89fde2d1]: 404
+2026-08-03T09:03:01.235Z  poll[44][2b9e357c]: 404
+2026-08-03T09:03:06.683Z  poll[45][89fde2d1]: 404
+2026-08-03T09:03:07.130Z  poll[45][2b9e357c]: 404
+2026-08-03T09:03:12.589Z  poll[46][89fde2d1]: 404
+2026-08-03T09:03:13.046Z  poll[46][2b9e357c]: 404
+2026-08-03T09:03:18.519Z  poll[47][89fde2d1]: 404
+2026-08-03T09:03:18.969Z  poll[47][2b9e357c]: 404
+2026-08-03T09:03:24.434Z  poll[48][89fde2d1]: 404
+2026-08-03T09:03:24.882Z  poll[48][2b9e357c]: 404
+2026-08-03T09:03:24.882Z  ポーリングタイムアウト (48回) → node-executions を最終取得
+2026-08-03T09:03:25.041Z  node-executions[89fde2d1-fd2f-4068-b3a6-f335cda7264c]: 404
+2026-08-03T09:03:25.193Z  node-executions[2b9e357c-a46a-4779-a46a-c2ad64b429b9]: 404
+2026-08-03T09:03:25.194Z  完了: nodeOutputs=0件
