@@ -1,0 +1,17 @@
+{
+  "received_keys": [
+    "client_slug",
+    "design_md",
+    "code",
+    "name",
+    "pct"
+  ],
+  "body_preview": {
+    "client_slug": "ge",
+    "design_md": "# ガイドライン\n\n## カラー\n提供されたスクレイピングデータには、HEXコード・RGB値・Pantone番号などの明示的なカラー情報は含まれていませんでした。ページ内で確認できた唯一の色に関する手がかりは、アイコンファイル名に含まれる「blue」という文字列（`ico_arrow_r_blue01.svg`）のみです。そのため、以下は確認できた範囲の情報のみを記載し、断定的なHEXコードの記載…",
+    "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n.ge-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.ge-portal {\n …",
+    "name": "プライマリ（青系・推定）",
+    "pct": "15"
+  },
+  "timestamp": "2026-08-05T09:26:21.132Z"
+}
