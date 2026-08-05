@@ -262,7 +262,7 @@ export async function POST(req: NextRequest) {
               if (logsRes.ok) {
                 type LogEntry = {
                   id?: string;
-                  workflow_run?: { id?: string; status?: string };
+                  workflow_run?: { id?: string; status?: string; outputs?: Record<string, unknown> };
                   status?: string;
                 };
                 const logsData = await logsRes.json() as { data?: LogEntry[] };
@@ -276,6 +276,16 @@ export async function POST(req: NextRequest) {
                     const status = match.status ?? match.workflow_run?.status;
                     log(`logs[${pollCount}]: run=${runId.slice(0, 8)} status="${status}"`);
                     if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
+                      // workflow_run.outputs から最終出力を取得
+                      const wfOutputs = match.workflow_run?.outputs;
+                      if (wfOutputs && typeof wfOutputs === 'object') {
+                        for (const [k, v] of Object.entries(wfOutputs)) {
+                          if (!nodeOutputs[k]) {
+                            nodeOutputs[k] = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
+                          }
+                        }
+                        log(`workflow outputs取得: ${Object.keys(wfOutputs).length}件`);
+                      }
                       workflowDone = true;
                       break;
                     }
