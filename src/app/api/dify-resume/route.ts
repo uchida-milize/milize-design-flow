@@ -277,28 +277,49 @@ export async function POST(req: NextRequest) {
                     const status = match.status ?? match.workflow_run?.status;
                     log(`logs[${pollCount}]: run=${runId.slice(0, 8)} status="${status}"`);
                     if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
-                      // details フィールドを確認
-                      log(`details: ${JSON.stringify(match.details)?.slice(0, 500) ?? 'undefined'}`);
-                      // 個別ログエントリ取得（outputsを含む可能性）
+                      // GET /v1/workflows/runs/{run_id} でワークフロー出力を取得
                       try {
-                        const logDetailRes = await fetch(`${baseUrl}/workflows/logs/${match.id}`, {
+                        const wfRunRes = await fetch(`${baseUrl}/workflows/runs/${runId}`, {
                           headers: { Authorization: `Bearer ${apiKey}` },
                         });
-                        log(`log-detail[${match.id?.slice(0,8)}]: ${logDetailRes.status}`);
-                        if (logDetailRes.ok) {
-                          const detail = await logDetailRes.json() as { workflow_run?: { outputs?: Record<string, unknown> }; outputs?: Record<string, unknown> };
-                          log(`log-detail body: ${JSON.stringify(detail)?.slice(0, 500)}`);
-                          const detailOutputs = detail.outputs ?? detail.workflow_run?.outputs;
-                          if (detailOutputs && typeof detailOutputs === 'object') {
-                            for (const [k, v] of Object.entries(detailOutputs)) {
+                        log(`workflow-run[${runId.slice(0,8)}]: ${wfRunRes.status}`);
+                        if (wfRunRes.ok) {
+                          const wfRun = await wfRunRes.json() as { outputs?: Record<string, unknown>; workflow_run?: { outputs?: Record<string, unknown> } };
+                          log(`workflow-run body: ${JSON.stringify(wfRun)?.slice(0, 500)}`);
+                          const wfOutputs = wfRun.outputs ?? wfRun.workflow_run?.outputs;
+                          if (wfOutputs && typeof wfOutputs === 'object' && Object.keys(wfOutputs).length > 0) {
+                            for (const [k, v] of Object.entries(wfOutputs)) {
                               if (!nodeOutputs[k]) {
                                 nodeOutputs[k] = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
                               }
                             }
-                            log(`log-detail outputs取得: ${Object.keys(detailOutputs).length}件`);
+                            log(`workflow-run outputs取得: ${Object.keys(wfOutputs).length}件`);
+                          }
+                        } else {
+                          const errText = await wfRunRes.text();
+                          log(`workflow-run error body: ${errText.slice(0, 200)}`);
+                          // フォールバック: match.workflow_run.id で試す
+                          const wfRunId2 = match.workflow_run?.id;
+                          if (wfRunId2 && wfRunId2 !== runId) {
+                            const res2 = await fetch(`${baseUrl}/workflows/runs/${wfRunId2}`, {
+                              headers: { Authorization: `Bearer ${apiKey}` },
+                            });
+                            log(`workflow-run2[${wfRunId2.slice(0,8)}]: ${res2.status}`);
+                            if (res2.ok) {
+                              const d2 = await res2.json() as { outputs?: Record<string, unknown> };
+                              const out2 = d2.outputs;
+                              if (out2 && typeof out2 === 'object') {
+                                for (const [k, v] of Object.entries(out2)) {
+                                  if (!nodeOutputs[k]) {
+                                    nodeOutputs[k] = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
+                                  }
+                                }
+                                log(`workflow-run2 outputs取得: ${Object.keys(out2).length}件`);
+                              }
+                            }
                           }
                         }
-                      } catch (e) { log(`log-detail error: ${e}`); }
+                      } catch (e) { log(`workflow-run error: ${e}`); }
                       workflowDone = true;
                       break;
                     }
