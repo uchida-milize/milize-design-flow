@@ -4,17 +4,21 @@ import { batchGitCommit } from '../_lib/portal-helpers';
 /**
  * POST /api/dify-callback
  *
- * Dify ワークフローの末尾に追加した HTTP Request ノードから呼び出される。
- * ワークフローの 4 つの出力変数を受け取り、resources.json を GitHub にコミットする。
+ * Dify ワークフローの各ポイントに置いた HTTP Request ノードから呼び出される。
+ * 受け取ったフィールドを resources.json にマージして GitHub にコミットする。
+ * （上書きではなく追記型：複数ノードから分割して送っても蓄積される）
  *
- * Body (Dify HTTP Request ノードで設定):
- * {
- *   "client_slug":       "{{client_slug}}",
- *   "design_md":         "{{design_md}}",          // DESIGN.MD 生成ノード出力
- *   "code":              "{{code}}",               // 実装コード生成ノード出力
- *   "iteration_output":  "{{iteration_output}}",   // イテレーションノード出力
- *   "URL":               "{{URL}}"                 // 出力URL作成ノード出力
- * }
+ * 必須フィールド:
+ *   client_slug  — クライアント識別子
+ *
+ * 任意フィールド（各ノードが持つ出力を好きなキー名で送る）:
+ *   selected_urls    — URL選択ノード出力
+ *   iteration_output — イテレーション出力（JSON文字列化してから送ること）
+ *   design_md        — DESIGN.MD生成ノード出力
+ *   code             — 実装コード生成ノード出力
+ *   vercel_output    — VERCELデプロイノード出力
+ *   URL              — デプロイURL
+ *   …その他任意キー
  */
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -33,7 +37,6 @@ export async function POST(req: NextRequest) {
   }
 
   const client_slug = body.client_slug as string | undefined;
-
   if (!client_slug || typeof client_slug !== 'string') {
     return Response.json({ error: 'client_slug is required' }, { status: 400 });
   }
@@ -43,50 +46,52 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: 'GITHUB_TOKEN not configured' }, { status: 500 });
   }
 
-  // ── Dify から受け取った全フィールドをそのまま保存 ─────────────────────────
-  // client_slug は resources.json には含めない（ファイルパス自体で識別するため）
+  // client_slug 以外のフィールドをマージ対象とする
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { client_slug: _cs, ...rest } = body;
+  const { client_slug: _cs, ...incoming } = body;
 
-  // URL は Dify から送られない場合に備え、client_slug から自動計算
-  const vercelBase = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://milize-design-flow.vercel.app';
-  const computedUrl = (rest.URL as string) || `${vercelBase}/${client_slug}`;
+  const filePath = `src/app/${client_slug}/resources.json`;
 
-  // 既知フィールドにデフォルト値を付与しつつ、未知フィールドもすべて保持
-  // iteration_output は Dify の配列展開バグにより送れないため空配列をデフォルトとする
-  const resources: Record<string, unknown> = {
-    design_md:        rest.design_md        ?? '',
-    code:             rest.code             ?? '',
-    iteration_output: rest.iteration_output ?? [],
-    URL:              computedUrl,
-    // Dify から届いた追加フィールドをすべてマージ
-    ...rest,
+  // ── 既存の resources.json を取得してマージ ──────────────────────────────────
+  let currentResources: Record<string, unknown> = {};
+  try {
+    const readRes = await fetch(
+      `https://api.github.com/repos/uchida-milize/milize-design-flow/contents/${filePath}`,
+      {
+        headers: {
+          Authorization: `Bearer ${githubToken}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'dify-callback',
+        },
+      },
+    );
+    if (readRes.ok) {
+      const fileData = await readRes.json() as { content?: string };
+      if (fileData.content) {
+        currentResources = JSON.parse(
+          Buffer.from(fileData.content, 'base64').toString('utf8'),
+        );
+      }
+    }
+  } catch {
+    // ファイルが存在しない場合は空オブジェクトから開始
+  }
+
+  // 新しいデータをマージ（既存キーは上書き）
+  const updatedResources: Record<string, unknown> = {
+    ...currentResources,
+    ...incoming,
   };
 
-  // ── デバッグログ ──────────────────────────────────────────────────────────
-  const rawBodyDebug: Record<string, string> = {};
-  for (const [k, v] of Object.entries(body)) {
-    const vStr = typeof v === 'string' ? v : JSON.stringify(v);
-    rawBodyDebug[k] = vStr.slice(0, 300) + (vStr.length > 300 ? '…' : '');
-  }
-  console.log(`[dify-callback] client="${client_slug}" raw_keys=${Object.keys(body).join(',')}`);
-  console.log(`[dify-callback] body_preview=${JSON.stringify(rawBodyDebug)}`);
+  console.log(
+    `[dify-callback] client="${client_slug}" keys_added=${Object.keys(incoming).join(',')}`,
+  );
 
   const result = await batchGitCommit(
     [
       {
-        path: `src/app/${client_slug}/resources.json`,
-        content: JSON.stringify(resources, null, 2),
-      },
-      {
-        path: `src/app/${client_slug}/_callback_debug.json`,
-        content: JSON.stringify({
-          received_keys: Object.keys(body),
-          body_preview: rawBodyDebug,
-          timestamp: new Date().toISOString(),
-        }, null, 2),
+        path: filePath,
+        content: JSON.stringify(updatedResources, null, 2),
       },
     ],
     `feat: update resources.json for ${client_slug} [dify-callback]`,
@@ -98,6 +103,11 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: result.error }, { status: 500 });
   }
 
-  console.log(`[dify-callback] resources.json committed for ${client_slug}`);
-  return Response.json({ ok: true, client_slug, fields: Object.keys(resources) });
+  console.log(`[dify-callback] resources.json updated for ${client_slug}`);
+  return Response.json({
+    ok: true,
+    client_slug,
+    keys_added: Object.keys(incoming),
+    total_keys: Object.keys(updatedResources),
+  });
 }
