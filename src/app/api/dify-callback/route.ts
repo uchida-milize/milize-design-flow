@@ -19,7 +19,15 @@ import { batchGitCommit } from '../_lib/portal-helpers';
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try {
-    body = await req.json();
+    const parsed: unknown = await req.json();
+    // Dify の HTTP Request ノードは JSON body を配列 [{...}] でラップして送信する場合がある
+    if (Array.isArray(parsed)) {
+      body = (parsed[0] as Record<string, unknown>) ?? {};
+    } else if (parsed && typeof parsed === 'object') {
+      body = parsed as Record<string, unknown>;
+    } else {
+      return Response.json({ error: 'unexpected body format' }, { status: 400 });
+    }
   } catch {
     return Response.json({ error: 'invalid JSON body' }, { status: 400 });
   }
