@@ -48,14 +48,20 @@ export async function POST(req: NextRequest) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { client_slug: _cs, ...rest } = body;
 
+  // URL は Dify から送られない場合に備え、client_slug から自動計算
+  const vercelBase = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'https://milize-design-flow.vercel.app';
+  const computedUrl = (rest.URL as string) || `${vercelBase}/${client_slug}`;
+
   // 既知フィールドにデフォルト値を付与しつつ、未知フィールドもすべて保持
+  // iteration_output は Dify の配列展開バグにより送れないため空配列をデフォルトとする
   const resources: Record<string, unknown> = {
     design_md:        rest.design_md        ?? '',
     code:             rest.code             ?? '',
     iteration_output: rest.iteration_output ?? [],
-    URL:              rest.URL              ?? '',
-    // Dify から届いた追加フィールドをすべてマージ（iteration_output/URL の代替変数名が
-    // 来ても確実に保存されるようにする）
+    URL:              computedUrl,
+    // Dify から届いた追加フィールドをすべてマージ
     ...rest,
   };
 
