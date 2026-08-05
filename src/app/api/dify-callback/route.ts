@@ -57,13 +57,25 @@ export async function POST(req: NextRequest) {
     URL:              deployUrl        ?? '',
   };
 
-  console.log(`[dify-callback] client="${client_slug}" fields=${Object.keys(resources).join(',')}`);
+  // ── デバッグ: Difyから受け取った生ボディのキーと値（先頭200文字）をログ出力 ──
+  const rawBodyDebug: Record<string, string> = {};
+  for (const [k, v] of Object.entries(body)) {
+    const vStr = typeof v === 'string' ? v : JSON.stringify(v);
+    rawBodyDebug[k] = vStr.slice(0, 200) + (vStr.length > 200 ? '…' : '');
+  }
+  console.log(`[dify-callback] client="${client_slug}" raw_keys=${Object.keys(body).join(',')} body_preview=${JSON.stringify(rawBodyDebug)}`);
+  console.log(`[dify-callback] iteration_output type=${typeof iteration_output} value=${JSON.stringify(iteration_output)?.slice(0, 300)}`);
+  console.log(`[dify-callback] URL/deployUrl="${String(deployUrl ?? '').slice(0, 200)}"`);
 
   const result = await batchGitCommit(
     [
       {
         path: `src/app/${client_slug}/resources.json`,
         content: JSON.stringify(resources, null, 2),
+      },
+      {
+        path: `src/app/${client_slug}/_callback_debug.json`,
+        content: JSON.stringify({ received_keys: Object.keys(body), body_preview: rawBodyDebug, timestamp: new Date().toISOString() }, null, 2),
       },
     ],
     `feat: update resources.json for ${client_slug} [dify-callback]`,
