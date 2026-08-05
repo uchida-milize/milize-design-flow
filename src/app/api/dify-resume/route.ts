@@ -263,6 +263,7 @@ export async function POST(req: NextRequest) {
                 type LogEntry = {
                   id?: string;
                   workflow_run?: { id?: string; status?: string; outputs?: Record<string, unknown> };
+                  details?: unknown;
                   status?: string;
                 };
                 const logsData = await logsRes.json() as { data?: LogEntry[] };
@@ -276,20 +277,28 @@ export async function POST(req: NextRequest) {
                     const status = match.status ?? match.workflow_run?.status;
                     log(`logs[${pollCount}]: run=${runId.slice(0, 8)} status="${status}"`);
                     if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
-                      // デバッグ: matchの構造を確認
-                      log(`match keys: ${JSON.stringify(Object.keys(match))}`);
-                      if (match.workflow_run) log(`workflow_run keys: ${JSON.stringify(Object.keys(match.workflow_run))}`);
-                      // workflow_run.outputs から最終出力を取得
-                      const wfOutputs = match.workflow_run?.outputs;
-                      log(`wfOutputs: ${JSON.stringify(wfOutputs)?.slice(0, 300) ?? 'undefined'}`);
-                      if (wfOutputs && typeof wfOutputs === 'object') {
-                        for (const [k, v] of Object.entries(wfOutputs)) {
-                          if (!nodeOutputs[k]) {
-                            nodeOutputs[k] = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
+                      // details フィールドを確認
+                      log(`details: ${JSON.stringify(match.details)?.slice(0, 500) ?? 'undefined'}`);
+                      // 個別ログエントリ取得（outputsを含む可能性）
+                      try {
+                        const logDetailRes = await fetch(`${baseUrl}/workflows/logs/${match.id}`, {
+                          headers: { Authorization: `Bearer ${apiKey}` },
+                        });
+                        log(`log-detail[${match.id?.slice(0,8)}]: ${logDetailRes.status}`);
+                        if (logDetailRes.ok) {
+                          const detail = await logDetailRes.json() as { workflow_run?: { outputs?: Record<string, unknown> }; outputs?: Record<string, unknown> };
+                          log(`log-detail body: ${JSON.stringify(detail)?.slice(0, 500)}`);
+                          const detailOutputs = detail.outputs ?? detail.workflow_run?.outputs;
+                          if (detailOutputs && typeof detailOutputs === 'object') {
+                            for (const [k, v] of Object.entries(detailOutputs)) {
+                              if (!nodeOutputs[k]) {
+                                nodeOutputs[k] = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
+                              }
+                            }
+                            log(`log-detail outputs取得: ${Object.keys(detailOutputs).length}件`);
                           }
                         }
-                        log(`workflow outputs取得: ${Object.keys(wfOutputs).length}件`);
-                      }
+                      } catch (e) { log(`log-detail error: ${e}`); }
                       workflowDone = true;
                       break;
                     }
