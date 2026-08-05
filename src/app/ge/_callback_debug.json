@@ -4,14 +4,14 @@
     "design_md",
     "code",
     "name",
-    "pct"
+    "percent"
   ],
   "body_preview": {
     "client_slug": "ge",
-    "design_md": "# ガイドライン\n\n## カラー\n提供されたスクレイピングデータには、HEXコード・RGB値・Pantone番号などの明示的なカラー情報は含まれていませんでした。ページ内で確認できた唯一の色に関する手がかりは、アイコンファイル名に含まれる「blue」という文字列（`ico_arrow_r_blue01.svg`）のみです。そのため、以下は確認できた範囲の情報のみを記載し、断定的なHEXコードの記載…",
-    "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n.ge-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.ge-portal {\n …",
-    "name": "プライマリ（青系・推定）",
-    "pct": "15"
+    "design_md": "# ガイドライン\n\n==========\n\n## カラー\n\n**⚠️ 注記：本スクレイピングデータには HEXコード・RGB値・Pantone番号が一切含まれていませんでした。**\n提供された `hex_colors` / `rgb_colors` / `input_css` / `button_css` / `border_radii` / `heights` はすべて空文字列であり、`page_summary.markdown` にもカラー値の記載がありません。\nガイドラインの指示（推測・近似値の使用禁止）に従い、確認不能な色コードの記載は行いません。実際の色情報を反映するには、以下のいず…",
+    "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n.ge-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.ge-portal {\n  min-height: 100vh;\n  background: #f5f7fa;\n  font-family: 'Noto Sans JP', sans-serif;\n  font-weight:…",
+    "name": "ニュートラルグレー（暫定）",
+    "percent": "40"
   },
-  "timestamp": "2026-08-05T09:26:21.132Z"
+  "timestamp": "2026-08-05T09:42:37.272Z"
 }
