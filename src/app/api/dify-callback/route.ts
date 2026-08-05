@@ -32,13 +32,7 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: 'invalid JSON body' }, { status: 400 });
   }
 
-  const { client_slug, design_md, code, iteration_output, URL: deployUrl } = body as {
-    client_slug?: string;
-    design_md?: string;
-    code?: string;
-    iteration_output?: unknown;
-    URL?: string;
-  };
+  const client_slug = body.client_slug as string | undefined;
 
   if (!client_slug || typeof client_slug !== 'string') {
     return Response.json({ error: 'client_slug is required' }, { status: 400 });
@@ -49,23 +43,30 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: 'GITHUB_TOKEN not configured' }, { status: 500 });
   }
 
-  // 4 フィールドを resources.json に格納（空でも含める）
+  // ── Dify から受け取った全フィールドをそのまま保存 ─────────────────────────
+  // client_slug は resources.json には含めない（ファイルパス自体で識別するため）
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { client_slug: _cs, ...rest } = body;
+
+  // 既知フィールドにデフォルト値を付与しつつ、未知フィールドもすべて保持
   const resources: Record<string, unknown> = {
-    design_md:        design_md        ?? '',
-    code:             code             ?? '',
-    iteration_output: iteration_output ?? [],
-    URL:              deployUrl        ?? '',
+    design_md:        rest.design_md        ?? '',
+    code:             rest.code             ?? '',
+    iteration_output: rest.iteration_output ?? [],
+    URL:              rest.URL              ?? '',
+    // Dify から届いた追加フィールドをすべてマージ（iteration_output/URL の代替変数名が
+    // 来ても確実に保存されるようにする）
+    ...rest,
   };
 
-  // ── デバッグ: Difyから受け取った生ボディのキーと値（先頭200文字）をログ出力 ──
+  // ── デバッグログ ──────────────────────────────────────────────────────────
   const rawBodyDebug: Record<string, string> = {};
   for (const [k, v] of Object.entries(body)) {
     const vStr = typeof v === 'string' ? v : JSON.stringify(v);
-    rawBodyDebug[k] = vStr.slice(0, 200) + (vStr.length > 200 ? '…' : '');
+    rawBodyDebug[k] = vStr.slice(0, 300) + (vStr.length > 300 ? '…' : '');
   }
-  console.log(`[dify-callback] client="${client_slug}" raw_keys=${Object.keys(body).join(',')} body_preview=${JSON.stringify(rawBodyDebug)}`);
-  console.log(`[dify-callback] iteration_output type=${typeof iteration_output} value=${JSON.stringify(iteration_output)?.slice(0, 300)}`);
-  console.log(`[dify-callback] URL/deployUrl="${String(deployUrl ?? '').slice(0, 200)}"`);
+  console.log(`[dify-callback] client="${client_slug}" raw_keys=${Object.keys(body).join(',')}`);
+  console.log(`[dify-callback] body_preview=${JSON.stringify(rawBodyDebug)}`);
 
   const result = await batchGitCommit(
     [
@@ -75,7 +76,11 @@ export async function POST(req: NextRequest) {
       },
       {
         path: `src/app/${client_slug}/_callback_debug.json`,
-        content: JSON.stringify({ received_keys: Object.keys(body), body_preview: rawBodyDebug, timestamp: new Date().toISOString() }, null, 2),
+        content: JSON.stringify({
+          received_keys: Object.keys(body),
+          body_preview: rawBodyDebug,
+          timestamp: new Date().toISOString(),
+        }, null, 2),
       },
     ],
     `feat: update resources.json for ${client_slug} [dify-callback]`,
