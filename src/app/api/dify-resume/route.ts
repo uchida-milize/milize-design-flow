@@ -276,8 +276,12 @@ export async function POST(req: NextRequest) {
                     const status = match.status ?? match.workflow_run?.status;
                     log(`logs[${pollCount}]: run=${runId.slice(0, 8)} status="${status}"`);
                     if (status === 'succeeded' || status === 'failed' || status === 'stopped') {
+                      // デバッグ: matchの構造を確認
+                      log(`match keys: ${JSON.stringify(Object.keys(match))}`);
+                      if (match.workflow_run) log(`workflow_run keys: ${JSON.stringify(Object.keys(match.workflow_run))}`);
                       // workflow_run.outputs から最終出力を取得
                       const wfOutputs = match.workflow_run?.outputs;
+                      log(`wfOutputs: ${JSON.stringify(wfOutputs)?.slice(0, 300) ?? 'undefined'}`);
                       if (wfOutputs && typeof wfOutputs === 'object') {
                         for (const [k, v] of Object.entries(wfOutputs)) {
                           if (!nodeOutputs[k]) {
