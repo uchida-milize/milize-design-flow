@@ -235,6 +235,26 @@ export async function POST(req: NextRequest) {
         }
 
         log(`ポーリング完了`);
+
+        // ── node-executions エンドポイント探索（デバッグ用） ────────────────────
+        const nodeExecPaths = [
+          `/v1/workflow-runs/${workflow_run_id}/node-executions`,
+          `/v1/workflows/run/${workflow_run_id}/node-executions`,
+          `/v1/workflows/runs/${workflow_run_id}/node-executions`,
+        ];
+        for (const path of nodeExecPaths) {
+          try {
+            const r = await fetch(`${baseUrl.replace(/\/v\d+\/?$/, '')}${path}`, {
+              headers: { Authorization: `Bearer ${apiKey}` },
+            });
+            const preview = await r.text().then(t => t.slice(0, 300));
+            log(`node-exec[${path}]: ${r.status} ${preview}`);
+          } catch (e) {
+            log(`node-exec[${path}]: ERROR ${e}`);
+          }
+        }
+        // ────────────────────────────────────────────────────────────────────────
+
         send({ progress: 79, status: 'ポータルファイルをコミット中...' });
 
         // ─── GitHub コミット + Vercel デプロイ ───────────────────────────────
