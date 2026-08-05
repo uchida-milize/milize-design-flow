@@ -8,10 +8,10 @@
   ],
   "body_preview": {
     "client_slug": "ge",
-    "design_md": "# ガイドライン\n\n## カラー\n提供されたスクレイピングデータには、HEXコード・RGB値・Pantone番号の実測データが含まれていません。ページマークダウンにはナビゲーション構造とアイコン画像のファイル名のみが含まれており、CSSやカラー値の直接記載がないため、以下は「データ不足」として明記します。\n\n- プライマリカラー: **実測データなし**（ロゴはSVG画像のため、カラーコードの直接抽出不可）\n- セカンダリカラー: 実測データなし\n- アクセントカラー: 実測データなし（矢印アイコンファイル名に「blue」表記あり `ico_arrow_r_blue01.svg` のため、青系…",
+    "design_md": "# ガイドライン\n\n==========\n\n## カラー\n\n**注記**: 提供されたスクレイピングデータ（page_summary/markdown）には、HEXコード・RGB値・Pantone番号などの実測CSS値は含まれていませんでした（hex_colors、rgb_colors、fontsフィールドは空欄）。取得できたのは画像URLとテキストコンテンツのみです。以下はGEコーポレートサイトの視覚的要素（ロゴ画像・背景画像）から確認できる範囲での記述です。実測HEXが取得できないため、推測色の断定は避けます。\n\n- プライマリカラー: 不明（実データなし）※GEモノグラムロゴは伝統的に青…",
     "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n:root {\n  --portal-bg: #f5f7fa;\n}\n\n.ge-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.ge-portal {\n  min-height: 100vh;\n  background: var(--portal-bg);\n  font-family…",
-    "name": "プライマリブルー（推定）",
-    "percent": "35"
+    "name": "背景ホワイト（推定）",
+    "percent": "55"
   },
-  "timestamp": "2026-08-05T09:52:36.678Z"
+  "timestamp": "2026-08-05T10:19:54.748Z"
 }
