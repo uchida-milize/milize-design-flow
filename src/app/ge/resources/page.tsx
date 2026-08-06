@@ -47,7 +47,6 @@ export default function ResourcesPage() {
   const [active, setActive] = useState('');
   const [data, setData] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
-
   const LABEL_MAP: Record<string, string> = {
     design_md: 'DESIGN.MD生成',
     code: '実装コード生成',
