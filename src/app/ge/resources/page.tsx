@@ -62,7 +62,7 @@ export default function ResourcesPage() {
     isWhite: '白背景フラグ',
   };
   const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
-  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite']);
+  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'selected_urls']);
   const primaryTabs = [...tabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
     (TAB_ORDER.indexOf(a) === -1 ? 999 : TAB_ORDER.indexOf(a)) - (TAB_ORDER.indexOf(b) === -1 ? 999 : TAB_ORDER.indexOf(b))
   );
