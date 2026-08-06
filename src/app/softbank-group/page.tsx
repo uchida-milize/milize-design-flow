@@ -96,6 +96,19 @@ export default function Home() {
               </p>
             </div>
           </a>
+          <a href={`${basePath}/resources`} className="hi-nav-card">
+            <div className="hi-card">
+              <div className="hi-section-label" style={{ color: primaryColor }}>
+                RESOURCES
+              </div>
+              <h2 className="hi-section-title" style={{ fontSize: 20 }}>
+                収集リソース
+              </h2>
+              <p className="hi-section-desc" style={{ marginBottom: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
