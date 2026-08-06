@@ -97,7 +97,7 @@ export default function ResourcesPage() {
                   background: active === tab ? primaryColor : '#f3f4f6',
                   color: active === tab ? '#ffffff' : '#6b7280',
                   border: 'none', cursor: 'pointer', transition: 'all 0.15s',
-                }}>{tab}</button>
+                }}>{LABEL_MAP[tab] ?? tab}</button>
               ))}
             </div>
             <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden' }}>
