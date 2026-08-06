@@ -56,7 +56,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
       >
         <NewClientButton />
         {visible.map((client) => (
-          <div key={client.slug} style={{ position: 'relative' }}>
+          <div key={client.slug} style={{ position: 'relative', height: '100%' }}>
             {confirmSlug === client.slug && (
               <div
                 style={{
@@ -93,10 +93,29 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
             )}
             <Link
               href={`/${client.slug}`}
-              className="block"
-              style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 16, padding: 0, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', textDecoration: 'none' }}
+              style={{
+                background: '#ffffff',
+                border: 'none',
+                borderRadius: 24,
+                padding: 0,
+                overflow: 'hidden',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+                (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLAnchorElement).style.transform = '';
+                (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+              }}
             >
-              <div style={{ display: 'flex', height: 40, borderBottom: '1px solid #c8c8c8', boxShadow: 'inset 0 0 0 1px #c8c8c8' }}>
+              <div style={{ display: 'flex', height: 40, flexShrink: 0 }}>
                 {client.colors.map((c) => (
                   <div
                     key={c.hex}
@@ -107,11 +126,11 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   />
                 ))}
               </div>
-              <div style={{ padding: 28 }}>
-                <div className="flex items-start justify-between mb-3">
+              <div style={{ padding: 28, display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
                   <div>
-                    <p className="font-bold" style={{ fontSize: 18, color: '#111827' }}>{client.name}</p>
-                    <p className="text-xs" style={{ color: '#9ca3af', marginTop: 2 }}>{client.slug}</p>
+                    <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: 0 }}>{client.name}</p>
+                    <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 2, margin: '2px 0 0' }}>{client.slug}</p>
                   </div>
                   <button
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmSlug(confirmSlug === client.slug ? null : client.slug); }}
@@ -140,6 +159,8 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
                   overflow: 'hidden',
+                  flex: 1,
+                  margin: '0 0 16px',
                 }}>
                   {client.description || 'デザインガイドライン・コンポーネントカタログを確認できます。'}
                 </p>
