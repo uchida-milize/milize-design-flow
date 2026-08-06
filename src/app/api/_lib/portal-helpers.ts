@@ -185,6 +185,19 @@ export default function ResourcesPage() {
   const [active, setActive] = useState('');
   const [data, setData] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const LABEL_MAP: Record<string, string> = {
+    design_md: 'DESIGN.MD生成',
+    code: '実装コード生成',
+    iteration_output: 'イテレーション出力',
+    URL: 'デプロイURL',
+    selected_urls: 'URL選択',
+    vercel_output: 'Vercelデプロイ',
+    name: 'カラー名',
+    percent: '使用比率',
+    state: 'Vercelステータス',
+    createdAt: '作成日時',
+    isWhite: '白背景フラグ',
+  };
 
   useEffect(() => {
     Promise.all([
