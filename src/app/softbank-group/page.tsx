@@ -96,15 +96,24 @@ export default function Home() {
               </p>
             </div>
           </a>
-          <a href={`${basePath}/resources`} className="hi-nav-card">
-            <div className="hi-card">
-              <div className="hi-section-label" style={{ color: primaryColor }}>
+          <a href={`${basePath}/resources`} style={{ textDecoration: 'none', display: 'block' }}>
+            <div style={{
+              background: 'rgba(255,255,255,0.92)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderRadius: '20px',
+              border: '1px solid rgba(255,255,255,0.8)',
+              boxShadow: '0 8px 32px rgba(9,25,70,0.12)',
+              padding: '24px',
+              cursor: 'pointer',
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
                 RESOURCES
               </div>
-              <h2 className="hi-section-title" style={{ fontSize: 20 }}>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
                 収集リソース
               </h2>
-              <p className="hi-section-desc" style={{ marginBottom: 0 }}>
+              <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
                 リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
               </p>
             </div>

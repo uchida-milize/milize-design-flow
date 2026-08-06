@@ -7,6 +7,10 @@ const basePath = '/softbank-group';
 
 const TOKEN_RE = /(https?:\/\/[^\s"',\]\}\)]+)|(#[0-9a-fA-F]{6,8}|#[0-9a-fA-F]{3}(?![0-9a-fA-F])|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+)?\s*\))/g;
 
+function rgbToHex(r: number, g: number, b: number): string {
+  return '#' + [r, g, b].map(v => Math.max(0, Math.min(255, v)).toString(16).padStart(2, '0')).join('').toUpperCase();
+}
+
 function renderRich(text: string) {
   const parts: React.ReactNode[] = [];
   let last = 0;
@@ -23,13 +27,15 @@ function renderRich(text: string) {
         </a>
       );
     } else if (color) {
+      const rgbMatch = color.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+      const hexLabel = rgbMatch ? rgbToHex(Number(rgbMatch[1]), Number(rgbMatch[2]), Number(rgbMatch[3])) : null;
       parts.push(
         <span key={m.index}>
           <span style={{
             display: 'inline-block', color, fontSize: 14, lineHeight: 1,
             marginRight: 3, verticalAlign: 'middle',
           }}>■</span>
-          {color}
+          {hexLabel ? `${hexLabel} (${color})` : color}
         </span>
       );
     } else {
@@ -41,12 +47,38 @@ function renderRich(text: string) {
   return parts;
 }
 
+function formatValue(key: string, value: unknown): string {
+  if (value === null || value === undefined) return '（データなし）';
+  // selected_urls: "url||tag1,tag2" 形式 → URLのみ表示（パイプ以降を除去）
+  if (key === 'selected_urls') {
+    const arr = Array.isArray(value) ? value :
+      (typeof value === 'string' ? value.split('\n').filter(Boolean) : [String(value)]);
+    return arr.map((item: unknown) => {
+      const s = String(item).trim();
+      const pipeIdx = s.indexOf('||');
+      return pipeIdx >= 0 ? s.slice(0, pipeIdx).trim() : s;
+    }).filter(Boolean).join('\n');
+  }
+  // createdAt: ミリ秒タイムスタンプを日本語日時に変換
+  if (key === 'createdAt') {
+    const ts = typeof value === 'number' ? value : Number(String(value));
+    if (!isNaN(ts) && ts > 1_000_000_000_000) {
+      try { return new Date(ts).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }); } catch { /* fall through */ }
+    }
+    return String(value);
+  }
+  if (typeof value === 'string') return value;
+  // 配列・オブジェクトはJSON整形して表示
+  return JSON.stringify(value, null, 2);
+}
+
 export default function ResourcesPage() {
   const [primaryColor, setPrimaryColor] = useState('#2563eb');
   const [tabs, setTabs] = useState<string[]>([]);
   const [active, setActive] = useState('');
-  const [data, setData] = useState<Record<string, string>>({});
+  const [data, setData] = useState<Record<string, unknown>>({});
   const [loading, setLoading] = useState(true);
+
   const LABEL_MAP: Record<string, string> = {
     design_md: 'DESIGN.MD生成',
     code: '実装コード生成',
@@ -60,6 +92,8 @@ export default function ResourcesPage() {
     state: 'Vercelステータス',
     createdAt: '作成日時',
     isWhite: '白背景フラグ',
+    border: 'ボーダー情報',
+    date: '日付',
   };
   // ゴミキーを除外：50文字超 OR 英数字・アンダースコア・ハイフン以外の文字を含む（URLやJSON断片を排除）
   const VALID_KEY = (k: string) => k.length <= 50 && /^[\w-]+$/.test(k);
@@ -67,8 +101,9 @@ export default function ResourcesPage() {
     const raw = LABEL_MAP[tab] ?? tab;
     return raw.length > 28 ? raw.slice(0, 26) + '…' : raw;
   };
-  const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
-  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'selected_urls']);
+  // vercel_output・date・border は技術的/ゴミ値なのでセカンダリへ
+  const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL'];
+  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'border', 'date', 'vercel_output']);
   const validTabs = tabs.filter(VALID_KEY);
   const primaryTabs = [...validTabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
     (TAB_ORDER.indexOf(a) === -1 ? 999 : TAB_ORDER.indexOf(a)) - (TAB_ORDER.indexOf(b) === -1 ? 999 : TAB_ORDER.indexOf(b))
@@ -83,11 +118,12 @@ export default function ResourcesPage() {
       const m = css.match(/--primary-color:\s*(#[0-9a-fA-F]{3,8})/);
       if (m) setPrimaryColor(m[1]);
       setData(json);
+      // ゴミキーを除外：50文字超 OR 英数字・アンダースコア・ハイフン以外の文字を含む
       const keys = Object.keys(json).filter((k: string) => k.length <= 50 && /^[\w-]+$/.test(k));
       setTabs(keys);
       if (keys.length > 0) {
-        const order = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
-        const sec = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite']);
+        const order = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL'];
+        const sec = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'border', 'date', 'vercel_output']);
         const sorted = keys.filter((k: string) => !sec.has(k)).sort((a: string, b: string) =>
           (order.indexOf(a) === -1 ? 999 : order.indexOf(a)) - (order.indexOf(b) === -1 ? 999 : order.indexOf(b))
         );
@@ -146,7 +182,7 @@ export default function ResourcesPage() {
                 padding: 24, margin: 0, fontSize: 12, lineHeight: 1.8,
                 color: '#374151', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
                 maxHeight: '65vh', overflowY: 'auto', fontFamily: "'Courier New', monospace",
-              }}>{renderRich(String(data[active] ?? '（データなし）'))}</pre>
+              }}>{renderRich(formatValue(active, data[active] ?? null))}</pre>
             </div>
           </>
         )}
