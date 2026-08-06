@@ -463,7 +463,7 @@ export function NewClientButton() {
             {/* Step 3: 生成中 */}
             {step === 'generating' && (
               <>
-                <StepIndicator current={3} urlsConfirmed={urlsConfirmed} />
+                <StepIndicator current={urlsConfirmed ? 3 : 2} urlsConfirmed={urlsConfirmed} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'ポータルを生成中...'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
                   {form.company_name}{'のポータルをDifyが構築しています'}
