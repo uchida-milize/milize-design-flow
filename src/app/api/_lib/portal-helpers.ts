@@ -463,16 +463,21 @@ export async function readAndFixDifyFiles(
       // page.tsx: resourcesカードを注入または既存className方式をインラインスタイル方式へ更新
       if (path.endsWith(`${slug}/page.tsx`)) {
         const resourcesCard = `
-          <a href={\`\${basePath}/resources\`} style={{ textDecoration: 'none', display: 'block' }}>
+          <a
+            href={\`\${basePath}/resources\`}
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', transition: 'transform 0.15s ease' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)'; const d = e.currentTarget.querySelector('div') as HTMLElement; if (d) d.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = ''; const d = e.currentTarget.querySelector('div') as HTMLElement; if (d) d.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)'; }}
+          >
             <div style={{
-              background: 'rgba(255,255,255,0.92)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
+              background: '#ffffff',
               borderRadius: '24px',
               border: 'none',
               boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
               padding: '24px',
               cursor: 'pointer',
+              flex: 1,
+              transition: 'box-shadow 0.15s ease',
             }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
                 RESOURCES
@@ -508,7 +513,7 @@ export async function readAndFixDifyFiles(
 
       // globals.css: カードスタイルを統一（罫線なし・角丸24px・シャドウ）
       if (path.endsWith('globals.css')) {
-        const cardOverride = `\n/* カードスタイル統一（自動注入） */\n[class$="-portal"] .card, .card {\n  border: none !important;\n  border-radius: 24px !important;\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;\n}\n[class$="-portal"] .nav-card:hover, .nav-card:hover {\n  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;\n  transform: translateY(-2px);\n}\n`;
+        const cardOverride = `\n/* カードスタイル統一（自動注入） */\n[class$="-portal"] .card, .card {\n  background: #ffffff !important;\n  border: none !important;\n  border-radius: 24px !important;\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;\n  transition: box-shadow 0.15s ease !important;\n}\n[class$="-portal"] .nav-card, .nav-card {\n  transition: transform 0.15s ease !important;\n  display: flex !important;\n  flex-direction: column !important;\n  height: 100% !important;\n}\n[class$="-portal"] .nav-card:hover, .nav-card:hover {\n  transform: translateY(-2px);\n}\n[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {\n  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;\n}\n`;
         if (!content.includes('カードスタイル統一')) {
           content += cardOverride;
         }
