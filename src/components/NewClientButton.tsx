@@ -121,6 +121,15 @@ export function NewClientButton() {
           setWorkflowRunId(typeof data.workflow_run_id === 'string' ? data.workflow_run_id : '');
           setFormToken(typeof data.form_token === 'string' ? data.form_token : '');
           const urls: string[] = Array.isArray(data.urls) ? (data.urls as string[]) : [];
+          // Wikipedia URL（会社名から自動生成・常に先頭に追加）
+          const wikiUrl = `https://ja.wikipedia.org/wiki/${form.company_name}`;
+          const wikiItem: UrlItem = {
+            url: wikiUrl,
+            checked: true,
+            purposes: { color: false, ci: true, font: false, form: false },
+            isPreset: true,
+          };
+          // ユーザー指定URL（重複排除してDify URLリストの先頭に追加）
           const presets = presetUrls.map(u => u.trim()).filter(Boolean);
           const presetItems: UrlItem[] = presets.map(url => ({
             url,
@@ -128,9 +137,10 @@ export function NewClientButton() {
             purposes: { color: true, ci: true, font: true, form: true },
             isPreset: true,
           }));
-          const difyUrls = urls.filter(u => !presets.includes(u));
+          // DifyのURLからWikipedia・ユーザー指定を除外（重複排除）
+          const difyUrls = urls.filter(u => !presets.includes(u) && u !== wikiUrl);
           const { items, excluded } = initUrlItems(difyUrls);
-          setUrlItems([...presetItems, ...items]);
+          setUrlItems([wikiItem, ...presetItems, ...items]);
           setExcludedCount(excluded);
           setGenProgress(typeof data.progress === 'number' ? data.progress : 50);
           setStep('urls');
@@ -434,7 +444,14 @@ export function NewClientButton() {
                               onChange={e => setUrlItems(u => u.map((i, j) => j === idx ? { ...i, checked: e.target.checked } : i))}
                               style={{ marginTop: '3px', flexShrink: 0, cursor: 'pointer' }}
                             />
-                            {item.isPreset && (
+                            {item.url.includes('wikipedia.org') ? (
+                              <span style={{
+                                flexShrink: 0, fontSize: '10px', fontWeight: 700,
+                                padding: '1px 6px', borderRadius: 999,
+                                background: '#eff6ff', color: '#2563eb', border: '1px solid #bfdbfe',
+                                marginTop: '2px',
+                              }}>Wiki</span>
+                            ) : item.isPreset && (
                               <span style={{
                                 flexShrink: 0, fontSize: '10px', fontWeight: 700,
                                 padding: '1px 6px', borderRadius: 999,
