@@ -70,14 +70,19 @@
 }
 
 .softbank-group-portal .nav-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease;
 }
 
 .softbank-group-portal .nav-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.softbank-group-portal .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
 
 .softbank-group-portal .swatch-grid {
