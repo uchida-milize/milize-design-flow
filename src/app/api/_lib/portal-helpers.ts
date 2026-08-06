@@ -233,7 +233,7 @@ export default function ResourcesPage() {
                 padding: 24, margin: 0, fontSize: 12, lineHeight: 1.8,
                 color: '#374151', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
                 maxHeight: '65vh', overflowY: 'auto', fontFamily: "'Courier New', monospace",
-              }}>{renderRich(data[active] ?? '（データなし）')}</pre>
+              }}>{renderRich(String(data[active] ?? '（データなし）'))}</pre>
             </div>
           </>
         )}
