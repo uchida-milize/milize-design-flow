@@ -1,11 +1,11 @@
-2026-08-06T00:40:24.908Z  START task_id="47ac6889-7cff-48fe-8208-19b8c55380f5" workflow_run_id="d014b800-ab8c-40ee-b55f-9674ec689b0b" form_token="m0ubWuKNaNxmeARApTbnSO" client="ge"
-2026-08-06T00:40:24.909Z  formBase="https://app.dify.milize.com"
-2026-08-06T00:40:24.909Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/m0ubWuKNaNxmeARApTbnSO
-2026-08-06T00:40:25.461Z  結果[app/api]: 200 ct=application/json body={}
+2026-08-06T00:45:22.880Z  START task_id="8fe35276-1761-4630-9526-4f145e9b8fe5" workflow_run_id="b84580f8-f3d4-4ece-a481-f55353a1e386" form_token="XNCuNXGsznN0qk1r15gxz0" client="ge"
+2026-08-06T00:45:22.881Z  formBase="https://app.dify.milize.com"
+2026-08-06T00:45:22.881Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/XNCuNXGsznN0qk1r15gxz0
+2026-08-06T00:45:23.388Z  結果[app/api]: 200 ct=application/json body={}
 
-2026-08-06T00:40:25.461Z  ✓ 再開成功: app/api
-2026-08-06T00:40:25.461Z  resume 成功: ct=application/json
-2026-08-06T00:40:25.462Z  ポーリング開始 pollIds=["d014b800-ab8c-40ee-b55f-9674ec689b0b","47ac6889-7cff-48fe-8208-19b8c55380f5"]
-2026-08-06T00:40:36.565Z  logs[1]: run=d014b800 status="failed"
-2026-08-06T00:40:36.565Z  ワークフロー完了: status="failed" (outputs は dify-callback 経由で書き込み済み)
-2026-08-06T00:40:36.565Z  ポーリング完了
+2026-08-06T00:45:23.388Z  ✓ 再開成功: app/api
+2026-08-06T00:45:23.389Z  resume 成功: ct=application/json
+2026-08-06T00:45:23.389Z  ポーリング開始 pollIds=["b84580f8-f3d4-4ece-a481-f55353a1e386","8fe35276-1761-4630-9526-4f145e9b8fe5"]
+2026-08-06T00:45:33.901Z  logs[1]: run=b84580f8 status="failed"
+2026-08-06T00:45:33.901Z  ワークフロー完了: status="failed" (outputs は dify-callback 経由で書き込み済み)
+2026-08-06T00:45:33.901Z  ポーリング完了
