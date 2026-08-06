@@ -199,12 +199,19 @@ export default function ResourcesPage() {
     createdAt: '作成日時',
     isWhite: '白背景フラグ',
   };
+  // ゴミキーを除外：50文字超 OR 英数字・アンダースコア・ハイフン以外の文字を含む（URLやJSON断片を排除）
+  const VALID_KEY = (k: string) => k.length <= 50 && /^[\\w-]+$/.test(k);
+  const getTabLabel = (tab: string) => {
+    const raw = LABEL_MAP[tab] ?? tab;
+    return raw.length > 28 ? raw.slice(0, 26) + '…' : raw;
+  };
   const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
   const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'selected_urls']);
-  const primaryTabs = [...tabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
+  const validTabs = tabs.filter(VALID_KEY);
+  const primaryTabs = [...validTabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
     (TAB_ORDER.indexOf(a) === -1 ? 999 : TAB_ORDER.indexOf(a)) - (TAB_ORDER.indexOf(b) === -1 ? 999 : TAB_ORDER.indexOf(b))
   );
-  const secondaryTabs = tabs.filter(t => SECONDARY_KEYS.has(t));
+  const secondaryTabs = validTabs.filter(t => SECONDARY_KEYS.has(t));
 
   useEffect(() => {
     Promise.all([
@@ -214,7 +221,7 @@ export default function ResourcesPage() {
       const m = css.match(/--primary-color:\\s*(#[0-9a-fA-F]{3,8})/);
       if (m) setPrimaryColor(m[1]);
       setData(json);
-      const keys = Object.keys(json);
+      const keys = Object.keys(json).filter((k: string) => k.length <= 50 && /^[\\w-]+$/.test(k));
       setTabs(keys);
       if (keys.length > 0) {
         const order = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
@@ -250,7 +257,7 @@ export default function ResourcesPage() {
                     background: active === tab ? primaryColor : '#f3f4f6',
                     color: active === tab ? '#ffffff' : '#6b7280',
                     border: 'none', cursor: 'pointer', transition: 'all 0.15s',
-                  }}>{LABEL_MAP[tab] ?? tab}</button>
+                  }}>{getTabLabel(tab)}</button>
                 ))}
               </div>
               {secondaryTabs.length > 0 && (
@@ -263,7 +270,7 @@ export default function ResourcesPage() {
                         background: active === tab ? primaryColor : '#f3f4f6',
                         color: active === tab ? '#ffffff' : '#6b7280',
                         border: 'none', cursor: 'pointer', transition: 'all 0.15s',
-                      }}>{LABEL_MAP[tab] ?? tab}</button>
+                      }}>{getTabLabel(tab)}</button>
                     ))}
                   </div>
                 </>
@@ -437,6 +444,12 @@ export async function readAndFixDifyFiles(
           /(<a[^>]*components[^>]*>[\s\S]*?<\/a>)(\s*\n\s*<\/div>)/,
           `$1${resourcesCard}$2`
         );
+      }
+
+      // globals.css: AIが生成したfont-family宣言を削除
+      // （ルートlayoutのbodyインラインスタイルのゴシック体スタックを継承させる）
+      if (path.endsWith('globals.css')) {
+        content = content.replace(/font-family\s*:[^;]+;/g, '');
       }
 
       // globals.css: 標準カラー変数を注入
