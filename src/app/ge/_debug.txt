@@ -1,21 +1,39 @@
-2026-08-06T01:58:33.375Z  START task_id="ded42389-45e5-491f-950b-6a0df34c3342" workflow_run_id="b3491e63-1e3a-49de-b05f-59dbb26ca695" form_token="3YZJnAyNPFRS1QM44EVreF" client="ge"
-2026-08-06T01:58:33.375Z  formBase="https://app.dify.milize.com"
-2026-08-06T01:58:33.375Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/3YZJnAyNPFRS1QM44EVreF
-2026-08-06T01:58:33.892Z  結果[app/api]: 200 ct=application/json body={}
+2026-08-06T02:03:11.553Z  START task_id="565044fc-ed88-46c5-b8b4-d9aa612c4376" workflow_run_id="5babb752-51d5-4acb-a662-ad1e22cd6660" form_token="Iqcfdx6j0IWtCyNx7HF02X" client="ge"
+2026-08-06T02:03:11.555Z  formBase="https://app.dify.milize.com"
+2026-08-06T02:03:11.556Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/Iqcfdx6j0IWtCyNx7HF02X
+2026-08-06T02:03:12.112Z  結果[app/api]: 200 ct=application/json body={}
 
-2026-08-06T01:58:33.892Z  ✓ 再開成功: app/api
-2026-08-06T01:58:33.892Z  resume 成功: ct=application/json
-2026-08-06T01:58:33.892Z  ポーリング開始 pollIds=["b3491e63-1e3a-49de-b05f-59dbb26ca695","ded42389-45e5-491f-950b-6a0df34c3342"]
-2026-08-06T01:58:44.451Z  logs[1]: run=b3491e63 status="running"
-2026-08-06T01:58:44.451Z  logs[1]: 10件, runId未発見
-2026-08-06T01:58:54.964Z  logs[2]: run=b3491e63 status="running"
-2026-08-06T01:58:54.964Z  logs[2]: 10件, runId未発見
-2026-08-06T01:59:05.483Z  logs[3]: run=b3491e63 status="running"
-2026-08-06T01:59:05.483Z  logs[3]: 10件, runId未発見
-2026-08-06T01:59:15.994Z  logs[4]: run=b3491e63 status="running"
-2026-08-06T01:59:15.994Z  logs[4]: 10件, runId未発見
-2026-08-06T01:59:26.501Z  logs[5]: run=b3491e63 status="running"
-2026-08-06T01:59:26.501Z  logs[5]: 10件, runId未発見
-2026-08-06T01:59:37.011Z  logs[6]: run=b3491e63 status="failed"
-2026-08-06T01:59:37.011Z  ワークフロー完了: status="failed" (outputs は dify-callback 経由で書き込み済み)
-2026-08-06T01:59:37.011Z  ポーリング完了
+2026-08-06T02:03:12.113Z  ✓ 再開成功: app/api
+2026-08-06T02:03:12.113Z  resume 成功: ct=application/json
+2026-08-06T02:03:12.113Z  ポーリング開始 pollIds=["5babb752-51d5-4acb-a662-ad1e22cd6660","565044fc-ed88-46c5-b8b4-d9aa612c4376"]
+2026-08-06T02:03:22.630Z  logs[1]: run=5babb752 status="running"
+2026-08-06T02:03:22.631Z  logs[1]: 10件, runId未発見
+2026-08-06T02:03:33.157Z  logs[2]: run=5babb752 status="running"
+2026-08-06T02:03:33.157Z  logs[2]: 10件, runId未発見
+2026-08-06T02:03:45.591Z  logs[3]: run=5babb752 status="running"
+2026-08-06T02:03:45.591Z  logs[3]: 10件, runId未発見
+2026-08-06T02:03:56.117Z  logs[4]: run=5babb752 status="running"
+2026-08-06T02:03:56.117Z  logs[4]: 10件, runId未発見
+2026-08-06T02:04:06.640Z  logs[5]: run=5babb752 status="running"
+2026-08-06T02:04:06.640Z  logs[5]: 10件, runId未発見
+2026-08-06T02:04:17.167Z  logs[6]: run=5babb752 status="running"
+2026-08-06T02:04:17.167Z  logs[6]: 10件, runId未発見
+2026-08-06T02:04:27.681Z  logs[7]: run=5babb752 status="running"
+2026-08-06T02:04:27.681Z  logs[7]: 10件, runId未発見
+2026-08-06T02:04:38.211Z  logs[8]: run=5babb752 status="running"
+2026-08-06T02:04:38.211Z  logs[8]: 10件, runId未発見
+2026-08-06T02:04:48.737Z  logs[9]: run=5babb752 status="running"
+2026-08-06T02:04:48.737Z  logs[9]: 10件, runId未発見
+2026-08-06T02:04:59.272Z  logs[10]: run=5babb752 status="running"
+2026-08-06T02:04:59.273Z  logs[10]: 10件, runId未発見
+2026-08-06T02:05:09.800Z  logs[11]: run=5babb752 status="running"
+2026-08-06T02:05:09.801Z  logs[11]: 10件, runId未発見
+2026-08-06T02:05:20.319Z  logs[12]: run=5babb752 status="running"
+2026-08-06T02:05:20.319Z  logs[12]: 10件, runId未発見
+2026-08-06T02:05:30.851Z  logs[13]: run=5babb752 status="running"
+2026-08-06T02:05:30.851Z  logs[13]: 10件, runId未発見
+2026-08-06T02:05:41.360Z  logs[14]: run=5babb752 status="running"
+2026-08-06T02:05:41.360Z  logs[14]: 10件, runId未発見
+2026-08-06T02:05:51.853Z  logs[15]: run=5babb752 status="succeeded"
+2026-08-06T02:05:51.854Z  ワークフロー完了: status="succeeded" (outputs は dify-callback 経由で書き込み済み)
+2026-08-06T02:05:51.854Z  ポーリング完了
