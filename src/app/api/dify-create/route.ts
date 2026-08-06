@@ -11,7 +11,7 @@ import {
 export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
-  const { company_name, client_slug, selected_urls } = await req.json();
+  const { company_name, client_slug, selected_urls, url1, url2, url3 } = await req.json();
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -43,6 +43,9 @@ export async function POST(req: NextRequest) {
               company_name,
               client_slug,
               ...(selected_urls ? { selected_urls } : {}),
+              ...(url1 ? { URL1: url1 } : {}),
+              ...(url2 ? { URL2: url2 } : {}),
+              ...(url3 ? { URL3: url3 } : {}),
             },
             response_mode: 'streaming',
             user: 'milize-admin',

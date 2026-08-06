@@ -29,6 +29,7 @@ interface UrlItem {
   url: string;
   checked: boolean;
   purposes: Record<PurposeKey, boolean>;
+  isPreset?: boolean;
 }
 
 /** %XX エンコードが多い（日本語パス等）URLを判定 */
@@ -71,6 +72,7 @@ export function NewClientButton() {
   const [urlItems, setUrlItems] = useState<UrlItem[]>([]);
   const [excludedCount, setExcludedCount] = useState(0);
   const [urlsConfirmed, setUrlsConfirmed] = useState(false);
+  const [presetUrls, setPresetUrls] = useState(['', '', '']);
   const router = useRouter();
 
   function reset() {
@@ -84,6 +86,7 @@ export function NewClientButton() {
     setUrlItems([]);
     setExcludedCount(0);
     setUrlsConfirmed(false);
+    setPresetUrls(['', '', '']);
   }
 
   /** 第1フェーズ: /api/dify-create を実行し、interrupted で止まったら urls ステップへ */
@@ -98,10 +101,17 @@ export function NewClientButton() {
     localStorage.setItem('hidden_clients', JSON.stringify(hidden.filter(s => s !== slug)));
 
     try {
+      const filledPresets = presetUrls.map(u => u.trim()).filter(Boolean);
       const res = await fetch('/api/dify-create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ company_name: form.company_name, client_slug: slug }),
+        body: JSON.stringify({
+          company_name: form.company_name,
+          client_slug: slug,
+          ...(filledPresets[0] ? { url1: filledPresets[0] } : {}),
+          ...(filledPresets[1] ? { url2: filledPresets[1] } : {}),
+          ...(filledPresets[2] ? { url3: filledPresets[2] } : {}),
+        }),
       });
 
       const interrupted = await consumeSseStream(res, (data) => {
@@ -111,8 +121,16 @@ export function NewClientButton() {
           setWorkflowRunId(typeof data.workflow_run_id === 'string' ? data.workflow_run_id : '');
           setFormToken(typeof data.form_token === 'string' ? data.form_token : '');
           const urls: string[] = Array.isArray(data.urls) ? (data.urls as string[]) : [];
-          const { items, excluded } = initUrlItems(urls);
-          setUrlItems(items);
+          const presets = presetUrls.map(u => u.trim()).filter(Boolean);
+          const presetItems: UrlItem[] = presets.map(url => ({
+            url,
+            checked: true,
+            purposes: { color: true, ci: true, font: true, form: true },
+            isPreset: true,
+          }));
+          const difyUrls = urls.filter(u => !presets.includes(u));
+          const { items, excluded } = initUrlItems(difyUrls);
+          setUrlItems([...presetItems, ...items]);
           setExcludedCount(excluded);
           setGenProgress(typeof data.progress === 'number' ? data.progress : 50);
           setStep('urls');
@@ -322,7 +340,7 @@ export function NewClientButton() {
                     <input style={inputStyle} placeholder={'例：ゼネラル・エレクトリック'} value={form.company_name}
                       onChange={e => setForm(f => ({ ...f, company_name: e.target.value }))} required />
                   </div>
-                  <div style={{ marginBottom: '28px' }}>
+                  <div style={{ marginBottom: '18px' }}>
                     <label style={labelStyle}>{'スラッグ（URL用ID・英小文字とハイフンのみ）'}</label>
                     <input style={inputStyle} placeholder={'例：ge'} value={form.client_slug}
                       onChange={e => setForm(f => ({ ...f, client_slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} required />
@@ -331,6 +349,19 @@ export function NewClientButton() {
                         URL: milize-design-flow.vercel.app/{form.client_slug}
                       </div>
                     )}
+                  </div>
+                  <div style={{ marginBottom: '28px' }}>
+                    <label style={labelStyle}>{'参照URL（任意・最大3件 — URL選択画面の先頭に表示されます）'}</label>
+                    {[0, 1, 2].map(i => (
+                      <input
+                        key={i}
+                        style={{ ...inputStyle, marginBottom: i < 2 ? '8px' : 0 }}
+                        placeholder={`URL ${i + 1}（例：https://www.example.com）`}
+                        value={presetUrls[i]}
+                        onChange={e => setPresetUrls(p => p.map((v, j) => j === i ? e.target.value : v))}
+                        type="url"
+                      />
+                    ))}
                   </div>
                   <div style={{ display: 'flex', gap: '12px' }}>
                     <button type="button" onClick={() => { setOpen(false); reset(); }}
@@ -403,6 +434,14 @@ export function NewClientButton() {
                               onChange={e => setUrlItems(u => u.map((i, j) => j === idx ? { ...i, checked: e.target.checked } : i))}
                               style={{ marginTop: '3px', flexShrink: 0, cursor: 'pointer' }}
                             />
+                            {item.isPreset && (
+                              <span style={{
+                                flexShrink: 0, fontSize: '10px', fontWeight: 700,
+                                padding: '1px 6px', borderRadius: 999,
+                                background: '#fef3c7', color: '#d97706', border: '1px solid #fde68a',
+                                marginTop: '2px',
+                              }}>指定</span>
+                            )}
                             <a
                               href={item.url}
                               target="_blank"
