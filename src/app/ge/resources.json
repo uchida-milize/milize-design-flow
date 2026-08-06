@@ -7,9 +7,9 @@
   "percent": 20,
   "selected_urls": "https://www.ge.com/||カラー,ロゴ・CI,フォント,フォーム",
   "url\": \"\", \"categories\": [\"カラー\", \"ロゴ・CI\", \"フォント\", \"フォーム\"], \"hex_colors\": \"\", \"rgb_colors\": \"\", \"fonts\": \"{\"font_family\": [], \"font_size\": [], \"line_height\": [], \"letter_spacing\": [], \"google_fonts\": []}\", \"page_summary\": \"{\"success\":true,\"data\":{\"markdown\":\"[Skip to main content](https": "",
-  "vercel_output": "{\"job\":{\"id\":\"wuuQEuz1iF6QmYRBOfjn",
+  "vercel_output": "{\"job\":{\"id\":\"0Y0gUrsyQVodJicrd7l8",
   "state": "PENDING",
-  "createdAt": 1785979449005,
+  "createdAt": 1785981939093,
   "isWhite": false,
   "pct": 55
 }
