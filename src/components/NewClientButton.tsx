@@ -70,6 +70,7 @@ export function NewClientButton() {
   const [formToken, setFormToken] = useState('');
   const [urlItems, setUrlItems] = useState<UrlItem[]>([]);
   const [excludedCount, setExcludedCount] = useState(0);
+  const [urlsConfirmed, setUrlsConfirmed] = useState(false);
   const router = useRouter();
 
   function reset() {
@@ -82,6 +83,7 @@ export function NewClientButton() {
     setFormToken('');
     setUrlItems([]);
     setExcludedCount(0);
+    setUrlsConfirmed(false);
   }
 
   /** 第1フェーズ: /api/dify-create を実行し、interrupted で止まったら urls ステップへ */
@@ -130,6 +132,7 @@ export function NewClientButton() {
 
   /** 第2フェーズ: 選択URLを /api/dify-resume に送る */
   async function handleResume() {
+    setUrlsConfirmed(true);
     setStep('generating');
     setGenStatus('URLを送信してワークフローを再開中...');
 
@@ -310,7 +313,7 @@ export function NewClientButton() {
             {/* Step 1: フォーム */}
             {step === 'form' && (
               <>
-                <StepIndicator current={1} />
+                <StepIndicator current={1} urlsConfirmed={urlsConfirmed} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'新規クライアント追加'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>{'会社名とスラッグを入力してポータルを生成します'}</p>
                 <form onSubmit={handleSubmit}>
@@ -346,7 +349,7 @@ export function NewClientButton() {
             {/* Step 2: URL選択 */}
             {step === 'urls' && (
               <>
-                <StepIndicator current={2} />
+                <StepIndicator current={2} urlsConfirmed={urlsConfirmed} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'参照URLを選択'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '20px' }}>
                   {'Difyがリサーチ対象として収集したURLです。使用するURLを選んで生成を続行してください。'}
@@ -460,7 +463,7 @@ export function NewClientButton() {
             {/* Step 3: 生成中 */}
             {step === 'generating' && (
               <>
-                <StepIndicator current={3} />
+                <StepIndicator current={3} urlsConfirmed={urlsConfirmed} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'ポータルを生成中...'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
                   {form.company_name}{'のポータルをDifyが構築しています'}
@@ -480,14 +483,15 @@ export function NewClientButton() {
   );
 }
 
-function StepIndicator({ current }: { current: 1 | 2 | 3 }) {
+function StepIndicator({ current, urlsConfirmed }: { current: 1 | 2 | 3; urlsConfirmed: boolean }) {
   const steps = ['入力', 'URL選択', '生成'];
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '20px' }}>
       {steps.map((label, i) => {
         const num = i + 1;
         const active = num === current;
-        const done = num < current;
+        // URL選択ステップ（num=2）は、ユーザーが選択を確定した後にのみ完了扱いにする
+        const done = num === 2 ? urlsConfirmed : num < current;
         return (
           <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{
