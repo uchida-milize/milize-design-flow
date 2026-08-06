@@ -194,10 +194,17 @@ export default function ResourcesPage() {
     vercel_output: 'Vercelデプロイ',
     name: 'カラー名',
     percent: '使用比率',
+    pct: '使用比率',
     state: 'Vercelステータス',
     createdAt: '作成日時',
     isWhite: '白背景フラグ',
   };
+  const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
+  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite']);
+  const primaryTabs = [...tabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
+    (TAB_ORDER.indexOf(a) === -1 ? 999 : TAB_ORDER.indexOf(a)) - (TAB_ORDER.indexOf(b) === -1 ? 999 : TAB_ORDER.indexOf(b))
+  );
+  const secondaryTabs = tabs.filter(t => SECONDARY_KEYS.has(t));
 
   useEffect(() => {
     Promise.all([
@@ -209,7 +216,14 @@ export default function ResourcesPage() {
       setData(json);
       const keys = Object.keys(json);
       setTabs(keys);
-      if (keys.length > 0) setActive(keys[0]);
+      if (keys.length > 0) {
+        const order = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
+        const sec = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite']);
+        const sorted = keys.filter((k: string) => !sec.has(k)).sort((a: string, b: string) =>
+          (order.indexOf(a) === -1 ? 999 : order.indexOf(a)) - (order.indexOf(b) === -1 ? 999 : order.indexOf(b))
+        );
+        setActive(sorted[0] ?? keys[0]);
+      }
     }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
@@ -228,15 +242,32 @@ export default function ResourcesPage() {
           <div style={{ color: '#9ca3af', fontSize: 14 }}>データがありません</div>
         ) : (
           <>
-            <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
-              {tabs.map(tab => (
-                <button key={tab} onClick={() => setActive(tab)} style={{
-                  padding: '6px 16px', borderRadius: 999, fontSize: 13, fontWeight: 500,
-                  background: active === tab ? primaryColor : '#f3f4f6',
-                  color: active === tab ? '#ffffff' : '#6b7280',
-                  border: 'none', cursor: 'pointer', transition: 'all 0.15s',
-                }}>{LABEL_MAP[tab] ?? tab}</button>
-              ))}
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {primaryTabs.map(tab => (
+                  <button key={tab} onClick={() => setActive(tab)} style={{
+                    padding: '6px 16px', borderRadius: 999, fontSize: 13, fontWeight: 500,
+                    background: active === tab ? primaryColor : '#f3f4f6',
+                    color: active === tab ? '#ffffff' : '#6b7280',
+                    border: 'none', cursor: 'pointer', transition: 'all 0.15s',
+                  }}>{LABEL_MAP[tab] ?? tab}</button>
+                ))}
+              </div>
+              {secondaryTabs.length > 0 && (
+                <>
+                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '10px 0' }} />
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {secondaryTabs.map(tab => (
+                      <button key={tab} onClick={() => setActive(tab)} style={{
+                        padding: '6px 16px', borderRadius: 999, fontSize: 13, fontWeight: 500,
+                        background: active === tab ? primaryColor : '#f3f4f6',
+                        color: active === tab ? '#ffffff' : '#6b7280',
+                        border: 'none', cursor: 'pointer', transition: 'all 0.15s',
+                      }}>{LABEL_MAP[tab] ?? tab}</button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
             <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden' }}>
               <div style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb', padding: '10px 20px' }}>
