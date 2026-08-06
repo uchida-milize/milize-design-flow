@@ -47,9 +47,9 @@
 
 .toyota-portal .card {
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 24px;
 }
 
@@ -66,7 +66,7 @@
 
 .toyota-portal .nav-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
 
 .toyota-portal .nav-card-title {

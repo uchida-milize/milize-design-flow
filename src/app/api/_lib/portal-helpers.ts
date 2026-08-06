@@ -468,9 +468,9 @@ export async function readAndFixDifyFiles(
               background: 'rgba(255,255,255,0.92)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255,255,255,0.8)',
-              boxShadow: '0 8px 32px rgba(9,25,70,0.12)',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
               padding: '24px',
               cursor: 'pointer',
             }}>
@@ -504,6 +504,14 @@ export async function readAndFixDifyFiles(
       // （ルートlayoutのbodyインラインスタイルのゴシック体スタックを継承させる）
       if (path.endsWith('globals.css')) {
         content = content.replace(/font-family\s*:[^;]+;/g, '');
+      }
+
+      // globals.css: カードスタイルを統一（罫線なし・角丸24px・シャドウ）
+      if (path.endsWith('globals.css')) {
+        const cardOverride = `\n/* カードスタイル統一（自動注入） */\n[class$="-portal"] .card, .card {\n  border: none !important;\n  border-radius: 24px !important;\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;\n}\n[class$="-portal"] .nav-card:hover, .nav-card:hover {\n  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;\n  transform: translateY(-2px);\n}\n`;
+        if (!content.includes('カードスタイル統一')) {
+          content += cardOverride;
+        }
       }
 
       // globals.css: 標準カラー変数を注入
