@@ -675,14 +675,15 @@ export async function readAndFixDifyFiles(
           .join('\n');
         const standardBlock = `\n/* 標準カラー変数（自動注入） */\n:root {\n  --primary-color: ${primary};\n  --secondary-color: ${secondary};\n  --accent-color: ${accent};\n  --text-color: ${textColor};\n  --bg-color: ${bgColor};\n${brandLines ? brandLines + '\n' : ''}}\n`;
 
-        if (content.includes('--primary-color:')) {
+        // 既存の標準カラー変数ブロック（自動注入済み）を削除してから追記
+        // テンプレートにすでに --primary-color: がある場合も正しく上書きできる
+        if (content.includes('/* 標準カラー変数（自動注入） */')) {
           content = content.replace(
-            /\/\*\s*標準カラー変数[^*]*\*\/\s*:root\s*\{[^}]*--primary-color:[^}]*\}/,
-            standardBlock.trim(),
+            /\n?\/\* 標準カラー変数（自動注入） \*\/[\s\S]*?(?=\n\/\*|\s*$)/,
+            '',
           );
-        } else {
-          content += standardBlock;
         }
+        content = content.trimEnd() + '\n' + standardBlock;
       }
 
       return { path, content };
