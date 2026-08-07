@@ -319,6 +319,15 @@ export function NewClientButton() {
           <div style={{ fontSize: '15px', fontWeight: 600, color: '#374151' }}>{'新規クライアント'}</div>
           <div style={{ fontSize: '13px', color: '#9ca3af', marginTop: '4px' }}>Difyで自動生成</div>
         </div>
+        <a
+          href="https://milize-design-flow.vercel.app/milize-asset-portal"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          style={{ fontSize: '12px', color: '#6b7280', marginTop: '8px', textDecoration: 'underline', cursor: 'pointer' }}
+        >
+          テンプレート
+        </a>
       </div>
 
       {open && (
