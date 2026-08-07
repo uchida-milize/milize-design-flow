@@ -1,15 +1,1 @@
-{
-  "selected_urls": "https://www.global.toshiba/jp/top.html",
-  "css_info": {
-    "hex_colors": "#E60012 | background-color, --brand-color | 出現50回 | [external-css]\n#FFFFFF | background-color | 出現40回 | [external-css]\n#003087 | background-color | 出現20回 | [external-css]\n#F5F5F5 | background-color | 出現15回 | [external-css]\n#1A1A1A | color | 出現30回 | [external-css]",
-    "css_variables": {},
-    "fonts": [],
-    "source_css_urls": [],
-    "extracted_at": "2026-08-07T08:35:56.246Z",
-    "source_urls": [
-      "https://www.global.toshiba/jp/top.html"
-    ]
-  },
-  "repair_generated": true,
-  "generated_at": "2026-08-07T08:35:56.253Z"
-}
+{}
