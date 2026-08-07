@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+  --primary-silver: #C0C0C0;
+  --secondary-black: #000000;
+  --accent-darkgray: #444444;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-note: #9ca3af;
+  /* 標準変数（カラーバー自動生成用） */
+  --primary-color: #C0C0C0;
+  --secondary-color: #000000;
+  --accent-color: #444444;
+  --text-color: #111827;
+  --bg-color: #FFFFFF;
+}
+
+.toshiba-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.toshiba-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  
+  color: var(--text-main);
+}
+
+.toshiba-portal h1,
+.toshiba-portal h2,
+.toshiba-portal h3 {
+  
+}
+
+.toshiba-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.toshiba-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.toshiba-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.toshiba-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.toshiba-portal .card {
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.toshiba-portal .nav-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.toshiba-portal .nav-card:hover {
+  transform: translateY(-2px);
+}
+
+.toshiba-portal .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+}
+
+.toshiba-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.toshiba-portal .swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.toshiba-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.toshiba-portal .swatch-info {
+  padding: 8px 10px;
+}
+
+.toshiba-portal .swatch-hex {
+  
+  font-size: 13px;
+  color: #111827;
+}
+
+.toshiba-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.toshiba-portal .tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.toshiba-portal .tab {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: #6b7280;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toshiba-portal .tab.active {
+  color: #ffffff;
+}
+
+.toshiba-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.toshiba-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  
+}
+
+.toshiba-portal .component-render {
+  padding: 24px;
+}
+
+.toshiba-portal .component-code {
+  background: #0f172a;
+  color: #94a3b8;
+  
+  font-size: 12px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.toshiba-portal .color-bar {
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.toshiba-portal .color-bar-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.toshiba-portal .color-bar-label-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.toshiba-portal .color-bar-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+/* カードスタイル統一（自動注入） */
+[class$="-portal"] .card, .card {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  transition: box-shadow 0.15s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+[class$="-portal"] .nav-card, .nav-card {
+  transition: transform 0.15s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+[class$="-portal"] .nav-card:hover, .nav-card:hover {
+  transform: translateY(-2px);
+}
+[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+}
