@@ -9,10 +9,10 @@
   --text-sub: #6b7280;
   --text-note: #9ca3af;
   /* 標準変数（カラーバー自動生成用） */
-  --primary-color: #0055A4;
-  --secondary-color: #00A0E9;
-  --accent-color: #F5A623;
-  --text-color: #333333;
+  --primary-color: #C0C0C0;
+  --secondary-color: #000000;
+  --accent-color: #444444;
+  --text-color: #111827;
   --bg-color: #FFFFFF;
 }
 
