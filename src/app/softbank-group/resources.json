@@ -7,67 +7,10 @@
     ],
     "button_styles": [
       {
-        "selector": ".mapboxgl-ctrl-group button",
+        "selector": ".btn.disable a",
         "properties": {
-          "display": "block",
-          "padding": "0",
-          "border": "0",
-          "background-color": "transparent"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button .mapboxgl-ctrl-icon",
-        "properties": {
-          "display": "block",
-          "background-repeat": "no-repeat"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button::-moz-focus-inner",
-        "properties": {
-          "border": "0"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-fullscreen .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-shrink .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-compass .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
-        }
-      },
-      {
-        "selector": ".mapboxgl-ctrl button.mapboxgl-ctrl-geolocate:disabled .mapboxgl-ctrl-icon",
-        "properties": {
-          "background-image": "url(\"data:image/svg+xml"
+          "background-color": "#ccc",
+          "color": "#666"
         }
       }
     ],
@@ -79,12 +22,12 @@
     "source_css_urls": [
       "https://group.softbank/_next/static/css/a097c944d610f8e9.css",
       "https://group.softbank/_next/static/css/bb73e01188fddf05.css",
-      "https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+      "https://group.softbank/media/Project/sbg/sbg/ir/css/loading.css"
     ],
-    "extracted_at": "2026-08-07T01:42:45.478Z",
+    "extracted_at": "2026-08-07T01:42:48.930Z",
     "source_urls": [
-      "https://group.softbank/"
+      "https://group.softbank/ir"
     ]
   },
-  "css_summary": "【使用フォント】\n  swiper-icons\n\n【ボタンスタイル】\n  .mapboxgl-ctrl-group button\n    display: block\n    padding: 0\n    border: 0\n    background-color: transparent\n  .mapboxgl-ctrl button .mapboxgl-ctrl-icon\n    display: block\n    background-repeat: no-repeat\n  .mapboxgl-ctrl button::-moz-focus-inner\n    border: 0\n  .mapboxgl-ctrl button.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon\n    background-image: url(\"data:image/svg+xml\n  .mapboxgl-ctrl button.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon\n    background-image: url(\"data:image/svg+xml\n\n【ロゴ・ビジュアル素材】\n  https://group.softbank/sites/default/files/assets/img/logo-group.png\n  https://group.softbank/themes/custom/sbg/favicon.ico\n\n【取得CSSファイル】\n  https://group.softbank/_next/static/css/a097c944d610f8e9.css\n  https://group.softbank/_next/static/css/bb73e01188fddf05.css\n  https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+  "css_summary": "【使用フォント】\n  swiper-icons\n\n【ボタンスタイル】\n  .btn.disable a\n    background-color: #ccc\n    color: #666\n\n【ロゴ・ビジュアル素材】\n  https://group.softbank/sites/default/files/assets/img/logo-group.png\n  https://group.softbank/themes/custom/sbg/favicon.ico\n\n【取得CSSファイル】\n  https://group.softbank/_next/static/css/a097c944d610f8e9.css\n  https://group.softbank/_next/static/css/bb73e01188fddf05.css\n  https://group.softbank/media/Project/sbg/sbg/ir/css/loading.css"
 }
