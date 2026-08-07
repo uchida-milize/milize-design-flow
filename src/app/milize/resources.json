@@ -3,51 +3,47 @@
   "css_info": {
     "css_variables": {},
     "fonts": [
-      "Font Awesome 5 Brands",
-      "Font Awesome 5 Free"
+      "Barlow Semi Condensed"
     ],
-    "button_styles": [],
+    "button_styles": [
+      {
+        "selector": ".wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select",
+        "properties": {
+          "padding": "1em",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "font-size": "16px"
+        }
+      },
+      {
+        "selector": ".wpcf7 button",
+        "properties": {
+          "color": "#fff",
+          "border-radius": "0 !important",
+          "background": "#0b1f65"
+        }
+      },
+      {
+        "selector": ".wpcf7 button br",
+        "properties": {
+          "display": "none !important"
+        }
+      }
+    ],
     "card_styles": [],
     "logo_urls": [
       "https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/btt-data_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/new_dai-ichi-life_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/df-life_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fukuoka-fg_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jibunbank_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jiji-data_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/mufg-shintaku_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/kyoto-bank_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/saison_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/yokohama_bank_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/relo-club_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/sony-bank_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/sompo-himawari_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/smtb_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/wealth-advisor_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/trn-g_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/tohoku-frontier-data_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/sbi-globalassetmanagement_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/manex_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/nomura-re_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/acomu_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fuyo-lease_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/glory-data_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/uploads/2025/11/case_logo_09-scaled.png",
-      "https://milize.co.jp/cms/wp-content/uploads/2025/11/case8_logo-scaled.png",
-      "https://milize.co.jp/cms/wp-content/uploads/2025/08/daiichi-life-group_logo.jpg",
-      "https://milize.co.jp/cms/wp-content/uploads/2025/05/trn-g_logo-1.png"
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico"
     ],
     "source_css_urls": [
       "https://unpkg.com/lenis@1.1.13/dist/lenis.css",
-      "https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css",
-      "https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      "https://milize.co.jp/cms/wp-content/themes/milize/previous/css/form.css?ver=7.0.3",
+      "https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css"
     ],
-    "extracted_at": "2026-08-07T04:19:11.379Z",
+    "extracted_at": "2026-08-07T04:19:17.720Z",
     "source_urls": [
-      "https://milize.co.jp/"
+      "https://milize.co.jp/contact_sales"
     ]
   },
-  "css_summary": "【使用フォント】\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/btt-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/new_dai-ichi-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/df-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fukuoka-fg_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jibunbank_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jiji-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/mufg-shintaku_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/kyoto-bank_logo.jpg\n\n【取得CSSファイル】\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css\n  https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+  "css_summary": "【使用フォント】\n  Barlow Semi Condensed\n\n【ボタンスタイル】\n  .wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select\n    padding: 1em\n    border: 1px solid #aaa\n    border-radius: 4px\n    font-size: 16px\n  .wpcf7 button\n    color: #fff\n    border-radius: 0 !important\n    background: #0b1f65\n  .wpcf7 button br\n    display: none !important\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n\n【取得CSSファイル】\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://milize.co.jp/cms/wp-content/themes/milize/previous/css/form.css?ver=7.0.3\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css"
 }
