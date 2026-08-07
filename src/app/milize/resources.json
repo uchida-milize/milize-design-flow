@@ -3,33 +3,10 @@
   "css_info": {
     "css_variables": {},
     "fonts": [
-      "Barlow Semi Condensed"
+      "Font Awesome 5 Brands",
+      "Font Awesome 5 Free"
     ],
-    "button_styles": [
-      {
-        "selector": ".wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select",
-        "properties": {
-          "padding": "1em",
-          "border": "1px solid #aaa",
-          "border-radius": "4px",
-          "font-size": "16px"
-        }
-      },
-      {
-        "selector": ".wpcf7 button",
-        "properties": {
-          "color": "#fff",
-          "border-radius": "0 !important",
-          "background": "#0b1f65"
-        }
-      },
-      {
-        "selector": ".wpcf7 button br",
-        "properties": {
-          "display": "none !important"
-        }
-      }
-    ],
+    "button_styles": [],
     "card_styles": [],
     "logo_urls": [
       "https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png",
@@ -37,13 +14,13 @@
     ],
     "source_css_urls": [
       "https://unpkg.com/lenis@1.1.13/dist/lenis.css",
-      "https://milize.co.jp/cms/wp-content/themes/milize/previous/css/form.css?ver=7.0.3",
-      "https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css"
+      "https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css",
+      "https://use.fontawesome.com/releases/v5.15.3/css/all.css"
     ],
-    "extracted_at": "2026-08-07T04:19:17.720Z",
+    "extracted_at": "2026-08-07T04:19:22.508Z",
     "source_urls": [
-      "https://milize.co.jp/contact_sales"
+      "https://milize.co.jp/about"
     ]
   },
-  "css_summary": "【使用フォント】\n  Barlow Semi Condensed\n\n【ボタンスタイル】\n  .wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select\n    padding: 1em\n    border: 1px solid #aaa\n    border-radius: 4px\n    font-size: 16px\n  .wpcf7 button\n    color: #fff\n    border-radius: 0 !important\n    background: #0b1f65\n  .wpcf7 button br\n    display: none !important\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n\n【取得CSSファイル】\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://milize.co.jp/cms/wp-content/themes/milize/previous/css/form.css?ver=7.0.3\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css"
+  "css_summary": "【使用フォント】\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n\n【取得CSSファイル】\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css\n  https://use.fontawesome.com/releases/v5.15.3/css/all.css"
 }
