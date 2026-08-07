@@ -147,10 +147,32 @@ async function getClients() {
           ]);
           if (pageRes.ok) {
             const pageSrc = await pageRes.text();
-            const m = pageSrc.match(/const clientName\s*(?::\s*string)?\s*=\s*['"`]([^'"`]+)['"`]/);
-            if (m) name = m[1];
+            // Extract client name
+            const nameMatch = pageSrc.match(/const clientName\s*(?::\s*string)?\s*=\s*['"`]([^'"`]+)['"`]/);
+            if (nameMatch) name = nameMatch[1];
+            // Read colorRatios from home page — exact same data the home page displays
+            // Supports both { pct: N } (legacy) and { ratio: N } (newer) formats
+            const ratioBlock = pageSrc.match(/colorRatios\s*=\s*\[[\s\S]*?\]/);
+            if (ratioBlock) {
+              const entryRe = /hex:\s*['"]([^'"]+)['"][\s\S]*?(?:pct|ratio):\s*(\d+)/g;
+              const extracted: Array<{ hex: string; ratio: number }> = [];
+              let em: RegExpExecArray | null;
+              while ((em = entryRe.exec(ratioBlock[0])) !== null) {
+                extracted.push({ hex: em[1], ratio: parseInt(em[2]) });
+              }
+              if (extracted.length > 0) {
+                const total = extracted.reduce((s, c) => s + c.ratio, 0);
+                if (total > 0 && total !== 100) {
+                  extracted.forEach(c => { c.ratio = Math.round(c.ratio * 100 / total); });
+                  const diff = 100 - extracted.reduce((s, c) => s + c.ratio, 0);
+                  if (diff !== 0) extracted[0].ratio += diff;
+                }
+                colors = extracted;
+              }
+            }
           }
-          if (cssRes.ok) {
+          if (cssRes.ok && colors[0]?.hex === '#004A99' && colors.length === 1) {
+            // Fall back to globals.css only when colorRatios was not found
             colors = extractBrandColors(await cssRes.text());
           }
           if (guideRes.ok) {
