@@ -47,6 +47,7 @@ export default function ResourcesPage() {
   const [active, setActive] = useState('');
   const [data, setData] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+
   const LABEL_MAP: Record<string, string> = {
     design_md: 'DESIGN.MD生成',
     code: '実装コード生成',
@@ -62,7 +63,7 @@ export default function ResourcesPage() {
     isWhite: '白背景フラグ',
   };
   const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL', 'vercel_output'];
-  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'selected_urls']);
+  const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite']);
   const primaryTabs = [...tabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
     (TAB_ORDER.indexOf(a) === -1 ? 999 : TAB_ORDER.indexOf(a)) - (TAB_ORDER.indexOf(b) === -1 ? 999 : TAB_ORDER.indexOf(b))
   );

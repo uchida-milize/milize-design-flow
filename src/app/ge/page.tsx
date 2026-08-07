@@ -72,8 +72,8 @@ export default function HomePage() {
             gap: 24,
           }}
         >
-          <a href={`${basePath}/guidelines`} className="hi-nav-card">
-            <div className="hi-card">
+          <a href={`${basePath}/guidelines`} className="nav-card">
+            <div className="card">
               <div className="hi-section-label" style={{ color: primaryColor }}>
                 GUIDELINES
               </div>
@@ -86,8 +86,8 @@ export default function HomePage() {
             </div>
           </a>
 
-          <a href={`${basePath}/components`} className="hi-nav-card">
-            <div className="hi-card">
+          <a href={`${basePath}/components`} className="nav-card">
+            <div className="card">
               <div className="hi-section-label" style={{ color: primaryColor }}>
                 COMPONENTS
               </div>
@@ -100,8 +100,8 @@ export default function HomePage() {
             </div>
           </a>
 
-          <a href={`${basePath}/resources`} className="hi-nav-card">
-            <div className="hi-card">
+          <a href={`${basePath}/resources`} className="nav-card">
+            <div className="card">
               <div className="hi-section-label" style={{ color: primaryColor }}>
                 RESOURCES
               </div>

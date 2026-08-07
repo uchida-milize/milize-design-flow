@@ -71,7 +71,7 @@ export function NewClientButton() {
   const [formToken, setFormToken] = useState('');
   const [urlItems, setUrlItems] = useState<UrlItem[]>([]);
   const [excludedCount, setExcludedCount] = useState(0);
-  const [urlsConfirmed, setUrlsConfirmed] = useState(false);
+  const [urlSelectionDone, setUrlSelectionDone] = useState(false);
   const [presetUrls, setPresetUrls] = useState(['', '', '']);
   const router = useRouter();
 
@@ -85,7 +85,7 @@ export function NewClientButton() {
     setFormToken('');
     setUrlItems([]);
     setExcludedCount(0);
-    setUrlsConfirmed(false);
+    setUrlSelectionDone(false);
     setPresetUrls(['', '', '']);
   }
 
@@ -160,7 +160,7 @@ export function NewClientButton() {
 
   /** 第2フェーズ: 選択URLを /api/dify-resume に送る */
   async function handleResume() {
-    setUrlsConfirmed(true);
+    setUrlSelectionDone(true);
     setStep('generating');
     setGenStatus('URLを送信してワークフローを再開中...');
 
@@ -341,7 +341,7 @@ export function NewClientButton() {
             {/* Step 1: フォーム */}
             {step === 'form' && (
               <>
-                <StepIndicator current={1} urlsConfirmed={urlsConfirmed} />
+                <StepIndicator current={1} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'新規クライアント追加'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '28px' }}>{'会社名とスラッグを入力してポータルを生成します'}</p>
                 <form onSubmit={handleSubmit}>
@@ -390,7 +390,7 @@ export function NewClientButton() {
             {/* Step 2: URL選択 */}
             {step === 'urls' && (
               <>
-                <StepIndicator current={2} urlsConfirmed={urlsConfirmed} />
+                <StepIndicator current={2} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'参照URLを選択'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '20px' }}>
                   {'Difyがリサーチ対象として収集したURLです。使用するURLを選んで生成を続行してください。'}
@@ -519,7 +519,7 @@ export function NewClientButton() {
             {/* Step 3: 生成中 */}
             {step === 'generating' && (
               <>
-                <StepIndicator current={urlsConfirmed ? 3 : 2} urlsConfirmed={urlsConfirmed} />
+                <StepIndicator current={urlSelectionDone ? 3 : 2} />
                 <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>{'ポータルを生成中...'}</h2>
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '32px' }}>
                   {form.company_name}{'のポータルをDifyが構築しています'}
@@ -539,27 +539,26 @@ export function NewClientButton() {
   );
 }
 
-function StepIndicator({ current, urlsConfirmed }: { current: 1 | 2 | 3; urlsConfirmed: boolean }) {
-  const steps = ['入力', 'URL選択', '生成'];
+function StepIndicator({ current }: { current: 1 | 2 | 3 }) {
+  const steps = ['入力・検証', 'URL選択', '生成'];
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '20px' }}>
       {steps.map((label, i) => {
         const num = i + 1;
         const active = num === current;
-        // URL選択ステップ（num=2）は、ユーザーが選択を確定した後にのみ完了扱いにする
-        const done = num === 2 ? urlsConfirmed : num < current;
+        const done = num < current;
         return (
           <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{
               width: '22px', height: '22px', borderRadius: '50%', fontSize: '11px', fontWeight: 700,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: done ? '#22c55e' : active ? '#111' : '#e5e7eb',
+              background: done || active ? '#22c55e' : '#e5e7eb',
               color: done || active ? '#fff' : '#9ca3af',
               flexShrink: 0,
             }}>
               {done ? '✓' : num}
             </div>
-            <span style={{ fontSize: '12px', fontWeight: active ? 600 : 400, color: active ? '#111' : '#9ca3af' }}>{label}</span>
+            <span style={{ fontSize: '12px', fontWeight: active ? 600 : 400, color: active ? '#22c55e' : '#9ca3af' }}>{label}</span>
             {i < steps.length - 1 && <div style={{ width: '20px', height: '1px', background: '#e5e7eb', margin: '0 2px' }} />}
           </div>
         );

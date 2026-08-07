@@ -312,7 +312,7 @@ export default function ResourcesPage() {
                 </>
               )}
             </div>
-            <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden' }}>
+            <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 3, overflow: 'hidden' }}>
               <div style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb', padding: '10px 20px' }}>
                 <span style={{ fontSize: 12, color: '#9ca3af', fontFamily: 'monospace' }}>{active}</span>
               </div>
@@ -502,6 +502,12 @@ export async function readAndFixDifyFiles(
             /<a\s[^>]*\/resources[^>]*className="hi-nav-card"[^>]*>[\s\S]*?<\/a>/,
             resourcesCard.trim()
           );
+        } else if (content.includes('/resources') && !content.includes('onMouseEnter')) {
+          // 古いインラインスタイル方式（hover無し）を新しい方式に置換
+          content = content.replace(
+            /<a\s[^>]*\/resources[^>]*>[\s\S]*?<\/a>/,
+            resourcesCard.trim()
+          );
         }
       }
 
@@ -513,7 +519,7 @@ export async function readAndFixDifyFiles(
 
       // globals.css: カードスタイルを統一（罫線なし・角丸24px・シャドウ）
       if (path.endsWith('globals.css')) {
-        const cardOverride = `\n/* カードスタイル統一（自動注入） */\n[class$="-portal"] .card, .card {\n  background: #ffffff !important;\n  border: none !important;\n  border-radius: 24px !important;\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;\n  transition: box-shadow 0.15s ease !important;\n}\n[class$="-portal"] .nav-card, .nav-card {\n  transition: transform 0.15s ease !important;\n  display: flex !important;\n  flex-direction: column !important;\n  height: 100% !important;\n}\n[class$="-portal"] .nav-card:hover, .nav-card:hover {\n  transform: translateY(-2px);\n}\n[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {\n  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;\n}\n`;
+        const cardOverride = `\n/* カードスタイル統一（自動注入） */\n[class$="-portal"] .card, .card {\n  background: #ffffff !important;\n  border: none !important;\n  border-radius: 24px !important;\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;\n  transition: box-shadow 0.15s ease !important;\n  height: 100% !important;\n  box-sizing: border-box !important;\n}\n[class$="-portal"] .nav-card, .nav-card {\n  transition: transform 0.15s ease !important;\n  display: flex !important;\n  flex-direction: column !important;\n  height: 100% !important;\n}\n[class$="-portal"] .nav-card:hover, .nav-card:hover {\n  transform: translateY(-2px);\n}\n[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {\n  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;\n}\n`;
         if (!content.includes('カードスタイル統一')) {
           content += cardOverride;
         }

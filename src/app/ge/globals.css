@@ -56,23 +56,30 @@
   margin-bottom: 24px;
 }
 
-.ge-portal .hi-card {
+.ge-portal .card {
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.ge-portal .hi-nav-card {
-  display: block;
+.ge-portal .nav-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease;
 }
 
-.ge-portal .hi-nav-card:hover {
+.ge-portal .nav-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.ge-portal .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
 
 .ge-portal .hi-swatch-grid {

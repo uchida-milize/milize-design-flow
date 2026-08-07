@@ -153,7 +153,9 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                     {'︙'}
                   </button>
                 </div>
-                <p className="text-sm leading-relaxed mb-4" style={{
+                <p style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
                   color: '#6b7280',
                   display: '-webkit-box',
                   WebkitLineClamp: 2,

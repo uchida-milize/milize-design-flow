@@ -25,14 +25,14 @@
 .softbank-group-portal {
   min-height: 100vh;
   background: var(--portal-bg);
-  
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
   color: var(--text-main);
 }
 
 .softbank-group-portal h1,
 .softbank-group-portal h2,
 .softbank-group-portal h3 {
-  
+  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
 }
 
 .softbank-group-portal .container {
@@ -67,6 +67,8 @@
   border-radius: 24px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .softbank-group-portal .nav-card {
@@ -108,7 +110,7 @@
 }
 
 .softbank-group-portal .swatch-hex {
-  
+  font-family: 'Courier New', monospace;
   font-size: 13px;
   color: #111827;
 }
@@ -154,7 +156,7 @@
   color: #9ca3af;
   padding: 10px 16px;
   border-bottom: 1px solid #e5e7eb;
-  
+  font-family: 'Courier New', monospace;
 }
 
 .softbank-group-portal .component-render {
@@ -164,7 +166,7 @@
 .softbank-group-portal .component-code {
   background: #0f172a;
   color: #94a3b8;
-  
+  font-family: 'Courier New', monospace;
   font-size: 12px;
   padding: 12px 16px;
   overflow-x: auto;
