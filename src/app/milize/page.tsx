@@ -2,14 +2,14 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = '株式会社MILIZE';
 const basePath = '/milize';
-const primaryColor: string = '#C0C0C0';
+const primaryColor: string = '#0084FF';
 
 const colorRatio = [
-  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
-  { hex: '#000000', name: 'ブラック', percent: 30 },
-  { hex: '#444444', name: 'ダークグレー', percent: 15 },
-  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
-  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
+  { hex: '#0084FF', name: 'プライマリカラー', percent: 29 },
+  { hex: '#79BEFF', name: 'セカンダリカラー', percent: 26 },
+  { hex: '#DDDDDD', name: 'アクセントカラー', percent: 24 },
+  { hex: '#32373C', name: 'サポートカラー', percent: 9 },
+  { hex: '#333333', name: 'サブカラー', percent: 12 },
 ];
 
 export default function Home() {

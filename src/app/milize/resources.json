@@ -1,0 +1,49 @@
+{
+  "selected_urls": "https://milize.co.jp/||カラー,ロゴ・CI,フォント,フォーム",
+  "css_milize.co.jp": {
+    "hex_colors": "#0084FF | --tw-gradient-from, --tw-gradient-stops, background, background-image | 出現10回 | [external-css]\n#79BEFF | --tw-gradient-to, background, background-image | 出現9回 | [external-css]\n#DDDDDD | --wp-editor-canvas-background, background-color, border | 出現8回 | [style-tag+inline-style]\n#EEEEEE | border, background-color, color | 出現4回 | [external-css+style-tag]\n#333333 | border-bottom, background-color | 出現4回 | [external-css]\n#DC3232 | border-color, color, border | 出現3回 | [external-css]\n#00D084 | background, --wp--preset--color--vivid-green-cyan | 出現3回 | [style-tag]\n#0693E3 | background, --wp--preset--color--vivid-cyan-blue | 出現3回 | [style-tag]\n#32373C | background-color, background | 出現3回 | [style-tag]\n#DFDFDF | background, border-bottom | 出現2回 | [external-css]\n#9CA3AF | color | 出現2回 | [external-css]\n#7A00DF | --wp-block-synced-color | 出現2回 | [style-tag]\n#007CBA | --wp-admin-theme-color | 出現2回 | [style-tag]\n#006BA1 | --wp-admin-theme-color-darker-10 | 出現2回 | [style-tag]\n#005A87 | --wp-admin-theme-color-darker-20 | 出現2回 | [style-tag]\n#313131 | background-color, color | 出現2回 | [style-tag]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現2回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現2回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現2回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現2回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現2回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現2回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現2回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現2回 | [style-tag]\n#FF253A | background-color | 出現1回 | [external-css]\n#00A0D2 | border | 出現1回 | [external-css]\n#46B450 | border-color | 出現1回 | [external-css]\n#F56E28 | border-color | 出現1回 | [external-css]\n#FFB900 | border-color | 出現1回 | [external-css]\n#23282D | background-color | 出現1回 | [external-css]",
+    "border_radii": [
+      "1em",
+      ".1em",
+      "100%",
+      "50%",
+      "9999px",
+      "20px"
+    ]
+  },
+  "design_tokens": {
+    "primary": "#0084FF",
+    "secondary": "#79BEFF",
+    "accent": "#DDDDDD",
+    "brandColors": [
+      {
+        "hex": "#0084FF",
+        "ratio": 29
+      },
+      {
+        "hex": "#79BEFF",
+        "ratio": 26
+      },
+      {
+        "hex": "#DDDDDD",
+        "ratio": 24
+      },
+      {
+        "hex": "#32373C",
+        "ratio": 9
+      },
+      {
+        "hex": "#333333",
+        "ratio": 12
+      }
+    ],
+    "topColors": "#0084FF(10) #79BEFF(9) #DDDDDD(8) #32373C(3) #333333(4) #00D084(3) #0693E3(3) #EEEEEE(4) #DFDFDF(2) #7A00DF(2)",
+    "borderRadii": [
+      "1em",
+      ".1em",
+      "100%",
+      "50%",
+      "9999px"
+    ]
+  }
+}

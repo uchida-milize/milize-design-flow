@@ -2,14 +2,14 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = '株式会社MILIZE';
 const basePath = '/milize';
-const primaryColor: string = '#C0C0C0';
+const primaryColor: string = '#0084FF';
 
 const colors = [
-  { hex: '#C0C0C0', name: 'プライマリカラー' },
-  { hex: '#000000', name: 'セカンダリカラー' },
-  { hex: '#444444', name: 'アクセントカラー' },
+  { hex: '#0084FF', name: 'プライマリカラー' },
+  { hex: '#79BEFF', name: 'セカンダリカラー' },
+  { hex: '#DDDDDD', name: 'アクセントカラー' },
   { hex: '#FFFFFF', name: '背景カラー' },
-  { hex: '#7F7F7F', name: 'サブカラー' },
+  { hex: '#32373C', name: 'サブカラー' },
 ];
 
 export default function GuidelinesPage() {
@@ -23,32 +23,6 @@ export default function GuidelinesPage() {
       />
 
       <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
-
-        {/* SAMPLEバナー */}
-        <div style={{
-          background: '#fff7ed',
-          border: '1px solid #fed7aa',
-          borderRadius: 10,
-          padding: '12px 20px',
-          marginBottom: 36,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-        }}>
-          <span style={{
-            background: '#f97316',
-            color: '#fff',
-            borderRadius: 4,
-            padding: '2px 10px',
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            whiteSpace: 'nowrap',
-          }}>SAMPLE</span>
-          <span style={{ fontSize: 13, color: '#9a3412', lineHeight: 1.6 }}>
-            このページはテンプレートのサンプルです。実際のクライアントポータルでは、Difyによって自動生成されたコンテンツが表示されます。
-          </span>
-        </div>
 
         <div style={{ marginBottom: 40 }}>
           <p className="section-label" style={{ color: primaryColor }}>
