@@ -1,12 +1,15 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = '株式会社東芝';
+const clientName = '株式会社 東芝';
 const basePath = '/toshiba';
-const primaryColor: string = '#E60012';
+const primaryColor: string = '#C0C0C0';
 
 const colorRatio = [
-  { hex: '#E60012', name: '#E60012', percent: 65 },
-  { hex: '#003087', name: '#003087', percent: 35 },
+  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
+  { hex: '#000000', name: 'ブラック', percent: 30 },
+  { hex: '#444444', name: 'ダークグレー', percent: 15 },
+  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
+  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
 ];
 
 export default function Home() {

@@ -1,8 +1,8 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = '株式会社東芝';
+const clientName = '株式会社 東芝';
 const basePath = '/toshiba';
-const primaryColor: string = '#E60012';
+const primaryColor: string = '#C0C0C0';
 
 export default function ComponentsPage() {
   return (

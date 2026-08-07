@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = '株式会社東芝';
+const clientName = '株式会社 東芝';
 const basePath = '/toshiba';
 
 const TOKEN_RE = /(https?:\/\/[^\s"',\]\}\)]+)|(#[0-9a-fA-F]{6,8}|#[0-9a-fA-F]{3}(?![0-9a-fA-F])|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+)?\s*\))/g;

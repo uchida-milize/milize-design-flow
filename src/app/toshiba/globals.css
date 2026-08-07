@@ -9,7 +9,7 @@
   --text-sub: #6b7280;
   --text-note: #9ca3af;
   /* 標準変数（カラーバー自動生成用） */
-  --primary-color: #E60012;
+  --primary-color: #C0C0C0;
   --secondary-color: #000000;
   --accent-color: #444444;
   --text-color: #111827;
@@ -226,13 +226,9 @@
 
 /* 標準カラー変数（自動注入） */
 :root {
-  --primary-color: #E60012;
-  --secondary-color: #003087;
-  --accent-color: #E60012;
-  --text-color: #1A1A1A;
-  --bg-color: #FFFFFF;
-  --brand-color-1: #E60012;
-  --brand-ratio-1: 65;
-  --brand-color-2: #003087;
-  --brand-ratio-2: 35;
+  --primary-color: #C0C0C0;
+  --secondary-color: #000000;
+  --accent-color: #444444;
+  --text-color: #111827;
+  --bg-color: #f5f7fa;
 }

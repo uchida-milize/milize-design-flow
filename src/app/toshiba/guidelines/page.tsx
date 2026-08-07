@@ -1,14 +1,15 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = '株式会社東芝';
+const clientName = '株式会社 東芝';
 const basePath = '/toshiba';
-const primaryColor: string = '#E60012';
+const primaryColor: string = '#C0C0C0';
 
 const colors = [
-  { hex: '#E60012', name: 'プライマリカラー' },
-  { hex: '#003087', name: 'セカンダリカラー' },
+  { hex: '#C0C0C0', name: 'プライマリカラー' },
+  { hex: '#000000', name: 'セカンダリカラー' },
+  { hex: '#444444', name: 'アクセントカラー' },
   { hex: '#FFFFFF', name: '背景カラー' },
-  { hex: '#1A1A1A', name: 'テキストカラー' },
+  { hex: '#7F7F7F', name: 'サブカラー' },
 ];
 
 export default function GuidelinesPage() {
