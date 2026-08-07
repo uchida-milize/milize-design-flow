@@ -152,9 +152,9 @@ async function getClients() {
             if (nameMatch) name = nameMatch[1];
             // Read colorRatios from home page — exact same data the home page displays
             // Supports both { pct: N } (legacy) and { ratio: N } (newer) formats
-            const ratioBlock = pageSrc.match(/colorRatios\s*=\s*\[[\s\S]*?\]/);
+            const ratioBlock = pageSrc.match(/colorRatios?\s*=\s*\[[\s\S]*?\]/);
             if (ratioBlock) {
-              const entryRe = /hex:\s*['"]([^'"]+)['"][\s\S]*?(?:pct|ratio):\s*(\d+)/g;
+              const entryRe = /hex:\s*['"]([^'"]+)['"][\s\S]*?(?:pct|ratio|percent):\s*(\d+)/g;
               const extracted: Array<{ hex: string; ratio: number }> = [];
               let em: RegExpExecArray | null;
               while ((em = entryRe.exec(ratioBlock[0])) !== null) {
