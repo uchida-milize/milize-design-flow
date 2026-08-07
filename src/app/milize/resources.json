@@ -1,3 +1,368 @@
 {
-  "selected_urls": "https://milize.co.jp/||カラー,ロゴ・CI,フォント,フォーム"
+  "selected_urls": "https://milize.co.jp/||カラー,ロゴ・CI,フォント,フォーム",
+  "css_info": {
+    "css_variables": {
+      "--wp-block-synced-color": "#7a00df",
+      "--wp-block-synced-color--rgb": "122,0,223",
+      "--wp-bound-block-color": "var(--wp-block-synced-color)",
+      "--wp-editor-canvas-background": "#ddd",
+      "--wp-admin-theme-color": "#007cba",
+      "--wp-admin-theme-color--rgb": "0,124,186",
+      "--wp-admin-theme-color-darker-10": "#006ba1",
+      "--wp-admin-theme-color-darker-10--rgb": "0,107,160.5",
+      "--wp-admin-theme-color-darker-20": "#005a87",
+      "--wp-admin-theme-color-darker-20--rgb": "0,90,135",
+      "--wp--preset--font-size--normal": "16px",
+      "--wp--preset--color--black": "#000000",
+      "--wp--preset--color--cyan-bluish-gray": "#abb8c3",
+      "--wp--preset--color--white": "#ffffff",
+      "--wp--preset--color--pale-pink": "#f78da7",
+      "--wp--preset--color--vivid-red": "#cf2e2e",
+      "--wp--preset--color--luminous-vivid-orange": "#ff6900",
+      "--wp--preset--color--luminous-vivid-amber": "#fcb900",
+      "--wp--preset--color--light-green-cyan": "#7bdcb5",
+      "--wp--preset--color--vivid-green-cyan": "#00d084",
+      "--wp--preset--color--pale-cyan-blue": "#8ed1fc",
+      "--wp--preset--color--vivid-cyan-blue": "#0693e3",
+      "--wp--preset--color--vivid-purple": "#9b51e0",
+      "--wp--preset--font-size--small": "13px",
+      "--wp--preset--font-size--medium": "20px",
+      "--wp--preset--font-size--large": "36px",
+      "--wp--preset--font-size--x-large": "42px"
+    },
+    "hex_colors": "#0084FF | --tw-gradient-from, --tw-gradient-stops, background, background-image | 出現10回 | [external-css]\n#79BEFF | --tw-gradient-to, background, background-image | 出現9回 | [external-css]\n#DDDDDD | --wp-editor-canvas-background, background-color, border | 出現8回 | [style-tag+inline-style]\n#EEEEEE | border, background-color, color | 出現4回 | [external-css+style-tag]\n#333333 | border-bottom, background-color | 出現4回 | [external-css]\n#DC3232 | border-color, color, border | 出現3回 | [external-css]\n#00D084 | background, --wp--preset--color--vivid-green-cyan | 出現3回 | [style-tag]\n#0693E3 | background, --wp--preset--color--vivid-cyan-blue | 出現3回 | [style-tag]\n#32373C | background-color, background | 出現3回 | [style-tag]\n#DFDFDF | background, border-bottom | 出現2回 | [external-css]\n#9CA3AF | color | 出現2回 | [external-css]\n#7A00DF | --wp-block-synced-color | 出現2回 | [style-tag]\n#007CBA | --wp-admin-theme-color | 出現2回 | [style-tag]\n#006BA1 | --wp-admin-theme-color-darker-10 | 出現2回 | [style-tag]\n#005A87 | --wp-admin-theme-color-darker-20 | 出現2回 | [style-tag]\n#313131 | background-color, color | 出現2回 | [style-tag]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現2回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現2回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現2回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現2回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現2回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現2回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現2回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現2回 | [style-tag]\n#FF253A | background-color | 出現1回 | [external-css]\n#00A0D2 | border | 出現1回 | [external-css]\n#46B450 | border-color | 出現1回 | [external-css]\n#F56E28 | border-color | 出現1回 | [external-css]\n#FFB900 | border-color | 出現1回 | [external-css]\n#23282D | background-color | 出現1回 | [external-css]",
+    "rgb_colors": [],
+    "fonts": [
+      "Zen Kaku Gothic New",
+      "Chillax",
+      "Chillax-Variable",
+      "ui-monospace",
+      "inherit",
+      "Barlow",
+      "Font Awesome 5 Brands",
+      "Font Awesome 5 Free",
+      "FontAwesome"
+    ],
+    "button_styles": [
+      {
+        "selector": "button,\ninput,\noptgroup,\nselect,\ntextarea",
+        "properties": {
+          "font-family": "inherit",
+          "font-feature-settings": "inherit",
+          "font-variation-settings": "inherit",
+          "font-size": "100%",
+          "font-weight": "inherit",
+          "color": "inherit",
+          "margin": "0"
+        }
+      },
+      {
+        "selector": "button,\ninput:where([type=button]),\ninput:where([type=reset]),\ninput:where([type=submit])",
+        "properties": {
+          "background-color": "transparent"
+        }
+      },
+      {
+        "selector": ".primary-btn",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-color": "rgb(0 132 255/var(--tw-bg-opacity))",
+          "background-image": "url(../img/global/noise.png)",
+          "padding-left": "30px",
+          "padding-right": "30px",
+          "font-weight": "700",
+          "color": "rgb(255 255 255/var(--tw-text-opacity))"
+        }
+      },
+      {
+        "selector": ".primary-btn:before",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
+        }
+      },
+      {
+        "selector": ".primary-btn:after",
+        "properties": {
+          "margin-left": "auto"
+        }
+      },
+      {
+        "selector": ".secondary-btn",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-color": "rgb(239 242 247/var(--tw-bg-opacity))",
+          "padding-left": "30px",
+          "padding-right": "30px",
+          "font-weight": "500",
+          "color": "rgb(0 0 0/var(--tw-text-opacity))"
+        }
+      },
+      {
+        "selector": ".secondary-btn:hover",
+        "properties": {
+          "color": "rgb(255 255 255/var(--tw-text-opacity))"
+        }
+      },
+      {
+        "selector": ".secondary-btn:before",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
+        }
+      },
+      {
+        "selector": ".secondary-btn:after",
+        "properties": {
+          "margin-left": "auto"
+        }
+      },
+      {
+        "selector": ".outline-btn",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "padding-left": "30px",
+          "padding-right": "30px",
+          "color": "rgb(255 255 255/var(--tw-text-opacity))",
+          "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+          "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
+          "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
+          "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))"
+        }
+      },
+      {
+        "selector": ".outline-btn:hover",
+        "properties": {
+          "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+          "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(var(--tw-ring-offset-width)) var(--tw-ring-color)"
+        }
+      },
+      {
+        "selector": ".outline-btn:before",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
+        }
+      },
+      {
+        "selector": ".outline-btn:after",
+        "properties": {
+          "margin-left": "auto"
+        }
+      },
+      {
+        "selector": ".external-btn",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-color": "rgb(239 242 247/var(--tw-bg-opacity))",
+          "padding-left": "25px",
+          "padding-right": "25px",
+          "font-size": "14px",
+          "font-weight": "500",
+          "color": "rgb(0 0 0/var(--tw-text-opacity))"
+        }
+      },
+      {
+        "selector": ".external-btn:hover",
+        "properties": {
+          "color": "rgb(255 255 255/var(--tw-text-opacity))"
+        }
+      },
+      {
+        "selector": ".external-btn:before",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
+        }
+      },
+      {
+        "selector": ".external-btn:after",
+        "properties": {
+          "margin-left": "auto"
+        }
+      },
+      {
+        "selector": ".btn",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "color": "rgb(255 255 255/var(--tw-text-opacity))",
+          "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+          "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
+          "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
+          "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))"
+        }
+      },
+      {
+        "selector": ".btn:hover",
+        "properties": {
+          "color": "rgb(255 255 255/var(--tw-text-opacity))",
+          "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+          "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(var(--tw-ring-offset-width)) var(--tw-ring-color)"
+        }
+      },
+      {
+        "selector": ".btn:before",
+        "properties": {
+          "display": "flex",
+          "border-radius": "9999px",
+          "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
+        }
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": "/* Contact Card */\n.contact-card",
+        "properties": {
+          "background-color": "white",
+          "border": "1px solid #E9E9E9",
+          "border-radius": "20px",
+          "padding": "30px 25px",
+          "color": "#000",
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".contact-card",
+        "properties": {
+          "padding": "40px 30px"
+        }
+      },
+      {
+        "selector": ".contact-card:hover",
+        "properties": {
+          "border-color": "transparent",
+          "box-shadow": "0 10px 25px rgba(0, 132, 255, 0.1)",
+          "background": "linear-gradient(to top right, #0084ff, #79beff)",
+          "color": "white"
+        }
+      },
+      {
+        "selector": ".contact-card h3",
+        "properties": {
+          "font-size": "20px",
+          "margin-bottom": "18px"
+        }
+      },
+      {
+        "selector": ".contact-card:hover h3",
+        "properties": {
+          "color": "white"
+        }
+      },
+      {
+        "selector": ".contact-card p",
+        "properties": {
+          "font-size": "15px",
+          "margin-bottom": "25px"
+        }
+      },
+      {
+        "selector": ".contact-card:hover p",
+        "properties": {
+          "color": "rgba(255, 255, 255, 0.9)"
+        }
+      },
+      {
+        "selector": ".contact-card:hover .contact-link",
+        "properties": {
+          "color": "white"
+        }
+      },
+      {
+        "selector": ".fa.fa-credit-card",
+        "properties": {
+          "font-family": "\"Font Awesome 5 Free\""
+        }
+      },
+      {
+        "selector": ".fa.fa-cc-amex,.fa.fa-cc-discover,.fa.fa-cc-mastercard,.fa.fa-cc-paypal,.fa.fa-cc-stripe,.fa.fa-cc-visa,.fa.fa-google-wallet,.fa.fa-paypal",
+        "properties": {
+          "font-family": "\"Font Awesome 5 Brands\""
+        }
+      },
+      {
+        "selector": ".fa.fa-address-card-o",
+        "properties": {
+          "font-family": "\"Font Awesome 5 Free\""
+        }
+      },
+      {
+        "selector": ".fa.fa-vcard-o",
+        "properties": {
+          "font-family": "\"Font Awesome 5 Free\""
+        }
+      },
+      {
+        "selector": ".fa.fa-id-card-o",
+        "properties": {
+          "font-family": "\"Font Awesome 5 Free\""
+        }
+      }
+    ],
+    "border_radii": [
+      "1em",
+      ".1em",
+      "100%",
+      "50%",
+      "9999px",
+      "20px"
+    ],
+    "logo_urls": [
+      "https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/btt-data_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/new_dai-ichi-life_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/df-life_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fukuoka-fg_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jibunbank_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jiji-data_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/mufg-shintaku_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/kyoto-bank_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/saison_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/yokohama_bank_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/relo-club_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/sony-bank_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/sompo-himawari_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/smtb_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/wealth-advisor_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/trn-g_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/tohoku-frontier-data_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/sbi-globalassetmanagement_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/manex_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/nomura-re_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/acomu_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fuyo-lease_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/glory-data_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/uploads/2025/11/case_logo_09-scaled.png",
+      "https://milize.co.jp/cms/wp-content/uploads/2025/11/case8_logo-scaled.png",
+      "https://milize.co.jp/cms/wp-content/uploads/2025/08/daiichi-life-group_logo.jpg",
+      "https://milize.co.jp/cms/wp-content/uploads/2025/05/trn-g_logo-1.png"
+    ],
+    "source_css_urls": [
+      "https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css",
+      "https://milize.co.jp/cms/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.6",
+      "https://milize.co.jp/cms/wp-content/plugins/cf7-conditional-fields/style.css?ver=2.7.10",
+      "https://milize.co.jp/cms/wp-content/themes/milize/css/zenkakugothicnew.css",
+      "https://milize.co.jp/cms/wp-content/themes/milize/css/chillax.css",
+      "https://milize.co.jp/cms/wp-content/themes/milize/css/style.css?v=1.6",
+      "https://milize.co.jp/cms/wp-content/themes/milize/css/barlow.css",
+      "https://unpkg.com/lenis@1.1.13/dist/lenis.css",
+      "https://use.fontawesome.com/releases/v5.15.3/css/all.css",
+      "https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css"
+    ],
+    "extracted_at": "2026-08-07T04:48:21.493Z",
+    "source_urls": [
+      "https://milize.co.jp/"
+    ]
+  },
+  "css_summary": "【抽出カラー（頻度順）】\n  #0084FF  --tw-gradient-from  出現10回  [external-css]\n  #79BEFF  --tw-gradient-to  出現9回  [external-css]\n  #DDDDDD  --wp-editor-canvas-background  出現8回  [style-tag+inline-style]\n  #EEEEEE  border  出現4回  [external-css+style-tag]\n  #333333  border-bottom  出現4回  [external-css]\n  #DC3232  border-color  出現3回  [external-css]\n  #00D084  background  出現3回  [style-tag]\n  #0693E3  background  出現3回  [style-tag]\n  #32373C  background-color  出現3回  [style-tag]\n  #DFDFDF  background  出現2回  [external-css]\n  #9CA3AF  color  出現2回  [external-css]\n  #7A00DF  --wp-block-synced-color  出現2回  [style-tag]\n  #007CBA  --wp-admin-theme-color  出現2回  [style-tag]\n  #006BA1  --wp-admin-theme-color-darker-10  出現2回  [style-tag]\n  #005A87  --wp-admin-theme-color-darker-20  出現2回  [style-tag]\n\n【CSS カラー変数（:root）】\n  --wp-block-synced-color: #7a00df\n  --wp-editor-canvas-background: #ddd\n  --wp-admin-theme-color: #007cba\n  --wp-admin-theme-color-darker-10: #006ba1\n  --wp-admin-theme-color-darker-20: #005a87\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n\n【使用フォント】\n  Zen Kaku Gothic New\n  Chillax\n  Chillax-Variable\n  ui-monospace\n  inherit\n  Barlow\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n  FontAwesome\n\n【角丸パターン】\n  1em\n  .1em\n  100%\n  50%\n  9999px\n  20px\n\n【ボタンスタイル】\n  button,\ninput,\noptgroup,\nselect,\ntextarea\n    font-family: inherit\n    font-feature-settings: inherit\n    font-variation-settings: inherit\n    font-size: 100%\n    font-weight: inherit\n    color: inherit\n  button,\ninput:where([type=button]),\ninput:where([type=reset]),\ninput:where([type=submit])\n    background-color: transparent\n  .primary-btn\n    display: flex\n    border-radius: 9999px\n    background-color: rgb(0 132 255/var(--tw-bg-opacity))\n    background-image: url(../img/global/noise.png)\n    padding-left: 30px\n    padding-right: 30px\n  .primary-btn:before\n    display: flex\n    border-radius: 9999px\n    background-image: linear-gradient(to top right, var(--tw-gradient-stops))\n  .primary-btn:after\n    margin-left: auto\n\n【カードスタイル】\n  /* Contact Card */\n.contact-card\n    background-color: white\n    border: 1px solid #E9E9E9\n    border-radius: 20px\n    padding: 30px 25px\n    color: #000\n    display: block\n  .contact-card\n    padding: 40px 30px\n  .contact-card:hover\n    border-color: transparent\n    box-shadow: 0 10px 25px rgba(0, 132, 255, 0.1)\n    background: linear-gradient(to top right, #0084ff, #79beff)\n    color: white\n  .contact-card h3\n    font-size: 20px\n    margin-bottom: 18px\n  .contact-card:hover h3\n    color: white\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/btt-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/new_dai-ichi-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/df-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fukuoka-fg_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jibunbank_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jiji-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/mufg-shintaku_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/kyoto-bank_logo.jpg\n\n【取得CSSファイル】\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css\n  https://milize.co.jp/cms/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.6\n  https://milize.co.jp/cms/wp-content/plugins/cf7-conditional-fields/style.css?ver=2.7.10\n  https://milize.co.jp/cms/wp-content/themes/milize/css/zenkakugothicnew.css\n  https://milize.co.jp/cms/wp-content/themes/milize/css/chillax.css\n  https://milize.co.jp/cms/wp-content/themes/milize/css/style.css?v=1.6\n  https://milize.co.jp/cms/wp-content/themes/milize/css/barlow.css\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://use.fontawesome.com/releases/v5.15.3/css/all.css\n  https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css"
 }
