@@ -1,43 +1,10 @@
-2026-08-07T04:04:06.356Z  START task_id="2b02c0a9-a683-4b04-8d08-1ad5742e3eba" workflow_run_id="e2b34cf5-eeac-4f47-aaee-2d04371e3833" form_token="cnpayC7lp2iWyex4Sa1Rfo" client="softbank-group"
-2026-08-07T04:04:06.359Z  formBase="https://app.dify.milize.com"
-2026-08-07T04:04:06.359Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/cnpayC7lp2iWyex4Sa1Rfo
-2026-08-07T04:04:06.928Z  結果[app/api]: 200 ct=application/json body={}
-
-2026-08-07T04:04:06.928Z  ✓ 再開成功: app/api
-2026-08-07T04:04:06.928Z  resume 成功: ct=application/json
-2026-08-07T04:04:06.928Z  ポーリング開始 pollIds=["e2b34cf5-eeac-4f47-aaee-2d04371e3833","2b02c0a9-a683-4b04-8d08-1ad5742e3eba"]
-2026-08-07T04:04:17.470Z  logs[1]: run=e2b34cf5 status="running"
-2026-08-07T04:04:17.470Z  logs[1]: 10件, runId未発見
-2026-08-07T04:04:27.979Z  logs[2]: run=e2b34cf5 status="running"
-2026-08-07T04:04:27.980Z  logs[2]: 10件, runId未発見
-2026-08-07T04:04:38.493Z  logs[3]: run=e2b34cf5 status="running"
-2026-08-07T04:04:38.493Z  logs[3]: 10件, runId未発見
-2026-08-07T04:04:49.718Z  logs[4]: run=e2b34cf5 status="running"
-2026-08-07T04:04:49.719Z  logs[4]: 10件, runId未発見
-2026-08-07T04:05:00.255Z  logs[5]: run=e2b34cf5 status="running"
-2026-08-07T04:05:00.255Z  logs[5]: 10件, runId未発見
-2026-08-07T04:05:10.784Z  logs[6]: run=e2b34cf5 status="running"
-2026-08-07T04:05:10.785Z  logs[6]: 10件, runId未発見
-2026-08-07T04:05:21.295Z  logs[7]: run=e2b34cf5 status="running"
-2026-08-07T04:05:21.295Z  logs[7]: 10件, runId未発見
-2026-08-07T04:05:31.799Z  logs[8]: run=e2b34cf5 status="running"
-2026-08-07T04:05:31.799Z  logs[8]: 10件, runId未発見
-2026-08-07T04:05:42.307Z  logs[9]: run=e2b34cf5 status="running"
-2026-08-07T04:05:42.308Z  logs[9]: 10件, runId未発見
-2026-08-07T04:05:52.818Z  logs[10]: run=e2b34cf5 status="running"
-2026-08-07T04:05:52.818Z  logs[10]: 10件, runId未発見
-2026-08-07T04:06:03.603Z  logs[11]: run=e2b34cf5 status="running"
-2026-08-07T04:06:03.604Z  logs[11]: 10件, runId未発見
-2026-08-07T04:06:14.128Z  logs[12]: run=e2b34cf5 status="running"
-2026-08-07T04:06:14.128Z  logs[12]: 10件, runId未発見
-2026-08-07T04:06:24.653Z  logs[13]: run=e2b34cf5 status="running"
-2026-08-07T04:06:24.654Z  logs[13]: 10件, runId未発見
-2026-08-07T04:06:35.184Z  logs[14]: run=e2b34cf5 status="running"
-2026-08-07T04:06:35.185Z  logs[14]: 10件, runId未発見
-2026-08-07T04:06:45.710Z  logs[15]: run=e2b34cf5 status="running"
-2026-08-07T04:06:45.710Z  logs[15]: 10件, runId未発見
-2026-08-07T04:06:56.253Z  logs[16]: run=e2b34cf5 status="running"
-2026-08-07T04:06:56.253Z  logs[16]: 10件, runId未発見
-2026-08-07T04:07:06.775Z  logs[17]: run=e2b34cf5 status="succeeded"
-2026-08-07T04:07:06.775Z  ワークフロー完了: status="succeeded" (outputs は dify-callback 経由で書き込み済み)
-2026-08-07T04:07:06.775Z  ポーリング完了
+2026-08-07T06:47:26.535Z  START company="ソフトバンクグループ株式会社" slug="softbank-group" appBase="https://milize-design-flow.vercel.app"
+2026-08-07T06:47:26.536Z  Parsed 1 URLs
+2026-08-07T06:47:26.536Z  Color extraction URLs: 1
+2026-08-07T06:47:26.537Z  extract-css: https://group.softbank/philosophy/identity categories=["カラー","ロゴ・CI","フォント","フォーム"]
+2026-08-07T06:47:29.533Z  hex_colors[group.softbank]: "#333333 | border, border-top, color | 出現3回 | [external-css]
+#0096FF | box-shadow | 出現2回 | [external-css]
+#007AFF | --swi"
+2026-08-07T06:47:29.534Z  Aggregated 8 unique hex colors
+2026-08-07T06:47:29.535Z  primary=#333333 brandColors=[#333333,#0096FF,#007AFF,#DDDDDD,#1DA1F2]
+2026-08-07T06:47:29.677Z  readAndFixDifyFiles: 4 files

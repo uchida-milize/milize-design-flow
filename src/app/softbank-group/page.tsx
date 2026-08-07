@@ -2,14 +2,14 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'ソフトバンクグループ株式会社';
 const basePath = '/softbank-group';
-const primaryColor: string = '#C0C0C0';
+const primaryColor: string = '#333333';
 
 const colorRatio = [
-  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
-  { hex: '#000000', name: 'ブラック', percent: 30 },
-  { hex: '#444444', name: 'ダークグレー', percent: 15 },
-  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
-  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
+  { hex: '#333333', name: 'プライマリカラー', percent: 36 },
+  { hex: '#0096FF', name: 'セカンダリカラー', percent: 25 },
+  { hex: '#007AFF', name: 'アクセントカラー', percent: 13 },
+  { hex: '#DDDDDD', name: 'サポートカラー', percent: 13 },
+  { hex: '#1DA1F2', name: 'サブカラー', percent: 13 },
 ];
 
 export default function Home() {
@@ -27,9 +27,9 @@ export default function Home() {
           <p className="section-label" style={{ color: primaryColor }}>
             BRAND PORTAL
           </p>
-          <h1 className="section-title">{clientName} ブランドポータル</h1>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
           <p className="section-desc">
-            情報革命・未来志向・誠実さを軸にした、伝統と革新が融合するブランドガイドラインです。
+            クライアントごとのトンマナを収集して一覧化をしています。
           </p>
         </div>
 
@@ -75,10 +75,10 @@ export default function Home() {
                 GUIDELINES
               </p>
               <h2 className="section-title" style={{ fontSize: 20 }}>
-                ブランドガイドライン
+                デザインガイドライン
               </h2>
               <p className="section-desc">
-                カラー・タイポグラフィ・トンマナなど、ブランドの基本方針を確認できます。
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
               </p>
             </div>
           </a>
@@ -89,10 +89,10 @@ export default function Home() {
                 COMPONENTS
               </p>
               <h2 className="section-title" style={{ fontSize: 20 }}>
-                コンポーネント集
+                コンポーネント
               </h2>
               <p className="section-desc">
-                ブランドカラーとタイポグラフィを反映したUIコンポーネントのサンプルです。
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
               </p>
             </div>
           </a>
@@ -114,7 +114,7 @@ export default function Home() {
                 RESOURCES
               </div>
               <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
-                収集リソース
+                リソース
               </h2>
               <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
                 リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。

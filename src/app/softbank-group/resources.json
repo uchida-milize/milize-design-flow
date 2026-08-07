@@ -1,0 +1,46 @@
+{
+  "selected_urls": "https://group.softbank/philosophy/identity||カラー,ロゴ・CI,フォント,フォーム",
+  "css_group.softbank": {
+    "hex_colors": "#333333 | border, border-top, color | 出現3回 | [external-css]\n#0096FF | box-shadow | 出現2回 | [external-css]\n#007AFF | --swiper-theme-color | 出現1回 | [external-css]\n#DDDDDD | border-top | 出現1回 | [external-css]\n#1DA1F2 | background-color | 出現1回 | [external-css]\n#AAAAAA | background-color | 出現1回 | [external-css]\n#202020 | border | 出現1回 | [external-css]\n#DEE2E5 | background-color | 出現1回 | [inline-style]",
+    "border_radii": [
+      "50%",
+      "4px",
+      "0 3px 0 0",
+      "3px"
+    ]
+  },
+  "design_tokens": {
+    "primary": "#333333",
+    "secondary": "#0096FF",
+    "accent": "#007AFF",
+    "brandColors": [
+      {
+        "hex": "#333333",
+        "ratio": 36
+      },
+      {
+        "hex": "#0096FF",
+        "ratio": 25
+      },
+      {
+        "hex": "#007AFF",
+        "ratio": 13
+      },
+      {
+        "hex": "#DDDDDD",
+        "ratio": 13
+      },
+      {
+        "hex": "#1DA1F2",
+        "ratio": 13
+      }
+    ],
+    "topColors": "#333333(3) #0096FF(2) #007AFF(1) #DDDDDD(1) #1DA1F2(1) #AAAAAA(1) #202020(1) #DEE2E5(1)",
+    "borderRadii": [
+      "50%",
+      "4px",
+      "0 3px 0 0",
+      "3px"
+    ]
+  }
+}
