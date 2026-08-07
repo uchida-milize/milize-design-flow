@@ -531,33 +531,50 @@ export function parseDesignMdColors(nodeOutputs: Record<string, string>): Design
   };
 }
 
-// Dify生成の4ファイルを読み込み、テンプレート参照を修正してメモリ上に返す
+// テンプレート（milize-asset-portal）を base として読み込み、slug/name/colors を置換してメモリ上に返す
+// Dify生成ファイルは使用しない（テンプレート構造・テキストを保証するため）
 export async function readAndFixDifyFiles(
   slug: string,
   companyName: string,
   token: string,
   designColors?: DesignColors | null,
 ): Promise<Array<{ path: string; content: string }>> {
-  const targetPaths = [
-    `src/app/${slug}/globals.css`,
-    `src/app/${slug}/page.tsx`,
-    `src/app/${slug}/guidelines/page.tsx`,
-    `src/app/${slug}/components/page.tsx`,
+  // 常にテンプレートから読み込む（Dify生成ファイルではなく）
+  const templatePaths = [
+    `src/app/${TPL_SLUG}/globals.css`,
+    `src/app/${TPL_SLUG}/page.tsx`,
+    `src/app/${TPL_SLUG}/guidelines/page.tsx`,
+    `src/app/${TPL_SLUG}/components/page.tsx`,
   ];
 
   const results = await Promise.all(
-    targetPaths.map(async (path) => {
-      const f = await getFileContent(path, token);
+    templatePaths.map(async (tplPath) => {
+      // 出力先パスはslugベース
+      const path = tplPath.replace(`src/app/${TPL_SLUG}/`, `src/app/${slug}/`);
+      const f = await getFileContent(tplPath, token);
       if (!f) return null;
       let content = f.content;
 
-      // テンプレート参照を修正
-      if (content.includes(TPL_SLUG) || content.includes(TPL_NAME)) {
-        content = content
-          .split(TPL_SLUG).join(slug)
-          .split(TPL_NAME).join(companyName)
-          .replace('background: #0f172a;', 'background: #efefef;')
-          .replace('color: #94a3b8;', 'color: #333333;');
+      // テンプレートのslug/nameを新クライアントのものに置換（常に実行）
+      content = content
+        .split(TPL_SLUG).join(slug)
+        .split(TPL_NAME).join(companyName);
+
+      // page.tsx: designColorsが指定された場合、primaryColorとcolorRatioを更新
+      if (path.endsWith(`${slug}/page.tsx`) && designColors) {
+        content = content.replace(
+          /const primaryColor: string = '[^']+';/,
+          `const primaryColor: string = '${designColors.primary}';`,
+        );
+        if (designColors.brandColors && designColors.brandColors.length > 0) {
+          const colorRatioLines = designColors.brandColors
+            .map(c => `  { hex: '${c.hex}', name: '${c.hex}', percent: ${c.ratio} }`)
+            .join(',\n');
+          content = content.replace(
+            /const colorRatio = \[[\s\S]*?\];/,
+            `const colorRatio = [\n${colorRatioLines},\n];`,
+          );
+        }
       }
 
       // page.tsx: resourcesカードを注入または既存カードをCSS class方式へ更新
