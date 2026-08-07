@@ -6,7 +6,7 @@ const EXCLUDED_DIRS = new Set([
   'prototype',
   'screens',
   'client-template',  // 汎用テンプレートディレクトリ
-  'milize-asset-Portal',  // ポータルテンプレート（一覧非表示）
+  'milize-asset-portal',  // ポータルテンプレート（一覧非表示）
   'hitachi',
   'sony_corp',
   'sharp-finance-corp',

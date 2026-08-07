@@ -4,7 +4,7 @@
 export const OWNER = 'uchida-milize';
 export const REPO  = 'milize-design-flow';
 export const API   = 'https://api.github.com';
-export const TPL_SLUG = 'milize-asset-Portal';
+export const TPL_SLUG = 'milize-asset-portal';
 export const TPL_NAME = 'Milize Asset Portal';
 
 export function ghHeaders(token: string) {
