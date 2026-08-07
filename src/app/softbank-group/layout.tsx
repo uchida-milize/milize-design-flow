@@ -1,4 +1,7 @@
 import './globals.css';
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="softbank-group-portal">{children}</div>;
+import type { ReactNode } from 'react';
+export default function Layout({
+  children,
+}: { children: ReactNode }) {
+  return <>{children}</>;
 }

@@ -255,7 +255,7 @@ export async function POST(req: NextRequest) {
           ...difyFiles,
           {
             path: `src/app/${client_slug}/layout.tsx`,
-            content: `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
+            content: `import './globals.css';\nimport type { ReactNode } from 'react';\nexport default function Layout({ children }: { children: ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
           },
           // resources.json は /api/dify-callback が書き込むためここでは除外
           {

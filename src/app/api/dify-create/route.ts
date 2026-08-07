@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       };
 
       try {
-        log(`START company="${company_name}" slug="${client_slug}" selected_urls=${selected_urls ? 'yes' : 'no'}`);
+        log(`START company="${company_name}" slug="${client_slug}" selected_urls=${selected_urls ? 'yes' : 'no'} url1="${url1 ?? ''}" url2="${url2 ?? ''}" url3="${url3 ?? ''}"`);
         send({ progress: 10, status: 'Difyに接続中...' });
 
         const difyRes = await fetch(`${process.env.DIFY_BASE_URL}/workflows/run`, {
@@ -225,7 +225,7 @@ export async function POST(req: NextRequest) {
                   ...difyFiles,
                   {
                     path: `src/app/${client_slug}/layout.tsx`,
-                    content: `import './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
+                    content: `import './globals.css';\nimport type { ReactNode } from 'react';\nexport default function Layout({ children }: { children: ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
                   },
                   {
                     path: `src/app/${client_slug}/resources.json`,
