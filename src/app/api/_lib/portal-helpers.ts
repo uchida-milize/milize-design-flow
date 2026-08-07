@@ -567,8 +567,9 @@ export async function readAndFixDifyFiles(
           `const primaryColor: string = '${designColors.primary}';`,
         );
         if (designColors.brandColors && designColors.brandColors.length > 0) {
+          const COLOR_NAMES = ['プライマリカラー', 'セカンダリカラー', 'アクセントカラー', 'サポートカラー', 'サブカラー'];
           const colorRatioLines = designColors.brandColors
-            .map(c => `  { hex: '${c.hex}', name: '${c.hex}', percent: ${c.ratio} }`)
+            .map((c, i) => `  { hex: '${c.hex}', name: '${COLOR_NAMES[i] ?? c.hex}', percent: ${c.ratio} }`)
             .join(',\n');
           content = content.replace(
             /const colorRatio = \[[\s\S]*?\];/,
