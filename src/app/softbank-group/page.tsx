@@ -96,16 +96,21 @@ export default function Home() {
               </p>
             </div>
           </a>
-          <a href={`${basePath}/resources`} style={{ textDecoration: 'none', display: 'block' }}>
+          <a
+            href={`${basePath}/resources`}
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', transition: 'transform 0.15s ease' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)'; const d = e.currentTarget.querySelector('div') as HTMLElement; if (d) d.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = ''; const d = e.currentTarget.querySelector('div') as HTMLElement; if (d) d.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)'; }}
+          >
             <div style={{
-              background: 'rgba(255,255,255,0.92)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255,255,255,0.8)',
-              boxShadow: '0 8px 32px rgba(9,25,70,0.12)',
+              background: '#ffffff',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
               padding: '24px',
               cursor: 'pointer',
+              flex: 1,
+              transition: 'box-shadow 0.15s ease',
             }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
                 RESOURCES

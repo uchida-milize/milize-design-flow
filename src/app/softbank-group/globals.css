@@ -25,14 +25,14 @@
 .softbank-group-portal {
   min-height: 100vh;
   background: var(--portal-bg);
-  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+  
   color: var(--text-main);
 }
 
 .softbank-group-portal h1,
 .softbank-group-portal h2,
 .softbank-group-portal h3 {
-  font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+  
 }
 
 .softbank-group-portal .container {
@@ -110,7 +110,7 @@
 }
 
 .softbank-group-portal .swatch-hex {
-  font-family: 'Courier New', monospace;
+  
   font-size: 13px;
   color: #111827;
 }
@@ -156,7 +156,7 @@
   color: #9ca3af;
   padding: 10px 16px;
   border-bottom: 1px solid #e5e7eb;
-  font-family: 'Courier New', monospace;
+  
 }
 
 .softbank-group-portal .component-render {
@@ -166,7 +166,7 @@
 .softbank-group-portal .component-code {
   background: #0f172a;
   color: #94a3b8;
-  font-family: 'Courier New', monospace;
+  
   font-size: 12px;
   padding: 12px 16px;
   overflow-x: auto;
@@ -200,4 +200,26 @@
   width: 12px;
   height: 12px;
   border-radius: 3px;
+}
+/* カードスタイル統一（自動注入） */
+[class$="-portal"] .card, .card {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  transition: box-shadow 0.15s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+[class$="-portal"] .nav-card, .nav-card {
+  transition: transform 0.15s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+[class$="-portal"] .nav-card:hover, .nav-card:hover {
+  transform: translateY(-2px);
+}
+[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
