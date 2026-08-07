@@ -29,7 +29,7 @@ export default function Home() {
           </p>
           <h1 className="section-title">{clientName} リサーチポータル</h1>
           <p className="section-desc">
-            情報革命・未来志向・誠実さを軸にした、伝統と革新が融合するリサーチガイドラインです。
+            クライアントごとのトンマナを収集して一覧化をしています。
           </p>
         </div>
 
@@ -75,10 +75,10 @@ export default function Home() {
                 GUIDELINES
               </p>
               <h2 className="section-title" style={{ fontSize: 20 }}>
-                リサーチガイドライン
+                デザインガイドライン
               </h2>
               <p className="section-desc">
-                カラー・タイポグラフィ・トンマナなど、リサーチの基本方針を確認できます。
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
               </p>
             </div>
           </a>
@@ -89,10 +89,10 @@ export default function Home() {
                 COMPONENTS
               </p>
               <h2 className="section-title" style={{ fontSize: 20 }}>
-                コンポーネント集
+                コンポーネント
               </h2>
               <p className="section-desc">
-                リサーチカラーとタイポグラフィを反映したUIコンポーネントのサンプルです。
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
               </p>
             </div>
           </a>
@@ -114,7 +114,7 @@ export default function Home() {
                 RESOURCES
               </div>
               <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
-                収集リソース
+                リソース
               </h2>
               <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
                 リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
