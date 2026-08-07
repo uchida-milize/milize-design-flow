@@ -43,7 +43,7 @@ function parseSelectedUrls(raw: string): ParsedUrl[] {
 
 // ---------- Hex color parsing ----------
 
-interface HexEntry { hex: string; count: number }
+interface HexEntry { hex: string; count: number; usages: string[] }
 
 function parseHexColorsString(raw: string): HexEntry[] {
   if (!raw) return [];
@@ -51,19 +51,50 @@ function parseHexColorsString(raw: string): HexEntry[] {
 
   // Format A (current extract-css output):
   //   "#004A99 | color, background-color | 出現12回 | [external-css]"
-  const rePipe = /(#[0-9A-Fa-f]{6,8})\s*\|[^|]*\|\s*出現(\d+)回/g;
+  const rePipe = /(#[0-9A-Fa-f]{6,8})\s*\|([^|]*)\|\s*出現(\d+)回/g;
   let m: RegExpExecArray | null;
   while ((m = rePipe.exec(raw)) !== null) {
-    results.push({ hex: m[1].toUpperCase(), count: parseInt(m[2], 10) });
+    const usages = m[2].split(',').map((u: string) => u.trim()).filter(Boolean);
+    results.push({ hex: m[1].toUpperCase(), count: parseInt(m[3], 10), usages });
   }
   if (results.length > 0) return results;
 
   // Format B (legacy): "#AABB00(12,...)"
   const reParen = /(#[0-9A-Fa-f]{6,8})\((\d+)[,)]/g;
   while ((m = reParen.exec(raw)) !== null) {
-    results.push({ hex: m[1].toUpperCase(), count: parseInt(m[2], 10) });
+    results.push({ hex: m[1].toUpperCase(), count: parseInt(m[2], 10), usages: [] });
   }
   return results;
+}
+
+/**
+ * Compute visual weight for a hex entry based on which CSS properties use it.
+ * Background fills dominate visual impression; text/link colors are minor.
+ *
+ * Multipliers:
+ *   background / background-color  ×5  (large filled areas)
+ *   fill                           ×4  (SVG logos/icons)
+ *   CSS variable (--xxx)           ×3  (brand design tokens)
+ *   border / outline               ×1  (thin lines)
+ *   color (text only)              ×0.3 (small text)
+ */
+function visualWeight(entry: HexEntry): number {
+  if (entry.usages.length === 0) return entry.count;
+  let weightedTotal = 0;
+  let rawTotal = 0;
+  for (const usage of entry.usages) {
+    const u = usage.toLowerCase();
+    let mult = 1;
+    if (/^background(?:-color)?$/.test(u)) mult = 5;
+    else if (/^fill$/.test(u))             mult = 4;
+    else if (u.startsWith('--'))           mult = 3;
+    else if (/border|outline/.test(u))     mult = 1;
+    else if (/^color$/.test(u))            mult = 0.3;
+    weightedTotal += mult;
+    rawTotal++;
+  }
+  const avgMult = weightedTotal / rawTotal;
+  return entry.count * avgMult;
 }
 
 function buildDesignColorsFromEntries(entries: HexEntry[]): DesignColors {
@@ -157,7 +188,7 @@ export async function POST(req: NextRequest) {
         log(`Color extraction URLs: ${extractUrls.length}`);
 
         // 3. Call extract-css for each URL and aggregate hex color entries
-        const hexMap = new Map<string, number>();
+        const hexMap = new Map<string, HexEntry>();
         const allBorderRadii: string[] = [];
         const resourcesData: Record<string, unknown> = { selected_urls: urlsStr };
 
@@ -197,7 +228,15 @@ export async function POST(req: NextRequest) {
             // Aggregate hex frequencies
             const entries = parseHexColorsString(cssData.hex_colors ?? '');
             for (const e of entries) {
-              hexMap.set(e.hex, (hexMap.get(e.hex) ?? 0) + e.count);
+              const existing = hexMap.get(e.hex);
+              if (!existing) {
+                hexMap.set(e.hex, { hex: e.hex, count: e.count, usages: [...e.usages] });
+              } else {
+                existing.count += e.count;
+                for (const u of e.usages) {
+                  if (!existing.usages.includes(u) && existing.usages.length < 8) existing.usages.push(u);
+                }
+              }
             }
 
             // Collect border radii
@@ -220,8 +259,8 @@ export async function POST(req: NextRequest) {
         send({ progress: 42, status: 'デザイントークンを構築中...' });
 
         const aggregatedEntries: HexEntry[] = [...hexMap.entries()]
-          .map(([hex, count]) => ({ hex, count }))
-          .sort((a, b) => b.count - a.count);
+          .map(([, e]) => e)
+          .sort((a, b) => visualWeight(b) - visualWeight(a));
 
         log(`Aggregated ${aggregatedEntries.length} unique hex colors`);
 
