@@ -546,6 +546,7 @@ export async function readAndFixDifyFiles(
     `src/app/${TPL_SLUG}/page.tsx`,
     `src/app/${TPL_SLUG}/guidelines/page.tsx`,
     `src/app/${TPL_SLUG}/components/page.tsx`,
+    `src/app/${TPL_SLUG}/resources/page.tsx`,
   ];
 
   const results = await Promise.all(
@@ -628,7 +629,33 @@ export async function readAndFixDifyFiles(
         }
       }
 
-      // globals.css: AIが生成したfont-family宣言を削除
+      // guidelines / components: SAMPLEバナーを削除し、primaryColor と colors を更新
+      if (path.includes('/guidelines/page.tsx') || path.includes('/components/page.tsx')) {
+        // SAMPLEバナーを丸ごと削除
+        content = content.replace(/\s*\{\s*\/\*\s*SAMPLEバナー\s*\*\/\s*\}[\s\S]*?<\/div>/, '');
+        // primaryColor を更新
+        if (designColors) {
+          content = content.replace(
+            /const primaryColor: string = '[^']+';/,
+            `const primaryColor: string = '${designColors.primary}';`,
+          );
+        }
+      }
+      // guidelines: colors 配列をブランドカラーで置換
+      if (path.includes('/guidelines/page.tsx') && designColors && designColors.brandColors.length > 0) {
+        const colorNames = ['プライマリカラー', 'セカンダリカラー', 'アクセントカラー', '背景カラー', 'サブカラー'];
+        const colorEntries = [
+          ...designColors.brandColors.slice(0, 3).map((c, i) => `  { hex: '${c.hex}', name: '${colorNames[i] ?? c.hex}' }`),
+          `  { hex: '${designColors.bg}', name: '背景カラー' }`,
+          `  { hex: '${designColors.text}', name: 'テキストカラー' }`,
+        ];
+        content = content.replace(
+          /const colors = \[[\s\S]*?\];/,
+          `const colors = [\n${colorEntries.join(',\n')},\n];`,
+        );
+      }
+
+            // globals.css: AIが生成したfont-family宣言を削除
       // （ルートlayoutのbodyインラインスタイルのゴシック体スタックを継承させる）
       if (path.endsWith('globals.css')) {
         content = content.replace(/font-family\s*:[^;]+;/g, '');
