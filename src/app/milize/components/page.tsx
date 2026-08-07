@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = '株式会社MILIZE';
 const basePath = '/milize';
-const primaryColor: string = '#C0C0C0';
+const primaryColor: string = '#004A99';
 
 export default function ComponentsPage() {
   return (

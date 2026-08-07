@@ -1,43 +1,6 @@
-2026-08-07T04:48:13.770Z  START task_id="c6786574-e507-40a8-9b30-18240d264c6e" workflow_run_id="c859b139-cdb5-4e00-adee-87db25c43b2a" form_token="329fW84ehB15v0Agw5SFv3" client="milize"
-2026-08-07T04:48:13.773Z  formBase="https://app.dify.milize.com"
-2026-08-07T04:48:13.774Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/329fW84ehB15v0Agw5SFv3
-2026-08-07T04:48:14.361Z  結果[app/api]: 200 ct=application/json body={}
-
-2026-08-07T04:48:14.362Z  ✓ 再開成功: app/api
-2026-08-07T04:48:14.362Z  resume 成功: ct=application/json
-2026-08-07T04:48:14.362Z  ポーリング開始 pollIds=["c859b139-cdb5-4e00-adee-87db25c43b2a","c6786574-e507-40a8-9b30-18240d264c6e"]
-2026-08-07T04:48:24.882Z  logs[1]: run=c859b139 status="running"
-2026-08-07T04:48:24.882Z  logs[1]: 10件, runId未発見
-2026-08-07T04:48:35.383Z  logs[2]: run=c859b139 status="running"
-2026-08-07T04:48:35.383Z  logs[2]: 10件, runId未発見
-2026-08-07T04:48:45.900Z  logs[3]: run=c859b139 status="running"
-2026-08-07T04:48:45.900Z  logs[3]: 10件, runId未発見
-2026-08-07T04:48:56.428Z  logs[4]: run=c859b139 status="running"
-2026-08-07T04:48:56.428Z  logs[4]: 10件, runId未発見
-2026-08-07T04:49:06.945Z  logs[5]: run=c859b139 status="running"
-2026-08-07T04:49:06.945Z  logs[5]: 10件, runId未発見
-2026-08-07T04:49:17.463Z  logs[6]: run=c859b139 status="running"
-2026-08-07T04:49:17.463Z  logs[6]: 10件, runId未発見
-2026-08-07T04:49:27.994Z  logs[7]: run=c859b139 status="running"
-2026-08-07T04:49:27.994Z  logs[7]: 10件, runId未発見
-2026-08-07T04:49:38.505Z  logs[8]: run=c859b139 status="running"
-2026-08-07T04:49:38.505Z  logs[8]: 10件, runId未発見
-2026-08-07T04:49:49.011Z  logs[9]: run=c859b139 status="running"
-2026-08-07T04:49:49.011Z  logs[9]: 10件, runId未発見
-2026-08-07T04:49:59.526Z  logs[10]: run=c859b139 status="running"
-2026-08-07T04:49:59.527Z  logs[10]: 10件, runId未発見
-2026-08-07T04:50:10.056Z  logs[11]: run=c859b139 status="running"
-2026-08-07T04:50:10.056Z  logs[11]: 10件, runId未発見
-2026-08-07T04:50:20.576Z  logs[12]: run=c859b139 status="running"
-2026-08-07T04:50:20.576Z  logs[12]: 10件, runId未発見
-2026-08-07T04:50:31.093Z  logs[13]: run=c859b139 status="running"
-2026-08-07T04:50:31.093Z  logs[13]: 10件, runId未発見
-2026-08-07T04:50:41.620Z  logs[14]: run=c859b139 status="running"
-2026-08-07T04:50:41.620Z  logs[14]: 10件, runId未発見
-2026-08-07T04:50:52.118Z  logs[15]: run=c859b139 status="running"
-2026-08-07T04:50:52.118Z  logs[15]: 10件, runId未発見
-2026-08-07T04:51:02.626Z  logs[16]: run=c859b139 status="running"
-2026-08-07T04:51:02.627Z  logs[16]: 10件, runId未発見
-2026-08-07T04:51:13.141Z  logs[17]: run=c859b139 status="succeeded"
-2026-08-07T04:51:13.142Z  ワークフロー完了: status="succeeded" (outputs は dify-callback 経由で書き込み済み)
-2026-08-07T04:51:13.142Z  ポーリング完了
+2026-08-07T05:39:18.462Z  START company="株式会社MILIZE" slug="milize" appBase="https://milize-design-flow.vercel.app"
+2026-08-07T05:39:18.465Z  Parsed 0 URLs
+2026-08-07T05:39:18.465Z  Color extraction URLs: 0
+2026-08-07T05:39:18.465Z  Aggregated 0 unique hex colors
+2026-08-07T05:39:18.465Z  primary=#004A99 brandColors=[#004A99]
+2026-08-07T05:39:18.656Z  readAndFixDifyFiles: 4 files
