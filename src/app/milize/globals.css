@@ -17,7 +17,7 @@
 .milize-portal {
   min-height: 100vh;
   background: var(--portal-bg);
-  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  
   color: var(--text-color);
 }
 
@@ -85,7 +85,7 @@
 }
 
 .milize-portal .swatch-hex {
-  font-family: monospace;
+  
   font-size: 13px;
   color: #111827;
 }
@@ -131,7 +131,7 @@
   color: #9ca3af;
   padding: 8px 16px;
   border-bottom: 1px solid #e5e7eb;
-  font-family: monospace;
+  
 }
 
 .milize-portal .component-render {
@@ -141,7 +141,7 @@
 .milize-portal .component-code {
   background: #0f172a;
   color: #94a3b8;
-  font-family: monospace;
+  
   font-size: 12px;
   padding: 12px 16px;
   overflow-x: auto;
@@ -201,4 +201,25 @@
   font-weight: 500;
   cursor: pointer;
   border: none;
+}
+
+/* カードスタイル統一（自動注入） */
+[class$="-portal"] .card, .card {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  transition: box-shadow 0.15s ease !important;
+}
+[class$="-portal"] .nav-card, .nav-card {
+  transition: transform 0.15s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+[class$="-portal"] .nav-card:hover, .nav-card:hover {
+  transform: translateY(-2px);
+}
+[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
