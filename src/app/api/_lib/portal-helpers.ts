@@ -685,6 +685,39 @@ export async function readAndFixDifyFiles(
         }
       }
 
+      // guidelines/page.tsx: inject real brand colors into the color palette
+      if (path.endsWith(`${slug}/guidelines/page.tsx`) && designColors) {
+        // Update primaryColor constant
+        content = content.replace(
+          /const primaryColor: string = '[^']+';/,
+          `const primaryColor: string = '${designColors.primary}';`,
+        );
+        // Replace the static colors array with extracted brand colors
+        const colorNames = ['プライマリカラー', 'セカンダリカラー', 'アクセントカラー', '背景カラー', 'サブカラー'];
+        const colorHexes = [
+          designColors.primary,
+          designColors.secondary,
+          designColors.accent,
+          designColors.bg,
+          designColors.brandColors[3]?.hex ?? '#7F7F7F',
+        ];
+        const colorLines = colorNames
+          .map((name, i) => `  { hex: '${colorHexes[i]}', name: '${name}' }`)
+          .join(',\n');
+        content = content.replace(
+          /const colors = \[[\s\S]*?\];/,
+          `const colors = [\n${colorLines},\n];`,
+        );
+      }
+
+      // components/page.tsx: inject primaryColor so all inline styles update automatically
+      if (path.endsWith(`${slug}/components/page.tsx`) && designColors) {
+        content = content.replace(
+          /const primaryColor: string = '[^']+';/,
+          `const primaryColor: string = '${designColors.primary}';`,
+        );
+      }
+
       return { path, content };
     }),
   );
