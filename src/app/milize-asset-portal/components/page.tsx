@@ -21,7 +21,7 @@ export default function ComponentsPage() {
           </p>
           <h1 className="section-title">コンポーネント集</h1>
           <p className="section-desc">
-            ブランドカラーとタイポグラフィを反映したUIコンポーネントのサンプル集です。
+            リサーチカラーとタイポグラフィを反映したUIコンポーネントのサンプル集です。
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function ComponentsPage() {
                   海援隊の精神
                 </h3>
                 <p style={{ fontSize: 14, color: '#6b7280', lineHeight: 1.8 }}>
-                  伝統と革新が融合した、時代を超えて輝くブランドの姿勢を表現します。
+                  伝統と革新が融合した、時代を超えて輝くリサーチの姿勢を表現します。
                 </p>
               </div>
             </div>

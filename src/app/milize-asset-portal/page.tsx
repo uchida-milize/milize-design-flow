@@ -27,9 +27,9 @@ export default function Home() {
           <p className="section-label" style={{ color: primaryColor }}>
             BRAND PORTAL
           </p>
-          <h1 className="section-title">{clientName} ブランドポータル</h1>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
           <p className="section-desc">
-            情報革命・未来志向・誠実さを軸にした、伝統と革新が融合するブランドガイドラインです。
+            情報革命・未来志向・誠実さを軸にした、伝統と革新が融合するリサーチガイドラインです。
           </p>
         </div>
 
@@ -75,10 +75,10 @@ export default function Home() {
                 GUIDELINES
               </p>
               <h2 className="section-title" style={{ fontSize: 20 }}>
-                ブランドガイドライン
+                リサーチガイドライン
               </h2>
               <p className="section-desc">
-                カラー・タイポグラフィ・トンマナなど、ブランドの基本方針を確認できます。
+                カラー・タイポグラフィ・トンマナなど、リサーチの基本方針を確認できます。
               </p>
             </div>
           </a>
@@ -92,7 +92,7 @@ export default function Home() {
                 コンポーネント集
               </h2>
               <p className="section-desc">
-                ブランドカラーとタイポグラフィを反映したUIコンポーネントのサンプルです。
+                リサーチカラーとタイポグラフィを反映したUIコンポーネントのサンプルです。
               </p>
             </div>
           </a>

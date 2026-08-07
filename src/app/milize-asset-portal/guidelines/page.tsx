@@ -27,7 +27,7 @@ export default function GuidelinesPage() {
           <p className="section-label" style={{ color: primaryColor }}>
             GUIDELINES
           </p>
-          <h1 className="section-title">ブランドガイドライン</h1>
+          <h1 className="section-title">リサーチガイドライン</h1>
           <p className="section-desc">
             坂本龍馬の海援隊旗をモチーフにしたシンボリックなロゴと、時代を超えて輝くシルバー。
             明朝体による品格と誠実さの表現を軸とした指針です。
@@ -90,7 +90,7 @@ export default function GuidelinesPage() {
                 color: '#111827',
               }}
             >
-              伝統と革新が融合したブランドイメージ。時代を超えて輝くシルバーと、明朝体の書体で品格と誠実さを表現し、未来志向で挑戦し続ける姿勢を体現します。
+              伝統と革新が融合したリサーチイメージ。時代を超えて輝くシルバーと、明朝体の書体で品格と誠実さを表現し、未来志向で挑戦し続ける姿勢を体現します。
             </p>
           </div>
         </section>
@@ -120,7 +120,7 @@ export default function GuidelinesPage() {
           </div>
           <div className="card">
             <p style={{ fontSize: 14, lineHeight: 1.9, color: '#6b7280' }}>
-              伝統と革新が融合したブランドイメージ。坂本龍馬の海援隊旗をモチーフにしたシンボリックなロゴに、時代を超えて輝くシルバーを使い、明朝体の書体で品格と誠実さを表現。情報革命を通じて社会に貢献し、未来志向で挑戦し続ける姿勢が感じられます。
+              伝統と革新が融合したリサーチイメージ。坂本龍馬の海援隊旗をモチーフにしたシンボリックなロゴに、時代を超えて輝くシルバーを使い、明朝体の書体で品格と誠実さを表現。情報革命を通じて社会に貢献し、未来志向で挑戦し続ける姿勢が感じられます。
             </p>
           </div>
         </section>
