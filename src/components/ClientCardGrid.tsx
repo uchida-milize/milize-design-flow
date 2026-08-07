@@ -10,10 +10,15 @@ type ClientInfo = {
   description: string;
 };
 
+type ConfirmMode = 'menu' | 'hide' | 'delete';
+
 
 export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
   const [hidden, setHidden] = useState<Set<string>>(new Set());
+  const [deletedSlugs, setDeletedSlugs] = useState<Set<string>>(new Set());
   const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
+  const [confirmMode, setConfirmMode] = useState<ConfirmMode>('menu');
+  const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem('hidden_clients');
@@ -22,11 +27,43 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
     }
   }, []);
 
+  const openMenu = (slug: string) => {
+    setConfirmSlug(slug);
+    setConfirmMode('menu');
+  };
+
+  const closeMenu = () => {
+    setConfirmSlug(null);
+    setConfirmMode('menu');
+  };
+
   const hideClient = (slug: string) => {
     const next = new Set([...hidden, slug]);
     setHidden(next);
     localStorage.setItem('hidden_clients', JSON.stringify([...next]));
-    setConfirmSlug(null);
+    closeMenu();
+  };
+
+  const deleteClient = async (slug: string) => {
+    setDeletingSlug(slug);
+    try {
+      const res = await fetch('/api/delete-client', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(`削除に失敗しました: ${data.error ?? res.status}`);
+        return;
+      }
+      setDeletedSlugs(prev => new Set([...prev, slug]));
+      closeMenu();
+    } catch (e) {
+      alert(`削除に失敗しました: ${String(e)}`);
+    } finally {
+      setDeletingSlug(null);
+    }
   };
 
   const restoreAll = () => {
@@ -34,7 +71,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
     localStorage.removeItem('hidden_clients');
   };
 
-  const visible = clients.filter((c) => !hidden.has(c.slug));
+  const visible = clients.filter((c) => !hidden.has(c.slug) && !deletedSlugs.has(c.slug));
 
   return (
     <>
@@ -69,26 +106,78 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   borderRadius: 10,
                   padding: '12px 14px',
                   boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
-                  minWidth: 160,
+                  minWidth: 168,
                 }}
               >
-                <p style={{ fontSize: 13, color: '#111827', fontWeight: 600, margin: '0 0 10px' }}>
-                  {'非表示にしますか？'}
-                </p>
-                <div style={{ display: 'flex', gap: 6 }}>
-                  <button
-                    onClick={() => hideClient(client.slug)}
-                    style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
-                  >
-                    {'非表示'}
-                  </button>
-                  <button
-                    onClick={() => setConfirmSlug(null)}
-                    style={{ background: '#f3f4f6', color: '#6b7280', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer' }}
-                  >
-                    {'キャンセル'}
-                  </button>
-                </div>
+                {confirmMode === 'menu' && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    <button
+                      onClick={() => setConfirmMode('hide')}
+                      style={{ background: 'none', border: 'none', borderRadius: 6, padding: '7px 10px', fontSize: 13, cursor: 'pointer', color: '#374151', textAlign: 'left', fontWeight: 500 }}
+                    >
+                      {'非表示にする'}
+                    </button>
+                    <button
+                      onClick={() => setConfirmMode('delete')}
+                      style={{ background: 'none', border: 'none', borderRadius: 6, padding: '7px 10px', fontSize: 13, cursor: 'pointer', color: '#ef4444', textAlign: 'left', fontWeight: 500 }}
+                    >
+                      {'削除する'}
+                    </button>
+                    <button
+                      onClick={closeMenu}
+                      style={{ background: 'none', border: 'none', borderRadius: 6, padding: '5px 10px', fontSize: 12, cursor: 'pointer', color: '#9ca3af', textAlign: 'left' }}
+                    >
+                      {'キャンセル'}
+                    </button>
+                  </div>
+                )}
+                {confirmMode === 'hide' && (
+                  <>
+                    <p style={{ fontSize: 13, color: '#111827', fontWeight: 600, margin: '0 0 10px' }}>
+                      {'非表示にしますか？'}
+                    </p>
+                    <div style={{ display: 'flex', gap: 6 }}>
+                      <button
+                        onClick={() => hideClient(client.slug)}
+                        style={{ background: '#6b7280', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 600 }}
+                      >
+                        {'非表示'}
+                      </button>
+                      <button
+                        onClick={closeMenu}
+                        style={{ background: '#f3f4f6', color: '#6b7280', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer' }}
+                      >
+                        {'戻る'}
+                      </button>
+                    </div>
+                  </>
+                )}
+                {confirmMode === 'delete' && (
+                  <>
+                    <p style={{ fontSize: 13, color: '#111827', fontWeight: 600, margin: '0 0 4px' }}>
+                      {'完全に削除しますか？'}
+                    </p>
+                    <p style={{ fontSize: 11, color: '#6b7280', margin: '0 0 10px', lineHeight: 1.5 }}>
+                      {`「${client.name}」のデータを完全に削除します。同じスラッグで再構築可能です。`}
+                    </p>
+                    <div style={{ display: 'flex', gap: 6 }}>
+                      <button
+                        onClick={() => deleteClient(client.slug)}
+                        disabled={deletingSlug === client.slug}
+                        style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: deletingSlug === client.slug ? 'not-allowed' : 'pointer', fontWeight: 600, opacity: deletingSlug === client.slug ? 0.6 : 1 }}
+                      >
+                        {deletingSlug === client.slug ? '削除中...' : '削除'}
+                      </button>
+                      <button
+                        onClick={closeMenu}
+                        disabled={deletingSlug === client.slug}
+                        style={{ background: '#f3f4f6', color: '#6b7280', border: 'none', borderRadius: 6, padding: '5px 12px', fontSize: 12, cursor: 'pointer' }}
+                      >
+                        {'戻る'}
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             )}
             <Link
@@ -133,7 +222,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                     <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 2, margin: '2px 0 0' }}>{client.slug}</p>
                   </div>
                   <button
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmSlug(confirmSlug === client.slug ? null : client.slug); }}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); confirmSlug === client.slug ? closeMenu() : openMenu(client.slug); }}
                     style={{
                       background: 'none',
                       border: 'none',
