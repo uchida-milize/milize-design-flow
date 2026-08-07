@@ -4,8 +4,8 @@
 export const OWNER = 'uchida-milize';
 export const REPO  = 'milize-design-flow';
 export const API   = 'https://api.github.com';
-export const TPL_SLUG = 'sharp-finance-corp';
-export const TPL_NAME = 'シャープファイナンス株式会社';
+export const TPL_SLUG = 'milize-asset-Portal';
+export const TPL_NAME = 'Milize Asset Portal';
 
 export function ghHeaders(token: string) {
   return {
@@ -28,6 +28,106 @@ export async function getFileContent(path: string, token: string): Promise<{ con
 }
 
 // GitHub Trees API で複数ファイルを1コミットにまとめる
+// 既存の src/app/{slug}/ 以下を全削除してから新規ファイルを追加する（リフレッシュモード）
+// deletePrefix を指定すると、そのプレフィックスにマッチする全ファイルを削除してから新規追加する
+export async function refreshAndCommitClientFiles(
+  slug: string,
+  files: Array<{ path: string; content: string }>,
+  message: string,
+  token: string,
+): Promise<{ ok: boolean; error?: string; deletedCount?: number }> {
+  const h = ghHeaders(token);
+  const prefix = `src/app/${slug}/`;
+
+  try {
+    // 1. HEAD SHA 取得
+    const refRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/refs/heads/main`, { headers: h });
+    if (!refRes.ok) return { ok: false, error: `ref fetch failed: ${refRes.status}` };
+    const refData = await refRes.json();
+    const headSha: string = refData.object.sha;
+
+    // 2. 現在のコミット＆ツリー SHA 取得
+    const commitRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/commits/${headSha}`, { headers: h });
+    if (!commitRes.ok) return { ok: false, error: `commit fetch failed: ${commitRes.status}` };
+    const commitData = await commitRes.json();
+    const treeSha: string = commitData.tree.sha;
+
+    // 3. 現在のツリーを再帰取得してクライアントの既存ファイルを洗い出す
+    const treeListRes = await fetch(
+      `${API}/repos/${OWNER}/${REPO}/git/trees/${treeSha}?recursive=1`,
+      { headers: h },
+    );
+    const treeListData = await treeListRes.json();
+    const existingPaths: string[] = (treeListData.tree ?? [])
+      .filter((item: { type: string; path: string }) => item.type === 'blob' && item.path.startsWith(prefix))
+      .map((item: { path: string }) => item.path);
+
+    // 4. 削除エントリ（sha: null = GitHub Trees API での削除指示）
+    const deleteItems = existingPaths.map(path => ({
+      path,
+      mode: '100644' as const,
+      type: 'blob' as const,
+      sha: null,
+    }));
+
+    // 5. 新規ファイルの blob を作成（重複パスを排除）
+    const uniqueFiles = Array.from(new Map(files.map(f => [f.path, f])).values());
+    const addItems = await Promise.all(
+      uniqueFiles.map(async (f) => {
+        const blobRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/blobs`, {
+          method: 'POST',
+          headers: h,
+          body: JSON.stringify({
+            content: Buffer.from(f.content, 'utf-8').toString('base64'),
+            encoding: 'base64',
+          }),
+        });
+        if (!blobRes.ok) throw new Error(`blob failed for ${f.path}: ${blobRes.status}`);
+        const blobData = await blobRes.json();
+        return { path: f.path, mode: '100644' as const, type: 'blob' as const, sha: blobData.sha as string };
+      }),
+    );
+
+    // 6. ツリー作成（削除 + 追加を一括）
+    const treeRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/trees`, {
+      method: 'POST',
+      headers: h,
+      body: JSON.stringify({
+        base_tree: treeSha,
+        tree: [...deleteItems, ...addItems],
+      }),
+    });
+    if (!treeRes.ok) {
+      const errBody = await treeRes.text();
+      return { ok: false, error: `tree failed: ${treeRes.status} ${errBody.slice(0, 100)}` };
+    }
+    const treeData = await treeRes.json();
+
+    // 7. コミットを作成
+    const newCommitRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/commits`, {
+      method: 'POST',
+      headers: h,
+      body: JSON.stringify({ message, tree: treeData.sha, parents: [headSha] }),
+    });
+    if (!newCommitRes.ok) return { ok: false, error: `commit create failed: ${newCommitRes.status}` };
+    const newCommitData = await newCommitRes.json();
+
+    // 8. refs/heads/main を更新
+    const updateRes = await fetch(`${API}/repos/${OWNER}/${REPO}/git/refs/heads/main`, {
+      method: 'PATCH',
+      headers: h,
+      body: JSON.stringify({ sha: newCommitData.sha, force: false }),
+    });
+    if (!updateRes.ok) {
+      const errBody = await updateRes.text();
+      return { ok: false, error: `ref update failed: ${updateRes.status} ${errBody.slice(0, 80)}` };
+    }
+    return { ok: true, deletedCount: existingPaths.length };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
+}
+
 export async function batchGitCommit(
   files: Array<{ path: string; content: string }>,
   message: string,

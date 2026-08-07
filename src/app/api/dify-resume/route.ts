@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import {
-  batchGitCommit,
+  refreshAndCommitClientFiles,
   buildResourcesPage,
   parseDesignMdColors,
   readAndFixDifyFiles,
@@ -268,26 +268,31 @@ export async function POST(req: NextRequest) {
           },
         ];
 
-        send({ progress: 82, status: `${filesToCommit.length}ファイルをコミット中...` });
+        send({ progress: 82, status: `${filesToCommit.length}ファイルをリフレッシュコミット中（旧ファイル全削除→新規追加）...` });
 
         let committed = false;
         let lastError = '';
         for (let attempt = 0; attempt < 3; attempt++) {
           if (attempt > 0) await new Promise(r => setTimeout(r, 3000 * attempt));
-          const result = await batchGitCommit(
+          const result = await refreshAndCommitClientFiles(
+            client_slug,
             filesToCommit,
-            `feat: generate portal for ${client_slug} [resumed]`,
+            `feat: refresh portal for ${client_slug} [resumed]`,
             githubToken,
           );
-          if (result.ok) { committed = true; break; }
+          if (result.ok) {
+            committed = true;
+            send({ progress: 83, status: `リフレッシュ完了（旧ファイル ${result.deletedCount ?? 0}件削除、新規${filesToCommit.length}件追加）` });
+            break;
+          }
           lastError = result.error ?? 'unknown';
           send({ progress: 82 + attempt, status: `コミット再試行 (${attempt + 1}/3)...` });
         }
 
         if (!committed) {
-          send({ progress: 83, status: `コミット失敗: ${lastError.slice(0, 80)}` });
+          send({ progress: 83, status: `リフレッシュコミット失敗: ${lastError.slice(0, 80)}` });
         } else {
-          send({ progress: 84, status: 'コミット完了！' });
+          send({ progress: 84, status: 'リフレッシュコミット完了！' });
         }
 
         await removeFromExcludedDirs(client_slug, githubToken);
