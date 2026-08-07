@@ -10,7 +10,7 @@ export const TPL_NAME = 'Milize Asset Portal';
 export function ghHeaders(token: string) {
   return {
     Authorization: `Bearer ${token}`,
-    Accept: 'application/vnd.github+json'
+    Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28',
     'Content-Type': 'application/json',
   };
