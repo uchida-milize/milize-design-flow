@@ -5,11 +5,11 @@ const basePath = '/milize-asset-portal';
 const primaryColor: string = '#C0C0C0';
 
 const colors = [
-  { hex: '#C0C0C0', name: 'プライマリ シルバー' },
-  { hex: '#000000', name: 'セカンダリ ブラック' },
-  { hex: '#444444', name: 'アクセント ダークグレー' },
-  { hex: '#FFFFFF', name: '背景 ホワイト' },
-  { hex: '#7F7F7F', name: 'グレー系中間色' },
+  { hex: '#C0C0C0', name: 'プライマリカラー' },
+  { hex: '#000000', name: 'セカンダリカラー' },
+  { hex: '#444444', name: 'アクセントカラー' },
+  { hex: '#FFFFFF', name: '背景カラー' },
+  { hex: '#7F7F7F', name: 'サブカラー' },
 ];
 
 export default function GuidelinesPage() {
@@ -23,14 +23,41 @@ export default function GuidelinesPage() {
       />
 
       <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+
+        {/* SAMPLEバナー */}
+        <div style={{
+          background: '#fff7ed',
+          border: '1px solid #fed7aa',
+          borderRadius: 10,
+          padding: '12px 20px',
+          marginBottom: 36,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+        }}>
+          <span style={{
+            background: '#f97316',
+            color: '#fff',
+            borderRadius: 4,
+            padding: '2px 10px',
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            whiteSpace: 'nowrap',
+          }}>SAMPLE</span>
+          <span style={{ fontSize: 13, color: '#9a3412', lineHeight: 1.6 }}>
+            このページはテンプレートのサンプルです。実際のクライアントポータルでは、Difyによって自動生成されたコンテンツが表示されます。
+          </span>
+        </div>
+
         <div style={{ marginBottom: 40 }}>
           <p className="section-label" style={{ color: primaryColor }}>
             GUIDELINES
           </p>
           <h1 className="section-title">リサーチガイドライン</h1>
           <p className="section-desc">
-            坂本龍馬の海援隊旗をモチーフにしたシンボリックなロゴと、時代を超えて輝くシルバー。
-            明朝体による品格と誠実さの表現を軸とした指針です。
+            クライアントのブランドカラー・タイポグラフィ・トンマナをまとめたガイドラインのサンプルです。
+            実際のポータルでは、収集したリサーチ情報をもとに内容が自動生成されます。
           </p>
         </div>
 
@@ -68,29 +95,27 @@ export default function GuidelinesPage() {
             タイポグラフィ
           </h2>
           <div className="card" style={{ marginBottom: 16 }}>
-            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>見出しフォント</p>
+            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>見出しフォント（サンプル）</p>
             <p
               style={{
-                fontFamily: "'Shippori Mincho', serif",
                 fontSize: 32,
                 fontWeight: 700,
                 color: '#111827',
               }}
             >
-              情報革命で、人々を幸せに。
+              見出しテキストのサンプルです。
             </p>
           </div>
           <div className="card">
-            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>本文フォント</p>
+            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>本文フォント（サンプル）</p>
             <p
               style={{
-                fontFamily: "'Noto Serif JP', serif",
                 fontSize: 16,
                 lineHeight: 1.9,
                 color: '#111827',
               }}
             >
-              伝統と革新が融合したリサーチイメージ。時代を超えて輝くシルバーと、明朝体の書体で品格と誠実さを表現し、未来志向で挑戦し続ける姿勢を体現します。
+              本文テキストのサンプルです。実際のポータルでは、クライアントのリサーチ情報をもとに生成されたブランドコピーやガイドライン文章が表示されます。読みやすさと一貫性を意識したタイポグラフィを設定します。
             </p>
           </div>
         </section>
@@ -110,9 +135,9 @@ export default function GuidelinesPage() {
               marginBottom: 24,
             }}
           >
-            {['情報革命', '未来志向', '誠実さ'].map((kw) => (
+            {['キーワード A', 'キーワード B', 'キーワード C'].map((kw) => (
               <div className="card" key={kw} style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: 18, fontWeight: 700, color: primaryColor === '#FFFFFF' ? '#000' : '#111827' }}>
+                <p style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
                   {kw}
                 </p>
               </div>
@@ -120,7 +145,7 @@ export default function GuidelinesPage() {
           </div>
           <div className="card">
             <p style={{ fontSize: 14, lineHeight: 1.9, color: '#6b7280' }}>
-              伝統と革新が融合したリサーチイメージ。坂本龍馬の海援隊旗をモチーフにしたシンボリックなロゴに、時代を超えて輝くシルバーを使い、明朝体の書体で品格と誠実さを表現。情報革命を通じて社会に貢献し、未来志向で挑戦し続ける姿勢が感じられます。
+              トンマナの説明テキストのサンプルです。実際のポータルでは、収集したWebサイトのデザイン情報をもとにクライアントのブランドイメージやトーン＆マナーを自動生成・一覧化します。
             </p>
           </div>
         </section>

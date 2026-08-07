@@ -15,6 +15,33 @@ export default function ComponentsPage() {
       />
 
       <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+
+        {/* SAMPLEバナー */}
+        <div style={{
+          background: '#fff7ed',
+          border: '1px solid #fed7aa',
+          borderRadius: 10,
+          padding: '12px 20px',
+          marginBottom: 36,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+        }}>
+          <span style={{
+            background: '#f97316',
+            color: '#fff',
+            borderRadius: 4,
+            padding: '2px 10px',
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            whiteSpace: 'nowrap',
+          }}>SAMPLE</span>
+          <span style={{ fontSize: 13, color: '#9a3412', lineHeight: 1.6 }}>
+            このページはテンプレートのサンプルです。実際のクライアントポータルでは、Difyによって自動生成されたコンテンツが表示されます。
+          </span>
+        </div>
+
         <div style={{ marginBottom: 40 }}>
           <p className="section-label" style={{ color: primaryColor }}>
             COMPONENTS
@@ -36,19 +63,18 @@ export default function ComponentsPage() {
                   border: `1px solid ${primaryColor}`,
                   padding: '10px 24px',
                   borderRadius: 6,
-                  fontFamily: "'Shippori Mincho', serif",
                   fontSize: 14,
                   cursor: 'pointer',
                 }}
               >
-                詳細を見る
+                サンプルボタン
               </button>
             </div>
-            <div className="component-code">{`<button className="btn-primary">詳細を見る</button>`}</div>
+            <div className="component-code">{`<button className="btn-primary">サンプルボタン</button>`}</div>
           </div>
 
           <div className="component-card">
-            <div className="component-label">Button / Secondary (Silver)</div>
+            <div className="component-label">Button / Secondary</div>
             <div className="component-render">
               <button
                 style={{
@@ -57,15 +83,14 @@ export default function ComponentsPage() {
                   border: 'none',
                   padding: '10px 24px',
                   borderRadius: 6,
-                  fontFamily: "'Shippori Mincho', serif",
                   fontSize: 14,
                   cursor: 'pointer',
                 }}
               >
-                資料請求
+                サンプルボタン
               </button>
             </div>
-            <div className="component-code">{`<button className="btn-silver">資料請求</button>`}</div>
+            <div className="component-code">{`<button className="btn-secondary">サンプルボタン</button>`}</div>
           </div>
 
           <div className="component-card">
@@ -81,7 +106,7 @@ export default function ComponentsPage() {
                   fontWeight: 600,
                 }}
               >
-                情報革命
+                タグ A
               </span>
               <span
                 style={{
@@ -93,7 +118,7 @@ export default function ComponentsPage() {
                   fontWeight: 600,
                 }}
               >
-                未来志向
+                タグ B
               </span>
               <span
                 style={{
@@ -105,10 +130,10 @@ export default function ComponentsPage() {
                   fontWeight: 600,
                 }}
               >
-                誠実さ
+                タグ C
               </span>
             </div>
-            <div className="component-code">{`<span className="badge">情報革命</span>`}</div>
+            <div className="component-code">{`<span className="badge">タグ A</span>`}</div>
           </div>
 
           <div className="component-card">
@@ -125,16 +150,15 @@ export default function ComponentsPage() {
               >
                 <h3
                   style={{
-                    fontFamily: "'Shippori Mincho', serif",
                     fontSize: 18,
                     marginBottom: 8,
                     color: '#111827',
                   }}
                 >
-                  海援隊の精神
+                  カードタイトル（サンプル）
                 </h3>
                 <p style={{ fontSize: 14, color: '#6b7280', lineHeight: 1.8 }}>
-                  伝統と革新が融合した、時代を超えて輝くリサーチの姿勢を表現します。
+                  カードの本文テキストのサンプルです。実際のポータルではクライアント情報が表示されます。
                 </p>
               </div>
             </div>
@@ -142,14 +166,14 @@ export default function ComponentsPage() {
           </div>
 
           <div className="component-card">
-            <div className="component-label">Divider (Equal Mark Motif)</div>
+            <div className="component-label">Divider</div>
             <div className="component-render">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: 160 }}>
                 <div style={{ height: 4, background: '#000000', borderRadius: 2 }} />
                 <div style={{ height: 4, background: '#444444', borderRadius: 2 }} />
               </div>
             </div>
-            <div className="component-code">{`<div className="equal-divider" />`}</div>
+            <div className="component-code">{`<div className="divider" />`}</div>
           </div>
         </div>
       </div>
