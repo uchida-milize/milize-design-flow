@@ -1,18 +1,18 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'Milize';
+const clientName = '株式会社MILIZE';
 const basePath = '/milize';
 const primaryColor: string = '#0055A4';
 
-const colorRatios = [
-  { hex: '#0055A4', name: 'Primary Blue', percent: 38 },
-  { hex: '#00A0E9', name: 'Secondary Blue', percent: 22 },
-  { hex: '#F5A623', name: 'Accent Orange', percent: 12 },
-  { hex: '#333333', name: 'Text Black', percent: 18 },
-  { hex: '#FFFFFF', name: 'Background White', percent: 10 },
+const colorRatio = [
+  { hex: '#0055A4', name: 'プライマリブルー', percent: 38 },
+  { hex: '#00A0E9', name: 'セカンダリブルー', percent: 22 },
+  { hex: '#F5A623', name: 'アクセントオレンジ', percent: 12 },
+  { hex: '#333333', name: 'テキストブラック', percent: 18 },
+  { hex: '#FFFFFF', name: 'バックグラウンドホワイト', percent: 10 },
 ];
 
-export default function HomePage() {
+export default function Home() {
   return (
     <div className="milize-portal">
       <ClientPortalHeader
@@ -21,34 +21,35 @@ export default function HomePage() {
         active="home"
         primaryColor={primaryColor}
       />
-      <div className="container" style={{ paddingTop: 48, paddingBottom: 80 }}>
+
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
         <div style={{ marginBottom: 40 }}>
-          <div className="section-label" style={{ color: primaryColor }}>
+          <p className="section-label" style={{ color: primaryColor }}>
             BRAND PORTAL
-          </div>
-          <div className="section-title">{clientName} ブランドポータル</div>
-          <div className="section-desc">
-            ブランドガイドラインとUIコンポーネントをまとめたポータルサイトです。
-          </div>
+          </p>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
+          <p className="section-desc">
+            クライアントごとのトンマナを収集して一覧化をしています。
+          </p>
         </div>
 
-        <div className="color-ratio-bar">
-          {colorRatios.map((c) => (
+        <div className="color-bar">
+          {colorRatio.map((c) => (
             <div
               key={c.hex}
               style={{
-                flex: c.percent,
+                flex: c.percent / 100,
                 background: c.hex,
-                border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                borderRight: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
               }}
             />
           ))}
         </div>
-        <div className="color-ratio-labels">
-          {colorRatios.map((c) => (
-            <div className="color-ratio-label-item" key={c.hex}>
+        <div className="color-bar-labels">
+          {colorRatio.map((c) => (
+            <div key={c.hex} className="color-bar-label-item">
               <span
-                className="color-ratio-swatch"
+                className="color-bar-swatch"
                 style={{
                   background: c.hex,
                   border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
@@ -64,30 +65,35 @@ export default function HomePage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: 24,
           }}
         >
           <a href={`${basePath}/guidelines`} className="nav-card">
-            <div className="section-label" style={{ color: primaryColor }}>
-              GUIDELINES
-            </div>
-            <div className="section-title" style={{ fontSize: 20 }}>
-              ブランドガイドライン
-            </div>
-            <div className="section-desc">
-              カラー・タイポグラフィ・トンマナなどのブランド定義を確認できます。
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                GUIDELINES
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                デザインガイドライン
+              </h2>
+              <p className="section-desc">
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
+              </p>
             </div>
           </a>
+
           <a href={`${basePath}/components`} className="nav-card">
-            <div className="section-label" style={{ color: primaryColor }}>
-              COMPONENTS
-            </div>
-            <div className="section-title" style={{ fontSize: 20 }}>
-              UIコンポーネント
-            </div>
-            <div className="section-desc">
-              ボタンやカードなど、実装済みのUIコンポーネント一覧です。
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                COMPONENTS
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                コンポーネント
+              </h2>
+              <p className="section-desc">
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
+              </p>
             </div>
           </a>
           <a
@@ -108,7 +114,7 @@ export default function HomePage() {
                 RESOURCES
               </div>
               <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
-                収集リソース
+                リソース
               </h2>
               <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
                 リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。

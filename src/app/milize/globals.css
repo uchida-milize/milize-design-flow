@@ -1,11 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
 
 :root {
   --portal-bg: #f5f7fa;
+  --primary-silver: #C0C0C0;
+  --secondary-black: #000000;
+  --accent-darkgray: #444444;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-note: #9ca3af;
+  /* 標準変数（カラーバー自動生成用） */
   --primary-color: #0055A4;
   --secondary-color: #00A0E9;
   --accent-color: #F5A623;
   --text-color: #333333;
+  --bg-color: #FFFFFF;
 }
 
 .milize-portal * {
@@ -18,12 +26,13 @@
   min-height: 100vh;
   background: var(--portal-bg);
   
-  color: var(--text-color);
+  color: var(--text-main);
 }
 
-.milize-portal a {
-  text-decoration: none;
-  color: inherit;
+.milize-portal h1,
+.milize-portal h2,
+.milize-portal h3 {
+  
 }
 
 .milize-portal .container {
@@ -62,91 +71,6 @@
   box-sizing: border-box;
 }
 
-.milize-portal .swatch-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
-}
-
-.milize-portal .swatch {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.milize-portal .swatch-color {
-  height: 80px;
-  width: 100%;
-}
-
-.milize-portal .swatch-info {
-  padding: 8px 12px;
-}
-
-.milize-portal .swatch-hex {
-  
-  font-size: 13px;
-  color: #111827;
-}
-
-.milize-portal .swatch-name {
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 2px;
-}
-
-.milize-portal .tab-nav {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-.milize-portal .tab {
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
-  background: #f3f4f6;
-  color: #6b7280;
-  border: none;
-  cursor: pointer;
-}
-
-.milize-portal .tab.active {
-  color: #ffffff;
-}
-
-.milize-portal .component-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #ffffff;
-  margin-bottom: 24px;
-}
-
-.milize-portal .component-label {
-  font-size: 12px;
-  color: #9ca3af;
-  padding: 8px 16px;
-  border-bottom: 1px solid #e5e7eb;
-  
-}
-
-.milize-portal .component-render {
-  padding: 24px;
-}
-
-.milize-portal .component-code {
-  background: #0f172a;
-  color: #94a3b8;
-  
-  font-size: 12px;
-  padding: 12px 16px;
-  overflow-x: auto;
-}
-
 .milize-portal .nav-card {
   display: flex;
   flex-direction: column;
@@ -163,22 +87,108 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
 
-.milize-portal .color-ratio-bar {
+.milize-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.milize-portal .swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.milize-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.milize-portal .swatch-info {
+  padding: 8px 10px;
+}
+
+.milize-portal .swatch-hex {
+  
+  font-size: 13px;
+  color: #111827;
+}
+
+.milize-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.milize-portal .tabs {
   display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.milize-portal .tab {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: #6b7280;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.milize-portal .tab.active {
+  color: #ffffff;
+}
+
+.milize-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.milize-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  
+}
+
+.milize-portal .component-render {
+  padding: 24px;
+}
+
+.milize-portal .component-code {
+  background: #0f172a;
+  color: #94a3b8;
+  
+  font-size: 12px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.milize-portal .color-bar {
   height: 32px;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 12px;
+  display: flex;
+  margin-bottom: 16px;
 }
 
-.milize-portal .color-ratio-labels {
+.milize-portal .color-bar-labels {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 32px;
 }
 
-.milize-portal .color-ratio-label-item {
+.milize-portal .color-bar-label-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -186,23 +196,11 @@
   color: #6b7280;
 }
 
-.milize-portal .color-ratio-swatch {
+.milize-portal .color-bar-swatch {
   width: 12px;
   height: 12px;
-  border-radius: 2px;
-  flex-shrink: 0;
+  border-radius: 3px;
 }
-
-.milize-portal .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-}
-
 /* カードスタイル統一（自動注入） */
 [class$="-portal"] .card, .card {
   background: #ffffff !important;
@@ -210,6 +208,8 @@
   border-radius: 24px !important;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
   transition: box-shadow 0.15s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
 }
 [class$="-portal"] .nav-card, .nav-card {
   transition: transform 0.15s ease !important;

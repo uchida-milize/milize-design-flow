@@ -1,23 +1,10 @@
-'use client';
-
-import { useState } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'Milize';
+const clientName = '株式会社MILIZE';
 const basePath = '/milize';
-const primaryColor: string = '#0055A4';
-const secondaryColor = '#00A0E9';
-const accentColor = '#F5A623';
-
-const tabs = [
-  { key: 'buttons', label: 'ボタン' },
-  { key: 'cards', label: 'カード' },
-  { key: 'badges', label: 'バッジ' },
-];
+const primaryColor: string = '#C0C0C0';
 
 export default function ComponentsPage() {
-  const [tab, setTab] = useState('buttons');
-
   return (
     <div className="milize-portal">
       <ClientPortalHeader
@@ -26,162 +13,145 @@ export default function ComponentsPage() {
         active="components"
         primaryColor={primaryColor}
       />
-      <div className="container" style={{ paddingTop: 48, paddingBottom: 80 }}>
-        <div style={{ marginBottom: 32 }}>
-          <div className="section-label" style={{ color: primaryColor }}>
+
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
+          <p className="section-label" style={{ color: primaryColor }}>
             COMPONENTS
-          </div>
-          <div className="section-title">UIコンポーネント</div>
-          <div className="section-desc">
-            実装済みのUIコンポーネントの一覧です。
-          </div>
+          </p>
+          <h1 className="section-title">コンポーネント集</h1>
+          <p className="section-desc">
+            リサーチカラーとタイポグラフィを反映したUIコンポーネントのサンプル集です。
+          </p>
         </div>
 
-        <div className="tab-nav">
-          {tabs.map((t) => (
-            <button
-              key={t.key}
-              className={`tab ${tab === t.key ? 'active' : ''}`}
-              style={tab === t.key ? { background: primaryColor } : {}}
-              onClick={() => setTab(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {tab === 'buttons' && (
-          <>
-            <div className="component-card">
-              <div className="component-label">Button / Primary</div>
-              <div className="component-render">
-                <button
-                  className="btn"
-                  style={{ background: primaryColor, color: '#fff' }}
-                >
-                  プライマリボタン
-                </button>
-              </div>
-              <div className="component-code">
-                {`<button style={{ background: '${primaryColor}', color: '#fff' }}>プライマリボタン</button>`}
-              </div>
-            </div>
-
-            <div className="component-card">
-              <div className="component-label">Button / Secondary</div>
-              <div className="component-render">
-                <button
-                  className="btn"
-                  style={{ background: secondaryColor, color: '#fff' }}
-                >
-                  セカンダリボタン
-                </button>
-              </div>
-              <div className="component-code">
-                {`<button style={{ background: '${secondaryColor}', color: '#fff' }}>セカンダリボタン</button>`}
-              </div>
-            </div>
-
-            <div className="component-card">
-              <div className="component-label">Button / Accent</div>
-              <div className="component-render">
-                <button
-                  className="btn"
-                  style={{ background: accentColor, color: '#fff' }}
-                >
-                  アクセントボタン
-                </button>
-              </div>
-              <div className="component-code">
-                {`<button style={{ background: '${accentColor}', color: '#fff' }}>アクセントボタン</button>`}
-              </div>
-            </div>
-
-            <div className="component-card">
-              <div className="component-label">Button / Outline</div>
-              <div className="component-render">
-                <button
-                  className="btn"
-                  style={{
-                    background: 'transparent',
-                    color: primaryColor,
-                    border: `1px solid ${primaryColor}`,
-                  }}
-                >
-                  アウトラインボタン
-                </button>
-              </div>
-              <div className="component-code">
-                {`<button style={{ border: '1px solid ${primaryColor}', color: '${primaryColor}' }}>アウトラインボタン</button>`}
-              </div>
-            </div>
-          </>
-        )}
-
-        {tab === 'cards' && (
+        <div style={{ display: 'grid', gap: 24 }}>
           <div className="component-card">
-            <div className="component-label">Card / Basic</div>
+            <div className="component-label">Button / Primary</div>
+            <div className="component-render">
+              <button
+                style={{
+                  background: '#000000',
+                  color: '#ffffff',
+                  border: `1px solid ${primaryColor}`,
+                  padding: '10px 24px',
+                  borderRadius: 6,
+                  fontFamily: "'Shippori Mincho', serif",
+                  fontSize: 14,
+                  cursor: 'pointer',
+                }}
+              >
+                詳細を見る
+              </button>
+            </div>
+            <div className="component-code">{`<button className="btn-primary">詳細を見る</button>`}</div>
+          </div>
+
+          <div className="component-card">
+            <div className="component-label">Button / Secondary (Silver)</div>
+            <div className="component-render">
+              <button
+                style={{
+                  background: primaryColor,
+                  color: '#000000',
+                  border: 'none',
+                  padding: '10px 24px',
+                  borderRadius: 6,
+                  fontFamily: "'Shippori Mincho', serif",
+                  fontSize: 14,
+                  cursor: 'pointer',
+                }}
+              >
+                資料請求
+              </button>
+            </div>
+            <div className="component-code">{`<button className="btn-silver">資料請求</button>`}</div>
+          </div>
+
+          <div className="component-card">
+            <div className="component-label">Badge</div>
+            <div className="component-render" style={{ display: 'flex', gap: 12 }}>
+              <span
+                style={{
+                  background: '#f3f4f6',
+                  color: '#444444',
+                  padding: '4px 12px',
+                  borderRadius: 999,
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                情報革命
+              </span>
+              <span
+                style={{
+                  background: primaryColor,
+                  color: '#000000',
+                  padding: '4px 12px',
+                  borderRadius: 999,
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                未来志向
+              </span>
+              <span
+                style={{
+                  background: '#000000',
+                  color: '#ffffff',
+                  padding: '4px 12px',
+                  borderRadius: 999,
+                  fontSize: 12,
+                  fontWeight: 600,
+                }}
+              >
+                誠実さ
+              </span>
+            </div>
+            <div className="component-code">{`<span className="badge">情報革命</span>`}</div>
+          </div>
+
+          <div className="component-card">
+            <div className="component-label">Card</div>
             <div className="component-render">
               <div
                 style={{
-                  background: '#ffffff',
                   border: '1px solid #e5e7eb',
                   borderRadius: 12,
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
                   padding: 24,
-                  maxWidth: 320,
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+                  maxWidth: 360,
                 }}
               >
-                <div style={{ fontWeight: 700, color: '#111827', marginBottom: 8 }}>
-                  カードタイトル
-                </div>
-                <div style={{ fontSize: 14, color: '#6b7280' }}>
-                  カードの説明文がここに入ります。
-                </div>
+                <h3
+                  style={{
+                    fontFamily: "'Shippori Mincho', serif",
+                    fontSize: 18,
+                    marginBottom: 8,
+                    color: '#111827',
+                  }}
+                >
+                  海援隊の精神
+                </h3>
+                <p style={{ fontSize: 14, color: '#6b7280', lineHeight: 1.8 }}>
+                  伝統と革新が融合した、時代を超えて輝くリサーチの姿勢を表現します。
+                </p>
               </div>
             </div>
-            <div className="component-code">
-              {`<div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: 24 }}>...</div>`}
-            </div>
+            <div className="component-code">{`<div className="card">...</div>`}</div>
           </div>
-        )}
 
-        {tab === 'badges' && (
           <div className="component-card">
-            <div className="component-label">Badge / Status</div>
+            <div className="component-label">Divider (Equal Mark Motif)</div>
             <div className="component-render">
-              <div style={{ display: 'flex', gap: 12 }}>
-                <span
-                  style={{
-                    background: '#f0f7ff',
-                    color: primaryColor,
-                    padding: '4px 12px',
-                    borderRadius: 999,
-                    fontSize: 12,
-                    fontWeight: 500,
-                  }}
-                >
-                  信頼感
-                </span>
-                <span
-                  style={{
-                    background: '#fff7ed',
-                    color: accentColor,
-                    padding: '4px 12px',
-                    borderRadius: 999,
-                    fontSize: 12,
-                    fontWeight: 500,
-                  }}
-                >
-                  先進的
-                </span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: 160 }}>
+                <div style={{ height: 4, background: '#000000', borderRadius: 2 }} />
+                <div style={{ height: 4, background: '#444444', borderRadius: 2 }} />
               </div>
             </div>
-            <div className="component-code">
-              {`<span style={{ background: '#f0f7ff', color: '${primaryColor}', borderRadius: 999, padding: '4px 12px' }}>信頼感</span>`}
-            </div>
+            <div className="component-code">{`<div className="equal-divider" />`}</div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
