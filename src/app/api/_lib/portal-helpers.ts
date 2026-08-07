@@ -542,6 +542,7 @@ export async function readAndFixDifyFiles(
   // 常にテンプレートから読み込む（Dify生成ファイルではなく）
   const templatePaths = [
     `src/app/${TPL_SLUG}/globals.css`,
+    `src/app/${TPL_SLUG}/layout.tsx`,
     `src/app/${TPL_SLUG}/page.tsx`,
     `src/app/${TPL_SLUG}/guidelines/page.tsx`,
     `src/app/${TPL_SLUG}/components/page.tsx`,
