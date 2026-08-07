@@ -306,7 +306,7 @@ export function NewClientButton() {
       <div
         onClick={() => { reset(); setOpen(true); }}
         style={{
-          background: '#f9fafb', border: '2px dashed #d1d5db', borderRadius: '12px',
+          background: '#f9fafb', border: '2px dashed #d1d5db', borderRadius: '24px',
           padding: '28px', cursor: 'pointer', display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center', gap: '12px', minHeight: '140px',
           transition: 'border-color 0.2s, background 0.2s',
