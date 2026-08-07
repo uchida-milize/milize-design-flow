@@ -48,14 +48,20 @@ interface HexEntry { hex: string; count: number }
 function parseHexColorsString(raw: string): HexEntry[] {
   if (!raw) return [];
   const results: HexEntry[] = [];
-  // Matches: #AABB00(12,background-color,color) or #AABB00(12,...) with various separators
-  const re = /(#[0-9A-Fa-f]{6,8})\((\d+)[,)]/g;
-  let m;
-  while ((m = re.exec(raw)) !== null) {
-    results.push({
-      hex: m[1].toUpperCase(),
-      count: parseInt(m[2], 10),
-    });
+
+  // Format A (current extract-css output):
+  //   "#004A99 | color, background-color | 出現12回 | [external-css]"
+  const rePipe = /(#[0-9A-Fa-f]{6,8})\s*\|[^|]*\|\s*出現(\d+)回/g;
+  let m: RegExpExecArray | null;
+  while ((m = rePipe.exec(raw)) !== null) {
+    results.push({ hex: m[1].toUpperCase(), count: parseInt(m[2], 10) });
+  }
+  if (results.length > 0) return results;
+
+  // Format B (legacy): "#AABB00(12,...)"
+  const reParen = /(#[0-9A-Fa-f]{6,8})\((\d+)[,)]/g;
+  while ((m = reParen.exec(raw)) !== null) {
+    results.push({ hex: m[1].toUpperCase(), count: parseInt(m[2], 10) });
   }
   return results;
 }
