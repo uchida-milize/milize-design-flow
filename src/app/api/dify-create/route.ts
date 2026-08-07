@@ -139,7 +139,10 @@ export async function POST(req: NextRequest) {
                   if (Array.isArray(knownKey) && knownKey.length > 0) {
                     foundUrls = knownKey.map((u: unknown) => typeof u === 'string' ? u : String(u)).filter(u => u.startsWith('http'));
                   } else if (typeof knownKey === 'string' && knownKey.includes('http')) {
-                    foundUrls = knownKey.split('\n').map(u => u.trim()).filter(u => u.startsWith('http'));
+                    // Regex extract URLs — handles "title, url" pairs where lines don't start with http
+                    foundUrls = Array.from(knownKey.matchAll(/https?:\/\/[^\s,\n"'\]}<>(]+/g))
+                      .map(m => m[0].replace(/[.,;:!?]+$/, ''))
+                      .filter(u => u.startsWith('http'));
                   }
 
                   // 未発見なら全フィールドを検索
@@ -148,12 +151,18 @@ export async function POST(req: NextRequest) {
                       if (Array.isArray(v) && v.length > 0 && typeof v[0] === 'string' && v[0].startsWith('http')) {
                         foundUrls = v.filter((u: unknown) => typeof u === 'string' && u.startsWith('http'));
                         break;
-                      } else if (typeof v === 'string' && v.includes('http://') || typeof v === 'string' && v.includes('https://')) {
-                        const lines = v.split('\n').map(u => u.trim()).filter(u => u.startsWith('http'));
-                        if (lines.length > 0) { foundUrls = lines; break; }
+                      } else if (typeof v === 'string' && (v.includes('http://') || v.includes('https://'))) {
+                        // Regex extract URLs — handles "title, url" pairs (LLM output format)
+                        const urlMatches = Array.from(v.matchAll(/https?:\/\/[^\s,\n"'\]}<>(]+/g))
+                          .map(m => m[0].replace(/[.,;:!?]+$/, ''))
+                          .filter(u => u.startsWith('http'));
+                        if (urlMatches.length > 0) { foundUrls = urlMatches; break; }
                       }
                     }
                   }
+
+                  // Deduplicate
+                  if (foundUrls.length > 0) foundUrls = [...new Set(foundUrls)];
 
                   if (foundUrls.length > 0) {
                     capturedUrls = foundUrls;
