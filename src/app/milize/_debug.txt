@@ -1,6 +1,9 @@
-2026-08-07T05:39:18.462Z  START company="株式会社MILIZE" slug="milize" appBase="https://milize-design-flow.vercel.app"
-2026-08-07T05:39:18.465Z  Parsed 0 URLs
-2026-08-07T05:39:18.465Z  Color extraction URLs: 0
-2026-08-07T05:39:18.465Z  Aggregated 0 unique hex colors
-2026-08-07T05:39:18.465Z  primary=#004A99 brandColors=[#004A99]
-2026-08-07T05:39:18.656Z  readAndFixDifyFiles: 4 files
+2026-08-07T05:41:14.713Z  START company="株式会社MILIZE" slug="milize" appBase="https://milize-design-flow.vercel.app"
+2026-08-07T05:41:14.717Z  Parsed 1 URLs
+2026-08-07T05:41:14.717Z  Color extraction URLs: 1
+2026-08-07T05:41:14.718Z  extract-css: https://milize.co.jp/about categories=["カラー","ロゴ・CI","フォント","フォーム"]
+2026-08-07T05:41:18.622Z  hex_colors[milize.co.jp]: "#0084FF | --tw-gradient-from, --tw-gradient-stops, background, background-image | 出現10回 | [external-css]
+#79BEFF | --tw-"
+2026-08-07T05:41:18.622Z  Aggregated 0 unique hex colors
+2026-08-07T05:41:18.622Z  primary=#004A99 brandColors=[#004A99]
+2026-08-07T05:41:18.768Z  readAndFixDifyFiles: 4 files
