@@ -21,7 +21,7 @@ export function ClientPortalHeader({
   clientName,
   basePath,
   active,
-  primaryColor = '#2563eb',
+    primaryColor = 'var(--primary-color)',
 }: ClientPortalHeaderProps) {
   return (
     <header style={{ background: '#ffffff', borderBottom: '1px solid #e5e7eb' }}>
