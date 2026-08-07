@@ -719,6 +719,14 @@ export async function readAndFixDifyFiles(
         );
       }
 
+      // Remove SAMPLE banner from template (it's a placeholder, not for generated portals)
+      if (content.includes('{/* SAMPLEバナー */}')) {
+        content = content.replace(
+          /\s*\{\s*\/\*\s*SAMPLEバナー\s*\*\/\s*\}[\s\S]*?<\/div>/,
+          '',
+        );
+      }
+
       return { path, content };
     }),
   );
