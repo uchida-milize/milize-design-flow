@@ -10,14 +10,14 @@ export const TPL_NAME = 'Milize Asset Portal';
 export function ghHeaders(token: string) {
   return {
     Authorization: `Bearer ${token}`,
-    Accept: 'application/vnd.github+json',
+    Accept: 'application/vnd.github+json'
     'X-GitHub-Api-Version': '2022-11-28',
     'Content-Type': 'application/json',
   };
 }
 
 export async function getFileContent(path: string, token: string): Promise<{ content: string; sha: string } | null> {
-  const h = ghHeaders(token);
+  const h = ghHeaders(token)
   const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
   if (!r.ok) return null;
   const data: { content: string; sha: string } = await r.json();
@@ -562,12 +562,8 @@ export async function readAndFixDifyFiles(
         .split(TPL_SLUG).join(slug)
         .split(TPL_NAME).join(companyName);
 
-      // page.tsx: designColorsが指定された場合、primaryColorとcolorRatioを更新
+      // page.tsx: designColorsが指定された場合、colorRatioを更新（primaryColorはCSS変数を使用するため不要）
       if (path.endsWith(`${slug}/page.tsx`) && designColors) {
-        content = content.replace(
-          /const primaryColor: string = '[^']+';/,
-          `const primaryColor: string = '${designColors.primary}';`,
-        );
         if (designColors.brandColors && designColors.brandColors.length > 0) {
           const colorRatioLines = designColors.brandColors
             .map(c => `  { hex: '${c.hex}', name: '${c.hex}', percent: ${c.ratio} }`)
@@ -633,13 +629,7 @@ export async function readAndFixDifyFiles(
       if (path.includes('/guidelines/page.tsx') || path.includes('/components/page.tsx')) {
         // SAMPLEバナーを丸ごと削除
         content = content.replace(/\s*\{\s*\/\*\s*SAMPLEバナー\s*\*\/\s*\}[\s\S]*?<\/div>/, '');
-        // primaryColor を更新
-        if (designColors) {
-          content = content.replace(
-            /const primaryColor: string = '[^']+';/,
-            `const primaryColor: string = '${designColors.primary}';`,
-          );
-        }
+        // primaryColor はCSS変数 var(--primary-color) を使用するため置換不要
       }
       // guidelines: colors 配列をブランドカラーで置換
       if (path.includes('/guidelines/page.tsx') && designColors && designColors.brandColors.length > 0) {
@@ -691,7 +681,7 @@ export async function readAndFixDifyFiles(
             }
             return null;
           };
-          primary   = extract(['--primary(?!-color)[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
+          primary   = extract(['--primary-color', '--primary[\\w-]*', '--color-primary', '--main-color', '--brand-color']) ?? '#004A99';
           secondary = extract(['--secondary(?!-color)[\\w-]*', '--color-secondary', '--sub-color']) ?? '#333333';
           accent    = extract(['--accent(?!-color)[\\w-]*', '--color-accent']) ?? '#F5A623';
           textColor = extract(['--text-main', '--text-color', '--color-text', '--text-primary']) ?? '#111827';
