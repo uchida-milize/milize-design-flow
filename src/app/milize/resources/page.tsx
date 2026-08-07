@@ -174,7 +174,7 @@ export default function ResourcesPage() {
                 </>
               )}
             </div>
-            <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden' }}>
+            <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 3, overflow: 'hidden' }}>
               <div style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb', padding: '10px 20px' }}>
                 <span style={{ fontSize: 12, color: '#9ca3af', fontFamily: 'monospace' }}>{active}</span>
               </div>
