@@ -1,3 +1,26 @@
 {
-  "selected_urls": "https://group.softbank/philosophy/identity||カラー,ロゴ・CI,フォント\nhttps://group.softbank/||カラー,ロゴ・CI,フォント,フォーム\nhttps://group.softbank/ir||カラー,ロゴ・CI,フォント,フォーム"
+  "selected_urls": "https://group.softbank/philosophy/identity||カラー,ロゴ・CI,フォント\nhttps://group.softbank/||カラー,ロゴ・CI,フォント,フォーム\nhttps://group.softbank/ir||カラー,ロゴ・CI,フォント,フォーム",
+  "css_info": {
+    "css_variables": {},
+    "fonts": [
+      "swiper-icons"
+    ],
+    "button_styles": [],
+    "card_styles": [],
+    "logo_urls": [
+      "https://group.softbank/sites/default/files/assets/img/logo-group.png",
+      "https://group.softbank/themes/custom/sbg/favicon.ico",
+      "https://group.softbank/media/Project/sbg/sbg/assets/img/philosophy/identity/logo_svg.svg"
+    ],
+    "source_css_urls": [
+      "https://group.softbank/_next/static/css/a097c944d610f8e9.css",
+      "https://group.softbank/_next/static/css/bb73e01188fddf05.css",
+      "https://group.softbank/media/Project/sbg/sbg/asset_injector/css/contents_body_fix.css"
+    ],
+    "extracted_at": "2026-08-07T01:42:42.028Z",
+    "source_urls": [
+      "https://group.softbank/philosophy/identity"
+    ]
+  },
+  "css_summary": "【使用フォント】\n  swiper-icons\n\n【ロゴ・ビジュアル素材】\n  https://group.softbank/sites/default/files/assets/img/logo-group.png\n  https://group.softbank/themes/custom/sbg/favicon.ico\n  https://group.softbank/media/Project/sbg/sbg/assets/img/philosophy/identity/logo_svg.svg\n\n【取得CSSファイル】\n  https://group.softbank/_next/static/css/a097c944d610f8e9.css\n  https://group.softbank/_next/static/css/bb73e01188fddf05.css\n  https://group.softbank/media/Project/sbg/sbg/asset_injector/css/contents_body_fix.css"
 }
