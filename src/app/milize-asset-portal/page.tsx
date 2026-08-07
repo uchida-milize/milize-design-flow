@@ -2,7 +2,7 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
 const clientName = 'Milize Asset Portal';
 const basePath = '/milize-asset-portal';
-const primaryColor: string = '#C0C0C0';
+const primaryColor = 'var(--primary-color)';
 
 const colorRatio = [
   { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
