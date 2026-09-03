@@ -2,18 +2,29 @@
   "selected_urls": "<think>\n\n</think>\n\nhttps://www.videor.co.jp/\nhttps://www.videor.co.jp/company/\nhttps://www.videor.co.jp/company/philosophy.html\nhttps://www.videor.co.jp/company/profile.html\nhttps://www.videor.co.jp/contact/\nhttps://www.videor.co.jp/press/\nhttps://www.videor.co.jp/service/\nhttps://www.videor.co.jp/data/\nhttps://ja.wikipedia.org/wiki/ビデオリサーチ",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "",
+    "hex_colors": "#BF3C2C | color | 出現2回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#AAAAAA | border-top | 出現1回 | [inline-style]",
     "rgb_colors": [],
     "fonts": [],
     "button_styles": [],
     "card_styles": [],
     "border_radii": [],
-    "logo_urls": [],
-    "source_css_urls": [],
-    "extracted_at": "2026-09-03T02:23:41.464Z",
+    "logo_urls": [
+      "https://upload.wikimedia.org/wikipedia/commons/b/b7/Logo_vr_500%C3%97500.png?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
+      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Logo_vr_500%C3%97500.png/250px-Logo_vr_500%C3%97500.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+    ],
+    "source_css_urls": [
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+    ],
+    "extracted_at": "2026-09-03T02:23:46.498Z",
     "source_urls": [
-      "https://www.videor.co.jp/data/"
+      "https://ja.wikipedia.org/wiki/ビデオリサーチ"
     ]
   },
-  "css_summary": "（データなし）"
+  "css_summary": "【抽出カラー（頻度順）】\n  #BF3C2C  color  出現2回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n  #AAAAAA  border-top  出現1回  [inline-style]\n\n【ロゴ・ビジュアル素材】\n  https://upload.wikimedia.org/wikipedia/commons/b/b7/Logo_vr_500%C3%97500.png?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Logo_vr_500%C3%97500.png/250px-Logo_vr_500%C3%97500.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
 }
