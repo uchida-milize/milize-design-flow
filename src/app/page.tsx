@@ -6,7 +6,6 @@ const EXCLUDED_DIRS = new Set([
   'prototype',
   'screens',
   'client-template',  // 汎用テンプレートディレクトリ
-  'milize-asset-portal',  // ポータルテンプレート（一覧非表示）
   'hitachi',
   'sony_corp',
   'sharp-finance-corp',
@@ -147,32 +146,10 @@ async function getClients() {
           ]);
           if (pageRes.ok) {
             const pageSrc = await pageRes.text();
-            // Extract client name
-            const nameMatch = pageSrc.match(/const clientName\s*(?::\s*string)?\s*=\s*['"`]([^'"`]+)['"`]/);
-            if (nameMatch) name = nameMatch[1];
-            // Read colorRatios from home page — exact same data the home page displays
-            // Supports both { pct: N } (legacy) and { ratio: N } (newer) formats
-            const ratioBlock = pageSrc.match(/colorRatios?\s*=\s*\[[\s\S]*?\]/);
-            if (ratioBlock) {
-              const entryRe = /hex:\s*['"]([^'"]+)['"][\s\S]*?(?:pct|ratio|percent):\s*(\d+)/g;
-              const extracted: Array<{ hex: string; ratio: number }> = [];
-              let em: RegExpExecArray | null;
-              while ((em = entryRe.exec(ratioBlock[0])) !== null) {
-                extracted.push({ hex: em[1], ratio: parseInt(em[2]) });
-              }
-              if (extracted.length > 0) {
-                const total = extracted.reduce((s, c) => s + c.ratio, 0);
-                if (total > 0 && total !== 100) {
-                  extracted.forEach(c => { c.ratio = Math.round(c.ratio * 100 / total); });
-                  const diff = 100 - extracted.reduce((s, c) => s + c.ratio, 0);
-                  if (diff !== 0) extracted[0].ratio += diff;
-                }
-                colors = extracted;
-              }
-            }
+            const m = pageSrc.match(/const clientName\s*(?::\s*string)?\s*=\s*['"`]([^'"`]+)['"`]/);
+            if (m) name = m[1];
           }
-          if (cssRes.ok && colors[0]?.hex === '#004A99' && colors.length === 1) {
-            // Fall back to globals.css only when colorRatios was not found
+          if (cssRes.ok) {
             colors = extractBrandColors(await cssRes.text());
           }
           if (guideRes.ok) {
@@ -199,7 +176,7 @@ export default async function ClientsIndex() {
   return (
     <div style={{ minHeight: '100vh', background: '#f7f9fc' }}>
       <header style={{ background: '#ffffff', borderBottom: '1px solid #e5e7eb' }}>
-        <div className="mx-auto flex items-center" style={{ maxWidth: 1120, padding: '16px 24px', gap: 12 }}>
+        <div className="flex items-center" style={{ padding: '16px 24px', gap: 12 }}>
           <span className="font-bold text-sm" style={{ color: '#111827', letterSpacing: '-0.01em' }}>
             MILIZE Asset Portal
           </span>
@@ -210,8 +187,13 @@ export default async function ClientsIndex() {
         </div>
       </header>
 
+      <div style={{ background: '#fff3f3', borderBottom: '1px solid #fecaca', padding: '10px 24px', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: 14, color: '#b91c1c' }}>⚠</span>
+        <span style={{ fontSize: 13, color: '#b91c1c', fontWeight: 500 }}>現在このサービスは開発を一時停止しています。</span>
+      </div>
+
       <div style={{ background: '#f7f9fc' }}>
-        <div className="mx-auto" style={{ maxWidth: 1120, padding: '64px 24px 48px' }}>
+        <div style={{ padding: '64px 24px 48px' }}>
           <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Client Production Portal</p>
           <h1 className="font-bold mb-4" style={{ fontSize: 36, lineHeight: 1.3, color: '#111827' }}>
             {`クライアント別`}<br />
@@ -223,7 +205,7 @@ export default async function ClientsIndex() {
         </div>
       </div>
 
-      <div className="mx-auto" style={{ maxWidth: 1120, padding: '0 24px 96px' }}>
+      <div style={{ padding: '0 24px 96px' }}>
         <ClientCardGrid clients={clients} />
       </div>
     </div>
