@@ -16,6 +16,7 @@ const EXCLUDED_DIRS = new Set([
   'panasonic',
   'sharp',
   'ge',
+  'milize',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
