@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const MODAL_KEYFRAMES = `
@@ -21,7 +21,6 @@ const PURPOSES = [
   { key: 'color',     label: 'カラー' },
   { key: 'ci',        label: 'ロゴ・CI' },
   { key: 'font',      label: 'フォント' },
-  { key: 'form',      label: 'フォーム' },
 ] as const;
 type PurposeKey = typeof PURPOSES[number]['key'];
 
@@ -36,6 +35,15 @@ interface UrlItem {
 function isHeavilyEncoded(url: string): boolean {
   const encoded = (url.match(/%[0-9A-Fa-f]{2}/g) ?? []).length;
   return encoded > 6;
+}
+
+/** URLからドメイン（www.除去）を取り出す。失敗時はnull */
+function extractDomain(url: string): string | null {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return null;
+  }
 }
 
 /** URLリストを初期化（エンコードURL除外 + デフォルト目的を設定） */
@@ -53,7 +61,6 @@ function initUrlItems(urls: string[]): { items: UrlItem[]; excluded: number } {
         color: !isWiki,
         ci:    true,
         font:  !isWiki,
-        form:  !isWiki,
       },
     });
   }
@@ -73,7 +80,23 @@ export function NewClientButton() {
   const [excludedCount, setExcludedCount] = useState(0);
   const [urlSelectionDone, setUrlSelectionDone] = useState(false);
   const [presetUrls, setPresetUrls] = useState(['', '', '']);
+  const [primaryDomainOverride, setPrimaryDomainOverride] = useState<string | null>(null);
   const router = useRouter();
+
+  // 候補URL群から「大元のドメイン」候補を頻度順に抽出（お問い合わせ/ニュースリリース検索の起点に使う）
+  const domainCandidates = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const item of urlItems) {
+      if (item.url.includes('wikipedia.org')) continue;
+      const domain = extractDomain(item.url);
+      if (!domain) continue;
+      counts.set(domain, (counts.get(domain) ?? 0) + 1);
+    }
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([domain]) => domain);
+  }, [urlItems]);
+  const primaryDomain = primaryDomainOverride ?? domainCandidates[0] ?? '';
 
   function reset() {
     setForm({ company_name: '', client_slug: '' });
@@ -87,6 +110,7 @@ export function NewClientButton() {
     setExcludedCount(0);
     setUrlSelectionDone(false);
     setPresetUrls(['', '', '']);
+    setPrimaryDomainOverride(null);
   }
 
   /** 第1フェーズ: /api/dify-create を実行し、interrupted で止まったら urls ステップへ */
@@ -126,7 +150,7 @@ export function NewClientButton() {
           const wikiItem: UrlItem = {
             url: wikiUrl,
             checked: true,
-            purposes: { color: false, ci: true, font: false, form: false },
+            purposes: { color: false, ci: true, font: false },
             isPreset: true,
           };
           // ユーザー指定URL（重複排除してDify URLリストの先頭に追加）
@@ -134,7 +158,7 @@ export function NewClientButton() {
           const presetItems: UrlItem[] = presets.map(url => ({
             url,
             checked: true,
-            purposes: { color: true, ci: true, font: true, form: true },
+            purposes: { color: true, ci: true, font: true },
             isPreset: true,
           }));
           // DifyのURLからWikipedia・ユーザー指定を除外（重複排除）
@@ -181,6 +205,7 @@ export function NewClientButton() {
           workflow_run_id: workflowRunId,
           form_token: formToken,
           selected_urls: selected,
+          primary_domain: primaryDomain,
           company_name: form.company_name,
           client_slug: form.client_slug,
         }),
@@ -404,6 +429,35 @@ export function NewClientButton() {
                 <p style={{ fontSize: '14px', color: '#777', marginBottom: '20px' }}>
                   {'Difyがリサーチ対象として収集したURLです。使用するURLを選んで生成を続行してください。'}
                 </p>
+
+                {domainCandidates.length > 0 && (
+                  <div style={{ marginBottom: '20px', padding: '12px 14px', background: '#f9fafb', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
+                    <div style={{ fontSize: '11px', color: '#6b7280', marginBottom: '8px' }}>
+                      {'大元のドメイン（お問い合わせ・ニュースリリースページの自動検索に使用）：'}
+                    </div>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                      {domainCandidates.map(domain => {
+                        const active = domain === primaryDomain;
+                        return (
+                          <button
+                            key={domain}
+                            type="button"
+                            onClick={() => setPrimaryDomainOverride(domain)}
+                            style={{
+                              fontSize: '12px', padding: '4px 12px', borderRadius: 999,
+                              border: `1px solid ${active ? '#111' : '#e5e7eb'}`,
+                              background: active ? '#111' : '#fff',
+                              color: active ? '#fff' : '#6b7280',
+                              cursor: 'pointer', fontWeight: active ? 600 : 400,
+                            }}
+                          >
+                            {domain}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
                 {urlItems.length === 0 ? (
                   <div style={{ color: '#9ca3af', fontSize: '14px', marginBottom: '24px', padding: '16px', background: '#f9fafb', borderRadius: '8px' }}>

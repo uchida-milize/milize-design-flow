@@ -11,7 +11,7 @@ import {
 export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
-  const { task_id, workflow_run_id, form_token, selected_urls, company_name, client_slug } =
+  const { task_id, workflow_run_id, form_token, selected_urls, primary_domain, company_name, client_slug } =
     await req.json();
 
   if (!task_id) {
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
         // 正しいエンドポイント: app.dify.milize.com/api/form/human_input/{form_token}
         // ペイロード: { inputs: { selected_urls }, action: "action_1" }
         const resumeBody = JSON.stringify({
-          inputs: { selected_urls: urlsStr },
+          inputs: { selected_urls: urlsStr, primary_domain: String(primary_domain ?? '') },
           action: 'action_1',
         });
 
