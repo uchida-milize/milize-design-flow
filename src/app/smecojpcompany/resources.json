@@ -2,38 +2,193 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/株式会社ソニー・ミュージックエンタテインメント||ロゴ・CI\nhttps://www.sme.co.jp/company/||カラー,ロゴ・CI,フォント,フォーム\nhttps://www.sme.co.jp/||カラー,ロゴ・CI,フォント,フォーム",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#002B69 | color, background | 出現56回 | [inline-style]\n#002BB8 | color | 出現36回 | [inline-style]\n#FFDB01 | background | 出現21回 | [inline-style]\n#778A7F | background-color | 出現20回 | [inline-style]\n#1D1D1D | background | 出現20回 | [inline-style]\n#EEEEEE | background-color | 出現14回 | [inline-style]\n#EFEFEF | background-color | 出現6回 | [inline-style]\n#E1E1E1 | background-color | 出現6回 | [inline-style]\n#000392 | background | 出現6回 | [inline-style]\n#494949 | background-color | 出現4回 | [inline-style]\n#DE0000 | background | 出現4回 | [inline-style]\n#A2A9B1 | border-bottom, border, border-left | 出現3回 | [style-tag]\n#D0111A | background | 出現3回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#B32424 | border-left | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#3366CC | border-left | 出現1回 | [style-tag]\n#FBFBFB | background-color | 出現1回 | [style-tag]\n#FEE7E6 | background-color | 出現1回 | [style-tag]\n#F28500 | border-left | 出現1回 | [style-tag]\n#FFCC33 | border-left | 出現1回 | [style-tag]\n#9932CC | border-left | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#AAAAAA | border | 出現1回 | [style-tag]\n#F9F9F9 | background-color | 出現1回 | [style-tag]",
+    "hex_colors": "#E5002D | color, background-color, border, border-top, border-left | 出現50回 | [external-css]\n#333333 | color, border, background-color, border-color | 出現49回 | [external-css]\n#DBDBDB | border-bottom, border-top, background-color, border, border-color | 出現42回 | [external-css]\n#CCCCCC | border-top, border-left, border-bottom, border-right, background-color | 出現25回 | [external-css]\n#FFFDED | background-color, background | 出現14回 | [external-css]\n#787D80 | border-right, border-top, background-color, border-bottom, fill | 出現10回 | [external-css]\n#9CA0A2 | border-top, border-right, border-left | 出現8回 | [external-css]\n#484848 | background-color, border-right, border-left, border-top | 出現6回 | [external-css]\n#98A1A6 | border, border-top, border-left | 出現5回 | [external-css]\n#81888C | background-color, background, --background | 出現5回 | [external-css]\n#72A3D4 | background, --background, --fill | 出現5回 | [external-css]\n#6CAD8B | background, --background, --fill | 出現5回 | [external-css]\n#F59176 | background, --background, --fill | 出現5回 | [external-css]\n#404040 | border-top, background-color | 出現3回 | [external-css]\n#F5F5F5 | background-color | 出現3回 | [external-css]\n#999D9F | border-top, border-left | 出現2回 | [external-css]\n#346F94 | color | 出現1回 | [external-css]\n#778A7F | background-color | 出現1回 | [external-css]",
     "rgb_colors": [],
-    "fonts": [],
-    "button_styles": [],
-    "card_styles": [],
-    "border_radii": [],
+    "fonts": [
+      "mfw-a1minchostd-bold",
+      "mfw-hiraginosansgb-w3",
+      "mfw-pshueigoginstd-m",
+      "mfw-pshueigoginstd-l",
+      "mfw-pshueigoginstd-b",
+      "inherit",
+      "MFW-PShueiGoGinStd-L",
+      "MFW-PShueiGoGinStd-B",
+      "MFW-PShueiGoGinStd-M",
+      "Raleway",
+      "Roboto"
+    ],
+    "button_styles": [
+      {
+        "selector": "button,input,optgroup,select,textarea",
+        "properties": {
+          "font-family": "inherit",
+          "font-size": "100%"
+        }
+      },
+      {
+        "selector": "[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner",
+        "properties": {
+          "border-style": "none"
+        }
+      },
+      {
+        "selector": ".m-btn",
+        "properties": {
+          "margin": "30px 0 20px"
+        }
+      },
+      {
+        "selector": ".m-btn .btn__inner",
+        "properties": {
+          "padding": "14px 45px"
+        }
+      },
+      {
+        "selector": ".m-btn .btn__inner:after",
+        "properties": {
+          "display": "block",
+          "margin": "auto",
+          "border-top": "1px solid #98a1a6",
+          "border-left": "1px solid #98a1a6"
+        }
+      },
+      {
+        "selector": ".m-btn .btn__inner[href$=\".pdf\"]>.m-blankIcon,.m-btn .btn__inner[href$=\".pdf\"]>.m-pdfIcon,.m-btn .btn__inner[target=_blank]>.m-blankIcon,.m-btn .btn__inner[target=_blank]>.m-pdfIcon",
+        "properties": {
+          "margin": "auto"
+        }
+      },
+      {
+        "selector": ".m-btn .btn__notes",
+        "properties": {
+          "margin": "0 0 15px"
+        }
+      },
+      {
+        "selector": ".m-btn.is-emphasis .btn__inner",
+        "properties": {
+          "color": "#fff",
+          "background-color": "#e5002d",
+          "border": "1px solid #e5002d"
+        }
+      },
+      {
+        "selector": ".m-btn.is-emphasis .btn__inner:after",
+        "properties": {
+          "border-top": "1px solid #fff"
+        }
+      },
+      {
+        "selector": ".m-btn.is-emphasis .btn__notes",
+        "properties": {
+          "margin": "0 0 15px"
+        }
+      },
+      {
+        "selector": ".m-btnList .btnList__list",
+        "properties": {
+          "margin": "0",
+          "display": "flex",
+          "flex-wrap": "wrap"
+        }
+      },
+      {
+        "selector": ".m-btnList .btnList__item:nth-of-type(n+2)",
+        "properties": {
+          "margin-top": "20px"
+        }
+      },
+      {
+        "selector": ".m-btnList .btnList__link",
+        "properties": {
+          "padding": "15px 10px"
+        }
+      },
+      {
+        "selector": ".m-btnList .btnList__hdg",
+        "properties": {
+          "margin-bottom": "20px"
+        }
+      },
+      {
+        "selector": ".js-faqDisclosure .faqDisclosure__question button",
+        "properties": {
+          "padding": "0",
+          "display": "flex",
+          "background-color": "#fff",
+          "border": "none"
+        }
+      },
+      {
+        "selector": ".js-faqDisclosure .faqDisclosure__question button:after,.js-faqDisclosure .faqDisclosure__question button:before",
+        "properties": {
+          "display": "block",
+          "background-color": "#787d80"
+        }
+      },
+      {
+        "selector": "body.sustainability._top .m-btn .btn__inner",
+        "properties": {
+          "padding": "12px 60px 12px 40px",
+          "border-radius": "4px"
+        }
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".m-panelLink .panelLink__item .panelLink__link",
+        "properties": {
+          "flex-direction": "row-reverse"
+        }
+      },
+      {
+        "selector": ".m-panelLink .panelLink__item .panelLink__link:focus,.m-panelLink .panelLink__item .panelLink__link:hover",
+        "properties": {
+          "color": "#e5002d"
+        }
+      },
+      {
+        "selector": ".m-panelLink .panelLink__text",
+        "properties": {
+          "margin-left": "20px",
+          "padding-top": "0"
+        }
+      },
+      {
+        "selector": ".m-panelLink .panelLink__text:after",
+        "properties": {
+          "display": "block",
+          "background-color": "#e5002d"
+        }
+      }
+    ],
+    "border_radii": [
+      "50%",
+      "4px",
+      "20px",
+      "0 15px 15px 0",
+      "20px 0 0 20px",
+      "0 20px 20px 0",
+      "15px 0 0 15px",
+      "26px",
+      "25px",
+      "15px"
+    ],
     "logo_urls": [
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/SME_Rokubancho_Building.jpg/1280px-SME_Rokubancho_Building.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
-      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
-      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
-      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
-      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sony_Music_%28Japan%29_logo.svg/120px-Sony_Music_%28Japan%29_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Sony_logo_%28white%29.svg/120px-Sony_logo_%28white%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/20px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sony_Music_Entertainment_Logo_2023.svg/40px-Sony_Music_Entertainment_Logo_2023.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Sony_Interactive_Entertainment_logo_%282016%29.svg/60px-Sony_Interactive_Entertainment_logo_%282016%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/PlayStation_logo_and_wordmark.svg/120px-PlayStation_logo_and_wordmark.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Recording_Industry_Association_of_Japan_logo.svg/120px-Recording_Industry_Association_of_Japan_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Japan_Video_Software_Association_Logo.png/120px-Japan_Video_Software_Association_Logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+      "https://www.sme.co.jp/common/images/og.png",
+      "https://www.sme.co.jp/common/images/favicon/favicon-32x32.png",
+      "https://www.sme.co.jp/common/images/company-logo.svg",
+      "https://www.sme.co.jp/common/images/sony-music-logo.svg",
+      "https://www.sme.co.jp/common/images/cocotame-logo.svg"
     ],
     "source_css_urls": [
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://morisawafonts.net/c/01K44VHE8EAEZ0ZFAEBX32RX8W/mf.css",
+      "https://www.sme.co.jp/common/css/module.css"
     ],
-    "extracted_at": "2026-09-08T09:17:07.459Z",
+    "extracted_at": "2026-09-08T09:17:14.948Z",
     "source_urls": [
-      "https://ja.wikipedia.org/wiki/株式会社ソニー・ミュージックエンタテインメント"
+      "https://www.sme.co.jp/company/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #002B69  color  出現56回  [inline-style]\n  #002BB8  color  出現36回  [inline-style]\n  #FFDB01  background  出現21回  [inline-style]\n  #778A7F  background-color  出現20回  [inline-style]\n  #1D1D1D  background  出現20回  [inline-style]\n  #EEEEEE  background-color  出現14回  [inline-style]\n  #EFEFEF  background-color  出現6回  [inline-style]\n  #E1E1E1  background-color  出現6回  [inline-style]\n  #000392  background  出現6回  [inline-style]\n  #494949  background-color  出現4回  [inline-style]\n  #DE0000  background  出現4回  [inline-style]\n  #A2A9B1  border-bottom  出現3回  [style-tag]\n  #D0111A  background  出現3回  [inline-style]\n  #EEEEFF  border  出現2回  [style-tag]\n  #B32424  border-left  出現2回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/SME_Rokubancho_Building.jpg/1280px-SME_Rokubancho_Building.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sony_Music_%28Japan%29_logo.svg/120px-Sony_Music_%28Japan%29_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Sony_logo_%28white%29.svg/120px-Sony_logo_%28white%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/20px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sony_Music_Entertainment_Logo_2023.svg/40px-Sony_Music_Entertainment_Logo_2023.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #E5002D  color  出現50回  [external-css]\n  #333333  color  出現49回  [external-css]\n  #DBDBDB  border-bottom  出現42回  [external-css]\n  #CCCCCC  border-top  出現25回  [external-css]\n  #FFFDED  background-color  出現14回  [external-css]\n  #787D80  border-right  出現10回  [external-css]\n  #9CA0A2  border-top  出現8回  [external-css]\n  #484848  background-color  出現6回  [external-css]\n  #98A1A6  border  出現5回  [external-css]\n  #81888C  background-color  出現5回  [external-css]\n  #72A3D4  background  出現5回  [external-css]\n  #6CAD8B  background  出現5回  [external-css]\n  #F59176  background  出現5回  [external-css]\n  #404040  border-top  出現3回  [external-css]\n  #F5F5F5  background-color  出現3回  [external-css]\n\n【使用フォント】\n  mfw-a1minchostd-bold\n  mfw-hiraginosansgb-w3\n  mfw-pshueigoginstd-m\n  mfw-pshueigoginstd-l\n  mfw-pshueigoginstd-b\n  inherit\n  MFW-PShueiGoGinStd-L\n  MFW-PShueiGoGinStd-B\n  MFW-PShueiGoGinStd-M\n  Raleway\n  Roboto\n\n【角丸パターン】\n  50%\n  4px\n  20px\n  0 15px 15px 0\n  20px 0 0 20px\n  0 20px 20px 0\n  15px 0 0 15px\n  26px\n\n【ボタンスタイル】\n  button,input,optgroup,select,textarea\n    font-family: inherit\n    font-size: 100%\n  [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner\n    border-style: none\n  .m-btn\n    margin: 30px 0 20px\n  .m-btn .btn__inner\n    padding: 14px 45px\n  .m-btn .btn__inner:after\n    display: block\n    margin: auto\n    border-top: 1px solid #98a1a6\n    border-left: 1px solid #98a1a6\n\n【カードスタイル】\n  .m-panelLink .panelLink__item .panelLink__link\n    flex-direction: row-reverse\n  .m-panelLink .panelLink__item .panelLink__link:focus,.m-panelLink .panelLink__item .panelLink__link:hover\n    color: #e5002d\n  .m-panelLink .panelLink__text\n    margin-left: 20px\n    padding-top: 0\n  .m-panelLink .panelLink__text:after\n    display: block\n    background-color: #e5002d\n\n【ロゴ・ビジュアル素材】\n  https://www.sme.co.jp/common/images/og.png\n  https://www.sme.co.jp/common/images/favicon/favicon-32x32.png\n  https://www.sme.co.jp/common/images/company-logo.svg\n  https://www.sme.co.jp/common/images/sony-music-logo.svg\n  https://www.sme.co.jp/common/images/cocotame-logo.svg\n\n【取得CSSファイル】\n  https://morisawafonts.net/c/01K44VHE8EAEZ0ZFAEBX32RX8W/mf.css\n  https://www.sme.co.jp/common/css/module.css"
 }
