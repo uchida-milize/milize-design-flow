@@ -23,6 +23,7 @@ const EXCLUDED_DIRS = new Set([
   'testrin',
   'toshiba',
   'toyota',
+  'videor',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
