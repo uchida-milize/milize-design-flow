@@ -1,73 +1,128 @@
-'use client';
-import Link from 'next/link';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
+const clientName = '株式会社 日立製作所';
 const basePath = '/hitachi';
-const clientName = '日立製作所';
-const primaryColor: string = '#E60012';
+const primaryColor = 'var(--primary-color)';
 
-const brandColors = [
-  { name: 'Hitachi Red', hex: '#E60012', ratio: 40 },
-  { name: 'Black', hex: '#000000', ratio: 20 },
-  { name: 'Hitachi Blue', hex: '#0071BC', ratio: 15 },
-  { name: 'Dark Gray', hex: '#333333', ratio: 15 },
-  { name: 'White', hex: '#FFFFFF', ratio: 10 },
+const colorRatio = [
+  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
+  { hex: '#000000', name: 'ブラック', percent: 30 },
+  { hex: '#444444', name: 'ダークグレー', percent: 15 },
+  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
+  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
 ];
 
-function getTextColor(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5 ? '#333333' : '#FFFFFF';
-}
-
-function hexToRgb(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
-export default function HitachiHome() {
+export default function Home() {
   return (
-    <>
-      <style>{`@import url('https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap');`}</style>
-      <div style={{ minHeight: '100vh' }}>
-        <ClientPortalHeader
-          clientName={clientName}
-          basePath={basePath}
-          active="home"
-          primaryColor={primaryColor}
-        />
+    <div className="hitachi-portal">
+      <ClientPortalHeader
+        clientName={clientName}
+        basePath={basePath}
+        active="home"
+        primaryColor={primaryColor}
+      />
 
-        {/* ブランドカラー比率バー — ヘッダー直下・全幅 */}
-        <div style={{ display: 'flex', width: '100%', height: '4px' }}>
-        {brandColors.map((c) => (
-          <div key={c.hex} style={{ flex: c.ratio, backgroundColor: c.hex }} />
-        ))}
-      </div>
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
+          <p className="section-label" style={{ color: primaryColor }}>
+            BRAND PORTAL
+          </p>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
+          <p className="section-desc">
+            クライアントごとのトンマナを収集して一覧化をしています。
+          </p>
+        </div>
 
-        {/* コンテンツ */}
-        <main style={{ padding: '40px 24px', maxWidth: '960px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#333333', marginBottom: '16px' }}>コンテンツ</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-            <Link href={`${basePath}/guidelines`} style={{ textDecoration: 'none' }}>
-              <div style={{ background: '#fff', borderRadius: '12px', padding: '28px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer' }}>
-                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>ブランドガイドライン</h3>
-                <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>ブランドカラー、タイポグラフィ、ロゴの使用方法など、日立ブランドの基本ルールをご確認ください。</p>
+        <div className="color-bar">
+          {colorRatio.map((c) => (
+            <div
+              key={c.hex}
+              style={{
+                flex: c.percent / 100,
+                background: c.hex,
+                borderRight: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+              }}
+            />
+          ))}
+        </div>
+        <div className="color-bar-labels">
+          {colorRatio.map((c) => (
+            <div key={c.hex} className="color-bar-label-item">
+              <span
+                className="color-bar-swatch"
+                style={{
+                  background: c.hex,
+                  border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                }}
+              />
+              <span>
+                {c.hex} {c.name} {c.percent}%
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 24,
+          }}
+        >
+          <a href={`${basePath}/guidelines`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                GUIDELINES
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                デザインガイドライン
+              </h2>
+              <p className="section-desc">
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
+              </p>
+            </div>
+          </a>
+
+          <a href={`${basePath}/components`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                COMPONENTS
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                コンポーネント
+              </h2>
+              <p className="section-desc">
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
+              </p>
+            </div>
+          </a>
+          <a
+            href={`${basePath}/resources`}
+            className="nav-card"
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <div className="card" style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+              padding: '24px',
+              cursor: 'pointer',
+              flex: 1,
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
+                RESOURCES
               </div>
-            </Link>
-            <Link href={`${basePath}/components`} style={{ textDecoration: 'none' }}>
-              <div style={{ background: '#fff', borderRadius: '12px', padding: '28px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', cursor: 'pointer' }}>
-                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#333333', marginBottom: '8px' }}>UIコンポーネント</h3>
-                <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>ボタン、フォーム、カード、ナビゲーションなど、UIコンポーネントの仕様と実装例をご覧ください。</p>
-              </div>
-            </Link>
-          </div>
-        </main>
-
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
+                リソース
+              </h2>
+              <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

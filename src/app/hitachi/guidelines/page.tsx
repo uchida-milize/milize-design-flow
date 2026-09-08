@@ -1,20 +1,20 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = '日立製作所';
+const clientName = '株式会社 日立製作所';
 const basePath = '/hitachi';
-const primaryColor: string = '#E60012';
+const primaryColor = 'var(--primary-color)';
 
-const colorRatios = [
-  { hex: '#E60012', name: '日立レッド（プライマリ）', ratio: 40 },
-  { hex: '#000000', name: 'ブラック（セカンダリ）', ratio: 20 },
-  { hex: '#0071BC', name: 'ブルー（アクセント）', ratio: 15 },
-  { hex: '#333333', name: 'ダークグレー（テキスト）', ratio: 15 },
-  { hex: '#FFFFFF', name: 'ホワイト（背景）', ratio: 10 },
+const colors = [
+  { hex: '#C0C0C0', name: 'プライマリカラー' },
+  { hex: '#000000', name: 'セカンダリカラー' },
+  { hex: '#444444', name: 'アクセントカラー' },
+  { hex: '#FFFFFF', name: '背景カラー' },
+  { hex: '#7F7F7F', name: 'サブカラー' },
 ];
 
 export default function GuidelinesPage() {
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div className="hitachi-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
@@ -22,111 +22,108 @@ export default function GuidelinesPage() {
         primaryColor={primaryColor}
       />
 
-      <main className="container" style={{ paddingTop: 48, paddingBottom: 80 }}>
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+
         <div style={{ marginBottom: 40 }}>
           <p className="section-label" style={{ color: primaryColor }}>
             GUIDELINES
           </p>
-          <h1 className="section-title">ブランドガイドライン</h1>
+          <h1 className="section-title">リサーチガイドライン</h1>
           <p className="section-desc">
-            日立ブランドの基本方針（カラー、タイポグラフィ、トンマナ）を掲載しています。
+            クライアントのブランドカラー・タイポグラフィ・トンマナをまとめたガイドラインのサンプルです。
+            実際のポータルでは、収集したリサーチ情報をもとに内容が自動生成されます。
           </p>
         </div>
 
-        {/* カラーセクション */}
-        <section style={{ marginBottom: 56 }}>
+        <section style={{ marginBottom: 48 }}>
           <p className="section-label" style={{ color: primaryColor }}>
             COLOR
           </p>
-          <h2 className="section-title">ブランドカラー</h2>
-          <p className="section-desc" style={{ marginBottom: 24 }}>
-            伝統的かつ力強い赤を基調に、黒やブルーをアクセントとして使用します。
-          </p>
-
+          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>
+            カラーパレット
+          </h2>
           <div className="swatch-grid">
-            {colorRatios.map((c) => (
-              <div className="swatch-item" key={c.hex}>
+            {colors.map((c) => (
+              <div className="swatch" key={c.hex}>
                 <div
                   className="swatch-color"
                   style={{
                     background: c.hex,
-                    border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                    borderBottom: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
                   }}
                 />
                 <div className="swatch-info">
                   <div className="swatch-hex">{c.hex}</div>
                   <div className="swatch-name">{c.name}</div>
-                  <div style={{ fontSize: '13px', color: '#888', marginTop: '2px' }}>{c.ratio}%</div>
-                  <div style={{ fontSize: '13px', color: '#888', marginTop: '2px' }}>{c.ratio}%</div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* タイポグラフィ */}
-        <section style={{ marginBottom: 56 }}>
+        <section style={{ marginBottom: 48 }}>
           <p className="section-label" style={{ color: primaryColor }}>
             TYPOGRAPHY
           </p>
-          <h2 className="section-title">タイポグラフィ</h2>
-          <p className="section-desc" style={{ marginBottom: 24 }}>
-            視認性と安定感を重視したゴシック体を使用します。
-          </p>
-
+          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>
+            タイポグラフィ
+          </h2>
           <div className="card" style={{ marginBottom: 16 }}>
-            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>見出しフォント</p>
-            <p style={{ fontSize: 32, fontWeight: 700, color: '#111827', marginBottom: 8 }}>
-              日立の技術で、社会を支える。
-            </p>
-            <p style={{ fontSize: 13, color: '#6b7280' }}>
-              ヒラギノ角ゴシック、または類似のサンセリフ体
+            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>見出しフォント（サンプル）</p>
+            <p
+              style={{
+                fontSize: 32,
+                fontWeight: 700,
+                color: '#111827',
+              }}
+            >
+              見出しテキストのサンプルです。
             </p>
           </div>
-
           <div className="card">
-            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>本文フォント</p>
-            <p style={{ fontSize: 16, color: '#333333', lineHeight: 1.8, marginBottom: 8 }}>
-              日立のブランドは、伝統的かつ力強い赤を基調に、黒やブルーをアクセントに用いることで信頼性と先進技術を表現しています。
-            </p>
-            <p style={{ fontSize: 13, color: '#6b7280' }}>
-              ヒラギノ角ゴシック、または類似のサンセリフ体
+            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>本文フォント（サンプル）</p>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.9,
+                color: '#111827',
+              }}
+            >
+              本文テキストのサンプルです。実際のポータルでは、クライアントのリサーチ情報をもとに生成されたブランドコピーやガイドライン文章が表示されます。読みやすさと一貫性を意識したタイポグラフィを設定します。
             </p>
           </div>
         </section>
 
-        {/* トンマナ */}
         <section>
           <p className="section-label" style={{ color: primaryColor }}>
             TONE &amp; MANNER
           </p>
-          <h2 className="section-title">トンマナ</h2>
-          <p className="section-desc" style={{ marginBottom: 24 }}>
-            信頼感・先進性・サステナビリティを軸としたブランド表現。
-          </p>
-
+          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>
+            トンマナ
+          </h2>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
               gap: 16,
               marginBottom: 24,
             }}
           >
-            {['信頼感', '先進性', 'サステナビリティ'].map((kw) => (
+            {['キーワード A', 'キーワード B', 'キーワード C'].map((kw) => (
               <div className="card" key={kw} style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: 18, fontWeight: 700, color: primaryColor }}>{kw}</p>
+                <p style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
+                  {kw}
+                </p>
               </div>
             ))}
           </div>
-
           <div className="card">
-            <p style={{ fontSize: 14, color: '#333333', lineHeight: 1.9 }}>
-              日立のブランドは、伝統的かつ力強い赤を基調に、黒やブルーをアクセントに用いることで信頼性と先進技術を表現しています。白背景による明快で清潔感のあるデザインにより、情報の視認性が高く、サステナブルな社会実現への意志が感じられる堅実かつ未来志向のトンマナです。
+            <p style={{ fontSize: 14, lineHeight: 1.9, color: '#6b7280' }}>
+              トンマナの説明テキストのサンプルです。実際のポータルでは、収集したWebサイトのデザイン情報をもとにクライアントのブランドイメージやトーン＆マナーを自動生成・一覧化します。
             </p>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

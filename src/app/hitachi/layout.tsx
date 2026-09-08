@@ -1,5 +1,5 @@
 import './globals.css';
 import type { ReactNode } from 'react';
 export default function Layout({ children }: { children: ReactNode }) {
-  return <div className="hitachi-portal" style={{ minHeight: '100vh' }}>{children}</div>;
+  return <div className="hitachi-portal">{children}</div>;
 }
