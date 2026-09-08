@@ -1,63 +1,65 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
-import Link from 'next/link';
 
-export default function Page() {
-  const clientName: string = 'Sony Pictures';
-  const basePath: string = '/sonypictures';
-  const primaryColor: string = '#000000';
+const clientName = 'ソニー・ピクチャーズ エンタテインメント';
+const basePath = '/sonypictures';
+const primaryColor = 'var(--primary-color)';
 
-  const colorRatio = [
-    { color: '#FFFFFF', name: 'ホワイト', pct: 60, border: true },
-    { color: '#000000', name: 'ブラック', pct: 30, border: false },
-    { color: '#E60012', name: 'レッド系（推定）', pct: 10, border: false },
-  ];
+const colorRatio = [
+  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
+  { hex: '#000000', name: 'ブラック', percent: 30 },
+  { hex: '#444444', name: 'ダークグレー', percent: 15 },
+  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
+  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
+];
 
+export default function Home() {
   return (
-    <div>
+    <div className="sonypictures-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
         active="home"
         primaryColor={primaryColor}
       />
-      <div className="portal-container" style={{ paddingTop: 40, paddingBottom: 80 }}>
-        <p className="portal-section-label" style={{ color: primaryColor }}>RESEARCH</p>
-        <h1 className="portal-section-title" style={{ fontSize: 32 }}>{clientName} リサーチ</h1>
-        <p className="portal-section-desc">
-          Sony Picturesのガイドラインリサーチおよびコンポーネントリサーチのまとめです。
-        </p>
 
-        <div style={{ marginTop: 40 }}>
-          <div style={{ display: 'flex', height: 32, borderRadius: 8, overflow: 'hidden' }}>
-            {colorRatio.map((c) => (
-              <div
-                key={c.name}
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
+          <p className="section-label" style={{ color: primaryColor }}>
+            BRAND PORTAL
+          </p>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
+          <p className="section-desc">
+            クライアントごとのトンマナを収集して一覧化をしています。
+          </p>
+        </div>
+
+        <div className="color-bar">
+          {colorRatio.map((c) => (
+            <div
+              key={c.hex}
+              style={{
+                flex: c.percent / 100,
+                background: c.hex,
+                borderRight: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+              }}
+            />
+          ))}
+        </div>
+        <div className="color-bar-labels">
+          {colorRatio.map((c) => (
+            <div key={c.hex} className="color-bar-label-item">
+              <span
+                className="color-bar-swatch"
                 style={{
-                  flex: c.pct / 100,
-                  background: c.color,
-                  border: c.border ? '1px solid #e5e7eb' : 'none',
+                  background: c.hex,
+                  border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
                 }}
               />
-            ))}
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 12 }}>
-            {colorRatio.map((c) => (
-              <div key={c.name} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <div
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: 3,
-                    background: c.color,
-                    border: c.border ? '1px solid #e5e7eb' : 'none',
-                  }}
-                />
-                <span style={{ fontSize: 12, color: '#6b7280' }}>
-                  {c.color} {c.name} {c.pct}%
-                </span>
-              </div>
-            ))}
-          </div>
+              <span>
+                {c.hex} {c.name} {c.percent}%
+              </span>
+            </div>
+          ))}
         </div>
 
         <div
@@ -65,27 +67,60 @@ export default function Page() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: 24,
-            marginTop: 40,
           }}
         >
-          <Link href={`${basePath}/guidelines`}>
-            <div className="portal-card" style={{ cursor: 'pointer', height: '100%' }}>
-              <p className="portal-section-label" style={{ color: primaryColor }}>GUIDELINES</p>
-              <h2 style={{ fontSize: 20, fontWeight: 700, marginTop: 8 }}>ガイドラインリサーチ</h2>
-              <p className="portal-section-desc">
-                カラー・タイポグラフィ・トンマナなどのガイドラインリサーチを確認する
+          <a href={`${basePath}/guidelines`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                GUIDELINES
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                デザインガイドライン
+              </h2>
+              <p className="section-desc">
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
               </p>
             </div>
-          </Link>
-          <Link href={`${basePath}/components`}>
-            <div className="portal-card" style={{ cursor: 'pointer', height: '100%' }}>
-              <p className="portal-section-label" style={{ color: primaryColor }}>COMPONENTS</p>
-              <h2 style={{ fontSize: 20, fontWeight: 700, marginTop: 8 }}>コンポーネント</h2>
-              <p className="portal-section-desc">
-                実装確認済みのコンポーネントと派生デザインを確認する
+          </a>
+
+          <a href={`${basePath}/components`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                COMPONENTS
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                コンポーネント
+              </h2>
+              <p className="section-desc">
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
               </p>
             </div>
-          </Link>
+          </a>
+          <a
+            href={`${basePath}/resources`}
+            className="nav-card"
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <div className="card" style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+              padding: '24px',
+              cursor: 'pointer',
+              flex: 1,
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
+                RESOURCES
+              </div>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
+                リソース
+              </h2>
+              <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
