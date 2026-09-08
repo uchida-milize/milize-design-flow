@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+}
+
+.smecojpcompany-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.smecojpcompany-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #111827;
+}
+
+.smecojpcompany-portal a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.smecojpcompany-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.smecojpcompany-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.smecojpcompany-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 8px;
+}
+
+.smecojpcompany-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.smecojpcompany-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.smecojpcompany-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.smecojpcompany-portal .swatch-color {
+  height: 80px;
+  border-radius: 8px 8px 0 0;
+}
+
+.smecojpcompany-portal .swatch-info {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 8px 10px;
+}
+
+.smecojpcompany-portal .swatch-hex {
+  font-family: monospace;
+  font-size: 13px;
+  color: #111827;
+}
+
+.smecojpcompany-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.smecojpcompany-portal .tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.smecojpcompany-portal .tab-btn {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.smecojpcompany-portal .tab-btn.active {
+  color: #ffffff;
+}
+
+.smecojpcompany-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  margin-bottom: 24px;
+}
+
+.smecojpcompany-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 12px 16px 0 16px;
+}
+
+.smecojpcompany-portal .component-render {
+  padding: 24px;
+}
+
+.smecojpcompany-portal .component-code {
+  background: #efefef;
+  color: #333333;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+}
