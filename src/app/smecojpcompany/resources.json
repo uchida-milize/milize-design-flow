@@ -2,7 +2,7 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/株式会社ソニー・ミュージックエンタテインメント||ロゴ・CI\nhttps://www.sme.co.jp/company/||カラー,ロゴ・CI,フォント,フォーム\nhttps://www.sme.co.jp/||カラー,ロゴ・CI,フォント,フォーム",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#E5002D | color, background-color, border, border-top, border-left | 出現50回 | [external-css]\n#333333 | color, border, background-color, border-color | 出現49回 | [external-css]\n#DBDBDB | border-bottom, border-top, background-color, border, border-color | 出現42回 | [external-css]\n#CCCCCC | border-top, border-left, border-bottom, border-right, background-color | 出現25回 | [external-css]\n#FFFDED | background-color, background | 出現14回 | [external-css]\n#787D80 | border-right, border-top, background-color, border-bottom, fill | 出現10回 | [external-css]\n#9CA0A2 | border-top, border-right, border-left | 出現8回 | [external-css]\n#484848 | background-color, border-right, border-left, border-top | 出現6回 | [external-css]\n#98A1A6 | border, border-top, border-left | 出現5回 | [external-css]\n#81888C | background-color, background, --background | 出現5回 | [external-css]\n#72A3D4 | background, --background, --fill | 出現5回 | [external-css]\n#6CAD8B | background, --background, --fill | 出現5回 | [external-css]\n#F59176 | background, --background, --fill | 出現5回 | [external-css]\n#404040 | border-top, background-color | 出現3回 | [external-css]\n#F5F5F5 | background-color | 出現3回 | [external-css]\n#999D9F | border-top, border-left | 出現2回 | [external-css]\n#346F94 | color | 出現1回 | [external-css]\n#778A7F | background-color | 出現1回 | [external-css]",
+    "hex_colors": "#E5002D | color, background-color, border-color | 出現21回 | [external-css]\n#333333 | color, background-color | 出現18回 | [external-css]\n#DBDBDB | border-bottom, border-top, background-color, border | 出現18回 | [external-css]\n#787D80 | border-right, border-top, background-color, border-bottom, fill | 出現9回 | [external-css]\n#CCCCCC | background-color, border-top, border-left, border-bottom, border-right | 出現9回 | [external-css]\n#9CA0A2 | border-top, border-left | 出現4回 | [external-css]\n#404040 | border-top, background-color | 出現3回 | [external-css]\n#F5F5F5 | background-color | 出現2回 | [external-css]\n#98A1A6 | border | 出現2回 | [external-css]\n#346F94 | color | 出現1回 | [external-css]\n#484848 | background-color | 出現1回 | [external-css]\n#FFFDED | background-color | 出現1回 | [external-css]\n#778A7F | background-color | 出現1回 | [external-css]\n#F7F7F7 | background-color | 出現1回 | [external-css]\n#666666 | background-color | 出現1回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
       "mfw-a1minchostd-bold",
@@ -15,7 +15,8 @@
       "MFW-PShueiGoGinStd-B",
       "MFW-PShueiGoGinStd-M",
       "Raleway",
-      "Roboto"
+      "Roboto",
+      "MFW-A1MinchoStd-Bold"
     ],
     "button_styles": [
       {
@@ -29,85 +30,6 @@
         "selector": "[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner",
         "properties": {
           "border-style": "none"
-        }
-      },
-      {
-        "selector": ".m-btn",
-        "properties": {
-          "margin": "30px 0 20px"
-        }
-      },
-      {
-        "selector": ".m-btn .btn__inner",
-        "properties": {
-          "padding": "14px 45px"
-        }
-      },
-      {
-        "selector": ".m-btn .btn__inner:after",
-        "properties": {
-          "display": "block",
-          "margin": "auto",
-          "border-top": "1px solid #98a1a6",
-          "border-left": "1px solid #98a1a6"
-        }
-      },
-      {
-        "selector": ".m-btn .btn__inner[href$=\".pdf\"]>.m-blankIcon,.m-btn .btn__inner[href$=\".pdf\"]>.m-pdfIcon,.m-btn .btn__inner[target=_blank]>.m-blankIcon,.m-btn .btn__inner[target=_blank]>.m-pdfIcon",
-        "properties": {
-          "margin": "auto"
-        }
-      },
-      {
-        "selector": ".m-btn .btn__notes",
-        "properties": {
-          "margin": "0 0 15px"
-        }
-      },
-      {
-        "selector": ".m-btn.is-emphasis .btn__inner",
-        "properties": {
-          "color": "#fff",
-          "background-color": "#e5002d",
-          "border": "1px solid #e5002d"
-        }
-      },
-      {
-        "selector": ".m-btn.is-emphasis .btn__inner:after",
-        "properties": {
-          "border-top": "1px solid #fff"
-        }
-      },
-      {
-        "selector": ".m-btn.is-emphasis .btn__notes",
-        "properties": {
-          "margin": "0 0 15px"
-        }
-      },
-      {
-        "selector": ".m-btnList .btnList__list",
-        "properties": {
-          "margin": "0",
-          "display": "flex",
-          "flex-wrap": "wrap"
-        }
-      },
-      {
-        "selector": ".m-btnList .btnList__item:nth-of-type(n+2)",
-        "properties": {
-          "margin-top": "20px"
-        }
-      },
-      {
-        "selector": ".m-btnList .btnList__link",
-        "properties": {
-          "padding": "15px 10px"
-        }
-      },
-      {
-        "selector": ".m-btnList .btnList__hdg",
-        "properties": {
-          "margin-bottom": "20px"
         }
       },
       {
@@ -127,68 +49,78 @@
         }
       },
       {
-        "selector": "body.sustainability._top .m-btn .btn__inner",
+        "selector": ".topMvArea__changeVideoBtn",
         "properties": {
-          "padding": "12px 60px 12px 40px",
-          "border-radius": "4px"
-        }
-      }
-    ],
-    "card_styles": [
-      {
-        "selector": ".m-panelLink .panelLink__item .panelLink__link",
-        "properties": {
-          "flex-direction": "row-reverse"
+          "margin": "auto",
+          "display": "none",
+          "background-image": "url(/common/images/top/top-video-play.svg)",
+          "background-size": "cover",
+          "background-color": "transparent",
+          "background-repeat": "no-repeat",
+          "border": "none",
+          "border-radius": "50%"
         }
       },
       {
-        "selector": ".m-panelLink .panelLink__item .panelLink__link:focus,.m-panelLink .panelLink__item .panelLink__link:hover",
+        "selector": ".topMvArea__longVideoController>button",
         "properties": {
-          "color": "#e5002d"
+          "padding": "0",
+          "background-size": "auto",
+          "background-color": "transparent",
+          "background-repeat": "no-repeat",
+          "background-position": "50%",
+          "border": "none"
         }
       },
       {
-        "selector": ".m-panelLink .panelLink__text",
+        "selector": ".topMvArea .swiper-button-prev:after",
         "properties": {
-          "margin-left": "20px",
-          "padding-top": "0"
+          "display": "block"
         }
       },
       {
-        "selector": ".m-panelLink .panelLink__text:after",
+        "selector": ".topMvArea .swiper-button-next:after",
         "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".topModal__btn",
+        "properties": {
+          "padding": "0",
+          "border": "none",
+          "background-color": "transparent"
+        }
+      },
+      {
+        "selector": ".topModal__btn:after,.topModal__btn:before",
+        "properties": {
+          "margin": "0 auto",
           "display": "block",
-          "background-color": "#e5002d"
+          "background-color": "#666"
         }
       }
     ],
+    "card_styles": [],
     "border_radii": [
-      "50%",
-      "4px",
-      "20px",
-      "0 15px 15px 0",
-      "20px 0 0 20px",
-      "0 20px 20px 0",
-      "15px 0 0 15px",
-      "26px",
-      "25px",
-      "15px"
+      "50%"
     ],
     "logo_urls": [
       "https://www.sme.co.jp/common/images/og.png",
       "https://www.sme.co.jp/common/images/favicon/favicon-32x32.png",
       "https://www.sme.co.jp/common/images/company-logo.svg",
       "https://www.sme.co.jp/common/images/sony-music-logo.svg",
-      "https://www.sme.co.jp/common/images/cocotame-logo.svg"
+      "https://www.sme.co.jp/common/images/cocotame-logo.svg",
+      "https://www.sme.co.jp/pressrelease/news/images/sme_logo.png"
     ],
     "source_css_urls": [
       "https://morisawafonts.net/c/01K44VHE8EAEZ0ZFAEBX32RX8W/mf.css",
-      "https://www.sme.co.jp/common/css/module.css"
+      "https://www.sme.co.jp/common/css/top.css?ts=20250728"
     ],
-    "extracted_at": "2026-09-08T09:17:14.948Z",
+    "extracted_at": "2026-09-08T09:17:19.998Z",
     "source_urls": [
-      "https://www.sme.co.jp/company/"
+      "https://www.sme.co.jp/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #E5002D  color  出現50回  [external-css]\n  #333333  color  出現49回  [external-css]\n  #DBDBDB  border-bottom  出現42回  [external-css]\n  #CCCCCC  border-top  出現25回  [external-css]\n  #FFFDED  background-color  出現14回  [external-css]\n  #787D80  border-right  出現10回  [external-css]\n  #9CA0A2  border-top  出現8回  [external-css]\n  #484848  background-color  出現6回  [external-css]\n  #98A1A6  border  出現5回  [external-css]\n  #81888C  background-color  出現5回  [external-css]\n  #72A3D4  background  出現5回  [external-css]\n  #6CAD8B  background  出現5回  [external-css]\n  #F59176  background  出現5回  [external-css]\n  #404040  border-top  出現3回  [external-css]\n  #F5F5F5  background-color  出現3回  [external-css]\n\n【使用フォント】\n  mfw-a1minchostd-bold\n  mfw-hiraginosansgb-w3\n  mfw-pshueigoginstd-m\n  mfw-pshueigoginstd-l\n  mfw-pshueigoginstd-b\n  inherit\n  MFW-PShueiGoGinStd-L\n  MFW-PShueiGoGinStd-B\n  MFW-PShueiGoGinStd-M\n  Raleway\n  Roboto\n\n【角丸パターン】\n  50%\n  4px\n  20px\n  0 15px 15px 0\n  20px 0 0 20px\n  0 20px 20px 0\n  15px 0 0 15px\n  26px\n\n【ボタンスタイル】\n  button,input,optgroup,select,textarea\n    font-family: inherit\n    font-size: 100%\n  [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner\n    border-style: none\n  .m-btn\n    margin: 30px 0 20px\n  .m-btn .btn__inner\n    padding: 14px 45px\n  .m-btn .btn__inner:after\n    display: block\n    margin: auto\n    border-top: 1px solid #98a1a6\n    border-left: 1px solid #98a1a6\n\n【カードスタイル】\n  .m-panelLink .panelLink__item .panelLink__link\n    flex-direction: row-reverse\n  .m-panelLink .panelLink__item .panelLink__link:focus,.m-panelLink .panelLink__item .panelLink__link:hover\n    color: #e5002d\n  .m-panelLink .panelLink__text\n    margin-left: 20px\n    padding-top: 0\n  .m-panelLink .panelLink__text:after\n    display: block\n    background-color: #e5002d\n\n【ロゴ・ビジュアル素材】\n  https://www.sme.co.jp/common/images/og.png\n  https://www.sme.co.jp/common/images/favicon/favicon-32x32.png\n  https://www.sme.co.jp/common/images/company-logo.svg\n  https://www.sme.co.jp/common/images/sony-music-logo.svg\n  https://www.sme.co.jp/common/images/cocotame-logo.svg\n\n【取得CSSファイル】\n  https://morisawafonts.net/c/01K44VHE8EAEZ0ZFAEBX32RX8W/mf.css\n  https://www.sme.co.jp/common/css/module.css"
+  "css_summary": "【抽出カラー（頻度順）】\n  #E5002D  color  出現21回  [external-css]\n  #333333  color  出現18回  [external-css]\n  #DBDBDB  border-bottom  出現18回  [external-css]\n  #787D80  border-right  出現9回  [external-css]\n  #CCCCCC  background-color  出現9回  [external-css]\n  #9CA0A2  border-top  出現4回  [external-css]\n  #404040  border-top  出現3回  [external-css]\n  #F5F5F5  background-color  出現2回  [external-css]\n  #98A1A6  border  出現2回  [external-css]\n  #346F94  color  出現1回  [external-css]\n  #484848  background-color  出現1回  [external-css]\n  #FFFDED  background-color  出現1回  [external-css]\n  #778A7F  background-color  出現1回  [external-css]\n  #F7F7F7  background-color  出現1回  [external-css]\n  #666666  background-color  出現1回  [external-css]\n\n【使用フォント】\n  mfw-a1minchostd-bold\n  mfw-hiraginosansgb-w3\n  mfw-pshueigoginstd-m\n  mfw-pshueigoginstd-l\n  mfw-pshueigoginstd-b\n  inherit\n  MFW-PShueiGoGinStd-L\n  MFW-PShueiGoGinStd-B\n  MFW-PShueiGoGinStd-M\n  Raleway\n  Roboto\n  MFW-A1MinchoStd-Bold\n\n【角丸パターン】\n  50%\n\n【ボタンスタイル】\n  button,input,optgroup,select,textarea\n    font-family: inherit\n    font-size: 100%\n  [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner\n    border-style: none\n  .js-faqDisclosure .faqDisclosure__question button\n    padding: 0\n    display: flex\n    background-color: #fff\n    border: none\n  .js-faqDisclosure .faqDisclosure__question button:after,.js-faqDisclosure .faqDisclosure__question button:before\n    display: block\n    background-color: #787d80\n  .topMvArea__changeVideoBtn\n    margin: auto\n    display: none\n    background-image: url(/common/images/top/top-video-play.svg)\n    background-size: cover\n    background-color: transparent\n    background-repeat: no-repeat\n\n【ロゴ・ビジュアル素材】\n  https://www.sme.co.jp/common/images/og.png\n  https://www.sme.co.jp/common/images/favicon/favicon-32x32.png\n  https://www.sme.co.jp/common/images/company-logo.svg\n  https://www.sme.co.jp/common/images/sony-music-logo.svg\n  https://www.sme.co.jp/common/images/cocotame-logo.svg\n  https://www.sme.co.jp/pressrelease/news/images/sme_logo.png\n\n【取得CSSファイル】\n  https://morisawafonts.net/c/01K44VHE8EAEZ0ZFAEBX32RX8W/mf.css\n  https://www.sme.co.jp/common/css/top.css?ts=20250728"
 }
