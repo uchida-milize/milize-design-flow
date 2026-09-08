@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { ClientLogo } from '@/components/ClientLogo';
 
 type ClientNavKey = 'home' | 'guidelines' | 'components' | 'resources';
 
@@ -43,10 +44,11 @@ export function ClientPortalHeader({
           <span style={{ color: '#e5e7eb' }}>|</span>
           <Link
             href={basePath}
-            className="text-sm font-bold"
-            style={{ color: primaryColor }}
+            className="flex items-center"
+            style={{ gap: 8, color: primaryColor, textDecoration: 'none' }}
           >
-            {clientName}
+            <ClientLogo slug={basePath.replace(/^\//, '')} name={clientName} size={28} />
+            <span className="text-sm font-bold">{clientName}</span>
           </Link>
         </div>
 

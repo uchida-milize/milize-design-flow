@@ -127,10 +127,14 @@ function extractBrandColors(css: string): Array<{ hex: string; ratio: number }> 
 
 async function getClients() {
   try {
+    const token = process.env.GITHUB_TOKEN ?? '';
+    const ghHeaders: Record<string, string> = { Accept: 'application/vnd.github.v3+json' };
+    if (token) ghHeaders.Authorization = `Bearer ${token}`;
+
     const res = await fetch(
       'https://api.github.com/repos/uchida-milize/milize-design-flow/contents/src/app',
       {
-        headers: { Accept: 'application/vnd.github.v3+json' },
+        headers: ghHeaders,
         next: { revalidate: 60 },
       }
     );
@@ -139,19 +143,21 @@ async function getClients() {
     const contents = (await res.json()) as Array<{ name: string; type: string }>;
     const clientSlugs = contents
       .filter((item) => item.type === 'dir' && !EXCLUDED_DIRS.has(item.name))
-      .map((item) => item.name)
-      .sort((a, b) => a.localeCompare(b));
+      .map((item) => item.name);
 
     const clients = await Promise.all(
       clientSlugs.map(async (slug) => {
         let colors: Array<{ hex: string; ratio: number }> = [{ hex: '#004A99', ratio: 100 }];
         let description = '';
         let name = slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        let updatedAt = 0;
         try {
-          const [cssRes, guideRes, pageRes] = await Promise.all([
+          const [cssRes, guideRes, pageRes, commitsRes] = await Promise.all([
             fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css`, { next: { revalidate: 60 } }),
             fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/guidelines/page.tsx`, { next: { revalidate: 60 } }),
             fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/page.tsx`, { next: { revalidate: 60 } }),
+            // 「新しいプロジェクト順」に並べるため、そのクライアントディレクトリに対する最新コミット日時を取得
+            fetch(`https://api.github.com/repos/uchida-milize/milize-design-flow/commits?path=src/app/${slug}&per_page=1`, { headers: ghHeaders, next: { revalidate: 60 } }),
           ]);
           if (pageRes.ok) {
             const pageSrc = await pageRes.text();
@@ -168,12 +174,18 @@ async function getClients() {
             const m = searchSrc.match(/lineHeight:\s*1\.8[^}]*\}}>([^<\n]+)/);
             if (m) description = m[1].trim();
           }
+          if (commitsRes.ok) {
+            const commits = (await commitsRes.json()) as Array<{ commit?: { committer?: { date?: string }; author?: { date?: string } } }>;
+            const dateStr = commits[0]?.commit?.committer?.date ?? commits[0]?.commit?.author?.date;
+            if (dateStr) updatedAt = new Date(dateStr).getTime();
+          }
         } catch { /* ignore */ }
-        return { slug, name, colors, description };
+        return { slug, name, colors, description, updatedAt };
       })
     );
 
-    return clients;
+    // 新しいプロジェクト順（最終更新が新しい順）。日時が取れなかったものは末尾へ。
+    return clients.sort((a, b) => b.updatedAt - a.updatedAt);
   } catch {
     return [];
   }

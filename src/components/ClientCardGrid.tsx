@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { NewClientButton } from '@/components/NewClientButton';
+import { ClientLogo } from '@/components/ClientLogo';
 
 type ClientInfo = {
   slug: string;
@@ -217,9 +218,12 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
               </div>
               <div style={{ padding: 28, display: 'flex', flexDirection: 'column', flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <div>
-                    <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: 0 }}>{client.name}</p>
-                    <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 2, margin: '2px 0 0' }}>{client.slug}</p>
+                  <div className="flex items-center" style={{ gap: 12 }}>
+                    <ClientLogo slug={client.slug} name={client.name} size={44} />
+                    <div>
+                      <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: 0 }}>{client.name}</p>
+                      <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 2, margin: '2px 0 0' }}>{client.slug}</p>
+                    </div>
                   </div>
                   <button
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); confirmSlug === client.slug ? closeMenu() : openMenu(client.slug); }}
