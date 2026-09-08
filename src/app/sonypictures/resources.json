@@ -2,29 +2,18 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/ソニー・ピクチャーズ エンタテインメント||ロゴ・CI\nhttps://www.sonypictures.jp/||カラー,ロゴ・CI,フォント,フォーム\nhttps://www.sonypictures.com/||カラー,ロゴ・CI,フォント,フォーム\nhttps://en.wikipedia.org/wiki/Sony_Pictures||ロゴ・CI\nhttps://www.sony.com/ja/SonyInfo/design/philosophy/||カラー,ロゴ・CI",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#F8F9FA | color, background-color | 出現3回 | [style-tag]\n#FDFDFD | background-color, border-color, border-top | 出現3回 | [style-tag]\n#1F1F23 | background | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#18911F | color | 出現2回 | [style-tag]\n#008855 | color | 出現1回 | [style-tag]\n#A2A9B1 | border | 出現1回 | [style-tag]\n#CCCCFF | background-color | 出現1回 | [style-tag]\n#DDDDFF | background-color | 出現1回 | [style-tag]\n#E6E6FF | background-color | 出現1回 | [style-tag]\n#F7F7F7 | background-color | 出現1回 | [style-tag]",
+    "hex_colors": "",
     "rgb_colors": [],
     "fonts": [],
     "button_styles": [],
     "card_styles": [],
     "border_radii": [],
-    "logo_urls": [
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Sony_Pictures_Inc._logo.svg/960px-Sony_Pictures_Inc._logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
-      "https://en.wikipedia.org/static/favicon/wikipedia.ico",
-      "https://en.wikipedia.org/static/images/icons/enwiki-25.svg",
-      "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
-      "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Sony_Pictures_Inc._logo.svg/250px-Sony_Pictures_Inc._logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/250px-Sony_logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
-    ],
-    "source_css_urls": [
-      "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cext.wikimediaBadges.ulsV2%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
-      "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
-    ],
-    "extracted_at": "2026-09-08T08:17:18.691Z",
+    "logo_urls": [],
+    "source_css_urls": [],
+    "extracted_at": "2026-09-08T08:17:24.125Z",
     "source_urls": [
-      "https://en.wikipedia.org/wiki/Sony_Pictures"
+      "https://www.sony.com/ja/SonyInfo/design/philosophy/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #F8F9FA  color  出現3回  [style-tag]\n  #FDFDFD  background-color  出現3回  [style-tag]\n  #1F1F23  background  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #18911F  color  出現2回  [style-tag]\n  #008855  color  出現1回  [style-tag]\n  #A2A9B1  border  出現1回  [style-tag]\n  #CCCCFF  background-color  出現1回  [style-tag]\n  #DDDDFF  background-color  出現1回  [style-tag]\n  #E6E6FF  background-color  出現1回  [style-tag]\n  #F7F7F7  background-color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Sony_Pictures_Inc._logo.svg/960px-Sony_Pictures_Inc._logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://en.wikipedia.org/static/favicon/wikipedia.ico\n  https://en.wikipedia.org/static/images/icons/enwiki-25.svg\n  https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg\n  https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Sony_Pictures_Inc._logo.svg/250px-Sony_Pictures_Inc._logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/250px-Sony_logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cext.wikimediaBadges.ulsV2%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://en.wikipedia.org/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "（データなし）"
 }
