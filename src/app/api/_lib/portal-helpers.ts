@@ -35,6 +35,7 @@ export async function refreshAndCommitClientFiles(
   files: Array<{ path: string; content: string }>,
   message: string,
   token: string,
+  preserveExisting?: (relPath: string) => boolean,
 ): Promise<{ ok: boolean; error?: string; deletedCount?: number }> {
   const h = ghHeaders(token);
   const prefix = `src/app/${slug}/`;
@@ -58,9 +59,13 @@ export async function refreshAndCommitClientFiles(
       { headers: h },
     );
     const treeListData = await treeListRes.json();
+    // preserveExisting に一致するファイル（例: Difyのワークフロー実行中に
+    // /api/extract-css 等が直接コミットした resources.json や logo.*）は
+    // 削除対象から除外する。files 側にも含めないことで「触らずそのまま残す」。
     const existingPaths: string[] = (treeListData.tree ?? [])
       .filter((item: { type: string; path: string }) => item.type === 'blob' && item.path.startsWith(prefix))
-      .map((item: { path: string }) => item.path);
+      .map((item: { path: string }) => item.path)
+      .filter((path: string) => !preserveExisting?.(path.slice(prefix.length)));
 
     // 4. 削除エントリ（sha: null = GitHub Trees API での削除指示）
     const deleteItems = existingPaths.map(path => ({
@@ -527,6 +532,61 @@ export function parseDesignMdColors(nodeOutputs: Record<string, string>): Design
     accent:    accentHex    ?? primaryHex,
     text:      textHex      ?? '#111827',
     bg:        bgHex        ?? '#FFFFFF',
+    brandColors,
+  };
+}
+
+/**
+ * resources.json の css_info.hex_colors（/api/extract-css が実際のスクレイピングから
+ * 頻度付きで書き込む本物のデータ）からブランドカラーを導出する。
+ *
+ * parseDesignMdColors は Dify の nodeOutputs（Design.md生成ノード出力）に依存するが、
+ * ワークフロー完了検知の不具合により nodeOutputs がほぼ常に空になるため、
+ * こちらを実データに基づくフォールバックとして使う。
+ */
+export function parseCssInfoColors(cssInfo: { hex_colors?: string } | null | undefined): DesignColors | null {
+  if (!cssInfo?.hex_colors) return null;
+
+  const hexes: string[] = [];
+  for (const line of cssInfo.hex_colors.split('\n')) {
+    const m = line.match(/^#([0-9A-Fa-f]{6})/);
+    if (m) hexes.push('#' + m[1].toUpperCase());
+  }
+  if (hexes.length === 0) return null;
+
+  const lum = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  };
+
+  // 近黒・近白はテキスト/背景の候補として扱い、ブランドカラー本体からは除外する
+  const darkCandidate = hexes.find(h => lum(h) <= 0.08);
+  const lightCandidate = hexes.find(h => lum(h) >= 0.94);
+  const meaningful = hexes.filter(h => lum(h) > 0.08 && lum(h) < 0.94);
+
+  // 出現頻度順（hex_colors の記載順）で重複しない色を上位5件まで採用
+  const seen = new Set<string>();
+  const top: string[] = [];
+  for (const h of (meaningful.length > 0 ? meaningful : hexes)) {
+    if (seen.has(h)) continue;
+    seen.add(h);
+    top.push(h);
+    if (top.length >= 5) break;
+  }
+  if (top.length === 0) return null;
+
+  const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15], 4: [55, 25, 12, 8], 5: [50, 22, 13, 9, 6] };
+  const ratios = evenRatios[top.length] ?? [50, 22, 13, 9, 6];
+  const brandColors: BrandColor[] = top.map((hex, i) => ({ hex, ratio: ratios[i] ?? 6 }));
+
+  return {
+    primary:   top[0],
+    secondary: top[1] ?? '#333333',
+    accent:    top[2] ?? top[0],
+    text:      darkCandidate ?? '#111827',
+    bg:        lightCandidate ?? '#FFFFFF',
     brandColors,
   };
 }

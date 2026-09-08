@@ -3,9 +3,11 @@ import {
   refreshAndCommitClientFiles,
   buildResourcesPage,
   parseDesignMdColors,
+  parseCssInfoColors,
   readAndFixDifyFiles,
   removeFromExcludedDirs,
   waitForVercelDeploy,
+  getFileContent,
 } from '../_lib/portal-helpers';
 
 export const maxDuration = 300;
@@ -247,8 +249,25 @@ export async function POST(req: NextRequest) {
         send({ progress: 80, status: 'GitHubにコミット中...' });
         const commitStart = Date.now();
 
-        // designColors は globals.css から抽出（nodeOutputs 不要）
-        const designColors = parseDesignMdColors({});
+        // designColors: nodeOutputs はワークフロー完了検知の不具合でほぼ常に空のため、
+        // ワークフロー実行中に /api/extract-css が確実に書き込んだ resources.json の
+        // css_info（実データ）から抽出する。それも取れない場合のみ nodeOutputs 経由
+        // （現状ほぼ null）にフォールバックする。
+        let designColors = parseDesignMdColors({});
+        try {
+          const existingResources = await getFileContent(`src/app/${client_slug}/resources.json`, githubToken);
+          if (existingResources) {
+            const parsed = JSON.parse(existingResources.content);
+            const fromCss = parseCssInfoColors(parsed?.css_info);
+            if (fromCss) {
+              designColors = fromCss;
+              log(`designColors: resources.json css_info から抽出 primary=${fromCss.primary}`);
+            }
+          }
+        } catch (e) {
+          log(`resources.json 読み込み/カラー抽出失敗: ${e}`);
+        }
+
         const difyFiles = await readAndFixDifyFiles(client_slug, company_name, githubToken, designColors);
 
         const filesToCommit: Array<{ path: string; content: string }> = [
@@ -257,7 +276,9 @@ export async function POST(req: NextRequest) {
             path: `src/app/${client_slug}/layout.tsx`,
             content: `import './globals.css';\nimport type { ReactNode } from 'react';\nexport default function Layout({ children }: { children: ReactNode }) {\n  return <div className="${client_slug}-portal">{children}</div>;\n}\n`,
           },
-          // resources.json は /api/dify-callback が書き込むためここでは除外
+          // resources.json / logo.* は Difyワークフロー実行中に /api/extract-css が
+          // 直接コミット済みのため、ここでは含めない（下記 preserveExisting で保護し、
+          // このリフレッシュコミットの削除対象からも除外する）
           {
             path: `src/app/${client_slug}/resources/page.tsx`,
             content: buildResourcesPage(client_slug, company_name),
@@ -270,6 +291,9 @@ export async function POST(req: NextRequest) {
 
         send({ progress: 82, status: `${filesToCommit.length}ファイルをリフレッシュコミット中（旧ファイル全削除→新規追加）...` });
 
+        const preserveExisting = (relPath: string) =>
+          relPath === 'resources.json' || relPath.startsWith('logo.');
+
         let committed = false;
         let lastError = '';
         for (let attempt = 0; attempt < 3; attempt++) {
@@ -279,6 +303,7 @@ export async function POST(req: NextRequest) {
             filesToCommit,
             `feat: refresh portal for ${client_slug} [resumed]`,
             githubToken,
+            preserveExisting,
           );
           if (result.ok) {
             committed = true;
