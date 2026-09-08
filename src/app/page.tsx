@@ -20,6 +20,7 @@ const EXCLUDED_DIRS = new Set([
   'softbank-group',
   'sony-entertainment',
   'sonypictures',
+  'testrin',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
