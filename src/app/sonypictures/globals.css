@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+.sonypictures-portal {
+  --portal-bg: #f5f7fa;
+  --portal-card-bg: #ffffff;
+  --portal-border: #e5e7eb;
+  --portal-text-main: #111827;
+  --portal-text-sub: #6b7280;
+  --portal-text-faint: #9ca3af;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.sonypictures-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.sonypictures-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  color: var(--portal-text-main);
+}
+
+.sonypictures-portal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sonypictures-portal .portal-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sonypictures-portal .portal-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.sonypictures-portal .portal-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.sonypictures-portal .portal-section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.sonypictures-portal .portal-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.sonypictures-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.sonypictures-portal .swatch-item {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.sonypictures-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.sonypictures-portal .swatch-info {
+  padding: 8px 10px;
+  background: #ffffff;
+}
+
+.sonypictures-portal .swatch-hex {
+  font-family: monospace;
+  font-size: 13px;
+  color: #111827;
+}
+
+.sonypictures-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.sonypictures-portal .portal-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.sonypictures-portal .portal-tab {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.sonypictures-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.sonypictures-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+}
+
+.sonypictures-portal .component-render {
+  padding: 24px;
+  background: #ffffff;
+}
+
+.sonypictures-portal .component-code {
+  background: #efefef;
+  color: #333333;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
