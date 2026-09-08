@@ -19,6 +19,7 @@ const EXCLUDED_DIRS = new Set([
   'milize',
   'softbank-group',
   'sony-entertainment',
+  'sonypictures',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
