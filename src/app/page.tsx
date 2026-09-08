@@ -6,7 +6,6 @@ const EXCLUDED_DIRS = new Set([
   'prototype',
   'screens',
   'client-template',  // 汎用テンプレートディレクトリ
-  'hitachi',
   'sony_corp',
   'sharp-finance-corp',
   'api',
