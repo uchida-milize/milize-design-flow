@@ -2,36 +2,235 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/ソニー・ピクチャーズ エンタテインメント||ロゴ・CI\nhttps://www.sonypictures.jp/||カラー,ロゴ・CI,フォント,フォーム\nhttps://www.sonypictures.com/||カラー,ロゴ・CI,フォント,フォーム\nhttps://en.wikipedia.org/wiki/Sony_Pictures||ロゴ・CI\nhttps://www.sony.com/ja/SonyInfo/design/philosophy/||カラー,ロゴ・CI",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#002B69 | color, background | 出現56回 | [inline-style]\n#002BB8 | color | 出現24回 | [inline-style]\n#FFDB01 | background | 出現21回 | [inline-style]\n#1D1D1D | background | 出現20回 | [inline-style]\n#EFEFEF | background-color | 出現12回 | [inline-style]\n#778A7F | background-color | 出現9回 | [inline-style]\n#494949 | background-color | 出現8回 | [inline-style]\n#EEEEEE | background-color | 出現6回 | [inline-style]\n#E1E1E1 | background-color | 出現6回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#555555 | color | 出現1回 | [inline-style]",
+    "hex_colors": "#333333 | color, border-left, border, background, border-bottom | 出現32回 | [external-css]\n#CCCCCC | border, border-bottom, background, border-top, border-left | 出現25回 | [external-css]\n#0099CC | border-bottom, color, fill, background | 出現13回 | [external-css]\n#666666 | background, background-color, color, border-top, border-bottom | 出現12回 | [external-css]\n#999999 | border-bottom, fill, border-left, border, color | 出現11回 | [external-css]\n#006699 | color, background, border-bottom | 出現10回 | [external-css]\n#393939 | background, border-bottom, border-color, color | 出現7回 | [external-css]\n#EFEFEF | background, border-top | 出現6回 | [external-css]\n#009ACC | border-bottom, border-color, color, border-left | 出現6回 | [external-css]\n#DCDCDC | border-top, border, border-bottom | 出現5回 | [external-css]\n#4A4A4A | border-bottom, color | 出現5回 | [external-css]\n#CFCFCF | color, background | 出現5回 | [external-css]\n#676767 | color, background | 出現5回 | [external-css]\n#E4E4E4 | border-right, border-bottom, border-left, border | 出現5回 | [external-css]\n#63788C | background, border-color, color | 出現5回 | [external-css]\n#D9D9D9 | border-bottom | 出現5回 | [external-css]\n#B8B8B8 | color, border-left | 出現4回 | [external-css]\n#D8D8D8 | border-left | 出現4回 | [external-css]\n#C6BFB7 | background | 出現4回 | [external-css]\n#707070 | color | 出現4回 | [external-css]\n#199CCF | border-color, color | 出現3回 | [external-css]\n#6D6D6D | color | 出現3回 | [external-css]\n#CED4DA | border | 出現3回 | [external-css]\n#005A78 | border-bottom, border-color | 出現3回 | [external-css]\n#840402 | border-bottom, border-color | 出現3回 | [external-css]\n#007BAB | color | 出現3回 | [external-css]\n#DFDFDF | color, background | 出現3回 | [external-css]\n#494949 | background, color | 出現2回 | [external-css]\n#D7D7D7 | border-top, border-bottom | 出現2回 | [external-css]\n#0099FF | background | 出現2回 | [external-css]",
     "rgb_colors": [],
-    "fonts": [],
-    "button_styles": [],
-    "card_styles": [],
-    "border_radii": [],
+    "fonts": [
+      "NotoSansJP-Bold",
+      "NotoSansJP-Regular",
+      "Avenir",
+      "inherit!important"
+    ],
+    "button_styles": [
+      {
+        "selector": "header .header-sp-search-bar-wrapper .header-sp-search-bar .header-sp-search-bar-submit .header-sp-search-bar-submit-btn",
+        "properties": {
+          "padding": "0 0 0 55px"
+        }
+      },
+      {
+        "selector": ".btn",
+        "properties": {
+          "padding": "17px 20px 0",
+          "color": "#fff",
+          "font-size": "16px",
+          "background": "#09c",
+          "border-radius": "25px"
+        }
+      },
+      {
+        "selector": ".btn.white",
+        "properties": {
+          "margin": "100px auto 0",
+          "background": "#fff",
+          "color": "#000",
+          "border": "1px solid #000",
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".btn.white:hover",
+        "properties": {
+          "background": "#000"
+        }
+      },
+      {
+        "selector": ".titles-list.keyart-list li a.btn",
+        "properties": {
+          "color": "#333",
+          "background": "#fff",
+          "border": "2px solid #333",
+          "padding": "10px 20px 0",
+          "font-size": "14px"
+        }
+      },
+      {
+        "selector": ".titles-list.keyart-list li a.btn:hover",
+        "properties": {
+          "background": "#000"
+        }
+      },
+      {
+        "selector": ".item-campaign .text-content .btn",
+        "properties": {
+          "color": "#333",
+          "background": "0 0",
+          "border": "2px solid #333",
+          "padding": "10px 20px 0",
+          "font-size": "14px"
+        }
+      },
+      {
+        "selector": ".item-campaign .text-content .btn:hover",
+        "properties": {
+          "background": "#000"
+        }
+      },
+      {
+        "selector": ".titles-list.newest-movies li .btn",
+        "properties": {
+          "margin": "0 0 10px",
+          "padding": "12px 11px 0",
+          "border": "2px solid #333",
+          "color": "#333",
+          "font-size": "13px"
+        }
+      },
+      {
+        "selector": ".titles-list.newest-movies li .btn:hover",
+        "properties": {
+          "color": "#fff"
+        }
+      },
+      {
+        "selector": ".page-title .btn",
+        "properties": {
+          "padding": "10px 20px 0",
+          "color": "#fff",
+          "background": "#565656",
+          "font-size": "14px"
+        }
+      },
+      {
+        "selector": ".page-title .btn:hover",
+        "properties": {
+          "color": "#fff!important"
+        }
+      },
+      {
+        "selector": ".page-title .sp-title-link-btns",
+        "properties": {
+          "margin": "30px 0 0",
+          "background": "#efefef!important"
+        }
+      },
+      {
+        "selector": ".page-title .sp-title-link-btns li",
+        "properties": {
+          "margin-bottom": "0"
+        }
+      },
+      {
+        "selector": ".page-title .sp-title-link-btns li .btn",
+        "properties": {
+          "padding": "12px 0"
+        }
+      },
+      {
+        "selector": ".page-title .sp-title-link-btns li .btn span",
+        "properties": {
+          "margin": "2px 10px 2px 0",
+          "border": "0 solid transparent",
+          "border-bottom-width": "5px",
+          "border-top-width": "5px"
+        }
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".page-title .boxart-seasons img",
+        "properties": {
+          "margin": "30px auto 0"
+        }
+      },
+      {
+        "selector": ".page-title .boxart-seasons .seasons-text",
+        "properties": {
+          "margin": "70px 0 0",
+          "font-size": "35px",
+          "font-weight": "700"
+        }
+      },
+      {
+        "selector": ".page-title .boxart-seasons .seasons",
+        "properties": {
+          "margin": "30px auto"
+        }
+      },
+      {
+        "selector": ".page-title .boxart-seasons .seasons li",
+        "properties": {
+          "margin-bottom": "10px"
+        }
+      },
+      {
+        "selector": ".page-title .boxart-seasons .seasons li a",
+        "properties": {
+          "color": "#333",
+          "display": "inline-block"
+        }
+      },
+      {
+        "selector": ".corp .corp-contact .box-container .error-message",
+        "properties": {
+          "color": "red"
+        }
+      },
+      {
+        "selector": ".corp .corp-contact .box-container.agree-box label",
+        "properties": {
+          "margin": "0"
+        }
+      },
+      {
+        "selector": ".corp .notification-content p.box,.corp .press-content p.box",
+        "properties": {
+          "border": "1px solid #000",
+          "padding": "1em"
+        }
+      },
+      {
+        "selector": ".corp .notification-content p.box_double,.corp .press-content p.box_double",
+        "properties": {
+          "border": "3px double #000",
+          "padding": "1em"
+        }
+      },
+      {
+        "selector": ".page-home.node-22566 .box",
+        "properties": {
+          "padding": "35px",
+          "font-size": "16px"
+        }
+      }
+    ],
+    "border_radii": [
+      "7px",
+      "none",
+      "5px",
+      "25px",
+      "18px"
+    ],
     "logo_urls": [
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Sony_Pictures_Studios_Motor_Gate.jpg/1280px-Sony_Pictures_Studios_Motor_Gate.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
-      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
-      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
-      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
-      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/120px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/20px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Sony_logo_%28white%29.svg/120px-Sony_logo_%28white%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sony_Music_Entertainment_Logo_2023.svg/40px-Sony_Music_Entertainment_Logo_2023.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sony_Music_%28Japan%29_logo.svg/120px-Sony_Music_%28Japan%29_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Sony_Interactive_Entertainment_logo_%282016%29.svg/60px-Sony_Interactive_Entertainment_logo_%282016%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/PlayStation_logo_and_wordmark.svg/120px-PlayStation_logo_and_wordmark.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+      "https://www.sonypictures.jp/images/sp-share-image.png",
+      "https://www.sonypictures.jp/sites/default/files/favicon.ico",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-he-movies.svg",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-he-tv.svg",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-about.svg",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-press.svg",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-history.svg",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-jobs.svg",
+      "https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-contact.svg",
+      "https://www.sonypictures.jp/sites/default/files/2026-09/bio2026_JPN_logo_RED_fix%20%282%29.jpg",
+      "https://www.sonypictures.jp/sites/default/files/2026-07/hero-bg_600x337.jpg"
     ],
     "source_css_urls": [
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cext.wikimediaBadges.ulsV2%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://www.sonypictures.jp/sites/default/files/css/css_547I7mtEo_LzdW-X2f80WbEwnGHncURJj1VJh00CAwM.css?delta=0&amp;language=ja&amp;theme=spej&amp;include=eJxNx0kOgCAMAMAPoT35HlJKY5BCCQWX35t48jLJUOaYhvbNN5l7qr4hZZ9q5Dp8EKUM_zjSzhD7bCgrHng7a3zALhpQFjJz9tjgAgGN3Zn4Mvhci8Yp_AKHHSs1",
+      "https://www.sonypictures.jp/sites/default/files/css/css_t_I224VJULHIJIsF-BdQD2fC6o5heyglo8XGRdojXAM.css?delta=1&amp;language=ja&amp;theme=spej&amp;include=eJxNx0kOgCAMAMAPoT35HlJKY5BCCQWX35t48jLJUOaYhvbNN5l7qr4hZZ9q5Dp8EKUM_zjSzhD7bCgrHng7a3zALhpQFjJz9tjgAgGN3Zn4Mvhci8Yp_AKHHSs1"
     ],
-    "extracted_at": "2026-09-08T08:17:05.261Z",
+    "extracted_at": "2026-09-08T08:17:10.965Z",
     "source_urls": [
-      "https://ja.wikipedia.org/wiki/ソニー・ピクチャーズ エンタテインメント"
+      "https://www.sonypictures.jp/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #002B69  color  出現56回  [inline-style]\n  #002BB8  color  出現24回  [inline-style]\n  #FFDB01  background  出現21回  [inline-style]\n  #1D1D1D  background  出現20回  [inline-style]\n  #EFEFEF  background-color  出現12回  [inline-style]\n  #778A7F  background-color  出現9回  [inline-style]\n  #494949  background-color  出現8回  [inline-style]\n  #EEEEEE  background-color  出現6回  [inline-style]\n  #E1E1E1  background-color  出現6回  [inline-style]\n  #EEEEFF  border  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #A2A9B1  border-bottom  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n  #555555  color  出現1回  [inline-style]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Sony_Pictures_Studios_Motor_Gate.jpg/1280px-Sony_Pictures_Studios_Motor_Gate.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/120px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/20px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Sony_logo_%28white%29.svg/120px-Sony_logo_%28white%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sony_Music_Entertainment_Logo_2023.svg/40px-Sony_Music_Entertainment_Logo_2023.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sony_Music_%28Japan%29_logo.svg/120px-Sony_Music_%28Japan%29_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cext.wikimediaBadges.ulsV2%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #333333  color  出現32回  [external-css]\n  #CCCCCC  border  出現25回  [external-css]\n  #0099CC  border-bottom  出現13回  [external-css]\n  #666666  background  出現12回  [external-css]\n  #999999  border-bottom  出現11回  [external-css]\n  #006699  color  出現10回  [external-css]\n  #393939  background  出現7回  [external-css]\n  #EFEFEF  background  出現6回  [external-css]\n  #009ACC  border-bottom  出現6回  [external-css]\n  #DCDCDC  border-top  出現5回  [external-css]\n  #4A4A4A  border-bottom  出現5回  [external-css]\n  #CFCFCF  color  出現5回  [external-css]\n  #676767  color  出現5回  [external-css]\n  #E4E4E4  border-right  出現5回  [external-css]\n  #63788C  background  出現5回  [external-css]\n\n【使用フォント】\n  NotoSansJP-Bold\n  NotoSansJP-Regular\n  Avenir\n  inherit!important\n\n【角丸パターン】\n  7px\n  none\n  5px\n  25px\n  18px\n\n【ボタンスタイル】\n  header .header-sp-search-bar-wrapper .header-sp-search-bar .header-sp-search-bar-submit .header-sp-search-bar-submit-btn\n    padding: 0 0 0 55px\n  .btn\n    padding: 17px 20px 0\n    color: #fff\n    font-size: 16px\n    background: #09c\n    border-radius: 25px\n  .btn.white\n    margin: 100px auto 0\n    background: #fff\n    color: #000\n    border: 1px solid #000\n    display: block\n  .btn.white:hover\n    background: #000\n  .titles-list.keyart-list li a.btn\n    color: #333\n    background: #fff\n    border: 2px solid #333\n    padding: 10px 20px 0\n    font-size: 14px\n\n【カードスタイル】\n  .page-title .boxart-seasons img\n    margin: 30px auto 0\n  .page-title .boxart-seasons .seasons-text\n    margin: 70px 0 0\n    font-size: 35px\n    font-weight: 700\n  .page-title .boxart-seasons .seasons\n    margin: 30px auto\n  .page-title .boxart-seasons .seasons li\n    margin-bottom: 10px\n  .page-title .boxart-seasons .seasons li a\n    color: #333\n    display: inline-block\n\n【ロゴ・ビジュアル素材】\n  https://www.sonypictures.jp/images/sp-share-image.png\n  https://www.sonypictures.jp/sites/default/files/favicon.ico\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-he-movies.svg\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-he-tv.svg\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-about.svg\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-press.svg\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-history.svg\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-jobs.svg\n  https://www.sonypictures.jp/themes/custom/spej/images/header/navi-icon-contact.svg\n  https://www.sonypictures.jp/sites/default/files/2026-09/bio2026_JPN_logo_RED_fix%20%282%29.jpg\n\n【取得CSSファイル】\n  https://www.sonypictures.jp/sites/default/files/css/css_547I7mtEo_LzdW-X2f80WbEwnGHncURJj1VJh00CAwM.css?delta=0&amp;language=ja&amp;theme=spej&amp;include=eJxNx0kOgCAMAMAPoT35HlJKY5BCCQWX35t48jLJUOaYhvbNN5l7qr4hZZ9q5Dp8EKUM_zjSzhD7bCgrHng7a3zALhpQFjJz9tjgAgGN3Zn4Mvhci8Yp_AKHHSs1\n  https://www.sonypictures.jp/sites/default/files/css/css_t_I224VJULHIJIsF-BdQD2fC6o5heyglo8XGRdojXAM.css?delta=1&amp;language=ja&amp;theme=spej&amp;include=eJxNx0kOgCAMAMAPoT35HlJKY5BCCQWX35t48jLJUOaYhvbNN5l7qr4hZZ9q5Dp8EKUM_zjSzhD7bCgrHng7a3zALhpQFjJz9tjgAgGN3Zn4Mvhci8Yp_AKHHSs1"
 }
