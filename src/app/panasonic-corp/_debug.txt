@@ -1,0 +1,11 @@
+2026-09-08T10:42:30.185Z  START task_id="8e3788a4-aa75-4f30-927a-b3ebd130883e" workflow_run_id="8b21960b-5e87-4ea7-8f2d-c76a9e3fb641" form_token="8A7QJIXWBlPzjOADzBJKoh" client="panasonic-corp"
+2026-09-08T10:42:30.188Z  formBase="https://app.dify.milize.com"
+2026-09-08T10:42:30.189Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/8A7QJIXWBlPzjOADzBJKoh
+2026-09-08T10:42:30.839Z  結果[app/api]: 200 ct=application/json body={}
+
+2026-09-08T10:42:30.839Z  ✓ 再開成功: app/api
+2026-09-08T10:42:30.839Z  resume 成功: ct=application/json
+2026-09-08T10:42:30.839Z  ポーリング開始 pollIds=["8b21960b-5e87-4ea7-8f2d-c76a9e3fb641","8e3788a4-aa75-4f30-927a-b3ebd130883e"]
+2026-09-08T10:42:41.381Z  logs[1]: run=8b21960b status="failed"
+2026-09-08T10:42:41.381Z  ワークフロー完了: status="failed" (outputs は dify-callback 経由で書き込み済み)
+2026-09-08T10:42:41.382Z  ポーリング完了
