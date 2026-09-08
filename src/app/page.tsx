@@ -17,6 +17,7 @@ const EXCLUDED_DIRS = new Set([
   'sharp',
   'ge',
   'milize',
+  'softbank-group',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
