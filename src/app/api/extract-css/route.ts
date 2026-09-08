@@ -453,6 +453,99 @@ function buildSummary(
 // ──────────────────────────────────────────
 // メインハンドラー
 // ──────────────────────────────────────────
+// ──────────────────────────────────────────
+// ロゴ画像の実ファイル保存
+// ──────────────────────────────────────────
+const LOGO_EXT_BY_CONTENT_TYPE: Record<string, string> = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg',
+  'image/svg+xml': 'svg',
+  'image/webp': 'webp',
+  'image/x-icon': 'ico',
+  'image/vnd.microsoft.icon': 'ico',
+  'image/gif': 'gif',
+};
+const LOGO_EXTENSIONS = Object.freeze(['png', 'jpg', 'jpeg', 'svg', 'webp', 'ico', 'gif']);
+
+/** src/app/{slug}/logo.{ext} がいずれかの拡張子で既に存在するか確認（並列チェックで待ち時間を短縮） */
+async function logoAlreadyExists(clientSlug: string, token: string): Promise<boolean> {
+  const checks = await Promise.all(
+    LOGO_EXTENSIONS.map(async (ext) => {
+      try {
+        const r = await fetch(
+          `https://api.github.com/repos/uchida-milize/milize-design-flow/contents/src/app/${clientSlug}/logo.${ext}`,
+          { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'extract-css' } },
+        );
+        return r.ok;
+      } catch {
+        return false;
+      }
+    }),
+  );
+  return checks.some(Boolean);
+}
+
+/**
+ * logoUrls の候補を順に試し、最初に取得できた実画像を
+ * src/app/{slug}/logo.{ext} としてコミットする。
+ * 既にロゴファイルが存在する場合は上書きしない（同一生成内の後続ページで
+ * 質の低い画像に上書きされるのを防ぐため）。
+ */
+async function saveLogo(
+  clientSlug: string,
+  logoUrls: string[],
+  token: string,
+): Promise<{ saved: boolean; path?: string; error?: string }> {
+  if (!clientSlug || logoUrls.length === 0) return { saved: false };
+  if (await logoAlreadyExists(clientSlug, token)) return { saved: false };
+
+  // data: URI等（遅延読み込みのプレースホルダー画像等）は候補から除外
+  // URLに"logo"を含む候補（favicon/OGP画像より明示的にロゴらしい）を優先して試す
+  const prioritized = logoUrls.filter(u => /^https?:\/\//i.test(u)).sort((a, b) => {
+    const aLogo = /logo/i.test(a) ? 0 : 1;
+    const bLogo = /logo/i.test(b) ? 0 : 1;
+    return aLogo - bLogo;
+  });
+
+  for (const url of prioritized.slice(0, 5)) {
+    try {
+      const imgRes = await fetch(url, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MilizeBot/1.0)' },
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!imgRes.ok) continue;
+      const contentType = (imgRes.headers.get('content-type') ?? '').split(';')[0].trim().toLowerCase();
+      const ext = LOGO_EXT_BY_CONTENT_TYPE[contentType];
+      if (!ext) continue;
+      const buf = await imgRes.arrayBuffer();
+      // トラッキングピクセル等の極小画像・巨大すぎるファイルは除外
+      if (buf.byteLength < 200 || buf.byteLength > 3 * 1024 * 1024) continue;
+      const base64 = Buffer.from(buf).toString('base64');
+      const filePath = `src/app/${clientSlug}/logo.${ext}`;
+      const putRes = await fetch(
+        `https://api.github.com/repos/uchida-milize/milize-design-flow/contents/${filePath}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+            'User-Agent': 'extract-css',
+          },
+          body: JSON.stringify({
+            message: `feat(${clientSlug}): save logo`,
+            content: base64,
+            branch: 'main',
+          }),
+        },
+      );
+      if (putRes.ok) return { saved: true, path: filePath };
+    } catch { /* 次の候補を試す */ }
+  }
+  return { saved: false, error: 'no valid logo candidate found' };
+}
+
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try {
@@ -583,6 +676,9 @@ export async function POST(req: NextRequest) {
   // client_slug が指定されていれば resources.json に保存
   let saved = false;
   let saveError: string | undefined;
+  let logoSaved = false;
+  let logoPath: string | undefined;
+  let logoSaveError: string | undefined;
   if (client_slug) {
     const githubToken = process.env.GITHUB_TOKEN ?? '';
     if (githubToken) {
@@ -621,6 +717,15 @@ export async function POST(req: NextRequest) {
       );
       saved = result.ok;
       if (!result.ok) saveError = result.error;
+
+      try {
+        const logoResult = await saveLogo(client_slug, logoUrls, githubToken);
+        logoSaved = logoResult.saved;
+        logoPath = logoResult.path;
+        logoSaveError = logoResult.error;
+      } catch (e) {
+        logoSaveError = String(e).slice(0, 200);
+      }
     }
   }
 
@@ -638,5 +743,10 @@ export async function POST(req: NextRequest) {
     summary,
     ...(errors.length > 0 ? { errors } : {}),
     ...(client_slug ? { saved, ...(saveError ? { save_error: saveError } : {}) } : {}),
+    ...(client_slug ? {
+      logo_saved: logoSaved,
+      ...(logoPath ? { logo_path: logoPath } : {}),
+      ...(logoSaveError ? { logo_save_error: logoSaveError } : {}),
+    } : {}),
   });
 }
