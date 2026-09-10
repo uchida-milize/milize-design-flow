@@ -1,3 +1,39 @@
 {
-  "selected_urls": "https://ja.wikipedia.org/wiki/株式会社ソニー・ミュージックエンタテインメント||ロゴ・CI\nhttps://www.sme.co.jp/||カラー,ロゴ・CI,フォント"
+  "selected_urls": "https://ja.wikipedia.org/wiki/株式会社ソニー・ミュージックエンタテインメント||ロゴ・CI\nhttps://www.sme.co.jp/||カラー,ロゴ・CI,フォント",
+  "css_info": {
+    "css_variables": {},
+    "hex_colors": "#002B69 | color, background | 出現56回 | [inline-style]\n#002BB8 | color | 出現36回 | [inline-style]\n#FFDB01 | background | 出現21回 | [inline-style]\n#778A7F | background-color | 出現20回 | [inline-style]\n#1D1D1D | background | 出現20回 | [inline-style]\n#EEEEEE | background-color | 出現14回 | [inline-style]\n#EFEFEF | background-color | 出現6回 | [inline-style]\n#E1E1E1 | background-color | 出現6回 | [inline-style]\n#000392 | background | 出現6回 | [inline-style]\n#494949 | background-color | 出現4回 | [inline-style]\n#DE0000 | background | 出現4回 | [inline-style]\n#A2A9B1 | border-bottom, border, border-left | 出現3回 | [style-tag]\n#D0111A | background | 出現3回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#B32424 | border-left | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#3366CC | border-left | 出現1回 | [style-tag]\n#FBFBFB | background-color | 出現1回 | [style-tag]\n#FEE7E6 | background-color | 出現1回 | [style-tag]\n#F28500 | border-left | 出現1回 | [style-tag]\n#FFCC33 | border-left | 出現1回 | [style-tag]\n#9932CC | border-left | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#AAAAAA | border | 出現1回 | [style-tag]\n#F9F9F9 | background-color | 出現1回 | [style-tag]",
+    "rgb_colors": [],
+    "fonts": [],
+    "button_styles": [],
+    "card_styles": [],
+    "border_radii": [],
+    "logo_urls": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/SME_Rokubancho_Building.jpg/1280px-SME_Rokubancho_Building.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
+      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sony_Music_%28Japan%29_logo.svg/120px-Sony_Music_%28Japan%29_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Sony_logo_%28white%29.svg/120px-Sony_logo_%28white%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/20px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sony_Music_Entertainment_Logo_2023.svg/40px-Sony_Music_Entertainment_Logo_2023.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Sony_Interactive_Entertainment_logo_%282016%29.svg/60px-Sony_Interactive_Entertainment_logo_%282016%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/PlayStation_logo_and_wordmark.svg/120px-PlayStation_logo_and_wordmark.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Recording_Industry_Association_of_Japan_logo.svg/120px-Recording_Industry_Association_of_Japan_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Japan_Video_Software_Association_Logo.png/120px-Japan_Video_Software_Association_Logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+    ],
+    "source_css_urls": [
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+    ],
+    "extracted_at": "2026-09-10T04:23:27.643Z",
+    "source_urls": [
+      "https://ja.wikipedia.org/wiki/株式会社ソニー・ミュージックエンタテインメント"
+    ]
+  },
+  "css_summary": "【抽出カラー（頻度順）】\n  #002B69  color  出現56回  [inline-style]\n  #002BB8  color  出現36回  [inline-style]\n  #FFDB01  background  出現21回  [inline-style]\n  #778A7F  background-color  出現20回  [inline-style]\n  #1D1D1D  background  出現20回  [inline-style]\n  #EEEEEE  background-color  出現14回  [inline-style]\n  #EFEFEF  background-color  出現6回  [inline-style]\n  #E1E1E1  background-color  出現6回  [inline-style]\n  #000392  background  出現6回  [inline-style]\n  #494949  background-color  出現4回  [inline-style]\n  #DE0000  background  出現4回  [inline-style]\n  #A2A9B1  border-bottom  出現3回  [style-tag]\n  #D0111A  background  出現3回  [inline-style]\n  #EEEEFF  border  出現2回  [style-tag]\n  #B32424  border-left  出現2回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/SME_Rokubancho_Building.jpg/1280px-SME_Rokubancho_Building.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sony_Music_%28Japan%29_logo.svg/120px-Sony_Music_%28Japan%29_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Sony_logo_%28white%29.svg/120px-Sony_logo_%28white%29.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sony_Pictures_logo.svg/20px-Sony_Pictures_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sony_Music_Entertainment_Logo_2023.svg/40px-Sony_Music_Entertainment_Logo_2023.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
 }
