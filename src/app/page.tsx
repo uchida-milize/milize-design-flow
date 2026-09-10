@@ -12,7 +12,6 @@ const EXCLUDED_DIRS = new Set([
   'dena',
   'group-softbank',
   'httpsdenacomjpcompanypolicylogoguidehtml',
-  'panasonic',
   'sharp',
   'ge',
   'milize',
