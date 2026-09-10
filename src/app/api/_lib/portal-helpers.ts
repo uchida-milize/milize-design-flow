@@ -208,6 +208,40 @@ export async function batchGitCommit(
   }
 }
 
+const LOGO_EXTENSIONS = ['png', 'jpg', 'jpeg', 'svg', 'webp', 'ico', 'gif'];
+
+/**
+ * src/app/{slug}/logo.{ext} を全拡張子分チェックし、存在すれば削除する。
+ * 同じスラッグでワークフローを再実行したとき、extract-css の logoAlreadyExists
+ * ガード（同一実行内での劣化上書き防止）が前回実行のロゴを永久にブロックし続けて
+ * しまうのを防ぐため、新しい実行の開始時（dify-callback の _reset）で呼ぶ。
+ */
+export async function deleteExistingLogoFiles(slug: string, token: string): Promise<number> {
+  const h = ghHeaders(token);
+  let deletedCount = 0;
+  await Promise.all(
+    LOGO_EXTENSIONS.map(async (ext) => {
+      const path = `src/app/${slug}/logo.${ext}`;
+      try {
+        const getRes = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, { headers: h });
+        if (!getRes.ok) return;
+        const data: { sha: string } = await getRes.json();
+        const delRes = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+          method: 'DELETE',
+          headers: h,
+          body: JSON.stringify({
+            message: `feat(${slug}): reset — remove stale logo before regeneration`,
+            sha: data.sha,
+            branch: 'main',
+          }),
+        });
+        if (delRes.ok) deletedCount++;
+      } catch { /* ファイルが無ければ何もしない */ }
+    }),
+  );
+  return deletedCount;
+}
+
 // page.tsx から slug を EXCLUDED_DIRS から除外する（別コミット）
 export async function removeFromExcludedDirs(slug: string, token: string) {
   const h = ghHeaders(token);

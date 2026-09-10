@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { batchGitCommit } from '../_lib/portal-helpers';
+import { batchGitCommit, deleteExistingLogoFiles } from '../_lib/portal-helpers';
 
 /**
  * POST /api/dify-callback
@@ -87,8 +87,20 @@ export async function POST(req: NextRequest) {
     ...incoming,
   };
 
+  // _reset 時は resources.json だけでなく、前回実行が残した logo.* も削除する。
+  // 削除しないと extract-css の logoAlreadyExists ガードが新しいロゴの保存を
+  // 永久にブロックし、同じスラッグを再実行してもロゴだけ更新されない。
+  let logosDeleted = 0;
+  if (shouldReset) {
+    try {
+      logosDeleted = await deleteExistingLogoFiles(client_slug, githubToken);
+    } catch (e) {
+      console.error(`[dify-callback] logo削除失敗: ${e}`);
+    }
+  }
+
   console.log(
-    `[dify-callback] client="${client_slug}" reset=${shouldReset} keys_added=${Object.keys(incoming).join(',')}`,
+    `[dify-callback] client="${client_slug}" reset=${shouldReset} logos_deleted=${logosDeleted} keys_added=${Object.keys(incoming).join(',')}`,
   );
 
   const result = await batchGitCommit(
@@ -113,5 +125,6 @@ export async function POST(req: NextRequest) {
     client_slug,
     keys_added: Object.keys(incoming),
     total_keys: Object.keys(updatedResources),
+    ...(shouldReset ? { logos_deleted: logosDeleted } : {}),
   });
 }

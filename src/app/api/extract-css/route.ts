@@ -375,6 +375,23 @@ function hexFreqToString(freq: Map<string, HexColorEntry>): string {
     .join('\n');
 }
 
+/** hexFreqToString で永続化した文字列を Map に復元する（同一実行内の複数URL呼び出しをマージするため） */
+function parseHexFreqString(str: string | undefined): Map<string, HexColorEntry> {
+  const freq = new Map<string, HexColorEntry>();
+  if (!str) return freq;
+  for (const line of str.split('\n')) {
+    const m = line.match(/^(#[0-9a-fA-F]{6})\s*\|\s*([^|]*)\|\s*出現(\d+)回\s*\|\s*\[([^\]]*)\]/);
+    if (!m) continue;
+    const [, hex, usagesStr, countStr, sourcesStr] = m;
+    freq.set(hex, {
+      count: parseInt(countStr, 10) || 0,
+      usages: usagesStr.split(',').map(s => s.trim()).filter(Boolean),
+      sources: sourcesStr.split('+').map(s => s.trim()).filter(Boolean),
+    });
+  }
+  return freq;
+}
+
 function buildSummary(
   cssVars: Record<string, string>,
   hexFreq: Map<string, HexColorEntry>,
@@ -651,29 +668,19 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // 重複除去
+  // 重複除去（この呼び出し1回分のURLの中での重複のみ）
   allButtonStyles = Array.from(new Map(allButtonStyles.map(b => [b.selector, b])).values()).slice(0, 20);
   allCardStyles   = Array.from(new Map(allCardStyles.map(c => [c.selector, c])).values()).slice(0, 20);
-  const logoUrls  = dedupe(allLogoUrls);
-  const sourceCssUrls = dedupe(allSourceCssUrls);
-  const fonts     = Array.from(allFonts);
-  const borderRadii = Array.from(allBorderRadii).slice(0, 20);
-
-  // HEX をソートして文字列化（LLM 入力用）
-  const hexColorsStr = hexFreqToString(allHexFreq);
-
-  // RGB 値も収集（CSS 変数の rgba など）
-  const rgbColors = Object.values(allCssVars)
-    .filter(v => /rgba?\(/.test(v))
-    .slice(0, 10);
-
-  const summary = buildSummary(
-    allCssVars, allHexFreq, fonts,
-    allButtonStyles, allCardStyles,
-    borderRadii, logoUrls, sourceCssUrls,
-  );
+  let logoUrls  = dedupe(allLogoUrls);
+  let sourceCssUrls = dedupe(allSourceCssUrls);
+  let fonts     = Array.from(allFonts);
+  let borderRadii = Array.from(allBorderRadii).slice(0, 20);
 
   // client_slug が指定されていれば resources.json に保存
+  // NOTE: Dify側は選択URLごとにこのAPIを1回ずつ呼ぶため、ここで既存の css_info と
+  // マージしないと「最後に処理されたURLの結果」だけが残ってしまう
+  // （ワークフロー開始時の dify-callback _reset で resources.json 自体は空に戻るので、
+  //   この呼び出し間マージは同一実行内の複数URL分を正しく積み上げるためのもの）
   let saved = false;
   let saveError: string | undefined;
   let logoSaved = false;
@@ -694,6 +701,38 @@ export async function POST(req: NextRequest) {
           if (fd.content) current = JSON.parse(Buffer.from(fd.content, 'base64').toString('utf8'));
         }
       } catch { /* 存在しない場合は空から開始 */ }
+
+      const prevCssInfo = current['css_info'] as {
+        css_variables?: Record<string, string>;
+        hex_colors?: string;
+        fonts?: string[];
+        button_styles?: StyleBlock[];
+        card_styles?: StyleBlock[];
+        border_radii?: string[];
+        logo_urls?: string[];
+        source_css_urls?: string[];
+      } | undefined;
+
+      if (prevCssInfo) {
+        // 同一ワークフロー実行内の既存分（他URL処理済み）とマージ。新しい値が同キーを上書き。
+        allCssVars = { ...prevCssInfo.css_variables, ...allCssVars };
+        allHexFreq = mergeHexFreq(parseHexFreqString(prevCssInfo.hex_colors), allHexFreq);
+        allButtonStyles = Array.from(new Map([...(prevCssInfo.button_styles ?? []), ...allButtonStyles].map(b => [b.selector, b])).values()).slice(0, 20);
+        allCardStyles   = Array.from(new Map([...(prevCssInfo.card_styles ?? []), ...allCardStyles].map(c => [c.selector, c])).values()).slice(0, 20);
+        fonts = Array.from(new Set([...(prevCssInfo.fonts ?? []), ...fonts]));
+        borderRadii = Array.from(new Set([...(prevCssInfo.border_radii ?? []), ...borderRadii])).slice(0, 20);
+        logoUrls = dedupe([...(prevCssInfo.logo_urls ?? []), ...logoUrls]);
+        sourceCssUrls = dedupe([...(prevCssInfo.source_css_urls ?? []), ...sourceCssUrls]);
+      }
+
+      // HEX をソートして文字列化（LLM 入力用、マージ後のデータから生成）
+      const hexColorsStr = hexFreqToString(allHexFreq);
+      const rgbColors = Object.values(allCssVars).filter(v => /rgba?\(/.test(v)).slice(0, 10);
+      const summary = buildSummary(
+        allCssVars, allHexFreq, fonts,
+        allButtonStyles, allCardStyles,
+        borderRadii, logoUrls, sourceCssUrls,
+      );
 
       current['css_info'] = {
         css_variables: allCssVars,
@@ -728,6 +767,15 @@ export async function POST(req: NextRequest) {
       }
     }
   }
+
+  // レスポンス用（client_slug 指定時は既存分とマージ済みのデータ、未指定時はこの呼び出し単体のデータ）
+  const hexColorsStr = hexFreqToString(allHexFreq);
+  const rgbColors = Object.values(allCssVars).filter(v => /rgba?\(/.test(v)).slice(0, 10);
+  const summary = buildSummary(
+    allCssVars, allHexFreq, fonts,
+    allButtonStyles, allCardStyles,
+    borderRadii, logoUrls, sourceCssUrls,
+  );
 
   return Response.json({
     ok: true,
