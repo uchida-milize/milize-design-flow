@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+}
+
+.httpswwwsmecojp-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.httpswwwsmecojp-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #111827;
+}
+
+.httpswwwsmecojp-portal .portal-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.httpswwwsmecojp-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.httpswwwsmecojp-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.httpswwwsmecojp-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.httpswwwsmecojp-portal .portal-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.httpswwwsmecojp-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.httpswwwsmecojp-portal .swatch-color {
+  height: 80px;
+  border-radius: 8px 8px 0 0;
+}
+
+.httpswwwsmecojp-portal .swatch-info {
+  padding: 8px 4px;
+}
+
+.httpswwwsmecojp-portal .swatch-hex {
+  font-family: monospace;
+  font-size: 12px;
+  color: #111827;
+}
+
+.httpswwwsmecojp-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.httpswwwsmecojp-portal .tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.httpswwwsmecojp-portal .tab-item {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.httpswwwsmecojp-portal .tab-item.active {
+  color: #ffffff;
+}
+
+.httpswwwsmecojp-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.httpswwwsmecojp-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 8px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.httpswwwsmecojp-portal .component-render {
+  padding: 24px;
+}
+
+.httpswwwsmecojp-portal .component-code {
+  background-color: #efefef;
+  color: #333333;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+}
+
+.httpswwwsmecojp-portal .nav-card {
+  display: block;
+  text-decoration: none;
+}
