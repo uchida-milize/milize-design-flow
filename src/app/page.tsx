@@ -24,6 +24,7 @@ const EXCLUDED_DIRS = new Set([
   'toyota',
   'videor',
   'smecojpcompany',
+  'httpswwwsmecojp',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
