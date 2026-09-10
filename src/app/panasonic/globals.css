@@ -226,19 +226,9 @@
 
 /* 標準カラー変数（自動注入） */
 :root {
-  --primary-color: #666666;
-  --secondary-color: #333333;
-  --accent-color: #CCCCCC;
+  --primary-color: #C0C0C0;
+  --secondary-color: #000000;
+  --accent-color: #444444;
   --text-color: #111827;
-  --bg-color: #F2F2F2;
-  --brand-color-1: #666666;
-  --brand-ratio-1: 50;
-  --brand-color-2: #333333;
-  --brand-ratio-2: 22;
-  --brand-color-3: #CCCCCC;
-  --brand-ratio-3: 13;
-  --brand-color-4: #E6E6E6;
-  --brand-ratio-4: 9;
-  --brand-color-5: #1A1A1A;
-  --brand-ratio-5: 6;
+  --bg-color: #f5f7fa;
 }

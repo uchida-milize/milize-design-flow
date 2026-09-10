@@ -5,11 +5,11 @@ const basePath = '/panasonic';
 const primaryColor = 'var(--primary-color)';
 
 const colorRatio = [
-  { hex: '#666666', name: '#666666', percent: 50 },
-  { hex: '#333333', name: '#333333', percent: 22 },
-  { hex: '#CCCCCC', name: '#CCCCCC', percent: 13 },
-  { hex: '#E6E6E6', name: '#E6E6E6', percent: 9 },
-  { hex: '#1A1A1A', name: '#1A1A1A', percent: 6 },
+  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
+  { hex: '#000000', name: 'ブラック', percent: 30 },
+  { hex: '#444444', name: 'ダークグレー', percent: 15 },
+  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
+  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
 ];
 
 export default function Home() {
