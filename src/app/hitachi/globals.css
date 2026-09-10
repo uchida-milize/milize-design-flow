@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+}
+
+.hitachi-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.hitachi-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #111827;
+}
+
+.hitachi-portal h1,
+.hitachi-portal h2,
+.hitachi-portal h3,
+.hitachi-portal h4,
+.hitachi-portal h5,
+.hitachi-portal h6 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+}
+
+.hitachi-portal p,
+.hitachi-portal span,
+.hitachi-portal a,
+.hitachi-portal button,
+.hitachi-portal input,
+.hitachi-portal textarea,
+.hitachi-portal select {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+}
+
+.hitachi-portal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hitachi-portal button {
+  cursor: pointer;
+}
