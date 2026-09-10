@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-primary: #0071e3;
+  --portal-bg: #f5f7fa;
+}
+
+.apple-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.apple-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: #111827;
+}
+
+.apple-portal h1,
+.apple-portal h2,
+.apple-portal h3,
+.apple-portal strong,
+.apple-portal b {
+  font-weight: 700;
+}
+
+.apple-portal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.apple-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.apple-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.apple-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--portal-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.apple-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.apple-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
