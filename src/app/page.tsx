@@ -26,6 +26,7 @@ const EXCLUDED_DIRS = new Set([
   'smecojpcompany',
   'httpswwwsmecojp',
   'sme',
+  'hitachi',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
