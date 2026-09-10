@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { batchGitCommit } from '../_lib/portal-helpers';
+import { batchGitCommit, deleteExistingLogoFiles } from '../_lib/portal-helpers';
 
 /**
  * POST /api/extract-css
@@ -84,6 +84,7 @@ function parseHtmlMeta(html: string, baseUrl: string): {
   ogImage: string | null;
   favicon: string | null;
   logoImgs: string[];
+  infoboxImage: string | null;
 } {
   const allCssLinks: string[] = [];
   const logoImgs: string[] = [];
@@ -121,6 +122,21 @@ function parseHtmlMeta(html: string, baseUrl: string): {
     }
   }
 
+  // Wikipedia の記事ページ: 右カラムの「基礎情報（infobox）」上部にある画像＝会社ロゴを優先取得。
+  // 一般的な logo/brand キーワード一致（下記）は infobox を持たないページ向けで、Wikipediaの
+  // ロゴ画像ファイル名は必ずしも "logo" を含むとは限らないため、ここで別途拾う。
+  let infoboxImage: string | null = null;
+  try {
+    if (/(^|\.)wikipedia\.org$/i.test(new URL(baseUrl).hostname)) {
+      const infoboxMatch = /<table[^>]+class=["'][^"']*\binfobox\b[^"']*["'][^>]*>([\s\S]*?)<\/table>/i.exec(html);
+      if (infoboxMatch) {
+        const infoboxImgMatch = /<img[^>]+src=["']([^"']+)["']/i.exec(infoboxMatch[1]);
+        // src 内の &amp; 等の HTML エンティティをデコードしてから絶対URL化する
+        if (infoboxImgMatch) infoboxImage = toAbsolute(infoboxImgMatch[1].replace(/&amp;/g, '&'), baseUrl);
+      }
+    }
+  } catch { /* baseUrl が不正な場合は無視 */ }
+
   // <style> タグ内の CSS テキストを収集
   const styleTags: string[] = [];
   const styleTagRe = /<style[^>]*>([\s\S]*?)<\/style>/gi;
@@ -142,6 +158,7 @@ function parseHtmlMeta(html: string, baseUrl: string): {
     ogImage,
     favicon,
     logoImgs: dedupe(logoImgs),
+    infoboxImage,
   };
 }
 
@@ -503,29 +520,13 @@ async function logoAlreadyExists(clientSlug: string, token: string): Promise<boo
   return checks.some(Boolean);
 }
 
-/**
- * logoUrls の候補を順に試し、最初に取得できた実画像を
- * src/app/{slug}/logo.{ext} としてコミットする。
- * 既にロゴファイルが存在する場合は上書きしない（同一生成内の後続ページで
- * 質の低い画像に上書きされるのを防ぐため）。
- */
-async function saveLogo(
+/** 候補URLを順に試し、最初に取得できた実画像を src/app/{slug}/logo.{ext} としてコミットする */
+async function tryCommitLogo(
   clientSlug: string,
-  logoUrls: string[],
+  candidates: string[],
   token: string,
-): Promise<{ saved: boolean; path?: string; error?: string }> {
-  if (!clientSlug || logoUrls.length === 0) return { saved: false };
-  if (await logoAlreadyExists(clientSlug, token)) return { saved: false };
-
-  // data: URI等（遅延読み込みのプレースホルダー画像等）は候補から除外
-  // URLに"logo"を含む候補（favicon/OGP画像より明示的にロゴらしい）を優先して試す
-  const prioritized = logoUrls.filter(u => /^https?:\/\//i.test(u)).sort((a, b) => {
-    const aLogo = /logo/i.test(a) ? 0 : 1;
-    const bLogo = /logo/i.test(b) ? 0 : 1;
-    return aLogo - bLogo;
-  });
-
-  for (const url of prioritized.slice(0, 5)) {
+): Promise<{ saved: boolean; path?: string } | null> {
+  for (const url of candidates.slice(0, 5)) {
     try {
       const imgRes = await fetch(url, {
         headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MilizeBot/1.0)' },
@@ -560,7 +561,49 @@ async function saveLogo(
       if (putRes.ok) return { saved: true, path: filePath };
     } catch { /* 次の候補を試す */ }
   }
-  return { saved: false, error: 'no valid logo candidate found' };
+  return null;
+}
+
+/**
+ * logoUrls の候補を順に試し、最初に取得できた実画像を
+ * src/app/{slug}/logo.{ext} としてコミットする。
+ * 既にロゴファイルが存在する場合は通常は上書きしない（同一生成内の後続ページで
+ * 質の低い画像に上書きされるのを防ぐため）。
+ *
+ * priorityUrls（Wikipediaのinfobox画像など、より権威あるロゴソース）が渡された場合は例外で、
+ * 既存ロゴの有無に関わらずまずそちらの保存を試みる（同一実行内で他ページの一般的な
+ * logo判定が先に処理され、後から見つかったinfobox画像が取りこぼされるのを防ぐため）。
+ */
+async function saveLogo(
+  clientSlug: string,
+  logoUrls: string[],
+  token: string,
+  priorityUrls: string[] = [],
+): Promise<{ saved: boolean; path?: string; error?: string }> {
+  if (!clientSlug) return { saved: false };
+
+  if (priorityUrls.length > 0) {
+    // 上書きのため、拡張子違いも含めて既存ロゴを先に削除してから保存を試みる
+    await deleteExistingLogoFiles(clientSlug, token);
+    const priorityCandidates = dedupe(priorityUrls.filter(u => /^https?:\/\//i.test(u)));
+    const result = await tryCommitLogo(clientSlug, priorityCandidates, token);
+    if (result) return result;
+    // 優先候補が全滅した場合は下の通常フローにフォールバック（既に削除済みなので素通りする）
+  }
+
+  if (logoUrls.length === 0) return { saved: false };
+  if (await logoAlreadyExists(clientSlug, token)) return { saved: false };
+
+  // data: URI等（遅延読み込みのプレースホルダー画像等）は候補から除外
+  // URLに"logo"を含む候補（favicon/OGP画像より明示的にロゴらしい）を優先して試す
+  const prioritized = logoUrls.filter(u => /^https?:\/\//i.test(u)).sort((a, b) => {
+    const aLogo = /logo/i.test(a) ? 0 : 1;
+    const bLogo = /logo/i.test(b) ? 0 : 1;
+    return aLogo - bLogo;
+  });
+
+  const result = await tryCommitLogo(clientSlug, prioritized, token);
+  return result ?? { saved: false, error: 'no valid logo candidate found' };
 }
 
 export async function POST(req: NextRequest) {
@@ -600,6 +643,7 @@ export async function POST(req: NextRequest) {
   let allCardStyles: StyleBlock[] = [];
   const allBorderRadii = new Set<string>();
   const allLogoUrls: string[] = [];
+  const allInfoboxImgs: string[] = [];
   const allSourceCssUrls: string[] = [];
   const errors: string[] = [];
 
@@ -613,9 +657,10 @@ export async function POST(req: NextRequest) {
       if (!htmlRes.ok) { errors.push(`${pageUrl}: HTTP ${htmlRes.status}`); continue; }
       const html = await htmlRes.text();
 
-      const { ownCssLinks, libCssLinks, styleTags, ogImage, favicon, logoImgs } = parseHtmlMeta(html, pageUrl);
+      const { ownCssLinks, libCssLinks, styleTags, ogImage, favicon, logoImgs, infoboxImage } = parseHtmlMeta(html, pageUrl);
 
-      // ロゴ・OGP を収集
+      // ロゴ・OGP を収集（Wikipediaのinfobox画像は「会社ロゴ」として最優先候補に別枠で積む）
+      if (infoboxImage) allInfoboxImgs.push(infoboxImage);
       [ogImage, favicon, ...logoImgs].filter(Boolean).forEach(u => allLogoUrls.push(u!));
 
       // ──────────────────────────
@@ -758,7 +803,7 @@ export async function POST(req: NextRequest) {
       if (!result.ok) saveError = result.error;
 
       try {
-        const logoResult = await saveLogo(client_slug, logoUrls, githubToken);
+        const logoResult = await saveLogo(client_slug, logoUrls, githubToken, dedupe(allInfoboxImgs));
         logoSaved = logoResult.saved;
         logoPath = logoResult.path;
         logoSaveError = logoResult.error;
@@ -788,6 +833,7 @@ export async function POST(req: NextRequest) {
     border_radii: borderRadii,
     logo_urls: logoUrls,
     source_css_urls: sourceCssUrls,
+    ...(allInfoboxImgs.length > 0 ? { infobox_images: dedupe(allInfoboxImgs) } : {}),
     summary,
     ...(errors.length > 0 ? { errors } : {}),
     ...(client_slug ? { saved, ...(saveError ? { save_error: saveError } : {}) } : {}),
