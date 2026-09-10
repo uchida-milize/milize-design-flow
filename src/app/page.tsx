@@ -26,7 +26,6 @@ const EXCLUDED_DIRS = new Set([
   'smecojpcompany',
   'httpswwwsmecojp',
   'sme',
-  'hitachi',
   'panasonic-corp',
 ]);
 
