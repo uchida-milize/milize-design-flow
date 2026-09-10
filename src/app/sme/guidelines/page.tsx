@@ -5,11 +5,11 @@ const basePath = '/sme';
 const primaryColor = 'var(--primary-color)';
 
 const colors = [
-  { hex: '#C0C0C0', name: 'プライマリカラー' },
-  { hex: '#000000', name: 'セカンダリカラー' },
-  { hex: '#444444', name: 'アクセントカラー' },
-  { hex: '#FFFFFF', name: '背景カラー' },
-  { hex: '#7F7F7F', name: 'サブカラー' },
+  { hex: '#002B69', name: 'プライマリカラー' },
+  { hex: '#002BB8', name: 'セカンダリカラー' },
+  { hex: '#FFDB01', name: 'アクセントカラー' },
+  { hex: '#EEEEFF', name: '背景カラー' },
+  { hex: '#000392', name: 'テキストカラー' },
 ];
 
 export default function GuidelinesPage() {

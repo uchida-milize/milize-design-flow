@@ -1,13 +1,42 @@
-2026-09-10T03:44:24.969Z  START task_id="c970ebe0-4c4a-4f64-9129-72ac7c11f272" workflow_run_id="86693fa9-32e2-4d2d-9b49-3097d7bc61cb" form_token="yt4YR0ZLEOV0VV0o4iAo57" client="sme"
-2026-09-10T03:44:24.973Z  formBase="https://app.dify.milize.com"
-2026-09-10T03:44:24.973Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/yt4YR0ZLEOV0VV0o4iAo57
-2026-09-10T03:44:25.525Z  結果[app/api]: 412 ct=application/json body={"code":"human_input_form_expired","message":"This form has expired, form_id=01a0892d-d163-737e-a624-a6b4e84e65bd","status":412}
+2026-09-10T04:30:09.742Z  START task_id="10d03a5c-ea17-4384-8f1a-55aef2d522c4" workflow_run_id="94fb2a7e-7f15-4c40-992a-658a1ef70b21" form_token="fWb7GBKStVlm2skgOAwlYV" client="sme"
+2026-09-10T04:30:09.746Z  formBase="https://app.dify.milize.com"
+2026-09-10T04:30:09.746Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/fWb7GBKStVlm2skgOAwlYV
+2026-09-10T04:30:10.291Z  結果[app/api]: 200 ct=application/json body={}
 
-2026-09-10T03:44:25.525Z  試行[api/form]: POST https://api.dify.milize.com/form/human_input/yt4YR0ZLEOV0VV0o4iAo57
-2026-09-10T03:44:25.985Z  結果[api/form]: 200 ct= body=
-2026-09-10T03:44:25.985Z  ✓ 再開成功: api/form
-2026-09-10T03:44:25.985Z  resume 成功: ct=
-2026-09-10T03:44:25.985Z  ポーリング開始 pollIds=["86693fa9-32e2-4d2d-9b49-3097d7bc61cb","c970ebe0-4c4a-4f64-9129-72ac7c11f272"]
-2026-09-10T03:44:36.687Z  logs[1]: run=86693fa9 status="succeeded"
-2026-09-10T03:44:36.687Z  ワークフロー完了: status="succeeded" (outputs は dify-callback 経由で書き込み済み)
-2026-09-10T03:44:36.687Z  ポーリング完了
+2026-09-10T04:30:10.291Z  ✓ 再開成功: app/api
+2026-09-10T04:30:10.291Z  resume 成功: ct=application/json
+2026-09-10T04:30:10.291Z  ポーリング開始 pollIds=["94fb2a7e-7f15-4c40-992a-658a1ef70b21","10d03a5c-ea17-4384-8f1a-55aef2d522c4"]
+2026-09-10T04:30:20.835Z  logs[1]: run=94fb2a7e status="running"
+2026-09-10T04:30:20.836Z  logs[1]: 10件, runId未発見
+2026-09-10T04:30:31.366Z  logs[2]: run=94fb2a7e status="running"
+2026-09-10T04:30:31.366Z  logs[2]: 10件, runId未発見
+2026-09-10T04:30:41.884Z  logs[3]: run=94fb2a7e status="running"
+2026-09-10T04:30:41.884Z  logs[3]: 10件, runId未発見
+2026-09-10T04:30:52.393Z  logs[4]: run=94fb2a7e status="running"
+2026-09-10T04:30:52.393Z  logs[4]: 10件, runId未発見
+2026-09-10T04:31:02.917Z  logs[5]: run=94fb2a7e status="running"
+2026-09-10T04:31:02.917Z  logs[5]: 10件, runId未発見
+2026-09-10T04:31:13.436Z  logs[6]: run=94fb2a7e status="running"
+2026-09-10T04:31:13.436Z  logs[6]: 10件, runId未発見
+2026-09-10T04:31:23.945Z  logs[7]: run=94fb2a7e status="running"
+2026-09-10T04:31:23.945Z  logs[7]: 10件, runId未発見
+2026-09-10T04:31:34.464Z  logs[8]: run=94fb2a7e status="running"
+2026-09-10T04:31:34.464Z  logs[8]: 10件, runId未発見
+2026-09-10T04:31:44.999Z  logs[9]: run=94fb2a7e status="running"
+2026-09-10T04:31:44.999Z  logs[9]: 10件, runId未発見
+2026-09-10T04:31:55.515Z  logs[10]: run=94fb2a7e status="running"
+2026-09-10T04:31:55.515Z  logs[10]: 10件, runId未発見
+2026-09-10T04:32:06.039Z  logs[11]: run=94fb2a7e status="running"
+2026-09-10T04:32:06.039Z  logs[11]: 10件, runId未発見
+2026-09-10T04:32:16.555Z  logs[12]: run=94fb2a7e status="running"
+2026-09-10T04:32:16.555Z  logs[12]: 10件, runId未発見
+2026-09-10T04:32:27.067Z  logs[13]: run=94fb2a7e status="running"
+2026-09-10T04:32:27.067Z  logs[13]: 10件, runId未発見
+2026-09-10T04:32:37.572Z  logs[14]: run=94fb2a7e status="running"
+2026-09-10T04:32:37.572Z  logs[14]: 10件, runId未発見
+2026-09-10T04:32:48.095Z  logs[15]: run=94fb2a7e status="running"
+2026-09-10T04:32:48.095Z  logs[15]: 10件, runId未発見
+2026-09-10T04:32:58.616Z  logs[16]: run=94fb2a7e status="succeeded"
+2026-09-10T04:32:58.616Z  ワークフロー完了: status="succeeded" (outputs は dify-callback 経由で書き込み済み)
+2026-09-10T04:32:58.616Z  ポーリング完了
+2026-09-10T04:32:58.757Z  designColors: resources.json css_info から抽出 primary=#002B69
