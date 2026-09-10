@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+  --portal-primary: #003DA5;
+}
+
+.panasonic-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.panasonic-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #333333;
+}
+
+.panasonic-portal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.panasonic-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.panasonic-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.panasonic-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.panasonic-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.panasonic-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.panasonic-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.panasonic-portal .swatch-top {
+  height: 80px;
+  border-radius: 8px 8px 0 0;
+}
+
+.panasonic-portal .swatch-bottom {
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.panasonic-portal .swatch-hex {
+  font-family: monospace;
+  font-size: 13px;
+  color: #111827;
+}
+
+.panasonic-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.panasonic-portal .tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.panasonic-portal .tab-btn {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.panasonic-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  margin-bottom: 24px;
+}
+
+.panasonic-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.panasonic-portal .component-render {
+  padding: 24px;
+}
+
+.panasonic-portal .component-code {
+  background: #efefef;
+  color: #333333;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+}
