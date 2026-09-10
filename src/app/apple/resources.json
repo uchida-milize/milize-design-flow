@@ -1,34 +1,375 @@
 {
   "selected_urls": "https://ja.wikipedia.org/wiki/Apple Japan合同会社||ロゴ・CI\nhttps://www.apple.com/jp/||カラー,ロゴ・CI,フォント",
   "css_info": {
-    "css_variables": {},
-    "hex_colors": "#002BB8 | color | 出現30回 | [inline-style]\n#A2AAAD | background | 出現21回 | [inline-style]\n#FFB21E | background | 出現14回 | [inline-style]\n#006600 | color | 出現5回 | [inline-style]\n#A2A9B1 | border-bottom, border, border-left | 出現3回 | [style-tag]\n#202122 | color | 出現3回 | [inline-style]\n#B32424 | border-left | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#3366CC | border-left | 出現1回 | [style-tag]\n#FBFBFB | background-color | 出現1回 | [style-tag]\n#FEE7E6 | background-color | 出現1回 | [style-tag]\n#F28500 | border-left | 出現1回 | [style-tag]\n#FFCC33 | border-left | 出現1回 | [style-tag]\n#9932CC | border-left | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#AAAAAA | border-top | 出現1回 | [inline-style]",
-    "rgb_colors": [],
-    "fonts": [],
-    "button_styles": [],
-    "card_styles": [],
-    "border_radii": [],
+    "css_variables": {
+      "--r-globalnav-background-opened": "#fafafc",
+      "--sk-focus-color": "#0071e3",
+      "--sk-focus-color-alt": "rgb(0, 0, 0)",
+      "--sk-body-text-color": "rgb(29, 29, 31)",
+      "--sk-headline-text-color": "rgb(29, 29, 31)",
+      "--sk-body-background-color": "rgb(255, 255, 255)",
+      "--sk-body-font-stack": "text",
+      "--sk-body-link-color": "rgb(0, 102, 204)",
+      "--sk-footnote-font-size": ".6em",
+      "--sk-glyph": "rgb(0, 0, 0)",
+      "--sk-glyph-gray": "rgb(29, 29, 31)",
+      "--sk-glyph-gray-alpha": "rgba(0, 0, 0, .88)",
+      "--sk-glyph-gray-secondary": "rgb(110, 110, 115)",
+      "--sk-glyph-gray-secondary-alpha": "rgba(0, 0, 0, .56)",
+      "--sk-glyph-gray-secondary-alt": "rgb(66, 66, 69)",
+      "--sk-glyph-gray-secondary-alt-alpha": "rgba(0, 0, 0, .72)",
+      "--sk-glyph-gray-tertiary": "rgb(134, 134, 139)",
+      "--sk-glyph-gray-tertiary-alpha": "rgba(0, 0, 0, .48)",
+      "--sk-glyph-blue": "rgb(0, 102, 204)",
+      "--sk-glyph-orange": "rgb(182, 68, 0)",
+      "--sk-glyph-green": "rgb(0, 128, 9)",
+      "--sk-glyph-red": "rgb(227, 0, 0)",
+      "--sk-fill": "rgb(255, 255, 255)",
+      "--sk-fill-secondary": "rgb(250, 250, 252)",
+      "--sk-fill-tertiary": "rgb(245, 245, 247)",
+      "--sk-fill-gray": "rgb(29, 29, 31)",
+      "--sk-fill-gray-alpha": "rgba(0, 0, 0, .88)",
+      "--sk-fill-gray-secondary": "rgb(134, 134, 139)",
+      "--sk-fill-gray-secondary-alpha": "rgba(0, 0, 0, .48)",
+      "--sk-fill-gray-tertiary": "rgb(210, 210, 215)",
+      "--sk-fill-gray-tertiary-alpha": "rgba(0, 0, 0, .16)",
+      "--sk-fill-gray-quaternary": "rgb(232, 232, 237)",
+      "--sk-fill-gray-quaternary-alpha": "rgba(0, 0, 0, .08)",
+      "--sk-fill-blue": "rgb(0, 113, 227)",
+      "--sk-fill-orange": "rgb(245, 99, 0)",
+      "--sk-fill-orange-secondary": "rgb(255, 249, 244)",
+      "--sk-fill-green": "rgb(3, 161, 14)",
+      "--sk-fill-green-secondary": "rgb(245, 255, 246)",
+      "--sk-fill-red": "rgb(227, 0, 0)",
+      "--sk-fill-red-secondary": "rgb(255, 242, 244)",
+      "--sk-fill-yellow": "rgb(255, 224, 69)",
+      "--sk-fill-yellow-secondary": "rgb(255, 254, 242)",
+      "--sk-productred": "rgb(175, 30, 45)",
+      "--sk-enviro-green": "rgb(0, 217, 89)",
+      "--sk-footnote-reduced-font-size": ".45em"
+    },
+    "hex_colors": "#0071E3 | outline, --sk-focus-color, --gf-focus-color, --localnav-focus-color | 出現26回 | [external-css]\n#006EDB | --sk-button-background-active | 出現18回 | [external-css]\n#0076DF | --sk-button-background-hover | 出現17回 | [external-css]\n#333336 | --r-globalnav-color-secondary, --r-globalnav-search-icon-active-fill, --r-globalnav-search-input-value-color, --r-globalnav-search-list-item-color, --r-globalnav-search-list-item-searchterm-color | 出現13回 | [external-css]\n#272729 | --sk-button-background-hover, --sk-iconcontrol-scrim-color-hover | 出現13回 | [external-css]\n#18181A | --sk-button-background-active, --sk-iconcontrol-scrim-color-active | 出現13回 | [external-css]\n#EDEDF2 | --sk-button-background-active, --sk-iconcontrol-scrim-color-active | 出現9回 | [external-css]\n#E8E8ED | --r-globalnav-color-secondary, --r-globalnav-search-icon-active-fill, --r-globalnav-search-input-value-color, --r-globalnav-search-list-item-color, --r-globalnav-search-list-item-searchterm-color | 出現8回 | [external-css]\n#6E6E73 | color | 出現6回 | [external-css]\n#86868B | color | 出現5回 | [external-css]\n#F5F5F7 | color, background-color | 出現3回 | [external-css]\n#FAFAFC | --r-globalnav-background-opened | 出現2回 | [external-css]\n#0066CC | color | 出現2回 | [external-css]\n#2997FF | color | 出現2回 | [external-css]\n#141414 | background | 出現2回 | [external-css]\n#161617 | --r-globalnav-background-opened-dark | 出現1回 | [external-css]\n#0077ED | --sk-button-background-hover | 出現1回 | [external-css]\n#1D1D1F | color | 出現1回 | [external-css]\n#42679E | background-color | 出現1回 | [external-css]",
+    "rgb_colors": [
+      "rgb(0, 0, 0)",
+      "rgb(29, 29, 31)",
+      "rgb(29, 29, 31)",
+      "rgb(255, 255, 255)",
+      "rgb(0, 102, 204)",
+      "rgb(0, 0, 0)",
+      "rgb(29, 29, 31)",
+      "rgba(0, 0, 0, .88)",
+      "rgb(110, 110, 115)",
+      "rgba(0, 0, 0, .56)"
+    ],
+    "fonts": [
+      "SF Pro Text",
+      "SF Pro Display",
+      "Apple Legacy Chevron",
+      "Apple Icons 100",
+      "Apple Icons 200",
+      "Apple Icons 300",
+      "Apple Icons 400",
+      "Apple Icons 500",
+      "Apple Icons 600",
+      "Apple Icons 700",
+      "Apple Icons 800",
+      "Apple Icons 900",
+      "inherit",
+      "SF Pro Icons"
+    ],
+    "button_styles": [
+      {
+        "selector": "#globalheader ul,#globalheader ol,#globalheader li,#globalheader dl,#globalheader dt,#globalheader dd,#globalheader h1,#globalheader h2,#globalheader h3,#globalheader h4,#globalheader h5,#globalheader h6,#globalheader hgroup,#globalheader p,#globalheader blockquote,#globalheader figure,#globalheader form,#globalheader fieldset,#globalheader input,#globalheader legend,#globalheader pre,#globalheader abbr,#globalheader button",
+        "properties": {
+          "margin": "0"
+        }
+      },
+      {
+        "selector": "#globalheader button",
+        "properties": {
+          "background": "none",
+          "border": "0",
+          "color": "inherit",
+          "font": "inherit"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button",
+        "properties": {
+          "display": "flex",
+          "color": "var(--r-globalnav-color)"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button .globalnav-submenu-button-icon",
+        "properties": {
+          "margin-top": "2px"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-item.globalnav-item-flyout-open .globalnav-submenu-trigger-button:focus-visible .globalnav-submenu-button-icon",
+        "properties": {
+          "margin-top": "1px"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-menuback-button",
+        "properties": {
+          "color": "var(--r-globalnav-color-secondary)",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-menutrigger-button",
+        "properties": {
+          "display": "flex",
+          "color": "#000"
+        }
+      },
+      {
+        "selector": "#globalnav.touch .globalnav-menutrigger-button",
+        "properties": {
+          "color": "var(--r-globalnav-color-hover)"
+        }
+      },
+      {
+        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button",
+        "properties": {
+          "--sk-button-padding-horizontal": "22px",
+          "--sk-button-padding-vertical": "12px",
+          "--sk-button-margin-horizontal": "11px",
+          "--sk-button-margin-vertical": "11px",
+          "font-size": "17px",
+          "font-weight": "400",
+          "font-family": "SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif",
+          "--sk-button-border-radius": "10px"
+        }
+      },
+      {
+        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:hover",
+        "properties": {
+          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
+          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
+        }
+      },
+      {
+        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:active",
+        "properties": {
+          "background": "var(--sk-button-background-active, var(--sk-button-background))",
+          "color": "var(--sk-button-color-active, var(--sk-button-color))"
+        }
+      },
+      {
+        "selector": "#ac-globalfooter,#ac-globalfooter input,#ac-globalfooter textarea,#ac-globalfooter select,#ac-globalfooter button",
+        "properties": {
+          "font-synthesis": "none",
+          "-moz-font-feature-settings": "\"kern\"",
+          "-webkit-font-smoothing": "antialiased",
+          "-moz-osx-font-smoothing": "grayscale"
+        }
+      },
+      {
+        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button,#ac-globalfooter .ac-gf-directory-column-section-title>.ac-gf-directory-column-section-title-text",
+        "properties": {
+          "font-size": "12px",
+          "font-weight": "600",
+          "font-family": "\"SF Pro Text\",\"Myriad Set Pro\",\"SF Pro Icons\",\"Apple Legacy Chevron\",\"Helvetica Neue\",\"Helvetica\",\"Arial\",sans-serif",
+          "margin-bottom": ".8em",
+          "margin-inline-end": "20px"
+        }
+      },
+      {
+        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button",
+        "properties": {
+          "font-weight": "400",
+          "display": "block",
+          "margin": "0",
+          "padding-top": "10px",
+          "padding-bottom": "10px",
+          "color": "var(--footer-directory-title-color)",
+          "background": "var(--footer-background)"
+        }
+      },
+      {
+        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button::after",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": "#ac-localnav ul,#ac-localnav ol,#ac-localnav li,#ac-localnav dl,#ac-localnav dt,#ac-localnav dd,#ac-localnav h1,#ac-localnav h2,#ac-localnav h3,#ac-localnav h4,#ac-localnav h5,#ac-localnav h6,#ac-localnav hgroup,#ac-localnav p,#ac-localnav blockquote,#ac-localnav figure,#ac-localnav form,#ac-localnav fieldset,#ac-localnav input,#ac-localnav legend,#ac-localnav pre,#ac-localnav abbr,#ac-localnav button",
+        "properties": {
+          "margin": "0"
+        }
+      },
+      {
+        "selector": "#ac-localnav button",
+        "properties": {
+          "background": "none",
+          "border": "0",
+          "color": "inherit",
+          "font": "inherit"
+        }
+      },
+      {
+        "selector": "#ac-localnav .ac-ln-button",
+        "properties": {
+          "padding-block": "calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width)) calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width))"
+        }
+      },
+      {
+        "selector": "#ac-localnav .ac-ln-button:hover",
+        "properties": {
+          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
+          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
+        }
+      },
+      {
+        "selector": "#ac-localnav .ac-ln-button:active",
+        "properties": {
+          "background": "var(--sk-button-background-active, var(--sk-button-background))",
+          "color": "var(--sk-button-color-active, var(--sk-button-color))"
+        }
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".theme-dark .tile",
+        "properties": {
+          "--sk-tile-background": "rgb(0, 0, 0)",
+          "--sk-tile-button-icon-color": "rgba(255, 255, 255, .8)",
+          "--sk-tile-button-background": "rgba(66, 66, 69, .72)",
+          "--sk-tile-button-icon-color-hover": "rgb(255, 255, 255)",
+          "--sk-tile-button-background-hover": "rgba(72.6170678337, 72.6170678337, 75.5120350109, .7256)"
+        }
+      },
+      {
+        "selector": ".theme-light .tile",
+        "properties": {
+          "--sk-tile-background": "rgb(255, 255, 255)",
+          "--sk-tile-button-icon-color": "rgba(0, 0, 0, .56)",
+          "--sk-tile-button-background": "rgba(210, 210, 215, .64)",
+          "--sk-tile-button-icon-color-hover": "rgba(0, 0, 0, .64)",
+          "--sk-tile-button-background-hover": "rgba(222.9661016949, 222.9661016949, 226.5254237288, .6976)"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-content",
+        "properties": {
+          "display": "flex",
+          "flex-direction": "column"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-image-wrapper",
+        "properties": {
+          "display": "flex"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-image-wrapper img",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-copy-wrapper",
+        "properties": {
+          "display": "flex",
+          "flex-direction": "column"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-headline",
+        "properties": {
+          "font-size": "40px",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-subhead",
+        "properties": {
+          "color": "var(--sk-glyph-gray-secondary)"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-callout",
+        "properties": {
+          "color": "var(--sk-glyph-gray-secondary)"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-ctas",
+        "properties": {
+          "display": "grid"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-image-wrapper[data-component-list~=InlineMedia] .inline-media-wrapper.loaded .start-frame",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".section-september-event [data-component-list~=SeptemberEvent2026] .tile-image-wrapper picture,.section-september-event [data-component-list~=SeptemberEvent2026] .tile-image-wrapper img",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".section-september-event [data-component-list~=SeptemberEvent2026] .tile-content",
+        "properties": {
+          "padding-top": "324px"
+        }
+      },
+      {
+        "selector": ".section-september-event [data-component-list~=SeptemberEvent2026] .tile-subhead",
+        "properties": {
+          "color": "#f5f5f7",
+          "margin-top": "0",
+          "font-size": "21px",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": "HTML.no-windows .tile-ctas .button",
+        "properties": {
+          "padding-block": "calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width) + 1px) calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width) - 1px)"
+        }
+      }
+    ],
+    "border_radii": [
+      "5px",
+      "980px",
+      "var(--sk-button-border-radius)",
+      "10px",
+      "1px",
+      "1.2px",
+      "8px",
+      "12px",
+      "50%"
+    ],
     "logo_urls": [
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1280px-Apple_logo_black.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
-      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
-      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
-      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
-      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/120px-Apple_logo_black.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/120px-Apple_logo_white.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_first_logo.png/120px-Apple_first_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Apple_Computer_Logo_rainbow.svg/120px-Apple_Computer_Logo_rainbow.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+      "https://www.apple.com/ac/structured-data/images/open_graph_logo.png?202609050240",
+      "https://www.apple.com/v/homepage/images/takeover/september-event-2026/hero/a/hero__d5qux45ov1g2_large.jpg",
+      "https://www.apple.com/v/homepage/images/logos/takeover/september-event-2026/apple-watch-series-12/a/logo_apple_watch_series_12__glnk77r0veaa_large.png",
+      "https://www.apple.com/v/homepage/images/logos/takeover/september-event-2026/apple-watch-ultra-4/a/logo_apple_watch_ultra_4__gjm11gdxgzu6_large.png"
     ],
     "source_css_urls": [
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cext.wikimediaBadges.ulsV2%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skins.legacy%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://www.apple.com/api-www/global-elements/global-header/v1/assets/globalheader.css",
+      "https://www.apple.com/ac/globalfooter/8/ja_JP/styles/ac-globalfooter.built.css",
+      "https://www.apple.com/ac/localnav/9/styles/ac-localnav.built.css",
+      "https://www.apple.com/v/homepage/a/styles/main.built.css",
+      "https://www.apple.com/v/homepage/a/styles/september-event2026.built.css",
+      "https://www.apple.com/v/homepage/a/styles/inline-media.built.css",
+      "https://www.apple.com/homepage/built/styles/index.built.css",
+      "https://www.apple.com/jp/global/styles/a/global.css",
+      "https://www.apple.com/jp/homepage/built/styles/index.css"
     ],
-    "extracted_at": "2026-09-10T02:25:45.602Z",
+    "extracted_at": "2026-09-10T02:25:50.395Z",
     "source_urls": [
-      "https://ja.wikipedia.org/wiki/Apple Japan合同会社"
+      "https://www.apple.com/jp/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #002BB8  color  出現30回  [inline-style]\n  #A2AAAD  background  出現21回  [inline-style]\n  #FFB21E  background  出現14回  [inline-style]\n  #006600  color  出現5回  [inline-style]\n  #A2A9B1  border-bottom  出現3回  [style-tag]\n  #202122  color  出現3回  [inline-style]\n  #B32424  border-left  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #3366CC  border-left  出現1回  [style-tag]\n  #FBFBFB  background-color  出現1回  [style-tag]\n  #FEE7E6  background-color  出現1回  [style-tag]\n  #F28500  border-left  出現1回  [style-tag]\n  #FFCC33  border-left  出現1回  [style-tag]\n  #9932CC  border-left  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1280px-Apple_logo_black.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/120px-Apple_logo_black.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/120px-Apple_logo_white.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_first_logo.png/120px-Apple_first_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Apple_Computer_Logo_rainbow.svg/120px-Apple_Computer_Logo_rainbow.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cext.wikimediaBadges.ulsV2%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skins.legacy%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #0071E3  outline  出現26回  [external-css]\n  #006EDB  --sk-button-background-active  出現18回  [external-css]\n  #0076DF  --sk-button-background-hover  出現17回  [external-css]\n  #333336  --r-globalnav-color-secondary  出現13回  [external-css]\n  #272729  --sk-button-background-hover  出現13回  [external-css]\n  #18181A  --sk-button-background-active  出現13回  [external-css]\n  #EDEDF2  --sk-button-background-active  出現9回  [external-css]\n  #E8E8ED  --r-globalnav-color-secondary  出現8回  [external-css]\n  #6E6E73  color  出現6回  [external-css]\n  #86868B  color  出現5回  [external-css]\n  #F5F5F7  color  出現3回  [external-css]\n  #FAFAFC  --r-globalnav-background-opened  出現2回  [external-css]\n  #0066CC  color  出現2回  [external-css]\n  #2997FF  color  出現2回  [external-css]\n  #141414  background  出現2回  [external-css]\n\n【CSS カラー変数（:root）】\n  --r-globalnav-background-opened: #fafafc\n  --sk-focus-color: #0071e3\n  --sk-focus-color-alt: rgb(0, 0, 0)\n  --sk-body-text-color: rgb(29, 29, 31)\n  --sk-headline-text-color: rgb(29, 29, 31)\n  --sk-body-background-color: rgb(255, 255, 255)\n  --sk-body-link-color: rgb(0, 102, 204)\n  --sk-glyph: rgb(0, 0, 0)\n  --sk-glyph-gray: rgb(29, 29, 31)\n  --sk-glyph-gray-alpha: rgba(0, 0, 0, .88)\n  --sk-glyph-gray-secondary: rgb(110, 110, 115)\n  --sk-glyph-gray-secondary-alpha: rgba(0, 0, 0, .56)\n  --sk-glyph-gray-secondary-alt: rgb(66, 66, 69)\n  --sk-glyph-gray-secondary-alt-alpha: rgba(0, 0, 0, .72)\n  --sk-glyph-gray-tertiary: rgb(134, 134, 139)\n  --sk-glyph-gray-tertiary-alpha: rgba(0, 0, 0, .48)\n  --sk-glyph-blue: rgb(0, 102, 204)\n  --sk-glyph-orange: rgb(182, 68, 0)\n  --sk-glyph-green: rgb(0, 128, 9)\n  --sk-glyph-red: rgb(227, 0, 0)\n  --sk-fill: rgb(255, 255, 255)\n  --sk-fill-secondary: rgb(250, 250, 252)\n  --sk-fill-tertiary: rgb(245, 245, 247)\n  --sk-fill-gray: rgb(29, 29, 31)\n  --sk-fill-gray-alpha: rgba(0, 0, 0, .88)\n  --sk-fill-gray-secondary: rgb(134, 134, 139)\n  --sk-fill-gray-secondary-alpha: rgba(0, 0, 0, .48)\n  --sk-fill-gray-tertiary: rgb(210, 210, 215)\n  --sk-fill-gray-tertiary-alpha: rgba(0, 0, 0, .16)\n  --sk-fill-gray-quaternary: rgb(232, 232, 237)\n  --sk-fill-gray-quaternary-alpha: rgba(0, 0, 0, .08)\n  --sk-fill-blue: rgb(0, 113, 227)\n  --sk-fill-orange: rgb(245, 99, 0)\n  --sk-fill-orange-secondary: rgb(255, 249, 244)\n  --sk-fill-green: rgb(3, 161, 14)\n  --sk-fill-green-secondary: rgb(245, 255, 246)\n  --sk-fill-red: rgb(227, 0, 0)\n  --sk-fill-red-secondary: rgb(255, 242, 244)\n  --sk-fill-yellow: rgb(255, 224, 69)\n  --sk-fill-yellow-secondary: rgb(255, 254, 242)\n  --sk-productred: rgb(175, 30, 45)\n  --sk-enviro-green: rgb(0, 217, 89)\n\n【使用フォント】\n  SF Pro Text\n  SF Pro Display\n  Apple Legacy Chevron\n  Apple Icons 100\n  Apple Icons 200\n  Apple Icons 300\n  Apple Icons 400\n  Apple Icons 500\n  Apple Icons 600\n  Apple Icons 700\n  Apple Icons 800\n  Apple Icons 900\n  inherit\n  SF Pro Icons\n\n【角丸パターン】\n  5px\n  980px\n  var(--sk-button-border-radius)\n  10px\n  1px\n  1.2px\n  8px\n  12px\n\n【ボタンスタイル】\n  #globalheader ul,#globalheader ol,#globalheader li,#globalheader dl,#globalheader dt,#globalheader dd,#globalheader h1,#globalheader h2,#globalheader h3,#globalheader h4,#globalheader h5,#globalheader h6,#globalheader hgroup,#globalheader p,#globalheader blockquote,#globalheader figure,#globalheader form,#globalheader fieldset,#globalheader input,#globalheader legend,#globalheader pre,#globalheader abbr,#globalheader button\n    margin: 0\n  #globalheader button\n    background: none\n    border: 0\n    color: inherit\n    font: inherit\n  #globalnav .globalnav-item .globalnav-submenu-trigger-button\n    display: flex\n    color: var(--r-globalnav-color)\n  #globalnav .globalnav-item .globalnav-submenu-trigger-button .globalnav-submenu-button-icon\n    margin-top: 2px\n  #globalnav .globalnav-item.globalnav-item-flyout-open .globalnav-submenu-trigger-button:focus-visible .globalnav-submenu-button-icon\n    margin-top: 1px\n\n【カードスタイル】\n  .theme-dark .tile\n    --sk-tile-background: rgb(0, 0, 0)\n    --sk-tile-button-icon-color: rgba(255, 255, 255, .8)\n    --sk-tile-button-background: rgba(66, 66, 69, .72)\n    --sk-tile-button-icon-color-hover: rgb(255, 255, 255)\n    --sk-tile-button-background-hover: rgba(72.6170678337, 72.6170678337, 75.5120350109, .7256)\n  .theme-light .tile\n    --sk-tile-background: rgb(255, 255, 255)\n    --sk-tile-button-icon-color: rgba(0, 0, 0, .56)\n    --sk-tile-button-background: rgba(210, 210, 215, .64)\n    --sk-tile-button-icon-color-hover: rgba(0, 0, 0, .64)\n    --sk-tile-button-background-hover: rgba(222.9661016949, 222.9661016949, 226.5254237288, .6976)\n  [data-component-list~=SeptemberEvent2026] .tile-content\n    display: flex\n    flex-direction: column\n  [data-component-list~=SeptemberEvent2026] .tile-image-wrapper\n    display: flex\n  [data-component-list~=SeptemberEvent2026] .tile-image-wrapper img\n    display: block\n\n【ロゴ・ビジュアル素材】\n  https://www.apple.com/ac/structured-data/images/open_graph_logo.png?202609050240\n  https://www.apple.com/v/homepage/images/takeover/september-event-2026/hero/a/hero__d5qux45ov1g2_large.jpg\n  https://www.apple.com/v/homepage/images/logos/takeover/september-event-2026/apple-watch-series-12/a/logo_apple_watch_series_12__glnk77r0veaa_large.png\n  https://www.apple.com/v/homepage/images/logos/takeover/september-event-2026/apple-watch-ultra-4/a/logo_apple_watch_ultra_4__gjm11gdxgzu6_large.png\n\n【取得CSSファイル】\n  https://www.apple.com/api-www/global-elements/global-header/v1/assets/globalheader.css\n  https://www.apple.com/ac/globalfooter/8/ja_JP/styles/ac-globalfooter.built.css\n  https://www.apple.com/ac/localnav/9/styles/ac-localnav.built.css\n  https://www.apple.com/v/homepage/a/styles/main.built.css\n  https://www.apple.com/v/homepage/a/styles/september-event2026.built.css\n  https://www.apple.com/v/homepage/a/styles/inline-media.built.css\n  https://www.apple.com/homepage/built/styles/index.built.css\n  https://www.apple.com/jp/global/styles/a/global.css\n  https://www.apple.com/jp/homepage/built/styles/index.css"
 }
