@@ -2,29 +2,344 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/パナソニック株式会社||ロゴ・CI\nhttps://panasonic.jp/||カラー,ロゴ・CI,フォント",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#88BBFF | background | 出現18回 | [inline-style]\n#77AAFF | background | 出現6回 | [inline-style]\n#002BB8 | color | 出現3回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]",
+    "hex_colors": "#666666 | color, background-color, background, border, -webkit-text-decoration-color | 出現106回 | [external-css]\n#333333 | border-top-color, background, border-color, border, color | 出現100回 | [external-css]\n#CCCCCC | border, background-color, background, border-bottom, border-top | 出現99回 | [external-css+style-tag]\n#E6E6E6 | background, color, fill, border, outline-color | 出現71回 | [external-css]\n#1A1A1A | color, background-image, outline-color, fill, background | 出現68回 | [external-css]\n#F2F2F2 | background, background-color, -webkit-box-shadow, box-shadow, border | 出現63回 | [external-css]\n#914108 | color, background-color, -webkit-text-decoration-color, text-decoration-color | 出現36回 | [external-css]\n#88BBFF | background | 出現18回 | [inline-style]\n#4D4D4D | background-color | 出現18回 | [external-css]\n#B3B3B3 | border, border-color, background-color, color | 出現15回 | [external-css]\n#475C85 | color, background | 出現13回 | [external-css]\n#F2DAD9 | background, background-color | 出現12回 | [external-css]\n#0063CC | color | 出現10回 | [external-css]\n#77AAFF | background | 出現6回 | [inline-style]\n#E08D52 | color | 出現5回 | [external-css]\n#612B05 | color | 出現4回 | [external-css]\n#B81F14 | border, color | 出現4回 | [external-css]\n#212121 | color | 出現4回 | [external-css]\n#202020 | border-top, border-bottom, color, border | 出現4回 | [external-css]\n#DFDFDF | border-color, border-bottom-color, color | 出現4回 | [external-css]\n#002BB8 | color | 出現3回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#F0C6A8 | color | 出現2回 | [external-css]\n#3396FF | color | 出現2回 | [external-css]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#F7E3D4 | color | 出現1回 | [external-css]\n#343434 | background-color | 出現1回 | [external-css]\n#BFBFBF | background-color | 出現1回 | [external-css]",
     "rgb_colors": [],
-    "fonts": [],
-    "button_styles": [],
-    "card_styles": [],
-    "border_radii": [],
+    "fonts": [
+      "monospace",
+      "inherit",
+      "Noto Sans JP"
+    ],
+    "button_styles": [
+      {
+        "selector": ".cmp-accordion__button",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".productcarousel__btn",
+        "properties": {
+          "background": "transparent",
+          "border": "0",
+          "margin-top": "-25px",
+          "border-color": "dimgrey"
+        }
+      },
+      {
+        "selector": ".productcarousel__btn:focus-visible",
+        "properties": {
+          "border-color": "black"
+        }
+      },
+      {
+        "selector": ".productcarousel__btn:disabled",
+        "properties": {
+          "border-color": "lightgrey"
+        }
+      },
+      {
+        "selector": ".productcarousel__btn--next",
+        "properties": {
+          "border-bottom": "8px solid",
+          "border-right": "8px solid"
+        }
+      },
+      {
+        "selector": ".productcarousel__btn--prev",
+        "properties": {
+          "border-bottom": "8px solid",
+          "border-left": "8px solid"
+        }
+      },
+      {
+        "selector": ".productcollection__loadmore-button",
+        "properties": {
+          "display": "block",
+          "margin": "0 auto auto auto"
+        }
+      },
+      {
+        "selector": ".productcollection__pagination-button-title",
+        "properties": {
+          "padding": "0.1rem 0.4rem"
+        }
+      },
+      {
+        "selector": ".productcollection__pagination-button--current .productcollection__pagination-button-title",
+        "properties": {
+          "border": "1px solid"
+        }
+      },
+      {
+        "selector": "/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n ~ Copyright 2021 Adobe\n ~\n ~ Licensed under the Apache License, Version 2.0 (the \"License\");\n ~ you may not use this file except in compliance with the License.\n ~ You may obtain a copy of the License at\n ~\n ~     http://www.apache.org/licenses/LICENSE-2.0\n ~\n ~ Unless required by applicable law or agreed to in writing, software\n ~ distributed under the License is distributed on an \"AS IS\" BASIS,\n ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n ~ See the License for the specific language governing permissions and\n ~ limitations under the License.\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/\n.carousel__btn",
+        "properties": {
+          "background": "transparent",
+          "border": "0",
+          "border-color": "dimgrey"
+        }
+      },
+      {
+        "selector": ".carousel__btn:focus-visible",
+        "properties": {
+          "border-color": "black"
+        }
+      },
+      {
+        "selector": ".carousel__btn:disabled",
+        "properties": {
+          "border-color": "lightgrey"
+        }
+      },
+      {
+        "selector": ".carousel__btn--next",
+        "properties": {
+          "border-bottom": "8px solid",
+          "border-right": "8px solid"
+        }
+      },
+      {
+        "selector": ".carousel__btn--prev",
+        "properties": {
+          "border-bottom": "8px solid",
+          "border-left": "8px solid"
+        }
+      },
+      {
+        "selector": "button,input,optgroup,select,textarea",
+        "properties": {
+          "font-family": "inherit",
+          "font-size": "100%"
+        }
+      },
+      {
+        "selector": "[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner",
+        "properties": {
+          "border-style": "none"
+        }
+      },
+      {
+        "selector": "button",
+        "properties": {
+          "background-color": "transparent",
+          "border": "none",
+          "margin": "0"
+        }
+      },
+      {
+        "selector": ".c-clp003__button--product",
+        "properties": {
+          "-ms-flex-preferred-size": "calc(50% - 8px)"
+        }
+      },
+      {
+        "selector": ".c-clp003__button--left,.c-clp003__button--noproducts,.c-clp003__button--right,.c-clp003__button--wrapper",
+        "properties": {
+          "-ms-flex-align": "center",
+          "display": "flex",
+          "-ms-flex-direction": "column",
+          "flex-direction": "column"
+        }
+      },
+      {
+        "selector": ".c-clp003__button--wrapper",
+        "properties": {
+          "-ms-flex-align": "stretch",
+          "-ms-flex-direction": "column",
+          "flex-direction": "column"
+        }
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".tile__root",
+        "properties": {
+          "margin-left": "1rem",
+          "margin-top": "1rem"
+        }
+      },
+      {
+        "selector": ".productcarousel__cardscontainer",
+        "properties": {
+          "margin": "auto"
+        }
+      },
+      {
+        "selector": ".carousel__cardscontainer",
+        "properties": {
+          "margin": "auto"
+        }
+      },
+      {
+        "selector": ".c-clp003__product--card",
+        "properties": {
+          "border-top": "1px solid #ccc",
+          "padding-bottom": "24px"
+        }
+      },
+      {
+        "selector": ".c-lay003 .productcarousel__cardscontainer",
+        "properties": {
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".c-lay003 .product__card",
+        "properties": {
+          "-webkit-box-flex": "0",
+          "-ms-flex": "0 0 auto",
+          "flex": "0 0 auto"
+        }
+      },
+      {
+        "selector": ".c-lay003 .product__card:last-child",
+        "properties": {
+          "padding-right": "24px"
+        }
+      },
+      {
+        "selector": ".c-lay003--col3 .product__card:last-child",
+        "properties": {
+          "padding-right": "24px"
+        }
+      },
+      {
+        "selector": ".c-lay003--col4 .product__card:last-child",
+        "properties": {
+          "padding-right": "24px"
+        }
+      },
+      {
+        "selector": ".c-oth102__product_card_list",
+        "properties": {
+          "display": "grid"
+        }
+      },
+      {
+        "selector": ".c-oth102__product_card_item",
+        "properties": {
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".c-oth104__product_card_list",
+        "properties": {
+          "display": "grid"
+        }
+      },
+      {
+        "selector": ".c-oth104__product_card_item",
+        "properties": {
+          "display": "grid"
+        }
+      },
+      {
+        "selector": ".c-oth104__product_card_item .cx_info",
+        "properties": {
+          "-ms-flex-pack": "normal"
+        }
+      },
+      {
+        "selector": ".c-oth104__product_card_item .c-product__link .c-product__linkInner",
+        "properties": {
+          "font-size": ".875rem"
+        }
+      },
+      {
+        "selector": ".c-oth104__product_card_item em",
+        "properties": {
+          "font-style": "normal"
+        }
+      },
+      {
+        "selector": ".c-prd001 .tileList__root",
+        "properties": {
+          "display": "flex",
+          "-ms-flex-wrap": "wrap",
+          "flex-wrap": "wrap"
+        }
+      },
+      {
+        "selector": ".c-prd001 .tileList__root>button",
+        "properties": {
+          "margin": "2px 4px"
+        }
+      },
+      {
+        "selector": ".c-prd001 .tile__root",
+        "properties": {
+          "-ms-flex-align": "center",
+          "display": "flex",
+          "-ms-flex-direction": "column",
+          "flex-direction": "column",
+          "margin": "0",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".tile__root_selected .c-prd001__colorBall:before",
+        "properties": {
+          "border": "1px solid #f2f2f2",
+          "border-radius": "50%"
+        }
+      }
+    ],
+    "border_radii": [
+      "50%",
+      "4px",
+      "50px",
+      "2px",
+      "2pc",
+      "1rem",
+      "1pc",
+      ".25rem",
+      "7px",
+      "56px"
+    ],
     "logo_urls": [
       "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
       "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
       "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
       "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/OGimage.png",
+      "https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-site/resources/images/icons/favicon_black.ico",
+      "https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-site/resources/images/logo.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_appliance.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_air.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_kitchen.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_audiovisual.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_wellness.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_battery.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_phone.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_pc.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_car.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_sumai.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_cycle.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_hochouki.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_account.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_favorite.svg",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_home_appliance.svg",
+      "https://panasonic.jp/content/panasonic/jp/ja/top/_jcr_content/root/main/componentContainer1/c_lay001_74519150_co/item/c_lay002/c_gen003.coreimg.png/1688520861227/logo-eftc.png"
     ],
     "source_css_urls": [
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022",
+      "https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-base.lc-36915c62ced17788860f80d9240fe095-lc.min.css",
+      "https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-cif.lc-730ca46df993f316603b6ff0381df120-lc.min.css",
+      "https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-dependencies.lc-d41d8cd98f00b204e9800998ecf8427e-lc.min.css",
+      "https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-site.lc-28e96cce96900fd540b3c470c0e092d1-lc.min.css",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/top/top_260401/ptop_custom.css",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/ab-testing/css/widget-ab-testing.css",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/storesearch/css/widget-storesearch.css",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/footer/prd-card-v2-patch.css",
+      "https://panasonic.jp/content/dam/panasonic/jp/ja/common/footer/style.css"
     ],
-    "extracted_at": "2026-09-10T05:13:58.845Z",
+    "extracted_at": "2026-09-10T05:14:06.817Z",
     "source_urls": [
-      "https://ja.wikipedia.org/wiki/パナソニック株式会社"
+      "https://panasonic.jp/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #88BBFF  background  出現18回  [inline-style]\n  #77AAFF  background  出現6回  [inline-style]\n  #002BB8  color  出現3回  [inline-style]\n  #EEEEFF  border  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #A2A9B1  border-bottom  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #666666  color  出現106回  [external-css]\n  #333333  border-top-color  出現100回  [external-css]\n  #CCCCCC  border  出現99回  [external-css+style-tag]\n  #E6E6E6  background  出現71回  [external-css]\n  #1A1A1A  color  出現68回  [external-css]\n  #F2F2F2  background  出現63回  [external-css]\n  #914108  color  出現36回  [external-css]\n  #88BBFF  background  出現18回  [inline-style]\n  #4D4D4D  background-color  出現18回  [external-css]\n  #B3B3B3  border  出現15回  [external-css]\n  #475C85  color  出現13回  [external-css]\n  #F2DAD9  background  出現12回  [external-css]\n  #0063CC  color  出現10回  [external-css]\n  #77AAFF  background  出現6回  [inline-style]\n  #E08D52  color  出現5回  [external-css]\n\n【使用フォント】\n  monospace\n  inherit\n  Noto Sans JP\n\n【角丸パターン】\n  50%\n  4px\n  50px\n  2px\n  2pc\n  1rem\n  1pc\n  .25rem\n\n【ボタンスタイル】\n  .cmp-accordion__button\n    display: block\n  .productcarousel__btn\n    background: transparent\n    border: 0\n    margin-top: -25px\n    border-color: dimgrey\n  .productcarousel__btn:focus-visible\n    border-color: black\n  .productcarousel__btn:disabled\n    border-color: lightgrey\n  .productcarousel__btn--next\n    border-bottom: 8px solid\n    border-right: 8px solid\n\n【カードスタイル】\n  .tile__root\n    margin-left: 1rem\n    margin-top: 1rem\n  .productcarousel__cardscontainer\n    margin: auto\n  .carousel__cardscontainer\n    margin: auto\n  .c-clp003__product--card\n    border-top: 1px solid #ccc\n    padding-bottom: 24px\n  .c-lay003 .productcarousel__cardscontainer\n    display: flex\n\n【ロゴ・ビジュアル素材】\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://panasonic.jp/content/dam/panasonic/jp/ja/common/OGimage.png\n  https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-site/resources/images/icons/favicon_black.ico\n  https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-site/resources/images/logo.svg\n  https://panasonic.jp/content/dam/panasonic/jp/ja/common/header/icon_appliance.svg\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-base.lc-36915c62ced17788860f80d9240fe095-lc.min.css\n  https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-cif.lc-730ca46df993f316603b6ff0381df120-lc.min.css\n  https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-dependencies.lc-d41d8cd98f00b204e9800998ecf8427e-lc.min.css\n  https://panasonic.jp/etc.clientlibs/panasonic-aem-frontend/clientlibs/clientlib-site.lc-28e96cce96900fd540b3c470c0e092d1-lc.min.css\n  https://panasonic.jp/content/dam/panasonic/jp/ja/top/top_260401/ptop_custom.css\n  https://panasonic.jp/content/dam/panasonic/jp/ja/common/ab-testing/css/widget-ab-testing.css\n  https://panasonic.jp/content/dam/panasonic/jp/ja/common/storesearch/css/widget-storesearch.css\n  https://panasonic.jp/content/dam/panasonic/jp/ja/common/footer/prd-card-v2-patch.css\n  https://panasonic.jp/content/dam/panasonic/jp/ja/common/footer/style.css"
 }
