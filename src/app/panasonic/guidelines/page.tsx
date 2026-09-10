@@ -1,48 +1,58 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
+const clientName = 'パナソニック株式会社';
+const basePath = '/panasonic';
+const primaryColor = 'var(--primary-color)';
+
+const colors = [
+  { hex: '#666666', name: 'プライマリカラー' },
+  { hex: '#333333', name: 'セカンダリカラー' },
+  { hex: '#CCCCCC', name: 'アクセントカラー' },
+  { hex: '#F2F2F2', name: '背景カラー' },
+  { hex: '#111827', name: 'テキストカラー' },
+];
+
 export default function GuidelinesPage() {
-  const clientName = 'パナソニック株式会社';
-  const basePath = '/panasonic';
-  const primaryColor: string = '#003DA5';
-
-  const colors = [
-    { hex: '#003DA5', name: 'プライマリカラー（Panasonic Blue）' },
-    { hex: '#333333', name: 'テキストカラー' },
-    { hex: '#FFFFFF', name: '背景色', border: true },
-    { hex: '#E6E6E6', name: 'ボーダー・区切り線グレー' },
-  ];
-
-  const typography = [
-    { label: 'h1', spec: '28px / Bold / Noto Sans JP' },
-    { label: 'h2', spec: '24px / Bold / Noto Sans JP' },
-    { label: 'h3', spec: '20px / Bold / Noto Sans JP' },
-    { label: 'h4', spec: '18px / Medium / Noto Sans JP' },
-    { label: 'h5', spec: '16px / Medium / Noto Sans JP' },
-    { label: 'h6', spec: '14px / Medium / Noto Sans JP' },
-    { label: 'body-lg', spec: '16px / Regular / Noto Sans JP' },
-    { label: 'body', spec: '14px / Regular / Noto Sans JP' },
-    { label: 'caption', spec: '12px / Regular / Noto Sans JP' },
-  ];
-
   return (
-    <div>
-      <ClientPortalHeader clientName={clientName} basePath={basePath} active="guidelines" primaryColor={primaryColor} />
-      <div className="container" style={{ paddingTop: 48, paddingBottom: 80 }}>
+    <div className="panasonic-portal">
+      <ClientPortalHeader
+        clientName={clientName}
+        basePath={basePath}
+        active="guidelines"
+        primaryColor={primaryColor}
+      />
+
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+
         <div style={{ marginBottom: 40 }}>
-          <p className="section-label" style={{ color: primaryColor }}>GUIDELINES</p>
-          <h1 className="section-title" style={{ fontSize: 28 }}>ガイドラインリサーチ</h1>
+          <p className="section-label" style={{ color: primaryColor }}>
+            GUIDELINES
+          </p>
+          <h1 className="section-title">リサーチガイドライン</h1>
           <p className="section-desc">
-            {clientName}のガイドラインリサーチに基づくカラー・タイポグラフィ・トンマナ定義です。
+            クライアントのブランドカラー・タイポグラフィ・トンマナをまとめたガイドラインのサンプルです。
+            実際のポータルでは、収集したリサーチ情報をもとに内容が自動生成されます。
           </p>
         </div>
 
         <section style={{ marginBottom: 48 }}>
-          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>カラー</h2>
+          <p className="section-label" style={{ color: primaryColor }}>
+            COLOR
+          </p>
+          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>
+            カラーパレット
+          </h2>
           <div className="swatch-grid">
             {colors.map((c) => (
-              <div key={c.hex}>
-                <div className="swatch-top" style={{ background: c.hex, border: c.border ? '1px solid #e5e7eb' : 'none' }} />
-                <div className="swatch-bottom">
+              <div className="swatch" key={c.hex}>
+                <div
+                  className="swatch-color"
+                  style={{
+                    background: c.hex,
+                    borderBottom: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                  }}
+                />
+                <div className="swatch-info">
                   <div className="swatch-hex">{c.hex}</div>
                   <div className="swatch-name">{c.name}</div>
                 </div>
@@ -52,30 +62,64 @@ export default function GuidelinesPage() {
         </section>
 
         <section style={{ marginBottom: 48 }}>
-          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>タイポグラフィ</h2>
+          <p className="section-label" style={{ color: primaryColor }}>
+            TYPOGRAPHY
+          </p>
+          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>
+            タイポグラフィ
+          </h2>
+          <div className="card" style={{ marginBottom: 16 }}>
+            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>見出しフォント（サンプル）</p>
+            <p
+              style={{
+                fontSize: 32,
+                fontWeight: 700,
+                color: '#111827',
+              }}
+            >
+              見出しテキストのサンプルです。
+            </p>
+          </div>
           <div className="card">
-            {typography.map((t) => (
-              <div key={t.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #e5e7eb' }}>
-                <span style={{ fontWeight: 700, width: 100 }}>{t.label}</span>
-                <span style={{ color: '#6b7280', fontSize: 14 }}>{t.spec}</span>
-              </div>
-            ))}
-            <p style={{ marginTop: 16, fontSize: 12, color: '#9ca3af' }}>
-              日本語フォント: Noto Sans JP　/　英数フォント: monospace, inherit　/　ウェイト: Regular(400), Bold(700)
+            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>本文フォント（サンプル）</p>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.9,
+                color: '#111827',
+              }}
+            >
+              本文テキストのサンプルです。実際のポータルでは、クライアントのリサーチ情報をもとに生成されたブランドコピーやガイドライン文章が表示されます。読みやすさと一貫性を意識したタイポグラフィを設定します。
             </p>
           </div>
         </section>
 
         <section>
-          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>トンマナ</h2>
+          <p className="section-label" style={{ color: primaryColor }}>
+            TONE &amp; MANNER
+          </p>
+          <h2 className="section-title" style={{ fontSize: 20, marginBottom: 16 }}>
+            トンマナ
+          </h2>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: 16,
+              marginBottom: 24,
+            }}
+          >
+            {['キーワード A', 'キーワード B', 'キーワード C'].map((kw) => (
+              <div className="card" key={kw} style={{ textAlign: 'center' }}>
+                <p style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>
+                  {kw}
+                </p>
+              </div>
+            ))}
+          </div>
           <div className="card">
-            <h3 style={{ fontSize: 16, marginBottom: 8 }}>角丸パターン</h3>
-            <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 16 }}>
-              ボタン・カード等は4px〜8px程度の小さめ角丸を推定使用。
-            </p>
-            <h3 style={{ fontSize: 16, marginBottom: 8 }}>シャドウ</h3>
-            <p style={{ fontSize: 14, color: '#6b7280' }}>
-              box-shadow: 0 2px 4px rgba(0,0,0,0.1) 相当の軽微な影を推定使用。
+            <p style={{ fontSize: 14, lineHeight: 1.9, color: '#6b7280' }}>
+              トンマナの説明テキストのサンプルです。実際のポータルでは、収集したWebサイトのデザイン情報をもとにクライアントのブランドイメージやトーン＆マナーを自動生成・一覧化します。
             </p>
           </div>
         </section>

@@ -1,8 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
 
 :root {
   --portal-bg: #f5f7fa;
-  --portal-primary: #003DA5;
+  --primary-silver: #C0C0C0;
+  --secondary-black: #000000;
+  --accent-darkgray: #444444;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-note: #9ca3af;
+  /* 標準変数（カラーバー自動生成用） */
+  --primary-color: #C0C0C0;
+  --secondary-color: #000000;
+  --accent-color: #444444;
+  --text-color: #111827;
+  --bg-color: #FFFFFF;
 }
 
 .panasonic-portal * {
@@ -14,13 +25,14 @@
 .panasonic-portal {
   min-height: 100vh;
   background: var(--portal-bg);
-  font-family: 'Noto Sans JP', sans-serif;
-  color: #333333;
+  
+  color: var(--text-main);
 }
 
-.panasonic-portal a {
-  text-decoration: none;
-  color: inherit;
+.panasonic-portal h1,
+.panasonic-portal h2,
+.panasonic-portal h3 {
+  
 }
 
 .panasonic-portal .container {
@@ -33,6 +45,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .panasonic-portal .section-title {
@@ -50,10 +63,28 @@
 
 .panasonic-portal .card {
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.panasonic-portal .nav-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.panasonic-portal .nav-card:hover {
+  transform: translateY(-2px);
+}
+
+.panasonic-portal .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
 
 .panasonic-portal .swatch-grid {
@@ -62,21 +93,24 @@
   gap: 12px;
 }
 
-.panasonic-portal .swatch-top {
-  height: 80px;
-  border-radius: 8px 8px 0 0;
+.panasonic-portal .swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
-.panasonic-portal .swatch-bottom {
-  padding: 8px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+.panasonic-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.panasonic-portal .swatch-info {
+  padding: 8px 10px;
 }
 
 .panasonic-portal .swatch-hex {
-  font-family: monospace;
+  
   font-size: 13px;
   color: #111827;
 }
@@ -84,21 +118,30 @@
 .panasonic-portal .swatch-name {
   font-size: 12px;
   color: #6b7280;
+  margin-top: 2px;
 }
 
-.panasonic-portal .tab-nav {
+.panasonic-portal .tabs {
   display: flex;
   gap: 8px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
-.panasonic-portal .tab-btn {
+.panasonic-portal .tab {
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
+  background: #f3f4f6;
+  color: #6b7280;
+  text-decoration: none;
   border: none;
   cursor: pointer;
+}
+
+.panasonic-portal .tab.active {
+  color: #ffffff;
 }
 
 .panasonic-portal .component-card {
@@ -106,14 +149,14 @@
   border-radius: 8px;
   overflow: hidden;
   background: #ffffff;
-  margin-bottom: 24px;
 }
 
 .panasonic-portal .component-label {
   font-size: 12px;
   color: #9ca3af;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-bottom: 1px solid #e5e7eb;
+  
 }
 
 .panasonic-portal .component-render {
@@ -121,10 +164,81 @@
 }
 
 .panasonic-portal .component-code {
-  background: #efefef;
-  color: #333333;
-  font-family: monospace;
+  background: #0f172a;
+  color: #94a3b8;
+  
   font-size: 12px;
   padding: 12px 16px;
-  white-space: pre-wrap;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.panasonic-portal .color-bar {
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.panasonic-portal .color-bar-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.panasonic-portal .color-bar-label-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.panasonic-portal .color-bar-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+/* カードスタイル統一（自動注入） */
+[class$="-portal"] .card, .card {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  transition: box-shadow 0.15s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+[class$="-portal"] .nav-card, .nav-card {
+  transition: transform 0.15s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+[class$="-portal"] .nav-card:hover, .nav-card:hover {
+  transform: translateY(-2px);
+}
+[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+}
+
+/* 標準カラー変数（自動注入） */
+:root {
+  --primary-color: #666666;
+  --secondary-color: #333333;
+  --accent-color: #CCCCCC;
+  --text-color: #111827;
+  --bg-color: #F2F2F2;
+  --brand-color-1: #666666;
+  --brand-ratio-1: 50;
+  --brand-color-2: #333333;
+  --brand-ratio-2: 22;
+  --brand-color-3: #CCCCCC;
+  --brand-ratio-3: 13;
+  --brand-color-4: #E6E6E6;
+  --brand-ratio-4: 9;
+  --brand-color-5: #1A1A1A;
+  --brand-ratio-5: 6;
 }
