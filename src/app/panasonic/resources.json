@@ -1,3 +1,30 @@
 {
-  "selected_urls": "https://ja.wikipedia.org/wiki/パナソニック株式会社||ロゴ・CI\nhttps://panasonic.jp/||カラー,ロゴ・CI,フォント"
+  "selected_urls": "https://ja.wikipedia.org/wiki/パナソニック株式会社||ロゴ・CI\nhttps://panasonic.jp/||カラー,ロゴ・CI,フォント",
+  "css_info": {
+    "css_variables": {},
+    "hex_colors": "#88BBFF | background | 出現18回 | [inline-style]\n#77AAFF | background | 出現6回 | [inline-style]\n#002BB8 | color | 出現3回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]",
+    "rgb_colors": [],
+    "fonts": [],
+    "button_styles": [],
+    "card_styles": [],
+    "border_radii": [],
+    "logo_urls": [
+      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
+      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+    ],
+    "source_css_urls": [
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+    ],
+    "extracted_at": "2026-09-10T06:27:35.575Z",
+    "source_urls": [
+      "https://ja.wikipedia.org/wiki/パナソニック株式会社"
+    ]
+  },
+  "css_summary": "【抽出カラー（頻度順）】\n  #88BBFF  background  出現18回  [inline-style]\n  #77AAFF  background  出現6回  [inline-style]\n  #002BB8  color  出現3回  [inline-style]\n  #EEEEFF  border  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #A2A9B1  border-bottom  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
 }
