@@ -1,3 +1,20 @@
 {
-  "selected_urls": "https://ja.wikipedia.org/wiki/株式会社MILIZE||ロゴ・CI\nhttps://milize.co.jp/||カラー,ロゴ・CI,フォント\nhttps://milize.co.jp/about||カラー,ロゴ・CI,フォント"
+  "selected_urls": "https://ja.wikipedia.org/wiki/株式会社MILIZE||ロゴ・CI\nhttps://milize.co.jp/||カラー,ロゴ・CI,フォント\nhttps://milize.co.jp/about||カラー,ロゴ・CI,フォント",
+  "css_info": {
+    "css_variables": {},
+    "hex_colors": "",
+    "rgb_colors": [],
+    "fonts": [],
+    "button_styles": [],
+    "card_styles": [],
+    "form_styles": [],
+    "border_radii": [],
+    "logo_urls": [],
+    "source_css_urls": [],
+    "extracted_at": "2026-09-11T07:32:50.404Z",
+    "source_urls": [
+      "https://ja.wikipedia.org/wiki/株式会社MILIZE"
+    ]
+  },
+  "css_summary": "（データなし）"
 }
