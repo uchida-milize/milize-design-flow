@@ -272,6 +272,23 @@ function parseCss(css: string, source: 'external-css' | 'style-tag'): Partial<Cs
     }
   }
 
+  // ①-2 Tailwindのuniversalリセット（`*, ::before, ::after`）にある --tw-* 変数。
+  // box-shadow/ring系のユーティリティ（btn-outline等）はこれらの変数が未定義だと
+  // 枠線や影が丸ごと描画されなくなるため、:root と同様にすべて収集しておく
+  // （Tailwind自身の内部変数なのでキーワードでの絞り込みはしない）。
+  const universalBlockRe = /([^{}\n][^{}]*?)\{([^{}]+)\}/g;
+  let ubm: RegExpExecArray | null;
+  while ((ubm = universalBlockRe.exec(css)) !== null) {
+    const selectorParts = ubm[1].trim().split(',').map((s) => s.trim());
+    const isUniversalReset = selectorParts.every((p) => /^\*?::?(before|after)$/i.test(p) || p === '*');
+    if (!isUniversalReset) continue;
+    const varRe2 = /(--[\w-]+)\s*:\s*([^;]+);/g;
+    let vm2: RegExpExecArray | null;
+    while ((vm2 = varRe2.exec(ubm[2])) !== null) {
+      css_variables[vm2[1].trim()] = vm2[2].trim();
+    }
+  }
+
   // ② 全 CSS から "プロパティ: #HEXカラー" を頻度付きで抽出
   //    context: "background-color: #0055A4" → usages に 'background-color' を記録
   const hexInPropRe = /([\w-]+)\s*:\s*([^;{}\n]*#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b[^;{}\n]*)/g;
@@ -430,7 +447,9 @@ function parseDeclarations(body: string): Record<string, string> {
   while ((m = re.exec(body)) !== null) {
     const prop = m[1].trim();
     const val = m[2].trim();
-    if (/color|background|border|radius|shadow|font|padding|margin|display|flex|outline|width|height/i.test(prop)) {
+    // カスタムプロパティ（--tw-bg-opacity 等）はキーワードに関わらず常に残す。
+    // Tailwindのopacity修飾子などはこの変数がないとbackground-color等がまるごと無効になる。
+    if (prop.startsWith('--') || /color|background|border|radius|shadow|font|padding|margin|display|flex|outline|width|height/i.test(prop)) {
       result[prop] = val;
     }
   }
@@ -508,6 +527,14 @@ const TYPE_ATTR_RE = /\btype\s*=\s*["']([^"']*)["']/i;
 const ROLE_BUTTON_RE = /\brole\s*=\s*["']button["']/i;
 const BUTTONISH_TOKEN_RE = /(^|[-_])(btn|button|cta)([-_]|$)/i;
 
+// Tailwind等のレスポンシブ修飾（"md:w-[300px]"）や任意値（"w-[260px]"）は、同じボタンの
+// インスタンス間でも付与状況が微妙に異なりやすく、素直にクラス文字列全体で頻度集計すると
+// 本来同一のボタンが別々の候補に分裂してしまう。ボタンの色・形とは無関係なレイアウト調整
+// 用のクラスなので、頻度集計・CSSマッチングの対象からは除外する。
+function isNoiseClassToken(token: string): boolean {
+  return token.includes('[') || token.includes(':');
+}
+
 /** header/nav/footer タグの開始〜終了までの文字位置の範囲を集める（雑にネストは無視） */
 function structuralRanges(html: string, tagNames: string[]): [number, number][] {
   const ranges: [number, number][] = [];
@@ -538,16 +565,22 @@ function extractDomButtonCandidates(html: string): DomButtonCandidate[] {
     const attrs = m[2];
     const classMatch = attrs.match(CLASS_ATTR_RE);
     if (!classMatch) continue;
-    const classAttr = classMatch[1].trim().replace(/\s+/g, ' ');
-    if (!classAttr) continue;
-    const tokens = classAttr.split(' ').filter(Boolean);
+    const rawClassAttr = classMatch[1].trim().replace(/\s+/g, ' ');
+    if (!rawClassAttr) continue;
+    const allTokens = rawClassAttr.split(' ').filter(Boolean);
     const typeAttr = attrs.match(TYPE_ATTR_RE)?.[1] ?? '';
     const isButtonish =
       tag === 'button' ||
       ROLE_BUTTON_RE.test(attrs) ||
       (tag === 'input' && /^(submit|button)$/i.test(typeAttr)) ||
-      tokens.some((t) => BUTTONISH_TOKEN_RE.test(t));
+      allTokens.some((t) => BUTTONISH_TOKEN_RE.test(t));
     if (!isButtonish) continue;
+
+    // レスポンシブ修飾・任意値クラスを除いた「本来のボタンの見た目を決めるクラス」だけを
+    // グルーピングのキーにする（同じボタンが幅指定違いで別候補に分裂するのを防ぐ）
+    const tokens = allTokens.filter((t) => !isNoiseClassToken(t));
+    if (tokens.length === 0) continue;
+    const classAttr = tokens.join(' ');
 
     const entry = freq.get(classAttr);
     const isPenalized = isInRanges(m.index, penaltyRanges) ? 1 : 0;
@@ -593,18 +626,27 @@ function matchCssForClassTokens(cssText: string, tokens: string[]): Record<strin
   return merged;
 }
 
-/** ページのHTML+CSSから「実際に繰り返し使われているボタン」を検出し、StyleBlockとして返す（上位2件まで） */
+/**
+ * ページのHTML+CSSから「実際に使われているボタン」を検出し、StyleBlockとして返す（上位6件まで）。
+ * 1回しか出現しない要素（「もっと見る」等の単発CTA）も、見た目のスコアで実在確認できれば候補に含める
+ * ——サイト内の色違い・スタイル違いのボタンをなるべく取りこぼさないため。
+ */
 function extractVerifiedButtonBlocks(html: string, cssText: string, pageUrl: string): StyleBlock[] {
-  // 見た目スコアの足切りで落ちる候補もあるため、頻度上位は少し広めに見ておく
-  const candidates = extractDomButtonCandidates(html).filter((c) => c.count >= 2).slice(0, 8);
+  // 見た目スコアの足切りで落ちる候補もあるため、頻度上位は広めに見ておく
+  const candidates = extractDomButtonCandidates(html).filter((c) => c.count >= 1).slice(0, 20);
   const out: StyleBlock[] = [];
+  const seenProps = new Set<string>();
   for (const cand of candidates) {
-    if (out.length >= 2) break;
+    if (out.length >= 6) break;
     const properties = matchCssForClassTokens(cssText, cand.tokens);
     // メニュー項目などARIA role="button"だけで頻出するリンクは、paddingはあっても
     // 背景色や枠線を持たない「ただのテキストリンク」であることが多い。DOM頻度だけでなく
     // 「箱として見える」見た目も要求し、本当にボタンらしいものだけを候補にする
     if (!hasBoxVisual(properties)) continue;
+    // 別クラス名でも解決後のCSSが完全に同一なら、見た目上は同じボタンなので重複登録しない
+    const propsKey = JSON.stringify(Object.entries(properties).sort());
+    if (seenProps.has(propsKey)) continue;
+    seenProps.add(propsKey);
     out.push({
       selector: `${DOM_VERIFIED_MARKER}.${cand.tokens.join('.')}（実際のボタン要素で${cand.count}回使用）`,
       properties,
