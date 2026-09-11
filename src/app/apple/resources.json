@@ -79,157 +79,259 @@
     ],
     "button_styles": [
       {
-        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button",
+        "selector": "★ .button.button-neutral（実際のボタン要素で6回使用）",
         "properties": {
+          "--sk-button-color": "rgb(255, 255, 255)",
+          "--sk-button-color-hover": "var(--sk-button-color)",
+          "--sk-button-color-active": "var(--sk-button-color-hover)",
+          "--sk-button-border-color": "transparent",
+          "--sk-button-border-radius": "980px",
+          "--sk-button-margin-horizontal": "18px",
+          "--sk-button-margin-vertical": "18px",
+          "--sk-button-min-width-basis": "70px",
+          "--sk-button-padding-horizontal": "22px",
+          "--sk-button-padding-vertical": "12px",
+          "--sk-button-border-width": "1px",
+          "--sk-button-width": "auto",
+          "--sk-button-display": "inline-block",
+          "font-size": "17px",
+          "line-height": "1.1764805882",
           "font-weight": "400",
-          "display": "block",
-          "margin": "0",
-          "padding-top": "10px",
-          "padding-bottom": "10px",
-          "color": "var(--footer-directory-title-color)",
-          "background": "var(--footer-background)"
-        }
+          "background": "var(--sk-button-background)",
+          "color": "var(--sk-button-color)",
+          "border-color": "var(--sk-button-border-color)",
+          "padding-block": "calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width) + 1px) calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width) - 1px)",
+          "padding-inline": "calc(var(--sk-button-padding-horizontal) - var(--sk-button-border-width))",
+          "border-radius": "var(--sk-button-border-radius)",
+          "border-style": "solid",
+          "border-width": "var(--sk-button-border-width)",
+          "width": "var(--sk-button-width)",
+          "min-width": "calc(var(--sk-button-min-width-basis) - var(--sk-button-padding-horizontal) * 2)",
+          "display": "var(--sk-button-display)",
+          "--sk-button-background": "rgb(29, 29, 31)",
+          "--sk-button-background-hover": "#272729",
+          "--sk-button-background-active": "#18181A"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "★ .button.button-secondary-neutral（実際のボタン要素で5回使用）",
+        "properties": {
+          "--sk-button-color": "rgb(29, 29, 31)",
+          "--sk-button-color-hover": "rgb(255, 255, 255)",
+          "--sk-button-color-active": "var(--sk-button-color-hover)",
+          "--sk-button-border-color": "transparent",
+          "--sk-button-border-radius": "980px",
+          "--sk-button-margin-horizontal": "18px",
+          "--sk-button-margin-vertical": "18px",
+          "--sk-button-min-width-basis": "70px",
+          "--sk-button-padding-horizontal": "22px",
+          "--sk-button-padding-vertical": "12px",
+          "--sk-button-border-width": "1px",
+          "--sk-button-width": "auto",
+          "--sk-button-display": "inline-block",
+          "font-size": "17px",
+          "line-height": "1.1764805882",
+          "font-weight": "400",
+          "background": "var(--sk-button-background)",
+          "color": "var(--sk-button-color)",
+          "border-color": "var(--sk-button-border-color)",
+          "padding-block": "calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width) + 1px) calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width) - 1px)",
+          "padding-inline": "calc(var(--sk-button-padding-horizontal) - var(--sk-button-border-width))",
+          "border-radius": "var(--sk-button-border-radius)",
+          "border-style": "solid",
+          "border-width": "var(--sk-button-border-width)",
+          "width": "var(--sk-button-width)",
+          "min-width": "calc(var(--sk-button-min-width-basis) - var(--sk-button-padding-horizontal) * 2)",
+          "display": "var(--sk-button-display)",
+          "--sk-button-background": "transparent",
+          "--sk-button-background-hover": "#272729",
+          "--sk-button-background-active": "#18181A"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "[data-component-list~=InlineMedia] .play-pause-button",
+        "properties": {
+          "display": "flex",
+          "width": "36px",
+          "height": "36px",
+          "margin-right": "max(16px,env(safe-area-inset-right))",
+          "border": "none",
+          "border-radius": "50%",
+          "background": "none",
+          "background-color": "#d2d2d7a3",
+          "background-repeat": "no-repeat"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
         "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:hover",
         "properties": {
           "background": "var(--sk-button-background-hover, var(--sk-button-background))",
           "color": "var(--sk-button-color-hover, var(--sk-button-color))"
-        }
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
         "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:active",
         "properties": {
           "background": "var(--sk-button-background-active, var(--sk-button-background))",
           "color": "var(--sk-button-color-active, var(--sk-button-color))"
-        }
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
         "selector": "#ac-localnav .ac-ln-button:hover",
         "properties": {
           "background": "var(--sk-button-background-hover, var(--sk-button-background))",
           "color": "var(--sk-button-color-hover, var(--sk-button-color))"
-        }
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
         "selector": "#ac-localnav .ac-ln-button:active",
         "properties": {
           "background": "var(--sk-button-background-active, var(--sk-button-background))",
           "color": "var(--sk-button-color-active, var(--sk-button-color))"
-        }
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
-        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button",
+        "selector": ".button:hover",
         "properties": {
-          "display": "flex",
-          "color": "var(--r-globalnav-color)"
-        }
+          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
+          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
-        "selector": "#globalnav .globalnav-menuback-button",
+        "selector": ".button:active",
         "properties": {
-          "color": "var(--r-globalnav-color-secondary)",
-          "display": "flex"
-        }
+          "background": "var(--sk-button-background-active, var(--sk-button-background))",
+          "color": "var(--sk-button-color-active, var(--sk-button-color))"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
-        "selector": "#globalnav .globalnav-menutrigger-button",
+        "selector": "[data-component-list~=InlineMedia] .play-pause-button:active",
         "properties": {
-          "display": "flex",
-          "color": "#000"
-        }
+          "background-color": "#c1c1c6a7"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
-        "selector": "#globalnav.touch .globalnav-menutrigger-button",
+        "selector": "[data-component-list~=InlineMedia] .inline-media-wrapper.loading .play-pause-button:after",
         "properties": {
-          "color": "var(--r-globalnav-color-hover)"
-        }
+          "background": "no-repeat center/contain transparent",
+          "background-image": "url(data:image/svg+xml",
+          "width": "100%",
+          "height": "100%"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "html.touch .localnav-container .content-collapsed-wrap .cta.buy",
+        "properties": {
+          "padding": "calc(var(--cta-padding-block) + 1px) calc(var(--cta-padding-inline)) calc(var(--cta-padding-block) - 1px)"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
         "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button",
         "properties": {
           "--sk-button-padding-horizontal": "22px",
           "--sk-button-padding-vertical": "12px",
+          "--sk-button-min-width-basis": "70px",
           "--sk-button-margin-horizontal": "11px",
           "--sk-button-margin-vertical": "11px",
           "font-size": "17px",
+          "line-height": "1.1764805882",
           "font-weight": "400",
           "font-family": "SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif",
           "--sk-button-border-radius": "10px"
-        }
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button",
+        "properties": {
+          "display": "flex",
+          "width": "22px",
+          "height": "100%",
+          "color": "var(--r-globalnav-color)",
+          "outline-offset": "-7px"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "#globalnav .globalnav-menuback-button",
+        "properties": {
+          "color": "var(--r-globalnav-color-secondary)",
+          "display": "flex",
+          "width": "100%",
+          "height": "100%",
+          "outline-offset": "-7px"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "#globalnav .globalnav-menutrigger-button",
+        "properties": {
+          "display": "flex",
+          "color": "#000",
+          "width": "48px",
+          "height": "48px",
+          "outline-offset": "-7px"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
+      },
+      {
+        "selector": "#globalnav.touch .globalnav-menutrigger-button",
+        "properties": {
+          "color": "var(--r-globalnav-color-hover)"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
         "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button,#ac-globalfooter .ac-gf-directory-column-section-title>.ac-gf-directory-column-section-title-text",
         "properties": {
           "font-size": "12px",
+          "line-height": "1.3333733333",
           "font-weight": "600",
           "font-family": "\"SF Pro Text\",\"Myriad Set Pro\",\"SF Pro Icons\",\"Apple Legacy Chevron\",\"Helvetica Neue\",\"Helvetica\",\"Arial\",sans-serif",
           "margin-bottom": ".8em",
           "margin-inline-end": "20px"
-        }
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
-        "selector": "#globalheader ul,#globalheader ol,#globalheader li,#globalheader dl,#globalheader dt,#globalheader dd,#globalheader h1,#globalheader h2,#globalheader h3,#globalheader h4,#globalheader h5,#globalheader h6,#globalheader hgroup,#globalheader p,#globalheader blockquote,#globalheader figure,#globalheader form,#globalheader fieldset,#globalheader input,#globalheader legend,#globalheader pre,#globalheader abbr,#globalheader button",
+        "selector": ".button-super",
         "properties": {
-          "margin": "0"
-        }
+          "--sk-button-padding-horizontal": "31px",
+          "--sk-button-padding-vertical": "18px",
+          "--sk-button-min-width-basis": "90px",
+          "--sk-button-margin-horizontal": "22px",
+          "--sk-button-margin-vertical": "22px",
+          "font-size": "17px",
+          "line-height": "1.1764805882",
+          "font-weight": "400"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       },
       {
-        "selector": "#globalheader button",
+        "selector": ".button-elevated",
         "properties": {
-          "background": "none",
-          "border": "0",
-          "color": "inherit",
-          "font": "inherit"
-        }
-      },
-      {
-        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button .globalnav-submenu-button-icon",
-        "properties": {
-          "margin-top": "2px"
-        }
-      },
-      {
-        "selector": "#globalnav .globalnav-item.globalnav-item-flyout-open .globalnav-submenu-trigger-button:focus-visible .globalnav-submenu-button-icon",
-        "properties": {
-          "margin-top": "1px"
-        }
-      },
-      {
-        "selector": "#ac-globalfooter,#ac-globalfooter input,#ac-globalfooter textarea,#ac-globalfooter select,#ac-globalfooter button",
-        "properties": {
-          "font-synthesis": "none",
-          "-moz-font-feature-settings": "\"kern\"",
-          "-webkit-font-smoothing": "antialiased",
-          "-moz-osx-font-smoothing": "grayscale"
-        }
-      },
-      {
-        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button::after",
-        "properties": {
-          "display": "block"
-        }
-      },
-      {
-        "selector": "#ac-localnav ul,#ac-localnav ol,#ac-localnav li,#ac-localnav dl,#ac-localnav dt,#ac-localnav dd,#ac-localnav h1,#ac-localnav h2,#ac-localnav h3,#ac-localnav h4,#ac-localnav h5,#ac-localnav h6,#ac-localnav hgroup,#ac-localnav p,#ac-localnav blockquote,#ac-localnav figure,#ac-localnav form,#ac-localnav fieldset,#ac-localnav input,#ac-localnav legend,#ac-localnav pre,#ac-localnav abbr,#ac-localnav button",
-        "properties": {
-          "margin": "0"
-        }
-      },
-      {
-        "selector": "#ac-localnav button",
-        "properties": {
-          "background": "none",
-          "border": "0",
-          "color": "inherit",
-          "font": "inherit"
-        }
-      },
-      {
-        "selector": "#ac-localnav .ac-ln-button",
-        "properties": {
-          "padding-block": "calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width)) calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width))"
-        }
+          "--sk-button-padding-horizontal": "22px",
+          "--sk-button-padding-vertical": "12px",
+          "--sk-button-min-width-basis": "70px",
+          "--sk-button-margin-horizontal": "18px",
+          "--sk-button-margin-vertical": "18px",
+          "font-size": "17px",
+          "line-height": "1.1764805882",
+          "font-weight": "400"
+        },
+        "sourceUrl": "https://www.apple.com/jp/"
       }
     ],
     "card_styles": [
