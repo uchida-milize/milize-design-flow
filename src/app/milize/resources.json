@@ -30,7 +30,7 @@
       "--wp--preset--font-size--large": "36px",
       "--wp--preset--font-size--x-large": "42px"
     },
-    "hex_colors": "#0084FF | --tw-gradient-from, --tw-gradient-stops, background, background-image | 出現20回 | [external-css]\n#79BEFF | --tw-gradient-to, background, background-image | 出現18回 | [external-css]\n#DDDDDD | --wp-editor-canvas-background, background-color, border | 出現11回 | [style-tag+inline-style]\n#EEEEEE | border, background-color, color | 出現8回 | [external-css+style-tag]\n#333333 | border-bottom, background-color | 出現8回 | [external-css]\n#DC3232 | border-color, color, border | 出現6回 | [external-css]\n#00D084 | background, --wp--preset--color--vivid-green-cyan | 出現6回 | [style-tag]\n#0693E3 | background, --wp--preset--color--vivid-cyan-blue | 出現6回 | [style-tag]\n#32373C | background-color, background | 出現6回 | [style-tag]\n#DFDFDF | background, border-bottom | 出現4回 | [external-css]\n#9CA3AF | color | 出現4回 | [external-css]\n#7A00DF | --wp-block-synced-color | 出現4回 | [style-tag]\n#007CBA | --wp-admin-theme-color | 出現4回 | [style-tag]\n#006BA1 | --wp-admin-theme-color-darker-10 | 出現4回 | [style-tag]\n#005A87 | --wp-admin-theme-color-darker-20 | 出現4回 | [style-tag]\n#313131 | background-color, color | 出現4回 | [style-tag]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現4回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現4回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現4回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現4回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現4回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現4回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現4回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現4回 | [style-tag]\n#FF253A | background-color | 出現2回 | [external-css]\n#00A0D2 | border | 出現2回 | [external-css]\n#46B450 | border-color | 出現2回 | [external-css]\n#F56E28 | border-color | 出現2回 | [external-css]\n#FFB900 | border-color | 出現2回 | [external-css]\n#23282D | background-color | 出現2回 | [external-css]",
+    "hex_colors": "#0084FF | --tw-gradient-from, --tw-gradient-stops, background, background-image | 出現30回 | [external-css]\n#79BEFF | --tw-gradient-to, background, background-image | 出現27回 | [external-css]\n#DDDDDD | --wp-editor-canvas-background, background-color, border | 出現15回 | [style-tag+inline-style+external-css]\n#333333 | border-bottom, background-color, color | 出現13回 | [external-css]\n#EEEEEE | border, background-color, color | 出現12回 | [external-css+style-tag]\n#DC3232 | border-color, color, border | 出現9回 | [external-css]\n#00D084 | background, --wp--preset--color--vivid-green-cyan | 出現9回 | [style-tag]\n#0693E3 | background, --wp--preset--color--vivid-cyan-blue | 出現9回 | [style-tag]\n#32373C | background-color, background | 出現9回 | [style-tag]\n#DFDFDF | background, border-bottom | 出現6回 | [external-css]\n#9CA3AF | color | 出現6回 | [external-css]\n#7A00DF | --wp-block-synced-color | 出現6回 | [style-tag]\n#007CBA | --wp-admin-theme-color | 出現6回 | [style-tag]\n#006BA1 | --wp-admin-theme-color-darker-10 | 出現6回 | [style-tag]\n#005A87 | --wp-admin-theme-color-darker-20 | 出現6回 | [style-tag]\n#313131 | background-color, color | 出現6回 | [style-tag]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現6回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現6回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現6回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現6回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現6回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現6回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現6回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現6回 | [style-tag]\n#FF253A | background-color | 出現3回 | [external-css]\n#00A0D2 | border | 出現3回 | [external-css]\n#46B450 | border-color | 出現3回 | [external-css]\n#F56E28 | border-color | 出現3回 | [external-css]\n#FFB900 | border-color | 出現3回 | [external-css]\n#23282D | background-color | 出現3回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
       "Zen Kaku Gothic New",
@@ -41,7 +41,8 @@
       "Barlow",
       "Font Awesome 5 Brands",
       "Font Awesome 5 Free",
-      "FontAwesome"
+      "FontAwesome",
+      "Barlow Semi Condensed"
     ],
     "button_styles": [
       {
@@ -67,7 +68,7 @@
           "box-shadow": "none",
           "padding": "calc(.667em + 2px) calc(1.333em + 2px)"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".primary-btn",
@@ -82,7 +83,7 @@
           "font-weight": "700",
           "color": "rgb(255 255 255/var(--tw-text-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".secondary-btn",
@@ -96,7 +97,7 @@
           "font-weight": "500",
           "color": "rgb(0 0 0/var(--tw-text-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".external-btn",
@@ -111,7 +112,7 @@
           "font-weight": "500",
           "color": "rgb(0 0 0/var(--tw-text-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": "/* ==========================================================================\n   BTN  追加CSS　2025.08.05\n   ========================================================================== */\n/* interactive-btn（既存スタイル準拠） */\n.interactive-btn",
@@ -125,7 +126,7 @@
           "font-weight": "500",
           "color": "#000"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": "/* action-btn（白背景版） */\n.action-btn",
@@ -139,7 +140,27 @@
           "font-weight": "500",
           "color": "#000"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select",
+        "properties": {
+          "width": "100%",
+          "padding": "1em",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "font-size": "16px"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".wpcf7 button",
+        "properties": {
+          "color": "#fff",
+          "border-radius": "0 !important",
+          "background": "#0b1f65"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".outline-btn",
@@ -155,7 +176,7 @@
           "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
           "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".btn",
@@ -168,7 +189,7 @@
           "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
           "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".btn-blue-outline",
@@ -179,7 +200,7 @@
           "padding-right": "20px",
           "color": "rgb(0 132 255/var(--tw-text-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".btn-blue",
@@ -190,7 +211,7 @@
           "padding-right": "20px",
           "color": "rgb(255 255 255/var(--tw-text-opacity))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ":root :where(.wp-element-button, .wp-block-button__link)",
@@ -208,7 +229,7 @@
           "padding-bottom": "calc(0.667em + 2px)",
           "padding-left": "calc(1.333em + 2px)"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".wp-block-file__button",
@@ -216,7 +237,7 @@
           "background": "#32373c",
           "color": "#fff"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".primary-btn:before",
@@ -226,7 +247,7 @@
           "border-radius": "9999px",
           "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".secondary-btn:before",
@@ -236,7 +257,7 @@
           "border-radius": "9999px",
           "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".outline-btn:before",
@@ -245,7 +266,7 @@
           "border-radius": "9999px",
           "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".external-btn:before",
@@ -254,7 +275,7 @@
           "border-radius": "9999px",
           "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".btn:before",
@@ -263,25 +284,7 @@
           "border-radius": "9999px",
           "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))"
         },
-        "sourceUrl": "https://milize.co.jp/about"
-      },
-      {
-        "selector": ".btn-header",
-        "properties": {
-          "font-weight": "500",
-          "color": "rgb(0 132 255/var(--tw-text-opacity))"
-        },
-        "sourceUrl": "https://milize.co.jp/about"
-      },
-      {
-        "selector": ".interactive-btn::before",
-        "properties": {
-          "display": "flex",
-          "width": "11px",
-          "border-radius": "9999px",
-          "background-image": "linear-gradient(to top right, #0084ff, #79beff)"
-        },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       }
     ],
     "card_styles": [
@@ -295,7 +298,7 @@
           "color": "#000",
           "display": "block"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card:hover",
@@ -305,35 +308,35 @@
           "background": "linear-gradient(to top right, #0084ff, #79beff)",
           "color": "white"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card",
         "properties": {
           "padding": "40px 30px"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card:hover h3",
         "properties": {
           "color": "white"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card:hover p",
         "properties": {
           "color": "rgba(255, 255, 255, 0.9)"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card:hover .contact-link",
         "properties": {
           "color": "white"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card h3",
@@ -341,7 +344,7 @@
           "font-size": "20px",
           "margin-bottom": "18px"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card p",
@@ -349,52 +352,63 @@
           "font-size": "15px",
           "margin-bottom": "25px"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".contact-card:nth-child(3)",
         "properties": {
           "max-width": "none"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".fa.fa-credit-card",
         "properties": {
           "font-family": "\"Font Awesome 5 Free\""
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".fa.fa-cc-amex,.fa.fa-cc-discover,.fa.fa-cc-mastercard,.fa.fa-cc-paypal,.fa.fa-cc-stripe,.fa.fa-cc-visa,.fa.fa-google-wallet,.fa.fa-paypal",
         "properties": {
           "font-family": "\"Font Awesome 5 Brands\""
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".fa.fa-address-card-o",
         "properties": {
           "font-family": "\"Font Awesome 5 Free\""
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".fa.fa-vcard-o",
         "properties": {
           "font-family": "\"Font Awesome 5 Free\""
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".fa.fa-id-card-o",
         "properties": {
           "font-family": "\"Font Awesome 5 Free\""
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       }
     ],
     "form_styles": [
+      {
+        "selector": ".wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select",
+        "properties": {
+          "width": "100%",
+          "padding": "1em",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "font-size": "16px"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
       {
         "selector": ".wpcf7 form .wpcf7-response-output",
         "properties": {
@@ -402,42 +416,68 @@
           "padding": "0.2em 1em",
           "border": "2px solid #00a0d2"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".wpcf7 input::placeholder,\n.wpcf7 textarea::placeholder",
+        "properties": {
+          "font-weight": "300",
+          "color": "#ccc"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".birth .wpcf7-form-control",
+        "properties": {
+          "width": "80px",
+          "padding": "12%",
+          "font-size": "1.5rem",
+          "margin-right": "1rem"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".wpcf7 textarea",
+        "properties": {
+          "margin": "0 auto",
+          "font-weight": "400"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".wpcf7 form.init .wpcf7-response-output,\n.wpcf7 form.resetting .wpcf7-response-output,\n.wpcf7 form.submitting .wpcf7-response-output",
         "properties": {
           "display": "none"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".wpcf7 form.sent .wpcf7-response-output",
         "properties": {
           "border-color": "#46b450"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".wpcf7 form.failed .wpcf7-response-output,\n.wpcf7 form.aborted .wpcf7-response-output",
         "properties": {
           "border-color": "#dc3232"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".wpcf7 form.spam .wpcf7-response-output",
         "properties": {
           "border-color": "#f56e28"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": ".wpcf7 form.invalid .wpcf7-response-output,\n.wpcf7 form.unaccepted .wpcf7-response-output,\n.wpcf7 form.payment-required .wpcf7-response-output",
         "properties": {
           "border-color": "#ffb900"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": "button,\ninput,\noptgroup,\nselect,\ntextarea",
@@ -451,14 +491,58 @@
           "color": "inherit",
           "margin": "0"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
       },
       {
         "selector": "button,\ninput:where([type=button]),\ninput:where([type=reset]),\ninput:where([type=submit])",
         "properties": {
           "background-color": "transparent"
         },
-        "sourceUrl": "https://milize.co.jp/about"
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".wpcf7 p.form-body",
+        "properties": {
+          "margin-bottom": "30px"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".wpcf7 select",
+        "properties": {
+          "width": "auto"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".contact-entry-wrap .wpcf7-list-item input",
+        "properties": {
+          "height": "22px",
+          "width": "auto"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".contact-entry-wrap .wpcf7-form-control",
+        "properties": {
+          "display": "flex",
+          "width": "100%"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".birth .select-inner-txt",
+        "properties": {
+          "padding-top": "0.8rem"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
+      },
+      {
+        "selector": ".privacy_area_wrap label input",
+        "properties": {
+          "margin": "auto 0.5rem"
+        },
+        "sourceUrl": "https://milize.co.jp/contact"
       }
     ],
     "border_radii": [
@@ -467,7 +551,9 @@
       "100%",
       "50%",
       "9999px",
-      "20px"
+      "20px",
+      "4px",
+      "0 !important"
     ],
     "logo_urls": [
       "https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png",
@@ -510,12 +596,13 @@
       "https://milize.co.jp/cms/wp-content/themes/milize/css/barlow.css",
       "https://unpkg.com/lenis@1.1.13/dist/lenis.css",
       "https://use.fontawesome.com/releases/v5.15.3/css/all.css",
-      "https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css"
+      "https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css",
+      "https://milize.co.jp/cms/wp-content/themes/milize/previous/css/form.css?ver=7.1"
     ],
-    "extracted_at": "2026-09-11T07:33:13.380Z",
+    "extracted_at": "2026-09-11T07:33:36.190Z",
     "source_urls": [
-      "https://milize.co.jp/about"
+      "https://milize.co.jp/contact"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #0084FF  --tw-gradient-from  出現20回  [external-css]\n  #79BEFF  --tw-gradient-to  出現18回  [external-css]\n  #DDDDDD  --wp-editor-canvas-background  出現11回  [style-tag+inline-style]\n  #EEEEEE  border  出現8回  [external-css+style-tag]\n  #333333  border-bottom  出現8回  [external-css]\n  #DC3232  border-color  出現6回  [external-css]\n  #00D084  background  出現6回  [style-tag]\n  #0693E3  background  出現6回  [style-tag]\n  #32373C  background-color  出現6回  [style-tag]\n  #DFDFDF  background  出現4回  [external-css]\n  #9CA3AF  color  出現4回  [external-css]\n  #7A00DF  --wp-block-synced-color  出現4回  [style-tag]\n  #007CBA  --wp-admin-theme-color  出現4回  [style-tag]\n  #006BA1  --wp-admin-theme-color-darker-10  出現4回  [style-tag]\n  #005A87  --wp-admin-theme-color-darker-20  出現4回  [style-tag]\n\n【CSS カラー変数（:root）】\n  --wp-block-synced-color: #7a00df\n  --wp-editor-canvas-background: #ddd\n  --wp-admin-theme-color: #007cba\n  --wp-admin-theme-color-darker-10: #006ba1\n  --wp-admin-theme-color-darker-20: #005a87\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n\n【使用フォント】\n  Zen Kaku Gothic New\n  Chillax\n  Chillax-Variable\n  ui-monospace\n  inherit\n  Barlow\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n  FontAwesome\n\n【角丸パターン】\n  1em\n  .1em\n  100%\n  50%\n  9999px\n  20px\n\n【ボタンスタイル】\n  ★ .interactive-btn.w-[260px].md:w-[300px]（実際のボタン要素で2回使用）\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: #EFF2F7\n    padding-left: 30px\n    padding-right: 30px\n  /*! This file is auto-generated */\n.wp-block-button__link\n    color: #fff\n    background-color: #32373c\n    border-radius: 9999px\n    box-shadow: none\n    padding: calc(.667em + 2px) calc(1.333em + 2px)\n  .primary-btn\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: rgb(0 132 255/var(--tw-bg-opacity))\n    background-image: url(../img/global/noise.png)\n    padding-left: 30px\n  .secondary-btn\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: rgb(239 242 247/var(--tw-bg-opacity))\n    padding-left: 30px\n    padding-right: 30px\n  .external-btn\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: rgb(239 242 247/var(--tw-bg-opacity))\n    padding-left: 25px\n    padding-right: 25px\n\n【カードスタイル】\n  /* Contact Card */\n.contact-card\n    background-color: white\n    border: 1px solid #E9E9E9\n    border-radius: 20px\n    padding: 30px 25px\n    color: #000\n    display: block\n  .contact-card:hover\n    border-color: transparent\n    box-shadow: 0 10px 25px rgba(0, 132, 255, 0.1)\n    background: linear-gradient(to top right, #0084ff, #79beff)\n    color: white\n  .contact-card\n    padding: 40px 30px\n  .contact-card:hover h3\n    color: white\n  .contact-card:hover p\n    color: rgba(255, 255, 255, 0.9)\n\n【フォームスタイル】\n  .wpcf7 form .wpcf7-response-output\n    margin: 2em 0.5em 1em\n    padding: 0.2em 1em\n    border: 2px solid #00a0d2\n  .wpcf7 form.init .wpcf7-response-output,\n.wpcf7 form.resetting .wpcf7-response-output,\n.wpcf7 form.submitting .wpcf7-response-output\n    display: none\n  .wpcf7 form.sent .wpcf7-response-output\n    border-color: #46b450\n  .wpcf7 form.failed .wpcf7-response-output,\n.wpcf7 form.aborted .wpcf7-response-output\n    border-color: #dc3232\n  .wpcf7 form.spam .wpcf7-response-output\n    border-color: #f56e28\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/btt-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/new_dai-ichi-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/df-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fukuoka-fg_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jibunbank_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jiji-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/mufg-shintaku_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/kyoto-bank_logo.jpg\n\n【取得CSSファイル】\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css\n  https://milize.co.jp/cms/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7\n  https://milize.co.jp/cms/wp-content/plugins/cf7-conditional-fields/style.css?ver=2.7.13\n  https://milize.co.jp/cms/wp-content/themes/milize/css/zenkakugothicnew.css\n  https://milize.co.jp/cms/wp-content/themes/milize/css/chillax.css\n  https://milize.co.jp/cms/wp-content/themes/milize/css/style.css?v=1.6\n  https://milize.co.jp/cms/wp-content/themes/milize/css/barlow.css\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://use.fontawesome.com/releases/v5.15.3/css/all.css\n  https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css"
+  "css_summary": "【抽出カラー（頻度順）】\n  #0084FF  --tw-gradient-from  出現30回  [external-css]\n  #79BEFF  --tw-gradient-to  出現27回  [external-css]\n  #DDDDDD  --wp-editor-canvas-background  出現15回  [style-tag+inline-style+external-css]\n  #333333  border-bottom  出現13回  [external-css]\n  #EEEEEE  border  出現12回  [external-css+style-tag]\n  #DC3232  border-color  出現9回  [external-css]\n  #00D084  background  出現9回  [style-tag]\n  #0693E3  background  出現9回  [style-tag]\n  #32373C  background-color  出現9回  [style-tag]\n  #DFDFDF  background  出現6回  [external-css]\n  #9CA3AF  color  出現6回  [external-css]\n  #7A00DF  --wp-block-synced-color  出現6回  [style-tag]\n  #007CBA  --wp-admin-theme-color  出現6回  [style-tag]\n  #006BA1  --wp-admin-theme-color-darker-10  出現6回  [style-tag]\n  #005A87  --wp-admin-theme-color-darker-20  出現6回  [style-tag]\n\n【CSS カラー変数（:root）】\n  --wp-block-synced-color: #7a00df\n  --wp-editor-canvas-background: #ddd\n  --wp-admin-theme-color: #007cba\n  --wp-admin-theme-color-darker-10: #006ba1\n  --wp-admin-theme-color-darker-20: #005a87\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n\n【使用フォント】\n  Zen Kaku Gothic New\n  Chillax\n  Chillax-Variable\n  ui-monospace\n  inherit\n  Barlow\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n  FontAwesome\n  Barlow Semi Condensed\n\n【角丸パターン】\n  1em\n  .1em\n  100%\n  50%\n  9999px\n  20px\n  4px\n  0 !important\n\n【ボタンスタイル】\n  ★ .interactive-btn.w-[260px].md:w-[300px]（実際のボタン要素で2回使用）\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: #EFF2F7\n    padding-left: 30px\n    padding-right: 30px\n  /*! This file is auto-generated */\n.wp-block-button__link\n    color: #fff\n    background-color: #32373c\n    border-radius: 9999px\n    box-shadow: none\n    padding: calc(.667em + 2px) calc(1.333em + 2px)\n  .primary-btn\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: rgb(0 132 255/var(--tw-bg-opacity))\n    background-image: url(../img/global/noise.png)\n    padding-left: 30px\n  .secondary-btn\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: rgb(239 242 247/var(--tw-bg-opacity))\n    padding-left: 30px\n    padding-right: 30px\n  .external-btn\n    display: flex\n    height: 65px\n    border-radius: 9999px\n    background-color: rgb(239 242 247/var(--tw-bg-opacity))\n    padding-left: 25px\n    padding-right: 25px\n\n【カードスタイル】\n  /* Contact Card */\n.contact-card\n    background-color: white\n    border: 1px solid #E9E9E9\n    border-radius: 20px\n    padding: 30px 25px\n    color: #000\n    display: block\n  .contact-card:hover\n    border-color: transparent\n    box-shadow: 0 10px 25px rgba(0, 132, 255, 0.1)\n    background: linear-gradient(to top right, #0084ff, #79beff)\n    color: white\n  .contact-card\n    padding: 40px 30px\n  .contact-card:hover h3\n    color: white\n  .contact-card:hover p\n    color: rgba(255, 255, 255, 0.9)\n\n【フォームスタイル】\n  .wpcf7 input,\n.wpcf7 textarea,\n.wpcf7 button,\n.wpcf7 select\n    width: 100%\n    padding: 1em\n    border: 1px solid #aaa\n    border-radius: 4px\n    font-size: 16px\n  .wpcf7 form .wpcf7-response-output\n    margin: 2em 0.5em 1em\n    padding: 0.2em 1em\n    border: 2px solid #00a0d2\n  .wpcf7 input::placeholder,\n.wpcf7 textarea::placeholder\n    font-weight: 300\n    color: #ccc\n  .birth .wpcf7-form-control\n    width: 80px\n    padding: 12%\n    font-size: 1.5rem\n    margin-right: 1rem\n  .wpcf7 textarea\n    margin: 0 auto\n    font-weight: 400\n\n【ロゴ・ビジュアル素材】\n  https://milize.co.jp/cms/wp-content/uploads/2024/09/milize_OGimages-768x403-1.png\n  https://milize.co.jp/cms/wp-content/themes/milize/img/favicon.ico\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/btt-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/new_dai-ichi-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/df-life_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/fukuoka-fg_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jibunbank_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/jiji-data_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/mufg-shintaku_logo.jpg\n  https://milize.co.jp/cms/wp-content/themes/milize/img/business-record/kyoto-bank_logo.jpg\n\n【取得CSSファイル】\n  https://milize.co.jp/cms/wp-content/uploads/font-awesome/v5.15.3/css/svg-with-js.css\n  https://milize.co.jp/cms/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7\n  https://milize.co.jp/cms/wp-content/plugins/cf7-conditional-fields/style.css?ver=2.7.13\n  https://milize.co.jp/cms/wp-content/themes/milize/css/zenkakugothicnew.css\n  https://milize.co.jp/cms/wp-content/themes/milize/css/chillax.css\n  https://milize.co.jp/cms/wp-content/themes/milize/css/style.css?v=1.6\n  https://milize.co.jp/cms/wp-content/themes/milize/css/barlow.css\n  https://unpkg.com/lenis@1.1.13/dist/lenis.css\n  https://use.fontawesome.com/releases/v5.15.3/css/all.css\n  https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css\n  https://milize.co.jp/cms/wp-content/themes/milize/previous/css/form.css?ver=7.1"
 }
