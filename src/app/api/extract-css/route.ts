@@ -442,7 +442,11 @@ function mergeHexFreq(a: Map<string, HexColorEntry>, b: Map<string, HexColorEntr
 
 function parseDeclarations(body: string): Record<string, string> {
   const result: Record<string, string> = {};
-  const re = /([\w-]+)\s*:\s*([^;]+);/g;
+  // CSSはブロック内最後の宣言の末尾セミコロンを省略できる（構文として有効）。
+  // ";" 必須のままだと、ちょうどその最後の宣言（今回のケースでは上書き用の
+  // 色指定であることが多い）が丸ごと読み飛ばされてしまうため、終端をセミコロンか
+  // 文字列末尾のどちらでも良いようにする。
+  const re = /([\w-]+)\s*:\s*([^;]+?)(?:;|$)/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(body)) !== null) {
     const prop = m[1].trim();

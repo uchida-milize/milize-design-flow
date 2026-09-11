@@ -10,7 +10,9 @@ export function toReactStyle(properties: Record<string, string> | undefined): CS
   if (!properties) return {};
   const style: Record<string, string> = {};
   for (const [k, v] of Object.entries(properties)) {
-    style[toCamel(k)] = v;
+    // "--tw-bg-opacity" のようなカスタムプロパティ名は大文字小文字を含め一字一句そのまま
+    // でなければ var() 参照先と一致しなくなる（toCamelでキャメルケース化すると壊れる）
+    style[k.startsWith('--') ? k : toCamel(k)] = v;
   }
   return style as CSSProperties;
 }

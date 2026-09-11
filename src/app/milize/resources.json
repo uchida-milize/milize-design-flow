@@ -107,12 +107,12 @@
           "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
           "--tw-ring-inset": "inset",
           "--tw-ring-opacity": "1",
-          "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))",
+          "--tw-ring-color": "rgb(0 132 255/var(--tw-ring-opacity))",
           "height": "60px",
           "--tw-bg-opacity": "1",
           "background-color": "rgb(255 255 255/var(--tw-bg-opacity))",
           "padding-left": "40px",
-          "padding-right": "20px"
+          "padding-right": "40px"
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
@@ -128,17 +128,34 @@
           "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
           "--tw-ring-inset": "inset",
           "--tw-ring-opacity": "1",
-          "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))",
+          "--tw-ring-color": "rgb(0 132 255/var(--tw-ring-opacity))",
           "height": "60px",
           "--tw-bg-opacity": "1",
           "background-color": "rgb(0 132 255/var(--tw-bg-opacity))",
           "padding-left": "40px",
-          "padding-right": "20px"
+          "padding-right": "40px"
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
       {
         "selector": "★ .btn.btn-header.hidden（実際のボタン要素で1回使用）",
+        "properties": {
+          "display": "none",
+          "border-radius": "9999px",
+          "--tw-text-opacity": "1",
+          "color": "rgb(255 255 255/var(--tw-text-opacity))",
+          "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+          "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
+          "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
+          "--tw-ring-inset": "inset",
+          "--tw-ring-opacity": "1",
+          "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))",
+          "font-weight": "500"
+        },
+        "sourceUrl": "https://milize.co.jp/news/20240520_5966"
+      },
+      {
+        "selector": "★ .btn.btn-header（実際のボタン要素で1回使用）",
         "properties": {
           "display": "flex",
           "border-radius": "9999px",
@@ -190,29 +207,14 @@
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
       {
-        "selector": "★ .btn（実際のボタン要素で1回使用）",
-        "properties": {
-          "display": "flex",
-          "border-radius": "9999px",
-          "--tw-text-opacity": "1",
-          "color": "rgb(255 255 255/var(--tw-text-opacity))",
-          "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-          "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
-          "box-shadow": "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
-          "--tw-ring-inset": "inset",
-          "--tw-ring-opacity": "1",
-          "--tw-ring-color": "rgb(255 255 255/var(--tw-ring-opacity))"
-        },
-        "sourceUrl": "https://milize.co.jp/news/20240520_5966"
-      },
-      {
         "selector": "/*! This file is auto-generated */\n.wp-block-button__link",
         "properties": {
           "color": "#fff",
           "background-color": "#32373c",
           "border-radius": "9999px",
           "box-shadow": "none",
-          "padding": "calc(.667em + 2px) calc(1.333em + 2px)"
+          "padding": "calc(.667em + 2px) calc(1.333em + 2px)",
+          "font-size": "1.125em"
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
@@ -340,7 +342,8 @@
           "padding-right": "20px",
           "--tw-text-opacity": "1",
           "color": "rgb(0 132 255/var(--tw-text-opacity))",
-          "--tw-ring-opacity": "1"
+          "--tw-ring-opacity": "1",
+          "--tw-ring-color": "rgb(0 132 255/var(--tw-ring-opacity))"
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
@@ -354,7 +357,8 @@
           "padding-right": "20px",
           "--tw-text-opacity": "1",
           "color": "rgb(255 255 255/var(--tw-text-opacity))",
-          "--tw-ring-opacity": "1"
+          "--tw-ring-opacity": "1",
+          "--tw-ring-color": "rgb(0 132 255/var(--tw-ring-opacity))"
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
@@ -373,6 +377,13 @@
           "padding-right": "calc(1.333em + 2px)",
           "padding-bottom": "calc(0.667em + 2px)",
           "padding-left": "calc(1.333em + 2px)"
+        },
+        "sourceUrl": "https://milize.co.jp/news/20240520_5966"
+      },
+      {
+        "selector": ".header.\\!active .menu-btn,\n.header.active .menu-btn",
+        "properties": {
+          "background-color": "hsla(0, 0%, 100%, .2)"
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
       },
@@ -396,21 +407,6 @@
           "--tw-gradient-to": "#79beff var(--tw-gradient-to-position)",
           "--tw-gradient-stops": "var(--tw-gradient-from), var(--tw-gradient-to)",
           "--tw-blur": "blur(4px)",
-          "--tw-content": "\"\""
-        },
-        "sourceUrl": "https://milize.co.jp/news/20240520_5966"
-      },
-      {
-        "selector": ".secondary-btn:before",
-        "properties": {
-          "display": "flex",
-          "width": "11px",
-          "border-radius": "9999px",
-          "background-image": "linear-gradient(to top right, var(--tw-gradient-stops))",
-          "--tw-gradient-from": "#0084ff var(--tw-gradient-from-position)",
-          "--tw-gradient-to": "#79beff var(--tw-gradient-to-position)",
-          "--tw-gradient-stops": "var(--tw-gradient-from), var(--tw-gradient-to)",
-          "--tw-blur": "blur(0)",
           "--tw-content": "\"\""
         },
         "sourceUrl": "https://milize.co.jp/news/20240520_5966"
