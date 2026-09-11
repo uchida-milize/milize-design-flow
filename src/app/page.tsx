@@ -154,12 +154,28 @@ async function getClients() {
         let name = slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
         let updatedAt = 0;
         try {
-          const [cssRes, guideRes, pageRes, commitsRes] = await Promise.all([
-            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/globals.css`, { next: { revalidate: 60 } }),
-            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/guidelines/page.tsx`, { next: { revalidate: 60 } }),
-            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/page.tsx`, { next: { revalidate: 60 } }),
-            // 「新しいプロジェクト順」に並べるため、そのクライアントディレクトリに対する最新コミット日時を取得
-            fetch(`https://api.github.com/repos/uchida-milize/milize-design-flow/commits?path=src/app/${slug}&per_page=1`, { headers: ghHeaders, next: { revalidate: 60 } }),
+          // 「新しいプロジェクト順」の並び替えだけでなく、raw.githubusercontent.com の
+          // main ブランチ参照は数分間キャッシュが残ることがあり、直後のリロードでも
+          // 色が更新されて見えない原因になる。そのクライアントの最新コミットSHAを
+          // 先に取得し、以降のファイル取得を「main」ではなくそのSHA固定で行うことで
+          // 常に最新内容を取得する（コミットSHA参照は内容が不変なのでCDNキャッシュ
+          // が残っていても古い内容を返すことがない）。
+          const commitsRes = await fetch(
+            `https://api.github.com/repos/uchida-milize/milize-design-flow/commits?path=src/app/${slug}&per_page=1`,
+            { headers: ghHeaders, next: { revalidate: 60 } },
+          );
+          let ref = 'main';
+          if (commitsRes.ok) {
+            const commits = (await commitsRes.json()) as Array<{ sha?: string; commit?: { committer?: { date?: string }; author?: { date?: string } } }>;
+            if (commits[0]?.sha) ref = commits[0].sha;
+            const dateStr = commits[0]?.commit?.committer?.date ?? commits[0]?.commit?.author?.date;
+            if (dateStr) updatedAt = new Date(dateStr).getTime();
+          }
+
+          const [cssRes, guideRes, pageRes] = await Promise.all([
+            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/${ref}/src/app/${slug}/globals.css`, { next: { revalidate: 60 } }),
+            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/${ref}/src/app/${slug}/guidelines/page.tsx`, { next: { revalidate: 60 } }),
+            fetch(`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/${ref}/src/app/${slug}/page.tsx`, { next: { revalidate: 60 } }),
           ]);
           if (pageRes.ok) {
             const pageSrc = await pageRes.text();
@@ -175,11 +191,6 @@ async function getClients() {
             const searchSrc = toneIdx > -1 ? src.slice(toneIdx) : src;
             const m = searchSrc.match(/lineHeight:\s*1\.8[^}]*\}}>([^<\n]+)/);
             if (m) description = m[1].trim();
-          }
-          if (commitsRes.ok) {
-            const commits = (await commitsRes.json()) as Array<{ commit?: { committer?: { date?: string }; author?: { date?: string } } }>;
-            const dateStr = commits[0]?.commit?.committer?.date ?? commits[0]?.commit?.author?.date;
-            if (dateStr) updatedAt = new Date(dateStr).getTime();
           }
         } catch { /* ignore */ }
         return { slug, name, colors, description, updatedAt };
@@ -223,7 +234,7 @@ export default async function ClientsIndex() {
             {`プロダクト＆セールスアセットポータル`}
           </h1>
           <p className="text-sm leading-relaxed" style={{ maxWidth: 560, color: '#6b7280' }}>
-            {`WEB・アプリのリサーチから開発仕様の参照、営業資料（PPTX）作成時のトンマナ確認やサンプル出力まで対応。クライアントごとの全デジタル資産の管理を推進します。`}
+            {`WEBサイトから各社のブランドに関わる情報を抽出して、トンマナやコンポーネントのサンプル出力をおこない、利用可能な素材としてまとめます`}
           </p>
         </div>
       </div>

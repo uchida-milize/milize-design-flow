@@ -1,7 +1,9 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
+import { ClientLogoHero } from '@/components/ClientLogoHero';
 
 const clientName = '株式会社 日立製作所';
 const basePath = '/hitachi';
+const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';
 
 const colorRatio = [
@@ -32,6 +34,8 @@ export default function Home() {
             クライアントごとのトンマナを収集して一覧化をしています。
           </p>
         </div>
+
+        <ClientLogoHero slug={slug} name={clientName} primaryColor={primaryColor} />
 
         <div className="color-bar">
           {colorRatio.map((c) => (

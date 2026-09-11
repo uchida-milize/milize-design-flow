@@ -1,7 +1,9 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
+import { ClientLogoHero } from '@/components/ClientLogoHero';
 
 const clientName = 'DeNA株式会社';
 const basePath = '/dena';
+const slug = basePath.replace(/^\//, '');
 const primaryColor: string = '#000000';
 
 const colorRatios = [
@@ -34,6 +36,8 @@ export default function Page() {
         </div>
 
         <div className="content-section">
+          <ClientLogoHero slug={slug} name={clientName} primaryColor={primaryColor} />
+
           <div className="color-ratio-bar">
             {colorRatios.map((c) => (
               <div
@@ -84,6 +88,17 @@ export default function Page() {
               </div>
               <p className="section-desc" style={{ marginBottom: 0 }}>
                 UIコンポーネントのサンプルとコードスニペットをご確認いただけます。
+              </p>
+            </a>
+            <a href={`${basePath}/resources`} className="nav-card">
+              <div className="section-label" style={{ color: primaryColor }}>
+                RESOURCES
+              </div>
+              <div className="section-title" style={{ marginBottom: 0 }}>
+                収集リソース
+              </div>
+              <p className="section-desc" style={{ marginBottom: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
               </p>
             </a>
           </div>
