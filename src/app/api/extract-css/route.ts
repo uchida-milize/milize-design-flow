@@ -27,6 +27,7 @@ interface CssInfo {
   fonts: string[];
   button_styles: StyleBlock[];
   card_styles: StyleBlock[];
+  form_styles: StyleBlock[];
   border_radii: string[];
   logo_urls: string[];
   source_css_urls: string[];
@@ -41,6 +42,7 @@ interface HexColorEntry {
 interface StyleBlock {
   selector: string;
   properties: Record<string, string>;
+  sourceUrl?: string; // このスタイルが見つかったスクレイピング対象ページ（引用元表示用）
 }
 
 // ──────────────────────────────────────────
@@ -187,6 +189,7 @@ function parseCss(css: string, source: 'external-css' | 'style-tag'): Partial<Cs
   const fontsSet = new Set<string>();
   const button_styles: StyleBlock[] = [];
   const card_styles: StyleBlock[] = [];
+  const form_styles: StyleBlock[] = [];
   const border_radii_set = new Set<string>();
   const hex_color_freq = new Map<string, HexColorEntry>();
 
@@ -278,6 +281,10 @@ function parseCss(css: string, source: 'external-css' | 'style-tag'): Partial<Cs
       const props = parseDeclarations(body);
       if (Object.keys(props).length > 0) card_styles.push({ selector, properties: props });
     }
+    if (/input|textarea|select|checkbox|radio|\.form-|\.field|\bform\b/i.test(selector)) {
+      const props = parseDeclarations(body);
+      if (Object.keys(props).length > 0) form_styles.push({ selector, properties: props });
+    }
   }
 
   return {
@@ -286,6 +293,7 @@ function parseCss(css: string, source: 'external-css' | 'style-tag'): Partial<Cs
     fonts: Array.from(fontsSet),
     button_styles: button_styles.slice(0, 20),
     card_styles: card_styles.slice(0, 20),
+    form_styles: form_styles.slice(0, 20),
     border_radii: Array.from(border_radii_set).slice(0, 20),
   };
 }
@@ -361,7 +369,7 @@ function parseDeclarations(body: string): Record<string, string> {
   while ((m = re.exec(body)) !== null) {
     const prop = m[1].trim();
     const val = m[2].trim();
-    if (/color|background|border|radius|shadow|font|padding|margin|display|flex/i.test(prop)) {
+    if (/color|background|border|radius|shadow|font|padding|margin|display|flex|outline|width|height/i.test(prop)) {
       result[prop] = val;
     }
   }
@@ -415,6 +423,7 @@ function buildSummary(
   fonts: string[],
   buttonStyles: StyleBlock[],
   cardStyles: StyleBlock[],
+  formStyles: StyleBlock[],
   borderRadii: string[],
   logoUrls: string[],
   sourceCssUrls: string[],
@@ -466,6 +475,15 @@ function buildSummary(
     cardStyles.slice(0, 5).forEach(c => {
       lines.push(`  ${c.selector}`);
       Object.entries(c.properties).slice(0, 6).forEach(([k, v]) => lines.push(`    ${k}: ${v}`));
+    });
+    lines.push('');
+  }
+
+  if (formStyles.length > 0) {
+    lines.push('【フォームスタイル】');
+    formStyles.slice(0, 5).forEach(f => {
+      lines.push(`  ${f.selector}`);
+      Object.entries(f.properties).slice(0, 6).forEach(([k, v]) => lines.push(`    ${k}: ${v}`));
     });
     lines.push('');
   }
@@ -641,6 +659,7 @@ export async function POST(req: NextRequest) {
   const allFonts = new Set<string>();
   let allButtonStyles: StyleBlock[] = [];
   let allCardStyles: StyleBlock[] = [];
+  let allFormStyles: StyleBlock[] = [];
   const allBorderRadii = new Set<string>();
   const allLogoUrls: string[] = [];
   const allInfoboxImgs: string[] = [];
@@ -682,8 +701,9 @@ export async function POST(req: NextRequest) {
           allCssVars = { ...allCssVars, ...(parsed.css_variables ?? {}) };
           allHexFreq = mergeHexFreq(allHexFreq, parsed.hex_color_freq);
           (parsed.fonts ?? []).forEach(f => allFonts.add(f));
-          allButtonStyles.push(...(parsed.button_styles ?? []));
-          allCardStyles.push(...(parsed.card_styles ?? []));
+          allButtonStyles.push(...(parsed.button_styles ?? []).map(b => ({ ...b, sourceUrl: pageUrl })));
+          allCardStyles.push(...(parsed.card_styles ?? []).map(c => ({ ...c, sourceUrl: pageUrl })));
+          allFormStyles.push(...(parsed.form_styles ?? []).map(f => ({ ...f, sourceUrl: pageUrl })));
           (parsed.border_radii ?? []).forEach(r => allBorderRadii.add(r));
           allSourceCssUrls.push(cssUrl);
         } catch { /* 個別 CSS 取得失敗は無視 */ }
@@ -697,8 +717,9 @@ export async function POST(req: NextRequest) {
         allCssVars = { ...allCssVars, ...(parsed.css_variables ?? {}) };
         allHexFreq = mergeHexFreq(allHexFreq, parsed.hex_color_freq);
         (parsed.fonts ?? []).forEach(f => allFonts.add(f));
-        allButtonStyles.push(...(parsed.button_styles ?? []));
-        allCardStyles.push(...(parsed.card_styles ?? []));
+        allButtonStyles.push(...(parsed.button_styles ?? []).map(b => ({ ...b, sourceUrl: pageUrl })));
+        allCardStyles.push(...(parsed.card_styles ?? []).map(c => ({ ...c, sourceUrl: pageUrl })));
+        allFormStyles.push(...(parsed.form_styles ?? []).map(f => ({ ...f, sourceUrl: pageUrl })));
         (parsed.border_radii ?? []).forEach(r => allBorderRadii.add(r));
       }
 
@@ -716,6 +737,7 @@ export async function POST(req: NextRequest) {
   // 重複除去（この呼び出し1回分のURLの中での重複のみ）
   allButtonStyles = Array.from(new Map(allButtonStyles.map(b => [b.selector, b])).values()).slice(0, 20);
   allCardStyles   = Array.from(new Map(allCardStyles.map(c => [c.selector, c])).values()).slice(0, 20);
+  allFormStyles   = Array.from(new Map(allFormStyles.map(f => [f.selector, f])).values()).slice(0, 20);
   let logoUrls  = dedupe(allLogoUrls);
   let sourceCssUrls = dedupe(allSourceCssUrls);
   let fonts     = Array.from(allFonts);
@@ -753,6 +775,7 @@ export async function POST(req: NextRequest) {
         fonts?: string[];
         button_styles?: StyleBlock[];
         card_styles?: StyleBlock[];
+        form_styles?: StyleBlock[];
         border_radii?: string[];
         logo_urls?: string[];
         source_css_urls?: string[];
@@ -764,6 +787,7 @@ export async function POST(req: NextRequest) {
         allHexFreq = mergeHexFreq(parseHexFreqString(prevCssInfo.hex_colors), allHexFreq);
         allButtonStyles = Array.from(new Map([...(prevCssInfo.button_styles ?? []), ...allButtonStyles].map(b => [b.selector, b])).values()).slice(0, 20);
         allCardStyles   = Array.from(new Map([...(prevCssInfo.card_styles ?? []), ...allCardStyles].map(c => [c.selector, c])).values()).slice(0, 20);
+        allFormStyles   = Array.from(new Map([...(prevCssInfo.form_styles ?? []), ...allFormStyles].map(f => [f.selector, f])).values()).slice(0, 20);
         fonts = Array.from(new Set([...(prevCssInfo.fonts ?? []), ...fonts]));
         borderRadii = Array.from(new Set([...(prevCssInfo.border_radii ?? []), ...borderRadii])).slice(0, 20);
         logoUrls = dedupe([...(prevCssInfo.logo_urls ?? []), ...logoUrls]);
@@ -775,7 +799,7 @@ export async function POST(req: NextRequest) {
       const rgbColors = Object.values(allCssVars).filter(v => /rgba?\(/.test(v)).slice(0, 10);
       const summary = buildSummary(
         allCssVars, allHexFreq, fonts,
-        allButtonStyles, allCardStyles,
+        allButtonStyles, allCardStyles, allFormStyles,
         borderRadii, logoUrls, sourceCssUrls,
       );
 
@@ -786,6 +810,7 @@ export async function POST(req: NextRequest) {
         fonts,
         button_styles: allButtonStyles,
         card_styles: allCardStyles,
+        form_styles: allFormStyles,
         border_radii: borderRadii,
         logo_urls: logoUrls,
         source_css_urls: sourceCssUrls,
@@ -818,7 +843,7 @@ export async function POST(req: NextRequest) {
   const rgbColors = Object.values(allCssVars).filter(v => /rgba?\(/.test(v)).slice(0, 10);
   const summary = buildSummary(
     allCssVars, allHexFreq, fonts,
-    allButtonStyles, allCardStyles,
+    allButtonStyles, allCardStyles, allFormStyles,
     borderRadii, logoUrls, sourceCssUrls,
   );
 
@@ -830,6 +855,7 @@ export async function POST(req: NextRequest) {
     fonts,
     button_styles: allButtonStyles,
     card_styles: allCardStyles,
+    form_styles: allFormStyles,
     border_radii: borderRadii,
     logo_urls: logoUrls,
     source_css_urls: sourceCssUrls,
