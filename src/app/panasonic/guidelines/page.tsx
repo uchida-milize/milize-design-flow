@@ -5,11 +5,11 @@ const basePath = '/panasonic';
 const primaryColor = 'var(--primary-color)';
 
 const colors = [
-  { hex: '#C0C0C0', name: 'プライマリカラー' },
-  { hex: '#000000', name: 'セカンダリカラー' },
-  { hex: '#444444', name: 'アクセントカラー' },
-  { hex: '#FFFFFF', name: '背景カラー' },
-  { hex: '#7F7F7F', name: 'サブカラー' },
+  { hex: '#0041C0', name: 'プライマリカラー' },
+  { hex: '#666666', name: 'セカンダリカラー' },
+  { hex: '#E6E6E6', name: 'アクセントカラー' },
+  { hex: '#F8F8F8', name: '背景カラー' },
+  { hex: '#111827', name: 'テキストカラー' },
 ];
 
 export default function GuidelinesPage() {

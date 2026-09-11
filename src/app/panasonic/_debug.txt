@@ -1,1 +1,48 @@
-2026-09-10T09:50:53.708Z  START company="パナソニック株式会社" slug="panasonic" selected_urls=no url1="https://panasonic.jp/" url2="" url3=""
+2026-09-11T01:38:07.196Z  START task_id="b246e7ff-eaae-4253-a27f-3278713eff31" workflow_run_id="a025c084-d055-4fd9-b468-bb7dc7c51eed" form_token="oVJPJDUNWD5I16kDSq1pG8" client="panasonic"
+2026-09-11T01:38:07.199Z  formBase="https://app.dify.milize.com"
+2026-09-11T01:38:07.199Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/oVJPJDUNWD5I16kDSq1pG8
+2026-09-11T01:38:07.823Z  結果[app/api]: 200 ct=application/json body={}
+
+2026-09-11T01:38:07.823Z  ✓ 再開成功: app/api
+2026-09-11T01:38:07.823Z  resume 成功: ct=application/json
+2026-09-11T01:38:07.823Z  ポーリング開始 pollIds=["a025c084-d055-4fd9-b468-bb7dc7c51eed","b246e7ff-eaae-4253-a27f-3278713eff31"]
+2026-09-11T01:38:18.470Z  logs[1]: run=a025c084 status="running"
+2026-09-11T01:38:18.470Z  logs[1]: 10件, runId未発見
+2026-09-11T01:38:29.010Z  logs[2]: run=a025c084 status="running"
+2026-09-11T01:38:29.010Z  logs[2]: 10件, runId未発見
+2026-09-11T01:38:39.527Z  logs[3]: run=a025c084 status="running"
+2026-09-11T01:38:39.528Z  logs[3]: 10件, runId未発見
+2026-09-11T01:38:50.074Z  logs[4]: run=a025c084 status="running"
+2026-09-11T01:38:50.074Z  logs[4]: 10件, runId未発見
+2026-09-11T01:39:00.619Z  logs[5]: run=a025c084 status="running"
+2026-09-11T01:39:00.619Z  logs[5]: 10件, runId未発見
+2026-09-11T01:39:11.141Z  logs[6]: run=a025c084 status="running"
+2026-09-11T01:39:11.141Z  logs[6]: 10件, runId未発見
+2026-09-11T01:39:21.707Z  logs[7]: run=a025c084 status="running"
+2026-09-11T01:39:21.707Z  logs[7]: 10件, runId未発見
+2026-09-11T01:39:32.237Z  logs[8]: run=a025c084 status="running"
+2026-09-11T01:39:32.238Z  logs[8]: 10件, runId未発見
+2026-09-11T01:39:42.790Z  logs[9]: run=a025c084 status="running"
+2026-09-11T01:39:42.790Z  logs[9]: 10件, runId未発見
+2026-09-11T01:39:53.309Z  logs[10]: run=a025c084 status="running"
+2026-09-11T01:39:53.309Z  logs[10]: 10件, runId未発見
+2026-09-11T01:40:03.820Z  logs[11]: run=a025c084 status="running"
+2026-09-11T01:40:03.820Z  logs[11]: 10件, runId未発見
+2026-09-11T01:40:14.325Z  logs[12]: run=a025c084 status="running"
+2026-09-11T01:40:14.325Z  logs[12]: 10件, runId未発見
+2026-09-11T01:40:24.837Z  logs[13]: run=a025c084 status="running"
+2026-09-11T01:40:24.837Z  logs[13]: 10件, runId未発見
+2026-09-11T01:40:35.361Z  logs[14]: run=a025c084 status="running"
+2026-09-11T01:40:35.361Z  logs[14]: 10件, runId未発見
+2026-09-11T01:40:45.873Z  logs[15]: run=a025c084 status="running"
+2026-09-11T01:40:45.874Z  logs[15]: 10件, runId未発見
+2026-09-11T01:40:56.402Z  logs[16]: run=a025c084 status="running"
+2026-09-11T01:40:56.402Z  logs[16]: 10件, runId未発見
+2026-09-11T01:41:06.932Z  logs[17]: run=a025c084 status="running"
+2026-09-11T01:41:06.933Z  logs[17]: 10件, runId未発見
+2026-09-11T01:41:17.451Z  logs[18]: run=a025c084 status="running"
+2026-09-11T01:41:17.451Z  logs[18]: 10件, runId未発見
+2026-09-11T01:41:27.991Z  logs[19]: run=a025c084 status="succeeded"
+2026-09-11T01:41:27.991Z  ワークフロー完了: status="succeeded" (outputs は dify-callback 経由で書き込み済み)
+2026-09-11T01:41:27.991Z  ポーリング完了
+2026-09-11T01:41:28.109Z  designColors: resources.json css_info から抽出 primary=#0041C0
