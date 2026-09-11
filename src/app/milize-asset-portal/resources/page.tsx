@@ -105,10 +105,10 @@ export default function ResourcesPage() {
   const TAB_ORDER = ['selected_urls', 'design_md', 'code', 'iteration_output', 'URL'];
   const SECONDARY_KEYS = new Set(['name', 'percent', 'pct', 'state', 'createdAt', 'isWhite', 'border', 'date', 'vercel_output']);
   const validTabs = tabs.filter(VALID_KEY);
+  // vercel_output・name・percent 等の技術的/断片的なキーはタブとして表示しない
   const primaryTabs = [...validTabs].filter(t => !SECONDARY_KEYS.has(t)).sort((a, b) =>
     (TAB_ORDER.indexOf(a) === -1 ? 999 : TAB_ORDER.indexOf(a)) - (TAB_ORDER.indexOf(b) === -1 ? 999 : TAB_ORDER.indexOf(b))
   );
-  const secondaryTabs = validTabs.filter(t => SECONDARY_KEYS.has(t));
 
   useEffect(() => {
     Promise.all([
@@ -158,21 +158,6 @@ export default function ResourcesPage() {
                   }}>{getTabLabel(tab)}</button>
                 ))}
               </div>
-              {secondaryTabs.length > 0 && (
-                <>
-                  <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '10px 0' }} />
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {secondaryTabs.map(tab => (
-                      <button key={tab} onClick={() => setActive(tab)} style={{
-                        padding: '6px 16px', borderRadius: 999, fontSize: 13, fontWeight: 500,
-                        background: active === tab ? primaryColor : '#f3f4f6',
-                        color: active === tab ? '#ffffff' : '#6b7280',
-                        border: 'none', cursor: 'pointer', transition: 'all 0.15s',
-                      }}>{getTabLabel(tab)}</button>
-                    ))}
-                  </div>
-                </>
-              )}
             </div>
             <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 3, overflow: 'hidden' }}>
               <div style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb', padding: '10px 20px' }}>
