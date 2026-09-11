@@ -26,7 +26,7 @@ export function SourceLinks({ urls }: { urls: string[] }) {
   );
 }
 
-/** 抽出された要素1件に付ける小さな「参照元」リンクチップ */
+/** 抽出された要素1件に付ける「どのページで使われていたか」へのリンクボタン */
 export function SourceTag({ url }: { url?: string }) {
   if (!url) return null;
   return (
@@ -34,16 +34,24 @@ export function SourceTag({ url }: { url?: string }) {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
+      title={url}
       style={{
         fontSize: 11,
-        color: '#9ca3af',
+        fontWeight: 500,
+        color: '#4b5563',
         textDecoration: 'none',
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 3,
+        gap: 4,
+        padding: '4px 10px',
+        borderRadius: 999,
+        border: '1px solid #e5e7eb',
+        background: '#f9fafb',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
       }}
     >
-      参照: {hostnameOf(url)}
+      {hostnameOf(url)} ↗
     </a>
   );
 }
