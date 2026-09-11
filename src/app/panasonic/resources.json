@@ -1,30 +1,381 @@
 {
   "selected_urls": "https://ja.wikipedia.org/wiki/パナソニック株式会社||ロゴ・CI\nhttps://holdings.panasonic/jp/corporate/brand/our-brand.html||カラー,ロゴ・CI,フォント",
   "css_info": {
-    "css_variables": {},
-    "hex_colors": "#88BBFF | background | 出現18回 | [inline-style]\n#77AAFF | background | 出現6回 | [inline-style]\n#002BB8 | color | 出現3回 | [inline-style]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]",
+    "css_variables": {
+      "--font-family": "\"Noto Sans JP\",\"Noto Sans SC\",\"Noto Sans TC\",\"Noto Sans Thai\",\"Noto Sans Khmer\",\"Noto Sans Myanmar\",\"Noto Sans\",sans-serif",
+      "--pale-gray": "#f2f2f2",
+      "--medium-gray": "#ccc",
+      "--dark-gray": "#1f1f1f",
+      "--standard-red": "#fc1921",
+      "--dark-red": "#b50000",
+      "--standard-green": "#4fad26",
+      "--dark-green": "#1f6600",
+      "--panasonic-blue": "#0041c0",
+      "--line-color-light": "#ccc",
+      "--line-color-dark": "#666",
+      "--text-color-normal": "#1a1a1a",
+      "--text-color-normal-sub": "#666",
+      "--text-color-normal-disable": "#b3b3b3",
+      "--text-color-light": "#e6e6e6",
+      "--text-color-light-sub": "#999",
+      "--text-color-light-disable": "#4d4d4d",
+      "--btn-hover-color-normal": "#e6e6e6",
+      "--btn-hover-color-dark": "#333",
+      "--icn-color-filter-normal": "none",
+      "--icn-color-filter-light": "brightness(0.9) invert(100%)",
+      "--text-shadow-white": "0 0 3px #fff,0 0 3px #fff",
+      "--text-shadow-white-hard": "0 0 5px #fff,0 0 4px #fff,0 0 3px #fff,0 0 2px #fff,0 0 1px #fff",
+      "--text-shadow-white-exhard": "-1px -1px 0 #fff,1px -1px 0 #fff,1px 1px 0 #fff,-1px 1px 0 #fff,0 0 7px #fff,0 0 6px #fff,0 0 5px #fff,0 0 4px #fff,0 0 3px #fff,0 0 2px #fff,0 0 1px #fff",
+      "--text-shadow-black": "0 0 3px #000,0 0 3px #000",
+      "--text-shadow-black-hard": "0 0 5px #000,0 0 4px #000,0 0 3px #000,0 0 2px #000,0 0 1px #000",
+      "--vc-clr-primary": "#642afb",
+      "--vc-clr-secondary": "#8e98f3",
+      "--vc-clr-white": "#fff",
+      "--vc-nav-color": "#fff",
+      "--vc-nav-background-color": "var(--vc-clr-primary)",
+      "--vc-pgn-background-color": "var(--vc-clr-secondary)"
+    },
+    "hex_colors": "#0041C0 | --panasonic-blue, color, border-top, background, fill | 出現85回 | [external-css]\n#666666 | --line-color-dark, --text-color-normal-sub, color, fill, border-left | 出現81回 | [external-css]\n#E6E6E6 | --text-color-light, --btn-hover-color-normal, background-color, background, border-bottom | 出現54回 | [external-css]\n#1F1F1F | --dark-gray, color, background, background-color | 出現33回 | [external-css]\n#F8F8F8 | background, border-color, border-top, background-color | 出現32回 | [external-css]\n#CCCCCC | --line-color-light, background-color, border-top, border-bottom, --medium-gray | 出現22回 | [external-css]\n#88BBFF | background | 出現18回 | [inline-style]\n#1A1A1A | --text-color-normal, color | 出現17回 | [external-css]\n#F2F2F2 | background, --bg-color, background-color, --pale-gray, border-top | 出現13回 | [external-css]\n#333333 | --btn-hover-color-dark, color, border-right, border-top | 出現11回 | [external-css]\n#4D4D4D | --text-color-light-disable, color, --headernavpanel-font-color-base | 出現9回 | [external-css]\n#77AAFF | background | 出現6回 | [inline-style]\n#707070 | color, background | 出現4回 | [external-css]\n#002BB8 | color | 出現3回 | [inline-style]\n#B3B3B3 | --text-color-normal-disable, border-top | 出現3回 | [external-css]\n#999999 | --text-color-light-sub, color | 出現3回 | [external-css]\n#0056A8 | border-left-color, background | 出現3回 | [external-css]\n#642AFB | background-color, --vc-clr-primary | 出現3回 | [external-css]\n#EEEEFF | border, background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#FC1921 | --standard-red, color | 出現2回 | [external-css]\n#E51A5E | fill, stroke | 出現2回 | [external-css]\n#EF4056 | color | 出現2回 | [external-css]\n#A6A6A6 | color | 出現2回 | [external-css]\n#8E98F3 | background-color, --vc-clr-secondary | 出現2回 | [external-css]\n#0068B7 | outline | 出現2回 | [external-css]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]\n#B50000 | --dark-red | 出現1回 | [external-css]\n#4FAD26 | --standard-green | 出現1回 | [external-css]",
     "rgb_colors": [],
-    "fonts": [],
-    "button_styles": [],
-    "card_styles": [],
-    "border_radii": [],
+    "fonts": [
+      "Noto Sans JP",
+      "inherit",
+      "var(--font-serif)",
+      "swiper-icons"
+    ],
+    "button_styles": [
+      {
+        "selector": ".holdings-cta button,.holdings-footer button,.holdings-header button,.holdings-titlenav button",
+        "properties": {
+          "background": "none",
+          "border": "none",
+          "border-radius": "0",
+          "color": "inherit",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".holdings-titlenav .holdings-header__sub__nav__list__item .item-link[role=button]:after",
+        "properties": {
+          "background-repeat": "no-repeat",
+          "background-size": "contain"
+        }
+      },
+      {
+        "selector": ".holdings-titlenav .holdings-header__sub__nav__list__item .item-link[role=button][aria-expanded=false]:after",
+        "properties": {
+          "background-image": "url(../resources/images/icon_add_line.svg)"
+        }
+      },
+      {
+        "selector": ".holdings-titlenav .holdings-header__sub__nav__list__item .item-link[role=button][aria-expanded=true]:after",
+        "properties": {
+          "background-image": "url(../resources/images/icon_close_line.svg)"
+        }
+      },
+      {
+        "selector": ".holdings-titlenav .holdings-header__sub__nav__list__item .item-link[href=\"\"]+.item-tglbtn:before",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".holdings-header__nav.pulldown .holdings-header__nav__tglbtn",
+        "properties": {
+          "margin-inline-end": "auto",
+          "padding": "0 15px"
+        }
+      },
+      {
+        "selector": ".holdings-header__nav.pulldown .holdings-header__nav__list__item .item-link[href=\"\"]+.item-tglbtn:before",
+        "properties": {
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".holdings-header__search__tglbtn",
+        "properties": {
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".holdings-header__search .holdings-header__search__tglbtn",
+        "properties": {
+          "margin-inline-start": "auto",
+          "padding": "0 15px"
+        }
+      },
+      {
+        "selector": ".l-page button,.l-page input,.l-page textarea select",
+        "properties": {
+          "color": "inherit",
+          "font-family": "inherit"
+        }
+      },
+      {
+        "selector": ".l-footer .l-footer__main-button",
+        "properties": {
+          "background": "none",
+          "border": "none",
+          "border-top": "1px solid #e6e6e6",
+          "color": "#666",
+          "font-size": "15px",
+          "font-weight": "700",
+          "padding": "18px 0"
+        }
+      },
+      {
+        "selector": ".l-footer .l-footer__main-button:after",
+        "properties": {
+          "background": "url(/asset/image/icon_plus_gray_01.svg) 50% no-repeat",
+          "background-size": "cover",
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".Buttons.-small .Buttons__item",
+        "properties": {
+          "border-radius": "4px"
+        }
+      },
+      {
+        "selector": ".Buttons .Buttons__item",
+        "properties": {
+          "background": "#fff",
+          "border": "1px solid gray",
+          "color": "#1f1f1f",
+          "display": "flex",
+          "font-size": "15px"
+        }
+      },
+      {
+        "selector": ".Buttons .Buttons__item:focus,.Buttons .Buttons__item:hover",
+        "properties": {
+          "border-color": "#0041c0"
+        }
+      },
+      {
+        "selector": ".Buttons .Buttons__item.-arrow",
+        "properties": {
+          "padding-right": "46px"
+        }
+      },
+      {
+        "selector": ".Buttons .Buttons__item.-arrow:after",
+        "properties": {
+          "background": "url(/asset/image/group-internal/icon_arrow_01.png) 50% no-repeat",
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".Buttons .Buttons__item.-movie",
+        "properties": {
+          "padding-right": "38px"
+        }
+      },
+      {
+        "selector": ".Buttons .Buttons__item.-movie:after",
+        "properties": {
+          "background": "url(/asset/image/group-internal/icon_movie_01.png) 50% no-repeat",
+          "display": "block"
+        }
+      },
+      {
+        "selector": ".l-page .c-button,[role=dialog] .c-button",
+        "properties": {
+          "background": "#fff",
+          "border": "1px solid gray",
+          "border-radius": "100px",
+          "color": "#1f1f1f",
+          "display": "inline-flex",
+          "font-size": "17px",
+          "font-weight": "700"
+        }
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".p-card .p-card__link",
+        "properties": {
+          "color": "#333"
+        }
+      },
+      {
+        "selector": ".p-card .p-card__link.-blank .p-card__heading:after",
+        "properties": {
+          "background": "url(/asset/image/icon_blank_gray_01.svg) 50% no-repeat",
+          "background-size": "cover",
+          "display": "inline-block",
+          "margin-left": "4px"
+        }
+      },
+      {
+        "selector": ".p-card.-md-horizontal .p-card__image",
+        "properties": {
+          "padding-right": "20px"
+        }
+      },
+      {
+        "selector": ".p-card.-sm-horizontal .p-card__image",
+        "properties": {
+          "margin-right": "15px"
+        }
+      },
+      {
+        "selector": ".p-card.-sp-small .p-card__image",
+        "properties": {
+          "padding-right": "15px"
+        }
+      },
+      {
+        "selector": ".p-card.-sp-small .p-card__heading",
+        "properties": {
+          "font-size": "15px"
+        }
+      },
+      {
+        "selector": ".p-card__number",
+        "properties": {
+          "color": "#4d4d4d",
+          "font-size": "48px",
+          "font-weight": "700"
+        }
+      },
+      {
+        "selector": ".p-card__image span",
+        "properties": {
+          "border": "1px solid #e6e6e6",
+          "border-radius": "12px",
+          "display": "block",
+          "padding-bottom": "56.3157894737%"
+        }
+      },
+      {
+        "selector": ".p-card__image img",
+        "properties": {
+          "margin": "auto"
+        }
+      },
+      {
+        "selector": ".p-card__new",
+        "properties": {
+          "color": "#ef4056",
+          "font-weight": "700"
+        }
+      },
+      {
+        "selector": ".p-card__new:before",
+        "properties": {
+          "color": "#666"
+        }
+      },
+      {
+        "selector": ".p-card__category,.p-card__date",
+        "properties": {
+          "color": "#333"
+        }
+      },
+      {
+        "selector": ".p-card__subTitle,.p-card__tagline",
+        "properties": {
+          "color": "#1f1f1f",
+          "font-size": "13px",
+          "font-weight": "500"
+        }
+      },
+      {
+        "selector": ".p-card__category-item:not(:last-child)",
+        "properties": {
+          "border-right": "1px solid gray",
+          "margin-right": ".5em"
+        }
+      },
+      {
+        "selector": ".p-card__heading",
+        "properties": {
+          "color": "#1f1f1f",
+          "display": "-webkit-box",
+          "font-weight": "700",
+          "margin-top": "8px"
+        }
+      },
+      {
+        "selector": ".p-card__tag",
+        "properties": {
+          "display": "flex",
+          "flex-wrap": "wrap"
+        }
+      },
+      {
+        "selector": ".p-card__tag-item",
+        "properties": {
+          "color": "#333"
+        }
+      },
+      {
+        "selector": ".p-card__summary",
+        "properties": {
+          "font-size": "13px"
+        }
+      },
+      {
+        "selector": ".p-card__pdf",
+        "properties": {
+          "font-size": "13px"
+        }
+      },
+      {
+        "selector": ".p-card__caption",
+        "properties": {
+          "color": "#666",
+          "font-size": "13px"
+        }
+      }
+    ],
+    "border_radii": [
+      "4px",
+      "100px",
+      "12px",
+      "20px",
+      "8px",
+      "50px",
+      "6px",
+      "0 4px 4px 0",
+      "16px",
+      "5px",
+      "12px 12px 0 0",
+      "0 0 12px 12px",
+      "0 12px 12px 0",
+      "30px",
+      "var(--vc-nav-width)",
+      "var(--vc-pgn-height)",
+      "50%"
+    ],
     "logo_urls": [
       "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
       "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
       "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
       "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://news.panasonic.com/asset/image/default_common.jpg",
+      "https://news.panasonic.com/resources/images/favicon_blue.ico",
+      "https://news.panasonic.com/resources/images/holdings-plogo-blue.svg",
+      "https://news.panasonic.com/resources/images/holdings-plogo-blue-horizontal.svg"
     ],
     "source_css_urls": [
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022",
+      "https://news.panasonic.com/etc/designs/panasonic/holdings/css/site.css",
+      "https://news.panasonic.com/asset/style/main.bundle.css",
+      "https://news.panasonic.com/asset/style/print.bundle.css",
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap"
     ],
-    "extracted_at": "2026-09-11T01:38:19.617Z",
+    "extracted_at": "2026-09-11T01:38:30.419Z",
     "source_urls": [
-      "https://holdings.panasonic/jp/corporate/brand/our-brand.html"
+      "https://news.panasonic.com/jp/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #88BBFF  background  出現18回  [inline-style]\n  #77AAFF  background  出現6回  [inline-style]\n  #002BB8  color  出現3回  [inline-style]\n  #EEEEFF  border  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #A2A9B1  border-bottom  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #0041C0  --panasonic-blue  出現85回  [external-css]\n  #666666  --line-color-dark  出現81回  [external-css]\n  #E6E6E6  --text-color-light  出現54回  [external-css]\n  #1F1F1F  --dark-gray  出現33回  [external-css]\n  #F8F8F8  background  出現32回  [external-css]\n  #CCCCCC  --line-color-light  出現22回  [external-css]\n  #88BBFF  background  出現18回  [inline-style]\n  #1A1A1A  --text-color-normal  出現17回  [external-css]\n  #F2F2F2  background  出現13回  [external-css]\n  #333333  --btn-hover-color-dark  出現11回  [external-css]\n  #4D4D4D  --text-color-light-disable  出現9回  [external-css]\n  #77AAFF  background  出現6回  [inline-style]\n  #707070  color  出現4回  [external-css]\n  #002BB8  color  出現3回  [inline-style]\n  #B3B3B3  --text-color-normal-disable  出現3回  [external-css]\n\n【CSS カラー変数（:root）】\n  --pale-gray: #f2f2f2\n  --medium-gray: #ccc\n  --dark-gray: #1f1f1f\n  --standard-red: #fc1921\n  --dark-red: #b50000\n  --standard-green: #4fad26\n  --dark-green: #1f6600\n  --panasonic-blue: #0041c0\n  --line-color-light: #ccc\n  --line-color-dark: #666\n  --text-color-normal: #1a1a1a\n  --text-color-normal-sub: #666\n  --text-color-normal-disable: #b3b3b3\n  --text-color-light: #e6e6e6\n  --text-color-light-sub: #999\n  --text-color-light-disable: #4d4d4d\n  --btn-hover-color-normal: #e6e6e6\n  --btn-hover-color-dark: #333\n  --vc-clr-primary: #642afb\n  --vc-clr-secondary: #8e98f3\n  --vc-clr-white: #fff\n  --vc-nav-color: #fff\n\n【使用フォント】\n  Noto Sans JP\n  inherit\n  var(--font-serif)\n  swiper-icons\n\n【角丸パターン】\n  4px\n  100px\n  12px\n  20px\n  8px\n  50px\n  6px\n  0 4px 4px 0\n\n【ボタンスタイル】\n  .holdings-cta button,.holdings-footer button,.holdings-header button,.holdings-titlenav button\n    background: none\n    border: none\n    border-radius: 0\n    color: inherit\n    display: flex\n  .holdings-titlenav .holdings-header__sub__nav__list__item .item-link[role=button]:after\n    background-repeat: no-repeat\n    background-size: contain\n  .holdings-titlenav .holdings-header__sub__nav__list__item .item-link[role=button][aria-expanded=false]:after\n    background-image: url(../resources/images/icon_add_line.svg)\n  .holdings-titlenav .holdings-header__sub__nav__list__item .item-link[role=button][aria-expanded=true]:after\n    background-image: url(../resources/images/icon_close_line.svg)\n  .holdings-titlenav .holdings-header__sub__nav__list__item .item-link[href=\"\"]+.item-tglbtn:before\n    display: block\n\n【カードスタイル】\n  .p-card .p-card__link\n    color: #333\n  .p-card .p-card__link.-blank .p-card__heading:after\n    background: url(/asset/image/icon_blank_gray_01.svg) 50% no-repeat\n    background-size: cover\n    display: inline-block\n    margin-left: 4px\n  .p-card.-md-horizontal .p-card__image\n    padding-right: 20px\n  .p-card.-sm-horizontal .p-card__image\n    margin-right: 15px\n  .p-card.-sp-small .p-card__image\n    padding-right: 15px\n\n【ロゴ・ビジュアル素材】\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Panasonic_logo.svg/250px-Panasonic_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Panasonic_Group_Logo.svg/120px-Panasonic_Group_Logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://news.panasonic.com/asset/image/default_common.jpg\n  https://news.panasonic.com/resources/images/favicon_blue.ico\n  https://news.panasonic.com/resources/images/holdings-plogo-blue.svg\n  https://news.panasonic.com/resources/images/holdings-plogo-blue-horizontal.svg\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://news.panasonic.com/etc/designs/panasonic/holdings/css/site.css\n  https://news.panasonic.com/asset/style/main.bundle.css\n  https://news.panasonic.com/asset/style/print.bundle.css\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap"
 }
