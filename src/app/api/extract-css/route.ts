@@ -453,7 +453,7 @@ function parseDeclarations(body: string): Record<string, string> {
     const val = m[2].trim();
     // カスタムプロパティ（--tw-bg-opacity 等）はキーワードに関わらず常に残す。
     // Tailwindのopacity修飾子などはこの変数がないとbackground-color等がまるごと無効になる。
-    if (prop.startsWith('--') || /color|background|border|radius|shadow|font|padding|margin|display|flex|outline|width|height/i.test(prop)) {
+    if (prop.startsWith('--') || /color|background|border|radius|shadow|font|padding|margin|display|flex|align|justify|outline|width|height/i.test(prop)) {
       result[prop] = val;
     }
   }
