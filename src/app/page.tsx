@@ -14,7 +14,6 @@ const EXCLUDED_DIRS = new Set([
   'httpsdenacomjpcompanypolicylogoguidehtml',
   'sharp',
   'ge',
-  'milize',
   'softbank-group',
   'sony-entertainment',
   'sonypictures',
