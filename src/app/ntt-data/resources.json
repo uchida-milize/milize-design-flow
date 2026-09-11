@@ -4,7 +4,7 @@
     "css_variables": {
       "--fa-style-family-brands": "'Font Awesome 6 Brands'"
     },
-    "hex_colors": "#2E404D | background, border-bottom, border-top, color, border | 出現306回 | [external-css]\n#070F26 | background, background-color, box-shadow, border, color | 出現226回 | [external-css]\n#FFC400 | color, background, border, background-color, border-bottom | 出現143回 | [external-css]\n#E8E8E8 | border-bottom, background, border, border-top, border-color | 出現136回 | [external-css]\n#0072BC | color, background-color, border, background | 出現121回 | [external-css]\n#949494 | border, color, border-bottom, border-color, background | 出現112回 | [external-css]\n#005B96 | background, border, color, border-color | 出現75回 | [external-css]\n#E42600 | color, border-bottom, border, background, background-color | 出現28回 | [external-css]\n#F2F3F4 | background, border, border-bottom | 出現19回 | [external-css]\n#141B31 | background | 出現16回 | [external-css]\n#515767 | color | 出現8回 | [external-css]\n#19A3FC | color | 出現6回 | [external-css]\n#696B75 | border, background | 出現6回 | [external-css]\n#3176F6 | border-color, background | 出現6回 | [external-css]\n#FFFF99 | background-color | 出現4回 | [external-css]\n#1D264D | background | 出現4回 | [external-css]\n#DBDBDB | border-bottom, border-top, border | 出現3回 | [external-css]\n#EEEEEE | border-color | 出現2回 | [external-css]\n#007AFF | --swiper-theme-color | 出現2回 | [external-css]\n#DADBDE | border | 出現2回 | [external-css]\n#131B38 | color | 出現2回 | [external-css]\n#767676 | border | 出現2回 | [external-css]\n#DDDDDD | border-left, border-right | 出現2回 | [external-css]\n#C7D1DB | border-left, border-bottom | 出現2回 | [external-css]\n#681DA8 | color | 出現1回 | [external-css]\n#667493 | border | 出現1回 | [external-css]\n#CCCCCC | border-top | 出現1回 | [external-css]\n#7F7F7F | color | 出現1回 | [external-css]\n#38F990 | color | 出現1回 | [external-css]",
+    "hex_colors": "#2E404D | background, border-bottom, border-top, color, border | 出現467回 | [external-css]\n#070F26 | background, background-color, box-shadow, border, color | 出現354回 | [external-css]\n#FFC400 | color, background, border, background-color, border-bottom | 出現223回 | [external-css]\n#E8E8E8 | border-bottom, background, border, border-top, border-color | 出現207回 | [external-css]\n#0072BC | color, background-color, border, background | 出現185回 | [external-css]\n#949494 | border, color, border-bottom, border-color, background | 出現170回 | [external-css]\n#005B96 | background, border, color, border-color | 出現116回 | [external-css]\n#E42600 | color, border-bottom, border, background, background-color | 出現41回 | [external-css]\n#F2F3F4 | background, border, border-bottom | 出現30回 | [external-css]\n#141B31 | background | 出現24回 | [external-css]\n#515767 | color | 出現11回 | [external-css]\n#19A3FC | color | 出現9回 | [external-css]\n#696B75 | border, background | 出現9回 | [external-css]\n#3176F6 | border-color, background | 出現9回 | [external-css]\n#FFFF99 | background-color | 出現6回 | [external-css]\n#1D264D | background | 出現6回 | [external-css]\n#DBDBDB | border-bottom, border-top, border | 出現3回 | [external-css]\n#EEEEEE | border-color | 出現3回 | [external-css]\n#DADBDE | border | 出現3回 | [external-css]\n#131B38 | color | 出現3回 | [external-css]\n#767676 | border | 出現3回 | [external-css]\n#007AFF | --swiper-theme-color | 出現2回 | [external-css]\n#DDDDDD | border-left, border-right | 出現2回 | [external-css]\n#C7D1DB | border-left, border-bottom | 出現2回 | [external-css]\n#681DA8 | color | 出現2回 | [external-css]\n#667493 | border | 出現2回 | [external-css]\n#CCCCCC | border-top | 出現2回 | [external-css]\n#7F7F7F | color | 出現1回 | [external-css]\n#38F990 | color | 出現1回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
       "var(--fa-style-family",
@@ -80,6 +80,21 @@
         "sourceUrl": "https://www.nttdata.com/jp/ja/"
       },
       {
+        "selector": "★ .c-link-share-button.st-custom-button（実際のボタン要素で3回使用）",
+        "properties": {
+          "border-radius": "50%",
+          "background-color": "#fff",
+          "background-repeat": "no-repeat",
+          "background-position": "center center",
+          "background-size": "24px 24px",
+          "box-shadow": "8px 8px 15px 1px rgba(0,0,0,.5)",
+          "width": "50px",
+          "height": "50px",
+          "font-size": "0"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
         "selector": "★ .c-btn-text-external（実際のボタン要素で19回使用）",
         "properties": {
           "color": "#0072bc",
@@ -106,6 +121,20 @@
           "background": "0 0"
         },
         "sourceUrl": "https://www.nttdata-with.com/"
+      },
+      {
+        "selector": "★ .c-btn-text-external（実際のボタン要素で7回使用）",
+        "properties": {
+          "color": "#0072bc",
+          "font-weight": "400",
+          "font-size": "inherit",
+          "display": "inline-flex",
+          "justify-content": "flex-start",
+          "line-height": "1",
+          "align-items": "center",
+          "background": "0 0"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": "★ .swiper-button-switch.is-swiper（実際のボタン要素で1回使用）",
@@ -135,7 +164,7 @@
           "font-size": "1.4rem",
           "line-height": "1"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": "★ .l-header-ed23__search-btn（実際のボタン要素で1回使用）",
@@ -148,7 +177,7 @@
           "border": "none",
           "padding": "0"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": "★ .l-header__search-form__button（実際のボタン要素で1回使用）",
@@ -160,7 +189,20 @@
           "width": "20px",
           "height": "20px"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": "★ .l-header__search-form__close（実際のボタン要素で1回使用）",
+        "properties": {
+          "border": "none",
+          "background": "0 0",
+          "padding": "0",
+          "font-size": "2rem",
+          "width": "20px",
+          "height": "20px",
+          "display": "none"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-btn",
@@ -176,7 +218,7 @@
           "line-height": "1",
           "border-radius": "40px"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-btn-arrow",
@@ -192,7 +234,7 @@
           "line-height": "1",
           "border-radius": "40px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-btn-external",
@@ -208,7 +250,7 @@
           "line-height": "1",
           "border-radius": "40px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-btn-download",
@@ -224,7 +266,7 @@
           "line-height": "1",
           "border-radius": "40px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-btn-angle-bottom",
@@ -242,7 +284,7 @@
           "line-height": "1",
           "border-radius": "40px"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".js-accordion-btn.is-btn-plus",
@@ -260,7 +302,7 @@
           "line-height": "1",
           "border-radius": "40px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".p-block--list-news .c-list-news-accordion__btn",
@@ -278,7 +320,7 @@
           "border-radius": "40px",
           "width": "auto"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": "/* Button */\n.c-btn",
@@ -295,54 +337,6 @@
           "border-radius": "40px"
         },
         "sourceUrl": "https://www.nttdata-with.com/"
-      },
-      {
-        "selector": ".c-btn-important",
-        "properties": {
-          "display": "inline-flex",
-          "align-items": "center",
-          "border": "none",
-          "padding": "5px 40px",
-          "background": "#ffc400",
-          "min-height": "64px",
-          "color": "#070f26",
-          "font-weight": "700",
-          "line-height": "1",
-          "border-radius": "40px"
-        },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
-      },
-      {
-        "selector": ".c-btn-important-arrow",
-        "properties": {
-          "display": "inline-flex",
-          "align-items": "center",
-          "border": "none",
-          "padding": "5px 40px",
-          "background": "#ffc400",
-          "min-height": "64px",
-          "color": "#070f26",
-          "font-weight": "700",
-          "line-height": "1",
-          "border-radius": "40px"
-        },
-        "sourceUrl": "https://www.nttdata-with.com/"
-      },
-      {
-        "selector": ".c-btn-important-external",
-        "properties": {
-          "display": "inline-flex",
-          "align-items": "center",
-          "border": "none",
-          "padding": "5px 40px",
-          "background": "#ffc400",
-          "min-height": "64px",
-          "color": "#070f26",
-          "font-weight": "700",
-          "line-height": "1",
-          "border-radius": "40px"
-        },
-        "sourceUrl": "https://www.nttdata-with.com/"
       }
     ],
     "card_styles": [
@@ -350,9 +344,9 @@
         "selector": ".countryInitialModal-body .tab-content .container-card::-webkit-scrollbar-thumb",
         "properties": {
           "border-radius": "6px",
-          "background": "rgba(255, 255, 255, 0.60)"
+          "background": "rgba(255,255,255,.6)"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card::-webkit-scrollbar",
@@ -360,14 +354,14 @@
           "background": "#070f26",
           "width": "12px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card",
         "properties": {
           "border-radius": "6px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".country-selector-modal.is-global .opCos-Cntr a::after,.countryInitialModal-body .tab-content .container-card .card__footer a::after",
@@ -380,7 +374,7 @@
           "height": "16px",
           "padding-right": "0"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card__footer a::after,\n.country-selector-modal.is-global .opCos-Cntr a::after",
@@ -396,40 +390,80 @@
         "sourceUrl": "https://www.nttdata-with.com/"
       },
       {
+        "selector": ".countryInitialModal-body .tab-content .container-card .card:hover",
+        "properties": {
+          "background": "linear-gradient(0deg,rgba(46,64,77,.6) 0,rgba(46,64,77,.6) 100%),#070f26"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": ".countryInitialModal-body .tab-content .container-card .card:hover .card__footer a",
+        "properties": {
+          "color": "#fff"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": ".countryInitialModal-body .tab-content .container-card .card__footer a:after",
+        "properties": {
+          "font-family": "\"Font Awesome 6 Free\"",
+          "font-weight": "700",
+          "padding-right": "10px"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": ".countryInitialModal-body .tab-content .container-card .card__footer a:hover",
+        "properties": {
+          "color": "#fff"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": ".countryInitialModal-body .tab-content .container-card .card__item",
+        "properties": {
+          "font-size": "14px",
+          "font-style": "normal",
+          "font-weight": "400",
+          "line-height": "140%"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
         "selector": ".countryInitialModal-body .tab-content .container-card .card h2",
         "properties": {
           "line-height": "1.2",
           "padding-bottom": "16px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card__wrap--inner",
         "properties": {
           "flex-basis": "100%"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card__wrap--inner:nth-child(2)",
         "properties": {
           "padding-right": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card__wrap--inner:last-child",
         "properties": {
           "padding-bottom": "0!important"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card__footer",
         "properties": {
           "padding-top": "24px"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card__footer a",
@@ -437,14 +471,14 @@
           "font-size": "1.6rem",
           "margin": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".country-selector-modal.is-global .opCos-Cntr:hover a::after,.countryInitialModal-body .tab-content .container-card .card:hover .card__footer a::after,.countryInitialModal-body .tab-content .container-card .card__footer>a:hover::after",
         "properties": {
           "background-image": "url(/jp/ja/-/media/assets/images/icon/white/arrow_right.svg)"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".countryInitialModal-body .tab-content .container-card .card:hover .card__footer a::after,\n.countryInitialModal-body .tab-content .container-card .card__footer > a:hover::after,\n.country-selector-modal.is-global .opCos-Cntr:hover a::after",
@@ -452,6 +486,23 @@
           "background-image": "url(/assets/images/icon/white/arrow_right.svg)"
         },
         "sourceUrl": "https://www.nttdata-with.com/"
+      },
+      {
+        "selector": ".countryInitialModal-body .tab-content .container-card .card__wrap--outer",
+        "properties": {
+          "display": "flex",
+          "flex-direction": "row",
+          "flex-wrap": "wrap",
+          "width": "100%"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": ".countryInitialModal-body .tab-content .container-card",
+        "properties": {
+          "height": "45vh"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       }
     ],
     "form_styles": [
@@ -472,7 +523,7 @@
           "font-style": "normal",
           "line-height": "120%"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-input-text-type-b",
@@ -482,11 +533,11 @@
           "padding": "13px 8px",
           "background": "#fff",
           "width": "100%",
-          "color": "#070f26 !important",
+          "color": "#070f26!important",
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-select-type-b select",
@@ -500,7 +551,7 @@
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".p-lineup-article-listing .c-list-filter-select>dd>input",
@@ -514,7 +565,21 @@
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
+        "selector": ".new_countrySelect-OpcosCurrentSelect",
+        "properties": {
+          "width": "92%",
+          "color": "#fff",
+          "font-size": "16px",
+          "border-radius": ".375rem",
+          "border": "1px solid #fff",
+          "background": "#2e404d",
+          "display": "block",
+          "padding": "20px 24px"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".new_countrySelect-currentCountry-cntr a",
@@ -540,37 +605,36 @@
           "border-radius": "40px",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-input-search-result",
         "properties": {
           "border": "none",
-          "padding": "9px 16px 9px 52px",
+          "padding": "12px 52px",
           "background": "#fff",
           "width": "100%",
-          "height": "100%",
           "color": "#070f26",
-          "font-size": "2rem",
-          "line-height": "1.5",
+          "font-size": "1.6rem",
+          "line-height": "1.3",
           "border-radius": "40px",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".country-selector-modal .geoip-credit",
         "properties": {
           "width": "100%",
-          "background": "linear-gradient(transparent 1%, rgba(7, 15, 38, 1) 20%)",
+          "background": "linear-gradient(transparent 1%,rgba(7,15,38,1) 20%)",
           "padding": "16px 25px 8px",
           "font-size": "1rem",
           "line-height": "1.2",
-          "color": "rgba(255, 255, 255, 0.60)",
+          "color": "rgba(255,255,255,.6)",
           "text-align": "right",
-          "border-radius": "0.375rem"
+          "border-radius": ".375rem"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": "/* 入力欄 */\n.mt-site-search-form__query,\n.l-header__search-form__input",
@@ -586,6 +650,17 @@
           "outline": "none"
         },
         "sourceUrl": "https://www.nttdata-with.com/"
+      },
+      {
+        "selector": ".new_countrySelect-currentCountry-cntr .countryDetail",
+        "properties": {
+          "border-radius": ".375rem",
+          "border": "1px solid #fff",
+          "background": "#2e404d",
+          "display": "block",
+          "padding": "20px 24px"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".country-selector-modal .modal-content",
@@ -609,7 +684,7 @@
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".p-lang-select",
@@ -621,7 +696,7 @@
           "box-shadow": "1px 2px 3px rgba(0,0,0,.16)",
           "font-size": "0"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": "/* Shutto翻訳 */\n.p-lang-select",
@@ -636,13 +711,25 @@
         "sourceUrl": "https://www.nttdata-with.com/"
       },
       {
+        "selector": ".country-selector-modal-content",
+        "properties": {
+          "border-radius": ".375rem!important",
+          "border": "1px solid rgba(255,255,255,.6)",
+          "background": "#070f26!important",
+          "box-shadow": "0 4px 36px 0 rgba(0,0,0,.25)",
+          "width": "436px",
+          "height": "96vh"
+        },
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
+      },
+      {
         "selector": ".p-news-listing .p-block--navigation>.p-block__inner .c-list-horizontal.label-list input.c-btn.c-btn--sm[type=checkbox]:checked+label",
         "properties": {
           "background-color": "#fff",
           "color": "#070f26",
           "font-weight": "700"
         },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-input-text-type-c",
@@ -656,7 +743,7 @@
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-textarea-type-b",
@@ -671,7 +758,7 @@
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       },
       {
         "selector": ".c-select-type-a select",
@@ -686,43 +773,7 @@
           "line-height": "1.5",
           "outline": "0"
         },
-        "sourceUrl": "https://www.nttdata-with.com/"
-      },
-      {
-        "selector": ".c-checkbox span::before",
-        "properties": {
-          "flex": "none",
-          "margin-right": "7px",
-          "border": "1px solid #2e404d",
-          "border-radius": "4px",
-          "background": "#fff",
-          "width": "24px",
-          "height": "24px"
-        },
-        "sourceUrl": "https://www.nttdata-with.com/"
-      },
-      {
-        "selector": ".c-radio::before",
-        "properties": {
-          "margin-right": "7px",
-          "border": "1px solid #ffc400",
-          "border-radius": "50%",
-          "background": "0 0",
-          "width": "24px",
-          "height": "24px"
-        },
-        "sourceUrl": "https://www.nttdata-with.com/"
-      },
-      {
-        "selector": ".c-radio:has(input[type=radio]:focus) span::before",
-        "properties": {
-          "border": "1px solid #ffc400",
-          "border-radius": "50%",
-          "background": "0 0",
-          "width": "20px",
-          "height": "20px"
-        },
-        "sourceUrl": "https://www.nttdata.com/jp/ja/"
+        "sourceUrl": "https://www.nttdata.com/global/ja/news/release/2025/050904/"
       }
     ],
     "border_radii": [
@@ -738,7 +789,8 @@
       "112px",
       "0.375rem",
       "50% !important",
-      "5px"
+      "5px",
+      ".375rem!important"
     ],
     "logo_urls": [
       "https://www.nttdata.com/jp/ja/-/media/assets/images/sns_share.png?rev=583d5951ace649c08be7a88679328a3b",
@@ -756,7 +808,10 @@
       "https://www.nttd-bb.com/common/img/ogp.png",
       "https://www.nttd-bb.com/common/favicon/favicon.svg",
       "https://www.nttd-bb.com/common/img/logo.png",
-      "https://www.nttd-bb.com/common/img/logo_footer.png"
+      "https://www.nttd-bb.com/common/img/logo_footer.png",
+      "https://www.nttdata.com/global/ja/-/media/assets/images/sns_share.png?rev=583d5951ace649c08be7a88679328a3b",
+      "https://www.nttdata.com/global/ja/-/media/assets/images/favicon.svg?rev=8365ca66efe648568ba9c65b837f66a6",
+      "https://www.nttdata.com/global/ja/-/media/assets/images/header_logo.svg?iar=0&amp;rev=010dc1bd851f4d2aaaaf407cf338776b"
     ],
     "source_css_urls": [
       "https://www.nttdata.com/jp/ja/-/media/assets/css/allmin.css?rev=75ee294b6212428ab97566d5cb44ab61",
@@ -772,12 +827,16 @@
       "https://www.nttd-bb.com/common/css/import.css",
       "https://www.nttd-bb.com/common/css/scroll-hint.css",
       "https://www.nttd-bb.com/common/css/print.css",
-      "https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
+      "https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap",
+      "https://www.nttdata.com/global/ja/-/media/assets/css/allmin.css?rev=75ee294b6212428ab97566d5cb44ab61",
+      "https://www.nttdata.com/styles/country-Initial-modal.min.css?202402081423",
+      "https://www.nttdata.com/styles/global-country-selector.min.css?202502281106",
+      "https://www.nttdata.com/global/ja/-/media/assets/css/style.css?rev=d2ff487e1f5b4ca89c2011abe295f9da"
     ],
-    "extracted_at": "2026-09-11T09:06:32.492Z",
+    "extracted_at": "2026-09-11T09:06:42.489Z",
     "source_urls": [
-      "https://www.nttd-bb.com/news/inf20120404.html"
+      "https://www.nttdata.com/global/ja/news/release/2025/050904/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #2E404D  background  出現306回  [external-css]\n  #070F26  background  出現226回  [external-css]\n  #FFC400  color  出現143回  [external-css]\n  #E8E8E8  border-bottom  出現136回  [external-css]\n  #0072BC  color  出現121回  [external-css]\n  #949494  border  出現112回  [external-css]\n  #005B96  background  出現75回  [external-css]\n  #E42600  color  出現28回  [external-css]\n  #F2F3F4  background  出現19回  [external-css]\n  #141B31  background  出現16回  [external-css]\n  #515767  color  出現8回  [external-css]\n  #19A3FC  color  出現6回  [external-css]\n  #696B75  border  出現6回  [external-css]\n  #3176F6  border-color  出現6回  [external-css]\n  #FFFF99  background-color  出現4回  [external-css]\n\n【使用フォント】\n  var(--fa-style-family\n  Font Awesome 6 Brands\n  Font Awesome 6 Free\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n  FontAwesome\n  Noto Serif\n  Noto Sans\n  swiper-icons\n  object-fit: cover\n  Lato!important\n  Noto Sans JP\n  Noto Serif !important\n  Montserrat !important\n  Lato !important\n  Heebo\n\n【角丸パターン】\n  var(--fa-border-radius,.1em)\n  .375rem\n  50%\n  40px\n  6px\n  4px\n  12px\n  5px 0 0 5px\n\n【ボタンスタイル】\n  ★ .c-btn-arrow.c-btn-text-external（実際のボタン要素で1回使用）\n    color: #0072bc\n    font-weight: 400\n    font-size: inherit\n    display: inline-flex!important\n    justify-content: flex-start\n    line-height: 1\n  ★ .c-btn（実際のボタン要素で2回使用）\n    width: 80%\n    display: inline-flex\n    text-align: center\n    align-items: center\n    border: 1px solid #070f26\n    padding: 5px 40px\n  ★ .c-btn-important-arrow（実際のボタン要素で4回使用）\n    color: #fff\n    display: inline-flex!important\n    align-items: center\n    border: none\n    padding: 5px 40px\n    background: #0072bc\n  ★ .c-btn-text-external（実際のボタン要素で19回使用）\n    color: #0072bc\n    font-weight: 400\n    font-size: inherit\n    display: inline-flex\n    justify-content: flex-start\n    line-height: 1\n  ★ .c-btn-text-external（実際のボタン要素で2回使用）\n    color: #fff\n    font-weight: 400\n    font-size: inherit\n    display: inline-flex\n    justify-content: flex-start\n    line-height: 1\n\n【カードスタイル】\n  .countryInitialModal-body .tab-content .container-card::-webkit-scrollbar-thumb\n    border-radius: 6px\n    background: rgba(255, 255, 255, 0.60)\n  .countryInitialModal-body .tab-content .container-card::-webkit-scrollbar\n    background: #070f26\n    width: 12px\n  .countryInitialModal-body .tab-content .container-card .card\n    border-radius: 6px\n  .country-selector-modal.is-global .opCos-Cntr a::after,.countryInitialModal-body .tab-content .container-card .card__footer a::after\n    display: inline-block\n    flex: none\n    background: url(/jp/ja/-/media/assets/images/icon/yellow/arrow_right.svg) no-repeat\n    background-size: 100%\n    width: 16px\n    height: 16px\n  .countryInitialModal-body .tab-content .container-card .card__footer a::after,\n.country-selector-modal.is-global .opCos-Cntr a::after\n    display: inline-block\n    flex: none\n    background: url(/assets/images/icon/yellow/arrow_right.svg) no-repeat\n    background-size: 100%\n    width: 16px\n    height: 16px\n\n【フォームスタイル】\n  .new_countrySelect-inputArea input#inputCountry\n    width: 100%\n    padding: 0 24px\n    height: 65px\n    background-color: #070f26\n    color: #fff\n    border-radius: .375rem\n  .c-input-text-type-b\n    border: 1px solid #949494\n    border-radius: 4px\n    padding: 13px 8px\n    background: #fff\n    width: 100%\n    color: #070f26 !important\n  .c-select-type-b select\n    border: 1px solid #949494\n    border-radius: 4px\n    padding: 13px 48px 13px 8px\n    background: 0 0\n    color: #949494\n    width: 100%\n  .p-lineup-article-listing .c-list-filter-select>dd>input\n    width: 60%\n    border: 1px solid #949494\n    border-radius: 4px\n    padding: 13px 8px\n    background: #fff\n    color: #070f26!important\n  .new_countrySelect-currentCountry-cntr a\n    border-radius: .375rem\n    border: 1px solid #fff\n    background: #2e404d\n    display: block\n    padding: 20px 24px\n\n【ロゴ・ビジュアル素材】\n  https://www.nttdata.com/jp/ja/-/media/assets/images/sns_share.png?rev=583d5951ace649c08be7a88679328a3b\n  https://www.nttdata.com/jp/ja/-/media/assets/images/favicon.svg?rev=8365ca66efe648568ba9c65b837f66a6\n  https://www.nttdata.com/jp/ja/-/media/assets/images/header_logo.svg?iar=0&amp;rev=010dc1bd851f4d2aaaaf407cf338776b\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_02.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=f9f9785292e34f6e9db0b1366690b611\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_03.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=30817f57f43c432b8fd86eb28bf82a10\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_04.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=2fa21da3767c44918934c52603502598\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_05_pc.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=bc37f24bc4e84c3fadc4083c4922fe79\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/banner/ir/hero_webinar_pc.jpg?h=1226&amp;iar=0&amp;w=2800&amp;rev=0fb7d0acf555425f8be1ee93b799e28a\n  https://www.nttdata-with.com/assets/images/apple-touch-icon.png\n  https://www.nttdata-with.com/assets/images/favicon.svg\n\n【取得CSSファイル】\n  https://www.nttdata.com/jp/ja/-/media/assets/css/allmin.css?rev=75ee294b6212428ab97566d5cb44ab61\n  https://www.nttdata.com/styles/newCountry-selector.min.css?202408291440\n  https://www.nttdata.com/jp/ja/-/media/assets/css/libs/swiperbundlemin.css?rev=ba00ed2b854743cab22ec67967a204f7\n  https://www.nttdata.com/jp/ja/-/media/assets/css/style.css?rev=d2ff487e1f5b4ca89c2011abe295f9da\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap\n  https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400;500;700;900&display=swap\n  https://www.nttdata-with.com/assets/css/all.min.css\n  https://www.nttdata-with.com/assets/css/libs/swiper-bundle.min.css\n  https://www.nttdata-with.com/assets/css/style.css\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@100;300;400;500;700;900&family=Noto+Serif:wght@400;700&display=swap\n  https://www.nttd-bb.com/common/css/import.css\n  https://www.nttd-bb.com/common/css/scroll-hint.css\n  https://www.nttd-bb.com/common/css/print.css\n  https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
+  "css_summary": "【抽出カラー（頻度順）】\n  #2E404D  background  出現467回  [external-css]\n  #070F26  background  出現354回  [external-css]\n  #FFC400  color  出現223回  [external-css]\n  #E8E8E8  border-bottom  出現207回  [external-css]\n  #0072BC  color  出現185回  [external-css]\n  #949494  border  出現170回  [external-css]\n  #005B96  background  出現116回  [external-css]\n  #E42600  color  出現41回  [external-css]\n  #F2F3F4  background  出現30回  [external-css]\n  #141B31  background  出現24回  [external-css]\n  #515767  color  出現11回  [external-css]\n  #19A3FC  color  出現9回  [external-css]\n  #696B75  border  出現9回  [external-css]\n  #3176F6  border-color  出現9回  [external-css]\n  #FFFF99  background-color  出現6回  [external-css]\n\n【使用フォント】\n  var(--fa-style-family\n  Font Awesome 6 Brands\n  Font Awesome 6 Free\n  Font Awesome 5 Brands\n  Font Awesome 5 Free\n  FontAwesome\n  Noto Serif\n  Noto Sans\n  swiper-icons\n  object-fit: cover\n  Lato!important\n  Noto Sans JP\n  Noto Serif !important\n  Montserrat !important\n  Lato !important\n  Heebo\n\n【角丸パターン】\n  var(--fa-border-radius,.1em)\n  .375rem\n  50%\n  40px\n  6px\n  4px\n  12px\n  5px 0 0 5px\n\n【ボタンスタイル】\n  ★ .c-btn-arrow.c-btn-text-external（実際のボタン要素で1回使用）\n    color: #0072bc\n    font-weight: 400\n    font-size: inherit\n    display: inline-flex!important\n    justify-content: flex-start\n    line-height: 1\n  ★ .c-btn（実際のボタン要素で2回使用）\n    width: 80%\n    display: inline-flex\n    text-align: center\n    align-items: center\n    border: 1px solid #070f26\n    padding: 5px 40px\n  ★ .c-btn-important-arrow（実際のボタン要素で4回使用）\n    color: #fff\n    display: inline-flex!important\n    align-items: center\n    border: none\n    padding: 5px 40px\n    background: #0072bc\n  ★ .c-link-share-button.st-custom-button（実際のボタン要素で3回使用）\n    border-radius: 50%\n    background-color: #fff\n    background-repeat: no-repeat\n    background-position: center center\n    background-size: 24px 24px\n    box-shadow: 8px 8px 15px 1px rgba(0,0,0,.5)\n  ★ .c-btn-text-external（実際のボタン要素で19回使用）\n    color: #0072bc\n    font-weight: 400\n    font-size: inherit\n    display: inline-flex\n    justify-content: flex-start\n    line-height: 1\n\n【カードスタイル】\n  .countryInitialModal-body .tab-content .container-card::-webkit-scrollbar-thumb\n    border-radius: 6px\n    background: rgba(255,255,255,.6)\n  .countryInitialModal-body .tab-content .container-card::-webkit-scrollbar\n    background: #070f26\n    width: 12px\n  .countryInitialModal-body .tab-content .container-card .card\n    border-radius: 6px\n  .country-selector-modal.is-global .opCos-Cntr a::after,.countryInitialModal-body .tab-content .container-card .card__footer a::after\n    display: inline-block\n    flex: none\n    background: url(/jp/ja/-/media/assets/images/icon/yellow/arrow_right.svg) no-repeat\n    background-size: 100%\n    width: 16px\n    height: 16px\n  .countryInitialModal-body .tab-content .container-card .card__footer a::after,\n.country-selector-modal.is-global .opCos-Cntr a::after\n    display: inline-block\n    flex: none\n    background: url(/assets/images/icon/yellow/arrow_right.svg) no-repeat\n    background-size: 100%\n    width: 16px\n    height: 16px\n\n【フォームスタイル】\n  .new_countrySelect-inputArea input#inputCountry\n    width: 100%\n    padding: 0 24px\n    height: 65px\n    background-color: #070f26\n    color: #fff\n    border-radius: .375rem\n  .c-input-text-type-b\n    border: 1px solid #949494\n    border-radius: 4px\n    padding: 13px 8px\n    background: #fff\n    width: 100%\n    color: #070f26!important\n  .c-select-type-b select\n    border: 1px solid #949494\n    border-radius: 4px\n    padding: 13px 48px 13px 8px\n    background: 0 0\n    color: #949494\n    width: 100%\n  .p-lineup-article-listing .c-list-filter-select>dd>input\n    width: 60%\n    border: 1px solid #949494\n    border-radius: 4px\n    padding: 13px 8px\n    background: #fff\n    color: #070f26!important\n  .new_countrySelect-OpcosCurrentSelect\n    width: 92%\n    color: #fff\n    font-size: 16px\n    border-radius: .375rem\n    border: 1px solid #fff\n    background: #2e404d\n\n【ロゴ・ビジュアル素材】\n  https://www.nttdata.com/jp/ja/-/media/assets/images/sns_share.png?rev=583d5951ace649c08be7a88679328a3b\n  https://www.nttdata.com/jp/ja/-/media/assets/images/favicon.svg?rev=8365ca66efe648568ba9c65b837f66a6\n  https://www.nttdata.com/jp/ja/-/media/assets/images/header_logo.svg?iar=0&amp;rev=010dc1bd851f4d2aaaaf407cf338776b\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_02.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=f9f9785292e34f6e9db0b1366690b611\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_03.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=30817f57f43c432b8fd86eb28bf82a10\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_04.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=2fa21da3767c44918934c52603502598\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/top-panel/carousel-header/top-kv_05_pc.jpg?h=730&amp;iar=0&amp;w=2012&amp;rev=bc37f24bc4e84c3fadc4083c4922fe79\n  https://www.nttdata.com/jp/ja/-/media/nttdatajapan/images/home/banner/ir/hero_webinar_pc.jpg?h=1226&amp;iar=0&amp;w=2800&amp;rev=0fb7d0acf555425f8be1ee93b799e28a\n  https://www.nttdata-with.com/assets/images/apple-touch-icon.png\n  https://www.nttdata-with.com/assets/images/favicon.svg\n\n【取得CSSファイル】\n  https://www.nttdata.com/jp/ja/-/media/assets/css/allmin.css?rev=75ee294b6212428ab97566d5cb44ab61\n  https://www.nttdata.com/styles/newCountry-selector.min.css?202408291440\n  https://www.nttdata.com/jp/ja/-/media/assets/css/libs/swiperbundlemin.css?rev=ba00ed2b854743cab22ec67967a204f7\n  https://www.nttdata.com/jp/ja/-/media/assets/css/style.css?rev=d2ff487e1f5b4ca89c2011abe295f9da\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap\n  https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400;500;700;900&display=swap\n  https://www.nttdata-with.com/assets/css/all.min.css\n  https://www.nttdata-with.com/assets/css/libs/swiper-bundle.min.css\n  https://www.nttdata-with.com/assets/css/style.css\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@100;300;400;500;700;900&family=Noto+Serif:wght@400;700&display=swap\n  https://www.nttd-bb.com/common/css/import.css\n  https://www.nttd-bb.com/common/css/scroll-hint.css\n  https://www.nttd-bb.com/common/css/print.css\n  https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap\n  https://www.nttdata.com/global/ja/-/media/assets/css/allmin.css?rev=75ee294b6212428ab97566d5cb44ab61\n  https://www.nttdata.com/styles/country-Initial-modal.min.css?202402081423\n  https://www.nttdata.com/styles/global-country-selector.min.css?202502281106\n  https://www.nttdata.com/global/ja/-/media/assets/css/style.css?rev=d2ff487e1f5b4ca89c2011abe295f9da"
 }
