@@ -30,6 +30,52 @@
     ],
     "button_styles": [
       {
+        "selector": ".cmp-header__main .navigation-links .language-nav__menu--is-open,.cmp-header__main .navigation-links .language-nav__menu-wrapper:active,.cmp-header__main .navigation-links .language-nav__menu-wrapper:hover,.cmp-header__main .navigation-links a:active,.cmp-header__main .navigation-links a:hover,.cmp-header__main .navigation-links button:active,.cmp-header__main .navigation-links button:hover",
+        "properties": {
+          "background-color": "var(--color-supportive-grey-2)",
+          "color": "#0c0c0c"
+        }
+      },
+      {
+        "selector": ".btn.btn-primary,button.btn-primary",
+        "properties": {
+          "background-color": "transparent",
+          "border": ".125rem solid #121212",
+          "border-radius": "25px"
+        }
+      },
+      {
+        "selector": ".btn.btn-secondary,button.btn-secondary",
+        "properties": {
+          "background-color": "transparent",
+          "border": ".125rem solid #fff",
+          "border-radius": "25px"
+        }
+      },
+      {
+        "selector": ".btn,button",
+        "properties": {
+          "border": "0",
+          "display": "inline-block",
+          "padding": ".0625rem 1.0625rem"
+        }
+      },
+      {
+        "selector": "dialog .close-button",
+        "properties": {
+          "background": "none",
+          "color": "#fff",
+          "font-size": "1.5rem",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".cmp-header__main .navigation-links .language-nav__menu-wrapper>a>span,.cmp-header__main .navigation-links>a>span,.cmp-header__main .navigation-links>button>span>span",
+        "properties": {
+          "font-weight": "500"
+        }
+      },
+      {
         "selector": ".cmp-accordion__button",
         "properties": {
           "display": "block"
@@ -70,34 +116,10 @@
         }
       },
       {
-        "selector": ".btn,button",
-        "properties": {
-          "border": "0",
-          "display": "inline-block",
-          "padding": ".0625rem 1.0625rem"
-        }
-      },
-      {
-        "selector": ".btn.btn-primary,button.btn-primary",
-        "properties": {
-          "background-color": "transparent",
-          "border": ".125rem solid #121212",
-          "border-radius": "25px"
-        }
-      },
-      {
         "selector": ".btn.btn-primary:focus,.btn.btn-primary:hover,button.btn-primary:focus,button.btn-primary:hover",
         "properties": {
           "background-color": "transparent",
           "border-color": "#121212"
-        }
-      },
-      {
-        "selector": ".btn.btn-secondary,button.btn-secondary",
-        "properties": {
-          "background-color": "transparent",
-          "border": ".125rem solid #fff",
-          "border-radius": "25px"
         }
       },
       {
@@ -111,22 +133,6 @@
         "selector": ".accordion,.banner,.button,.byline,.carousel,.company-profiles-multi,.company-profiles-single,.download,.image,.list,.list-with-image,.list-with-teaser,.navigation,.news-list-with-filter,.news-list-with-teaser,.newslist,.page-search,.page-tags,.press-releases,.separator,.sns-share,.stats,.tableofcontents,.tabs,.tag-list,.teaser,.teaser-fullwidth,.text,.title,.video,.video-list",
         "properties": {
           "margin-bottom": "1.5rem"
-        }
-      },
-      {
-        "selector": "dialog .close-button",
-        "properties": {
-          "background": "none",
-          "color": "#fff",
-          "font-size": "1.5rem",
-          "padding": "0"
-        }
-      },
-      {
-        "selector": ".cmp-header__main .navigation-links .language-nav__menu--is-open,.cmp-header__main .navigation-links .language-nav__menu-wrapper:active,.cmp-header__main .navigation-links .language-nav__menu-wrapper:hover,.cmp-header__main .navigation-links a:active,.cmp-header__main .navigation-links a:hover,.cmp-header__main .navigation-links button:active,.cmp-header__main .navigation-links button:hover",
-        "properties": {
-          "background-color": "var(--color-supportive-grey-2)",
-          "color": "#0c0c0c"
         }
       },
       {
@@ -154,12 +160,6 @@
         }
       },
       {
-        "selector": ".cmp-header__main .navigation-links .language-nav__menu-wrapper>a>span,.cmp-header__main .navigation-links>a>span,.cmp-header__main .navigation-links>button>span>span",
-        "properties": {
-          "font-weight": "500"
-        }
-      },
-      {
         "selector": ".cmp-header__main .navigation-links .language-nav__menu-wrapper>a,.cmp-header__main .navigation-links button>span,.cmp-header__main .navigation-links>a",
         "properties": {
           "-ms-flex-align": "center",
@@ -178,6 +178,57 @@
     ],
     "card_styles": [
       {
+        "selector": ".cmp-card-list--label-overlay .cmp-teaser__content",
+        "properties": {
+          "-ms-flex-pack": "center",
+          "-ms-flex-align": "center",
+          "background": "hsla(0,0%,96%,.7)",
+          "border": "1px solid var(--color-supportive-grey-1)",
+          "border-radius": ".375rem",
+          "display": "flex",
+          "margin": "auto"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__content",
+        "properties": {
+          "background": "#0c0c0c",
+          "color": "#fff",
+          "padding": "1rem"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--label-overlay .cmp-teaser__image .cmp-image",
+        "properties": {
+          "border": "1px solid var(--color-supportive-grey-1)",
+          "border-radius": ".375rem"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link",
+        "properties": {
+          "border-radius": ".5rem"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__content,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__content",
+        "properties": {
+          "border-radius": ".5rem .5rem 0 0"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__image .cmp-image",
+        "properties": {
+          "border-radius": ".375rem .375rem 0 0"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__image .cmp-image__image",
+        "properties": {
+          "border-radius": ".375rem .375rem 0 0"
+        }
+      },
+      {
         "selector": ".cmp-card-list--text-only.default-list .cmp-list__item-link .cmp-list__item-title,.cmp-company-profile-multiple__dialog-content-subtitle,.cmp-listwithimage__swiper-container .cmp-list__item-title,.cmp-teaser .cmp-teaser__title,.download .cmp-download__title,.stats-background__wrapper .cmp-stats__desc p,.tag-list__title,.title",
         "properties": {
           "font-family": "inherit",
@@ -185,6 +236,37 @@
           "font-kerning": "auto",
           "font-size": "1.25rem",
           "font-weight": "500"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--label-overlay .cmp-teaser__title",
+        "properties": {
+          "display": "-webkit-box",
+          "font-family": "inherit",
+          "-webkit-font-kerning": "auto",
+          "font-kerning": "auto",
+          "font-size": "1rem",
+          "font-weight": "400"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__title,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__title",
+        "properties": {
+          "color": "#fff",
+          "display": "-webkit-box"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__description,.cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__wrapper,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__description,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__wrapper",
+        "properties": {
+          "color": "#fff"
+        }
+      },
+      {
+        "selector": ".cmp-card-list--text-overlay .cmp-teaser__title",
+        "properties": {
+          "color": "#fff",
+          "display": "-webkit-box"
         }
       },
       {
@@ -232,91 +314,9 @@
         }
       },
       {
-        "selector": ".cmp-card-list--label-overlay .cmp-teaser__image .cmp-image",
-        "properties": {
-          "border": "1px solid var(--color-supportive-grey-1)",
-          "border-radius": ".375rem"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--label-overlay .cmp-teaser__content",
-        "properties": {
-          "-ms-flex-pack": "center",
-          "-ms-flex-align": "center",
-          "background": "hsla(0,0%,96%,.7)",
-          "border": "1px solid var(--color-supportive-grey-1)",
-          "border-radius": ".375rem",
-          "display": "flex",
-          "margin": "auto"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--label-overlay .cmp-teaser__title",
-        "properties": {
-          "display": "-webkit-box",
-          "font-family": "inherit",
-          "-webkit-font-kerning": "auto",
-          "font-kerning": "auto",
-          "font-size": "1rem",
-          "font-weight": "400"
-        }
-      },
-      {
         "selector": ".cmp-card-list--label-overlay .cmp-list,.cmp-card-list--news-default .cmp-list",
         "properties": {
           "display": "grid"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link",
-        "properties": {
-          "border-radius": ".5rem"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__content,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__content",
-        "properties": {
-          "border-radius": ".5rem .5rem 0 0"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__title,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__title",
-        "properties": {
-          "color": "#fff",
-          "display": "-webkit-box"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__description,.cmp-card-list--text-overlay .cmp-teaser__link:active .cmp-teaser__wrapper,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__description,.cmp-card-list--text-overlay .cmp-teaser__link:hover .cmp-teaser__wrapper",
-        "properties": {
-          "color": "#fff"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__image .cmp-image",
-        "properties": {
-          "border-radius": ".375rem .375rem 0 0"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__image .cmp-image__image",
-        "properties": {
-          "border-radius": ".375rem .375rem 0 0"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__content",
-        "properties": {
-          "background": "#0c0c0c",
-          "color": "#fff",
-          "padding": "1rem"
-        }
-      },
-      {
-        "selector": ".cmp-card-list--text-overlay .cmp-teaser__title",
-        "properties": {
-          "color": "#fff",
-          "display": "-webkit-box"
         }
       }
     ],

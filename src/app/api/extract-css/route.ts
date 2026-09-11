@@ -291,9 +291,9 @@ function parseCss(css: string, source: 'external-css' | 'style-tag'): Partial<Cs
     css_variables,
     hex_color_freq,
     fonts: Array.from(fontsSet),
-    button_styles: button_styles.slice(0, 20),
-    card_styles: card_styles.slice(0, 20),
-    form_styles: form_styles.slice(0, 20),
+    button_styles: sortByVisualScore(button_styles).slice(0, 20),
+    card_styles: sortByVisualScore(card_styles).slice(0, 20),
+    form_styles: sortByVisualScore(form_styles).slice(0, 20),
     border_radii: Array.from(border_radii_set).slice(0, 20),
   };
 }
@@ -374,6 +374,36 @@ function parseDeclarations(body: string): Record<string, string> {
     }
   }
   return result;
+}
+
+// ボタン/カード/フォームの候補は「btn」「button」等の文字列一致だけだと
+// margin:0 や background:none のようなリセット規則まで大量に拾ってしまい、
+// 実際に背景色やパディングを持つ「見た目のあるデザイン」が埋もれてしまう。
+// 視覚的に意味のあるプロパティを持つ規則ほど高スコアになるようにして並び替える。
+const VISUAL_PROP_WEIGHTS: Record<string, number> = {
+  'background-color': 3,
+  background: 2,
+  color: 1,
+  padding: 2,
+  'border-radius': 2,
+  border: 1,
+  'box-shadow': 1,
+  'font-weight': 1,
+};
+const NOISE_VALUE_RE = /^(none|inherit|initial|unset|transparent|0|0px)$/i;
+
+function visualScore(properties: Record<string, string>): number {
+  let score = 0;
+  for (const [prop, value] of Object.entries(properties)) {
+    const weight = VISUAL_PROP_WEIGHTS[prop];
+    if (!weight || NOISE_VALUE_RE.test(value.trim())) continue;
+    score += weight;
+  }
+  return score;
+}
+
+function sortByVisualScore<T extends { properties: Record<string, string> }>(blocks: T[]): T[] {
+  return [...blocks].sort((a, b) => visualScore(b.properties) - visualScore(a.properties));
 }
 
 function isColorValue(val: string): boolean {
@@ -734,10 +764,10 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // 重複除去（この呼び出し1回分のURLの中での重複のみ）
-  allButtonStyles = Array.from(new Map(allButtonStyles.map(b => [b.selector, b])).values()).slice(0, 20);
-  allCardStyles   = Array.from(new Map(allCardStyles.map(c => [c.selector, c])).values()).slice(0, 20);
-  allFormStyles   = Array.from(new Map(allFormStyles.map(f => [f.selector, f])).values()).slice(0, 20);
+  // 重複除去（この呼び出し1回分のURLの中での重複のみ）＋ 見た目のある規則を優先して並び替え
+  allButtonStyles = sortByVisualScore(Array.from(new Map(allButtonStyles.map(b => [b.selector, b])).values())).slice(0, 20);
+  allCardStyles   = sortByVisualScore(Array.from(new Map(allCardStyles.map(c => [c.selector, c])).values())).slice(0, 20);
+  allFormStyles   = sortByVisualScore(Array.from(new Map(allFormStyles.map(f => [f.selector, f])).values())).slice(0, 20);
   let logoUrls  = dedupe(allLogoUrls);
   let sourceCssUrls = dedupe(allSourceCssUrls);
   let fonts     = Array.from(allFonts);
@@ -785,9 +815,9 @@ export async function POST(req: NextRequest) {
         // 同一ワークフロー実行内の既存分（他URL処理済み）とマージ。新しい値が同キーを上書き。
         allCssVars = { ...prevCssInfo.css_variables, ...allCssVars };
         allHexFreq = mergeHexFreq(parseHexFreqString(prevCssInfo.hex_colors), allHexFreq);
-        allButtonStyles = Array.from(new Map([...(prevCssInfo.button_styles ?? []), ...allButtonStyles].map(b => [b.selector, b])).values()).slice(0, 20);
-        allCardStyles   = Array.from(new Map([...(prevCssInfo.card_styles ?? []), ...allCardStyles].map(c => [c.selector, c])).values()).slice(0, 20);
-        allFormStyles   = Array.from(new Map([...(prevCssInfo.form_styles ?? []), ...allFormStyles].map(f => [f.selector, f])).values()).slice(0, 20);
+        allButtonStyles = sortByVisualScore(Array.from(new Map([...(prevCssInfo.button_styles ?? []), ...allButtonStyles].map(b => [b.selector, b])).values())).slice(0, 20);
+        allCardStyles   = sortByVisualScore(Array.from(new Map([...(prevCssInfo.card_styles ?? []), ...allCardStyles].map(c => [c.selector, c])).values())).slice(0, 20);
+        allFormStyles   = sortByVisualScore(Array.from(new Map([...(prevCssInfo.form_styles ?? []), ...allFormStyles].map(f => [f.selector, f])).values())).slice(0, 20);
         fonts = Array.from(new Set([...(prevCssInfo.fonts ?? []), ...fonts]));
         borderRadii = Array.from(new Set([...(prevCssInfo.border_radii ?? []), ...borderRadii])).slice(0, 20);
         logoUrls = dedupe([...(prevCssInfo.logo_urls ?? []), ...logoUrls]);

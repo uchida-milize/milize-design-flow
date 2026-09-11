@@ -78,6 +78,7 @@ export function findSection(sections: DesignMdSection[], keyword: string): Desig
 }
 
 export interface ResourcesCssInfo {
+  css_variables?: Record<string, string>;
   hex_colors?: string;
   fonts?: string[];
   button_styles?: StyleBlock[];

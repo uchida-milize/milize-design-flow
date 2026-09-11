@@ -79,18 +79,43 @@
     ],
     "button_styles": [
       {
-        "selector": "#globalheader ul,#globalheader ol,#globalheader li,#globalheader dl,#globalheader dt,#globalheader dd,#globalheader h1,#globalheader h2,#globalheader h3,#globalheader h4,#globalheader h5,#globalheader h6,#globalheader hgroup,#globalheader p,#globalheader blockquote,#globalheader figure,#globalheader form,#globalheader fieldset,#globalheader input,#globalheader legend,#globalheader pre,#globalheader abbr,#globalheader button",
+        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button",
         "properties": {
-          "margin": "0"
+          "font-weight": "400",
+          "display": "block",
+          "margin": "0",
+          "padding-top": "10px",
+          "padding-bottom": "10px",
+          "color": "var(--footer-directory-title-color)",
+          "background": "var(--footer-background)"
         }
       },
       {
-        "selector": "#globalheader button",
+        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:hover",
         "properties": {
-          "background": "none",
-          "border": "0",
-          "color": "inherit",
-          "font": "inherit"
+          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
+          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
+        }
+      },
+      {
+        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:active",
+        "properties": {
+          "background": "var(--sk-button-background-active, var(--sk-button-background))",
+          "color": "var(--sk-button-color-active, var(--sk-button-color))"
+        }
+      },
+      {
+        "selector": "#ac-localnav .ac-ln-button:hover",
+        "properties": {
+          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
+          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
+        }
+      },
+      {
+        "selector": "#ac-localnav .ac-ln-button:active",
+        "properties": {
+          "background": "var(--sk-button-background-active, var(--sk-button-background))",
+          "color": "var(--sk-button-color-active, var(--sk-button-color))"
         }
       },
       {
@@ -98,18 +123,6 @@
         "properties": {
           "display": "flex",
           "color": "var(--r-globalnav-color)"
-        }
-      },
-      {
-        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button .globalnav-submenu-button-icon",
-        "properties": {
-          "margin-top": "2px"
-        }
-      },
-      {
-        "selector": "#globalnav .globalnav-item.globalnav-item-flyout-open .globalnav-submenu-trigger-button:focus-visible .globalnav-submenu-button-icon",
-        "properties": {
-          "margin-top": "1px"
         }
       },
       {
@@ -146,29 +159,6 @@
         }
       },
       {
-        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:hover",
-        "properties": {
-          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
-          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
-        }
-      },
-      {
-        "selector": "#globalnav-bag .ac-bag-flyout-container .ac-gn-bagview-button:active",
-        "properties": {
-          "background": "var(--sk-button-background-active, var(--sk-button-background))",
-          "color": "var(--sk-button-color-active, var(--sk-button-color))"
-        }
-      },
-      {
-        "selector": "#ac-globalfooter,#ac-globalfooter input,#ac-globalfooter textarea,#ac-globalfooter select,#ac-globalfooter button",
-        "properties": {
-          "font-synthesis": "none",
-          "-moz-font-feature-settings": "\"kern\"",
-          "-webkit-font-smoothing": "antialiased",
-          "-moz-osx-font-smoothing": "grayscale"
-        }
-      },
-      {
         "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button,#ac-globalfooter .ac-gf-directory-column-section-title>.ac-gf-directory-column-section-title-text",
         "properties": {
           "font-size": "12px",
@@ -179,15 +169,39 @@
         }
       },
       {
-        "selector": "#ac-globalfooter .ac-gf-directory-column-section-title-button",
+        "selector": "#globalheader ul,#globalheader ol,#globalheader li,#globalheader dl,#globalheader dt,#globalheader dd,#globalheader h1,#globalheader h2,#globalheader h3,#globalheader h4,#globalheader h5,#globalheader h6,#globalheader hgroup,#globalheader p,#globalheader blockquote,#globalheader figure,#globalheader form,#globalheader fieldset,#globalheader input,#globalheader legend,#globalheader pre,#globalheader abbr,#globalheader button",
         "properties": {
-          "font-weight": "400",
-          "display": "block",
-          "margin": "0",
-          "padding-top": "10px",
-          "padding-bottom": "10px",
-          "color": "var(--footer-directory-title-color)",
-          "background": "var(--footer-background)"
+          "margin": "0"
+        }
+      },
+      {
+        "selector": "#globalheader button",
+        "properties": {
+          "background": "none",
+          "border": "0",
+          "color": "inherit",
+          "font": "inherit"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-item .globalnav-submenu-trigger-button .globalnav-submenu-button-icon",
+        "properties": {
+          "margin-top": "2px"
+        }
+      },
+      {
+        "selector": "#globalnav .globalnav-item.globalnav-item-flyout-open .globalnav-submenu-trigger-button:focus-visible .globalnav-submenu-button-icon",
+        "properties": {
+          "margin-top": "1px"
+        }
+      },
+      {
+        "selector": "#ac-globalfooter,#ac-globalfooter input,#ac-globalfooter textarea,#ac-globalfooter select,#ac-globalfooter button",
+        "properties": {
+          "font-synthesis": "none",
+          "-moz-font-feature-settings": "\"kern\"",
+          "-webkit-font-smoothing": "antialiased",
+          "-moz-osx-font-smoothing": "grayscale"
         }
       },
       {
@@ -216,23 +230,37 @@
         "properties": {
           "padding-block": "calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width)) calc(var(--sk-button-padding-vertical) - var(--sk-button-border-width))"
         }
-      },
-      {
-        "selector": "#ac-localnav .ac-ln-button:hover",
-        "properties": {
-          "background": "var(--sk-button-background-hover, var(--sk-button-background))",
-          "color": "var(--sk-button-color-hover, var(--sk-button-color))"
-        }
-      },
-      {
-        "selector": "#ac-localnav .ac-ln-button:active",
-        "properties": {
-          "background": "var(--sk-button-background-active, var(--sk-button-background))",
-          "color": "var(--sk-button-color-active, var(--sk-button-color))"
-        }
       }
     ],
     "card_styles": [
+      {
+        "selector": ".section-september-event [data-component-list~=SeptemberEvent2026] .tile-subhead",
+        "properties": {
+          "color": "#f5f5f7",
+          "margin-top": "0",
+          "font-size": "21px",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-headline",
+        "properties": {
+          "font-size": "40px",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-subhead",
+        "properties": {
+          "color": "var(--sk-glyph-gray-secondary)"
+        }
+      },
+      {
+        "selector": "[data-component-list~=SeptemberEvent2026] .tile-callout",
+        "properties": {
+          "color": "var(--sk-glyph-gray-secondary)"
+        }
+      },
       {
         "selector": ".theme-dark .tile",
         "properties": {
@@ -280,25 +308,6 @@
         }
       },
       {
-        "selector": "[data-component-list~=SeptemberEvent2026] .tile-headline",
-        "properties": {
-          "font-size": "40px",
-          "font-weight": "600"
-        }
-      },
-      {
-        "selector": "[data-component-list~=SeptemberEvent2026] .tile-subhead",
-        "properties": {
-          "color": "var(--sk-glyph-gray-secondary)"
-        }
-      },
-      {
-        "selector": "[data-component-list~=SeptemberEvent2026] .tile-callout",
-        "properties": {
-          "color": "var(--sk-glyph-gray-secondary)"
-        }
-      },
-      {
         "selector": "[data-component-list~=SeptemberEvent2026] .tile-ctas",
         "properties": {
           "display": "grid"
@@ -320,15 +329,6 @@
         "selector": ".section-september-event [data-component-list~=SeptemberEvent2026] .tile-content",
         "properties": {
           "padding-top": "324px"
-        }
-      },
-      {
-        "selector": ".section-september-event [data-component-list~=SeptemberEvent2026] .tile-subhead",
-        "properties": {
-          "color": "#f5f5f7",
-          "margin-top": "0",
-          "font-size": "21px",
-          "font-weight": "600"
         }
       },
       {

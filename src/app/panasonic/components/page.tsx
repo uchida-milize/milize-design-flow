@@ -11,7 +11,7 @@ import {
   type StyleBlock,
   type ResourcesJson,
 } from '@/lib/designExtract';
-import { toReactStyle } from '@/lib/cssStyle';
+import { toReactStyle, toCssVarStyle } from '@/lib/cssStyle';
 
 const clientName = 'パナソニック株式会社';
 const basePath = '/panasonic';
@@ -79,7 +79,7 @@ export default function ComponentsPage() {
     !!componentSection;
 
   return (
-    <div className="panasonic-portal">
+    <div className="panasonic-portal" style={toCssVarStyle(cssInfo?.css_variables)}>
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}

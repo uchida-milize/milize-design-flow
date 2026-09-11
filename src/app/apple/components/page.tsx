@@ -11,7 +11,7 @@ import {
   type StyleBlock,
   type ResourcesJson,
 } from '@/lib/designExtract';
-import { toReactStyle } from '@/lib/cssStyle';
+import { toReactStyle, toCssVarStyle } from '@/lib/cssStyle';
 
 const clientName = 'Apple Japan合同会社';
 const basePath = '/apple';
@@ -79,7 +79,7 @@ export default function ComponentsPage() {
     !!componentSection;
 
   return (
-    <div className="apple-portal">
+    <div className="apple-portal" style={toCssVarStyle(cssInfo?.css_variables)}>
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}

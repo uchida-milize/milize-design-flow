@@ -11,7 +11,7 @@ import {
   type StyleBlock,
   type ResourcesJson,
 } from '@/lib/designExtract';
-import { toReactStyle } from '@/lib/cssStyle';
+import { toReactStyle, toCssVarStyle } from '@/lib/cssStyle';
 
 const clientName = 'Milize Asset Portal';
 const basePath = '/milize-asset-portal';
@@ -79,7 +79,7 @@ export default function ComponentsPage() {
     !!componentSection;
 
   return (
-    <div className="milize-asset-portal-portal">
+    <div className="milize-asset-portal-portal" style={toCssVarStyle(cssInfo?.css_variables)}>
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}

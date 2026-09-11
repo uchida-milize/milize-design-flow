@@ -11,7 +11,7 @@ import {
   type StyleBlock,
   type ResourcesJson,
 } from '@/lib/designExtract';
-import { toReactStyle } from '@/lib/cssStyle';
+import { toReactStyle, toCssVarStyle } from '@/lib/cssStyle';
 
 const clientName = '株式会社 日立製作所';
 const basePath = '/hitachi';
@@ -79,7 +79,7 @@ export default function ComponentsPage() {
     !!componentSection;
 
   return (
-    <div className="hitachi-portal">
+    <div className="hitachi-portal" style={toCssVarStyle(cssInfo?.css_variables)}>
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
