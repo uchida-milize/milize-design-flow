@@ -402,8 +402,155 @@ function visualScore(properties: Record<string, string>): number {
   return score;
 }
 
-function sortByVisualScore<T extends { properties: Record<string, string> }>(blocks: T[]): T[] {
-  return [...blocks].sort((a, b) => visualScore(b.properties) - visualScore(a.properties));
+// DOM側で「実際に何回使われているボタン要素か」を検証できたスタイルにはこの印を付け、
+// CSSセレクタの文字列一致だけで拾った候補より常に優先表示する
+// （ナビの開閉ボタンのような偶然一致した無関係要素が、本物のCTAボタンより上に来るのを防ぐ）
+const DOM_VERIFIED_MARKER = '★ ';
+
+// padding や font-weight だけでは「ボタンらしい見た目」の証拠として弱い
+// （余白付きのただのテキストリンクでも同じ値を持つ）。背景・枠線・角丸・影のような
+// 「箱として見える」プロパティを持っているかどうかで判定する。
+const BOX_VISUAL_PROPS = ['background-color', 'background', 'border', 'border-radius', 'box-shadow'];
+
+function hasBoxVisual(properties: Record<string, string>): boolean {
+  return BOX_VISUAL_PROPS.some((p) => {
+    const v = properties[p];
+    return !!v && !NOISE_VALUE_RE.test(v.trim());
+  });
+}
+
+function sortByVisualScore<T extends { selector: string; properties: Record<string, string> }>(blocks: T[]): T[] {
+  return [...blocks].sort((a, b) => {
+    const aDom = a.selector.startsWith(DOM_VERIFIED_MARKER) ? 1 : 0;
+    const bDom = b.selector.startsWith(DOM_VERIFIED_MARKER) ? 1 : 0;
+    if (aDom !== bDom) return bDom - aDom;
+    return visualScore(b.properties) - visualScore(a.properties);
+  });
+}
+
+// ──────────────────────────────────────────
+// DOM頻度ベースのボタン検出
+// CSSセレクタの文字列一致だけだと、たまたま "btn"/"button" を含む無関係な要素
+// （ナビのトグルボタン等）まで拾ってしまう。実際のHTML上で「ボタンらしい要素」が
+// 何回使われているかを数え、最頻出のクラスをそのサイトの「普遍的なボタン」とみなす。
+// ──────────────────────────────────────────
+interface DomButtonCandidate {
+  classAttr: string;
+  tokens: string[];
+  count: number;
+  penalty: number; // header/nav/footer 内で見つかった割合が高いほど大きい（装飾的なUI部品の可能性が高い）
+}
+
+const BUTTONISH_TAG_RE = /<(button|a|input)\b([^>]*)>/gi;
+const CLASS_ATTR_RE = /\bclass\s*=\s*["']([^"']*)["']/i;
+const TYPE_ATTR_RE = /\btype\s*=\s*["']([^"']*)["']/i;
+const ROLE_BUTTON_RE = /\brole\s*=\s*["']button["']/i;
+const BUTTONISH_TOKEN_RE = /(^|[-_])(btn|button|cta)([-_]|$)/i;
+
+/** header/nav/footer タグの開始〜終了までの文字位置の範囲を集める（雑にネストは無視） */
+function structuralRanges(html: string, tagNames: string[]): [number, number][] {
+  const ranges: [number, number][] = [];
+  for (const tag of tagNames) {
+    const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
+    let om: RegExpExecArray | null;
+    while ((om = openRe.exec(html)) !== null) {
+      const closeRe = new RegExp(`</${tag}>`, 'i');
+      const closeIdx = html.slice(om.index).search(closeRe);
+      if (closeIdx >= 0) ranges.push([om.index, om.index + closeIdx]);
+    }
+  }
+  return ranges;
+}
+
+function isInRanges(idx: number, ranges: [number, number][]): boolean {
+  return ranges.some(([s, e]) => idx >= s && idx <= e);
+}
+
+/** HTML中の実際のボタン要素からクラスの出現頻度を集計し、頻度順（header/nav/footer内は減点）で返す */
+function extractDomButtonCandidates(html: string): DomButtonCandidate[] {
+  const penaltyRanges = structuralRanges(html, ['header', 'nav', 'footer']);
+  const freq = new Map<string, { count: number; penaltyHits: number; tokens: string[] }>();
+  let m: RegExpExecArray | null;
+  BUTTONISH_TAG_RE.lastIndex = 0;
+  while ((m = BUTTONISH_TAG_RE.exec(html)) !== null) {
+    const tag = m[1].toLowerCase();
+    const attrs = m[2];
+    const classMatch = attrs.match(CLASS_ATTR_RE);
+    if (!classMatch) continue;
+    const classAttr = classMatch[1].trim().replace(/\s+/g, ' ');
+    if (!classAttr) continue;
+    const tokens = classAttr.split(' ').filter(Boolean);
+    const typeAttr = attrs.match(TYPE_ATTR_RE)?.[1] ?? '';
+    const isButtonish =
+      tag === 'button' ||
+      ROLE_BUTTON_RE.test(attrs) ||
+      (tag === 'input' && /^(submit|button)$/i.test(typeAttr)) ||
+      tokens.some((t) => BUTTONISH_TOKEN_RE.test(t));
+    if (!isButtonish) continue;
+
+    const entry = freq.get(classAttr);
+    const isPenalized = isInRanges(m.index, penaltyRanges) ? 1 : 0;
+    if (entry) {
+      entry.count++;
+      entry.penaltyHits += isPenalized;
+    } else {
+      freq.set(classAttr, { count: 1, penaltyHits: isPenalized, tokens });
+    }
+  }
+  return Array.from(freq.entries())
+    .map(([classAttr, v]) => ({
+      classAttr,
+      tokens: v.tokens,
+      count: v.count,
+      penalty: v.penaltyHits / v.count,
+    }))
+    .sort((a, b) => (a.penalty - b.penalty) || (b.count - a.count));
+}
+
+/**
+ * CSS全文から、指定したクラス群「だけ」で構成されるコンパウンドセレクタ（擬似クラスは除く）の
+ * 宣言を集めてマージする。`.btn` と `.btn-primary` のように基本形＋修飾クラスへ分かれている場合も
+ * 1つの「実際に使われているボタン」として合成できるようにするため。
+ */
+function matchCssForClassTokens(cssText: string, tokens: string[]): Record<string, string> {
+  const merged: Record<string, string> = {};
+  const blockRe = /([^{}\n][^{}]*?)\{([^{}]+)\}/g;
+  let bm: RegExpExecArray | null;
+  while ((bm = blockRe.exec(cssText)) !== null) {
+    const selectorGroup = bm[1].trim();
+    if (selectorGroup.startsWith('@')) continue;
+    const body = bm[2].trim();
+    for (const part of selectorGroup.split(',').map((s) => s.trim())) {
+      const lastSegment = part.split(/\s+/).pop() ?? '';
+      if (lastSegment.includes(':') || lastSegment.includes('[')) continue; // hover/focus等の状態は基本形に混ぜない
+      const classesInSelector = Array.from(lastSegment.matchAll(/\.([\w-]+)/g)).map((x) => x[1]);
+      if (classesInSelector.length === 0) continue;
+      if (!classesInSelector.every((c) => tokens.includes(c))) continue;
+      Object.assign(merged, parseDeclarations(body));
+    }
+  }
+  return merged;
+}
+
+/** ページのHTML+CSSから「実際に繰り返し使われているボタン」を検出し、StyleBlockとして返す（上位2件まで） */
+function extractVerifiedButtonBlocks(html: string, cssText: string, pageUrl: string): StyleBlock[] {
+  // 見た目スコアの足切りで落ちる候補もあるため、頻度上位は少し広めに見ておく
+  const candidates = extractDomButtonCandidates(html).filter((c) => c.count >= 2).slice(0, 8);
+  const out: StyleBlock[] = [];
+  for (const cand of candidates) {
+    if (out.length >= 2) break;
+    const properties = matchCssForClassTokens(cssText, cand.tokens);
+    // メニュー項目などARIA role="button"だけで頻出するリンクは、paddingはあっても
+    // 背景色や枠線を持たない「ただのテキストリンク」であることが多い。DOM頻度だけでなく
+    // 「箱として見える」見た目も要求し、本当にボタンらしいものだけを候補にする
+    if (!hasBoxVisual(properties)) continue;
+    out.push({
+      selector: `${DOM_VERIFIED_MARKER}.${cand.tokens.join('.')}（実際のボタン要素で${cand.count}回使用）`,
+      properties,
+      sourceUrl: pageUrl,
+    });
+  }
+  return out;
 }
 
 function isColorValue(val: string): boolean {
@@ -716,6 +863,7 @@ export async function POST(req: NextRequest) {
       // A-1. 自社 CSS を最大 10 本取得（CDN より優先）
       // ──────────────────────────
       const fetchTargets = [...ownCssLinks.slice(0, 10), ...libCssLinks.slice(0, 3)];
+      let pageCssText = '';
 
       for (const cssUrl of fetchTargets) {
         try {
@@ -727,6 +875,7 @@ export async function POST(req: NextRequest) {
           const buf = await cssRes.arrayBuffer();
           if (buf.byteLength > 800 * 1024) continue; // 800KB 制限
           const cssText = new TextDecoder().decode(buf);
+          pageCssText += '\n' + cssText;
           const parsed = parseCss(cssText, 'external-css');
           allCssVars = { ...allCssVars, ...(parsed.css_variables ?? {}) };
           allHexFreq = mergeHexFreq(allHexFreq, parsed.hex_color_freq);
@@ -743,6 +892,7 @@ export async function POST(req: NextRequest) {
       // A-2. <style> タグを解析
       // ──────────────────────────
       for (const styleText of styleTags) {
+        pageCssText += '\n' + styleText;
         const parsed = parseCss(styleText, 'style-tag');
         allCssVars = { ...allCssVars, ...(parsed.css_variables ?? {}) };
         allHexFreq = mergeHexFreq(allHexFreq, parsed.hex_color_freq);
@@ -752,6 +902,11 @@ export async function POST(req: NextRequest) {
         allFormStyles.push(...(parsed.form_styles ?? []).map(f => ({ ...f, sourceUrl: pageUrl })));
         (parsed.border_radii ?? []).forEach(r => allBorderRadii.add(r));
       }
+
+      // ──────────────────────────
+      // A-3. HTML上で実際に使われているボタン要素をDOM頻度から検証し、最優先候補として追加
+      // ──────────────────────────
+      allButtonStyles.push(...extractVerifiedButtonBlocks(html, pageCssText, pageUrl));
 
       // ──────────────────────────
       // B. インライン style= 属性のカラーを収集
