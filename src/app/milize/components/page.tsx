@@ -11,7 +11,7 @@ import {
   type StyleBlock,
   type ResourcesJson,
 } from '@/lib/designExtract';
-import { toReactStyle, toCssVarStyle } from '@/lib/cssStyle';
+import { toReactStyle, toCssVarStyle, isLightCssColor } from '@/lib/cssStyle';
 
 const clientName = '株式会社MILIZE';
 const basePath = '/milize';
@@ -118,22 +118,38 @@ export default function ComponentsPage() {
               </div>
             )}
 
-            {buttonStyles.map((b, i) => (
-              <div className="component-card" key={`btn-${i}`}>
-                <div className="component-label" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center' }}>
-                  <span>Button {i + 1}</span>
-                  <SourceTag url={b.sourceUrl} />
+            {buttonStyles.map((b, i) => {
+              // 濃い背景（ヘッダー等）の上で使う前提の白文字・白枠ボタンは、背景色が
+              // 指定されていないことが多い。白いプレビュー面にそのまま置くと文字も枠線も
+              // 見えなくなるため、その場合だけプレビュー背景を自動的に暗くする。
+              const needsDarkBackdrop =
+                !b.properties['background-color'] && !b.properties.background &&
+                (isLightCssColor(b.properties.color) || isLightCssColor(b.properties['border-color']));
+              return (
+                <div className="component-card" key={`btn-${i}`}>
+                  <div className="component-label" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'center' }}>
+                    <span>Button {i + 1}</span>
+                    <SourceTag url={b.sourceUrl} />
+                  </div>
+                  <div
+                    className="component-render"
+                    style={{ maxHeight: 220, overflow: 'auto', background: needsDarkBackdrop ? '#1f2937' : undefined }}
+                  >
+                    <button style={{ padding: '10px 24px', fontSize: 14, cursor: 'pointer', ...toReactStyle(b.properties) }}>
+                      サンプルボタン
+                    </button>
+                  </div>
+                  {needsDarkBackdrop && (
+                    <p style={{ fontSize: 11, color: '#9ca3af', padding: '6px 16px 0' }}>
+                      ※ 濃い背景の上で使うボタンのため、プレビュー背景を暗くしています
+                    </p>
+                  )}
+                  <div className="component-code">
+                    {`${b.selector}\n${Object.entries(b.properties).map(([k, v]) => `${k}: ${v};`).join('\n')}`}
+                  </div>
                 </div>
-                <div className="component-render" style={{ maxHeight: 220, overflow: 'auto' }}>
-                  <button style={{ padding: '10px 24px', fontSize: 14, cursor: 'pointer', ...toReactStyle(b.properties) }}>
-                    サンプルボタン
-                  </button>
-                </div>
-                <div className="component-code">
-                  {`${b.selector}\n${Object.entries(b.properties).map(([k, v]) => `${k}: ${v};`).join('\n')}`}
-                </div>
-              </div>
-            ))}
+              );
+            })}
 
             {formStyles.map((f, i) => (
               <div className="component-card" key={`form-${i}`}>

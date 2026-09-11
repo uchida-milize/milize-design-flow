@@ -32,3 +32,35 @@ export function toCssVarStyle(vars: Record<string, string> | undefined): CSSProp
   }
   return style as CSSProperties;
 }
+
+const NAMED_LIGHT_COLORS = new Set(['white', '#fff', '#ffffff', 'transparent']);
+
+/**
+ * 文字色や枠線色が白系かどうかを判定する。ヘッダー等の濃い背景の上で使う前提の
+ * ボタン（白文字・白枠、背景色は指定なし）は、白いプレビュー面の上に置くと
+ * 文字も枠線も見えなくなってしまうため、プレビュー側の背景を自動で暗くする判定に使う。
+ * `rgb(r g b/var(...))` のような値でもRGB部分が数値であれば判定できる。
+ */
+export function isLightCssColor(value: string | undefined): boolean {
+  if (!value) return false;
+  const v = value.trim().toLowerCase();
+  if (NAMED_LIGHT_COLORS.has(v)) return true;
+
+  const hexMatch = /^#([0-9a-f]{3}|[0-9a-f]{6})$/.exec(v);
+  if (hexMatch) {
+    const hex = hexMatch[1];
+    const full = hex.length === 3 ? hex.split('').map((c) => c + c).join('') : hex;
+    const r = parseInt(full.slice(0, 2), 16);
+    const g = parseInt(full.slice(2, 4), 16);
+    const b = parseInt(full.slice(4, 6), 16);
+    return 0.299 * r + 0.587 * g + 0.114 * b > 200;
+  }
+
+  const rgbMatch = /rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/.exec(v);
+  if (rgbMatch) {
+    const [r, g, b] = rgbMatch.slice(1, 4).map(Number);
+    return 0.299 * r + 0.587 * g + 0.114 * b > 200;
+  }
+
+  return false;
+}
