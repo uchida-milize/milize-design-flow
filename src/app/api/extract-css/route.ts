@@ -87,6 +87,8 @@ function parseHtmlMeta(html: string, baseUrl: string): {
   favicon: string | null;
   logoImgs: string[];
   infoboxImage: string | null;
+  headerLogoImg: string | null;
+  headerLogoSvg: string | null;
 } {
   const allCssLinks: string[] = [];
   const logoImgs: string[] = [];
@@ -123,6 +125,13 @@ function parseHtmlMeta(html: string, baseUrl: string): {
       logoImgs.push(toAbsolute(src, baseUrl));
     }
   }
+
+  // header内の「サイトルートへのリンク」の中にあるロゴを最優先候補として取得。
+  // 実績/取引先ページ等に並ぶ他社ロゴ画像は "logo" というファイル名を持つことが多く、
+  // 単純なキーワード一致だと自社ロゴと区別できない。一方、サイト自身のロゴは
+  // ほぼ必ずheader内のホームへのリンクの中にあるため、この位置を根拠にする方が確実。
+  // 近年はロゴが<img>ではなくインラインSVGで埋め込まれるサイトも多いため、その場合はSVGマークアップ自体を返す。
+  const { imgUrl: headerLogoImg, svgMarkup: headerLogoSvg } = extractHeaderLogo(html, baseUrl);
 
   // Wikipedia の記事ページ: 右カラムの「基礎情報（infobox）」上部にある画像＝会社ロゴを優先取得。
   // 一般的な logo/brand キーワード一致（下記）は infobox を持たないページ向けで、Wikipediaの
@@ -161,7 +170,59 @@ function parseHtmlMeta(html: string, baseUrl: string): {
     favicon,
     logoImgs: dedupe(logoImgs),
     infoboxImage,
+    headerLogoImg,
+    headerLogoSvg,
   };
+}
+
+/**
+ * <header>内で、サイトルート（"/" やそのドメインのトップURL）へのリンクの中にある
+ * ロゴを取得する。多くのサイトでヘッダーロゴは自ドメインのトップページへのリンクで
+ * 囲まれているという慣習を根拠にした、サイト非依存の検出方法。
+ * <img>で埋め込まれていればURLを、インラインSVGならそのマークアップ自体を返す。
+ */
+function extractHeaderLogo(html: string, baseUrl: string): { imgUrl: string | null; svgMarkup: string | null } {
+  const headerOpenMatch = /<header\b[^>]*>/i.exec(html);
+  if (!headerOpenMatch) return { imgUrl: null, svgMarkup: null };
+  const afterOpen = headerOpenMatch.index + headerOpenMatch[0].length;
+  const closeIdx = html.slice(afterOpen).search(/<\/header>/i);
+  const headerHtml = closeIdx >= 0 ? html.slice(afterOpen, afterOpen + closeIdx) : html.slice(afterOpen, afterOpen + 20000);
+
+  let origin = '';
+  let currentPathname = '';
+  try {
+    const baseParsed = new URL(baseUrl);
+    origin = baseParsed.origin;
+    currentPathname = baseParsed.pathname;
+  } catch { /* baseUrlが不正な場合は無視 */ }
+
+  const anchorRe = /<a\b[^>]*href=["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let am: RegExpExecArray | null;
+  while ((am = anchorRe.exec(headerHtml)) !== null) {
+    const href = am[1];
+    const inner = am[2];
+    // "#" 等のプレースホルダーリンク（JS制御のトグル等）はホームリンクではないため除外
+    if (!href || href === '#' || /^(javascript:|#)/i.test(href)) continue;
+
+    let isRootLink = false;
+    try {
+      const abs = new URL(href, baseUrl);
+      if (abs.origin === origin) {
+        const segments = abs.pathname.split('/').filter(Boolean);
+        // "/" や "/ja-jp/" のようなドメイン直下〜1階層目（ロケール/セクションのトップ）は
+        // ホームリンクとみなす。現在表示中のページ自身へのリンク（自己参照ロゴ）も対象に含める。
+        isRootLink = segments.length <= 1 || abs.pathname === currentPathname;
+      }
+    } catch { /* 相対URL解決失敗は候補から除外 */ }
+    if (!isRootLink) continue;
+
+    const svgMatch = /<svg\b[\s\S]*?<\/svg>/i.exec(inner);
+    if (svgMatch) return { imgUrl: null, svgMarkup: svgMatch[0] };
+
+    const imgMatch = /<img[^>]+src=["']([^"']+)["']/i.exec(inner);
+    if (imgMatch) return { imgUrl: toAbsolute(imgMatch[1], baseUrl), svgMarkup: null };
+  }
+  return { imgUrl: null, svgMarkup: null };
 }
 
 /** 自社 CSS かどうか判定（CDN/ライブラリを除外） */
@@ -759,23 +820,76 @@ async function tryCommitLogo(
   return null;
 }
 
+/** header内で見つけたインラインSVGロゴを、URL取得なしで直接 logo.svg としてコミットする */
+async function commitLogoSvgMarkup(
+  clientSlug: string,
+  svgMarkup: string,
+  token: string,
+): Promise<{ saved: boolean; path?: string } | null> {
+  if (svgMarkup.length < 20 || svgMarkup.length > 200 * 1024) return null;
+  // xmlns が無いと単体ファイルとして開いたときに正しく描画されないビューアがあるため補完する
+  const svg = /xmlns\s*=/i.test(svgMarkup)
+    ? svgMarkup
+    : svgMarkup.replace(/^<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+  const base64 = Buffer.from(svg, 'utf8').toString('base64');
+  const filePath = `src/app/${clientSlug}/logo.svg`;
+  try {
+    const putRes = await fetch(
+      `https://api.github.com/repos/uchida-milize/milize-design-flow/contents/${filePath}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+          'User-Agent': 'extract-css',
+        },
+        body: JSON.stringify({
+          message: `feat(${clientSlug}): save header logo (inline svg)`,
+          content: base64,
+          branch: 'main',
+        }),
+      },
+    );
+    if (putRes.ok) return { saved: true, path: filePath };
+  } catch { /* ignore */ }
+  return null;
+}
+
 /**
  * logoUrls の候補を順に試し、最初に取得できた実画像を
  * src/app/{slug}/logo.{ext} としてコミットする。
  * 既にロゴファイルが存在する場合は通常は上書きしない（同一生成内の後続ページで
  * 質の低い画像に上書きされるのを防ぐため）。
  *
- * priorityUrls（Wikipediaのinfobox画像など、より権威あるロゴソース）が渡された場合は例外で、
- * 既存ロゴの有無に関わらずまずそちらの保存を試みる（同一実行内で他ページの一般的な
- * logo判定が先に処理され、後から見つかったinfobox画像が取りこぼされるのを防ぐため）。
+ * headerLogo（自社サイトのheader内、サイトルートへのリンクの中で見つけたロゴ）が最優先。
+ * 実績/取引先ページ等に並ぶ他社ロゴ画像もファイル名に"logo"を含むことが多く、キーワード一致
+ * だけでは自社ロゴと区別できないため、DOM構造（header内のホームリンク）を根拠にする方が確実。
+ * 次点で priorityUrls（Wikipediaのinfobox画像など）。どちらも
+ * 既存ロゴの有無に関わらずまず保存を試みる（同一実行内で他ページの一般的な
+ * logo判定が先に処理され、後から見つかったより確実な候補が取りこぼされるのを防ぐため）。
  */
 async function saveLogo(
   clientSlug: string,
   logoUrls: string[],
   token: string,
   priorityUrls: string[] = [],
+  headerLogo?: { imgUrl: string | null; svgMarkup: string | null },
 ): Promise<{ saved: boolean; path?: string; error?: string }> {
   if (!clientSlug) return { saved: false };
+
+  if (headerLogo?.svgMarkup || headerLogo?.imgUrl) {
+    await deleteExistingLogoFiles(clientSlug, token);
+    if (headerLogo.svgMarkup) {
+      const result = await commitLogoSvgMarkup(clientSlug, headerLogo.svgMarkup, token);
+      if (result) return result;
+    }
+    if (headerLogo.imgUrl) {
+      const result = await tryCommitLogo(clientSlug, [headerLogo.imgUrl], token);
+      if (result) return result;
+    }
+    // headerロゴの保存に失敗した場合は下にフォールバック（既に削除済みなので素通りする）
+  }
 
   if (priorityUrls.length > 0) {
     // 上書きのため、拡張子違いも含めて既存ロゴを先に削除してから保存を試みる
@@ -840,6 +954,8 @@ export async function POST(req: NextRequest) {
   const allBorderRadii = new Set<string>();
   const allLogoUrls: string[] = [];
   const allInfoboxImgs: string[] = [];
+  let headerLogoImg: string | null = null;
+  let headerLogoSvg: string | null = null;
   const allSourceCssUrls: string[] = [];
   const errors: string[] = [];
 
@@ -853,10 +969,18 @@ export async function POST(req: NextRequest) {
       if (!htmlRes.ok) { errors.push(`${pageUrl}: HTTP ${htmlRes.status}`); continue; }
       const html = await htmlRes.text();
 
-      const { ownCssLinks, libCssLinks, styleTags, ogImage, favicon, logoImgs, infoboxImage } = parseHtmlMeta(html, pageUrl);
+      const {
+        ownCssLinks, libCssLinks, styleTags, ogImage, favicon, logoImgs, infoboxImage,
+        headerLogoImg: pageHeaderLogoImg, headerLogoSvg: pageHeaderLogoSvg,
+      } = parseHtmlMeta(html, pageUrl);
 
-      // ロゴ・OGP を収集（Wikipediaのinfobox画像は「会社ロゴ」として最優先候補に別枠で積む）
+      // ロゴ・OGP を収集（Wikipediaのinfobox画像・header内の自社ロゴは「会社ロゴ」として最優先候補に別枠で積む）
       if (infoboxImage) allInfoboxImgs.push(infoboxImage);
+      if (!headerLogoSvg && !headerLogoImg) {
+        // 最初に見つかったページのheaderロゴを採用する（selected_urlsは通常ドメイントップが先頭のため）
+        headerLogoSvg = pageHeaderLogoSvg;
+        headerLogoImg = pageHeaderLogoImg;
+      }
       [ogImage, favicon, ...logoImgs].filter(Boolean).forEach(u => allLogoUrls.push(u!));
 
       // ──────────────────────────
@@ -1013,7 +1137,7 @@ export async function POST(req: NextRequest) {
       if (!result.ok) saveError = result.error;
 
       try {
-        const logoResult = await saveLogo(client_slug, logoUrls, githubToken, dedupe(allInfoboxImgs));
+        const logoResult = await saveLogo(client_slug, logoUrls, githubToken, dedupe(allInfoboxImgs), { imgUrl: headerLogoImg, svgMarkup: headerLogoSvg });
         logoSaved = logoResult.saved;
         logoPath = logoResult.path;
         logoSaveError = logoResult.error;
@@ -1045,6 +1169,8 @@ export async function POST(req: NextRequest) {
     logo_urls: logoUrls,
     source_css_urls: sourceCssUrls,
     ...(allInfoboxImgs.length > 0 ? { infobox_images: dedupe(allInfoboxImgs) } : {}),
+    ...(headerLogoImg ? { header_logo_img: headerLogoImg } : {}),
+    ...(headerLogoSvg ? { header_logo_svg_detected: true } : {}),
     summary,
     ...(errors.length > 0 ? { errors } : {}),
     ...(client_slug ? { saved, ...(saveError ? { save_error: saveError } : {}) } : {}),
