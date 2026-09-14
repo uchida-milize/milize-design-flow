@@ -58,7 +58,7 @@ export function ClientLogoHero({ slug, name, primaryColor = '#111827' }: ClientL
         <img
           src={src}
           alt={`${name} logo`}
-          style={{ maxWidth: maxSize, maxHeight: maxSize, objectFit: 'contain' }}
+          style={{ width: maxSize, height: maxSize, objectFit: 'contain' }}
           onError={() => setExtIndex((i) => i + 1)}
         />
       ) : (

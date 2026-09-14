@@ -70,7 +70,7 @@ export function ClientLogo({ slug, name, size = 40, width, bordered = true, back
         <img
           src={src}
           alt={`${name} logo`}
-          style={{ maxWidth: '92%', maxHeight: '78%', objectFit: 'contain' }}
+          style={{ width: '92%', height: '78%', objectFit: 'contain' }}
           onError={() => setExtIndex(i => i + 1)}
         />
       )}
