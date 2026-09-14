@@ -23,8 +23,13 @@ export type ProcessedLogo = { src: string; backdrop: string | null };
  *     画像（data URL）を src として返す（OGPシェア画像等、ロゴ本体の周囲に大きな
  *     余白があるアセットが小さく見えてしまう問題への対処）
  * 何らかの理由で解析できない場合は、元の src をそのまま返す（安全側フォールバック）。
+ *
+ * SVGは cropToDataUrl=false で呼び出すこと: canvasはSVGの本来の描画サイズ（viewBox由来の
+ * 小さいピクセル数のことが多い）でラスタライズしてしまい、ベクターの解像度非依存性が
+ * 失われて拡大表示時にぼやける。SVGは背景色判定のためだけにcanvasへ描画し、実際の
+ * 表示用srcは常に元のベクターファイルのまま返す。
  */
-function processImage(src: string): Promise<ProcessedLogo> {
+function processImage(src: string, cropToDataUrl: boolean): Promise<ProcessedLogo> {
   return new Promise((resolve) => {
     const fallback: ProcessedLogo = { src, backdrop: null };
     const img = new Image();
@@ -89,7 +94,7 @@ function processImage(src: string): Promise<ProcessedLogo> {
         const contentH = maxY - minY;
         // 既にほぼ全体を占めている（=元々タイトな画像）ならクロップ不要
         const alreadyTight = contentW >= w * 0.94 && contentH >= h * 0.94;
-        if (alreadyTight) { resolve({ src, backdrop }); return; }
+        if (!cropToDataUrl || alreadyTight) { resolve({ src, backdrop }); return; }
 
         const marginX = Math.round(contentW * CONTENT_MARGIN_RATIO);
         const marginY = Math.round(contentH * CONTENT_MARGIN_RATIO);
@@ -149,7 +154,7 @@ export function useProcessedLogo(src: string, ext: string, enabled: boolean): Pr
     let cancelled = false;
 
     (async () => {
-      const processed = await processImage(src);
+      const processed = await processImage(src, ext !== 'svg');
       if (cancelled) return;
       if (processed.backdrop === null && ext === 'svg') {
         const needsDark = await isMonochromeLightSvg(src);
