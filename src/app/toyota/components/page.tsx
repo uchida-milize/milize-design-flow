@@ -13,7 +13,7 @@ import {
 } from '@/lib/designExtract';
 import { toReactStyle, toCssVarStyle, isLightCssColor } from '@/lib/cssStyle';
 
-const clientName = 'トヨタ自動車';
+const clientName = 'トヨタ自動車株式会社';
 const basePath = '/toyota';
 const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';

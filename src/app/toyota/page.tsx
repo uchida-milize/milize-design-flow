@@ -1,17 +1,17 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 import { ClientLogoHero } from '@/components/ClientLogoHero';
 
-const clientName = 'トヨタ自動車';
+const clientName = 'トヨタ自動車株式会社';
 const basePath = '/toyota';
 const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';
 
 const colorRatio = [
-  { hex: '#C0C0C0', name: 'シルバー', percent: 35 },
-  { hex: '#000000', name: 'ブラック', percent: 30 },
-  { hex: '#444444', name: 'ダークグレー', percent: 15 },
-  { hex: '#FFFFFF', name: 'ホワイト', percent: 15 },
-  { hex: '#7F7F7F', name: 'グレー系中間色', percent: 5 },
+  { hex: '#C0C0C0', name: '#C0C0C0', percent: 50 },
+  { hex: '#E0E0E0', name: '#E0E0E0', percent: 22 },
+  { hex: '#EB0A1E', name: '#EB0A1E', percent: 13 },
+  { hex: '#FF9999', name: '#FF9999', percent: 9 },
+  { hex: '#212121', name: '#212121', percent: 6 },
 ];
 
 export default function Home() {
