@@ -486,15 +486,15 @@
   "isWhiteBorder": false,
   "brand_identity": {
     "value": [
-      "Accessibility",
-      "Education",
-      "Environment",
-      "Inclusion and Diversity",
-      "Privacy",
-      "Racial Equity and Justice",
-      "Supply Chain Innovation"
+      "Accessibility（アクセシビリティ）",
+      "Education（教育）",
+      "Environment（環境）",
+      "Inclusion and Diversity（インクルージョンと多様性）",
+      "Privacy（プライバシー）",
+      "Racial Equity and Justice（人種的公正と正義）",
+      "Supply Chain Innovation（サプライチェーンイノベーション）"
     ],
-    "brand_statement": "Apple's more than 150,000 employees are dedicated to making the best products on earth and to leaving the world better than we found it.",
+    "brand_statement": "Apple's more than 150,000 employees are dedicated to making the best products on earth and to leaving the world better than we found it.\n（日本語訳: Appleの15万人を超える従業員は、地球上で最高の製品を作ることと、私たちが出会った時よりも良い世界を残すことに全力を注いでいます。）",
     "sources": [
       "https://www.apple.com/job-creation/",
       "https://www.apple.com/newsroom/2025/08/apple-increases-us-commitment-to-600-billion-usd-announces-ambitious-program/"

@@ -837,14 +837,14 @@
   "border": false,
   "brand_identity": {
     "mission": "NTT DATAは、情報技術で、新しい「しくみ」や「価値」を創造し、より豊かで調和のとれた社会の実現に貢献する。",
-    "vision": "Trusted Global Innovator",
+    "vision": "Trusted Global Innovator（日本語訳: 信頼されるグローバルイノベーター）",
     "value": [
-      "Respect every voice（多様な視点を尊重し、耳を傾けることで成長する）",
-      "Think big. Be bold.（期待を超えて挑戦し、好奇心と大胆さで未来を切り拓く）",
-      "Deliver the outcome（約束を守り、誠実に行動し、成果に責任を持つ）",
-      "Win together（国境を越えて協力し、ひとつのグローバルチームとして成功する）"
+      "Respect every voice（日本語訳: すべての声を尊重する） — 多様な視点を尊重し、耳を傾けることで成長する",
+      "Think big. Be bold.（日本語訳: 大きく考え、大胆であれ） — 期待を超えて挑戦し、好奇心と大胆さで未来を切り拓く",
+      "Deliver the outcome（日本語訳: 成果を届ける） — 約束を守り、誠実に行動し、成果に責任を持つ",
+      "Win together（日本語訳: ともに勝つ） — 国境を越えて協力し、ひとつのグローバルチームとして成功する"
     ],
-    "tagline": "Trusted Global Innovator",
+    "tagline": "Trusted Global Innovator（日本語訳: 信頼されるグローバルイノベーター）",
     "sources": [
       "https://www.nttdata.com/global/ja/about-us/mission-and-values",
       "https://www.nttdata.com/global/ja/about-us/",
