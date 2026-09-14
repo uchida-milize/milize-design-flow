@@ -216,67 +216,33 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   />
                 ))}
               </div>
-              <div style={{ padding: 28, display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <div className="flex items-center" style={{ gap: 12 }}>
-                    <ClientLogo slug={client.slug} name={client.name} size={44} />
-                    <div>
-                      <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: 0 }}>{client.name}</p>
-                      <p style={{ fontSize: 12, color: '#9ca3af', marginTop: 2, margin: '2px 0 0' }}>{client.slug}</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); confirmSlug === client.slug ? closeMenu() : openMenu(client.slug); }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      width: 26,
-                      height: 26,
-                      fontSize: 16,
-                      color: '#9ca3af',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      padding: 0,
-                    }}
-                    title={'非表示にする'}
-                  >
-                    {'︙'}
-                  </button>
-                </div>
-                <p style={{
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  color: '#6b7280',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  flex: 1,
-                  margin: '0 0 16px',
-                }}>
-                  {client.description || 'デザインガイドライン・コンポーネントカタログを確認できます。'}
-                </p>
-                <div style={{ display: 'flex', gap: 4, flexWrap: 'nowrap', overflow: 'hidden' }}>
-                  {['ガイドラインリサーチ', 'コンポーネント'].map((cat) => (
-                    <span
-                      key={cat}
-                      style={{
-                        background: '#f3f4f6',
-                        color: '#6b7280',
-                        borderRadius: 999,
-                        padding: '3px 8px',
-                        fontSize: '0.7rem',
-                        whiteSpace: 'nowrap',
-                        fontWeight: 500,
-                      }}
-                    >
-                      {cat}
-                    </span>
-                  ))}
-                </div>
+              <div style={{ padding: 28, display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', textAlign: 'center', position: 'relative' }}>
+                <button
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); confirmSlug === client.slug ? closeMenu() : openMenu(client.slug); }}
+                  style={{
+                    position: 'absolute',
+                    top: 28,
+                    right: 28,
+                    background: 'none',
+                    border: 'none',
+                    width: 26,
+                    height: 26,
+                    fontSize: 16,
+                    color: '#9ca3af',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    padding: 0,
+                  }}
+                  title={'非表示にする'}
+                >
+                  {'︙'}
+                </button>
+                <ClientLogo slug={client.slug} name={client.name} size={64} bordered={false} />
+                <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: '14px 0 0' }}>{client.name}</p>
+                <p style={{ fontSize: 12, color: '#9ca3af', margin: '2px 0 0' }}>{client.slug}</p>
               </div>
             </Link>
           </div>

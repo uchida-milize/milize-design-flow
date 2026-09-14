@@ -5,6 +5,7 @@ interface ClientLogoProps {
   slug: string;
   name: string;
   size?: number;
+  bordered?: boolean;
 }
 
 // /api/extract-css が保存し得る拡張子を優先度順に列挙。
@@ -21,7 +22,7 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
  * エラーを発生させてしまい、onError が拾えず素の壊れ画像アイコンが
  * 残ってしまうため。
  */
-export function ClientLogo({ slug, name, size = 40 }: ClientLogoProps) {
+export function ClientLogo({ slug, name, size = 40, bordered = true }: ClientLogoProps) {
   const [mounted, setMounted] = useState(false);
   const [extIndex, setExtIndex] = useState(0);
   const initial = name.trim().charAt(0).toUpperCase() || '?';
@@ -38,7 +39,7 @@ export function ClientLogo({ slug, name, size = 40 }: ClientLogoProps) {
         height: size,
         borderRadius: size >= 36 ? 10 : 8,
         background: '#ffffff',
-        border: '1px solid #e5e7eb',
+        border: bordered ? '1px solid #e5e7eb' : 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
