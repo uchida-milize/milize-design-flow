@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { NewClientButton } from '@/components/NewClientButton';
 import { ClientLogo } from '@/components/ClientLogo';
+import { isLightCssColor } from '@/lib/cssStyle';
+
+const DARK_BACKDROP = '#1f2937';
 
 type ClientInfo = {
   slug: string;
@@ -20,6 +23,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
   const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
   const [confirmMode, setConfirmMode] = useState<ConfirmMode>('menu');
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
+  const [darkLogoSlugs, setDarkLogoSlugs] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const stored = localStorage.getItem('hidden_clients');
@@ -93,7 +97,13 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}
       >
         <NewClientButton />
-        {visible.map((client) => (
+        {visible.map((client) => {
+          const needsDark = darkLogoSlugs[client.slug] ?? false;
+          const corporateHex = client.colors[0]?.hex;
+          const backdrop = needsDark
+            ? (corporateHex && !isLightCssColor(corporateHex) ? corporateHex : DARK_BACKDROP)
+            : '#ffffff';
+          return (
           <div key={client.slug} style={{ position: 'relative', height: '100%' }}>
             {confirmSlug === client.slug && (
               <div
@@ -216,7 +226,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   />
                 ))}
               </div>
-              <div style={{ padding: 28, display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', textAlign: 'center', position: 'relative' }}>
+              <div style={{ padding: 28, display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', textAlign: 'center', position: 'relative', background: backdrop, transition: 'background 0.15s ease' }}>
                 <button
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); confirmSlug === client.slug ? closeMenu() : openMenu(client.slug); }}
                   style={{
@@ -228,7 +238,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                     width: 26,
                     height: 26,
                     fontSize: 16,
-                    color: '#9ca3af',
+                    color: needsDark ? 'rgba(255,255,255,0.7)' : '#9ca3af',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -240,13 +250,24 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                 >
                   {'︙'}
                 </button>
-                <ClientLogo slug={client.slug} name={client.name} size={64} width={200} bordered={false} />
-                <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: '14px 0 0' }}>{client.name}</p>
-                <p style={{ fontSize: 12, color: '#9ca3af', margin: '2px 0 0' }}>{client.slug}</p>
+                <ClientLogo
+                  slug={client.slug}
+                  name={client.name}
+                  size={64}
+                  width={200}
+                  bordered={false}
+                  background="transparent"
+                  onNeedsDarkBackdrop={(needs) => {
+                    setDarkLogoSlugs((prev) => (prev[client.slug] === needs ? prev : { ...prev, [client.slug]: needs }));
+                  }}
+                />
+                <p style={{ fontSize: 18, fontWeight: 700, color: needsDark ? '#ffffff' : '#111827', margin: '14px 0 0' }}>{client.name}</p>
+                <p style={{ fontSize: 12, color: needsDark ? 'rgba(255,255,255,0.65)' : '#9ca3af', margin: '2px 0 0' }}>{client.slug}</p>
               </div>
             </Link>
           </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );

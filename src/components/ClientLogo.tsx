@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useLogoNeedsDarkBackdrop } from '@/lib/useLogoNeedsDarkBackdrop';
 
 interface ClientLogoProps {
   slug: string;
@@ -8,6 +9,10 @@ interface ClientLogoProps {
   /** ロゴ表示枠の横幅。省略時は size と同じ（正方形）。横長ロゴ向けに広げたい場合に指定する。 */
   width?: number;
   bordered?: boolean;
+  /** 表示枠の背景色。省略時は白。呼び出し側で暗い背景を敷く場合は 'transparent' を渡す。 */
+  background?: string;
+  /** ロゴが白一色などで暗い背景が無いと見えない場合に呼び出し側へ通知する */
+  onNeedsDarkBackdrop?: (needs: boolean) => void;
 }
 
 // /api/extract-css が保存し得る拡張子を優先度順に列挙。
@@ -24,17 +29,24 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
  * エラーを発生させてしまい、onError が拾えず素の壊れ画像アイコンが
  * 残ってしまうため。
  */
-export function ClientLogo({ slug, name, size = 40, width, bordered = true }: ClientLogoProps) {
+export function ClientLogo({ slug, name, size = 40, width, bordered = true, background, onNeedsDarkBackdrop }: ClientLogoProps) {
   const [mounted, setMounted] = useState(false);
   const [extIndex, setExtIndex] = useState(0);
   const initial = name.trim().charAt(0).toUpperCase() || '?';
   const failed = extIndex >= LOGO_EXTENSIONS.length;
   const boxWidth = width ?? size;
-  const src = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${LOGO_EXTENSIONS[extIndex]}`;
+  const ext = LOGO_EXTENSIONS[extIndex];
+  const src = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${ext}`;
+  const needsDarkBackdrop = useLogoNeedsDarkBackdrop(src, ext, mounted && !failed);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    onNeedsDarkBackdrop?.(needsDarkBackdrop);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [needsDarkBackdrop]);
 
   return (
     <div
@@ -42,7 +54,7 @@ export function ClientLogo({ slug, name, size = 40, width, bordered = true }: Cl
         width: boxWidth,
         height: size,
         borderRadius: size >= 36 ? 10 : 8,
-        background: '#ffffff',
+        background: background ?? '#ffffff',
         border: bordered ? '1px solid #e5e7eb' : 'none',
         display: 'flex',
         alignItems: 'center',
