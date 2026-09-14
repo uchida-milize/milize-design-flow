@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useLogoBackdrop } from '@/lib/useLogoBackdrop';
+import { useProcessedLogo } from '@/lib/useProcessedLogo';
 
 interface ClientLogoProps {
   slug: string;
@@ -23,6 +23,7 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
  * クライアントのロゴ表示スペース。
  * src/app/{slug}/logo.{png,svg,jpg,...} のいずれかが存在すればそれを表示し、
  * まだ取得できていない（=会社を正しく認識できていない）場合はイニシャルにフォールバックする。
+ * ロゴ画像は余白トリミング・背景色判定（useProcessedLogo）を経て表示する。
  *
  * <img> はマウント後（useEffect）にだけ描画する。SSR直後の初期HTMLに
  * 失敗確定のURLを含めると、ハイドレーション完了より先にブラウザが
@@ -36,8 +37,8 @@ export function ClientLogo({ slug, name, size = 40, width, bordered = true, back
   const failed = extIndex >= LOGO_EXTENSIONS.length;
   const boxWidth = width ?? size;
   const ext = LOGO_EXTENSIONS[extIndex];
-  const src = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${ext}`;
-  const backdrop = useLogoBackdrop(src, ext, mounted && !failed);
+  const rawSrc = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${ext}`;
+  const { src, backdrop } = useProcessedLogo(rawSrc, ext, mounted && !failed);
 
   useEffect(() => {
     setMounted(true);

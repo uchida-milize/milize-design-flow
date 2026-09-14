@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useLogoBackdrop } from '@/lib/useLogoBackdrop';
+import { useProcessedLogo } from '@/lib/useProcessedLogo';
 import { isLightCssColor } from '@/lib/cssStyle';
 
 interface ClientLogoHeroProps {
@@ -15,6 +15,7 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
 /**
  * 各クライアントポータルのトップページ、カラーバーの上に置く大きなロゴ表示エリア。
  * ロゴが取得できていればダウンロードリンクを右下に表示する。
+ * ロゴ画像は余白トリミング・背景色判定（useProcessedLogo）を経て表示する。
  * ロゴ画像に単色の背景が焼き込まれている場合（OGP用バッジ画像等）や、白一色の
  * 反転ロゴの場合は、表示枠の背景をその色／ニュートラルなダークグレーに切り替える。
  */
@@ -24,14 +25,14 @@ export function ClientLogoHero({ slug, name, primaryColor = '#111827' }: ClientL
   const failed = extIndex >= LOGO_EXTENSIONS.length;
   const initial = name.trim().charAt(0).toUpperCase() || '?';
   const ext = LOGO_EXTENSIONS[extIndex];
-  const src = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${ext}`;
+  const rawSrc = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${ext}`;
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const showLogo = mounted && !failed;
-  const backdrop = useLogoBackdrop(src, ext, showLogo);
+  const { src, backdrop } = useProcessedLogo(rawSrc, ext, showLogo);
   const useLightText = backdrop !== null && !isLightCssColor(backdrop);
 
   return (
@@ -54,7 +55,7 @@ export function ClientLogoHero({ slug, name, primaryColor = '#111827' }: ClientL
         <img
           src={src}
           alt={`${name} logo`}
-          style={{ maxWidth: '55%', maxHeight: '65%', objectFit: 'contain' }}
+          style={{ maxWidth: '70%', maxHeight: '70%', objectFit: 'contain' }}
           onError={() => setExtIndex((i) => i + 1)}
         />
       ) : (
