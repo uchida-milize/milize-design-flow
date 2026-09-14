@@ -1,5 +1,19 @@
 import { NextRequest } from 'next/server';
 import { batchGitCommit, deleteExistingLogoFiles } from '../_lib/portal-helpers';
+import { isLightCssColor } from '@/lib/cssStyle';
+
+/**
+ * SVGのfill色を全て調べ、明るい色（白系）しか使われていないかを判定する。
+ * 濃い背景（サイトのヘッダー等）の上で使う前提の反転ロゴは、白いポータル上に
+ * そのまま置くと見えなくなるため、ロゴ候補として採用しない判定に使う。
+ */
+function isMonochromeLightSvg(svg: string): boolean {
+  const fills = [...svg.matchAll(/fill\s*[:=]\s*["']?(#[0-9a-fA-F]{3,6}|[a-zA-Z]+)["']?/g)]
+    .map((m) => m[1])
+    .filter((v) => v.toLowerCase() !== 'none');
+  if (fills.length === 0) return false;
+  return fills.every((f) => isLightCssColor(f));
+}
 
 /**
  * POST /api/extract-css
@@ -841,6 +855,9 @@ async function tryCommitLogo(
       const buf = await imgRes.arrayBuffer();
       // トラッキングピクセル等の極小画像・巨大すぎるファイルは除外
       if (buf.byteLength < 200 || buf.byteLength > 3 * 1024 * 1024) continue;
+      // 白一色などの反転ロゴ（濃い背景前提）は白いポータル上で見えなくなるためスキップし、
+      // 他の色付き候補（favicon等）に譲る
+      if (ext === 'svg' && isMonochromeLightSvg(Buffer.from(buf).toString('utf8'))) continue;
       const base64 = Buffer.from(buf).toString('base64');
       const filePath = `src/app/${clientSlug}/logo.${ext}`;
       const putRes = await fetch(
@@ -924,13 +941,16 @@ async function saveLogo(
 ): Promise<{ saved: boolean; path?: string; error?: string }> {
   if (!clientSlug) return { saved: false };
 
-  if (headerLogo?.svgMarkup || headerLogo?.imgUrl) {
+  // 白一色などの反転ロゴ（濃い背景前提）は白いポータル上で見えなくなるため、
+  // header内で見つかっていても採用せず色付きの候補（favicon等）に譲る
+  const headerSvgUsable = !!headerLogo?.svgMarkup && !isMonochromeLightSvg(headerLogo.svgMarkup);
+  if (headerSvgUsable || headerLogo?.imgUrl) {
     await deleteExistingLogoFiles(clientSlug, token);
-    if (headerLogo.svgMarkup) {
-      const result = await commitLogoSvgMarkup(clientSlug, headerLogo.svgMarkup, token);
+    if (headerSvgUsable) {
+      const result = await commitLogoSvgMarkup(clientSlug, headerLogo!.svgMarkup!, token);
       if (result) return result;
     }
-    if (headerLogo.imgUrl) {
+    if (headerLogo?.imgUrl) {
       const result = await tryCommitLogo(clientSlug, [headerLogo.imgUrl], token);
       if (result) return result;
     }
