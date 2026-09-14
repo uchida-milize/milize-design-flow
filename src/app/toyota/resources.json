@@ -58,7 +58,7 @@
       "--tjp-brand-logo-width": "32.8px",
       "--tjp-brand-logo-height": "21.11px"
     },
-    "hex_colors": "#C0C0C0 | background-color | 出現513回 | [inline-style]\n#E0E0E0 | background-color | 出現219回 | [inline-style]\n#FF9999 | background, background-color | 出現106回 | [inline-style]\n#F4F4F4 | outline-color, background, background-color, --tjp-color-focused, --tjp-color-button-secondary-on | 出現68回 | [external-css]\n#E3E3E3 | background | 出現44回 | [inline-style]\n#EB0A1E | color, background-color, background, fill, border-left | 出現32回 | [external-css]\n#002BB8 | color | 出現30回 | [inline-style]\n#F0F0F0 | background-color, background | 出現28回 | [inline-style]\n#D3D3D3 | border-top, border-bottom, border, border-left, border-right | 出現28回 | [external-css]\n#008A32 | background | 出現19回 | [inline-style]\n#666666 | color, --tjp-color-tertiary, --tjp-color-bg-tertiary, --tjp-color-text-weak | 出現18回 | [external-css]\n#AAAAFF | background | 出現15回 | [inline-style]\n#FFB21E | background | 出現14回 | [inline-style]\n#222222 | color, --tjp-color-dark, --tjp-color-bg-dark, --tjp-color-text-secondary | 出現13回 | [external-css]\n#485D4B | border | 出現11回 | [inline-style]\n#FAEBD5 | background-color | 出現11回 | [inline-style]\n#D9D9D9 | background, --tjp-color-top5, --tjp-color-disabled, --tjp-color-border, --tjp-color-text-disabled | 出現11回 | [external-css]\n#115C9E | background | 出現10回 | [inline-style]\n#EFEFEF | background | 出現9回 | [inline-style]\n#F9F9F9 | background-color, background, --tjp-color-secondary, --tjp-color-bg-secondary, --tjp-color-bg-disabled | 出現9回 | [style-tag+external-css]\n#555555 | color, background-color, background, border | 出現9回 | [inline-style+external-css]\n#333333 | color, background-color, --tjp-color-border-dark | 出現7回 | [external-css]\n#999999 | background-color, color | 出現7回 | [external-css]\n#009CE5 | background | 出現6回 | [inline-style]\n#E1032C | background | 出現6回 | [inline-style]\n#0E0E69 | background | 出現6回 | [inline-style]\n#4C4C4C | background-color, --tjp-color-button-primary-on | 出現6回 | [external-css]\n#AF0111 | background-color | 出現5回 | [external-css]\n#F5F5F5 | background-color, background | 出現4回 | [external-css]\n#A2A9B1 | border-bottom, border, border-left | 出現3回 | [style-tag]",
+    "hex_colors": "#C0C0C0 | background-color | 出現513回 | [inline-style]\n#E0E0E0 | background-color, border-top, border-left, border-right, border-bottom | 出現231回 | [inline-style+external-css]\n#FF9999 | background, background-color | 出現106回 | [inline-style]\n#EB0A1E | color, background-color, background, fill, border-left | 出現102回 | [external-css]\n#212121 | color, border-bottom, background-color, border, border-left | 出現86回 | [external-css]\n#F4F4F4 | outline-color, background, background-color, --tjp-color-focused, --tjp-color-button-secondary-on | 出現68回 | [external-css]\n#E3E3E3 | background | 出現44回 | [inline-style]\n#002BB8 | color | 出現30回 | [inline-style]\n#F0F0F0 | background-color, background | 出現28回 | [inline-style]\n#D3D3D3 | border-top, border-bottom, border, border-left, border-right | 出現28回 | [external-css]\n#008A32 | background | 出現19回 | [inline-style]\n#666666 | color, --tjp-color-tertiary, --tjp-color-bg-tertiary, --tjp-color-text-weak | 出現18回 | [external-css]\n#555555 | color, background-color, background, border, border-bottom | 出現17回 | [inline-style+external-css]\n#AAAAFF | background | 出現15回 | [inline-style]\n#FFB21E | background | 出現14回 | [inline-style]\n#222222 | color, --tjp-color-dark, --tjp-color-bg-dark, --tjp-color-text-secondary | 出現13回 | [external-css]\n#888888 | color, background-color, border-color | 出現13回 | [external-css]\n#485D4B | border | 出現11回 | [inline-style]\n#FAEBD5 | background-color | 出現11回 | [inline-style]\n#D9D9D9 | background, --tjp-color-top5, --tjp-color-disabled, --tjp-color-border, --tjp-color-text-disabled | 出現11回 | [external-css]\n#115C9E | background | 出現10回 | [inline-style]\n#333333 | color, background-color, --tjp-color-border-dark, border-top, border-bottom | 出現10回 | [external-css]\n#EFEFEF | background | 出現9回 | [inline-style]\n#F9F9F9 | background-color, background, --tjp-color-secondary, --tjp-color-bg-secondary, --tjp-color-bg-disabled | 出現9回 | [style-tag+external-css]\n#999999 | background-color, color | 出現7回 | [external-css]\n#BDBDBD | color, border-top, border | 出現7回 | [external-css]\n#9E9E9E | color | 出現7回 | [external-css]\n#009CE5 | background | 出現6回 | [inline-style]\n#E1032C | background | 出現6回 | [inline-style]\n#0E0E69 | background | 出現6回 | [inline-style]",
     "rgb_colors": [
       "rgba(235,10,30,.4)",
       "rgba(235,10,30,.1)"
@@ -66,7 +66,8 @@
     "fonts": [
       "monospace",
       "SF Pro",
-      "inherit"
+      "inherit",
+      "sans-serif"
     ],
     "button_styles": [
       {
@@ -151,6 +152,23 @@
         "sourceUrl": "https://toyota.jp/"
       },
       {
+        "selector": "a.btn_text",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "200px",
+          "min-height": "40px",
+          "padding": "8px 32px",
+          "border": "1px solid #212121",
+          "background-color": "#fff",
+          "color": "#212121",
+          "text-align": "center",
+          "vertical-align": "middle",
+          "font-size": "14px",
+          "font-weight": "bold"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
         "selector": "#contents-body .section.button ul li a.btn-text.btn-white",
         "properties": {
           "padding": "12px",
@@ -206,6 +224,46 @@
           "vertical-align": "bottom"
         },
         "sourceUrl": "https://toyota.jp/"
+      },
+      {
+        "selector": ".dl_items a.add_cart,.dl_items a.pdf_dl,.dl_items a.file_dl,.dl_items a.zip_dl,.dl_items a.btn_text",
+        "properties": {
+          "display": "inline-block",
+          "margin-right": "8px",
+          "padding": "8px 16px",
+          "background-color": "#212121",
+          "color": "#fff",
+          "font-size": "14px",
+          "font-weight": "bold",
+          "line-height": "24px"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
+        "selector": ".btn_more a",
+        "properties": {
+          "padding": "0 20px",
+          "background-color": "#fff",
+          "color": "#888",
+          "font-size": "16px",
+          "font-weight": "bold"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
+        "selector": ".form a.btn_text,a.btn_text.submit",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "200px",
+          "padding": "8px 16px",
+          "border": "0",
+          "background-color": "#212121",
+          "color": "#fff",
+          "font-size": "14px",
+          "font-weight": "bold",
+          "line-height": "24px"
+        },
+        "sourceUrl": "https://global.toyota/"
       },
       {
         "selector": ".global-header .global-header__inline-button",
@@ -342,52 +400,6 @@
           "background-color": "var(--tjp-color-button-secondary)",
           "-webkit-box-shadow": "inset 0 0 0 1px currentColor",
           "box-shadow": "inset 0 0 0 1px currentColor",
-          "color": "var(--tjp-color-text-primary)"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".tjp-title-description-button",
-        "properties": {
-          "background-color": "var(--tjp-color-button-secondary)",
-          "display": "grid",
-          "font-size": "var(--tjp-fz-l)",
-          "height": "100%",
-          "line-height": "1.5",
-          "outline": "none",
-          "padding": "16px 0"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".global-header .global-header__tab-nav-button",
-        "properties": {
-          "display": "flex",
-          "-webkit-box-align": "center",
-          "-ms-flex-align": "center",
-          "align-items": "center",
-          "-ms-flex-pack": "center",
-          "justify-content": "center",
-          "height": "100%",
-          "padding": "0 8px",
-          "outline": "4px solid transparent",
-          "background": "0 0",
-          "color": "inherit"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": "#contents-body .section.button.tjp-cms-button-section ul li a[class].btn-text,.tjp-button,.tjp-garage-board-simple.tjp-garage-board-simple--bright .tjp-button--outline",
-        "properties": {
-          "background-color": "var(--tjp-color-button-primary)",
-          "color": "var(--tjp-color-text-bright)"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": "#contents-body .section.button.tjp-cms-button-section.tjp-cms-button-section--primary-inverted ul li a[class].btn-text,.tjp-button--primary-inverted",
-        "properties": {
-          "background-color": "var(--tjp-color-button-secondary)",
           "color": "var(--tjp-color-text-primary)"
         },
         "sourceUrl": "https://toyota.jp/"
@@ -539,6 +551,13 @@
         "sourceUrl": "https://toyota.jp/"
       },
       {
+        "selector": ".tile_wrapper .tile_normal .grid_tile,.type_one .grid_tile,.type_two .grid_tile,.type_four .grid_tile,.type_large .grid_tile",
+        "properties": {
+          "padding": "12px 0"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
         "selector": ".global-header .global-header__estimate-card-support-data",
         "properties": {
           "margin-top": "8px",
@@ -573,15 +592,6 @@
           "line-height": "1.5"
         },
         "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".global-header .global-header__estimate-card-payment-label",
-        "properties": {
-          "font-weight": "700",
-          "-ms-flex-item-align": "center",
-          "align-self": "center"
-        },
-        "sourceUrl": "https://toyota.jp/"
       }
     ],
     "form_styles": [
@@ -612,6 +622,21 @@
           "width": "100%"
         },
         "sourceUrl": "https://toyota.jp/"
+      },
+      {
+        "selector": ".form a.btn_text,a.btn_text.submit",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "200px",
+          "padding": "8px 16px",
+          "border": "0",
+          "background-color": "#212121",
+          "color": "#fff",
+          "font-size": "14px",
+          "font-weight": "bold",
+          "line-height": "24px"
+        },
+        "sourceUrl": "https://global.toyota/"
       },
       {
         "selector": "#cboxLoadedContent input[type=button],#cboxLoadedContent input[type=reset],#cboxLoadedContent input[type=submit],#contents-body .section input[type=button],#contents-body .section input[type=reset],#contents-body .section input[type=submit]",
@@ -681,6 +706,21 @@
         "sourceUrl": "https://toyota.jp/"
       },
       {
+        "selector": ".date-picker dl dd select",
+        "properties": {
+          "width": "82px",
+          "height": "30px",
+          "padding-right": "20px",
+          "padding-left": "6px",
+          "background-color": "#fff",
+          "border": "1px solid #212121",
+          "border-radius": "0",
+          "font-size": "16px",
+          "font-weight": "bold"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
         "selector": ".tjp-frame-radiobutton__element:disabled+.tjp-frame-radiobutton__inner",
         "properties": {
           "background-color": "var(--tjp-color-base)",
@@ -738,6 +778,33 @@
         "sourceUrl": "https://toyota.jp/"
       },
       {
+        "selector": ".result_title_wrapper .sort_menu .sort_select_wrapper .sort_list",
+        "properties": {
+          "border": "1px solid #e8e8e8",
+          "background-color": "#fff"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
+        "selector": ".result_title_wrapper .sort_menu .sort_select_wrapper .sort_list a.current,.result_title_wrapper .sort_menu .sort_select_wrapper .sort_list a:hover",
+        "properties": {
+          "color": "#fff",
+          "background-color": "#eb0a1e"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
+        "selector": "input[type=checkbox]+label.checkbox_style:before",
+        "properties": {
+          "display": "block",
+          "width": "19px",
+          "height": "19px",
+          "border": "1px solid #212121",
+          "background-color": "#fff"
+        },
+        "sourceUrl": "https://global.toyota/"
+      },
+      {
         "selector": "#cboxLoadedContent input[type=button]:hover,#cboxLoadedContent input[type=reset]:hover,#cboxLoadedContent input[type=submit]:hover,#contents-body .section input[type=button]:hover,#contents-body .section input[type=reset]:hover,#contents-body .section input[type=submit]:hover",
         "properties": {
           "background-color": "#999"
@@ -757,41 +824,6 @@
           "background-color": "var(--tjp-color-chips-silver)"
         },
         "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".tjp-colorchip-checkbox--red",
-        "properties": {
-          "background-color": "var(--tjp-color-chips-red)"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".tjp-colorchip-checkbox--black",
-        "properties": {
-          "background-color": "var(--tjp-color-chips-black)"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".tjp-colorchip-checkbox--brown",
-        "properties": {
-          "background-color": "var(--tjp-color-chips-brown)"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".tjp-colorchip-checkbox--yellow",
-        "properties": {
-          "background-color": "var(--tjp-color-chips-yellow)"
-        },
-        "sourceUrl": "https://toyota.jp/"
-      },
-      {
-        "selector": ".tjp-colorchip-checkbox--green",
-        "properties": {
-          "background-color": "var(--tjp-color-chips-green)"
-        },
-        "sourceUrl": "https://toyota.jp/"
       }
     ],
     "border_radii": [
@@ -802,7 +834,12 @@
       "3em",
       "8px 8px 0 0",
       "inherit",
-      "12px"
+      "12px",
+      "10px",
+      "27px",
+      "2px",
+      "34px",
+      "26px"
     ],
     "logo_urls": [
       "https://upload.wikimedia.org/wikipedia/commons/f/ff/Headquarter_of_Toyota_Motor_Corporation_3.JPG?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
@@ -815,7 +852,9 @@
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/KDDI_logos.svg/120px-KDDI_logos.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
       "http://toyota.jp/pages/contents/top/image/01-toyota_OGP-TOP.png",
-      "https://toyota.jp/favicon.ico"
+      "https://toyota.jp/favicon.ico",
+      "https://global.toyota/pages/_system/image/tmb_corporate.png",
+      "https://global.toyota/favicon.ico"
     ],
     "source_css_urls": [
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skins.legacy%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
@@ -827,12 +866,22 @@
       "https://toyota.jp/pages/contents/include/common/css/tjp_parts.css",
       "https://toyota.jp/pages/contents/include/common/css/tjp_print.css",
       "https://toyota.jp/pages/contents/include/component/css/tjp_component.css",
-      "https://toyota.jp/pages/contents/top/css/tjp_top.css"
+      "https://toyota.jp/pages/contents/top/css/tjp_top.css",
+      "https://global.toyota/pages/_system/css/slick.css",
+      "https://global.toyota/pages/contents/css/normalize.css",
+      "https://global.toyota/pages/contents/css/common.css",
+      "https://global.toyota/pages/contents/css/common_jp.css",
+      "https://global.toyota/pages/contents/css/parts.css",
+      "https://global.toyota/pages/contents/css/parts_jp.css",
+      "https://global.toyota/pages/contents/css/style_list_jp.css",
+      "https://global.toyota/pages/contents/css/header_footer.css?v=2024050113",
+      "https://global.toyota/pages/contents/css/20201013/style.css",
+      "https://global.toyota/pages/contents/css/global_top_20240409.css"
     ],
-    "extracted_at": "2026-09-14T02:19:16.240Z",
+    "extracted_at": "2026-09-14T02:19:20.590Z",
     "source_urls": [
-      "https://toyota.jp/"
+      "https://global.toyota/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #C0C0C0  background-color  出現513回  [inline-style]\n  #E0E0E0  background-color  出現219回  [inline-style]\n  #FF9999  background  出現106回  [inline-style]\n  #F4F4F4  outline-color  出現68回  [external-css]\n  #E3E3E3  background  出現44回  [inline-style]\n  #EB0A1E  color  出現32回  [external-css]\n  #002BB8  color  出現30回  [inline-style]\n  #F0F0F0  background-color  出現28回  [inline-style]\n  #D3D3D3  border-top  出現28回  [external-css]\n  #008A32  background  出現19回  [inline-style]\n  #666666  color  出現18回  [external-css]\n  #AAAAFF  background  出現15回  [inline-style]\n  #FFB21E  background  出現14回  [inline-style]\n  #222222  color  出現13回  [external-css]\n  #485D4B  border  出現11回  [inline-style]\n\n【CSS カラー変数（:root）】\n  --tjp-color-base: #fff\n  --tjp-color-primary: #000\n  --tjp-color-secondary: #f9f9f9\n  --tjp-color-tertiary: #666\n  --tjp-color-highlight: #eb0a1e\n  --tjp-color-highlight-alpha-40: rgba(235,10,30,.4)\n  --tjp-color-brand: #eb0a1e\n  --tjp-color-kinto: #00708d\n  --tjp-color-dark: #222\n  --tjp-color-gold: #ebb90a\n  --tjp-color-silver: #a5a5a5\n  --tjp-color-bronze: #c97342\n  --tjp-color-top5: #d9d9d9\n  --tjp-color-disabled: #d9d9d9\n  --tjp-color-error: #eb0a1e\n  --tjp-color-success: #3a71df\n  --tjp-color-focused: #f4f4f4\n  --tjp-color-border: #d9d9d9\n  --tjp-color-border-dark: #333\n  --tjp-color-bg-base: #fff\n  --tjp-color-bg-base-alpha-95: hsla(0,0%,100%,.95)\n  --tjp-color-bg-primary: #000\n  --tjp-color-bg-secondary: #f9f9f9\n  --tjp-color-bg-tertiary: #666\n  --tjp-color-bg-dark: #222\n  --tjp-color-bg-error: rgba(235,10,30,.1)\n  --tjp-color-bg-disabled: #f9f9f9\n  --tjp-color-text-primary: #000\n  --tjp-color-text-secondary: #222\n  --tjp-color-text-weak: #666\n  --tjp-color-text-highlight: #eb0a1e\n  --tjp-color-text-error: #eb0a1e\n  --tjp-color-text-disabled: #d9d9d9\n  --tjp-color-text-bright: #fff\n  --tjp-color-button-primary: #000\n  --tjp-color-button-primary-on: #4c4c4c\n  --tjp-color-button-secondary: #fff\n  --tjp-color-button-secondary-on: #f4f4f4\n  --tjp-color-button-tertiary: transparent\n  --tjp-color-button-tertiary-on: #f4f4f4\n  --tjp-color-chips-white: #fff\n  --tjp-color-chips-silver: #bfbfbf\n  --tjp-color-chips-red: #c30808\n  --tjp-color-chips-black: #000\n  --tjp-color-chips-brown: #70470a\n  --tjp-color-chips-yellow: #ffc700\n  --tjp-color-chips-green: #016b2c\n  --tjp-color-chips-aqua: #57a8ad\n  --tjp-color-chips-blue: #1145ab\n  --tjp-color-chips-purple: #6711ab\n  --tjp-color-outline-number-border: #d9d9d9\n  --tjp-color-marker: #cfd8dc\n\n【使用フォント】\n  monospace\n  SF Pro\n  inherit\n\n【角丸パターン】\n  50%\n  4px\n  56px\n  16px\n  3em\n  8px 8px 0 0\n  inherit\n  12px\n\n【ボタンスタイル】\n  ★ .tjp-button.tjp-button--primary（実際のボタン要素で5回使用）\n    --tjp-button-padding: 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background: none\n  ★ .tjp-button.tjp-button--tertiary（実際のボタン要素で5回使用）\n    --tjp-button-padding: 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background: none\n  ★ .text.btn01.l-text-ellipsis.btn-text（実際のボタン要素で1回使用）\n    min-width: 100%\n    max-width: 100%\n    padding-right: 0\n    padding-left: 0\n    display: block\n    padding: 13px\n  #contents-body .section.button ul li a.btn-text.btn-white\n    padding: 12px\n    border: 1px solid #555\n    background-color: #fff\n    color: #333\n  .tjp-frame-radiobutton__inner\n    --tjp--padding: 20px 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background-color: var(--tjp-color-button-secondary)\n\n【カードスタイル】\n  .tjp-grade-card__rank\n    -webkit-box-align: center\n    -ms-flex-align: center\n    -ms-flex-pack: center\n    align-items: center\n    background-color: var(--tjp-color-top5)\n    border-radius: 50%\n  .tjp-offer-kinto-card\n    background: var(--tjp-color-bg-secondary)\n    display: grid\n    padding: 24px\n  .tjp-offer-used-car-card\n    background: var(--tjp-color-bg-secondary)\n    display: grid\n    padding: 24px\n  .tjp-offer-t-connect-card\n    background: var(--tjp-color-bg-secondary)\n    display: block\n    padding: 24px\n  .global-header .global-header__feature-card\n    display: grid\n    -webkit-box-align: start\n    -ms-flex-align: start\n    align-items: start\n    -ms-flex-pack: justify\n    justify-content: space-between\n\n【フォームスタイル】\n  .tjp-frame-radiobutton__inner\n    --tjp--padding: 20px 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background-color: var(--tjp-color-button-secondary)\n  #cboxLoadedContent input[type=button],#cboxLoadedContent input[type=reset],#cboxLoadedContent input[type=submit],#contents-body .section input[type=button],#contents-body .section input[type=reset],#contents-body .section input[type=submit]\n    height: 40px\n    padding: 0 30px\n    background-color: #555\n    border: none\n    color: #fff\n    text-align: center\n  .tjp-colorchip-checkbox\n    background-color: var(--tjp-color-base)\n    border: 1px solid var(--tjp-color-border)\n    border-radius: 50%\n    display: flex\n    height: 32px\n    width: 32px\n  .tjp-colorchip-radio\n    background-color: var(--tjp-color-base)\n    border: 1px solid var(--tjp-color-border)\n    border-radius: 50%\n    display: flex\n    height: 32px\n    width: 32px\n  .tjp-input\n    background-color: var(--tjp-color-bg-base)\n    -webkit-box-shadow: 0 -1px 0 0 inset var(--tjp-color-border)\n    box-shadow: 0 -1px 0 0 inset var(--tjp-color-border)\n    color: var(--tjp-color-text-secondary)\n    font-size: var(--tjp-fz-m)\n    font-weight: 400\n\n【ロゴ・ビジュアル素材】\n  https://upload.wikimedia.org/wikipedia/commons/f/ff/Headquarter_of_Toyota_Motor_Corporation_3.JPG?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/2020_Summer_Olympics_text_logo.svg/120px-2020_Summer_Olympics_text_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/KDDI_logos.svg/120px-KDDI_logos.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  http://toyota.jp/pages/contents/top/image/01-toyota_OGP-TOP.png\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skins.legacy%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://toyota.jp/pages/_system/common/css/cms_system.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_reset.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_common.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_parts.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_print.css\n  https://toyota.jp/pages/contents/include/component/css/tjp_component.css\n  https://toyota.jp/pages/contents/top/css/tjp_top.css"
+  "css_summary": "【抽出カラー（頻度順）】\n  #C0C0C0  background-color  出現513回  [inline-style]\n  #E0E0E0  background-color  出現231回  [inline-style+external-css]\n  #FF9999  background  出現106回  [inline-style]\n  #EB0A1E  color  出現102回  [external-css]\n  #212121  color  出現86回  [external-css]\n  #F4F4F4  outline-color  出現68回  [external-css]\n  #E3E3E3  background  出現44回  [inline-style]\n  #002BB8  color  出現30回  [inline-style]\n  #F0F0F0  background-color  出現28回  [inline-style]\n  #D3D3D3  border-top  出現28回  [external-css]\n  #008A32  background  出現19回  [inline-style]\n  #666666  color  出現18回  [external-css]\n  #555555  color  出現17回  [inline-style+external-css]\n  #AAAAFF  background  出現15回  [inline-style]\n  #FFB21E  background  出現14回  [inline-style]\n\n【CSS カラー変数（:root）】\n  --tjp-color-base: #fff\n  --tjp-color-primary: #000\n  --tjp-color-secondary: #f9f9f9\n  --tjp-color-tertiary: #666\n  --tjp-color-highlight: #eb0a1e\n  --tjp-color-highlight-alpha-40: rgba(235,10,30,.4)\n  --tjp-color-brand: #eb0a1e\n  --tjp-color-kinto: #00708d\n  --tjp-color-dark: #222\n  --tjp-color-gold: #ebb90a\n  --tjp-color-silver: #a5a5a5\n  --tjp-color-bronze: #c97342\n  --tjp-color-top5: #d9d9d9\n  --tjp-color-disabled: #d9d9d9\n  --tjp-color-error: #eb0a1e\n  --tjp-color-success: #3a71df\n  --tjp-color-focused: #f4f4f4\n  --tjp-color-border: #d9d9d9\n  --tjp-color-border-dark: #333\n  --tjp-color-bg-base: #fff\n  --tjp-color-bg-base-alpha-95: hsla(0,0%,100%,.95)\n  --tjp-color-bg-primary: #000\n  --tjp-color-bg-secondary: #f9f9f9\n  --tjp-color-bg-tertiary: #666\n  --tjp-color-bg-dark: #222\n  --tjp-color-bg-error: rgba(235,10,30,.1)\n  --tjp-color-bg-disabled: #f9f9f9\n  --tjp-color-text-primary: #000\n  --tjp-color-text-secondary: #222\n  --tjp-color-text-weak: #666\n  --tjp-color-text-highlight: #eb0a1e\n  --tjp-color-text-error: #eb0a1e\n  --tjp-color-text-disabled: #d9d9d9\n  --tjp-color-text-bright: #fff\n  --tjp-color-button-primary: #000\n  --tjp-color-button-primary-on: #4c4c4c\n  --tjp-color-button-secondary: #fff\n  --tjp-color-button-secondary-on: #f4f4f4\n  --tjp-color-button-tertiary: transparent\n  --tjp-color-button-tertiary-on: #f4f4f4\n  --tjp-color-chips-white: #fff\n  --tjp-color-chips-silver: #bfbfbf\n  --tjp-color-chips-red: #c30808\n  --tjp-color-chips-black: #000\n  --tjp-color-chips-brown: #70470a\n  --tjp-color-chips-yellow: #ffc700\n  --tjp-color-chips-green: #016b2c\n  --tjp-color-chips-aqua: #57a8ad\n  --tjp-color-chips-blue: #1145ab\n  --tjp-color-chips-purple: #6711ab\n  --tjp-color-outline-number-border: #d9d9d9\n  --tjp-color-marker: #cfd8dc\n\n【使用フォント】\n  monospace\n  SF Pro\n  inherit\n  sans-serif\n\n【角丸パターン】\n  50%\n  4px\n  56px\n  16px\n  3em\n  8px 8px 0 0\n  inherit\n  12px\n\n【ボタンスタイル】\n  ★ .tjp-button.tjp-button--primary（実際のボタン要素で5回使用）\n    --tjp-button-padding: 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background: none\n  ★ .tjp-button.tjp-button--tertiary（実際のボタン要素で5回使用）\n    --tjp-button-padding: 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background: none\n  ★ .text.btn01.l-text-ellipsis.btn-text（実際のボタン要素で1回使用）\n    min-width: 100%\n    max-width: 100%\n    padding-right: 0\n    padding-left: 0\n    display: block\n    padding: 13px\n  a.btn_text\n    display: inline-block\n    min-width: 200px\n    min-height: 40px\n    padding: 8px 32px\n    border: 1px solid #212121\n    background-color: #fff\n  #contents-body .section.button ul li a.btn-text.btn-white\n    padding: 12px\n    border: 1px solid #555\n    background-color: #fff\n    color: #333\n\n【カードスタイル】\n  .tjp-grade-card__rank\n    -webkit-box-align: center\n    -ms-flex-align: center\n    -ms-flex-pack: center\n    align-items: center\n    background-color: var(--tjp-color-top5)\n    border-radius: 50%\n  .tjp-offer-kinto-card\n    background: var(--tjp-color-bg-secondary)\n    display: grid\n    padding: 24px\n  .tjp-offer-used-car-card\n    background: var(--tjp-color-bg-secondary)\n    display: grid\n    padding: 24px\n  .tjp-offer-t-connect-card\n    background: var(--tjp-color-bg-secondary)\n    display: block\n    padding: 24px\n  .global-header .global-header__feature-card\n    display: grid\n    -webkit-box-align: start\n    -ms-flex-align: start\n    align-items: start\n    -ms-flex-pack: justify\n    justify-content: space-between\n\n【フォームスタイル】\n  .tjp-frame-radiobutton__inner\n    --tjp--padding: 20px 16px\n    -ms-flex-pack: center\n    -webkit-box-align: center\n    -ms-flex-align: center\n    align-items: center\n    background-color: var(--tjp-color-button-secondary)\n  .form a.btn_text,a.btn_text.submit\n    display: inline-block\n    min-width: 200px\n    padding: 8px 16px\n    border: 0\n    background-color: #212121\n    color: #fff\n  #cboxLoadedContent input[type=button],#cboxLoadedContent input[type=reset],#cboxLoadedContent input[type=submit],#contents-body .section input[type=button],#contents-body .section input[type=reset],#contents-body .section input[type=submit]\n    height: 40px\n    padding: 0 30px\n    background-color: #555\n    border: none\n    color: #fff\n    text-align: center\n  .tjp-colorchip-checkbox\n    background-color: var(--tjp-color-base)\n    border: 1px solid var(--tjp-color-border)\n    border-radius: 50%\n    display: flex\n    height: 32px\n    width: 32px\n  .tjp-colorchip-radio\n    background-color: var(--tjp-color-base)\n    border: 1px solid var(--tjp-color-border)\n    border-radius: 50%\n    display: flex\n    height: 32px\n    width: 32px\n\n【ロゴ・ビジュアル素材】\n  https://upload.wikimedia.org/wikipedia/commons/f/ff/Headquarter_of_Toyota_Motor_Corporation_3.JPG?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/2020_Summer_Olympics_text_logo.svg/120px-2020_Summer_Olympics_text_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/KDDI_logos.svg/120px-KDDI_logos.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  http://toyota.jp/pages/contents/top/image/01-toyota_OGP-TOP.png\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skins.legacy%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://toyota.jp/pages/_system/common/css/cms_system.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_reset.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_common.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_parts.css\n  https://toyota.jp/pages/contents/include/common/css/tjp_print.css\n  https://toyota.jp/pages/contents/include/component/css/tjp_component.css\n  https://toyota.jp/pages/contents/top/css/tjp_top.css\n  https://global.toyota/pages/_system/css/slick.css\n  https://global.toyota/pages/contents/css/normalize.css\n  https://global.toyota/pages/contents/css/common.css\n  https://global.toyota/pages/contents/css/common_jp.css\n  https://global.toyota/pages/contents/css/parts.css\n  https://global.toyota/pages/contents/css/parts_jp.css\n  https://global.toyota/pages/contents/css/style_list_jp.css\n  https://global.toyota/pages/contents/css/header_footer.css?v=2024050113\n  https://global.toyota/pages/contents/css/20201013/style.css\n  https://global.toyota/pages/contents/css/global_top_20240409.css"
 }
