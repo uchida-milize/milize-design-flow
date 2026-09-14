@@ -34,9 +34,9 @@ export function ClientLogoHero({ slug, name, primaryColor = '#111827' }: ClientL
   const showLogo = mounted && !failed;
   const { src, backdrop } = useProcessedLogo(rawSrc, ext, showLogo);
   const useLightText = backdrop !== null && !isLightCssColor(backdrop);
-  // 背景色つきの箱（単色背景焼き込み/白一色ロゴのフォールバック）は、色面自体の存在感が強いため
-  // ロゴを目一杯まで拡大すると圧迫感が出る。通常の透過ロゴより一回り小さく表示する。
-  const maxSize = backdrop ? '47%' : '70%';
+  // カードに対するロゴの割合は、背景色の有無に関わらず一律この比率に統一する
+  // （NTT DATAの見え方を基準値とした）。
+  const maxSize = '47%';
 
   return (
     <div
