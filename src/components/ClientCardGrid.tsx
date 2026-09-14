@@ -240,7 +240,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                 >
                   {'︙'}
                 </button>
-                <ClientLogo slug={client.slug} name={client.name} size={64} bordered={false} />
+                <ClientLogo slug={client.slug} name={client.name} size={64} width={200} bordered={false} />
                 <p style={{ fontSize: 18, fontWeight: 700, color: '#111827', margin: '14px 0 0' }}>{client.name}</p>
                 <p style={{ fontSize: 12, color: '#9ca3af', margin: '2px 0 0' }}>{client.slug}</p>
               </div>

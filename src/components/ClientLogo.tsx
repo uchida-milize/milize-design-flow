@@ -5,6 +5,8 @@ interface ClientLogoProps {
   slug: string;
   name: string;
   size?: number;
+  /** ロゴ表示枠の横幅。省略時は size と同じ（正方形）。横長ロゴ向けに広げたい場合に指定する。 */
+  width?: number;
   bordered?: boolean;
 }
 
@@ -22,11 +24,12 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
  * エラーを発生させてしまい、onError が拾えず素の壊れ画像アイコンが
  * 残ってしまうため。
  */
-export function ClientLogo({ slug, name, size = 40, bordered = true }: ClientLogoProps) {
+export function ClientLogo({ slug, name, size = 40, width, bordered = true }: ClientLogoProps) {
   const [mounted, setMounted] = useState(false);
   const [extIndex, setExtIndex] = useState(0);
   const initial = name.trim().charAt(0).toUpperCase() || '?';
   const failed = extIndex >= LOGO_EXTENSIONS.length;
+  const boxWidth = width ?? size;
 
   useEffect(() => {
     setMounted(true);
@@ -35,7 +38,7 @@ export function ClientLogo({ slug, name, size = 40, bordered = true }: ClientLog
   return (
     <div
       style={{
-        width: size,
+        width: boxWidth,
         height: size,
         borderRadius: size >= 36 ? 10 : 8,
         background: '#ffffff',
@@ -53,7 +56,7 @@ export function ClientLogo({ slug, name, size = 40, bordered = true }: ClientLog
         <img
           src={`https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${LOGO_EXTENSIONS[extIndex]}`}
           alt={`${name} logo`}
-          style={{ maxWidth: '78%', maxHeight: '78%', objectFit: 'contain' }}
+          style={{ maxWidth: '92%', maxHeight: '78%', objectFit: 'contain' }}
           onError={() => setExtIndex(i => i + 1)}
         />
       )}
