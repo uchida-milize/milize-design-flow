@@ -1,0 +1,11 @@
+2026-09-14T01:32:50.069Z  START task_id="dfbe38d9-726b-4c4c-8669-d7b51a6f09dc" workflow_run_id="296c1532-8ac9-466c-b9d9-19a6f9b8f308" form_token="t9itycAicAdo8yoxAMjVcV" client="toyota"
+2026-09-14T01:32:50.072Z  formBase="https://app.dify.milize.com"
+2026-09-14T01:32:50.073Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/t9itycAicAdo8yoxAMjVcV
+2026-09-14T01:32:51.214Z  結果[app/api]: 200 ct=application/json body={}
+
+2026-09-14T01:32:51.214Z  ✓ 再開成功: app/api
+2026-09-14T01:32:51.215Z  resume 成功: ct=application/json
+2026-09-14T01:32:51.215Z  ポーリング開始 pollIds=["296c1532-8ac9-466c-b9d9-19a6f9b8f308","dfbe38d9-726b-4c4c-8669-d7b51a6f09dc"]
+2026-09-14T01:33:02.349Z  logs[1]: run=296c1532 status="failed"
+2026-09-14T01:33:02.349Z  ワークフロー完了: status="failed" (outputs は dify-callback 経由で書き込み済み)
+2026-09-14T01:33:02.349Z  ポーリング完了
