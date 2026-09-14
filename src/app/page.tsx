@@ -19,7 +19,6 @@ const EXCLUDED_DIRS = new Set([
   'sonypictures',
   'testrin',
   'toshiba',
-  'toyota',
   'videor',
   'smecojpcompany',
   'httpswwwsmecojp',
