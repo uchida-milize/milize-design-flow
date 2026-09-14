@@ -834,5 +834,21 @@
   "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n.nttdata-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.nttdata-portal {\n  --portal-bg: #f5f7fa;\n  --portal-primary: #E60012;\n  min-height: 100vh;\n  background: var(--portal-bg);\n  font-family: 'Noto Sans JP', sans-serif;\n  color: #111827;\n}\n\n.nttdata-portal a {\n  text-decoration: none;\n  color: inherit;\n}\n\n.nttdata-portal .container {\n  max-width: 1000px;\n  margin: 0 auto;\n  padding: 0 24px;\n}\n\n.nttdata-portal .section-label {\n  font-size: 12px;\n  font-weight: 700;\n  letter-spacing: 0.05em;\n}\n\n.nttdata-portal .section-title {\n  font-size: 24px;\n  font-weight: 700;\n  color: #111827;\n  margin-top: 4px;\n}\n\n.nttdata-portal .section-desc {\n  font-size: 14px;\n  color: #6b7280;\n  margin-top: 8px;\n}\n\n.nttdata-portal .card {\n  background: #ffffff;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  box-shadow: 0 1px 3px rgba(0,0,0,0.06);\n  padding: 24px;\n}\n\n.nttdata-portal .swatch-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));\n  gap: 12px;\n}\n\n.nttdata-portal .swatch-top {\n  height: 80px;\n  border-radius: 8px 8px 0 0;\n}\n\n.nttdata-portal .swatch-bottom {\n  padding: 8px 4px;\n}\n\n.nttdata-portal .swatch-hex {\n  font-family: monospace;\n  font-size: 13px;\n  color: #111827;\n}\n\n.nttdata-portal .swatch-name {\n  font-size: 12px;\n  color: #6b7280;\n}\n\n.nttdata-portal .tab-nav {\n  display: flex;\n  gap: 8px;\n  margin-bottom: 32px;\n}\n\n.nttdata-portal .tab-item {\n  padding: 6px 16px;\n  border-radius: 999px;\n  font-size: 14px;\n  font-weight: 500;\n  cursor: pointer;\n  border: none;\n}\n\n.nttdata-portal .component-card {\n  border: 1px solid #e5e7eb;\n  border-radius: 8px;\n  overflow: hidden;\n  margin-bottom: 24px;\n}\n\n.nttdata-portal .component-label {\n  font-size: 12px;\n  color: #9ca3af;\n  padding: 12px 16px 0 16px;\n}\n\n.nttdata-portal .component-render {\n  padding: 24px;\n}\n\n.nttdata-portal .component-code {\n  background: #efefef;\n  color: #333333;\n  font-family: monospace;\n  font-size: 12px;\n  padding: 12px 16px;\n  white-space: pre-wrap;\n  overflow-x: auto;\n}\n===END===\n\n===LAYOUT_TSX===\nimport './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className=\"nttdata-portal\">{children}</div>;\n}\n===END===\n\n===PAGE_TSX===\nimport { ClientPortalHeader } from '@/components/ClientPortalHeader';\nimport Link from 'next/link';\n\nexport default function Home() {\n  const clientName = '株式会社NTTデータグループ';\n  const basePath = '/nttdata';\n  const primaryColor: string = '#E60012';\n\n  const colorRatios = [\n    { hex: '#E60012'",
   "name": "プライマリレッド（推定）",
   "pct": 15,
-  "border": false
+  "border": false,
+  "brand_identity": {
+    "mission": "NTT DATAは、情報技術で、新しい「しくみ」や「価値」を創造し、より豊かで調和のとれた社会の実現に貢献する。",
+    "vision": "Trusted Global Innovator",
+    "value": [
+      "Respect every voice（多様な視点を尊重し、耳を傾けることで成長する）",
+      "Think big. Be bold.（期待を超えて挑戦し、好奇心と大胆さで未来を切り拓く）",
+      "Deliver the outcome（約束を守り、誠実に行動し、成果に責任を持つ）",
+      "Win together（国境を越えて協力し、ひとつのグローバルチームとして成功する）"
+    ],
+    "tagline": "Trusted Global Innovator",
+    "sources": [
+      "https://www.nttdata.com/global/ja/about-us/mission-and-values",
+      "https://www.nttdata.com/global/ja/about-us/",
+      "https://www.nttdata.com/global/en/news/press-release/2018/may/ntt-data-to-launch-trusted-global-innovator-vision"
+    ]
+  }
 }

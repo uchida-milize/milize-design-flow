@@ -34,6 +34,9 @@ export function ClientLogoHero({ slug, name, primaryColor = '#111827' }: ClientL
   const showLogo = mounted && !failed;
   const { src, backdrop } = useProcessedLogo(rawSrc, ext, showLogo);
   const useLightText = backdrop !== null && !isLightCssColor(backdrop);
+  // 背景色つきの箱（単色背景焼き込み/白一色ロゴのフォールバック）は、色面自体の存在感が強いため
+  // ロゴを目一杯まで拡大すると圧迫感が出る。通常の透過ロゴより一回り小さく表示する。
+  const maxSize = backdrop ? '47%' : '70%';
 
   return (
     <div
@@ -55,7 +58,7 @@ export function ClientLogoHero({ slug, name, primaryColor = '#111827' }: ClientL
         <img
           src={src}
           alt={`${name} logo`}
-          style={{ maxWidth: '70%', maxHeight: '70%', objectFit: 'contain' }}
+          style={{ maxWidth: maxSize, maxHeight: maxSize, objectFit: 'contain' }}
           onError={() => setExtIndex((i) => i + 1)}
         />
       ) : (

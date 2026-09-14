@@ -87,10 +87,24 @@ export interface ResourcesCssInfo {
   border_radii?: string[];
 }
 
+export interface BrandIdentity {
+  mission?: string;
+  vision?: string;
+  value?: string[];
+  brand_concept?: string;
+  purpose?: string;
+  brand_promise?: string;
+  tagline?: string;
+  brand_statement?: string;
+  /** 各項目の根拠となる公式情報源のURL */
+  sources?: string[];
+}
+
 export interface ResourcesJson {
   css_info?: ResourcesCssInfo;
   design_md?: string;
   selected_urls?: string;
+  brand_identity?: BrandIdentity;
 }
 
 /** クライアントの resources.json を取得する（存在しない/取得失敗時は null） */

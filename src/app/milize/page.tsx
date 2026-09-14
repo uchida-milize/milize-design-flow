@@ -1,5 +1,6 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 import { ClientLogoHero } from '@/components/ClientLogoHero';
+import { BrandIdentitySection } from '@/components/BrandIdentitySection';
 
 const clientName = '株式会社MILIZE';
 const basePath = '/milize';
@@ -126,6 +127,8 @@ export default function Home() {
             </div>
           </a>
         </div>
+
+        <BrandIdentitySection slug={slug} primaryColor={primaryColor} />
       </div>
     </div>
   );

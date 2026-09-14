@@ -512,5 +512,19 @@
   "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n:root {\n  --portal-bg: #f5f7fa;\n}\n\n.hitachi-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.hitachi-portal {\n  min-height: 100vh;\n  background: var(--portal-bg);\n  font-family: 'Noto Sans JP', sans-serif;\n  color: #111827;\n}\n\n.hitachi-portal h1,\n.hitachi-portal h2,\n.hitachi-portal h3,\n.hitachi-portal h4,\n.hitachi-portal h5,\n.hitachi-portal h6 {\n  font-family: 'Noto Sans JP', sans-serif;\n  font-weight: 700;\n}\n\n.hitachi-portal p,\n.hitachi-portal span,\n.hitachi-portal a,\n.hitachi-portal button,\n.hitachi-portal input,\n.hitachi-portal textarea,\n.hitachi-portal select {\n  font-family: 'Noto Sans JP', sans-serif;\n  font-weight: 400;\n}\n\n.hitachi-portal a {\n  text-decoration: none;\n  color: inherit;\n}\n\n.hitachi-portal button {\n  cursor: pointer;\n}\n===END===\n===LAYOUT_TSX===\nimport './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className=\"hitachi-portal\">{children}</div>;\n}\n===END===\n===PAGE_TSX===\nimport { ClientPortalHeader } from '@/components/ClientPortalHeader';\nimport Link from 'next/link';\n\nexport default function Home() {\n  const clientName: string = '日立製作所';\n  const basePath: string = '/hitachi';\n  const primaryColor: string = '#CC0000';\n\n  const colorRatios = [\n    { hex: '#FFFFFF'",
   "name": "白（背景）",
   "percent": 50,
-  "border": true
+  "border": true,
+  "brand_identity": {
+    "mission": "優れた自主技術・製品の開発を通じて社会に貢献する",
+    "vision": "社会インフラをデジタル技術で進化させ、環境・幸福・経済成長が調和する未来を創造する。",
+    "value": [
+      "和（Wa）",
+      "誠（Makoto）",
+      "開拓者精神（Pioneer Spirit）"
+    ],
+    "tagline": "Inspire the Next",
+    "sources": [
+      "https://www.hitachi.com/ja-jp/about/identity/",
+      "https://www.hitachi.co.jp/about/corporate/identity/values/"
+    ]
+  }
 }

@@ -483,5 +483,21 @@
   "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n:root {\n  --portal-primary: #0071e3;\n  --portal-bg: #f5f7fa;\n}\n\n.apple-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.apple-portal {\n  min-height: 100vh;\n  background: var(--portal-bg);\n  font-family: 'Noto Sans JP', sans-serif;\n  font-weight: 400;\n  color: #111827;\n}\n\n.apple-portal h1,\n.apple-portal h2,\n.apple-portal h3,\n.apple-portal strong,\n.apple-portal b {\n  font-weight: 700;\n}\n\n.apple-portal a {\n  text-decoration: none;\n  color: inherit;\n}\n\n.apple-portal .container {\n  max-width: 1000px;\n  margin: 0 auto;\n  padding: 0 24px;\n}\n\n.apple-portal .card {\n  background: #ffffff;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  box-shadow: 0 1px 3px rgba(0,0,0,0.06);\n  padding: 24px;\n}\n\n.apple-portal .section-label {\n  font-size: 12px;\n  font-weight: 700;\n  color: var(--portal-primary);\n  letter-spacing: 0.05em;\n  margin-bottom: 8px;\n}\n\n.apple-portal .section-title {\n  font-size: 24px;\n  font-weight: 700;\n  color: #111827;\n  margin-bottom: 8px;\n}\n\n.apple-portal .section-desc {\n  font-size: 14px;\n  color: #6b7280;\n  margin-bottom: 24px;\n}\n===END===\n\n===LAYOUT_TSX===\nimport './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className=\"apple-portal\">{children}</div>;\n}\n===END===\n\n===PAGE_TSX===\nimport { ClientPortalHeader } from '@/components/ClientPortalHeader';\nimport Link from 'next/link';\n\nexport default function Page() {\n  const clientName: string = 'Apple';\n  const basePath: string = '/apple';\n  const primaryColor: string = '#0071e3';\n\n  const colorRatios = [\n    { hex: '#fafafc'",
   "name": "背景色",
   "percent": 55,
-  "isWhiteBorder": false
+  "isWhiteBorder": false,
+  "brand_identity": {
+    "value": [
+      "Accessibility",
+      "Education",
+      "Environment",
+      "Inclusion and Diversity",
+      "Privacy",
+      "Racial Equity and Justice",
+      "Supply Chain Innovation"
+    ],
+    "brand_statement": "Apple's more than 150,000 employees are dedicated to making the best products on earth and to leaving the world better than we found it.",
+    "sources": [
+      "https://www.apple.com/job-creation/",
+      "https://www.apple.com/newsroom/2025/08/apple-increases-us-commitment-to-600-billion-usd-announces-ambitious-program/"
+    ]
+  }
 }

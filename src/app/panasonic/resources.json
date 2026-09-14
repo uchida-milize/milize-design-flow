@@ -388,5 +388,20 @@
   "code": "===GLOBALS_CSS===\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n.panasonic-portal * {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\n.panasonic-portal {\n  --portal-bg: #f5f7fa;\n  --primary: #003DA5;\n  font-family: 'Noto Sans JP', sans-serif;\n  min-height: 100vh;\n  background: var(--portal-bg);\n  color: #111827;\n  font-weight: 400;\n}\n\n.panasonic-portal h1,\n.panasonic-portal h2,\n.panasonic-portal h3,\n.panasonic-portal h4,\n.panasonic-portal h5,\n.panasonic-portal h6 {\n  font-weight: 700;\n}\n\n.panasonic-portal a {\n  color: inherit;\n  text-decoration: none;\n}\n\n.panasonic-portal .portal-container {\n  max-width: 1000px;\n  margin: 0 auto;\n  padding: 0 24px;\n}\n\n.panasonic-portal .portal-card {\n  background: #ffffff;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  box-shadow: 0 1px 3px rgba(0,0,0,0.06);\n  padding: 24px;\n}\n\n.panasonic-portal .section-label {\n  font-size: 12px;\n  font-weight: 700;\n  letter-spacing: 0.05em;\n}\n\n.panasonic-portal .section-title {\n  font-size: 24px;\n  font-weight: 700;\n  color: #111827;\n  margin-top: 8px;\n}\n\n.panasonic-portal .section-desc {\n  font-size: 14px;\n  color: #6b7280;\n  margin-top: 8px;\n}\n\n.panasonic-portal .swatch-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));\n  gap: 12px;\n}\n\n.panasonic-portal .swatch-color {\n  height: 80px;\n  border-radius: 8px 8px 0 0;\n}\n\n.panasonic-portal .swatch-meta {\n  padding: 8px 4px;\n  background: #ffffff;\n}\n\n.panasonic-portal .swatch-hex {\n  font-family: monospace;\n  font-size: 12px;\n  color: #111827;\n}\n\n.panasonic-portal .swatch-name {\n  font-size: 12px;\n  color: #6b7280;\n}\n\n.panasonic-portal .tab-nav {\n  display: flex;\n  gap: 8px;\n  margin-bottom: 32px;\n}\n\n.panasonic-portal .tab-item {\n  padding: 6px 16px;\n  border-radius: 999px;\n  font-size: 14px;\n  font-weight: 500;\n  border: none;\n  cursor: pointer;\n}\n\n.panasonic-portal .code-block {\n  background-color: #efefef;\n  color: #333333;\n  font-family: monospace;\n  font-size: 12px;\n  padding: 12px 16px;\n  white-space: pre-wrap;\n}\n\n.panasonic-portal .component-card {\n  border: 1px solid #e5e7eb;\n  border-radius: 8px;\n  overflow: hidden;\n  background: #ffffff;\n  margin-bottom: 24px;\n}\n\n.panasonic-portal .component-label {\n  font-size: 12px;\n  color: #9ca3af;\n  padding: 12px 16px;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.panasonic-portal .component-render {\n  padding: 24px;\n}\n===END===\n===LAYOUT_TSX===\nimport './globals.css';\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return <div className=\"panasonic-portal\">{children}</div>;\n}\n===END===\n===PAGE_TSX===\nimport Link from 'next/link';\nimport { ClientPortalHeader } from '@/components/ClientPortalHeader';\n\nexport default function Page() {\n  const clientName: string = 'パナソニック';\n  const basePath: string = '/panasonic';\n  const primaryColor: string = '#003DA5';\n\n  const colorRatios = [\n    { hex: '#003DA5'",
   "name": "Panasonicブルー",
   "percent": 15,
-  "needsBorder": false
+  "needsBorder": false,
+  "brand_identity": {
+    "value": [
+      "産業人たるの本分に徹し、社会生活の改善と向上を図り、世界文化の進展に寄与せんことを期す（綱領）",
+      "向上発展は各員の和親協力を得るに非ざれば得難し。各員至誠を旨とし、一致団結、社務に精励すること（信条）"
+    ],
+    "purpose": "物心一如の繁栄が実現する理想の社会をつくる（2021年10月の経営基本方針改定で制定）",
+    "brand_statement": "幸せの、チカラに。",
+    "tagline": "幸せの、チカラに。",
+    "sources": [
+      "https://holdings.panasonic/jp/corporate/about/philosophy/3.html",
+      "https://holdings.panasonic/jp/corporate/about/philosophy/4.html",
+      "https://news.panasonic.com/jp/press/jn220401-9",
+      "https://news.panasonic.com/jp/stories/17117"
+    ]
+  }
 }
