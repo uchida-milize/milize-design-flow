@@ -1,3 +1,172 @@
 {
-  "selected_urls": "https://milibank.co.jp/||カラー,ロゴ・CI,フォント\nhttps://milibank.co.jp/contact||ロゴ・CI"
+  "selected_urls": "https://milibank.co.jp/||カラー,ロゴ・CI,フォント\nhttps://milibank.co.jp/contact||ロゴ・CI",
+  "css_info": {
+    "css_variables": {},
+    "hex_colors": "#565AC0 | color, border, background-color | 出現91回 | [external-css]\n#333333 | background-color, color, border-bottom | 出現46回 | [external-css]\n#666666 | color, border | 出現19回 | [external-css]\n#606196 | color | 出現15回 | [external-css]\n#4B4EA0 | color | 出現12回 | [external-css]\n#DDDDDD | border-bottom, border-top | 出現12回 | [external-css]\n#9DA7E0 | border-bottom, border-top | 出現12回 | [external-css]\n#EAF2FF | background-color, background, border-bottom | 出現8回 | [external-css]\n#EBF3FE | background-color | 出現7回 | [external-css]\n#F5F6FF | background-color, background | 出現6回 | [external-css]\n#0B1F65 | color | 出現6回 | [external-css]\n#AAAAAA | color | 出現6回 | [external-css]\n#DE3333 | background-color | 出現6回 | [external-css]\n#DAE2F7 | background-color | 出現6回 | [external-css]\n#E6EDF5 | background, background-color | 出現5回 | [external-css]\n#CCCCCC | border-top, border | 出現4回 | [external-css]\n#7C88F3 | border-bottom, color, border, background-color | 出現4回 | [external-css]\n#1560B9 | color | 出現3回 | [external-css]\n#E8EFF5 | background-color | 出現3回 | [external-css]\n#819ED4 | color | 出現3回 | [external-css]\n#EBEDFF | background-color | 出現3回 | [external-css]\n#55ACEE | background | 出現3回 | [external-css]\n#3B5998 | background | 出現3回 | [external-css]\n#1DCD00 | background | 出現3回 | [external-css]\n#3E57AC | background | 出現2回 | [external-css]\n#2C5CBA | background | 出現2回 | [external-css]\n#3472BC | background | 出現2回 | [external-css]\n#7F82C4 | background | 出現2回 | [external-css]\n#AD92D0 | background | 出現2回 | [external-css]\n#EAF2FE | background | 出現2回 | [external-css]",
+    "rgb_colors": [],
+    "fonts": [
+      "milizeBarlow-L",
+      "milizeBarlow-M",
+      "milizeBarlow-R",
+      "milizeBarlow-R-ttl",
+      "Barlow",
+      "din-condensed",
+      "Noto Sans JP"
+    ],
+    "button_styles": [
+      {
+        "selector": ".button a,\n  .button a",
+        "properties": {
+          "display": "inline-block",
+          "padding": "1rem 3.2rem",
+          "font-size": "1.1rem",
+          "color": "#fff",
+          "font-weight": "400",
+          "background": "linear-gradient(rgba(170,173,247,1) 0%, rgba(108,113,241,1) 100%)",
+          "border-radius": "3rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".submit-btn #submit",
+        "properties": {
+          "display": "inline-block",
+          "padding": "1vw 10vw",
+          "font-size": "1.5vw",
+          "color": "#fff",
+          "font-weight": "400",
+          "background": "linear-gradient(rgba(170,173,247,1) 0%, rgba(108,113,241,1) 100%)",
+          "border-radius": "3rem",
+          "border": "0"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".button a",
+        "properties": {
+          "display": "inline-block",
+          "padding": "1rem 5rem",
+          "font-size": "1.7vw",
+          "color": "#fff",
+          "font-weight": "400",
+          "background": "linear-gradient(rgba(170,173,247,1) 0%, rgba(108,113,241,1) 100%)",
+          "border-radius": "3rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".talk_right .button",
+        "properties": {
+          "padding-top": "4vw",
+          "margin": "0",
+          "padding-bottom": "16vw",
+          "background-color": "#EBF3FE"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".co_innner02 .co_inner_wrap .button a",
+        "properties": {
+          "font-size": "1rem",
+          "padding": "0.8rem 1.5rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".co_innner01 .button a",
+        "properties": {
+          "padding": "1.5vw 5vw"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".capsule_main_contents .button",
+        "properties": {
+          "margin-bottom": "8vw",
+          "margin-top": "0"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": "*/\n\n  .button",
+        "properties": {
+          "text-align": "center",
+          "margin-top": "3rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".content_news .button",
+        "properties": {
+          "text-align": "center",
+          "margin": "2rem 0 1rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".submit-btn",
+        "properties": {
+          "text-align": "center"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".co_innner02 .co_inner_wrap .button",
+        "properties": {
+          "margin-top": "1.5rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      },
+      {
+        "selector": ".co_innner01 .button",
+        "properties": {
+          "margin-top": "1.5rem",
+          "text-align": "right",
+          "padding-bottom": "5rem"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      }
+    ],
+    "card_styles": [],
+    "form_styles": [
+      {
+        "selector": "input, select",
+        "properties": {
+          "vertical-align": "middle"
+        },
+        "sourceUrl": "https://milibank.co.jp/"
+      }
+    ],
+    "border_radii": [
+      "65px",
+      "30px",
+      "20px",
+      "0 20px 20px 0",
+      "10px",
+      "5px",
+      "3px",
+      "3rem",
+      "0.2rem",
+      "6px"
+    ],
+    "logo_urls": [
+      "https://milibank.co.jp/assets/img/common/ogp.png",
+      "https://milibank.co.jp/assets/img/common/favicon.ico",
+      "https://milibank.co.jp/assets/img/common/logo01.svg"
+    ],
+    "source_css_urls": [
+      "https://milibank.co.jp/assets/css/style_hamburger.css?ver=1.0.0",
+      "https://milibank.co.jp/assets/css/style.css?ver=1.0.1",
+      "https://milibank.co.jp/assets/css/add.css",
+      "https://use.typekit.net/qjr8wfl.css",
+      "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css",
+      "https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap",
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&display=swap"
+    ],
+    "extracted_at": "2026-09-14T05:26:58.841Z",
+    "source_urls": [
+      "https://milibank.co.jp/"
+    ]
+  },
+  "css_summary": "【抽出カラー（頻度順）】\n  #565AC0  color  出現91回  [external-css]\n  #333333  background-color  出現46回  [external-css]\n  #666666  color  出現19回  [external-css]\n  #606196  color  出現15回  [external-css]\n  #4B4EA0  color  出現12回  [external-css]\n  #DDDDDD  border-bottom  出現12回  [external-css]\n  #9DA7E0  border-bottom  出現12回  [external-css]\n  #EAF2FF  background-color  出現8回  [external-css]\n  #EBF3FE  background-color  出現7回  [external-css]\n  #F5F6FF  background-color  出現6回  [external-css]\n  #0B1F65  color  出現6回  [external-css]\n  #AAAAAA  color  出現6回  [external-css]\n  #DE3333  background-color  出現6回  [external-css]\n  #DAE2F7  background-color  出現6回  [external-css]\n  #E6EDF5  background  出現5回  [external-css]\n\n【使用フォント】\n  milizeBarlow-L\n  milizeBarlow-M\n  milizeBarlow-R\n  milizeBarlow-R-ttl\n  Barlow\n  din-condensed\n  Noto Sans JP\n\n【角丸パターン】\n  65px\n  30px\n  20px\n  0 20px 20px 0\n  10px\n  5px\n  3px\n  3rem\n\n【ボタンスタイル】\n  .button a,\n  .button a\n    display: inline-block\n    padding: 1rem 3.2rem\n    font-size: 1.1rem\n    color: #fff\n    font-weight: 400\n    background: linear-gradient(rgba(170,173,247,1) 0%, rgba(108,113,241,1) 100%)\n  .submit-btn #submit\n    display: inline-block\n    padding: 1vw 10vw\n    font-size: 1.5vw\n    color: #fff\n    font-weight: 400\n    background: linear-gradient(rgba(170,173,247,1) 0%, rgba(108,113,241,1) 100%)\n  .button a\n    display: inline-block\n    padding: 1rem 5rem\n    font-size: 1.7vw\n    color: #fff\n    font-weight: 400\n    background: linear-gradient(rgba(170,173,247,1) 0%, rgba(108,113,241,1) 100%)\n  .talk_right .button\n    padding-top: 4vw\n    margin: 0\n    padding-bottom: 16vw\n    background-color: #EBF3FE\n  .co_innner02 .co_inner_wrap .button a\n    font-size: 1rem\n    padding: 0.8rem 1.5rem\n\n【フォームスタイル】\n  input, select\n    vertical-align: middle\n\n【ロゴ・ビジュアル素材】\n  https://milibank.co.jp/assets/img/common/ogp.png\n  https://milibank.co.jp/assets/img/common/favicon.ico\n  https://milibank.co.jp/assets/img/common/logo01.svg\n\n【取得CSSファイル】\n  https://milibank.co.jp/assets/css/style_hamburger.css?ver=1.0.0\n  https://milibank.co.jp/assets/css/style.css?ver=1.0.1\n  https://milibank.co.jp/assets/css/add.css\n  https://use.typekit.net/qjr8wfl.css\n  https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css\n  https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&display=swap"
 }
