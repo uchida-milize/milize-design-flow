@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useLogoNeedsDarkBackdrop } from '@/lib/useLogoNeedsDarkBackdrop';
+import { useLogoBackdrop } from '@/lib/useLogoBackdrop';
 
 interface ClientLogoProps {
   slug: string;
@@ -9,10 +9,10 @@ interface ClientLogoProps {
   /** ロゴ表示枠の横幅。省略時は size と同じ（正方形）。横長ロゴ向けに広げたい場合に指定する。 */
   width?: number;
   bordered?: boolean;
-  /** 表示枠の背景色。省略時は白。呼び出し側で暗い背景を敷く場合は 'transparent' を渡す。 */
+  /** 表示枠の背景色。省略時は白。呼び出し側で背景を敷く場合は 'transparent' を渡す。 */
   background?: string;
-  /** ロゴが白一色などで暗い背景が無いと見えない場合に呼び出し側へ通知する */
-  onNeedsDarkBackdrop?: (needs: boolean) => void;
+  /** ロゴ画像から判定した推奨背景色（単色背景の焼き込み or 白一色ロゴ）を呼び出し側へ通知する */
+  onBackdropDetected?: (color: string | null) => void;
 }
 
 // /api/extract-css が保存し得る拡張子を優先度順に列挙。
@@ -29,7 +29,7 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
  * エラーを発生させてしまい、onError が拾えず素の壊れ画像アイコンが
  * 残ってしまうため。
  */
-export function ClientLogo({ slug, name, size = 40, width, bordered = true, background, onNeedsDarkBackdrop }: ClientLogoProps) {
+export function ClientLogo({ slug, name, size = 40, width, bordered = true, background, onBackdropDetected }: ClientLogoProps) {
   const [mounted, setMounted] = useState(false);
   const [extIndex, setExtIndex] = useState(0);
   const initial = name.trim().charAt(0).toUpperCase() || '?';
@@ -37,16 +37,16 @@ export function ClientLogo({ slug, name, size = 40, width, bordered = true, back
   const boxWidth = width ?? size;
   const ext = LOGO_EXTENSIONS[extIndex];
   const src = `https://raw.githubusercontent.com/uchida-milize/milize-design-flow/main/src/app/${slug}/logo.${ext}`;
-  const needsDarkBackdrop = useLogoNeedsDarkBackdrop(src, ext, mounted && !failed);
+  const backdrop = useLogoBackdrop(src, ext, mounted && !failed);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    onNeedsDarkBackdrop?.(needsDarkBackdrop);
+    onBackdropDetected?.(backdrop);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [needsDarkBackdrop]);
+  }, [backdrop]);
 
   return (
     <div

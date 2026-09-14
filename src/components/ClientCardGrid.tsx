@@ -5,8 +5,6 @@ import { NewClientButton } from '@/components/NewClientButton';
 import { ClientLogo } from '@/components/ClientLogo';
 import { isLightCssColor } from '@/lib/cssStyle';
 
-const DARK_BACKDROP = '#1f2937';
-
 type ClientInfo = {
   slug: string;
   name: string;
@@ -23,7 +21,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
   const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
   const [confirmMode, setConfirmMode] = useState<ConfirmMode>('menu');
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
-  const [darkLogoSlugs, setDarkLogoSlugs] = useState<Record<string, boolean>>({});
+  const [logoBackdrops, setLogoBackdrops] = useState<Record<string, string | null>>({});
 
   useEffect(() => {
     const stored = localStorage.getItem('hidden_clients');
@@ -98,11 +96,9 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
       >
         <NewClientButton />
         {visible.map((client) => {
-          const needsDark = darkLogoSlugs[client.slug] ?? false;
-          const corporateHex = client.colors[0]?.hex;
-          const backdrop = needsDark
-            ? (corporateHex && !isLightCssColor(corporateHex) ? corporateHex : DARK_BACKDROP)
-            : '#ffffff';
+          const detected = logoBackdrops[client.slug] ?? null;
+          const backdrop = detected ?? '#ffffff';
+          const needsDark = detected !== null && !isLightCssColor(detected);
           return (
           <div key={client.slug} style={{ position: 'relative', height: '100%' }}>
             {confirmSlug === client.slug && (
@@ -257,8 +253,8 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   width={200}
                   bordered={false}
                   background="transparent"
-                  onNeedsDarkBackdrop={(needs) => {
-                    setDarkLogoSlugs((prev) => (prev[client.slug] === needs ? prev : { ...prev, [client.slug]: needs }));
+                  onBackdropDetected={(color) => {
+                    setLogoBackdrops((prev) => (prev[client.slug] === color ? prev : { ...prev, [client.slug]: color }));
                   }}
                 />
                 <p style={{ fontSize: 18, fontWeight: 700, color: needsDark ? '#ffffff' : '#111827', margin: '14px 0 0' }}>{client.name}</p>
