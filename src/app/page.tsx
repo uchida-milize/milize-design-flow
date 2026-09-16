@@ -25,6 +25,7 @@ const EXCLUDED_DIRS = new Set([
   'sme',
   'panasonic-corp',
   'ntt-data',
+  'test-debug-0916b',
 ]);
 
 /** CSSから全カラー変数を抽出し、ブランドカラーとして適切なものだけ返す */
