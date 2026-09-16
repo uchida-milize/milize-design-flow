@@ -1,22 +1,23 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
-import Link from 'next/link';
+import { ClientLogoHero } from '@/components/ClientLogoHero';
+import { BrandIdentitySection } from '@/components/BrandIdentitySection';
 
-export default function Page() {
-  const clientName: string = 'T&Dフィナンシャル生命保険株式会社';
-  const basePath: string = '/tdf';
-  const primaryColor: string = '#1B3A6B'; // design.md上は「未取得」のため、生命保険業界の信頼感を踏まえた暫定値
+const clientName = 'Ｔ&Ｄフィナンシャル生命保険株式会社';
+const basePath = '/tdf';
+const slug = basePath.replace(/^\//, '');
+const primaryColor = 'var(--primary-color)';
 
-  // design.mdでは実測カラー比率データは「未取得」とされているため、
-  // 判明している唯一のカラーガイドライン候補(primaryColor)と、
-  // ポータル共通で確認できる背景色・白色を用いた暫定的な構成比を表示する。
-  const colorRatios: { hex: string; name: string; percent: number; isWhite?: boolean }[] = [
-    { hex: '#1B3A6B', name: 'プライマリカラー（暫定・未確定）', percent: 40 },
-    { hex: '#f5f7fa', name: '背景色（ポータル共通値）', percent: 35 },
-    { hex: '#ffffff', name: '白色（未取得・推定）', percent: 25, isWhite: true },
-  ];
+const colorRatio = [
+  { hex: '#E60044', name: '#E60044', percent: 30.3 },
+  { hex: '#5B6FBC', name: '#5B6FBC', percent: 23.4 },
+  { hex: '#333333', name: '#333333', percent: 17.5 },
+  { hex: '#CCCCCC', name: '#CCCCCC', percent: 16.9 },
+  { hex: '#2A4198', name: '#2A4198', percent: 11.9 },
+];
 
+export default function Home() {
   return (
-    <div className="tdf-container" style={{ paddingTop: 48, paddingBottom: 80 }}>
+    <div className="tdf-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
@@ -24,71 +25,110 @@ export default function Page() {
         primaryColor={primaryColor}
       />
 
-      <div style={{ marginTop: 40 }}>
-        <p className="tdf-section-label" style={{ color: primaryColor }}>RESEARCH</p>
-        <h1 className="tdf-section-title">{clientName} リサーチ</h1>
-        <p className="tdf-section-desc">
-          スクレイピングデータをもとにしたガイドラインリサーチです。カラーコード・CSS実装等の実測値が取得できていない項目については「未取得」として扱い、推測値は記載していません。
-        </p>
-      </div>
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
+          <p className="section-label" style={{ color: primaryColor }}>
+            BRAND PORTAL
+          </p>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
+          <p className="section-desc">
+            クライアントごとのトンマナを収集して一覧化をしています。
+          </p>
+        </div>
 
-      <div
-        style={{
-          display: 'flex',
-          height: 32,
-          borderRadius: 8,
-          overflow: 'hidden',
-          marginBottom: 12,
-        }}
-      >
-        {colorRatios.map((c) => (
-          <div
-            key={c.hex}
-            style={{
-              flex: c.percent / 100,
-              background: c.hex,
-              border: c.isWhite ? '1px solid #e5e7eb' : 'none',
-            }}
-          />
-        ))}
-      </div>
+        <ClientLogoHero slug={slug} name={clientName} primaryColor={primaryColor} />
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
-        {colorRatios.map((c) => (
-          <div key={c.hex} style={{ fontSize: 12, color: '#6b7280', display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span
+        <div className="color-bar">
+          {colorRatio.map((c) => (
+            <div
+              key={c.hex}
               style={{
-                display: 'inline-block',
-                width: 10,
-                height: 10,
-                borderRadius: 2,
+                flex: c.percent / 100,
                 background: c.hex,
-                border: c.isWhite ? '1px solid #e5e7eb' : 'none',
+                borderRight: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
               }}
             />
-            <span style={{ fontFamily: 'monospace' }}>{c.hex}</span>
-            <span>{c.name}</span>
-            <span>{c.percent}%</span>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+        <div className="color-bar-labels">
+          {colorRatio.map((c) => (
+            <div key={c.hex} className="color-bar-label-item">
+              <span
+                className="color-bar-swatch"
+                style={{
+                  background: c.hex,
+                  border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                }}
+              />
+              <span>
+                {c.hex} {c.name} {c.percent}%
+              </span>
+            </div>
+          ))}
+        </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
-        <Link href={`${basePath}/guidelines`} className="tdf-card" style={{ display: 'block' }}>
-          <p className="tdf-section-label" style={{ color: primaryColor }}>DOCUMENT</p>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 8 }}>ガイドラインリサーチ</h2>
-          <p style={{ fontSize: 14, color: '#6b7280' }}>
-            カラー・タイポグラフィ・トンマナ等のリサーチ結果を確認できます。
-          </p>
-        </Link>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 24,
+          }}
+        >
+          <a href={`${basePath}/guidelines`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                GUIDELINES
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                デザインガイドライン
+              </h2>
+              <p className="section-desc">
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
+              </p>
+            </div>
+          </a>
 
-        <Link href={`${basePath}/components`} className="tdf-card" style={{ display: 'block' }}>
-          <p className="tdf-section-label" style={{ color: primaryColor }}>UI</p>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 8 }}>コンポーネント</h2>
-          <p style={{ fontSize: 14, color: '#6b7280' }}>
-            実装確認済みコンポーネントと、派生デザイン（想定）を確認できます。
-          </p>
-        </Link>
+          <a href={`${basePath}/components`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                COMPONENTS
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                コンポーネント
+              </h2>
+              <p className="section-desc">
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
+              </p>
+            </div>
+          </a>
+          <a
+            href={`${basePath}/resources`}
+            className="nav-card"
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <div className="card" style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+              padding: '24px',
+              cursor: 'pointer',
+              flex: 1,
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
+                RESOURCES
+              </div>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
+                リソース
+              </h2>
+              <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <BrandIdentitySection slug={slug} primaryColor={primaryColor} />
       </div>
     </div>
   );
