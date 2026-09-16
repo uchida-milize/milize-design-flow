@@ -11,14 +11,14 @@ export function DifyLink() {
       title="Dify ワークフローを開く"
       style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="6" fill="#1C64F2" />
+      <svg height="20" viewBox="0 0 108 40" xmlns="http://www.w3.org/2000/svg">
         <text
-          x="12" y="17" textAnchor="middle"
-          fontFamily="Arial, Helvetica, sans-serif" fontWeight={700} fontSize={13}
-          fill="#ffffff"
+          x="0" y="31"
+          fontFamily="'Arial Black', Arial, Helvetica, sans-serif" fontWeight={900} fontSize={36}
         >
-          D
+          <tspan fill="#111111">D</tspan>
+          <tspan fill="#1447E6">if</tspan>
+          <tspan fill="#111111">y</tspan>
         </text>
       </svg>
     </a>
