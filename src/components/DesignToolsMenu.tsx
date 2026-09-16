@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 interface Tool {
   label: string;
   href: string;
-  external?: boolean;
 }
 
 const TOOLS: Tool[] = [
   { label: 'Client Production Portal', href: 'https://milize-design-flow.vercel.app/' },
-  { label: 'Proposal Generator', href: 'https://milize-pptx-web.vercel.app/', external: true },
+  { label: 'Proposal Generator', href: 'https://milize-pptx-web.vercel.app/' },
 ];
 
 /** ヘッダー左上のタイトルを「Design Tools」ドロップダウンにし、社内ツール群への導線をまとめる */
@@ -55,8 +54,6 @@ export function DesignToolsMenu() {
             <a
               key={tool.href}
               href={tool.href}
-              target={tool.external ? '_blank' : undefined}
-              rel={tool.external ? 'noopener noreferrer' : undefined}
               onClick={() => setOpen(false)}
               style={{
                 display: 'block', padding: '11px 14px', fontSize: 13, fontWeight: 500,
