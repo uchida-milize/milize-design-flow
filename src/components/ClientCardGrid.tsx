@@ -254,19 +254,21 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                 >
                   {'︙'}
                 </button>
-                <ClientLogo
-                  slug={client.slug}
-                  name={client.name}
-                  size={64}
-                  width={200}
-                  bordered={false}
-                  background="transparent"
-                  logoScale={LOGO_SCALE_OVERRIDES[client.slug] ?? 1}
-                  onBackdropDetected={(color) => {
-                    setLogoBackdrops((prev) => (prev[client.slug] === color ? prev : { ...prev, [client.slug]: color }));
-                  }}
-                />
-                <p style={{ fontSize: 18, fontWeight: 700, color: needsDark ? '#ffffff' : '#111827', margin: '14px 0 0' }}>{client.name}</p>
+                <div style={{ marginTop: 16, marginBottom: 16 }}>
+                  <ClientLogo
+                    slug={client.slug}
+                    name={client.name}
+                    size={64}
+                    width={200}
+                    bordered={false}
+                    background="transparent"
+                    logoScale={LOGO_SCALE_OVERRIDES[client.slug] ?? 1}
+                    onBackdropDetected={(color) => {
+                      setLogoBackdrops((prev) => (prev[client.slug] === color ? prev : { ...prev, [client.slug]: color }));
+                    }}
+                  />
+                </div>
+                <p style={{ fontSize: 15.3, fontWeight: 700, color: needsDark ? '#ffffff' : '#111827', margin: '14px 0 0' }}>{client.name}</p>
                 <p style={{ fontSize: 12, color: needsDark ? 'rgba(255,255,255,0.65)' : '#9ca3af', margin: '2px 0 0' }}>{client.slug}</p>
               </div>
             </Link>
