@@ -1,14 +1,854 @@
 {
   "selected_urls": "https://ja.wikipedia.org/wiki/NIKE, INC.||ロゴ・CI\nhttps://www.nike.com/||カラー,ロゴ・CI,フォント\nhttps://about.nike.com/ja/company||カラー,ロゴ・CI,フォント\nhttps://www.wikidata.org/wiki/Q483915||カラー,ロゴ・CI,フォント\nhttps://kaitorisatei.info/bwn/nike-logo||カラー,ロゴ・CI,フォント\nhttps://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon||カラー,ロゴ・CI,フォント",
   "css_info": {
-    "css_variables": {},
-    "hex_colors": "#555555 | color | 出現9回 | [inline-style]\n#002BB8 | color | 出現6回 | [inline-style]\n#006600 | color | 出現4回 | [inline-style]\n#222222 | background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#EAECF0 | outline | 出現1回 | [style-tag]\n#AAAAAA | border | 出現1回 | [style-tag]\n#F9F9F9 | background-color | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]",
-    "rgb_colors": [],
-    "fonts": [],
-    "button_styles": [],
-    "card_styles": [],
-    "form_styles": [],
-    "border_radii": [],
+    "css_variables": {
+      "--podium-cds-color-black": "#111111",
+      "--podium-cds-color-white": "#FFFFFF",
+      "--podium-cds-color-red-50": "#FFE5E5",
+      "--podium-cds-color-red-100": "#FFC3C4",
+      "--podium-cds-color-red-200": "#FFABAD",
+      "--podium-cds-color-red-300": "#FF7975",
+      "--podium-cds-color-red-400": "#FF4E4A",
+      "--podium-cds-color-red-500": "#EE0005",
+      "--podium-cds-color-red-600": "#D30005",
+      "--podium-cds-color-red-700": "#A70E00",
+      "--podium-cds-color-red-800": "#780700",
+      "--podium-cds-color-red-900": "#530300",
+      "--podium-cds-color-orange-50": "#FFE2D6",
+      "--podium-cds-color-orange-100": "#FFC5AD",
+      "--podium-cds-color-orange-200": "#FFA584",
+      "--podium-cds-color-orange-300": "#FF8255",
+      "--podium-cds-color-orange-400": "#FF5000",
+      "--podium-cds-color-orange-500": "#D33918",
+      "--podium-cds-color-orange-600": "#9F290F",
+      "--podium-cds-color-orange-700": "#7E200D",
+      "--podium-cds-color-orange-800": "#5D180C",
+      "--podium-cds-color-orange-900": "#3E1009",
+      "--podium-cds-color-yellow-50": "#FEF087",
+      "--podium-cds-color-yellow-100": "#FEEA55",
+      "--podium-cds-color-yellow-200": "#FEDF35",
+      "--podium-cds-color-yellow-300": "#FFD11B",
+      "--podium-cds-color-yellow-400": "#FDC400",
+      "--podium-cds-color-yellow-500": "#FCA600",
+      "--podium-cds-color-yellow-600": "#F08E0A",
+      "--podium-cds-color-yellow-700": "#E57A09",
+      "--podium-cds-color-yellow-800": "#CD6006",
+      "--podium-cds-color-yellow-900": "#99470A",
+      "--podium-cds-color-green-50": "#DFFFB9",
+      "--podium-cds-color-green-100": "#BDFB72",
+      "--podium-cds-color-green-200": "#83F13B",
+      "--podium-cds-color-green-300": "#5FE63F",
+      "--podium-cds-color-green-400": "#3CCD49",
+      "--podium-cds-color-green-500": "#1EAA52",
+      "--podium-cds-color-green-600": "#007D48",
+      "--podium-cds-color-green-700": "#00643E",
+      "--podium-cds-color-green-800": "#005034",
+      "--podium-cds-color-green-900": "#003C2A",
+      "--podium-cds-color-blue-50": "#D6EEFF",
+      "--podium-cds-color-blue-100": "#B9E2FF",
+      "--podium-cds-color-blue-200": "#87CEFF",
+      "--podium-cds-color-blue-300": "#4CABFF",
+      "--podium-cds-color-blue-400": "#1190FF",
+      "--podium-cds-color-blue-500": "#1151FF",
+      "--podium-cds-color-blue-600": "#0034E3",
+      "--podium-cds-color-blue-700": "#061DBB",
+      "--podium-cds-color-blue-800": "#02068E",
+      "--podium-cds-color-blue-900": "#020664",
+      "--podium-cds-color-teal-50": "#D4FFFB",
+      "--podium-cds-color-teal-100": "#9CFFF7",
+      "--podium-cds-color-teal-200": "#69EEE7",
+      "--podium-cds-color-teal-300": "#31CBCB",
+      "--podium-cds-color-teal-400": "#1CB2B6",
+      "--podium-cds-color-teal-500": "#008E98",
+      "--podium-cds-color-teal-600": "#0A7281",
+      "--podium-cds-color-teal-700": "#005C68",
+      "--podium-cds-color-teal-800": "#004856",
+      "--podium-cds-color-teal-900": "#043441",
+      "--podium-cds-color-purple-50": "#E4E1FC",
+      "--podium-cds-color-purple-100": "#D6D1FF",
+      "--podium-cds-color-purple-200": "#BEAFFD",
+      "--podium-cds-color-purple-300": "#A082FF",
+      "--podium-cds-color-purple-400": "#8755FF",
+      "--podium-cds-color-purple-500": "#6E0FF6",
+      "--podium-cds-color-purple-600": "#5400CC",
+      "--podium-cds-color-purple-700": "#4400A9",
+      "--podium-cds-color-purple-800": "#300080",
+      "--podium-cds-color-purple-900": "#1C0060",
+      "--podium-cds-color-pink-50": "#FFE1F3",
+      "--podium-cds-color-pink-100": "#FFCDEA",
+      "--podium-cds-color-pink-200": "#FFB0DD",
+      "--podium-cds-color-pink-300": "#FE90CC",
+      "--podium-cds-color-pink-400": "#FC5DBB",
+      "--podium-cds-color-pink-500": "#ED1AA0",
+      "--podium-cds-color-pink-600": "#D00B84",
+      "--podium-cds-color-pink-700": "#A50767",
+      "--podium-cds-color-pink-800": "#770349",
+      "--podium-cds-color-pink-900": "#4C012D",
+      "--podium-cds-color-grey-50": "#FAFAFA",
+      "--podium-cds-color-grey-100": "#F5F5F5",
+      "--podium-cds-color-grey-200": "#E5E5E5",
+      "--podium-cds-color-grey-300": "#CACACB",
+      "--podium-cds-color-grey-400": "#9E9EA0",
+      "--podium-cds-color-grey-500": "#707072",
+      "--podium-cds-color-grey-600": "#4B4B4D",
+      "--podium-cds-color-grey-700": "#39393B",
+      "--podium-cds-color-grey-800": "#28282A",
+      "--podium-cds-color-grey-900": "#1F1F21",
+      "--podium-cds-color-scrim-100": "rgba(17,17,17,0.36)",
+      "--podium-cds-color-scrim-100-inverse": "rgba(17,17,17,0.80)",
+      "--podium-cds-color-scrim-primary": "rgba(17,17,17,0.36)",
+      "--podium-cds-color-scrim-primary-inverse": "rgba(17,17,17,0.80)",
+      "--podium-cds-color-gradient-brand-orange": "linear-gradient(113.7deg, #FF0015 3.64%, #fe5000 50.92%, #FF6A00 97.26%)",
+      "--podium-cds-color-focus-shadow": "rgba(17, 17, 17, 0.12)",
+      "--podium-cds-color-box-focus-ring": "rgba(39, 93, 197, 1)",
+      "--podium-cds-button-text-decoration-line": "underline",
+      "--podium-cds-button-color-bg-secondary": "transparent",
+      "--podium-cds-dialog-bg-blur": "4px",
+      "--podium-cds-font-weight-regular": "400",
+      "--podium-cds-font-weight-medium": "500",
+      "--podium-cds-font-weight-bold": "700",
+      "--podium-cds-font-size-xxs": "12px",
+      "--podium-cds-font-size-xs": "14px",
+      "--podium-cds-font-size-s": "16px",
+      "--podium-cds-font-size-m": "20px",
+      "--podium-cds-font-size-l": "24px",
+      "--podium-cds-font-size-xl": "28px",
+      "--podium-cds-font-size-xxl": "32px",
+      "--podium-cds-font-size-xxxl": "40px",
+      "--podium-cds-font-size-xxxxl": "48px",
+      "--podium-cds-font-size-xxxxxl": "72px",
+      "--podium-cds-font-style-normal": "normal",
+      "--podium-cds-color-brand-nike-orange": "var(--podium-cds-color-orange-400)",
+      "--podium-cds-color-brand-snkrs-red": "var(--podium-cds-color-red-500)",
+      "--podium-cds-color-bg-active": "var(--podium-cds-color-grey-100)",
+      "--podium-cds-color-bg-always-dark": "var(--podium-cds-color-black)",
+      "--podium-cds-color-bg-always-light": "var(--podium-cds-color-white)",
+      "--podium-cds-color-bg-critical": "var(--podium-cds-color-red-600)",
+      "--podium-cds-color-bg-disabled": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-color-bg-disabled-inverse": "var(--podium-cds-color-grey-600)",
+      "--podium-cds-color-bg-hover": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-color-bg-hover-inverse": "var(--podium-cds-color-grey-700)",
+      "--podium-cds-color-bg-image": "var(--podium-cds-color-grey-100)",
+      "--podium-cds-color-bg-loading": "var(--podium-cds-color-grey-100)",
+      "--podium-cds-color-bg-modal": "var(--podium-cds-color-white)",
+      "--podium-cds-color-bg-on-image-primary": "var(--podium-cds-color-white)",
+      "--podium-cds-color-bg-on-image-secondary": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-color-bg-overlay": "var(--podium-cds-color-white)",
+      "--podium-cds-color-bg-primary": "var(--podium-cds-color-white)",
+      "--podium-cds-color-bg-primary-inverse": "var(--podium-cds-color-grey-900)",
+      "--podium-cds-color-bg-primary-on-light": "var(--podium-cds-color-grey-800)",
+      "--podium-cds-color-bg-primary-on-dark": "var(--podium-cds-color-white)",
+      "--podium-cds-color-bg-secondary": "var(--podium-cds-color-grey-100)",
+      "--podium-cds-color-bg-success": "var(--podium-cds-color-green-600)",
+      "--podium-cds-color-bg-warning": "var(--podium-cds-color-yellow-200)",
+      "--podium-cds-color-text-critical": "var(--podium-cds-color-red-600)",
+      "--podium-cds-color-text-disabled": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-color-text-disabled-inverse": "var(--podium-cds-color-grey-600)",
+      "--podium-cds-color-text-disabled-on-light": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-color-text-disabled-on-dark": "var(--podium-cds-color-grey-600)",
+      "--podium-cds-color-text-hover": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-color-text-hover-inverse": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-color-text-hover-on-light": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-color-text-hover-on-dark": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-color-text-link": "var(--podium-cds-color-blue-500)",
+      "--podium-cds-color-text-primary": "var(--podium-cds-color-black)",
+      "--podium-cds-color-text-primary-inverse": "var(--podium-cds-color-white)",
+      "--podium-cds-color-text-primary-on-light": "var(--podium-cds-color-black)",
+      "--podium-cds-color-text-primary-on-dark": "var(--podium-cds-color-white)",
+      "--podium-cds-color-text-secondary": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-color-text-secondary-inverse": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-color-text-secondary-on-light": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-color-text-secondary-on-dark": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-color-text-success": "var(--podium-cds-color-green-600)",
+      "--podium-cds-color-border-active": "var(--podium-cds-color-black)",
+      "--podium-cds-color-border-active-inverse": "var(--podium-cds-color-white)",
+      "--podium-cds-color-border-active-on-light": "var(--podium-cds-color-black)",
+      "--podium-cds-color-border-active-on-dark": "var(--podium-cds-color-white)",
+      "--podium-cds-color-border-critical": "var(--podium-cds-color-red-600)",
+      "--podium-cds-color-border-disabled": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-color-border-disabled-on-light": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-color-border-disabled-on-dark": "var(--podium-cds-color-grey-700)",
+      "--podium-cds-color-border-primary": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-color-border-primary-inverse": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-color-border-primary-on-light": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-color-border-primary-on-dark": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-color-border-secondary": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-color-border-success": "var(--podium-cds-color-green-600)",
+      "--podium-cds-color-border-tertiary": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-color-critical": "var(--podium-cds-color-red-600)",
+      "--podium-cds-color-critical-inverse": "var(--podium-cds-color-red-400)",
+      "--podium-cds-color-success": "var(--podium-cds-color-green-600)",
+      "--podium-cds-color-success-inverse": "var(--podium-cds-color-green-500)",
+      "--podium-cds-color-info": "var(--podium-cds-color-blue-500)",
+      "--podium-cds-color-info-inverse": "var(--podium-cds-color-blue-400)",
+      "--podium-cds-color-warning": "var(--podium-cds-color-yellow-200)",
+      "--podium-cds-color-warning-inverse": "var(--podium-cds-color-yellow-100)",
+      "--podium-cds-color-focus-ring": "var(--podium-cds-color-blue-500)",
+      "--podium-cds-color-text-badge": "var(--podium-cds-color-orange-500)",
+      "--podium-cds-button-color-bg-primary": "var(--podium-cds-color-black)",
+      "--podium-cds-button-color-bg-primary-on-light": "var(--podium-cds-color-black)",
+      "--podium-cds-button-color-bg-primary-on-dark": "var(--podium-cds-color-white)",
+      "--podium-cds-button-color-bg-primary-hover": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-button-color-bg-primary-hover-on-light": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-button-color-bg-primary-hover-on-dark": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-button-color-bg-primary-disabled": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-button-color-bg-primary-disabled-on-light": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-button-color-bg-primary-disabled-on-dark": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-button-color-border-secondary": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-button-color-border-secondary-on-light": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-button-color-border-secondary-on-dark": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-button-color-border-secondary-hover": "var(--podium-cds-color-black)",
+      "--podium-cds-button-color-border-secondary-hover-on-dark": "var(--podium-cds-color-white)",
+      "--podium-cds-button-color-border-secondary-disabled": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-button-color-border-secondary-disabled-on-dark": "var(--podium-cds-color-grey-600)",
+      "--podium-cds-icon-button-color-bg-primary": "var(--podium-cds-color-black)",
+      "--podium-cds-icon-button-color-bg-primary-on-light": "var(--podium-cds-color-black)",
+      "--podium-cds-icon-button-color-bg-primary-on-dark": "var(--podium-cds-color-white)",
+      "--podium-cds-icon-button-color-bg-primary-hover": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-icon-button-color-bg-primary-hover-on-light": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-icon-button-color-bg-primary-hover-on-dark": "var(--podium-cds-color-grey-400)",
+      "--podium-cds-icon-button-color-bg-secondary": "var(--podium-cds-color-grey-100)",
+      "--podium-cds-icon-button-color-bg-secondary-on-light": "var(--podium-cds-color-grey-100)",
+      "--podium-cds-icon-button-color-bg-secondary-on-dark": "var(--podium-cds-color-black)",
+      "--podium-cds-icon-button-color-bg-secondary-hover": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-icon-button-color-bg-secondary-hover-on-light": "var(--podium-cds-color-grey-300)",
+      "--podium-cds-icon-button-color-bg-secondary-hover-on-dark": "var(--podium-cds-color-grey-700)",
+      "--podium-cds-icon-button-color-bg-tertiary-hover": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-icon-button-color-bg-tertiary-hover-on-light": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-icon-button-color-bg-tertiary-hover-on-dark": "var(--podium-cds-color-grey-700)",
+      "--podium-cds-icon-button-color-bg-disabled": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-icon-button-color-bg-disabled-on-light": "var(--podium-cds-color-grey-200)",
+      "--podium-cds-icon-button-color-bg-disabled-on-dark": "var(--podium-cds-color-grey-500)",
+      "--podium-cds-input-color-disabled": "var(--podium-cds-color-grey-500)"
+    },
+    "hex_colors": "#73859F | background-color, border-top-color, background-image | 出現13回 | [external-css]\n#555555 | color | 出現9回 | [inline-style]\n#707072 | color, scrollbar-color, --podium-cds-color-grey-500 | 出現8回 | [external-css]\n#2B333F | background-color, color | 出現7回 | [external-css]\n#1151FF | --podium-cds-color-blue-500, outline, box-shadow | 出現7回 | [external-css+style-tag]\n#002BB8 | color | 出現6回 | [inline-style]\n#006600 | color | 出現4回 | [inline-style]\n#111111 | --podium-cds-color-black, color | 出現4回 | [external-css+style-tag]\n#222222 | background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#EC3EA7 | background | 出現2回 | [external-css]\n#FF623A | background | 出現2回 | [external-css]\n#FBAD22 | background | 出現2回 | [external-css]\n#FAD81B | background | 出現2回 | [external-css]\n#99D531 | background | 出現2回 | [external-css]\n#2EB350 | background | 出現2回 | [external-css]\n#3573AA | background | 出現2回 | [external-css]\n#CE46A4 | background | 出現2回 | [external-css]\n#FF009E | color | 出現2回 | [external-css]\n#B3B3B3 | color | 出現2回 | [external-css]\n#FFE5E5 | --podium-cds-color-red-50 | 出現2回 | [external-css]\n#FFC3C4 | --podium-cds-color-red-100 | 出現2回 | [external-css]\n#FFABAD | --podium-cds-color-red-200 | 出現2回 | [external-css]\n#FF7975 | --podium-cds-color-red-300 | 出現2回 | [external-css]\n#FF4E4A | --podium-cds-color-red-400 | 出現2回 | [external-css]\n#EE0005 | --podium-cds-color-red-500 | 出現2回 | [external-css]\n#D30005 | --podium-cds-color-red-600 | 出現2回 | [external-css]\n#A70E00 | --podium-cds-color-red-700 | 出現2回 | [external-css]\n#780700 | --podium-cds-color-red-800 | 出現2回 | [external-css]\n#530300 | --podium-cds-color-red-900 | 出現2回 | [external-css]",
+    "rgb_colors": [
+      "rgba(17,17,17,0.36)",
+      "rgba(17,17,17,0.80)",
+      "rgba(17,17,17,0.36)",
+      "rgba(17,17,17,0.80)",
+      "rgba(17, 17, 17, 0.12)",
+      "rgba(39, 93, 197, 1)"
+    ],
+    "fonts": [
+      "VideoJS",
+      "Arial",
+      "inherit",
+      "Helvetica Neue",
+      "nike-glyphs",
+      "Nike TG",
+      "Nike Futura ND",
+      "Nike Futura",
+      "Helvetica Now Text",
+      "Helvetica Now Text Medium",
+      "Helvetica Now Display Medium",
+      "Palatino LT Pro Light",
+      "monospace",
+      "Neue Frutiger Arabic"
+    ],
+    "button_styles": [
+      {
+        "selector": "★ .nds-btn.nds-button--icon-only.search-start-btn.css-1ygbog4.btn-secondary-dark（実際のボタン要素で1回使用）",
+        "properties": {
+          "-webkit-flex": "0 0 auto",
+          "-ms-flex": "0 0 auto",
+          "flex": "0 0 auto",
+          "min-width": "36px",
+          "background": "var(--podium-cds-button-color-bg-secondary)",
+          "color": "var(--podium-cds-color-text-primary-on-light)",
+          "border-color": "var(--podium-cds-button-color-border-secondary)",
+          "background-color": "var(--podium-cds-icon-button-color-bg-secondary)",
+          "font": "var(--podium-cds-typography-body1-strong)",
+          "text-align": "center",
+          "display": "flex",
+          "-webkit-justify-content": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "padding": "6px",
+          "min-height": "unset",
+          "border": "var(--podium-cds-button-border-width) solid",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "outline": "none",
+          "width": "unset"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .nds-btn.nds-button--icon-only.nav-favorites.css-1j8f80w.btn-primary-dark（実際のボタン要素で1回使用）",
+        "properties": {
+          "-webkit-flex": "0 0 auto",
+          "-ms-flex": "0 0 auto",
+          "flex": "0 0 auto",
+          "display": "inline-flex",
+          "min-width": "36px",
+          "background": "var(--podium-cds-button-color-bg-primary)",
+          "color": "var(--podium-cds-color-text-primary-on-dark)",
+          "background-color": "var(--podium-cds-color-bg-hover)",
+          "font": "var(--podium-cds-typography-body1-strong)",
+          "text-align": "center",
+          "-webkit-justify-content": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "padding": "6px",
+          "min-height": "unset",
+          "border": "none",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "outline": "none",
+          "width": "unset"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .nds-btn.nds-button--icon-only.nav-bag-icon.css-vwffdb.btn-primary-light（実際のボタン要素で1回使用）",
+        "properties": {
+          "-webkit-flex": "0 0 auto",
+          "-ms-flex": "0 0 auto",
+          "flex": "0 0 auto",
+          "min-width": "36px",
+          "background": "var(--podium-cds-button-color-bg-primary-on-dark)",
+          "color": "var(--podium-cds-color-text-primary-on-light)",
+          "background-color": "var(--podium-cds-color-bg-hover)",
+          "font": "var(--podium-cds-typography-body1-strong)",
+          "text-align": "center",
+          "display": "inline-flex",
+          "-webkit-justify-content": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "padding": "6px",
+          "min-height": "unset",
+          "border": "none",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "outline": "none",
+          "width": "unset"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._4EfJ5rYM.css-1k7g084.ex41m6f0.btn-primary-dark（実際のボタン要素で10回使用）",
+        "properties": {
+          "margin-left": "0",
+          "margin-right": "6px",
+          "margin-top": "6px",
+          "max-width": "100%",
+          "line-height": "normal",
+          "color": "var(--podium-cds-color-text-primary-on-dark)",
+          "vertical-align": "top",
+          "font": "var(--podium-cds-typography-body1-strong)",
+          "text-align": "center",
+          "display": "inline-flex",
+          "-webkit-justify-content": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "padding": "var(--podium-cds-button-padding-top-s) var(--podium-cds-button-padding-sides-s) var(--podium-cds-button-padding-bottom-s)",
+          "min-height": "var(--podium-cds-button-height-s)",
+          "background": "var(--podium-cds-button-color-bg-primary)",
+          "border": "none",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "outline": "none"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._3p27lmat.css-vhpoxs.ex41m6f0.btn-primary-light（実際のボタン要素で10回使用）",
+        "properties": {
+          "margin-left": "0",
+          "margin-right": "6px",
+          "margin-top": "6px",
+          "max-width": "100%",
+          "line-height": "normal",
+          "color": "var(--podium-cds-color-text-primary-on-light)",
+          "vertical-align": "top",
+          "font": "var(--podium-cds-typography-body1-strong)",
+          "text-align": "center",
+          "display": "inline-flex",
+          "-webkit-justify-content": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "padding": "var(--podium-cds-button-padding-top-s) var(--podium-cds-button-padding-sides-s) var(--podium-cds-button-padding-bottom-s)",
+          "min-height": "var(--podium-cds-button-height-s)",
+          "background": "var(--podium-cds-button-color-bg-primary-on-dark)",
+          "border": "none",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "outline": "none"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .nds-btn.inline-flx-btn.dz_xjzja._2rSiVp6P._3Ax-yJXK._4EfJ5rYM.css-6ifxsw.ex41m6f0.cta-primary-dark.underline.btn-lg（実際のボタン要素で2回使用）",
+        "properties": {
+          "margin-left": "0",
+          "margin-right": "6px",
+          "margin-top": "6px",
+          "max-width": "100%",
+          "line-height": "normal",
+          "color": "var(--podium-cds-color-text-primary)",
+          "box-shadow": "inset 0 var(--podium-cds-button-box-shadow-width) 0 0 var(--podium-cds-color-text-primary)",
+          "border-bottom": "var(--podium-cds-size-border-width-m) solid var(--podium-cds-color-text-primary)",
+          "padding": "0",
+          "font": "var(--podium-cds-typography-body1-strong)",
+          "text-align": "start",
+          "display": "inline-flex",
+          "-webkit-justify-content": "center",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "background": "transparent",
+          "border": "0",
+          "padding-end": "initial",
+          "margin-end": "auto",
+          "reset-margins": "var(--podium-cds-size-spacing-xs)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content",
+        "properties": {
+          "color": "#b2b2b2",
+          "font-family": "\"Helvetica Neue\"",
+          "font-size": "16px",
+          "padding": "8px 2px",
+          "border-radius": "8px",
+          "background-color": "rgba(17,17,17,0.8)",
+          "text-shadow": "0px 0px 24px rgba(0,0,0,0.5)",
+          "scrollbar-width": "thin",
+          "scrollbar-color": "white rgba(17,17,17,0.8)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "a.ncss-btn-primary-dark,button.ncss-btn-primary-dark",
+        "properties": {
+          "padding": "var(--podium-cds-button-padding-top-s) var(--podium-cds-button-padding-sides-s)",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "border": "var(--podium-cds-button-border-width) solid transparent",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "background": "var(--podium-cds-button-color-bg-primary)",
+          "color": "var(--podium-cds-color-text-primary-inverse)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "a.ncss-btn-primary-light,button.ncss-btn-primary-light",
+        "properties": {
+          "padding": "var(--podium-cds-button-padding-top-s) var(--podium-cds-button-padding-sides-s)",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "border": "var(--podium-cds-button-border-width) solid transparent",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "background": "var(--podium-cds-button-color-bg-primary-on-dark)",
+          "color": "var(--podium-cds-color-text-primary)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "a.ncss-btn-secondary-dark,button.ncss-btn-secondary-dark",
+        "properties": {
+          "padding": "var(--podium-cds-button-padding-top-s) var(--podium-cds-button-padding-sides-s)",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "border": "var(--podium-cds-button-border-width) solid transparent",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "background": "var(--podium-cds-button-color-bg-secondary)",
+          "color": "var(--podium-cds-color-text-primary)",
+          "border-color": "var(--podium-cds-button-color-border-secondary)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "a.ncss-btn-secondary-light,button.ncss-btn-secondary-light",
+        "properties": {
+          "padding": "var(--podium-cds-button-padding-top-s) var(--podium-cds-button-padding-sides-s)",
+          "border-radius": "var(--podium-cds-button-border-radius)",
+          "border": "var(--podium-cds-button-border-width) solid transparent",
+          "-ms-flex-pack": "center",
+          "justify-content": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "background": "var(--podium-cds-button-color-bg-secondary)",
+          "color": "var(--podium-cds-color-text-primary-inverse)",
+          "border-color": "var(--podium-cds-button-color-border-secondary-on-dark)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".video-js .vjs-big-play-button",
+        "properties": {
+          "font-size": "3em",
+          "line-height": "1.5em",
+          "height": "1.63332em",
+          "width": "3em",
+          "display": "block",
+          "padding": "0",
+          "border": "0.06666em solid #fff",
+          "background-color": "rgba(43,51,63,0.7)",
+          "border-radius": "0.3em"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".vjs-track-settings-controls button",
+        "properties": {
+          "background-color": "#fff",
+          "background-image": "linear-gradient(-180deg, #fff 88%, #73859f 100%)",
+          "color": "#2B333F",
+          "border-radius": "2px"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content::-webkit-scrollbar-thumb",
+        "properties": {
+          "background-color": "white",
+          "border-radius": "20px",
+          "border": "3px solid white"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".rvp-video.video-js .vjs-big-play-button",
+        "properties": {
+          "background-color": "rgba(17,17,17,0.8)",
+          "border": "unset",
+          "border-radius": "50%",
+          "height": "1em",
+          "width": "1em"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-input-container button.ncss-trailing-icon-container ::after",
+        "properties": {
+          "width": "48px",
+          "height": "48px",
+          "border-radius": "50%",
+          "background": "var(--podium-cds-color-grey-100)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1ygbog4.nds-button--icon-only.btn-primary-dark.disabled,.css-1ygbog4.nds-button--icon-only.btn-secondary-dark.disabled",
+        "properties": {
+          "background-color": "var(--podium-cds-icon-button-color-bg-disabled)",
+          "color": "var(--podium-cds-color-text-disabled)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1ygbog4.nds-button--icon-only.btn-secondary-light.disabled",
+        "properties": {
+          "background-color": "var(--podium-cds-icon-button-color-bg-disabled-on-dark)",
+          "color": "var(--podium-cds-color-text-disabled-inverse)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1j8f80w.nds-button--icon-only.btn-primary-dark.disabled,.css-1j8f80w.nds-button--icon-only.btn-secondary-dark.disabled",
+        "properties": {
+          "background-color": "var(--podium-cds-icon-button-color-bg-disabled)",
+          "color": "var(--podium-cds-color-text-disabled)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1j8f80w.nds-button--icon-only.btn-secondary-light.disabled",
+        "properties": {
+          "background-color": "var(--podium-cds-icon-button-color-bg-disabled-on-dark)",
+          "color": "var(--podium-cds-color-text-disabled-inverse)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".card.merchMenu",
+        "properties": {
+          "max-width": "920px",
+          "margin": "0"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "[data-qa=card-overlay-content] ._2JgqWhO4.below",
+        "properties": {
+          "padding-right": "0",
+          "max-width": "none"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-col-lg-12.ncss-col-lg-offset-0 [data-qa=card-overlay-content] ._2JgqWhO4.below",
+        "properties": {
+          "padding-right": "0",
+          "max-width": "none"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2p2-DY4s,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2p2-DY4s",
+        "properties": {
+          "width": "40%"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".E5X3EFEx [data-qa=card-overlay]",
+        "properties": {
+          "display": "block"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "._2YIwVArV [data-qa=card-overlay]",
+        "properties": {
+          "margin": "36px auto 84px",
+          "width": "75%!important",
+          "text-align": "center!important"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      }
+    ],
+    "form_styles": [
+      {
+        "selector": ".css-1be0g1s .search-input-container input",
+        "properties": {
+          "border": "0",
+          "margin": "0",
+          "padding": "7px 0px 9px 2px",
+          "width": "100%",
+          "font": "var(--podium-cds-typography-body1)",
+          "color": "var(--podium-cds-color-text-primary)",
+          "background-color": "var(--podium-cds-color-bg-secondary)",
+          "height": "36px",
+          "border-radius": "24px"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".textarea-container .ncss-textarea",
+        "properties": {
+          "padding": "var(--podium-cds-size-spacing-grid-gutter)",
+          "margin-top": "0",
+          "border-radius": "var(--podium-cds-size-border-radius-s)",
+          "border": "0",
+          "width": "100%",
+          "height": "100%",
+          "display": "block",
+          "background": "0 0",
+          "font": "var(--podium-cds-typography-320-to-959-editorial-body1)",
+          "color": "var(--podium-cds-color-text-primary)",
+          "text-align": "left"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-input",
+        "properties": {
+          "border": "0",
+          "margin": "0",
+          "padding": "var(--podium-cds-size-spacing-grid-gutter)",
+          "width": "100%",
+          "font": "var(--podium-cds-typography-320-to-959-editorial-body1)",
+          "color": "var(--podium-cds-color-black)",
+          "background-color": "transparent",
+          "height": "var(--podium-cds-size-form-input-field-height)",
+          "border-radius": "var(--podium-cds-size-border-radius-s)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-checkbox-container .checkbox-box",
+        "properties": {
+          "background": "0 0",
+          "height": "20px",
+          "width": "20px",
+          "border": "1.5px solid var(--podium-cds-color-border-primary)",
+          "border-radius": "6px"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".vjs-menu li.vjs-selected,.vjs-menu li.vjs-selected:focus,.vjs-menu li.vjs-selected:hover,.js-focus-visible .vjs-menu li.vjs-selected:hover",
+        "properties": {
+          "background-color": "#fff",
+          "color": "#2B333F"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-selection-children-container .ncss-radio-container .ncss-radio-input~.radio-circle",
+        "properties": {
+          "border-radius": "50%",
+          "background": "0 0",
+          "height": "18px",
+          "width": "18px"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-input-container button.ncss-trailing-icon-container ::after",
+        "properties": {
+          "width": "48px",
+          "height": "48px",
+          "border-radius": "50%",
+          "background": "var(--podium-cds-color-grey-100)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".nav-css-tr0r01 .gn-search-bar .search-input-container #nav-search-icon",
+        "properties": {
+          "color": "var(--podium-cds-color-text-primary)",
+          "background-color": "var(--podium-cds-icon-button-color-bg-secondary, var(--podium-cds-color-grey-100))"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content .vjs-menu-item:hover,.rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content .vjs-menu-item.vjs-selected:hover",
+        "properties": {
+          "background-color": "rgba(255,255,255,0.2)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-form-group.group-up",
+        "properties": {
+          "border": "var(--podium-cds-size-border-width-s) solid var(--podium-cds-color-grey-200)",
+          "border-radius": "var(--podium-cds-size-border-radius-s)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-form-group.group-up .ncss-radio-container .ncss-label",
+        "properties": {
+          "color": "var(--podium-cds-color-black)",
+          "background": "var(--podium-cds-color-grey-100)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-checkbox-container .ncss-checkbox:focus:not(:disabled)~.checkbox-box.circle,.ncss-checkbox-container .ncss-checkbox:hover:not(:disabled)~.checkbox-box.circle",
+        "properties": {
+          "border": "0",
+          "background": "var(--podium-cds-color-focus-shadow)",
+          "-webkit-box-shadow": "var(--podium-cds-form-shadow-focus)",
+          "box-shadow": "var(--podium-cds-form-shadow-focus)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-selection-children-container .ncss-radio-container .ncss-radio-input:focus:not(:disabled)~.radio-circle,.ncss-selection-children-container .ncss-radio-container .ncss-radio-input:hover:not(:disabled)~.radio-circle",
+        "properties": {
+          "background": "var(--podium-cds-color-focus-shadow)",
+          "-webkit-box-shadow": "var(--podium-cds-form-shadow-focus)",
+          "box-shadow": "var(--podium-cds-form-shadow-focus)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-selection-children-container .ncss-radio-container svg",
+        "properties": {
+          "color": "var(--podium-cds-color-grey-300)",
+          "border-radius": "50%"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".ncss-dropdown-container .ncss-dropdown-select-container select:focus::-ms-value",
+        "properties": {
+          "color": "var(--podium-cds-color-text-primary)",
+          "background": "0 0"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".nav-css-tr0r01 .gn-search-bar .search-input-container",
+        "properties": {
+          "background-color": "var(--podium-cds-color-bg-secondary)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".nav-css-tr0r01 .gn-search-bar:not(.search-opened) .search-input-container #nav-search-icon",
+        "properties": {
+          "background-color": "var(--podium-cds-color-bg-primary)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1be0g1s .search-input-container:hover,.css-1be0g1s .search-input-container:focus",
+        "properties": {
+          "background-color": "var(--podium-cds-color-bg-hover)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1be0g1s .search-input-container:hover input,.css-1be0g1s .search-input-container:focus input",
+        "properties": {
+          "background-color": "var(--podium-cds-color-bg-hover)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": ".css-1be0g1s .search-input-container:hover button.nds-button--icon-only,.css-1be0g1s .search-input-container:focus button.nds-button--icon-only",
+        "properties": {
+          "background-color": "var(--podium-cds-color-bg-hover)"
+        },
+        "sourceUrl": "https://www.nike.com/"
+      }
+    ],
+    "border_radii": [
+      "0.3em",
+      "25px",
+      "inherit",
+      "8px",
+      "20px",
+      "2px",
+      "50%",
+      "4px",
+      "7px",
+      "6px",
+      "30px",
+      "12px",
+      "var(--podium-cds-button-border-radius)",
+      "var(--podium-cds-size-border-radius-s)",
+      "24px",
+      "0 0 8px 8px",
+      "18px"
+    ],
     "logo_urls": [
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nikeworldheadquarters.jpg/1280px-Nikeworldheadquarters.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
       "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
@@ -19,18 +859,22 @@
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Blue_ribbon_sports_logo.png/250px-Blue_ribbon_sports_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Nike_swoosh_logo71.png/250px-Nike_swoosh_logo71.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Old_Nike_logo.jpg/250px-Old_Nike_logo.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg"
     ],
     "source_css_urls": [
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
-      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022",
+      "https://static-assets.nike.com/video-player/2.2.0/nike-one-video-player.min.css",
+      "https://www.nike.com/_next/static/chunks/deac8c7d545e2588.css",
+      "https://www.nike.com/assets/ncss/glyphs/2.6/css/glyphs.min.css",
+      "https://www.nike.com/static/ncss/5.0/dotcom/desktop/css/ncss.en-us.min.css"
     ],
-    "extracted_at": "2026-09-16T02:02:37.761Z",
+    "extracted_at": "2026-09-16T02:02:42.483Z",
     "source_urls": [
-      "https://ja.wikipedia.org/wiki/NIKE",
-      "INC."
+      "https://www.nike.com/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #555555  color  出現9回  [inline-style]\n  #002BB8  color  出現6回  [inline-style]\n  #006600  color  出現4回  [inline-style]\n  #222222  background-color  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #A2A9B1  border-bottom  出現1回  [style-tag]\n  #EAECF0  outline  出現1回  [style-tag]\n  #AAAAAA  border  出現1回  [style-tag]\n  #F9F9F9  background-color  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nikeworldheadquarters.jpg/1280px-Nikeworldheadquarters.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/250px-Logo_NIKE.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Blue_ribbon_sports_logo.png/250px-Blue_ribbon_sports_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Nike_swoosh_logo71.png/250px-Nike_swoosh_logo71.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Old_Nike_logo.jpg/250px-Old_Nike_logo.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #73859F  background-color  出現13回  [external-css]\n  #555555  color  出現9回  [inline-style]\n  #707072  color  出現8回  [external-css]\n  #2B333F  background-color  出現7回  [external-css]\n  #1151FF  --podium-cds-color-blue-500  出現7回  [external-css+style-tag]\n  #002BB8  color  出現6回  [inline-style]\n  #006600  color  出現4回  [inline-style]\n  #111111  --podium-cds-color-black  出現4回  [external-css+style-tag]\n  #222222  background-color  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #EC3EA7  background  出現2回  [external-css]\n  #FF623A  background  出現2回  [external-css]\n  #FBAD22  background  出現2回  [external-css]\n  #FAD81B  background  出現2回  [external-css]\n  #99D531  background  出現2回  [external-css]\n\n【CSS カラー変数（:root）】\n  --podium-cds-color-black: #111111\n  --podium-cds-color-white: #FFFFFF\n  --podium-cds-color-red-50: #FFE5E5\n  --podium-cds-color-red-100: #FFC3C4\n  --podium-cds-color-red-200: #FFABAD\n  --podium-cds-color-red-300: #FF7975\n  --podium-cds-color-red-400: #FF4E4A\n  --podium-cds-color-red-500: #EE0005\n  --podium-cds-color-red-600: #D30005\n  --podium-cds-color-red-700: #A70E00\n  --podium-cds-color-red-800: #780700\n  --podium-cds-color-red-900: #530300\n  --podium-cds-color-orange-50: #FFE2D6\n  --podium-cds-color-orange-100: #FFC5AD\n  --podium-cds-color-orange-200: #FFA584\n  --podium-cds-color-orange-300: #FF8255\n  --podium-cds-color-orange-400: #FF5000\n  --podium-cds-color-orange-500: #D33918\n  --podium-cds-color-orange-600: #9F290F\n  --podium-cds-color-orange-700: #7E200D\n  --podium-cds-color-orange-800: #5D180C\n  --podium-cds-color-orange-900: #3E1009\n  --podium-cds-color-yellow-50: #FEF087\n  --podium-cds-color-yellow-100: #FEEA55\n  --podium-cds-color-yellow-200: #FEDF35\n  --podium-cds-color-yellow-300: #FFD11B\n  --podium-cds-color-yellow-400: #FDC400\n  --podium-cds-color-yellow-500: #FCA600\n  --podium-cds-color-yellow-600: #F08E0A\n  --podium-cds-color-yellow-700: #E57A09\n  --podium-cds-color-yellow-800: #CD6006\n  --podium-cds-color-yellow-900: #99470A\n  --podium-cds-color-green-50: #DFFFB9\n  --podium-cds-color-green-100: #BDFB72\n  --podium-cds-color-green-200: #83F13B\n  --podium-cds-color-green-300: #5FE63F\n  --podium-cds-color-green-400: #3CCD49\n  --podium-cds-color-green-500: #1EAA52\n  --podium-cds-color-green-600: #007D48\n  --podium-cds-color-green-700: #00643E\n  --podium-cds-color-green-800: #005034\n  --podium-cds-color-green-900: #003C2A\n  --podium-cds-color-blue-50: #D6EEFF\n  --podium-cds-color-blue-100: #B9E2FF\n  --podium-cds-color-blue-200: #87CEFF\n  --podium-cds-color-blue-300: #4CABFF\n  --podium-cds-color-blue-400: #1190FF\n  --podium-cds-color-blue-500: #1151FF\n  --podium-cds-color-blue-600: #0034E3\n  --podium-cds-color-blue-700: #061DBB\n  --podium-cds-color-blue-800: #02068E\n  --podium-cds-color-blue-900: #020664\n  --podium-cds-color-teal-50: #D4FFFB\n  --podium-cds-color-teal-100: #9CFFF7\n  --podium-cds-color-teal-200: #69EEE7\n  --podium-cds-color-teal-300: #31CBCB\n  --podium-cds-color-teal-400: #1CB2B6\n  --podium-cds-color-teal-500: #008E98\n  --podium-cds-color-teal-600: #0A7281\n  --podium-cds-color-teal-700: #005C68\n  --podium-cds-color-teal-800: #004856\n  --podium-cds-color-teal-900: #043441\n  --podium-cds-color-purple-50: #E4E1FC\n  --podium-cds-color-purple-100: #D6D1FF\n  --podium-cds-color-purple-200: #BEAFFD\n  --podium-cds-color-purple-300: #A082FF\n  --podium-cds-color-purple-400: #8755FF\n  --podium-cds-color-purple-500: #6E0FF6\n  --podium-cds-color-purple-600: #5400CC\n  --podium-cds-color-purple-700: #4400A9\n  --podium-cds-color-purple-800: #300080\n  --podium-cds-color-purple-900: #1C0060\n  --podium-cds-color-pink-50: #FFE1F3\n  --podium-cds-color-pink-100: #FFCDEA\n  --podium-cds-color-pink-200: #FFB0DD\n  --podium-cds-color-pink-300: #FE90CC\n  --podium-cds-color-pink-400: #FC5DBB\n  --podium-cds-color-pink-500: #ED1AA0\n  --podium-cds-color-pink-600: #D00B84\n  --podium-cds-color-pink-700: #A50767\n  --podium-cds-color-pink-800: #770349\n  --podium-cds-color-pink-900: #4C012D\n  --podium-cds-color-grey-50: #FAFAFA\n  --podium-cds-color-grey-100: #F5F5F5\n  --podium-cds-color-grey-200: #E5E5E5\n  --podium-cds-color-grey-300: #CACACB\n  --podium-cds-color-grey-400: #9E9EA0\n  --podium-cds-color-grey-500: #707072\n  --podium-cds-color-grey-600: #4B4B4D\n  --podium-cds-color-grey-700: #39393B\n  --podium-cds-color-grey-800: #28282A\n  --podium-cds-color-grey-900: #1F1F21\n  --podium-cds-color-scrim-100: rgba(17,17,17,0.36)\n  --podium-cds-color-scrim-100-inverse: rgba(17,17,17,0.80)\n  --podium-cds-color-scrim-primary: rgba(17,17,17,0.36)\n  --podium-cds-color-scrim-primary-inverse: rgba(17,17,17,0.80)\n  --podium-cds-color-focus-shadow: rgba(17, 17, 17, 0.12)\n  --podium-cds-color-box-focus-ring: rgba(39, 93, 197, 1)\n  --podium-cds-button-color-bg-secondary: transparent\n\n【使用フォント】\n  VideoJS\n  Arial\n  inherit\n  Helvetica Neue\n  nike-glyphs\n  Nike TG\n  Nike Futura ND\n  Nike Futura\n  Helvetica Now Text\n  Helvetica Now Text Medium\n  Helvetica Now Display Medium\n  Palatino LT Pro Light\n  monospace\n  Neue Frutiger Arabic\n\n【角丸パターン】\n  0.3em\n  25px\n  inherit\n  8px\n  20px\n  2px\n  50%\n  4px\n\n【ボタンスタイル】\n  ★ .nds-btn.nds-button--icon-only.search-start-btn.css-1ygbog4.btn-secondary-dark（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-secondary)\n    color: var(--podium-cds-color-text-primary-on-light)\n  ★ .nds-btn.nds-button--icon-only.nav-favorites.css-1j8f80w.btn-primary-dark（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    display: inline-flex\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-primary)\n  ★ .nds-btn.nds-button--icon-only.nav-bag-icon.css-vwffdb.btn-primary-light（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-primary-on-dark)\n    color: var(--podium-cds-color-text-primary-on-light)\n  ★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._4EfJ5rYM.css-1k7g084.ex41m6f0.btn-primary-dark（実際のボタン要素で10回使用）\n    margin-left: 0\n    margin-right: 6px\n    margin-top: 6px\n    max-width: 100%\n    line-height: normal\n    color: var(--podium-cds-color-text-primary-on-dark)\n  ★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._3p27lmat.css-vhpoxs.ex41m6f0.btn-primary-light（実際のボタン要素で10回使用）\n    margin-left: 0\n    margin-right: 6px\n    margin-top: 6px\n    max-width: 100%\n    line-height: normal\n    color: var(--podium-cds-color-text-primary-on-light)\n\n【カードスタイル】\n  .card.merchMenu\n    max-width: 920px\n    margin: 0\n  [data-qa=card-overlay-content] ._2JgqWhO4.below\n    padding-right: 0\n    max-width: none\n  .ncss-col-lg-12.ncss-col-lg-offset-0 [data-qa=card-overlay-content] ._2JgqWhO4.below\n    padding-right: 0\n    max-width: none\n  .grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2p2-DY4s,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2p2-DY4s\n    width: 40%\n  .E5X3EFEx [data-qa=card-overlay]\n    display: block\n\n【フォームスタイル】\n  .css-1be0g1s .search-input-container input\n    border: 0\n    margin: 0\n    padding: 7px 0px 9px 2px\n    width: 100%\n    font: var(--podium-cds-typography-body1)\n    color: var(--podium-cds-color-text-primary)\n  .textarea-container .ncss-textarea\n    padding: var(--podium-cds-size-spacing-grid-gutter)\n    margin-top: 0\n    border-radius: var(--podium-cds-size-border-radius-s)\n    border: 0\n    width: 100%\n    height: 100%\n  .ncss-input\n    border: 0\n    margin: 0\n    padding: var(--podium-cds-size-spacing-grid-gutter)\n    width: 100%\n    font: var(--podium-cds-typography-320-to-959-editorial-body1)\n    color: var(--podium-cds-color-black)\n  .ncss-checkbox-container .checkbox-box\n    background: 0 0\n    height: 20px\n    width: 20px\n    border: 1.5px solid var(--podium-cds-color-border-primary)\n    border-radius: 6px\n  .vjs-menu li.vjs-selected,.vjs-menu li.vjs-selected:focus,.vjs-menu li.vjs-selected:hover,.js-focus-visible .vjs-menu li.vjs-selected:hover\n    background-color: #fff\n    color: #2B333F\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nikeworldheadquarters.jpg/1280px-Nikeworldheadquarters.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/250px-Logo_NIKE.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Blue_ribbon_sports_logo.png/250px-Blue_ribbon_sports_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Nike_swoosh_logo71.png/250px-Nike_swoosh_logo71.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Old_Nike_logo.jpg/250px-Old_Nike_logo.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://static-assets.nike.com/video-player/2.2.0/nike-one-video-player.min.css\n  https://www.nike.com/_next/static/chunks/deac8c7d545e2588.css\n  https://www.nike.com/assets/ncss/glyphs/2.6/css/glyphs.min.css\n  https://www.nike.com/static/ncss/5.0/dotcom/desktop/css/ncss.en-us.min.css"
 }
