@@ -1,0 +1,51 @@
+2026-09-16T02:02:29.346Z  START task_id="d11de749-1c9a-438d-aa95-03e310e21a3e" workflow_run_id="b522969b-dec6-4bd4-868e-a29a2ace9774" form_token="vG7jqMT8vxaiS8DABNQ3DD" client="nike"
+2026-09-16T02:02:29.349Z  formBase="https://app.dify.milize.com"
+2026-09-16T02:02:29.350Z  試行[app/api]: POST https://app.dify.milize.com/api/form/human_input/vG7jqMT8vxaiS8DABNQ3DD
+2026-09-16T02:02:29.918Z  結果[app/api]: 200 ct=application/json body={}
+
+2026-09-16T02:02:29.918Z  ✓ 再開成功: app/api
+2026-09-16T02:02:29.919Z  resume 成功: ct=application/json
+2026-09-16T02:02:29.919Z  ポーリング開始 pollIds=["b522969b-dec6-4bd4-868e-a29a2ace9774","d11de749-1c9a-438d-aa95-03e310e21a3e"]
+2026-09-16T02:02:40.448Z  logs[1]: run=b522969b status="running"
+2026-09-16T02:02:40.449Z  logs[1]: 10件, runId未発見
+2026-09-16T02:02:50.984Z  logs[2]: run=b522969b status="running"
+2026-09-16T02:02:50.985Z  logs[2]: 10件, runId未発見
+2026-09-16T02:03:01.503Z  logs[3]: run=b522969b status="running"
+2026-09-16T02:03:01.503Z  logs[3]: 10件, runId未発見
+2026-09-16T02:03:12.020Z  logs[4]: run=b522969b status="running"
+2026-09-16T02:03:12.020Z  logs[4]: 10件, runId未発見
+2026-09-16T02:03:22.529Z  logs[5]: run=b522969b status="running"
+2026-09-16T02:03:22.529Z  logs[5]: 10件, runId未発見
+2026-09-16T02:03:33.046Z  logs[6]: run=b522969b status="running"
+2026-09-16T02:03:33.046Z  logs[6]: 10件, runId未発見
+2026-09-16T02:03:43.590Z  logs[7]: run=b522969b status="running"
+2026-09-16T02:03:43.590Z  logs[7]: 10件, runId未発見
+2026-09-16T02:03:54.094Z  logs[8]: run=b522969b status="running"
+2026-09-16T02:03:54.094Z  logs[8]: 10件, runId未発見
+2026-09-16T02:04:04.608Z  logs[9]: run=b522969b status="running"
+2026-09-16T02:04:04.608Z  logs[9]: 10件, runId未発見
+2026-09-16T02:04:15.166Z  logs[10]: run=b522969b status="running"
+2026-09-16T02:04:15.166Z  logs[10]: 10件, runId未発見
+2026-09-16T02:04:25.681Z  logs[11]: run=b522969b status="running"
+2026-09-16T02:04:25.681Z  logs[11]: 10件, runId未発見
+2026-09-16T02:04:36.212Z  logs[12]: run=b522969b status="running"
+2026-09-16T02:04:36.212Z  logs[12]: 10件, runId未発見
+2026-09-16T02:04:46.738Z  logs[13]: run=b522969b status="running"
+2026-09-16T02:04:46.739Z  logs[13]: 10件, runId未発見
+2026-09-16T02:04:57.248Z  logs[14]: run=b522969b status="running"
+2026-09-16T02:04:57.248Z  logs[14]: 10件, runId未発見
+2026-09-16T02:05:07.757Z  logs[15]: run=b522969b status="running"
+2026-09-16T02:05:07.757Z  logs[15]: 10件, runId未発見
+2026-09-16T02:05:18.253Z  logs[16]: run=b522969b status="running"
+2026-09-16T02:05:18.253Z  logs[16]: 10件, runId未発見
+2026-09-16T02:05:28.765Z  logs[17]: run=b522969b status="running"
+2026-09-16T02:05:28.765Z  logs[17]: 10件, runId未発見
+2026-09-16T02:05:39.288Z  logs[18]: run=b522969b status="running"
+2026-09-16T02:05:39.288Z  logs[18]: 10件, runId未発見
+2026-09-16T02:05:49.818Z  logs[19]: run=b522969b status="running"
+2026-09-16T02:05:49.819Z  logs[19]: 10件, runId未発見
+2026-09-16T02:06:00.434Z  logs[20]: run=b522969b status="running"
+2026-09-16T02:06:00.434Z  logs[20]: 10件, runId未発見
+2026-09-16T02:06:00.434Z  ポーリングタイムアウト (20回)
+2026-09-16T02:06:00.434Z  ポーリング完了
+2026-09-16T02:06:00.588Z  designColors: resources.json css_info から抽出 primary=#4D4D4D
