@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+}
+
+.mufg-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.mufg-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #111827;
+}
+
+.mufg-portal h1,
+.mufg-portal h2,
+.mufg-portal h3,
+.mufg-portal h4,
+.mufg-portal h5,
+.mufg-portal h6 {
+  font-weight: 700;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.mufg-portal p,
+.mufg-portal span,
+.mufg-portal div {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.mufg-portal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mufg-portal .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.mufg-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.mufg-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.mufg-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.mufg-portal .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+.mufg-portal .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.mufg-portal .swatch-top {
+  height: 80px;
+  border-radius: 8px 8px 0 0;
+}
+
+.mufg-portal .swatch-bottom {
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.mufg-portal .swatch-hex {
+  font-family: monospace;
+  font-size: 13px;
+  color: #111827;
+}
+
+.mufg-portal .swatch-name {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.mufg-portal .tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.mufg-portal .tab {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.mufg-portal .component-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 24px;
+}
+
+.mufg-portal .component-label {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 12px 16px 0 16px;
+}
+
+.mufg-portal .component-render {
+  padding: 24px;
+}
+
+.mufg-portal .component-code {
+  background: #efefef;
+  color: #333333;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+}
