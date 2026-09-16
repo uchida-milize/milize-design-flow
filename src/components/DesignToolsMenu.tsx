@@ -9,6 +9,7 @@ interface Tool {
 const TOOLS: Tool[] = [
   { label: 'クライアント別アセット管理', href: 'https://milize-design-flow.vercel.app/' },
   { label: '提案書ジェネレーター', href: 'https://milize-pptx-web.vercel.app/' },
+  { label: 'デザインガイドライン', href: 'https://neutral-base-v2.vercel.app/' },
 ];
 
 /** ヘッダー左上のタイトルを「Design Tools」ドロップダウンにし、社内ツール群への導線をまとめる */
