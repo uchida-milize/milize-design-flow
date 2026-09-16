@@ -100,6 +100,14 @@ export async function POST(req: NextRequest) {
                 send({ progress: progressVal, status: `EVT:${data.event}` });
               }
 
+              if (data.event === 'error') {
+                const message = data.message || data.data?.error || data.data?.message || JSON.stringify(data).slice(0, 300);
+                log(`DIFY ERROR: ${message}`);
+                send({ error: `Difyワークフローエラー: ${message}` });
+                controller.close();
+                return;
+              }
+
               if (data.event === 'workflow_started') {
                 progressVal = 20;
                 send({ progress: progressVal, status: 'ワークフロー開始...' });

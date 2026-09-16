@@ -153,6 +153,12 @@ export async function POST(req: NextRequest) {
                 } else if (data.event === 'workflow_finished') {
                   workflowDone = true;
                   log(`workflow_finished (outputs は dify-callback 経由で受信済み)`);
+                } else if (data.event === 'error') {
+                  const message = data.message || data.data?.error || data.data?.message || JSON.stringify(data).slice(0, 300);
+                  log(`DIFY ERROR: ${message}`);
+                  send({ error: `Difyワークフローエラー: ${message}` });
+                  controller.close();
+                  return;
                 } else {
                   log(`EVT:${data.event}`);
                 }
