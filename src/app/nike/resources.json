@@ -221,7 +221,7 @@
       "--podium-cds-icon-button-color-bg-disabled-on-dark": "var(--podium-cds-color-grey-500)",
       "--podium-cds-input-color-disabled": "var(--podium-cds-color-grey-500)"
     },
-    "hex_colors": "#73859F | background-color, border-top-color, background-image | 出現13回 | [external-css]\n#707072 | color, scrollbar-color, --podium-cds-color-grey-500 | 出現8回 | [external-css]\n#2B333F | background-color, color | 出現7回 | [external-css]\n#1151FF | --podium-cds-color-blue-500, outline, box-shadow | 出現7回 | [external-css+style-tag]\n#111111 | --podium-cds-color-black, color | 出現4回 | [external-css+style-tag]\n#EC3EA7 | background | 出現2回 | [external-css]\n#FF623A | background | 出現2回 | [external-css]\n#FBAD22 | background | 出現2回 | [external-css]\n#FAD81B | background | 出現2回 | [external-css]\n#99D531 | background | 出現2回 | [external-css]\n#2EB350 | background | 出現2回 | [external-css]\n#3573AA | background | 出現2回 | [external-css]\n#CE46A4 | background | 出現2回 | [external-css]\n#FF009E | color | 出現2回 | [external-css]\n#B3B3B3 | color | 出現2回 | [external-css]\n#FFE5E5 | --podium-cds-color-red-50 | 出現2回 | [external-css]\n#FFC3C4 | --podium-cds-color-red-100 | 出現2回 | [external-css]\n#FFABAD | --podium-cds-color-red-200 | 出現2回 | [external-css]\n#FF7975 | --podium-cds-color-red-300 | 出現2回 | [external-css]\n#FF4E4A | --podium-cds-color-red-400 | 出現2回 | [external-css]\n#EE0005 | --podium-cds-color-red-500 | 出現2回 | [external-css]\n#D30005 | --podium-cds-color-red-600 | 出現2回 | [external-css]\n#A70E00 | --podium-cds-color-red-700 | 出現2回 | [external-css]\n#780700 | --podium-cds-color-red-800 | 出現2回 | [external-css]\n#530300 | --podium-cds-color-red-900 | 出現2回 | [external-css]\n#FFE2D6 | --podium-cds-color-orange-50 | 出現2回 | [external-css]\n#FFC5AD | --podium-cds-color-orange-100 | 出現2回 | [external-css]\n#FFA584 | --podium-cds-color-orange-200 | 出現2回 | [external-css]\n#FF8255 | --podium-cds-color-orange-300 | 出現2回 | [external-css]\n#FF5000 | --podium-cds-color-orange-400 | 出現2回 | [external-css]",
+    "hex_colors": "#73859F | background-color, border-top-color, background-image | 出現22回 | [external-css]\n#111111 | --podium-cds-color-black, color, background, background-color, --theme-roundbuttoncolor | 出現19回 | [external-css+style-tag]\n#E5E5E5 | --theme-borderstrong, --theme-border, border-color, background | 出現16回 | [style-tag]\n#2B333F | background-color, color | 出現14回 | [external-css]\n#4D4D4D | --theme-border, border-color, --theme-borderstrong, --theme-borderlabelhover | 出現12回 | [style-tag]\n#707072 | color, scrollbar-color, --podium-cds-color-grey-500 | 出現8回 | [external-css]\n#1151FF | --podium-cds-color-blue-500, outline, box-shadow | 出現7回 | [external-css+style-tag]\n#707070 | color, background-image | 出現4回 | [style-tag]\n#F5F5F5 | background | 出現4回 | [style-tag]\n#CCCCCC | --theme-borderlabel | 出現3回 | [style-tag]\n#EC3EA7 | background | 出現2回 | [external-css]\n#FF623A | background | 出現2回 | [external-css]\n#FBAD22 | background | 出現2回 | [external-css]\n#FAD81B | background | 出現2回 | [external-css]\n#99D531 | background | 出現2回 | [external-css]\n#2EB350 | background | 出現2回 | [external-css]\n#3573AA | background | 出現2回 | [external-css]\n#CE46A4 | background | 出現2回 | [external-css]\n#FF009E | color | 出現2回 | [external-css]\n#B3B3B3 | color | 出現2回 | [external-css]\n#FFE5E5 | --podium-cds-color-red-50 | 出現2回 | [external-css]\n#FFC3C4 | --podium-cds-color-red-100 | 出現2回 | [external-css]\n#FFABAD | --podium-cds-color-red-200 | 出現2回 | [external-css]\n#FF7975 | --podium-cds-color-red-300 | 出現2回 | [external-css]\n#FF4E4A | --podium-cds-color-red-400 | 出現2回 | [external-css]\n#EE0005 | --podium-cds-color-red-500 | 出現2回 | [external-css]\n#D30005 | --podium-cds-color-red-600 | 出現2回 | [external-css]\n#A70E00 | --podium-cds-color-red-700 | 出現2回 | [external-css]\n#780700 | --podium-cds-color-red-800 | 出現2回 | [external-css]\n#530300 | --podium-cds-color-red-900 | 出現2回 | [external-css]",
     "rgb_colors": [
       "rgba(17,17,17,0.36)",
       "rgba(17,17,17,0.80)",
@@ -244,7 +244,13 @@
       "Helvetica Now Display Medium",
       "Palatino LT Pro Light",
       "monospace",
-      "Neue Frutiger Arabic"
+      "Neue Frutiger Arabic",
+      "Helvetica",
+      "Palatino",
+      "FuturaNike",
+      "Avenir Next Thai Bold",
+      "Neue Helvetica Thai",
+      "Nike 365 SC"
     ],
     "button_styles": [
       {
@@ -276,6 +282,32 @@
           "width": "unset"
         },
         "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .css-5ykhiw-f-ui-3（実際のボタン要素で1回使用）",
+        "properties": {
+          "font-size": "1rem",
+          "line-height": "1",
+          "font-weight": "500",
+          "font-family": "\"Helvetica Neue\",var(--sansFont, \"Helvetica Neue\"),Helvetica,sans-serif",
+          "font-style": "normal",
+          "height": "40px",
+          "color": "black",
+          "background-color": "var(--theme-buttonPrimary)",
+          "padding": "13px 24px",
+          "border-radius": "80px",
+          "display": "inline-flex",
+          "-webkit-align-items": "center",
+          "-webkit-box-align": "center",
+          "-ms-flex-align": "center",
+          "align-items": "center",
+          "outline-color": "#7FB2F9",
+          "width": "auto",
+          "border": "0",
+          "margin": "0",
+          "background": "white"
+        },
+        "sourceUrl": "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
       },
       {
         "selector": "★ .nds-btn.nds-button--icon-only.nav-favorites.css-1j8f80w.btn-primary-dark（実際のボタン要素で1回使用）",
@@ -392,6 +424,29 @@
           "outline": "none"
         },
         "sourceUrl": "https://www.nike.com/"
+      },
+      {
+        "selector": "★ .css-12ivdcw（実際のボタン要素で1回使用）",
+        "properties": {
+          "height": "48px",
+          "width": "48px",
+          "border-radius": "100%",
+          "background": "#e5e5e5",
+          "color": "inherit",
+          "margin-right": "10px"
+        },
+        "sourceUrl": "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
+      },
+      {
+        "selector": "★ .css-1ek4mqi（実際のボタン要素で1回使用）",
+        "properties": {
+          "height": "48px",
+          "width": "48px",
+          "border-radius": "100%",
+          "background": "#e5e5e5",
+          "color": "inherit"
+        },
+        "sourceUrl": "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
       },
       {
         "selector": "★ .nds-btn.inline-flx-btn.dz_xjzja._2rSiVp6P._3Ax-yJXK._4EfJ5rYM.css-6ifxsw.ex41m6f0.cta-primary-dark.underline.btn-lg（実際のボタン要素で2回使用）",
@@ -513,21 +568,21 @@
           "width": "3em",
           "display": "block",
           "padding": "0",
-          "border": "0.06666em solid #fff",
-          "background-color": "rgba(43,51,63,0.7)",
-          "border-radius": "0.3em"
+          "border": ".06666em solid #fff",
+          "background-color": "rgba(43,51,63,.7)",
+          "border-radius": ".3em"
         },
-        "sourceUrl": "https://www.nike.com/"
+        "sourceUrl": "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
       },
       {
         "selector": ".vjs-track-settings-controls button",
         "properties": {
           "background-color": "#fff",
-          "background-image": "linear-gradient(-180deg, #fff 88%, #73859f 100%)",
+          "background-image": "linear-gradient(-180deg,#fff 88%,#73859f)",
           "color": "#2B333F",
           "border-radius": "2px"
         },
-        "sourceUrl": "https://www.nike.com/"
+        "sourceUrl": "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
       },
       {
         "selector": ".rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content::-webkit-scrollbar-thumb",
@@ -564,30 +619,6 @@
         "properties": {
           "background-color": "var(--podium-cds-icon-button-color-bg-disabled)",
           "color": "var(--podium-cds-color-text-disabled)"
-        },
-        "sourceUrl": "https://www.nike.com/"
-      },
-      {
-        "selector": ".css-1ygbog4.nds-button--icon-only.btn-secondary-light.disabled",
-        "properties": {
-          "background-color": "var(--podium-cds-icon-button-color-bg-disabled-on-dark)",
-          "color": "var(--podium-cds-color-text-disabled-inverse)"
-        },
-        "sourceUrl": "https://www.nike.com/"
-      },
-      {
-        "selector": ".css-1j8f80w.nds-button--icon-only.btn-primary-dark.disabled,.css-1j8f80w.nds-button--icon-only.btn-secondary-dark.disabled",
-        "properties": {
-          "background-color": "var(--podium-cds-icon-button-color-bg-disabled)",
-          "color": "var(--podium-cds-color-text-disabled)"
-        },
-        "sourceUrl": "https://www.nike.com/"
-      },
-      {
-        "selector": ".css-1j8f80w.nds-button--icon-only.btn-secondary-light.disabled",
-        "properties": {
-          "background-color": "var(--podium-cds-icon-button-color-bg-disabled-on-dark)",
-          "color": "var(--podium-cds-color-text-disabled-inverse)"
         },
         "sourceUrl": "https://www.nike.com/"
       }
@@ -737,6 +768,14 @@
         "sourceUrl": "https://www.nike.com/"
       },
       {
+        "selector": ".js-focus-visible .vjs-menu li.vjs-selected:hover,.vjs-menu li.vjs-selected,.vjs-menu li.vjs-selected:focus,.vjs-menu li.vjs-selected:hover",
+        "properties": {
+          "background-color": "#fff",
+          "color": "#2B333F"
+        },
+        "sourceUrl": "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
+      },
+      {
         "selector": ".rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content .vjs-menu-item:hover,.rvp-video.video-js .vjs-control.vjs-button .vjs-menu .vjs-menu-content .vjs-menu-item.vjs-selected:hover",
         "properties": {
           "background-color": "rgba(255,255,255,0.2)"
@@ -821,13 +860,6 @@
           "background-color": "var(--podium-cds-color-bg-hover)"
         },
         "sourceUrl": "https://www.nike.com/"
-      },
-      {
-        "selector": ".css-1be0g1s .search-input-container:hover button.nds-button--icon-only,.css-1be0g1s .search-input-container:focus button.nds-button--icon-only",
-        "properties": {
-          "background-color": "var(--podium-cds-color-bg-hover)"
-        },
-        "sourceUrl": "https://www.nike.com/"
       }
     ],
     "border_radii": [
@@ -847,21 +879,33 @@
       "var(--podium-cds-size-border-radius-s)",
       "24px",
       "0 0 8px 8px",
-      "18px"
+      "18px",
+      ".3em",
+      "80px",
+      "100%"
     ],
     "logo_urls": [
-      "https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg"
+      "https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg",
+      "https://nmp.about.nike.com/about/prod/f2a30a4b-ddf9-4b3f-9836-042f949ea52c/nike-swoosh-carolyn-davidson-dna-1.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjowLCJ0b3AiOjYzLCJ3aWR0aCI6MzAwMCwiaGVpZ2h0IjoxNjg4fSwicmVzaXplIjp7IndpZHRoIjo5MDB9fX0%3D&amp;s=37d6e419bb6202b7ba572b9ecd33b985ed648997a02884d4819843c96659f131",
+      "https://about.nike.com/favicon-32x32.png",
+      "https://nmp.about.nike.com/about/prod/2cb271ab-6c2a-48b0-8ea8-a0b2f5db551e/nike-logo-wordmark-carolyn-davidson-dna-1.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjowLCJ0b3AiOjAsIndpZHRoIjozMDAwLCJoZWlnaHQiOjIwMDB9LCJyZXNpemUiOnsid2lkdGgiOjM4NDB9fX0%3D&amp;s=7d75a78fd5cf98c9d9c60a5eac347cda7f34026b448683db33f8e7298cf1dfbd",
+      "https://nmp.about.nike.com/about/prod/15da26c8-97b5-418e-a5e8-7753698a34c9/jeff-johnson-original-nike-sunburst-logo-sketch-copy.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozNywidG9wIjo3MDAsIndpZHRoIjoyNDI2LCJoZWlnaHQiOjE2MTV9LCJyZXNpemUiOnsid2lkdGgiOjM4NDB9fX0%3D&amp;s=089a0b6c097c044366b276950e33644b4def21863355c831ecbba6bba21f49e6",
+      "https://nmp.about.nike.com/about/prod/0cc8c295-a643-44f4-acb3-c18bfc2289f1/nike-swoosh-logo-timeline.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwicmVzaXplIjp7IndpZHRoIjozODQwfX19&amp;s=cf8fdb210e3ba5e388cdfd16eb16711c9303b0a5fd4921afd9d10e3f0600aa84",
+      "https://nmp.about.nike.com/about/prod/d0e30591-39ac-4f5d-ab75-ef1614253864/nike-nyhq-architecture-offices-new-york-usa-dezeen-hero.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjoyNDYsInRvcCI6MCwid2lkdGgiOjE5OTUsImhlaWdodCI6MTMzMH0sInJlc2l6ZSI6eyJ3aWR0aCI6Mzg0MH19fQ%3D%3D&amp;s=d03083f4983dc9fa2b3f05b5c0bc57c4ddb683701ce2548e6b9719eb3458d867"
     ],
     "source_css_urls": [
       "https://static-assets.nike.com/video-player/2.2.0/nike-one-video-player.min.css",
       "https://www.nike.com/_next/static/chunks/deac8c7d545e2588.css",
       "https://www.nike.com/assets/ncss/glyphs/2.6/css/glyphs.min.css",
-      "https://www.nike.com/static/ncss/5.0/dotcom/desktop/css/ncss.en-us.min.css"
+      "https://www.nike.com/static/ncss/5.0/dotcom/desktop/css/ncss.en-us.min.css",
+      "https://about.nike.com/_next/static/css/4ee0b3ccdc7ce041.css?dpl=86a26917207977bc22c9ff8bec4b755880fcb81a",
+      "https://about.nike.com/_next/static/css/7d06ebbb4c2a2b8c.css?dpl=86a26917207977bc22c9ff8bec4b755880fcb81a",
+      "https://about.nike.com/_next/static/css/50cae09f11d7c87b.css?dpl=86a26917207977bc22c9ff8bec4b755880fcb81a"
     ],
-    "extracted_at": "2026-09-16T05:11:05.205Z",
+    "extracted_at": "2026-09-16T05:11:09.735Z",
     "source_urls": [
-      "https://www.nike.com/"
+      "https://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #73859F  background-color  出現13回  [external-css]\n  #707072  color  出現8回  [external-css]\n  #2B333F  background-color  出現7回  [external-css]\n  #1151FF  --podium-cds-color-blue-500  出現7回  [external-css+style-tag]\n  #111111  --podium-cds-color-black  出現4回  [external-css+style-tag]\n  #EC3EA7  background  出現2回  [external-css]\n  #FF623A  background  出現2回  [external-css]\n  #FBAD22  background  出現2回  [external-css]\n  #FAD81B  background  出現2回  [external-css]\n  #99D531  background  出現2回  [external-css]\n  #2EB350  background  出現2回  [external-css]\n  #3573AA  background  出現2回  [external-css]\n  #CE46A4  background  出現2回  [external-css]\n  #FF009E  color  出現2回  [external-css]\n  #B3B3B3  color  出現2回  [external-css]\n\n【CSS カラー変数（:root）】\n  --podium-cds-color-black: #111111\n  --podium-cds-color-white: #FFFFFF\n  --podium-cds-color-red-50: #FFE5E5\n  --podium-cds-color-red-100: #FFC3C4\n  --podium-cds-color-red-200: #FFABAD\n  --podium-cds-color-red-300: #FF7975\n  --podium-cds-color-red-400: #FF4E4A\n  --podium-cds-color-red-500: #EE0005\n  --podium-cds-color-red-600: #D30005\n  --podium-cds-color-red-700: #A70E00\n  --podium-cds-color-red-800: #780700\n  --podium-cds-color-red-900: #530300\n  --podium-cds-color-orange-50: #FFE2D6\n  --podium-cds-color-orange-100: #FFC5AD\n  --podium-cds-color-orange-200: #FFA584\n  --podium-cds-color-orange-300: #FF8255\n  --podium-cds-color-orange-400: #FF5000\n  --podium-cds-color-orange-500: #D33918\n  --podium-cds-color-orange-600: #9F290F\n  --podium-cds-color-orange-700: #7E200D\n  --podium-cds-color-orange-800: #5D180C\n  --podium-cds-color-orange-900: #3E1009\n  --podium-cds-color-yellow-50: #FEF087\n  --podium-cds-color-yellow-100: #FEEA55\n  --podium-cds-color-yellow-200: #FEDF35\n  --podium-cds-color-yellow-300: #FFD11B\n  --podium-cds-color-yellow-400: #FDC400\n  --podium-cds-color-yellow-500: #FCA600\n  --podium-cds-color-yellow-600: #F08E0A\n  --podium-cds-color-yellow-700: #E57A09\n  --podium-cds-color-yellow-800: #CD6006\n  --podium-cds-color-yellow-900: #99470A\n  --podium-cds-color-green-50: #DFFFB9\n  --podium-cds-color-green-100: #BDFB72\n  --podium-cds-color-green-200: #83F13B\n  --podium-cds-color-green-300: #5FE63F\n  --podium-cds-color-green-400: #3CCD49\n  --podium-cds-color-green-500: #1EAA52\n  --podium-cds-color-green-600: #007D48\n  --podium-cds-color-green-700: #00643E\n  --podium-cds-color-green-800: #005034\n  --podium-cds-color-green-900: #003C2A\n  --podium-cds-color-blue-50: #D6EEFF\n  --podium-cds-color-blue-100: #B9E2FF\n  --podium-cds-color-blue-200: #87CEFF\n  --podium-cds-color-blue-300: #4CABFF\n  --podium-cds-color-blue-400: #1190FF\n  --podium-cds-color-blue-500: #1151FF\n  --podium-cds-color-blue-600: #0034E3\n  --podium-cds-color-blue-700: #061DBB\n  --podium-cds-color-blue-800: #02068E\n  --podium-cds-color-blue-900: #020664\n  --podium-cds-color-teal-50: #D4FFFB\n  --podium-cds-color-teal-100: #9CFFF7\n  --podium-cds-color-teal-200: #69EEE7\n  --podium-cds-color-teal-300: #31CBCB\n  --podium-cds-color-teal-400: #1CB2B6\n  --podium-cds-color-teal-500: #008E98\n  --podium-cds-color-teal-600: #0A7281\n  --podium-cds-color-teal-700: #005C68\n  --podium-cds-color-teal-800: #004856\n  --podium-cds-color-teal-900: #043441\n  --podium-cds-color-purple-50: #E4E1FC\n  --podium-cds-color-purple-100: #D6D1FF\n  --podium-cds-color-purple-200: #BEAFFD\n  --podium-cds-color-purple-300: #A082FF\n  --podium-cds-color-purple-400: #8755FF\n  --podium-cds-color-purple-500: #6E0FF6\n  --podium-cds-color-purple-600: #5400CC\n  --podium-cds-color-purple-700: #4400A9\n  --podium-cds-color-purple-800: #300080\n  --podium-cds-color-purple-900: #1C0060\n  --podium-cds-color-pink-50: #FFE1F3\n  --podium-cds-color-pink-100: #FFCDEA\n  --podium-cds-color-pink-200: #FFB0DD\n  --podium-cds-color-pink-300: #FE90CC\n  --podium-cds-color-pink-400: #FC5DBB\n  --podium-cds-color-pink-500: #ED1AA0\n  --podium-cds-color-pink-600: #D00B84\n  --podium-cds-color-pink-700: #A50767\n  --podium-cds-color-pink-800: #770349\n  --podium-cds-color-pink-900: #4C012D\n  --podium-cds-color-grey-50: #FAFAFA\n  --podium-cds-color-grey-100: #F5F5F5\n  --podium-cds-color-grey-200: #E5E5E5\n  --podium-cds-color-grey-300: #CACACB\n  --podium-cds-color-grey-400: #9E9EA0\n  --podium-cds-color-grey-500: #707072\n  --podium-cds-color-grey-600: #4B4B4D\n  --podium-cds-color-grey-700: #39393B\n  --podium-cds-color-grey-800: #28282A\n  --podium-cds-color-grey-900: #1F1F21\n  --podium-cds-color-scrim-100: rgba(17,17,17,0.36)\n  --podium-cds-color-scrim-100-inverse: rgba(17,17,17,0.80)\n  --podium-cds-color-scrim-primary: rgba(17,17,17,0.36)\n  --podium-cds-color-scrim-primary-inverse: rgba(17,17,17,0.80)\n  --podium-cds-color-focus-shadow: rgba(17, 17, 17, 0.12)\n  --podium-cds-color-box-focus-ring: rgba(39, 93, 197, 1)\n  --podium-cds-button-color-bg-secondary: transparent\n\n【使用フォント】\n  VideoJS\n  Arial\n  inherit\n  Helvetica Neue\n  nike-glyphs\n  Nike TG\n  Nike Futura ND\n  Nike Futura\n  Helvetica Now Text\n  Helvetica Now Text Medium\n  Helvetica Now Display Medium\n  Palatino LT Pro Light\n  monospace\n  Neue Frutiger Arabic\n\n【角丸パターン】\n  0.3em\n  25px\n  inherit\n  8px\n  20px\n  2px\n  50%\n  4px\n\n【ボタンスタイル】\n  ★ .nds-btn.nds-button--icon-only.search-start-btn.css-1ygbog4.btn-secondary-dark（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-secondary)\n    color: var(--podium-cds-color-text-primary-on-light)\n  ★ .nds-btn.nds-button--icon-only.nav-favorites.css-1j8f80w.btn-primary-dark（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    display: inline-flex\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-primary)\n  ★ .nds-btn.nds-button--icon-only.nav-bag-icon.css-vwffdb.btn-primary-light（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-primary-on-dark)\n    color: var(--podium-cds-color-text-primary-on-light)\n  ★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._4EfJ5rYM.css-1k7g084.ex41m6f0.btn-primary-dark（実際のボタン要素で10回使用）\n    margin-left: 0\n    margin-right: 6px\n    margin-top: 6px\n    max-width: 100%\n    line-height: normal\n    color: var(--podium-cds-color-text-primary-on-dark)\n  ★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._3p27lmat.css-vhpoxs.ex41m6f0.btn-primary-light（実際のボタン要素で10回使用）\n    margin-left: 0\n    margin-right: 6px\n    margin-top: 6px\n    max-width: 100%\n    line-height: normal\n    color: var(--podium-cds-color-text-primary-on-light)\n\n【カードスタイル】\n  .card.merchMenu\n    max-width: 920px\n    margin: 0\n  [data-qa=card-overlay-content] ._2JgqWhO4.below\n    padding-right: 0\n    max-width: none\n  .ncss-col-lg-12.ncss-col-lg-offset-0 [data-qa=card-overlay-content] ._2JgqWhO4.below\n    padding-right: 0\n    max-width: none\n  .grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2p2-DY4s,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2p2-DY4s\n    width: 40%\n  .E5X3EFEx [data-qa=card-overlay]\n    display: block\n\n【フォームスタイル】\n  .css-1be0g1s .search-input-container input\n    border: 0\n    margin: 0\n    padding: 7px 0px 9px 2px\n    width: 100%\n    font: var(--podium-cds-typography-body1)\n    color: var(--podium-cds-color-text-primary)\n  .textarea-container .ncss-textarea\n    padding: var(--podium-cds-size-spacing-grid-gutter)\n    margin-top: 0\n    border-radius: var(--podium-cds-size-border-radius-s)\n    border: 0\n    width: 100%\n    height: 100%\n  .ncss-input\n    border: 0\n    margin: 0\n    padding: var(--podium-cds-size-spacing-grid-gutter)\n    width: 100%\n    font: var(--podium-cds-typography-320-to-959-editorial-body1)\n    color: var(--podium-cds-color-black)\n  .ncss-checkbox-container .checkbox-box\n    background: 0 0\n    height: 20px\n    width: 20px\n    border: 1.5px solid var(--podium-cds-color-border-primary)\n    border-radius: 6px\n  .vjs-menu li.vjs-selected,.vjs-menu li.vjs-selected:focus,.vjs-menu li.vjs-selected:hover,.js-focus-visible .vjs-menu li.vjs-selected:hover\n    background-color: #fff\n    color: #2B333F\n\n【ロゴ・ビジュアル素材】\n  https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg\n\n【取得CSSファイル】\n  https://static-assets.nike.com/video-player/2.2.0/nike-one-video-player.min.css\n  https://www.nike.com/_next/static/chunks/deac8c7d545e2588.css\n  https://www.nike.com/assets/ncss/glyphs/2.6/css/glyphs.min.css\n  https://www.nike.com/static/ncss/5.0/dotcom/desktop/css/ncss.en-us.min.css"
+  "css_summary": "【抽出カラー（頻度順）】\n  #73859F  background-color  出現22回  [external-css]\n  #111111  --podium-cds-color-black  出現19回  [external-css+style-tag]\n  #E5E5E5  --theme-borderstrong  出現16回  [style-tag]\n  #2B333F  background-color  出現14回  [external-css]\n  #4D4D4D  --theme-border  出現12回  [style-tag]\n  #707072  color  出現8回  [external-css]\n  #1151FF  --podium-cds-color-blue-500  出現7回  [external-css+style-tag]\n  #707070  color  出現4回  [style-tag]\n  #F5F5F5  background  出現4回  [style-tag]\n  #CCCCCC  --theme-borderlabel  出現3回  [style-tag]\n  #EC3EA7  background  出現2回  [external-css]\n  #FF623A  background  出現2回  [external-css]\n  #FBAD22  background  出現2回  [external-css]\n  #FAD81B  background  出現2回  [external-css]\n  #99D531  background  出現2回  [external-css]\n\n【CSS カラー変数（:root）】\n  --podium-cds-color-black: #111111\n  --podium-cds-color-white: #FFFFFF\n  --podium-cds-color-red-50: #FFE5E5\n  --podium-cds-color-red-100: #FFC3C4\n  --podium-cds-color-red-200: #FFABAD\n  --podium-cds-color-red-300: #FF7975\n  --podium-cds-color-red-400: #FF4E4A\n  --podium-cds-color-red-500: #EE0005\n  --podium-cds-color-red-600: #D30005\n  --podium-cds-color-red-700: #A70E00\n  --podium-cds-color-red-800: #780700\n  --podium-cds-color-red-900: #530300\n  --podium-cds-color-orange-50: #FFE2D6\n  --podium-cds-color-orange-100: #FFC5AD\n  --podium-cds-color-orange-200: #FFA584\n  --podium-cds-color-orange-300: #FF8255\n  --podium-cds-color-orange-400: #FF5000\n  --podium-cds-color-orange-500: #D33918\n  --podium-cds-color-orange-600: #9F290F\n  --podium-cds-color-orange-700: #7E200D\n  --podium-cds-color-orange-800: #5D180C\n  --podium-cds-color-orange-900: #3E1009\n  --podium-cds-color-yellow-50: #FEF087\n  --podium-cds-color-yellow-100: #FEEA55\n  --podium-cds-color-yellow-200: #FEDF35\n  --podium-cds-color-yellow-300: #FFD11B\n  --podium-cds-color-yellow-400: #FDC400\n  --podium-cds-color-yellow-500: #FCA600\n  --podium-cds-color-yellow-600: #F08E0A\n  --podium-cds-color-yellow-700: #E57A09\n  --podium-cds-color-yellow-800: #CD6006\n  --podium-cds-color-yellow-900: #99470A\n  --podium-cds-color-green-50: #DFFFB9\n  --podium-cds-color-green-100: #BDFB72\n  --podium-cds-color-green-200: #83F13B\n  --podium-cds-color-green-300: #5FE63F\n  --podium-cds-color-green-400: #3CCD49\n  --podium-cds-color-green-500: #1EAA52\n  --podium-cds-color-green-600: #007D48\n  --podium-cds-color-green-700: #00643E\n  --podium-cds-color-green-800: #005034\n  --podium-cds-color-green-900: #003C2A\n  --podium-cds-color-blue-50: #D6EEFF\n  --podium-cds-color-blue-100: #B9E2FF\n  --podium-cds-color-blue-200: #87CEFF\n  --podium-cds-color-blue-300: #4CABFF\n  --podium-cds-color-blue-400: #1190FF\n  --podium-cds-color-blue-500: #1151FF\n  --podium-cds-color-blue-600: #0034E3\n  --podium-cds-color-blue-700: #061DBB\n  --podium-cds-color-blue-800: #02068E\n  --podium-cds-color-blue-900: #020664\n  --podium-cds-color-teal-50: #D4FFFB\n  --podium-cds-color-teal-100: #9CFFF7\n  --podium-cds-color-teal-200: #69EEE7\n  --podium-cds-color-teal-300: #31CBCB\n  --podium-cds-color-teal-400: #1CB2B6\n  --podium-cds-color-teal-500: #008E98\n  --podium-cds-color-teal-600: #0A7281\n  --podium-cds-color-teal-700: #005C68\n  --podium-cds-color-teal-800: #004856\n  --podium-cds-color-teal-900: #043441\n  --podium-cds-color-purple-50: #E4E1FC\n  --podium-cds-color-purple-100: #D6D1FF\n  --podium-cds-color-purple-200: #BEAFFD\n  --podium-cds-color-purple-300: #A082FF\n  --podium-cds-color-purple-400: #8755FF\n  --podium-cds-color-purple-500: #6E0FF6\n  --podium-cds-color-purple-600: #5400CC\n  --podium-cds-color-purple-700: #4400A9\n  --podium-cds-color-purple-800: #300080\n  --podium-cds-color-purple-900: #1C0060\n  --podium-cds-color-pink-50: #FFE1F3\n  --podium-cds-color-pink-100: #FFCDEA\n  --podium-cds-color-pink-200: #FFB0DD\n  --podium-cds-color-pink-300: #FE90CC\n  --podium-cds-color-pink-400: #FC5DBB\n  --podium-cds-color-pink-500: #ED1AA0\n  --podium-cds-color-pink-600: #D00B84\n  --podium-cds-color-pink-700: #A50767\n  --podium-cds-color-pink-800: #770349\n  --podium-cds-color-pink-900: #4C012D\n  --podium-cds-color-grey-50: #FAFAFA\n  --podium-cds-color-grey-100: #F5F5F5\n  --podium-cds-color-grey-200: #E5E5E5\n  --podium-cds-color-grey-300: #CACACB\n  --podium-cds-color-grey-400: #9E9EA0\n  --podium-cds-color-grey-500: #707072\n  --podium-cds-color-grey-600: #4B4B4D\n  --podium-cds-color-grey-700: #39393B\n  --podium-cds-color-grey-800: #28282A\n  --podium-cds-color-grey-900: #1F1F21\n  --podium-cds-color-scrim-100: rgba(17,17,17,0.36)\n  --podium-cds-color-scrim-100-inverse: rgba(17,17,17,0.80)\n  --podium-cds-color-scrim-primary: rgba(17,17,17,0.36)\n  --podium-cds-color-scrim-primary-inverse: rgba(17,17,17,0.80)\n  --podium-cds-color-focus-shadow: rgba(17, 17, 17, 0.12)\n  --podium-cds-color-box-focus-ring: rgba(39, 93, 197, 1)\n  --podium-cds-button-color-bg-secondary: transparent\n\n【使用フォント】\n  VideoJS\n  Arial\n  inherit\n  Helvetica Neue\n  nike-glyphs\n  Nike TG\n  Nike Futura ND\n  Nike Futura\n  Helvetica Now Text\n  Helvetica Now Text Medium\n  Helvetica Now Display Medium\n  Palatino LT Pro Light\n  monospace\n  Neue Frutiger Arabic\n  Helvetica\n  Palatino\n  FuturaNike\n  Avenir Next Thai Bold\n  Neue Helvetica Thai\n  Nike 365 SC\n\n【角丸パターン】\n  0.3em\n  25px\n  inherit\n  8px\n  20px\n  2px\n  50%\n  4px\n\n【ボタンスタイル】\n  ★ .nds-btn.nds-button--icon-only.search-start-btn.css-1ygbog4.btn-secondary-dark（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-secondary)\n    color: var(--podium-cds-color-text-primary-on-light)\n  ★ .css-5ykhiw-f-ui-3（実際のボタン要素で1回使用）\n    font-size: 1rem\n    line-height: 1\n    font-weight: 500\n    font-family: \"Helvetica Neue\",var(--sansFont, \"Helvetica Neue\"),Helvetica,sans-serif\n    font-style: normal\n    height: 40px\n  ★ .nds-btn.nds-button--icon-only.nav-favorites.css-1j8f80w.btn-primary-dark（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    display: inline-flex\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-primary)\n  ★ .nds-btn.nds-button--icon-only.nav-bag-icon.css-vwffdb.btn-primary-light（実際のボタン要素で1回使用）\n    -webkit-flex: 0 0 auto\n    -ms-flex: 0 0 auto\n    flex: 0 0 auto\n    min-width: 36px\n    background: var(--podium-cds-button-color-bg-primary-on-dark)\n    color: var(--podium-cds-color-text-primary-on-light)\n  ★ .nds-btn.inline-flx-btn.dz_xjzja._2minRfAM.bihGx79a._4EfJ5rYM.css-1k7g084.ex41m6f0.btn-primary-dark（実際のボタン要素で10回使用）\n    margin-left: 0\n    margin-right: 6px\n    margin-top: 6px\n    max-width: 100%\n    line-height: normal\n    color: var(--podium-cds-color-text-primary-on-dark)\n\n【カードスタイル】\n  .card.merchMenu\n    max-width: 920px\n    margin: 0\n  [data-qa=card-overlay-content] ._2JgqWhO4.below\n    padding-right: 0\n    max-width: none\n  .ncss-col-lg-12.ncss-col-lg-offset-0 [data-qa=card-overlay-content] ._2JgqWhO4.below\n    padding-right: 0\n    max-width: none\n  .grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.image-card ._13xDDA0A._2p2-DY4s,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2n345FhB,.grid>.grid-row>.grid-col.ncss-col-lg-12.ncss-col-md-12 div>.video-card ._13xDDA0A._2p2-DY4s\n    width: 40%\n  .E5X3EFEx [data-qa=card-overlay]\n    display: block\n\n【フォームスタイル】\n  .css-1be0g1s .search-input-container input\n    border: 0\n    margin: 0\n    padding: 7px 0px 9px 2px\n    width: 100%\n    font: var(--podium-cds-typography-body1)\n    color: var(--podium-cds-color-text-primary)\n  .textarea-container .ncss-textarea\n    padding: var(--podium-cds-size-spacing-grid-gutter)\n    margin-top: 0\n    border-radius: var(--podium-cds-size-border-radius-s)\n    border: 0\n    width: 100%\n    height: 100%\n  .ncss-input\n    border: 0\n    margin: 0\n    padding: var(--podium-cds-size-spacing-grid-gutter)\n    width: 100%\n    font: var(--podium-cds-typography-320-to-959-editorial-body1)\n    color: var(--podium-cds-color-black)\n  .ncss-checkbox-container .checkbox-box\n    background: 0 0\n    height: 20px\n    width: 20px\n    border: 1.5px solid var(--podium-cds-color-border-primary)\n    border-radius: 6px\n  .vjs-menu li.vjs-selected,.vjs-menu li.vjs-selected:focus,.vjs-menu li.vjs-selected:hover,.js-focus-visible .vjs-menu li.vjs-selected:hover\n    background-color: #fff\n    color: #2B333F\n\n【ロゴ・ビジュアル素材】\n  https://c.static-nike.com/a/images/w_1920,c_limit/bzl2wmsfh7kgdkufrrjq/image.jpg\n  https://nmp.about.nike.com/about/prod/f2a30a4b-ddf9-4b3f-9836-042f949ea52c/nike-swoosh-carolyn-davidson-dna-1.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjowLCJ0b3AiOjYzLCJ3aWR0aCI6MzAwMCwiaGVpZ2h0IjoxNjg4fSwicmVzaXplIjp7IndpZHRoIjo5MDB9fX0%3D&amp;s=37d6e419bb6202b7ba572b9ecd33b985ed648997a02884d4819843c96659f131\n  https://about.nike.com/favicon-32x32.png\n  https://nmp.about.nike.com/about/prod/2cb271ab-6c2a-48b0-8ea8-a0b2f5db551e/nike-logo-wordmark-carolyn-davidson-dna-1.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjowLCJ0b3AiOjAsIndpZHRoIjozMDAwLCJoZWlnaHQiOjIwMDB9LCJyZXNpemUiOnsid2lkdGgiOjM4NDB9fX0%3D&amp;s=7d75a78fd5cf98c9d9c60a5eac347cda7f34026b448683db33f8e7298cf1dfbd\n  https://nmp.about.nike.com/about/prod/15da26c8-97b5-418e-a5e8-7753698a34c9/jeff-johnson-original-nike-sunburst-logo-sketch-copy.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozNywidG9wIjo3MDAsIndpZHRoIjoyNDI2LCJoZWlnaHQiOjE2MTV9LCJyZXNpemUiOnsid2lkdGgiOjM4NDB9fX0%3D&amp;s=089a0b6c097c044366b276950e33644b4def21863355c831ecbba6bba21f49e6\n  https://nmp.about.nike.com/about/prod/0cc8c295-a643-44f4-acb3-c18bfc2289f1/nike-swoosh-logo-timeline.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwicmVzaXplIjp7IndpZHRoIjozODQwfX19&amp;s=cf8fdb210e3ba5e388cdfd16eb16711c9303b0a5fd4921afd9d10e3f0600aa84\n  https://nmp.about.nike.com/about/prod/d0e30591-39ac-4f5d-ab75-ef1614253864/nike-nyhq-architecture-offices-new-york-usa-dezeen-hero.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjoyNDYsInRvcCI6MCwid2lkdGgiOjE5OTUsImhlaWdodCI6MTMzMH0sInJlc2l6ZSI6eyJ3aWR0aCI6Mzg0MH19fQ%3D%3D&amp;s=d03083f4983dc9fa2b3f05b5c0bc57c4ddb683701ce2548e6b9719eb3458d867\n\n【取得CSSファイル】\n  https://static-assets.nike.com/video-player/2.2.0/nike-one-video-player.min.css\n  https://www.nike.com/_next/static/chunks/deac8c7d545e2588.css\n  https://www.nike.com/assets/ncss/glyphs/2.6/css/glyphs.min.css\n  https://www.nike.com/static/ncss/5.0/dotcom/desktop/css/ncss.en-us.min.css\n  https://about.nike.com/_next/static/css/4ee0b3ccdc7ce041.css?dpl=86a26917207977bc22c9ff8bec4b755880fcb81a\n  https://about.nike.com/_next/static/css/7d06ebbb4c2a2b8c.css?dpl=86a26917207977bc22c9ff8bec4b755880fcb81a\n  https://about.nike.com/_next/static/css/50cae09f11d7c87b.css?dpl=86a26917207977bc22c9ff8bec4b755880fcb81a"
 }
