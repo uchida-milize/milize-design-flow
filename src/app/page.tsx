@@ -220,20 +220,14 @@ export default async function ClientsIndex() {
         </div>
       </header>
 
-      <div style={{ background: '#fff3f3', borderBottom: '1px solid #fecaca', padding: '10px 24px', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ fontSize: 14, color: '#b91c1c' }}>⚠</span>
-        <span style={{ fontSize: 13, color: '#b91c1c', fontWeight: 500 }}>現在このサービスは開発を一時停止しています。</span>
-      </div>
-
       <div style={{ background: '#f7f9fc' }}>
         <div style={{ padding: '64px 24px 48px' }}>
           <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Client Production Portal</p>
           <h1 className="font-bold mb-4" style={{ fontSize: 36, lineHeight: 1.3, color: '#111827' }}>
-            {`クライアント別`}<br />
-            {`プロダクト＆セールスアセットポータル`}
+            {`クライアント別アセット＆トンマナポータル`}
           </h1>
           <p className="text-sm leading-relaxed" style={{ maxWidth: 560, color: '#6b7280' }}>
-            {`WEBサイトから各社のブランドに関わる情報を抽出して、トンマナやコンポーネントのサンプル出力をおこない、利用可能な素材としてまとめます`}
+            {`WEBサイトから各社のデザイン要素に関わる情報を抽出して、トンマナやコンポーネントのサンプル出力をおこない、利用可能な素材としてまとめます`}
           </p>
         </div>
       </div>
