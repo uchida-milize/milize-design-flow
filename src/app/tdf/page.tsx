@@ -1,0 +1,135 @@
+import { ClientPortalHeader } from '@/components/ClientPortalHeader';
+import { ClientLogoHero } from '@/components/ClientLogoHero';
+import { BrandIdentitySection } from '@/components/BrandIdentitySection';
+
+const clientName = 'Ｔ&Ｄフィナンシャル生命保険株式会社';
+const basePath = '/tdf';
+const slug = basePath.replace(/^\//, '');
+const primaryColor = 'var(--primary-color)';
+
+const colorRatio = [
+  { hex: '#E60044', name: '#E60044', percent: 30.3 },
+  { hex: '#5B6FBC', name: '#5B6FBC', percent: 23.4 },
+  { hex: '#333333', name: '#333333', percent: 17.5 },
+  { hex: '#CCCCCC', name: '#CCCCCC', percent: 16.9 },
+  { hex: '#2A4198', name: '#2A4198', percent: 11.9 },
+];
+
+export default function Home() {
+  return (
+    <div className="tdf-portal">
+      <ClientPortalHeader
+        clientName={clientName}
+        basePath={basePath}
+        active="home"
+        primaryColor={primaryColor}
+      />
+
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
+          <p className="section-label" style={{ color: primaryColor }}>
+            BRAND PORTAL
+          </p>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
+          <p className="section-desc">
+            クライアントごとのトンマナを収集して一覧化をしています。
+          </p>
+        </div>
+
+        <ClientLogoHero slug={slug} name={clientName} primaryColor={primaryColor} />
+
+        <div className="color-bar">
+          {colorRatio.map((c) => (
+            <div
+              key={c.hex}
+              style={{
+                flex: c.percent / 100,
+                background: c.hex,
+                borderRight: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+              }}
+            />
+          ))}
+        </div>
+        <div className="color-bar-labels">
+          {colorRatio.map((c) => (
+            <div key={c.hex} className="color-bar-label-item">
+              <span
+                className="color-bar-swatch"
+                style={{
+                  background: c.hex,
+                  border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                }}
+              />
+              <span>
+                {c.hex} {c.name} {c.percent}%
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 24,
+          }}
+        >
+          <a href={`${basePath}/guidelines`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                GUIDELINES
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                デザインガイドライン
+              </h2>
+              <p className="section-desc">
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
+              </p>
+            </div>
+          </a>
+
+          <a href={`${basePath}/components`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                COMPONENTS
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                コンポーネント
+              </h2>
+              <p className="section-desc">
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
+              </p>
+            </div>
+          </a>
+          <a
+            href={`${basePath}/resources`}
+            className="nav-card"
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <div className="card" style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+              padding: '24px',
+              cursor: 'pointer',
+              flex: 1,
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
+                RESOURCES
+              </div>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
+                リソース
+              </h2>
+              <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <BrandIdentitySection slug={slug} primaryColor={primaryColor} />
+      </div>
+    </div>
+  );
+}
