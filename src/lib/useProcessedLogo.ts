@@ -38,16 +38,24 @@ function processImage(src: string, ext: string): Promise<ProcessedLogo> {
     img.crossOrigin = 'anonymous';
     img.onload = () => { void (async () => {
       try {
-        const w = img.naturalWidth;
-        const h = img.naturalHeight;
-        if (!w || !h) { resolve(fallback); return; }
+        const naturalW = img.naturalWidth;
+        const naturalH = img.naturalHeight;
+        if (!naturalW || !naturalH) { resolve(fallback); return; }
+
+        // SVGは元のviewBoxが小さいピクセル数（例: 24x24）のことが多く、そのまま
+        // canvasに描画するとバウンディングボックス検出が粗くなり、細い曲線の先端が
+        // 検出漏れして「内容が欠けて見える」原因になる。検出用にのみ十分な解像度へ
+        // 拡大して描画する（表示用srcは常にベクターのまま返すため画質には影響しない）。
+        const upscale = isSvg ? Math.max(1, Math.min(40, 480 / Math.max(naturalW, naturalH))) : 1;
+        const w = Math.round(naturalW * upscale);
+        const h = Math.round(naturalH * upscale);
 
         const canvas = document.createElement('canvas');
         canvas.width = w;
         canvas.height = h;
         const ctx = canvas.getContext('2d');
         if (!ctx) { resolve(fallback); return; }
-        ctx.drawImage(img, 0, 0);
+        ctx.drawImage(img, 0, 0, w, h);
 
         const full = ctx.getImageData(0, 0, w, h).data;
         const pixelAt = (x: number, y: number) => {
