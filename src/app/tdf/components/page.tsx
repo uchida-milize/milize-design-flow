@@ -135,7 +135,7 @@ export default function ComponentsPage() {
                     className="component-render"
                     style={{ maxHeight: 220, overflow: 'auto', background: needsDarkBackdrop ? '#1f2937' : undefined }}
                   >
-                    <button style={{ padding: '10px 24px', fontSize: 14, cursor: 'pointer', ...toReactStyle(b.properties) }}>
+                    <button style={{ padding: '10px 24px', fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', ...toReactStyle(b.properties) }}>
                       {isIconOnlyButtonStyle(b.properties) ? '︙' : 'サンプルボタン'}
                     </button>
                   </div>
