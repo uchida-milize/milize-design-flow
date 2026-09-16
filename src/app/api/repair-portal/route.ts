@@ -7,6 +7,7 @@ import {
   DesignColors,
   BrandColor,
 } from '../_lib/portal-helpers';
+import { visualColorWeight, computeColorRatios } from '@/lib/cssStyle';
 
 // ──────────────────────────────────────────
 // カラー抽出・DesignColors 構築ユーティリティ
@@ -16,25 +17,6 @@ interface HexEntry {
   hex: string;
   count: number;
   usages: string[];
-}
-
-/** CSS プロパティに応じた視覚的重みを返す（ver2 generate-portal と同じロジック） */
-function visualWeight(entry: HexEntry): number {
-  if (entry.usages.length === 0) return entry.count;
-  let weightedTotal = 0;
-  let rawTotal = 0;
-  for (const usage of entry.usages) {
-    const u = usage.toLowerCase().trim();
-    let mult = 1;
-    if (/^background(?:-color)?$/.test(u)) mult = 5;
-    else if (/^fill$/.test(u))             mult = 4;
-    else if (u.startsWith('--'))           mult = 3;
-    else if (/border|outline/.test(u))     mult = 1;
-    else if (/^color$/.test(u))            mult = 0.3;
-    weightedTotal += mult;
-    rawTotal++;
-  }
-  return entry.count * (weightedTotal / rawTotal);
 }
 
 /** hex_colors 文字列（extract-css 出力）をパースして HexEntry 配列を返す */
@@ -94,19 +76,18 @@ function buildDesignColors(
 
   // 視覚的重みでソート
   const sorted = Array.from(merged.values())
-    .sort((a, b) => visualWeight(b) - visualWeight(a));
+    .sort((a, b) => visualColorWeight(b) - visualColorWeight(a));
 
   // ブランドカラー：上位5色（白黒無彩色を優先除外）
   const chromatic = sorted.filter(e => isChromatic(e.hex));
   const topColors = (chromatic.length >= 2 ? chromatic : sorted).slice(0, 5);
 
-  // 均等配分（比率が0の場合）
-  const evenRatios: Record<number, number[]> = {
-    1: [100], 2: [65, 35], 3: [60, 25, 15], 4: [55, 25, 12, 8], 5: [50, 22, 13, 9, 6],
-  };
+  // 帯の比率は各色の実際の視覚的重みに比例させる（固定パターンだと、どのクライアントも
+  // 同じ見た目の比率になってしまい実データの差が反映されないため）
+  const ratios = computeColorRatios(topColors.map(c => visualColorWeight(c)));
   const brandColors: BrandColor[] = topColors.map((c, i) => ({
     hex: c.hex,
-    ratio: (evenRatios[topColors.length] ?? [50, 22, 13, 9, 6])[i] ?? 6,
+    ratio: ratios[i] ?? 6,
   }));
 
   const primary   = brandColors[0]?.hex ?? '#004A99';

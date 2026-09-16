@@ -1,5 +1,6 @@
 // Shared helpers for Dify portal generation routes
 // Used by: dify-create/route.ts, dify-resume/route.ts
+import { visualColorWeight, computeColorRatios } from '@/lib/cssStyle';
 
 export const OWNER = 'uchida-milize';
 export const REPO  = 'milize-design-flow';
@@ -555,8 +556,9 @@ export function parseDesignMdColors(nodeOutputs: Record<string, string>): Design
     const sum = brandColors.reduce((s, c) => s + c.ratio, 0);
     if (sum !== 100) brandColors[0].ratio += 100 - sum;
   } else {
-    const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15], 4: [55, 25, 12, 8], 5: [50, 22, 13, 9, 6] };
-    const ratios = evenRatios[rawColors.length] ?? [50, 22, 13, 9, 6];
+    // テキストから比率を一切読み取れなかった場合、根拠なく特定の色を大きく見せるより
+    // 均等割りの方が誠実なフォールバックになる
+    const ratios = computeColorRatios(rawColors.map(() => 1));
     brandColors = rawColors.map((c, i) => ({ hex: c.hex, ratio: ratios[i] ?? 6 }));
   }
 
@@ -581,12 +583,21 @@ export function parseDesignMdColors(nodeOutputs: Record<string, string>): Design
 export function parseCssInfoColors(cssInfo: { hex_colors?: string } | null | undefined): DesignColors | null {
   if (!cssInfo?.hex_colors) return null;
 
-  const hexes: string[] = [];
+  // "#hex | usage1, usage2 | 出現N回 | [sources]" 形式（extract-css の出力）をパースする。
+  // usages/countは、カラー帯の比率を実際の視覚的重みに比例させるために使う。
+  interface Entry { hex: string; usages: string[]; count: number }
+  const entries: Entry[] = [];
+  const lineRe = /^#([0-9A-Fa-f]{6})\s*(?:\|([^|]*)\|\s*出現(\d+)回)?/;
   for (const line of cssInfo.hex_colors.split('\n')) {
-    const m = line.match(/^#([0-9A-Fa-f]{6})/);
-    if (m) hexes.push('#' + m[1].toUpperCase());
+    const m = line.match(lineRe);
+    if (!m) continue;
+    entries.push({
+      hex: '#' + m[1].toUpperCase(),
+      usages: (m[2] ?? '').split(',').map(s => s.trim()).filter(Boolean),
+      count: m[3] ? parseInt(m[3]) : 1,
+    });
   }
-  if (hexes.length === 0) return null;
+  if (entries.length === 0) return null;
 
   const lum = (hex: string) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -596,29 +607,31 @@ export function parseCssInfoColors(cssInfo: { hex_colors?: string } | null | und
   };
 
   // 近黒・近白はテキスト/背景の候補として扱い、ブランドカラー本体からは除外する
-  const darkCandidate = hexes.find(h => lum(h) <= 0.08);
-  const lightCandidate = hexes.find(h => lum(h) >= 0.94);
-  const meaningful = hexes.filter(h => lum(h) > 0.08 && lum(h) < 0.94);
+  const darkCandidate = entries.find(e => lum(e.hex) <= 0.08)?.hex;
+  const lightCandidate = entries.find(e => lum(e.hex) >= 0.94)?.hex;
+  const meaningful = entries.filter(e => lum(e.hex) > 0.08 && lum(e.hex) < 0.94);
 
-  // 出現頻度順（hex_colors の記載順）で重複しない色を上位5件まで採用
+  // 実際の視覚的重み順（背景/塗り等を重視）で重複しない色を上位5件まで採用
+  const pool = meaningful.length > 0 ? meaningful : entries;
   const seen = new Set<string>();
-  const top: string[] = [];
-  for (const h of (meaningful.length > 0 ? meaningful : hexes)) {
-    if (seen.has(h)) continue;
-    seen.add(h);
-    top.push(h);
+  const top: Entry[] = [];
+  for (const e of [...pool].sort((a, b) => visualColorWeight(b) - visualColorWeight(a))) {
+    if (seen.has(e.hex)) continue;
+    seen.add(e.hex);
+    top.push(e);
     if (top.length >= 5) break;
   }
   if (top.length === 0) return null;
 
-  const evenRatios: Record<number, number[]> = { 1: [100], 2: [65, 35], 3: [60, 25, 15], 4: [55, 25, 12, 8], 5: [50, 22, 13, 9, 6] };
-  const ratios = evenRatios[top.length] ?? [50, 22, 13, 9, 6];
-  const brandColors: BrandColor[] = top.map((hex, i) => ({ hex, ratio: ratios[i] ?? 6 }));
+  // 帯の比率は各色の実際の視覚的重みに比例させる（固定パターンだと、どのクライアントも
+  // 同じ見た目の比率になってしまい実データの差が反映されないため）
+  const ratios = computeColorRatios(top.map(e => visualColorWeight(e)));
+  const brandColors: BrandColor[] = top.map((e, i) => ({ hex: e.hex, ratio: ratios[i] ?? 6 }));
 
   return {
-    primary:   top[0],
-    secondary: top[1] ?? '#333333',
-    accent:    top[2] ?? top[0],
+    primary:   top[0].hex,
+    secondary: top[1]?.hex ?? '#333333',
+    accent:    top[2]?.hex ?? top[0].hex,
     text:      darkCandidate ?? '#111827',
     bg:        lightCandidate ?? '#FFFFFF',
     brandColors,

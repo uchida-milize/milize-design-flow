@@ -64,3 +64,68 @@ export function isLightCssColor(value: string | undefined): boolean {
 
   return false;
 }
+
+/**
+ * 色の「視覚的な重み」を、出現回数とCSS上の用途から算出する。
+ * background/fill等、実際に画面上の面積を大きく占める用途を重視し、
+ * 文字色（color）のような細い用途は軽く扱う。プライマリカラー判定・
+ * カラー帯の比率算出の両方で共通して使う。
+ */
+export function visualColorWeight(entry: { count: number; usages: string[] }): number {
+  if (entry.usages.length === 0) return entry.count;
+  let weightedTotal = 0;
+  let rawTotal = 0;
+  for (const usage of entry.usages) {
+    const u = usage.toLowerCase().trim();
+    let mult = 1;
+    if (/^background(?:-color)?$/.test(u)) mult = 5;
+    else if (/^fill$/.test(u)) mult = 4;
+    else if (u.startsWith('--')) mult = 3;
+    else if (/border|outline/.test(u)) mult = 1;
+    else if (/^color$/.test(u)) mult = 0.3;
+    weightedTotal += mult;
+    rawTotal++;
+  }
+  return entry.count * (weightedTotal / rawTotal);
+}
+
+/** カラー帯の中でどんなに重みが小さい色でも視認できるようにする最低比率（%） */
+const MIN_COLOR_RATIO_PERCENT = 5;
+
+/**
+ * 色の重み配列から、実際の重みに比例した表示比率（%、合計100）を算出する。
+ * 全クライアント共通の固定パターン（50/22/13/9/6等）に頼ると、実際の色使いの
+ * 差がカラー帯の見た目にまったく反映されなくなるため、それを避けるための関数。
+ * 重みが0以下（データが取れない）場合は均等割りにフォールバックする。
+ */
+export function computeColorRatios(weights: number[]): number[] {
+  if (weights.length === 0) return [];
+  if (weights.length === 1) return [100];
+
+  const total = weights.reduce((a, b) => a + b, 0);
+  if (total <= 0) {
+    const even = Math.round((100 / weights.length) * 10) / 10;
+    const ratios = weights.map(() => even);
+    ratios[0] += 100 - ratios.reduce((a, b) => a + b, 0);
+    return ratios;
+  }
+
+  // 重みに比例した比率を計算した上で、最低比率を下回る色を底上げし、
+  // その分を最低比率を上回っている色から比例配分で差し引く
+  let ratios = weights.map((w) => (w / total) * 100);
+  for (let iter = 0; iter < weights.length; iter++) {
+    const deficits = ratios.map((r) => Math.max(0, MIN_COLOR_RATIO_PERCENT - r));
+    const totalDeficit = deficits.reduce((a, b) => a + b, 0);
+    if (totalDeficit <= 0.01) break;
+    const donorTotal = ratios.reduce((sum, r, i) => sum + (deficits[i] === 0 ? r : 0), 0);
+    if (donorTotal <= 0) break;
+    ratios = ratios.map((r, i) =>
+      deficits[i] > 0 ? MIN_COLOR_RATIO_PERCENT : r - totalDeficit * (r / donorTotal),
+    );
+  }
+
+  // 丸め誤差を最も重みの大きい色（先頭）に寄せて合計をちょうど100にする
+  const rounded = ratios.map((r) => Math.round(r * 10) / 10);
+  rounded[0] = Math.round((rounded[0] + (100 - rounded.reduce((a, b) => a + b, 0))) * 10) / 10;
+  return rounded;
+}
