@@ -8,11 +8,11 @@ const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';
 
 const colorRatio = [
-  { hex: '#0041C0', name: '#0041C0', percent: 50 },
-  { hex: '#666666', name: '#666666', percent: 22 },
-  { hex: '#E6E6E6', name: '#E6E6E6', percent: 13 },
-  { hex: '#1F1F1F', name: '#1F1F1F', percent: 9 },
-  { hex: '#CCCCCC', name: '#CCCCCC', percent: 6 },
+  { hex: '#0041C0', name: '#0041C0', percent: 29.8 },
+  { hex: '#666666', name: '#666666', percent: 24.1 },
+  { hex: '#E6E6E6', name: '#E6E6E6', percent: 24.2 },
+  { hex: '#1F1F1F', name: '#1F1F1F', percent: 14.4 },
+  { hex: '#CCCCCC', name: '#CCCCCC', percent: 7.5 },
 ];
 
 export default function Home() {
