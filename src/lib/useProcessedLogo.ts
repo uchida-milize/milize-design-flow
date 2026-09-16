@@ -173,20 +173,24 @@ async function retightenSvgViewBox(
 
     const marginX = contentW * CONTENT_MARGIN_RATIO;
     const marginY = contentH * CONTENT_MARGIN_RATIO;
-    const newViewBox = [minX - marginX, minY - marginY, contentW + marginX * 2, contentH + marginY * 2]
+    const newW = contentW + marginX * 2;
+    const newH = contentH + marginY * 2;
+    const newViewBox = [minX - marginX, minY - marginY, newW, newH]
       .map((n) => Number(n.toFixed(3)))
       .join(' ');
 
-    // ルートの<svg>タグを対象に、viewBoxを詰め替えた上でwidth/height属性を除去する。
-    // width/height（例: 24px×24px）を残したままだと、そのアスペクト比が画像の
-    // 本来のサイズとしてobject-fit等の計算に使われ続け、正方形キャンバスの中に
-    // 新しいviewBoxが再度レターボックスされて詰めた効果が打ち消されてしまうため、
-    // 除去してviewBox自体のアスペクト比に委ねる（nullを許容する正規表現マッチのため
-    // rootTagが見つからない場合はフォールバックする）。
+    // ルートの<svg>タグを対象に、viewBoxを詰め替えた上でwidth/height属性も新しい
+    // viewBoxの縦横比に更新する。width/height（例: 24px×24px）を古いまま残すと、
+    // そのアスペクト比が画像の本来のサイズとしてobject-fit等の計算に使われ続け、
+    // 正方形キャンバスの中に新しいviewBoxが再度レターボックスされて詰めた効果が
+    // 打ち消されてしまう。width/height省略でviewBoxのアスペクト比に委ねる方法は
+    // ブラウザによって挙動が異なる場合があるため、明示的に数値を設定して
+    // ブラウザ間の差異を避ける（rootTagが見つからない場合はフォールバックする）。
     const rootMatch = /<svg\b[^>]*>/i.exec(svgText);
     if (!rootMatch) return null;
     let rootTag = rootMatch[0].replace(/viewBox\s*=\s*["'][^"']+["']/i, `viewBox="${newViewBox}"`);
     rootTag = rootTag.replace(/\s(?:width|height)\s*=\s*["'][^"']*["']/gi, '');
+    rootTag = rootTag.replace(/^<svg\b/i, `<svg width="${newW.toFixed(3)}" height="${newH.toFixed(3)}"`);
     const retargeted = svgText.slice(0, rootMatch.index) + rootTag + svgText.slice(rootMatch.index + rootMatch[0].length);
     return `data:image/svg+xml;utf8,${encodeURIComponent(retargeted)}`;
   } catch {
