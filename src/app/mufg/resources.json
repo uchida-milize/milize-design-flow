@@ -2,15 +2,108 @@
   "selected_urls": "https://www.mufg.jp/profile/brand/ourbrand/index.html||カラー,ロゴ・CI,フォント\nhttps://commons.wikimedia.org/wiki/File:Mitsubishi_UFJ_Financial_Group.svg||ロゴ・CI",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#E60000 | color, border-bottom, background, border-top, border-color | 出現152回 | [external-css]\n#333333 | color, background, background-color | 出現73回 | [external-css]\n#DCDCDC | border-left, background, border-bottom, border, border-top | 出現68回 | [external-css]\n#999999 | color, border, background, border-left-color | 出現23回 | [external-css]\n#5A5A5A | color, border, background-color, border-top, border-right | 出現22回 | [external-css]\n#F5F5F5 | background | 出現20回 | [external-css]\n#F2D6C5 | background, border-color, background-color | 出現18回 | [external-css]\n#DDDDDD | border-top, border-bottom, background, border | 出現17回 | [external-css]\n#E6E6E6 | border-color, background, border | 出現14回 | [external-css]\n#666666 | color, background-color, border-left | 出現14回 | [external-css]\n#F7F7F7 | background, background-color | 出現12回 | [external-css]\n#EBEBEB | background, border-color | 出現10回 | [external-css]\n#EEEEEE | background-color, background | 出現10回 | [external-css]\n#CCCCCC | background, background-color | 出現9回 | [external-css]\n#EDEDED | background | 出現8回 | [external-css]\n#B70005 | color | 出現6回 | [external-css]\n#820000 | background | 出現6回 | [external-css]\n#3E3E3E | color, background-color | 出現4回 | [external-css]\n#DCE6E1 | background, background-color | 出現4回 | [external-css]\n#D8D9EC | background, background-color | 出現4回 | [external-css]\n#F4E6BF | background, background-color | 出現4回 | [external-css]\n#676767 | color | 出現4回 | [external-css]\n#6367B4 | background-color, color | 出現4回 | [external-css]\n#D29B00 | background-color, color | 出現4回 | [external-css]\n#739A89 | background-color, color | 出現4回 | [external-css]\n#742B56 | background-color, color | 出現4回 | [external-css]\n#CB5A19 | background-color, color | 出現4回 | [external-css]\n#1B4B7D | background-color, color | 出現4回 | [external-css]\n#797979 | background | 出現2回 | [external-css]\n#F6F6F6 | background | 出現2回 | [external-css]",
+    "hex_colors": "#E60000 | color, border-bottom, background, border-top, border-color | 出現379回 | [external-css]\n#333333 | color, background, background-color, outline, border | 出現149回 | [external-css]\n#D4D4D4 | border, border-bottom, border-left, background-color, border-top | 出現75回 | [external-css]\n#DCDCDC | border-left, background, border-bottom, border, border-top | 出現68回 | [external-css]\n#DDDDDD | border-top, border-bottom, background, border, border-right | 出現57回 | [external-css]\n#5A5A5A | color, border, background-color, border-top, border-right | 出現43回 | [external-css]\n#CCCCCC | background, background-color, border, border-bottom, border-left | 出現35回 | [external-css]\n#999999 | color, border, background, border-left-color, background-color | 出現32回 | [external-css]\n#EEEEEE | background-color, background, border, border-bottom | 出現32回 | [external-css]\n#666666 | color, background-color, border-left, background, border | 出現31回 | [external-css]\n#F2F2F2 | background-color, border-color, background | 出現28回 | [external-css]\n#F2D6C5 | background, border-color, background-color | 出現23回 | [external-css]\n#F5F5F5 | background | 出現20回 | [external-css]\n#F7F7F7 | background, background-color | 出現15回 | [external-css]\n#E6E6E6 | border-color, background, border | 出現14回 | [external-css]\n#EBEBEB | background, border-color, border, border-bottom | 出現13回 | [external-css]\n#EDEDED | background, border-left | 出現10回 | [external-css]\n#D29B00 | background-color, color, border-color | 出現10回 | [external-css]\n#2A3F98 | background-color, border-left, border-color | 出現10回 | [external-css]\n#6367B4 | background-color, color, border-color | 出現9回 | [external-css]\n#739A89 | background-color, color, border-color | 出現9回 | [external-css]\n#742B56 | background-color, color, border-color | 出現9回 | [external-css]\n#CB5A19 | background-color, color, border-color | 出現9回 | [external-css]\n#1B4B7D | background-color, color, border-color | 出現9回 | [external-css]\n#D5D5D5 | -webkit-box-shadow, box-shadow | 出現8回 | [external-css]\n#B70005 | color | 出現6回 | [external-css]\n#820000 | background | 出現6回 | [external-css]\n#FBFBFB | background-color | 出現6回 | [external-css]\n#AADDD9 | background-color, border-color | 出現6回 | [external-css]\n#DCE6E1 | background, background-color | 出現5回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
       "Graphik",
       "ヒラギノ角ゴ Pro",
       "Arial",
-      "slick"
+      "slick",
+      "Hiragino Kaku Gothic Pro",
+      "helvetica"
     ],
     "button_styles": [
+      {
+        "selector": "★ .a-btn.a-btn_bg-gray（実際のボタン要素で2回使用）",
+        "properties": {
+          "color": "#fff",
+          "font-size": "1.6rem",
+          "display": "block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px 35px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#5a5a5a",
+          "font-weight": "normal",
+          "border-color": "#5a5a5a"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": "★ .a-btn.a-btn_bg-red.a-btn-newwin（実際のボタン要素で1回使用）",
+        "properties": {
+          "color": "#fff",
+          "padding-left": "auto",
+          "padding-right": "38px",
+          "height": "auto",
+          "font-size": "1.6rem",
+          "display": "inline-block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px 35px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#e60000",
+          "font-weight": "normal",
+          "border-color": "#e60000"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": "★ .a-btn（実際のボタン要素で22回使用）",
+        "properties": {
+          "font-size": "1.6rem",
+          "color": "#333",
+          "display": "block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px 35px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#fff"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": "★ .a-btn.a-btn-newwin（実際のボタン要素で4回使用）",
+        "properties": {
+          "height": "auto",
+          "padding-right": "38px",
+          "font-size": "1.6rem",
+          "color": "#333",
+          "display": "inline-block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px 35px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#fff",
+          "padding-left": "auto"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": "★ .a-btn.a-btn-small.a-btn-newwin（実際のボタン要素で1回使用）",
+        "properties": {
+          "height": "auto",
+          "padding-right": "30px",
+          "font-size": "1.2rem",
+          "color": "#333",
+          "display": "inline-block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px 35px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#fff",
+          "padding-left": "25px",
+          "line-height": "1.4",
+          "padding-top": "10px",
+          "padding-bottom": "10px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
       {
         "selector": "★ .t-header_link-primary-acd.t-header_link-primary-profile.js-header-mega-btn（実際のボタン要素で1回使用）",
         "properties": {
@@ -25,6 +118,19 @@
           "text-align": "center"
         },
         "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
+      },
+      {
+        "selector": "★ .t-header_search_btn（実際のボタン要素で3回使用）",
+        "properties": {
+          "font-size": "1.4rem",
+          "color": "#fff",
+          "background-color": "#888888",
+          "padding": "20px 0",
+          "line-height": "1",
+          "width": "10.83%",
+          "height": "100%"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
       },
       {
         "selector": "★ .t-header_menu_btn.js-header-menu（実際のボタン要素で1回使用）",
@@ -71,6 +177,49 @@
         "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
       },
       {
+        "selector": ".m-btnclose",
+        "properties": {
+          "font-size": "1.2rem",
+          "color": "#333",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "width": "auto",
+          "text-align": "center",
+          "background-color": "#fff",
+          "display": "inline-block",
+          "padding": "5px 20px 5px 30px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".a-btn",
+        "properties": {
+          "color": "#333",
+          "display": "block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px 35px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#fff"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".a-btn-s",
+        "properties": {
+          "color": "#333",
+          "display": "block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px",
+          "padding": "15px",
+          "width": "100%",
+          "text-align": "center",
+          "background-color": "#fff"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
         "selector": ".a-btn-hajimete",
         "properties": {
           "color": "#e60000",
@@ -86,195 +235,74 @@
         "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
       },
       {
-        "selector": ".a-btn-print",
+        "selector": ".t-hero_login_btn",
+        "properties": {
+          "display": "block",
+          "background-color": "white",
+          "border-radius": "3px",
+          "padding": "10px 22px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-accordion_btn",
         "properties": {
           "color": "#333",
-          "font-size": "1.4rem",
-          "line-height": "1.2",
-          "background": "#fff",
+          "display": "block",
+          "background-color": "#f2f2f2",
+          "border": "1px solid #d4d4d4",
+          "padding": "13px 50px 13px 30px",
+          "min-height": "0",
+          "margin": "-1px 0 0 0"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-faq_btn",
+        "properties": {
+          "color": "#333",
+          "display": "block",
+          "background-color": "#f2f2f2",
+          "border": "1px solid #d4d4d4",
+          "padding": "13px 40px 13px 30px",
+          "min-height": "0",
+          "margin": "-1px 0 0 0"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-slide_info_btn",
+        "properties": {
+          "display": "block",
+          "background-color": "white",
+          "border-radius": "3px",
+          "padding": "10px 22px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".a-btn-inline-cta-red",
+        "properties": {
           "display": "inline-block",
+          "width": "30%",
+          "padding": "15px 35px",
+          "font-size": "1.8rem",
           "text-align": "center",
-          "max-width": "186px",
-          "width": "100%",
-          "padding": "8px",
-          "border": "1px solid #dcdcdc"
+          "border-radius": "3px",
+          "background-color": "#fff",
+          "vertical-align": "middle"
         },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
       },
       {
-        "selector": ".a-btn-year-dropdown",
-        "properties": {
-          "color": "#333",
-          "font-size": "1.4rem",
-          "line-height": "1.2",
-          "background": "#fff",
-          "text-align": "left",
-          "display": "block",
-          "width": "100%",
-          "padding": "15px 12px"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".t-header_drawer_close_btn",
-        "properties": {
-          "font-size": "1.5rem",
-          "background": "#f7f7f7",
-          "display": "flex",
-          "-webkit-align-items": "center",
-          "align-items": "center",
-          "text-align": "center",
-          "width": "100%",
-          "height": "60px",
-          "padding": "0 18px"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".t-header_mega_close_btn",
-        "properties": {
-          "color": "#666",
-          "font-size": "1.6rem",
-          "font-weight": "bold",
-          "line-height": "1.2",
-          "width": "100%",
-          "padding": ".3em .5em .7em"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".o-slider_dot > li > button",
-        "properties": {
-          "background": "#ccc",
-          "display": "block",
-          "width": "10px",
-          "height": "10px",
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": "/*---------------\n5-1 Button\n------------------*/\n.a-btn, .a-btn-large, .a-btn-medium, .a-btn-small",
-        "properties": {
-          "color": "#e60000",
-          "line-height": "1.2",
-          "background": "#fff",
-          "display": "inline-flex",
-          "-webkit-align-items": "center",
-          "align-items": "center",
-          "-webkit-justify-content": "center",
-          "justify-content": "center",
-          "text-align": "center",
-          "width": "100%",
-          "border": "1px solid #e60000"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn-modal-close",
+        "selector": ".a-btn_login-direct",
         "properties": {
           "display": "block",
-          "background": "#e60000 url(\"data:image/svg+xml",
-          "background-size": "28px auto",
-          "width": "50px",
-          "height": "50px",
-          "border-radius": "50%"
+          "background-color": "#e60000",
+          "border-radius": "3px",
+          "padding": "17px 28px"
         },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn-modal-prev, .a-btn-modal-next",
-        "properties": {
-          "display": "block",
-          "background": "#333 url(\"data:image/svg+xml",
-          "background-size": "13px auto",
-          "width": "50px",
-          "height": "50px",
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn-year-prev, .a-btn-year-next",
-        "properties": {
-          "display": "block",
-          "background": "url(\"data:image/svg+xml",
-          "background-size": "100%",
-          "width": "16px",
-          "height": "30px",
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".o-slider_dot>li>button",
-        "properties": {
-          "background": "#ccc",
-          "display": "block",
-          "width": "10px",
-          "height": "10px",
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn,.a-btn-large,.a-btn-medium,.a-btn-small",
-        "properties": {
-          "color": "#e60000",
-          "line-height": "1.2",
-          "background": "#fff",
-          "display": "inline-flex",
-          "-webkit-align-items": "center",
-          "align-items": "center",
-          "-webkit-justify-content": "center",
-          "justify-content": "center",
-          "text-align": "center",
-          "width": "100%",
-          "border": "1px solid #e60000"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn-modal-prev,.a-btn-modal-next",
-        "properties": {
-          "display": "block",
-          "background": "#333 url(\"data:image/svg+xml",
-          "background-size": "13px auto",
-          "width": "50px",
-          "height": "50px",
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn-year-prev,.a-btn-year-next",
-        "properties": {
-          "display": "block",
-          "background": "url(\"data:image/svg+xml",
-          "background-size": "100%",
-          "width": "16px",
-          "height": "30px",
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".a-btn-year",
-        "properties": {
-          "text-align": "center",
-          "width": "100%",
-          "padding": "12px 0",
-          "border": "1px solid #dcdcdc"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".is-nav-open .t-header_menu_btn",
-        "properties": {
-          "color": "#fff",
-          "background": "#e60000"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
       }
     ],
     "card_styles": [
@@ -423,6 +451,77 @@
     ],
     "form_styles": [
       {
+        "selector": ".m-input",
+        "properties": {
+          "color": "#333",
+          "font-size": "1.6rem",
+          "font-weight": "100",
+          "display": "block",
+          "padding": "10px",
+          "width": "100%",
+          "background-color": "white",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-inputfile_label",
+        "properties": {
+          "text-align": "center",
+          "display": "block",
+          "background-color": "white",
+          "border": "1px solid #d1d1d1",
+          "border-radius": "5px",
+          "-webkit-box-shadow": "0 1px 1px rgba(148, 148, 148, .25)",
+          "box-shadow": "0 1px 1px rgba(148, 148, 148, .25)",
+          "padding": "10px 5px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-radiobtn_input:checked + .m-radiobtn_text:after",
+        "properties": {
+          "display": "block",
+          "width": "10px",
+          "height": "10px",
+          "background-color": "#e60000",
+          "border-radius": "50%"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": "textarea.m-input::-webkit-scrollbar-thumb",
+        "properties": {
+          "background-color": "#c1c1c1",
+          "border-radius": "4px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-selectmenu:before",
+        "properties": {
+          "width": "20px",
+          "height": "100%",
+          "background-color": "#e60000",
+          "border-radius": "0 4px 4px 0px / 0 4px 4px 0px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-selectmenu select",
+        "properties": {
+          "font-size": "1.6rem",
+          "width": "100%",
+          "display": "block",
+          "border": "1px solid #d4d4d4",
+          "border-radius": "4px",
+          "padding": "15px 10px",
+          "background-color": "transparent"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
         "selector": ".m-yearselect, .m-yearselect-full, .m-yearselect-termselect",
         "properties": {
           "background": "#f5f5f5",
@@ -451,6 +550,42 @@
         "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
       },
       {
+        "selector": ".m-radiobtn_text:before",
+        "properties": {
+          "display": "block",
+          "width": "20px",
+          "height": "20px",
+          "border": "2px solid #333",
+          "border-radius": "50%"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-selectmenu option",
+        "properties": {
+          "background-color": "white"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".t-header_search_input",
+        "properties": {
+          "font-size": "1.6rem",
+          "padding-top": "10px",
+          "padding-bottom": "10px",
+          "width": "60%",
+          "background-color": "#f2f2f2"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".sp-search_wrap .t-header_search,\n  .sp-search_wrap .t-header_search:after,\n  .sp-search_wrap .t-header_search_input",
+        "properties": {
+          "background-color": "#fff"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
         "selector": ".da_searchBox_query_wrap input",
         "properties": {
           "font-size": "1.8rem",
@@ -470,6 +605,33 @@
         "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
       },
       {
+        "selector": ".t-header_search-pc .t-header_search_input",
+        "properties": {
+          "width": "89.17%",
+          "margin": "0",
+          "padding": "20px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-checkbox_input:checked + .m-checkbox_text:after",
+        "properties": {
+          "display": "block",
+          "width": "11px",
+          "height": "8px",
+          "background": "url('data:image/svg+xml",
+          "background-size": "22px 16px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
+        "selector": ".m-input_hyphen",
+        "properties": {
+          "padding": "0 5px"
+        },
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
+      },
+      {
         "selector": ".m-yearselect_inner",
         "properties": {
           "border": "1px solid #dcdcdc"
@@ -477,88 +639,26 @@
         "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
       },
       {
-        "selector": "/*---------------\n5-4 YearSelect\n------------------*/\n.m-yearselect, .m-yearselect-full, .m-yearselect-termselect",
+        "selector": ".m-checkbox_text:before",
         "properties": {
-          "margin-bottom": "40px"
+          "display": "block",
+          "width": "21px",
+          "height": "21px",
+          "border": "2px solid #333"
         },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect.is-active .m-yearselect_list, .is-active.m-yearselect-full .m-yearselect_list, .is-active.m-yearselect-termselect .m-yearselect_list",
-        "properties": {
-          "display": "block"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect_list",
-        "properties": {
-          "display": "block"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect_list_item.is-active",
-        "properties": {
-          "height": "auto"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect_list_item.is-hidden",
-        "properties": {
-          "display": "block"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect_list .slick-arrow",
-        "properties": {
-          "display": "none"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect-full",
-        "properties": {
-          "padding-left": "18px",
-          "padding-right": "18px"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect_btn",
-        "properties": {
-          "display": "none"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect_list .slick-wrapper",
-        "properties": {
-          "display": "flex"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect,.m-yearselect-full,.m-yearselect-termselect",
-        "properties": {
-          "margin-bottom": "40px"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
-      },
-      {
-        "selector": ".m-yearselect.is-active .m-yearselect_list,.is-active.m-yearselect-full .m-yearselect_list,.is-active.m-yearselect-termselect .m-yearselect_list",
-        "properties": {
-          "display": "block"
-        },
-        "sourceUrl": "https://www.mufg.jp/profile/brand/ourbrand/index.html"
+        "sourceUrl": "https://www.bk.mufg.jp/news/index.html"
       }
     ],
     "border_radii": [
       "4px",
       "50%",
-      "5px"
+      "5px",
+      "3px",
+      "5px 5px 0 0",
+      "0 4px 4px 0px / 0 4px 4px 0px",
+      "6px",
+      "13px",
+      "11px"
     ],
     "logo_urls": [
       "https://www.mufg.jp/dam/cmn/og_image.jpg",
@@ -581,7 +681,10 @@
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Mitsubishi_UFJ_Financial_Group.svg/1280px-Mitsubishi_UFJ_Financial_Group.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
       "https://commons.wikimedia.org/static/favicon/commons.ico",
       "https://commons.wikimedia.org/static/images/icons/commonswiki.svg",
-      "https://commons.wikimedia.org/static/images/mobile/copyright/commonswiki-wordmark.svg"
+      "https://commons.wikimedia.org/static/images/mobile/copyright/commonswiki-wordmark.svg",
+      "https://www.bk.mufg.jp/shared2019/cmn/og_image.jpg",
+      "https://www.bk.mufg.jp/shared2019/cmn/favicon.ico",
+      "https://www.bk.mufg.jp/shared2019/imgs/logo-20th.svg"
     ],
     "source_css_urls": [
       "https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/clientlib-base.css",
@@ -593,12 +696,14 @@
       "https://www.mufg.jp/dam/brand/toppage/css/slick-theme.css",
       "https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=ext.uls.pt%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cfilepage%7Cjquery.wikibase.toolbar.styles%7Cmediawiki.action.view.filepage%7Cmediawiki.interface.helpers.linker.styles%7Cmediawiki.interface.helpers.styles%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.alltargets%2Cdesktop%7Cwikibase.mediainfo.filepage.styles%7Cwikibase.mediainfo.statements.styles&amp;only=styles&amp;skin=vector-2022",
       "https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=ext.gadget.Long-Image-Names-in-Categories&amp;only=styles&amp;skin=vector-2022",
-      "https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+      "https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022",
+      "https://www.bk.mufg.jp/etc.clientlibs/mufg/clientlibs/clientlib-base.css",
+      "https://www.bk.mufg.jp/etc.clientlibs/mufg/clientlibs/bk-page.css"
     ],
-    "extracted_at": "2026-09-16T08:06:44.008Z",
+    "extracted_at": "2026-09-16T08:06:50.430Z",
     "source_urls": [
-      "https://commons.wikimedia.org/wiki/File:Mitsubishi_UFJ_Financial_Group.svg"
+      "https://www.bk.mufg.jp/news/index.html"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #E60000  color  出現152回  [external-css]\n  #333333  color  出現73回  [external-css]\n  #DCDCDC  border-left  出現68回  [external-css]\n  #999999  color  出現23回  [external-css]\n  #5A5A5A  color  出現22回  [external-css]\n  #F5F5F5  background  出現20回  [external-css]\n  #F2D6C5  background  出現18回  [external-css]\n  #DDDDDD  border-top  出現17回  [external-css]\n  #E6E6E6  border-color  出現14回  [external-css]\n  #666666  color  出現14回  [external-css]\n  #F7F7F7  background  出現12回  [external-css]\n  #EBEBEB  background  出現10回  [external-css]\n  #EEEEEE  background-color  出現10回  [external-css]\n  #CCCCCC  background  出現9回  [external-css]\n  #EDEDED  background  出現8回  [external-css]\n\n【使用フォント】\n  Graphik\n  ヒラギノ角ゴ Pro\n  Arial\n  slick\n\n【角丸パターン】\n  4px\n  50%\n  5px\n\n【ボタンスタイル】\n  ★ .t-header_link-primary-acd.t-header_link-primary-profile.js-header-mega-btn（実際のボタン要素で1回使用）\n    color: #e60000\n    font-size: 1.6rem\n    font-weight: bold\n    display: block\n    margin-bottom: 0\n    padding: 25px 5px\n  ★ .t-header_menu_btn.js-header-menu（実際のボタン要素で1回使用）\n    color: #fff\n    font-size: 1.2rem\n    font-weight: bold\n    line-height: 1\n    display: block\n    -webkit-align-items: center\n  ★ .t-header_drawer_close_btn.js-header-close（実際のボタン要素で1回使用）\n    font-size: 1.5rem\n    background: #f7f7f7\n    display: inline-block\n    -webkit-align-items: center\n    align-items: center\n    text-align: center\n  ★ .da_searchBox_submit（実際のボタン要素で2回使用）\n    background: url(data:image/svg+xml\n    background-size: 20px auto\n    width: 46px\n    background-image: url(data:image/svg+xml\n  .a-btn-hajimete\n    color: #e60000\n    font-size: 2rem\n    font-weight: bold\n    line-height: 1\n    background: #fff\n    display: block\n\n【カードスタイル】\n  main.communication .mv .info .box .anchor-list>a\n    font-size: 1.4rem\n    padding: 4px 18px 4px 6px\n    margin: 0 0 5px 5px\n  .sec3-ob .inner .sec3-center .box\n    padding: 10px\n  .sec3-ob .inner .sec3-center .box:nth-of-type(1)\n    background: #e60000\n  .sec3-ob .inner .sec3-center .box:nth-of-type(2)\n    background: #5a5a5a\n  .sec3-ob .inner .sec3-center .box h3\n    color: #fff\n    font-size: 1.8rem\n\n【フォームスタイル】\n  .m-yearselect, .m-yearselect-full, .m-yearselect-termselect\n    background: #f5f5f5\n    padding: 30px 0\n  /*---------------\nInput\n------------------*/\n.a-input\n    font-size: 1.4rem\n    display: block\n    padding: 10px 15px\n    border: 1px solid #dcdcdc\n  .a-input\n    font-size: 1.4rem\n    display: block\n    padding: 10px 15px\n    border: 1px solid #dcdcdc\n  .da_searchBox_query_wrap input\n    font-size: 1.8rem\n    padding: .8em 48px .8em .8em\n    border: 0\n  .m-yearselect_list_item\n    background: transparent\n    width: 140px\n    padding: 0 4px\n    border-top: 0\n\n【ロゴ・ビジュアル素材】\n  https://www.mufg.jp/dam/cmn/og_image.jpg\n  https://www.mufg.jp/favicon_ja.ico\n  https://www.mufg.jp/dam/cmn/cmn_logo_mufg_001.png\n  https://www.mufg.jp/dam/cmn/imgs/logo-20th.svg\n  https://www.mufg.jp/dam/cmn/cmn_logo_mufg_003.png\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/main_sp.jpg\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/main.jpg\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/se1-img1.png\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/sp/sec3-img01.png\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/sp/sec4-img1.png\n\n【取得CSSファイル】\n  https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/clientlib-base.css\n  https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/mufg-page.css\n  https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/mufg-page.min.css\n  https://www.mufg.jp/dam/brand/toppage/css/mufg-way.css\n  https://www.mufg.jp/dam/brand/toppage/css/mufg-ob.css\n  https://www.mufg.jp/dam/brand/toppage/css/slick.css\n  https://www.mufg.jp/dam/brand/toppage/css/slick-theme.css\n  https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=ext.uls.pt%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cfilepage%7Cjquery.wikibase.toolbar.styles%7Cmediawiki.action.view.filepage%7Cmediawiki.interface.helpers.linker.styles%7Cmediawiki.interface.helpers.styles%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.alltargets%2Cdesktop%7Cwikibase.mediainfo.filepage.styles%7Cwikibase.mediainfo.statements.styles&amp;only=styles&amp;skin=vector-2022\n  https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=ext.gadget.Long-Image-Names-in-Categories&amp;only=styles&amp;skin=vector-2022\n  https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+  "css_summary": "【抽出カラー（頻度順）】\n  #E60000  color  出現379回  [external-css]\n  #333333  color  出現149回  [external-css]\n  #D4D4D4  border  出現75回  [external-css]\n  #DCDCDC  border-left  出現68回  [external-css]\n  #DDDDDD  border-top  出現57回  [external-css]\n  #5A5A5A  color  出現43回  [external-css]\n  #CCCCCC  background  出現35回  [external-css]\n  #999999  color  出現32回  [external-css]\n  #EEEEEE  background-color  出現32回  [external-css]\n  #666666  color  出現31回  [external-css]\n  #F2F2F2  background-color  出現28回  [external-css]\n  #F2D6C5  background  出現23回  [external-css]\n  #F5F5F5  background  出現20回  [external-css]\n  #F7F7F7  background  出現15回  [external-css]\n  #E6E6E6  border-color  出現14回  [external-css]\n\n【使用フォント】\n  Graphik\n  ヒラギノ角ゴ Pro\n  Arial\n  slick\n  Hiragino Kaku Gothic Pro\n  helvetica\n\n【角丸パターン】\n  4px\n  50%\n  5px\n  3px\n  5px 5px 0 0\n  0 4px 4px 0px / 0 4px 4px 0px\n  6px\n  13px\n\n【ボタンスタイル】\n  ★ .a-btn.a-btn_bg-gray（実際のボタン要素で2回使用）\n    color: #fff\n    font-size: 1.6rem\n    display: block\n    border: 1px solid #d4d4d4\n    border-radius: 3px\n    padding: 15px 35px\n  ★ .a-btn.a-btn_bg-red.a-btn-newwin（実際のボタン要素で1回使用）\n    color: #fff\n    padding-left: auto\n    padding-right: 38px\n    height: auto\n    font-size: 1.6rem\n    display: inline-block\n  ★ .a-btn（実際のボタン要素で22回使用）\n    font-size: 1.6rem\n    color: #333\n    display: block\n    border: 1px solid #d4d4d4\n    border-radius: 3px\n    padding: 15px 35px\n  ★ .a-btn.a-btn-newwin（実際のボタン要素で4回使用）\n    height: auto\n    padding-right: 38px\n    font-size: 1.6rem\n    color: #333\n    display: inline-block\n    border: 1px solid #d4d4d4\n  ★ .a-btn.a-btn-small.a-btn-newwin（実際のボタン要素で1回使用）\n    height: auto\n    padding-right: 30px\n    font-size: 1.2rem\n    color: #333\n    display: inline-block\n    border: 1px solid #d4d4d4\n\n【カードスタイル】\n  main.communication .mv .info .box .anchor-list>a\n    font-size: 1.4rem\n    padding: 4px 18px 4px 6px\n    margin: 0 0 5px 5px\n  .sec3-ob .inner .sec3-center .box\n    padding: 10px\n  .sec3-ob .inner .sec3-center .box:nth-of-type(1)\n    background: #e60000\n  .sec3-ob .inner .sec3-center .box:nth-of-type(2)\n    background: #5a5a5a\n  .sec3-ob .inner .sec3-center .box h3\n    color: #fff\n    font-size: 1.8rem\n\n【フォームスタイル】\n  .m-input\n    color: #333\n    font-size: 1.6rem\n    font-weight: 100\n    display: block\n    padding: 10px\n    width: 100%\n  .m-inputfile_label\n    text-align: center\n    display: block\n    background-color: white\n    border: 1px solid #d1d1d1\n    border-radius: 5px\n    -webkit-box-shadow: 0 1px 1px rgba(148, 148, 148, .25)\n  .m-radiobtn_input:checked + .m-radiobtn_text:after\n    display: block\n    width: 10px\n    height: 10px\n    background-color: #e60000\n    border-radius: 50%\n  textarea.m-input::-webkit-scrollbar-thumb\n    background-color: #c1c1c1\n    border-radius: 4px\n  .m-selectmenu:before\n    width: 20px\n    height: 100%\n    background-color: #e60000\n    border-radius: 0 4px 4px 0px / 0 4px 4px 0px\n\n【ロゴ・ビジュアル素材】\n  https://www.mufg.jp/dam/cmn/og_image.jpg\n  https://www.mufg.jp/favicon_ja.ico\n  https://www.mufg.jp/dam/cmn/cmn_logo_mufg_001.png\n  https://www.mufg.jp/dam/cmn/imgs/logo-20th.svg\n  https://www.mufg.jp/dam/cmn/cmn_logo_mufg_003.png\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/main_sp.jpg\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/main.jpg\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/se1-img1.png\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/sp/sec3-img01.png\n  https://www.mufg.jp/dam/brand/toppage/images/our-brand/sp/sec4-img1.png\n\n【取得CSSファイル】\n  https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/clientlib-base.css\n  https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/mufg-page.css\n  https://www.mufg.jp/etc.clientlibs/mufg/clientlibs/mufg-page.min.css\n  https://www.mufg.jp/dam/brand/toppage/css/mufg-way.css\n  https://www.mufg.jp/dam/brand/toppage/css/mufg-ob.css\n  https://www.mufg.jp/dam/brand/toppage/css/slick.css\n  https://www.mufg.jp/dam/brand/toppage/css/slick-theme.css\n  https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=ext.uls.pt%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cfilepage%7Cjquery.wikibase.toolbar.styles%7Cmediawiki.action.view.filepage%7Cmediawiki.interface.helpers.linker.styles%7Cmediawiki.interface.helpers.styles%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.alltargets%2Cdesktop%7Cwikibase.mediainfo.filepage.styles%7Cwikibase.mediainfo.statements.styles&amp;only=styles&amp;skin=vector-2022\n  https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=ext.gadget.Long-Image-Names-in-Categories&amp;only=styles&amp;skin=vector-2022\n  https://commons.wikimedia.org/w/load.php?lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://www.bk.mufg.jp/etc.clientlibs/mufg/clientlibs/clientlib-base.css\n  https://www.bk.mufg.jp/etc.clientlibs/mufg/clientlibs/bk-page.css"
 }
