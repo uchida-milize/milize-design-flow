@@ -1,6 +1,7 @@
 import { ClientCardGrid } from '@/components/ClientCardGrid';
 import { DesignToolsMenu } from '@/components/DesignToolsMenu';
 import { MilizeLogo } from '@/components/MilizeLogo';
+import { DifyLink } from '@/components/DifyLink';
 
 const EXCLUDED_DIRS = new Set([
   'components',
@@ -220,7 +221,10 @@ export default async function ClientsIndex() {
               {`クライアント別アセット管理`}
             </span>
           </div>
-          <MilizeLogo />
+          <div className="flex items-center" style={{ gap: 14 }}>
+            <DifyLink />
+            <MilizeLogo />
+          </div>
         </div>
       </header>
 
