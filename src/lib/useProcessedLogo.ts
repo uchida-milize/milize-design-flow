@@ -19,22 +19,24 @@ export type ProcessedLogo = { src: string; backdrop: string | null };
 /**
  * ロゴ画像をcanvasに描画して解析し、
  *  1) 単色背景が焼き込まれている場合はその色をbackdropとして返す（無ければ null）
- *  2) 実際のロゴ内容だけを囲むバウンディングボックスを求め、余白を詰めてクロップした
- *     画像（data URL）を src として返す（OGPシェア画像等、ロゴ本体の周囲に大きな
- *     余白があるアセットが小さく見えてしまう問題への対処）
+ *  2) 実際のロゴ内容だけを囲むバウンディングボックスを求め、余白を詰めた
+ *     画像を src として返す（OGPシェア画像やviewBoxに大きな余白を持つSVG等、
+ *     ロゴ本体の周囲に余白があるアセットが小さく見えてしまう問題への対処）
  * 何らかの理由で解析できない場合は、元の src をそのまま返す（安全側フォールバック）。
  *
- * SVGは cropToDataUrl=false で呼び出すこと: canvasはSVGの本来の描画サイズ（viewBox由来の
- * 小さいピクセル数のことが多い）でラスタライズしてしまい、ベクターの解像度非依存性が
- * 失われて拡大表示時にぼやける。SVGは背景色判定のためだけにcanvasへ描画し、実際の
- * 表示用srcは常に元のベクターファイルのまま返す。
+ * SVGはcanvasで直接クロップ（ラスタライズ）しないこと: canvasはSVGの本来の描画サイズ
+ * （viewBox由来の小さいピクセル数のことが多い）で描画するため、そのままdata URL化すると
+ * ベクターの解像度非依存性が失われて拡大表示時にぼやける。SVGは内容のバウンディング
+ * ボックスを求める解析にのみcanvasを使い、実際に返すsrcは元のSVGマークアップの
+ * viewBoxを詰め替えたベクターのまま（retightenSvgViewBox）とする。
  */
-function processImage(src: string, cropToDataUrl: boolean): Promise<ProcessedLogo> {
+function processImage(src: string, ext: string): Promise<ProcessedLogo> {
+  const isSvg = ext === 'svg';
   return new Promise((resolve) => {
     const fallback: ProcessedLogo = { src, backdrop: null };
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload = () => {
+    img.onload = () => { void (async () => {
       try {
         const w = img.naturalWidth;
         const h = img.naturalHeight;
@@ -94,7 +96,15 @@ function processImage(src: string, cropToDataUrl: boolean): Promise<ProcessedLog
         const contentH = maxY - minY;
         // 既にほぼ全体を占めている（=元々タイトな画像）ならクロップ不要
         const alreadyTight = contentW >= w * 0.94 && contentH >= h * 0.94;
-        if (!cropToDataUrl || alreadyTight) { resolve({ src, backdrop }); return; }
+        if (alreadyTight) { resolve({ src, backdrop }); return; }
+
+        if (isSvg) {
+          // SVGはラスタライズせず、内容のバウンディングボックスに合わせてviewBoxを
+          // 詰め替えたベクターのまま返す（拡大表示してもぼやけない）
+          const retightened = await retightenSvgViewBox(src, { minX, minY, maxX, maxY }, w, h);
+          resolve({ src: retightened ?? src, backdrop });
+          return;
+        }
 
         const marginX = Math.round(contentW * CONTENT_MARGIN_RATIO);
         const marginY = Math.round(contentH * CONTENT_MARGIN_RATIO);
@@ -114,10 +124,64 @@ function processImage(src: string, cropToDataUrl: boolean): Promise<ProcessedLog
       } catch {
         resolve(fallback);
       }
-    };
+    })(); };
     img.onerror = () => resolve(fallback);
     img.src = src;
   });
+}
+
+/** SVGマークアップ文字列から viewBox 属性をパースする。無ければ null。 */
+function parseSvgViewBox(svgText: string): { x: number; y: number; w: number; h: number } | null {
+  const m = /viewBox\s*=\s*["']([^"']+)["']/i.exec(svgText);
+  if (!m) return null;
+  const parts = m[1].trim().split(/[\s,]+/).map(Number);
+  if (parts.length !== 4 || parts.some((n) => Number.isNaN(n))) return null;
+  const [x, y, w, h] = parts;
+  return { x, y, w, h };
+}
+
+/**
+ * SVGファイルを取得し、canvas解析で求めた内容のバウンディングボックス（canvasのピクセル
+ * 座標系）を、SVG自身のviewBox座標系に変換した上でviewBoxを詰め替える。
+ * ラスタライズはせず、詰め替え後もベクターのまま返すため拡大表示してもぼやけない。
+ * 取得・パースに失敗した場合や、詰め替え後のサイズが不正な場合は null を返す
+ * （呼び出し側は元の src にフォールバックする）。
+ */
+async function retightenSvgViewBox(
+  src: string,
+  bbox: { minX: number; minY: number; maxX: number; maxY: number },
+  canvasW: number,
+  canvasH: number,
+): Promise<string | null> {
+  try {
+    const svgText = await fetch(src).then((r) => (r.ok ? r.text() : ''));
+    if (!svgText) return null;
+    const viewBox = parseSvgViewBox(svgText);
+    if (!viewBox || !/viewBox\s*=\s*["'][^"']+["']/i.test(svgText)) return null;
+
+    // canvasはこのSVGの本来の描画サイズ（naturalWidth/Height）で描画されているため、
+    // canvasピクセル座標 → viewBox座標への変換比率は viewBoxサイズ/canvasサイズ で求まる
+    const scaleX = viewBox.w / canvasW;
+    const scaleY = viewBox.h / canvasH;
+    const minX = viewBox.x + bbox.minX * scaleX;
+    const minY = viewBox.y + bbox.minY * scaleY;
+    const maxX = viewBox.x + bbox.maxX * scaleX;
+    const maxY = viewBox.y + bbox.maxY * scaleY;
+    const contentW = maxX - minX;
+    const contentH = maxY - minY;
+    if (contentW <= 0 || contentH <= 0) return null;
+
+    const marginX = contentW * CONTENT_MARGIN_RATIO;
+    const marginY = contentH * CONTENT_MARGIN_RATIO;
+    const newViewBox = [minX - marginX, minY - marginY, contentW + marginX * 2, contentH + marginY * 2]
+      .map((n) => Number(n.toFixed(3)))
+      .join(' ');
+
+    const retargeted = svgText.replace(/viewBox\s*=\s*["'][^"']+["']/i, `viewBox="${newViewBox}"`);
+    return `data:image/svg+xml;utf8,${encodeURIComponent(retargeted)}`;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -154,7 +218,7 @@ export function useProcessedLogo(src: string, ext: string, enabled: boolean): Pr
     let cancelled = false;
 
     (async () => {
-      const processed = await processImage(src, ext !== 'svg');
+      const processed = await processImage(src, ext);
       if (cancelled) return;
       if (processed.backdrop === null && ext === 'svg') {
         const needsDark = await isMonochromeLightSvg(src);
