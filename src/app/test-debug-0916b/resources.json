@@ -30,9 +30,27 @@
       "--wp--preset--font-size--small": "13px",
       "--wp--preset--font-size--medium": "20px",
       "--wp--preset--font-size--large": "36px",
-      "--wp--preset--font-size--x-large": "42px"
+      "--wp--preset--font-size--x-large": "42px",
+      "--hcb--c": "#f9f9f6",
+      "--hcb--bgc": "#2d2e29",
+      "--hcb--data-label--c": "#fff",
+      "--hcb--data-label--bgc": "#20211f",
+      "--hcb--line-numbers--c": "#a3a3a3",
+      "--hcb--highlight-color": "#fffaf51a",
+      "--hcb--scbar-track--bgc": "#ffffff1a",
+      "--wp-block-synced-color": "#7a00df",
+      "--wp-block-synced-color--rgb": "122,0,223",
+      "--wp-bound-block-color": "var(--wp-block-synced-color)",
+      "--wp-editor-canvas-background": "#ddd",
+      "--wp-admin-theme-color": "#007cba",
+      "--wp-admin-theme-color--rgb": "0,124,186",
+      "--wp-admin-theme-color-darker-10": "#006ba1",
+      "--wp-admin-theme-color-darker-10--rgb": "0,107,160.5",
+      "--wp-admin-theme-color-darker-20": "#005a87",
+      "--wp-admin-theme-color-darker-20--rgb": "0,90,135",
+      "--wp--preset--font-size--normal": "16px"
     },
-    "hex_colors": "#1F1F1F | background-color | 出現10回 | [external-css]\n#C3C3C3 | border-color, --clr-black-50 | 出現6回 | [external-css]\n#DEDEDE | border, border-bottom | 出現4回 | [external-css]\n#CC0033 | color, --clr-primary-90 | 出現4回 | [external-css]\n#DC3232 | border-color, color, border | 出現3回 | [external-css]\n#3F3F3F | background-color | 出現2回 | [external-css]\n#575757 | background-color | 出現2回 | [external-css]\n#737373 | background-color | 出現2回 | [external-css]\n#D90237 | color | 出現2回 | [external-css]\n#BE0026 | --clr-primary-100 | 出現2回 | [external-css]\n#141414 | --clr-black-100 | 出現2回 | [external-css]\n#585858 | --clr-black-90 | 出現2回 | [external-css]\n#E8E8E8 | --clr-black-40 | 出現2回 | [external-css]\n#EEEEEE | --clr-black-30 | 出現2回 | [external-css]\n#F5F5F5 | --clr-black-20 | 出現2回 | [external-css]\n#FAFAFA | --clr-black-10 | 出現2回 | [external-css]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現2回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現2回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現2回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現2回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現2回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現2回 | [style-tag]\n#00D084 | --wp--preset--color--vivid-green-cyan | 出現2回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現2回 | [style-tag]\n#0693E3 | --wp--preset--color--vivid-cyan-blue | 出現2回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現2回 | [style-tag]\n#00A0D2 | border | 出現1回 | [external-css]\n#46B450 | border-color | 出現1回 | [external-css]\n#F56E28 | border-color | 出現1回 | [external-css]\n#FFB900 | border-color | 出現1回 | [external-css]",
+    "hex_colors": "#252525 | color, background, border, background-color | 出現16回 | [external-css]\n#888888 | border | 出現15回 | [external-css]\n#F5F5F5 | --clr-black-20, background, color, border-bottom, border-right | 出現13回 | [external-css]\n#1F1F1F | background-color | 出現10回 | [external-css]\n#DEDEDE | border, border-bottom, color, background | 出現10回 | [external-css]\n#222222 | background-color, color, border | 出現10回 | [external-css]\n#444444 | color, background-color, border-left | 出現9回 | [external-css+style-tag]\n#EEEEEE | --clr-black-30, color, background-color, background | 出現8回 | [external-css+style-tag]\n#333333 | color, background-color | 出現7回 | [external-css]\n#C3C3C3 | border-color, --clr-black-50 | 出現6回 | [external-css]\n#777777 | color, background-color, background | 出現6回 | [external-css]\n#CCCCCC | color, border | 出現6回 | [external-css]\n#00D084 | --wp--preset--color--vivid-green-cyan, background | 出現5回 | [style-tag]\n#0693E3 | --wp--preset--color--vivid-cyan-blue, background | 出現5回 | [style-tag]\n#EC5555 | color, border-color | 出現5回 | [external-css]\n#CC0033 | color, --clr-primary-90 | 出現4回 | [external-css]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現4回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現4回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現4回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現4回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現4回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現4回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現4回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現4回 | [style-tag]\n#DDDDDD | border, --wp-editor-canvas-background, background-color | 出現4回 | [external-css+style-tag]\n#BDBDBD | color | 出現4回 | [external-css]\n#DC3232 | border-color, color, border | 出現3回 | [external-css]\n#F8F8F2 | color | 出現3回 | [external-css]\n#32373C | background-color, background | 出現3回 | [style-tag]\n#3F3F3F | background-color | 出現2回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
       "var(--eng-font)",
@@ -41,7 +59,12 @@
       "Bebas Neue",
       "Lato",
       "Noto Sans JP",
-      "inherit"
+      "inherit",
+      "system-ui",
+      "Menlo",
+      "Roboto Mono",
+      "var(--hcb--ff)",
+      "Arial"
     ],
     "button_styles": [
       {
@@ -207,6 +230,53 @@
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       },
       {
+        "selector": "★ .btn（実際のボタン要素で1回使用）",
+        "properties": {
+          "display": "block",
+          "width": "100%",
+          "max-width": "153px",
+          "height": "28px",
+          "line-height": "25px",
+          "text-align": "center",
+          "font-weight": "400",
+          "border": "1px solid #000",
+          "color": "#fff",
+          "background": "#000",
+          "margin": "25px auto",
+          "border-radius": "3px",
+          "margin-top": "8px",
+          "font-size": "16px"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": "★ .h-btn（実際のボタン要素で1回使用）",
+        "properties": {
+          "width": "100%",
+          "height": "40px",
+          "line-height": "40px",
+          "text-align": "center",
+          "border": "1px solid #000",
+          "font-size": "15px",
+          "font-weight": "600",
+          "background": "#fff",
+          "margin-right": "-1px"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": "/*! This file is auto-generated */\n.wp-block-button__link",
+        "properties": {
+          "color": "#fff",
+          "background-color": "#32373c",
+          "border-radius": "9999px",
+          "box-shadow": "none",
+          "padding": "calc(.667em + 2px) calc(1.333em + 2px)",
+          "font-size": "1.125em"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
         "selector": ".c-button",
         "properties": {
           "--clr-txt": "var(--clr-black-100)",
@@ -244,6 +314,22 @@
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       },
       {
+        "selector": ".editor-styles-wrapper .is-style-btn-black a,.editor-styles-wrapper .is-style-btn-black .wp-block-button__link",
+        "properties": {
+          "display": "inline-block",
+          "color": "#fff",
+          "background": "#000",
+          "border-radius": "0",
+          "min-width": "260px",
+          "padding": "13px 30px",
+          "line-height": "1.3",
+          "text-align": "center",
+          "font-weight": "600",
+          "border": "1px solid #000"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
         "selector": ".f-form-button .wpcf7-submit",
         "properties": {
           "display": "block",
@@ -257,6 +343,38 @@
           "border": "0"
         },
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+      },
+      {
+        "selector": ".btn",
+        "properties": {
+          "display": "block",
+          "width": "100%",
+          "max-width": "260px",
+          "height": "50px",
+          "line-height": "48px",
+          "text-align": "center",
+          "font-weight": "600",
+          "border": "1px solid #000",
+          "color": "#fff",
+          "background": "#000"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": ".wp-lightbox-container button",
+        "properties": {
+          "align-items": "center",
+          "background-color": "#5a5a5a40",
+          "border": "none",
+          "border-radius": "4px",
+          "display": "flex",
+          "height": "20px",
+          "justify-content": "center",
+          "padding": "0",
+          "text-align": "center",
+          "width": "20px"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       },
       {
         "selector": ":root :where(.wp-element-button, .wp-block-button__link)",
@@ -274,7 +392,22 @@
           "padding-bottom": "calc(0.667em + 2px)",
           "padding-left": "calc(1.333em + 2px)"
         },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": ".header .h-btn-wrap .h-btn",
+        "properties": {
+          "width": "150px",
+          "height": "30px",
+          "line-height": "30px",
+          "text-align": "center",
+          "border": "1px solid #000",
+          "font-size": "11px",
+          "font-weight": "600",
+          "background": "#fff",
+          "margin-right": "-1px"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       },
       {
         "selector": ".p-movie-button",
@@ -297,76 +430,22 @@
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       },
       {
-        "selector": ".c-button::before",
+        "selector": ".header .h-btn-wrap .h-btn:hover",
         "properties": {
-          "display": "inline-block",
-          "width": "100%",
-          "height": "100%",
-          "background": "var(--clr-bg-hover)"
+          "background": "#000",
+          "color": "#fff"
         },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       },
       {
-        "selector": "[lang=ja] .p-workflow .c-button",
+        "selector": ".header .pc.btn-search",
         "properties": {
-          "width": "100%",
-          "min-width": "auto",
-          "height": "60px",
-          "padding": "0 0.875rem",
-          "font-size": "0.875rem",
-          "text-align": "center"
+          "display": "block",
+          "width": "90px",
+          "background": "url(//sqripts.com/wp-content/themes/sqripts/img/common/icn_search-w.svg) no-repeat center center #252525",
+          "border": "1px solid #252525"
         },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".c-button:hover .c-icon,a:hover .c-button .c-icon",
-        "properties": {
-          "color": "var(--clr-white)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".c-button.-secondary:hover .c-icon.-primary-70,a:hover .c-button.-secondary .c-icon.-primary-70",
-        "properties": {
-          "color": "var(--clr-black-0)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".c-button.-outline:hover .c-icon.-white,a:hover .c-button.-outline .c-icon.-white",
-        "properties": {
-          "color": "var(--clr-white)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".c-button.-outline.-current .c-icon.-primary-70,.c-button.-outline.-disabled .c-icon.-primary-70",
-        "properties": {
-          "color": "var(--clr-black-50)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".c-button__label",
-        "properties": {
-          "font-size": "var(--txt-size)",
-          "color": "var(--clr-txt)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": "button,h1,h2,h3,h4,h5,h6,input,option,select,table,textarea",
-        "properties": {
-          "font-size": "100%"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": "button",
-        "properties": {
-          "outline": "0"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       }
     ],
     "card_styles": [
@@ -654,6 +733,53 @@
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       },
       {
+        "selector": "::-moz-selection",
+        "properties": {
+          "background-color": "#252525",
+          "color": "#fff"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": "::selection",
+        "properties": {
+          "background-color": "#252525",
+          "color": "#fff"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": ".form-wrap input[type=text],.form-wrap input[type=email]",
+        "properties": {
+          "display": "inline-block",
+          "width": "100%",
+          "max-width": "100%",
+          "background": "#fff",
+          "border-bottom": "1px solid #fff",
+          "border-radius": "0",
+          "font": "inherit",
+          "outline": "none",
+          "margin": "0",
+          "padding": "0 20px",
+          "height": "60px",
+          "line-height": "60px"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
+        "selector": ".form-wrap select",
+        "properties": {
+          "display": "block",
+          "border": "none",
+          "height": "60px",
+          "line-height": "60px",
+          "padding": "0 30px 0 10px",
+          "border-bottom": "1px solid #fff",
+          "background": "url(//sqripts.com/wp-content/themes/sqripts/img/common/icn_arrow_select.svg) no-repeat right 15px center #fff"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
         "selector": ".f-form-input input",
         "properties": {
           "width": "100%",
@@ -694,6 +820,14 @@
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       },
       {
+        "selector": ".form-wrap .btn-wrap .back",
+        "properties": {
+          "background": "0 0",
+          "font-weight": "600"
+        },
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+      },
+      {
         "selector": ".f-form-textarea textarea",
         "properties": {
           "min-height": "2.875rem",
@@ -717,76 +851,44 @@
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       },
       {
-        "selector": ".f-form-select option,.l-header.-en.-home .p-header__link .p-header__sub-link-container a",
+        "selector": ".form-wrap textarea",
         "properties": {
-          "color": "var(--clr-black-100)"
+          "padding": "20px",
+          "width": "100%",
+          "border-bottom": "1px solid #fff"
         },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       },
       {
-        "selector": ".f-form-input input::-moz-placeholder,.f-form-select select::-moz-placeholder,.f-form-textarea textarea::-moz-placeholder",
+        "selector": ".form-wrap .checkbox-wrap .checkbox__item+span:before",
         "properties": {
-          "color": "var(--clr-black-50)"
+          "background": "#f5f5f5"
         },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       },
       {
-        "selector": ".f-form-input input::placeholder,.f-form-select select::placeholder,.f-form-textarea textarea::placeholder",
+        "selector": ".search-box-wrap .form-wrap .ttl .ttl-key",
         "properties": {
-          "color": "var(--clr-black-50)"
+          "background": "url(//sqripts.com/wp-content/themes/sqripts/img/common/icn_search-keyword.svg) no-repeat 0 center"
         },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".f-form-text.-msg",
-        "properties": {
-          "display": "none",
-          "margin-top": ".25rem",
-          "font-size": "var(--txt-xxxs)",
-          "line-height": "var(--lh-m)",
-          "color": "#d90237"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".f-form-radio-block__date",
-        "properties": {
-          "display": "block",
-          "padding-left": "calc(var(--icon-size) + .375rem)",
-          "font-weight": "var(--fw-b)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".f-form-link",
-        "properties": {
-          "display": "inline-flex",
-          "color": "var(--clr-black-90)",
-          "border-bottom": "1px solid var(--clr-black-90)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".f-form-link:hover",
-        "properties": {
-          "color": "var(--clr-primary-90)",
-          "border-bottom": "1px solid var(--clr-primary-90)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".wpcf7 form.init .wpcf7-response-output,\n.wpcf7 form.resetting .wpcf7-response-output,\n.wpcf7 form.submitting .wpcf7-response-output",
-        "properties": {
-          "display": "none"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       }
     ],
     "border_radii": [
       "50%",
       "0 0 .625rem .625rem",
       ".1875rem",
-      "100%"
+      "100%",
+      "3px",
+      "4px",
+      "2px",
+      "20px",
+      "5px",
+      "var(--hcb--radius,0)",
+      ".3em",
+      "0 var(--hcb--radius)",
+      "8px",
+      "9999px"
     ],
     "logo_urls": [
       "https://geeq.co.jp/wp-content/uploads/2024/03/test.png",
@@ -797,7 +899,10 @@
       "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_facebook.svg",
       "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_youtube.svg",
       "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_linkedin.svg",
-      "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg"
+      "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg",
+      "https://sqripts.com/wp-content/uploads/2023/11/20231121_thumb-1.jpg",
+      "https://sqripts.com/wp-content/themes/sqripts/img/icons/favicon.ico",
+      "https://sqripts.com/wp-content/themes/sqripts/img/common/logo.svg"
     ],
     "source_css_urls": [
       "https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?2024062305",
@@ -806,12 +911,23 @@
       "https://www.geeq.co.jp/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7",
       "https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?ver=7.1",
       "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/style.css?ver=7.1",
-      "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Bebas+Neue&display=swap&family=Lato:wght@400;700&display=swap"
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Bebas+Neue&display=swap&family=Lato:wght@400;700&display=swap",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_f8cb08ce16bbf77bdb90ec09b5fe536a.css",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_305a074b4d20a5ec83953e0635e1c3ae.css?1757498292",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_08082510c21edacd066a0efc00ad6105.css?ver=2.6.0.1.1",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_587aff57a2ad70e67f1856ec54d0efa1.css?ver=2.6.0.1.1",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_1a28f7e2d7d91bdf98483befd2416982.css?ver=1.0.0",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_a3bc4735f7f053e7665718edc0ffda85.css?ver=1.0.0",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_2bee417e5b769418966cae22e78d7c86.css?ver=2.2.1",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_292f3fc4f1681a95b7e05a895458fd59.css?ver=1.4.33",
+      "https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_ebeb8dd6a171516ba92abb74416c1d94.css?ver=4.23.13",
+      "https://sqripts.com/wp-content/plugins/wp-rss-aggregator//v4/css/build/pagination.min.css?ver=4.23.13",
+      "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap"
     ],
-    "extracted_at": "2026-09-16T01:47:15.565Z",
+    "extracted_at": "2026-09-16T01:47:23.971Z",
     "source_urls": [
-      "https://www.geeq.co.jp/service/game-creation/tests/"
+      "https://sqripts.com/2023/11/21/79031/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #1F1F1F  background-color  出現10回  [external-css]\n  #C3C3C3  border-color  出現6回  [external-css]\n  #DEDEDE  border  出現4回  [external-css]\n  #CC0033  color  出現4回  [external-css]\n  #DC3232  border-color  出現3回  [external-css]\n  #3F3F3F  background-color  出現2回  [external-css]\n  #575757  background-color  出現2回  [external-css]\n  #737373  background-color  出現2回  [external-css]\n  #D90237  color  出現2回  [external-css]\n  #BE0026  --clr-primary-100  出現2回  [external-css]\n  #141414  --clr-black-100  出現2回  [external-css]\n  #585858  --clr-black-90  出現2回  [external-css]\n  #E8E8E8  --clr-black-40  出現2回  [external-css]\n  #EEEEEE  --clr-black-30  出現2回  [external-css]\n  #F5F5F5  --clr-black-20  出現2回  [external-css]\n\n【CSS カラー変数（:root）】\n  --clr-primary-100: #BE0026\n  --clr-primary-90: #C03\n  --clr-black-100: #141414\n  --clr-black-90: #585858\n  --clr-black-50: #C3C3C3\n  --clr-black-40: #E8E8E8\n  --clr-black-30: #EEE\n  --clr-black-20: #F5F5F5\n  --clr-black-10: #FAFAFA\n  --clr-white: #FFF\n  --clr-primary-20: #FAE5EB\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n\n【使用フォント】\n  var(--eng-font)\n  var(--base-font)\n  var(--head-font)\n  Bebas Neue\n  Lato\n  Noto Sans JP\n  inherit\n\n【角丸パターン】\n  50%\n  0 0 .625rem .625rem\n  .1875rem\n  100%\n\n【ボタンスタイル】\n  ★ .c-button.-primary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-primary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-secondary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-size_m.-outline（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-white)\n    --clr-bg-hover: var(--clr-primary-90)\n    --clr-border: var(--clr-black-100)\n    --border-width: 1px\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-secondary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n\n【カードスタイル】\n  .p-case-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    padding: .25rem .5rem\n    font-size: var(--txt-xxxxs)\n    color: var(--clr-white)\n  .p-interview-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    width: max-content\n    padding: .25rem .5rem\n    margin-top: .75rem\n  .p-case-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    padding: 0 2.75rem\n    color: var(--clr-white)\n  .p-interview-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    width: 100%\n    height: 100%\n  .p-case-card__head\n    background-color: var(--clr-black-10)\n\n【フォームスタイル】\n  .f-form-checkbox .wpcf7-form-control .wpcf7-list-item label::before,.f-form__checkbox-label::before\n    display: block\n    width: var(--check-box)\n    height: var(--check-box)\n    background-color: var(--clr-bg)\n    border: 1px solid var(--clr-border)\n    border-radius: .1875rem\n  .f-form-button .wpcf7-submit\n    display: block\n    width: 100%\n    min-height: 3.5rem\n    padding: 1rem\n    font-family: var(--base-font)\n    font-size: var(--txt-xs)\n  .f-form-text.-required\n    display: inline-flex\n    min-width: max-content\n    height: 1.25rem\n    padding: .0625rem .5rem\n    margin-left: .5rem\n    font-size: var(--txt-xxxxs)\n  .f-form-radio .wpcf7-list-item-label::before\n    display: inline-block\n    width: var(--icon-size)\n    height: var(--icon-size)\n    margin-right: .5rem\n    background: var(--clr-white)\n    border: var(--input-w) solid var(--input-color)\n  .f-form-radio-block__content\n    --px: 1rem\n    --border-w: 0\n    display: flex\n    flex-direction: column\n    padding: var(--py) var(--px)\n    border: .0625rem solid var(--input-color)\n\n【ロゴ・ビジュアル素材】\n  https://geeq.co.jp/wp-content/uploads/2024/03/test.png\n  https://www.geeq.co.jp/wp-content/themes/IGQ/favicon.ico\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq_mini.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_x.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_facebook.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_youtube.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_linkedin.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg\n\n【取得CSSファイル】\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?2024062305\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/print.css\n  https://www.geeq.co.jp/wp-content/plugins/bogo/includes/css/style.css?ver=3.9.3\n  https://www.geeq.co.jp/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?ver=7.1\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/style.css?ver=7.1\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Bebas+Neue&display=swap&family=Lato:wght@400;700&display=swap"
+  "css_summary": "【抽出カラー（頻度順）】\n  #252525  color  出現16回  [external-css]\n  #888888  border  出現15回  [external-css]\n  #F5F5F5  --clr-black-20  出現13回  [external-css]\n  #1F1F1F  background-color  出現10回  [external-css]\n  #DEDEDE  border  出現10回  [external-css]\n  #222222  background-color  出現10回  [external-css]\n  #444444  color  出現9回  [external-css+style-tag]\n  #EEEEEE  --clr-black-30  出現8回  [external-css+style-tag]\n  #333333  color  出現7回  [external-css]\n  #C3C3C3  border-color  出現6回  [external-css]\n  #777777  color  出現6回  [external-css]\n  #CCCCCC  color  出現6回  [external-css]\n  #00D084  --wp--preset--color--vivid-green-cyan  出現5回  [style-tag]\n  #0693E3  --wp--preset--color--vivid-cyan-blue  出現5回  [style-tag]\n  #EC5555  color  出現5回  [external-css]\n\n【CSS カラー変数（:root）】\n  --clr-primary-100: #BE0026\n  --clr-primary-90: #C03\n  --clr-black-100: #141414\n  --clr-black-90: #585858\n  --clr-black-50: #C3C3C3\n  --clr-black-40: #E8E8E8\n  --clr-black-30: #EEE\n  --clr-black-20: #F5F5F5\n  --clr-black-10: #FAFAFA\n  --clr-white: #FFF\n  --clr-primary-20: #FAE5EB\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n  --hcb--c: #f9f9f6\n  --hcb--bgc: #2d2e29\n  --hcb--data-label--c: #fff\n  --hcb--data-label--bgc: #20211f\n  --hcb--line-numbers--c: #a3a3a3\n  --hcb--highlight-color: #fffaf51a\n  --hcb--scbar-track--bgc: #ffffff1a\n  --wp-block-synced-color: #7a00df\n  --wp-editor-canvas-background: #ddd\n  --wp-admin-theme-color: #007cba\n  --wp-admin-theme-color-darker-10: #006ba1\n  --wp-admin-theme-color-darker-20: #005a87\n\n【使用フォント】\n  var(--eng-font)\n  var(--base-font)\n  var(--head-font)\n  Bebas Neue\n  Lato\n  Noto Sans JP\n  inherit\n  system-ui\n  Menlo\n  Roboto Mono\n  var(--hcb--ff)\n  Arial\n\n【角丸パターン】\n  50%\n  0 0 .625rem .625rem\n  .1875rem\n  100%\n  3px\n  4px\n  2px\n  20px\n\n【ボタンスタイル】\n  ★ .c-button.-primary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-primary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-secondary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-size_m.-outline（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-white)\n    --clr-bg-hover: var(--clr-primary-90)\n    --clr-border: var(--clr-black-100)\n    --border-width: 1px\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-secondary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n\n【カードスタイル】\n  .p-case-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    padding: .25rem .5rem\n    font-size: var(--txt-xxxxs)\n    color: var(--clr-white)\n  .p-interview-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    width: max-content\n    padding: .25rem .5rem\n    margin-top: .75rem\n  .p-case-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    padding: 0 2.75rem\n    color: var(--clr-white)\n  .p-interview-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    width: 100%\n    height: 100%\n  .p-case-card__head\n    background-color: var(--clr-black-10)\n\n【フォームスタイル】\n  .f-form-checkbox .wpcf7-form-control .wpcf7-list-item label::before,.f-form__checkbox-label::before\n    display: block\n    width: var(--check-box)\n    height: var(--check-box)\n    background-color: var(--clr-bg)\n    border: 1px solid var(--clr-border)\n    border-radius: .1875rem\n  .f-form-button .wpcf7-submit\n    display: block\n    width: 100%\n    min-height: 3.5rem\n    padding: 1rem\n    font-family: var(--base-font)\n    font-size: var(--txt-xs)\n  .f-form-text.-required\n    display: inline-flex\n    min-width: max-content\n    height: 1.25rem\n    padding: .0625rem .5rem\n    margin-left: .5rem\n    font-size: var(--txt-xxxxs)\n  .f-form-radio .wpcf7-list-item-label::before\n    display: inline-block\n    width: var(--icon-size)\n    height: var(--icon-size)\n    margin-right: .5rem\n    background: var(--clr-white)\n    border: var(--input-w) solid var(--input-color)\n  .f-form-radio-block__content\n    --px: 1rem\n    --border-w: 0\n    display: flex\n    flex-direction: column\n    padding: var(--py) var(--px)\n    border: .0625rem solid var(--input-color)\n\n【ロゴ・ビジュアル素材】\n  https://geeq.co.jp/wp-content/uploads/2024/03/test.png\n  https://www.geeq.co.jp/wp-content/themes/IGQ/favicon.ico\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq_mini.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_x.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_facebook.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_youtube.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_linkedin.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg\n  https://sqripts.com/wp-content/uploads/2023/11/20231121_thumb-1.jpg\n\n【取得CSSファイル】\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?2024062305\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/print.css\n  https://www.geeq.co.jp/wp-content/plugins/bogo/includes/css/style.css?ver=3.9.3\n  https://www.geeq.co.jp/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?ver=7.1\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/style.css?ver=7.1\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Bebas+Neue&display=swap&family=Lato:wght@400;700&display=swap\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_f8cb08ce16bbf77bdb90ec09b5fe536a.css\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_305a074b4d20a5ec83953e0635e1c3ae.css?1757498292\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_08082510c21edacd066a0efc00ad6105.css?ver=2.6.0.1.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_587aff57a2ad70e67f1856ec54d0efa1.css?ver=2.6.0.1.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_1a28f7e2d7d91bdf98483befd2416982.css?ver=1.0.0\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_a3bc4735f7f053e7665718edc0ffda85.css?ver=1.0.0\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_2bee417e5b769418966cae22e78d7c86.css?ver=2.2.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_292f3fc4f1681a95b7e05a895458fd59.css?ver=1.4.33\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_ebeb8dd6a171516ba92abb74416c1d94.css?ver=4.23.13\n  https://sqripts.com/wp-content/plugins/wp-rss-aggregator//v4/css/build/pagination.min.css?ver=4.23.13\n  https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap"
 }
