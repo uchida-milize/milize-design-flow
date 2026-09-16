@@ -5,6 +5,14 @@ import { NewClientButton } from '@/components/NewClientButton';
 import { ClientLogo } from '@/components/ClientLogo';
 import { isLightCssColor } from '@/lib/cssStyle';
 
+// 一覧ページで存在感が強すぎる一部クライアントのロゴのみ縮小表示する（カード枠自体は変えない）
+const LOGO_SCALE_OVERRIDES: Record<string, number> = {
+  hitachi: 0.85,
+  milize: 0.95,
+  nike: 0.95,
+  panasonic: 0.9,
+};
+
 type ClientInfo = {
   slug: string;
   name: string;
@@ -253,6 +261,7 @@ export function ClientCardGrid({ clients }: { clients: ClientInfo[] }) {
                   width={200}
                   bordered={false}
                   background="transparent"
+                  logoScale={LOGO_SCALE_OVERRIDES[client.slug] ?? 1}
                   onBackdropDetected={(color) => {
                     setLogoBackdrops((prev) => (prev[client.slug] === color ? prev : { ...prev, [client.slug]: color }));
                   }}

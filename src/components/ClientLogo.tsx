@@ -13,6 +13,8 @@ interface ClientLogoProps {
   background?: string;
   /** ロゴ画像から判定した推奨背景色（単色背景の焼き込み or 白一色ロゴ）を呼び出し側へ通知する */
   onBackdropDetected?: (color: string | null) => void;
+  /** ロゴ画像自体の表示倍率（1 = 通常サイズ）。表示枠は変えず、画像だけを縮小/拡大したい場合に指定する */
+  logoScale?: number;
 }
 
 // /api/extract-css が保存し得る拡張子を優先度順に列挙。
@@ -30,7 +32,7 @@ const LOGO_EXTENSIONS = ['png', 'svg', 'jpg', 'jpeg', 'webp', 'ico', 'gif'];
  * エラーを発生させてしまい、onError が拾えず素の壊れ画像アイコンが
  * 残ってしまうため。
  */
-export function ClientLogo({ slug, name, size = 40, width, bordered = true, background, onBackdropDetected }: ClientLogoProps) {
+export function ClientLogo({ slug, name, size = 40, width, bordered = true, background, onBackdropDetected, logoScale = 1 }: ClientLogoProps) {
   const [mounted, setMounted] = useState(false);
   const [extIndex, setExtIndex] = useState(0);
   const initial = name.trim().charAt(0).toUpperCase() || '?';
@@ -70,7 +72,7 @@ export function ClientLogo({ slug, name, size = 40, width, bordered = true, back
         <img
           src={src}
           alt={`${name} logo`}
-          style={{ width: '92%', height: '78%', objectFit: 'contain' }}
+          style={{ width: `${92 * logoScale}%`, height: `${78 * logoScale}%`, objectFit: 'contain' }}
           onError={() => setExtIndex(i => i + 1)}
         />
       )}
