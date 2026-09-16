@@ -229,7 +229,7 @@ export default async function ClientsIndex() {
       </header>
 
       <div style={{ background: '#f7f9fc' }}>
-        <div style={{ padding: '64px 24px 48px' }}>
+        <div style={{ padding: '16px 24px 48px' }}>
           <p className="text-sm font-bold mb-3" style={{ color: '#999' }}>Client Production Portal</p>
           <h1 className="font-bold mb-4" style={{ fontSize: 36, lineHeight: 1.3, color: '#111827' }}>
             {`クライアント別アセット＆トンマナポータル`}
