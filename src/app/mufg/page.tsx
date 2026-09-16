@@ -1,19 +1,23 @@
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
+import { ClientLogoHero } from '@/components/ClientLogoHero';
+import { BrandIdentitySection } from '@/components/BrandIdentitySection';
+
+const clientName = '株式会社 三菱ＵＦＪ銀行';
+const basePath = '/mufg';
+const slug = basePath.replace(/^\//, '');
+const primaryColor = 'var(--primary-color)';
+
+const colorRatio = [
+  { hex: '#E60000', name: '#E60000', percent: 32.9 },
+  { hex: '#333333', name: '#333333', percent: 26.9 },
+  { hex: '#CCCCCC', name: '#CCCCCC', percent: 18.7 },
+  { hex: '#B40001', name: '#B40001', percent: 14.6 },
+  { hex: '#D4D4D4', name: '#D4D4D4', percent: 6.9 },
+];
 
 export default function Home() {
-  const clientName: string = '三菱UFJフィナンシャル・グループ';
-  const basePath: string = '/mufg';
-  const primaryColor: string = '#C8102E';
-
-  const colorRatios = [
-    { hex: '#FFFFFF', name: '背景（ホワイト系）', percent: 70, isWhite: true },
-    { hex: '#333333', name: 'テキスト（ダークグレー〜ブラック系）', percent: 15, isWhite: false },
-    { hex: '#C8102E', name: 'MUFGレッド（ロゴ・シンボルマーク）', percent: 10, isWhite: false },
-    { hex: '#9CA3AF', name: 'その他（画像・写真領域）', percent: 5, isWhite: false },
-  ];
-
   return (
-    <div className="container" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
+    <div className="mufg-portal">
       <ClientPortalHeader
         clientName={clientName}
         basePath={basePath}
@@ -21,86 +25,111 @@ export default function Home() {
         primaryColor={primaryColor}
       />
 
-      <section style={{ marginTop: '48px' }}>
-        <div className="section-label" style={{ color: primaryColor }}>
-          RESEARCH
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
+          <p className="section-label" style={{ color: primaryColor }}>
+            BRAND PORTAL
+          </p>
+          <h1 className="section-title">{clientName} リサーチポータル</h1>
+          <p className="section-desc">
+            クライアントごとのトンマナを収集して一覧化をしています。
+          </p>
         </div>
-        <h1 className="section-title" style={{ fontSize: '32px' }}>
-          {clientName} リサーチ
-        </h1>
-        <p className="section-desc">
-          スクレイピングデータおよび視覚的観察に基づくガイドラインリサーチとコンポーネントの整理です。
-        </p>
-      </section>
 
-      <section style={{ marginTop: '40px' }}>
-        <div
-          style={{
-            display: 'flex',
-            height: '32px',
-            borderRadius: '8px',
-            overflow: 'hidden',
-          }}
-        >
-          {colorRatios.map((c) => (
+        <ClientLogoHero slug={slug} name={clientName} primaryColor={primaryColor} />
+
+        <div className="color-bar">
+          {colorRatio.map((c) => (
             <div
               key={c.hex}
               style={{
-                flex: `${c.percent} 0 0`,
+                flex: c.percent / 100,
                 background: c.hex,
-                border: c.isWhite ? '1px solid #e5e7eb' : 'none',
+                borderRight: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
               }}
             />
           ))}
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '12px' }}>
-          {colorRatios.map((c) => (
-            <div key={c.hex} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <div
+        <div className="color-bar-labels">
+          {colorRatio.map((c) => (
+            <div key={c.hex} className="color-bar-label-item">
+              <span
+                className="color-bar-swatch"
                 style={{
-                  width: '12px',
-                  height: '12px',
-                  borderRadius: '3px',
                   background: c.hex,
-                  border: c.isWhite ? '1px solid #e5e7eb' : 'none',
+                  border: c.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
                 }}
               />
-              <span style={{ fontSize: '12px', color: '#6b7280' }}>
-                {c.hex} {c.name} ({c.percent}%)
+              <span>
+                {c.hex} {c.name} {c.percent}%
               </span>
             </div>
           ))}
         </div>
-      </section>
 
-      <section
-        style={{
-          marginTop: '40px',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '24px',
-        }}
-      >
-        <a href={`${basePath}/guidelines`} className="card" style={{ display: 'block' }}>
-          <div className="section-label" style={{ color: primaryColor }}>
-            GUIDELINES
-          </div>
-          <h2 className="section-title" style={{ fontSize: '20px' }}>
-            ガイドラインリサーチ
-          </h2>
-          <p className="section-desc">カラー・タイポグラフィ・トンマナの調査結果</p>
-        </a>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 24,
+          }}
+        >
+          <a href={`${basePath}/guidelines`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                GUIDELINES
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                デザインガイドライン
+              </h2>
+              <p className="section-desc">
+                カラー・タイポグラフィ・アクセシビリティなどのトンマナの基本方針を確認できます。
+              </p>
+            </div>
+          </a>
 
-        <a href={`${basePath}/components`} className="card" style={{ display: 'block' }}>
-          <div className="section-label" style={{ color: primaryColor }}>
-            COMPONENTS
-          </div>
-          <h2 className="section-title" style={{ fontSize: '20px' }}>
-            コンポーネント
-          </h2>
-          <p className="section-desc">実装確認済み・想定コンポーネントの一覧</p>
-        </a>
-      </section>
+          <a href={`${basePath}/components`} className="nav-card">
+            <div className="card">
+              <p className="section-label" style={{ color: primaryColor }}>
+                COMPONENTS
+              </p>
+              <h2 className="section-title" style={{ fontSize: 20 }}>
+                コンポーネント
+              </h2>
+              <p className="section-desc">
+                UIUXのベースとなるコンポーネントを一覧化。Figmaと連動可能です。
+              </p>
+            </div>
+          </a>
+          <a
+            href={`${basePath}/resources`}
+            className="nav-card"
+            style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <div className="card" style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              border: 'none',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+              padding: '24px',
+              cursor: 'pointer',
+              flex: 1,
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: primaryColor, letterSpacing: '0.05em', marginBottom: 8 }}>
+                RESOURCES
+              </div>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', margin: '0 0 8px 0' }}>
+                リソース
+              </h2>
+              <p style={{ fontSize: 14, color: '#6b7280', margin: 0 }}>
+                リサーチで収集したWebページのデザイン情報（カラー・フォント・CSS）を確認できます。
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <BrandIdentitySection slug={slug} primaryColor={primaryColor} />
+      </div>
     </div>
   );
 }

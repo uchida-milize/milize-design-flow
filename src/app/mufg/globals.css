@@ -1,7 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
 
 :root {
   --portal-bg: #f5f7fa;
+  --primary-silver: #C0C0C0;
+  --secondary-black: #000000;
+  --accent-darkgray: #444444;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --text-note: #9ca3af;
+  /* 標準変数（カラーバー自動生成用） */
+  --primary-color: #C0C0C0;
+  --secondary-color: #000000;
+  --accent-color: #444444;
+  --text-color: #111827;
+  --bg-color: #FFFFFF;
 }
 
 .mufg-portal * {
@@ -13,29 +25,14 @@
 .mufg-portal {
   min-height: 100vh;
   background: var(--portal-bg);
-  font-family: 'Noto Sans JP', sans-serif;
-  color: #111827;
+  
+  color: var(--text-main);
 }
 
 .mufg-portal h1,
 .mufg-portal h2,
-.mufg-portal h3,
-.mufg-portal h4,
-.mufg-portal h5,
-.mufg-portal h6 {
-  font-weight: 700;
-  font-family: 'Noto Sans JP', sans-serif;
-}
-
-.mufg-portal p,
-.mufg-portal span,
-.mufg-portal div {
-  font-family: 'Noto Sans JP', sans-serif;
-}
-
-.mufg-portal a {
-  text-decoration: none;
-  color: inherit;
+.mufg-portal h3 {
+  
 }
 
 .mufg-portal .container {
@@ -48,6 +45,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .mufg-portal .section-title {
@@ -65,10 +63,28 @@
 
 .mufg-portal .card {
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: none;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.mufg-portal .nav-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.mufg-portal .nav-card:hover {
+  transform: translateY(-2px);
+}
+
+.mufg-portal .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
 }
 
 .mufg-portal .swatch-grid {
@@ -77,21 +93,24 @@
   gap: 12px;
 }
 
-.mufg-portal .swatch-top {
-  height: 80px;
-  border-radius: 8px 8px 0 0;
+.mufg-portal .swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
-.mufg-portal .swatch-bottom {
-  padding: 8px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+.mufg-portal .swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.mufg-portal .swatch-info {
+  padding: 8px 10px;
 }
 
 .mufg-portal .swatch-hex {
-  font-family: monospace;
+  
   font-size: 13px;
   color: #111827;
 }
@@ -99,6 +118,7 @@
 .mufg-portal .swatch-name {
   font-size: 12px;
   color: #6b7280;
+  margin-top: 2px;
 }
 
 .mufg-portal .tabs {
@@ -113,22 +133,30 @@
   border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
+  background: #f3f4f6;
+  color: #6b7280;
+  text-decoration: none;
   border: none;
+  cursor: pointer;
+}
+
+.mufg-portal .tab.active {
+  color: #ffffff;
 }
 
 .mufg-portal .component-card {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
-  margin-bottom: 24px;
+  background: #ffffff;
 }
 
 .mufg-portal .component-label {
   font-size: 12px;
   color: #9ca3af;
-  padding: 12px 16px 0 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  
 }
 
 .mufg-portal .component-render {
@@ -136,10 +164,81 @@
 }
 
 .mufg-portal .component-code {
-  background: #efefef;
-  color: #333333;
-  font-family: monospace;
+  background: #0f172a;
+  color: #94a3b8;
+  
   font-size: 12px;
   padding: 12px 16px;
-  white-space: pre-wrap;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.mufg-portal .color-bar {
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.mufg-portal .color-bar-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.mufg-portal .color-bar-label-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.mufg-portal .color-bar-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+/* カードスタイル統一（自動注入） */
+[class$="-portal"] .card, .card {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  transition: box-shadow 0.15s ease !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+[class$="-portal"] .nav-card, .nav-card {
+  transition: transform 0.15s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+[class$="-portal"] .nav-card:hover, .nav-card:hover {
+  transform: translateY(-2px);
+}
+[class$="-portal"] .nav-card:hover .card, .nav-card:hover .card {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+}
+
+/* 標準カラー変数（自動注入） */
+:root {
+  --primary-color: #E60000;
+  --secondary-color: #333333;
+  --accent-color: #CCCCCC;
+  --text-color: #111827;
+  --bg-color: #F5F5F5;
+  --brand-color-1: #E60000;
+  --brand-ratio-1: 32.9;
+  --brand-color-2: #333333;
+  --brand-ratio-2: 26.9;
+  --brand-color-3: #CCCCCC;
+  --brand-ratio-3: 18.7;
+  --brand-color-4: #B40001;
+  --brand-ratio-4: 14.6;
+  --brand-color-5: #D4D4D4;
+  --brand-ratio-5: 6.9;
 }
