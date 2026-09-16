@@ -48,10 +48,35 @@
       "--wp-admin-theme-color-darker-10--rgb": "0,107,160.5",
       "--wp-admin-theme-color-darker-20": "#005a87",
       "--wp-admin-theme-color-darker-20--rgb": "0,90,135",
-      "--wp--preset--font-size--normal": "16px"
+      "--wp--preset--font-size--normal": "16px",
+      "--ink": "#16263f",
+      "--ink-deep": "#0c1729",
+      "--paper": "#f7f7f5",
+      "--surface": "#ffffff",
+      "--line": "#d8d5cf",
+      "--muted": "#606873",
+      "--accent": "#b40d0d",
+      "--accent-dark": "#8a0a0a",
+      "--red-soft": "#f7e8e7",
+      "--grid": "rgba(180, 13, 13, 0.055)",
+      "--grid-faint": "rgba(180, 13, 13, 0.035)",
+      "--shadow-accent-strong": "0 12px 24px rgba(180, 13, 13, 0.22)",
+      "--shadow-accent-soft": "0 14px 30px rgba(180, 13, 13, 0.14)",
+      "--shadow-ring-accent": "0 0 0 5px rgba(180, 13, 13, 0.12)",
+      "--font-num": "\"Roboto Condensed\", \"Arial Narrow\", Arial, sans-serif",
+      "--ink-nav": "#222326",
+      "--text-strong": "#33363a",
+      "--line-soft": "#e5e5e5",
+      "--media-placeholder": "#e9e9e7"
     },
     "hex_colors": "#252525 | color, background, border, background-color | 出現16回 | [external-css]\n#888888 | border | 出現15回 | [external-css]\n#F5F5F5 | --clr-black-20, background, color, border-bottom, border-right | 出現13回 | [external-css]\n#1F1F1F | background-color | 出現10回 | [external-css]\n#DEDEDE | border, border-bottom, color, background | 出現10回 | [external-css]\n#222222 | background-color, color, border | 出現10回 | [external-css]\n#444444 | color, background-color, border-left | 出現9回 | [external-css+style-tag]\n#EEEEEE | --clr-black-30, color, background-color, background | 出現8回 | [external-css+style-tag]\n#333333 | color, background-color | 出現7回 | [external-css]\n#C3C3C3 | border-color, --clr-black-50 | 出現6回 | [external-css]\n#777777 | color, background-color, background | 出現6回 | [external-css]\n#CCCCCC | color, border | 出現6回 | [external-css]\n#00D084 | --wp--preset--color--vivid-green-cyan, background | 出現5回 | [style-tag]\n#0693E3 | --wp--preset--color--vivid-cyan-blue, background | 出現5回 | [style-tag]\n#EC5555 | color, border-color | 出現5回 | [external-css]\n#CC0033 | color, --clr-primary-90 | 出現4回 | [external-css]\n#ABB8C3 | --wp--preset--color--cyan-bluish-gray | 出現4回 | [style-tag]\n#F78DA7 | --wp--preset--color--pale-pink | 出現4回 | [style-tag]\n#CF2E2E | --wp--preset--color--vivid-red | 出現4回 | [style-tag]\n#FF6900 | --wp--preset--color--luminous-vivid-orange | 出現4回 | [style-tag]\n#FCB900 | --wp--preset--color--luminous-vivid-amber | 出現4回 | [style-tag]\n#7BDCB5 | --wp--preset--color--light-green-cyan | 出現4回 | [style-tag]\n#8ED1FC | --wp--preset--color--pale-cyan-blue | 出現4回 | [style-tag]\n#9B51E0 | --wp--preset--color--vivid-purple | 出現4回 | [style-tag]\n#DDDDDD | border, --wp-editor-canvas-background, background-color | 出現4回 | [external-css+style-tag]\n#BDBDBD | color | 出現4回 | [external-css]\n#DC3232 | border-color, color, border | 出現3回 | [external-css]\n#F8F8F2 | color | 出現3回 | [external-css]\n#32373C | background-color, background | 出現3回 | [style-tag]\n#3F3F3F | background-color | 出現2回 | [external-css]",
-    "rgb_colors": [],
+    "rgb_colors": [
+      "rgba(180, 13, 13, 0.055)",
+      "rgba(180, 13, 13, 0.035)",
+      "0 12px 24px rgba(180, 13, 13, 0.22)",
+      "0 14px 30px rgba(180, 13, 13, 0.14)",
+      "0 0 0 5px rgba(180, 13, 13, 0.12)"
+    ],
     "fonts": [
       "var(--eng-font)",
       "var(--base-font)",
@@ -64,9 +89,51 @@
       "Menlo",
       "Roboto Mono",
       "var(--hcb--ff)",
-      "Arial"
+      "Arial",
+      "Georgia",
+      "var(--font-num)"
     ],
     "button_styles": [
+      {
+        "selector": "★ .motion-toggle（実際のボタン要素で1回使用）",
+        "properties": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "min-height": "38px",
+          "padding": "0 14px",
+          "border": "1px solid rgba(22, 38, 63, 0.25)",
+          "border-radius": "var(--radius)",
+          "background": "rgba(255, 255, 255, 0.9)",
+          "color": "var(--ink)",
+          "font-size": "var(--fs-sm2)",
+          "font-weight": "800"
+        },
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
+      },
+      {
+        "selector": "★ .btn.btn-primary（実際のボタン要素で3回使用）",
+        "properties": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "min-height": "50px",
+          "padding": "0 10px",
+          "border": "1px solid transparent",
+          "border-radius": "var(--radius)",
+          "font-size": "var(--fs-sm2)",
+          "line-height": "var(--lh-normal)",
+          "font-weight": "800",
+          "background": "var(--surface)",
+          "color": "var(--accent)",
+          "border-color": "var(--surface)",
+          "box-shadow": "none",
+          "width": "100%",
+          "min-width": "0",
+          "padding-left": "16px",
+          "padding-right": "16px"
+        },
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
+      },
       {
         "selector": "★ .c-button.-primary.-wide（実際のボタン要素で1回使用）",
         "properties": {
@@ -250,6 +317,58 @@
         "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       },
       {
+        "selector": "★ .btn.btn-secondary（実際のボタン要素で3回使用）",
+        "properties": {
+          "display": "none",
+          "align-items": "center",
+          "justify-content": "center",
+          "min-height": "50px",
+          "padding": "0 10px",
+          "border": "1px solid transparent",
+          "border-radius": "var(--radius)",
+          "font-size": "var(--fs-sm2)",
+          "line-height": "var(--lh-normal)",
+          "font-weight": "800",
+          "background": "transparent",
+          "color": "var(--surface)",
+          "border-color": "rgba(255, 255, 255, 0.62)",
+          "width": "100%",
+          "min-width": "0",
+          "padding-left": "16px",
+          "padding-right": "16px"
+        },
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
+      },
+      {
+        "selector": "★ .method-step.is-active（実際のボタン要素で1回使用）",
+        "properties": {
+          "display": "grid",
+          "width": "100%",
+          "padding": "15px 16px 15px 20px",
+          "border": "1px solid rgba(22, 38, 63, 0.16)",
+          "border-left": "0",
+          "background": "var(--ink)",
+          "color": "var(--surface)",
+          "text-align": "left",
+          "border-color": "var(--ink)"
+        },
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
+      },
+      {
+        "selector": "★ .method-step（実際のボタン要素で3回使用）",
+        "properties": {
+          "display": "grid",
+          "width": "100%",
+          "padding": "15px 16px 15px 20px",
+          "border": "1px solid rgba(22, 38, 63, 0.16)",
+          "border-left": "0",
+          "background": "rgba(255, 255, 255, 0.55)",
+          "color": "inherit",
+          "text-align": "left"
+        },
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
+      },
+      {
         "selector": "★ .h-btn（実際のボタン要素で1回使用）",
         "properties": {
           "width": "100%",
@@ -347,18 +466,18 @@
       {
         "selector": ".btn",
         "properties": {
-          "display": "block",
-          "width": "100%",
-          "max-width": "260px",
-          "height": "50px",
-          "line-height": "48px",
-          "text-align": "center",
-          "font-weight": "600",
-          "border": "1px solid #000",
-          "color": "#fff",
-          "background": "#000"
+          "display": "inline-flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "min-height": "48px",
+          "padding": "0 22px",
+          "border": "1px solid transparent",
+          "border-radius": "var(--radius)",
+          "font-size": "var(--fs-md2)",
+          "line-height": "var(--lh-normal)",
+          "font-weight": "800"
         },
-        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
       },
       {
         "selector": ".wp-lightbox-container button",
@@ -393,59 +512,6 @@
           "padding-left": "calc(1.333em + 2px)"
         },
         "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
-      },
-      {
-        "selector": ".header .h-btn-wrap .h-btn",
-        "properties": {
-          "width": "150px",
-          "height": "30px",
-          "line-height": "30px",
-          "text-align": "center",
-          "border": "1px solid #000",
-          "font-size": "11px",
-          "font-weight": "600",
-          "background": "#fff",
-          "margin-right": "-1px"
-        },
-        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
-      },
-      {
-        "selector": ".p-movie-button",
-        "properties": {
-          "width": "2.75rem",
-          "height": "1.75rem",
-          "background": "var(--clr-white)",
-          "border": "1px solid var(--clr-black-100)",
-          "--icon-type": "var(--icon-pause)",
-          "--label-opacity": "0",
-          "--label-text": "\"停止\""
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".f-form-button .wpcf7-submit:hover",
-        "properties": {
-          "background-color": "var(--clr-black-100)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".header .h-btn-wrap .h-btn:hover",
-        "properties": {
-          "background": "#000",
-          "color": "#fff"
-        },
-        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
-      },
-      {
-        "selector": ".header .pc.btn-search",
-        "properties": {
-          "display": "block",
-          "width": "90px",
-          "background": "url(//sqripts.com/wp-content/themes/sqripts/img/common/icn_search-w.svg) no-repeat center center #252525",
-          "border": "1px solid #252525"
-        },
-        "sourceUrl": "https://sqripts.com/2023/11/21/79031/"
       }
     ],
     "card_styles": [
@@ -476,6 +542,21 @@
           "background-color": "var(--clr-black-100)"
         },
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
+      },
+      {
+        "selector": ".member-card,\n    .fv-doc-card",
+        "properties": {
+          "flex": "0 0 auto",
+          "width": "184px",
+          "min-width": "184px",
+          "height": "234px",
+          "min-height": "234px",
+          "background": "var(--surface)",
+          "border": "1px solid rgba(27, 27, 29, 0.08)",
+          "border-radius": "var(--radius)",
+          "box-shadow": "var(--shadow-paper)"
+        },
+        "sourceUrl": "https://genz.jp/lp/tw/game-app-test"
       },
       {
         "selector": ".p-case-card__layer",
@@ -647,19 +728,6 @@
           "font-weight": "var(--fw-b)",
           "line-height": "var(--lh-m)",
           "color": "var(--clr-txt)"
-        },
-        "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
-      },
-      {
-        "selector": ".p-requirement-card___info-name",
-        "properties": {
-          "display": "inline-flex",
-          "align-items": "center",
-          "justify-content": "center",
-          "width": "100%",
-          "font-size": "var(--txt-xxxs)",
-          "line-height": "var(--lh-m)",
-          "background": "var(--clr-black-40)"
         },
         "sourceUrl": "https://www.geeq.co.jp/service/game-creation/tests/"
       }
@@ -888,7 +956,9 @@
       ".3em",
       "0 var(--hcb--radius)",
       "8px",
-      "9999px"
+      "9999px",
+      "var(--radius)",
+      "999px"
     ],
     "logo_urls": [
       "https://geeq.co.jp/wp-content/uploads/2024/03/test.png",
@@ -902,7 +972,23 @@
       "https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg",
       "https://sqripts.com/wp-content/uploads/2023/11/20231121_thumb-1.jpg",
       "https://sqripts.com/wp-content/themes/sqripts/img/icons/favicon.ico",
-      "https://sqripts.com/wp-content/themes/sqripts/img/common/logo.svg"
+      "https://sqripts.com/wp-content/themes/sqripts/img/common/logo.svg",
+      "https://lp.genz.jp/assets/og/genz-ogp-fv-v2-1200x630.png",
+      "https://genz.jp/lp/tw/assets/images/genz-logo.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-01.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-02.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-03.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-04.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-05.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-06.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-07.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-08.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-09.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-10.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-11.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-12.webp",
+      "https://genz.jp/lp/tw/assets/case-logos/company-logo-13.webp",
+      "https://genz.jp/lp/tw/assets/images/genz-logo-white.svg"
     ],
     "source_css_urls": [
       "https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?2024062305",
@@ -924,10 +1010,10 @@
       "https://sqripts.com/wp-content/plugins/wp-rss-aggregator//v4/css/build/pagination.min.css?ver=4.23.13",
       "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap"
     ],
-    "extracted_at": "2026-09-16T01:47:23.971Z",
+    "extracted_at": "2026-09-16T01:47:34.290Z",
     "source_urls": [
-      "https://sqripts.com/2023/11/21/79031/"
+      "https://genz.jp/lp/tw/game-app-test"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #252525  color  出現16回  [external-css]\n  #888888  border  出現15回  [external-css]\n  #F5F5F5  --clr-black-20  出現13回  [external-css]\n  #1F1F1F  background-color  出現10回  [external-css]\n  #DEDEDE  border  出現10回  [external-css]\n  #222222  background-color  出現10回  [external-css]\n  #444444  color  出現9回  [external-css+style-tag]\n  #EEEEEE  --clr-black-30  出現8回  [external-css+style-tag]\n  #333333  color  出現7回  [external-css]\n  #C3C3C3  border-color  出現6回  [external-css]\n  #777777  color  出現6回  [external-css]\n  #CCCCCC  color  出現6回  [external-css]\n  #00D084  --wp--preset--color--vivid-green-cyan  出現5回  [style-tag]\n  #0693E3  --wp--preset--color--vivid-cyan-blue  出現5回  [style-tag]\n  #EC5555  color  出現5回  [external-css]\n\n【CSS カラー変数（:root）】\n  --clr-primary-100: #BE0026\n  --clr-primary-90: #C03\n  --clr-black-100: #141414\n  --clr-black-90: #585858\n  --clr-black-50: #C3C3C3\n  --clr-black-40: #E8E8E8\n  --clr-black-30: #EEE\n  --clr-black-20: #F5F5F5\n  --clr-black-10: #FAFAFA\n  --clr-white: #FFF\n  --clr-primary-20: #FAE5EB\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n  --hcb--c: #f9f9f6\n  --hcb--bgc: #2d2e29\n  --hcb--data-label--c: #fff\n  --hcb--data-label--bgc: #20211f\n  --hcb--line-numbers--c: #a3a3a3\n  --hcb--highlight-color: #fffaf51a\n  --hcb--scbar-track--bgc: #ffffff1a\n  --wp-block-synced-color: #7a00df\n  --wp-editor-canvas-background: #ddd\n  --wp-admin-theme-color: #007cba\n  --wp-admin-theme-color-darker-10: #006ba1\n  --wp-admin-theme-color-darker-20: #005a87\n\n【使用フォント】\n  var(--eng-font)\n  var(--base-font)\n  var(--head-font)\n  Bebas Neue\n  Lato\n  Noto Sans JP\n  inherit\n  system-ui\n  Menlo\n  Roboto Mono\n  var(--hcb--ff)\n  Arial\n\n【角丸パターン】\n  50%\n  0 0 .625rem .625rem\n  .1875rem\n  100%\n  3px\n  4px\n  2px\n  20px\n\n【ボタンスタイル】\n  ★ .c-button.-primary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-primary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-secondary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-size_m.-outline（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-white)\n    --clr-bg-hover: var(--clr-primary-90)\n    --clr-border: var(--clr-black-100)\n    --border-width: 1px\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-secondary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n\n【カードスタイル】\n  .p-case-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    padding: .25rem .5rem\n    font-size: var(--txt-xxxxs)\n    color: var(--clr-white)\n  .p-interview-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    width: max-content\n    padding: .25rem .5rem\n    margin-top: .75rem\n  .p-case-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    padding: 0 2.75rem\n    color: var(--clr-white)\n  .p-interview-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    width: 100%\n    height: 100%\n  .p-case-card__head\n    background-color: var(--clr-black-10)\n\n【フォームスタイル】\n  .f-form-checkbox .wpcf7-form-control .wpcf7-list-item label::before,.f-form__checkbox-label::before\n    display: block\n    width: var(--check-box)\n    height: var(--check-box)\n    background-color: var(--clr-bg)\n    border: 1px solid var(--clr-border)\n    border-radius: .1875rem\n  .f-form-button .wpcf7-submit\n    display: block\n    width: 100%\n    min-height: 3.5rem\n    padding: 1rem\n    font-family: var(--base-font)\n    font-size: var(--txt-xs)\n  .f-form-text.-required\n    display: inline-flex\n    min-width: max-content\n    height: 1.25rem\n    padding: .0625rem .5rem\n    margin-left: .5rem\n    font-size: var(--txt-xxxxs)\n  .f-form-radio .wpcf7-list-item-label::before\n    display: inline-block\n    width: var(--icon-size)\n    height: var(--icon-size)\n    margin-right: .5rem\n    background: var(--clr-white)\n    border: var(--input-w) solid var(--input-color)\n  .f-form-radio-block__content\n    --px: 1rem\n    --border-w: 0\n    display: flex\n    flex-direction: column\n    padding: var(--py) var(--px)\n    border: .0625rem solid var(--input-color)\n\n【ロゴ・ビジュアル素材】\n  https://geeq.co.jp/wp-content/uploads/2024/03/test.png\n  https://www.geeq.co.jp/wp-content/themes/IGQ/favicon.ico\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq_mini.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_x.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_facebook.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_youtube.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_linkedin.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg\n  https://sqripts.com/wp-content/uploads/2023/11/20231121_thumb-1.jpg\n\n【取得CSSファイル】\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?2024062305\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/print.css\n  https://www.geeq.co.jp/wp-content/plugins/bogo/includes/css/style.css?ver=3.9.3\n  https://www.geeq.co.jp/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?ver=7.1\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/style.css?ver=7.1\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Bebas+Neue&display=swap&family=Lato:wght@400;700&display=swap\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_f8cb08ce16bbf77bdb90ec09b5fe536a.css\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_305a074b4d20a5ec83953e0635e1c3ae.css?1757498292\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_08082510c21edacd066a0efc00ad6105.css?ver=2.6.0.1.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_587aff57a2ad70e67f1856ec54d0efa1.css?ver=2.6.0.1.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_1a28f7e2d7d91bdf98483befd2416982.css?ver=1.0.0\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_a3bc4735f7f053e7665718edc0ffda85.css?ver=1.0.0\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_2bee417e5b769418966cae22e78d7c86.css?ver=2.2.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_292f3fc4f1681a95b7e05a895458fd59.css?ver=1.4.33\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_ebeb8dd6a171516ba92abb74416c1d94.css?ver=4.23.13\n  https://sqripts.com/wp-content/plugins/wp-rss-aggregator//v4/css/build/pagination.min.css?ver=4.23.13\n  https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap"
+  "css_summary": "【抽出カラー（頻度順）】\n  #252525  color  出現16回  [external-css]\n  #888888  border  出現15回  [external-css]\n  #F5F5F5  --clr-black-20  出現13回  [external-css]\n  #1F1F1F  background-color  出現10回  [external-css]\n  #DEDEDE  border  出現10回  [external-css]\n  #222222  background-color  出現10回  [external-css]\n  #444444  color  出現9回  [external-css+style-tag]\n  #EEEEEE  --clr-black-30  出現8回  [external-css+style-tag]\n  #333333  color  出現7回  [external-css]\n  #C3C3C3  border-color  出現6回  [external-css]\n  #777777  color  出現6回  [external-css]\n  #CCCCCC  color  出現6回  [external-css]\n  #00D084  --wp--preset--color--vivid-green-cyan  出現5回  [style-tag]\n  #0693E3  --wp--preset--color--vivid-cyan-blue  出現5回  [style-tag]\n  #EC5555  color  出現5回  [external-css]\n\n【CSS カラー変数（:root）】\n  --clr-primary-100: #BE0026\n  --clr-primary-90: #C03\n  --clr-black-100: #141414\n  --clr-black-90: #585858\n  --clr-black-50: #C3C3C3\n  --clr-black-40: #E8E8E8\n  --clr-black-30: #EEE\n  --clr-black-20: #F5F5F5\n  --clr-black-10: #FAFAFA\n  --clr-white: #FFF\n  --clr-primary-20: #FAE5EB\n  --wp--preset--color--black: #000000\n  --wp--preset--color--cyan-bluish-gray: #abb8c3\n  --wp--preset--color--white: #ffffff\n  --wp--preset--color--pale-pink: #f78da7\n  --wp--preset--color--vivid-red: #cf2e2e\n  --wp--preset--color--luminous-vivid-orange: #ff6900\n  --wp--preset--color--luminous-vivid-amber: #fcb900\n  --wp--preset--color--light-green-cyan: #7bdcb5\n  --wp--preset--color--vivid-green-cyan: #00d084\n  --wp--preset--color--pale-cyan-blue: #8ed1fc\n  --wp--preset--color--vivid-cyan-blue: #0693e3\n  --wp--preset--color--vivid-purple: #9b51e0\n  --hcb--c: #f9f9f6\n  --hcb--bgc: #2d2e29\n  --hcb--data-label--c: #fff\n  --hcb--data-label--bgc: #20211f\n  --hcb--line-numbers--c: #a3a3a3\n  --hcb--highlight-color: #fffaf51a\n  --hcb--scbar-track--bgc: #ffffff1a\n  --wp-block-synced-color: #7a00df\n  --wp-editor-canvas-background: #ddd\n  --wp-admin-theme-color: #007cba\n  --wp-admin-theme-color-darker-10: #006ba1\n  --wp-admin-theme-color-darker-20: #005a87\n  --ink: #16263f\n  --ink-deep: #0c1729\n  --paper: #f7f7f5\n  --surface: #ffffff\n  --line: #d8d5cf\n  --muted: #606873\n  --accent: #b40d0d\n  --accent-dark: #8a0a0a\n  --red-soft: #f7e8e7\n  --grid: rgba(180, 13, 13, 0.055)\n  --grid-faint: rgba(180, 13, 13, 0.035)\n  --ink-nav: #222326\n  --text-strong: #33363a\n  --line-soft: #e5e5e5\n  --media-placeholder: #e9e9e7\n\n【使用フォント】\n  var(--eng-font)\n  var(--base-font)\n  var(--head-font)\n  Bebas Neue\n  Lato\n  Noto Sans JP\n  inherit\n  system-ui\n  Menlo\n  Roboto Mono\n  var(--hcb--ff)\n  Arial\n  Georgia\n  var(--font-num)\n\n【角丸パターン】\n  50%\n  0 0 .625rem .625rem\n  .1875rem\n  100%\n  3px\n  4px\n  2px\n  20px\n\n【ボタンスタイル】\n  ★ .motion-toggle（実際のボタン要素で1回使用）\n    display: inline-flex\n    align-items: center\n    min-height: 38px\n    padding: 0 14px\n    border: 1px solid rgba(22, 38, 63, 0.25)\n    border-radius: var(--radius)\n  ★ .btn.btn-primary（実際のボタン要素で3回使用）\n    display: inline-flex\n    align-items: center\n    justify-content: center\n    min-height: 50px\n    padding: 0 10px\n    border: 1px solid transparent\n  ★ .c-button.-primary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-header.-primary（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-primary-90)\n    --clr-bg-hover: var(--clr-black-100)\n    --clr-border: transparent\n    --border-width: 0\n    --txt-size: var(--txt-xs)\n  ★ .c-button.-secondary.-wide（実際のボタン要素で1回使用）\n    --clr-txt: var(--clr-white)\n    --clr-bg: var(--clr-black-100)\n    --clr-bg-hover: var(--clr-primary-100)\n    --clr-border: transparent\n    --border-width: 0px\n    --txt-size: var(--txt-xs)\n\n【カードスタイル】\n  .p-case-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    padding: .25rem .5rem\n    font-size: var(--txt-xxxxs)\n    color: var(--clr-white)\n  .p-interview-card__tag\n    display: flex\n    align-items: center\n    justify-content: center\n    width: max-content\n    padding: .25rem .5rem\n    margin-top: .75rem\n  .member-card,\n    .fv-doc-card\n    flex: 0 0 auto\n    width: 184px\n    min-width: 184px\n    height: 234px\n    min-height: 234px\n    background: var(--surface)\n  .p-case-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    padding: 0 2.75rem\n    color: var(--clr-white)\n  .p-interview-card__layer\n    display: flex\n    flex-direction: column\n    align-items: center\n    justify-content: center\n    width: 100%\n    height: 100%\n\n【フォームスタイル】\n  .f-form-checkbox .wpcf7-form-control .wpcf7-list-item label::before,.f-form__checkbox-label::before\n    display: block\n    width: var(--check-box)\n    height: var(--check-box)\n    background-color: var(--clr-bg)\n    border: 1px solid var(--clr-border)\n    border-radius: .1875rem\n  .f-form-button .wpcf7-submit\n    display: block\n    width: 100%\n    min-height: 3.5rem\n    padding: 1rem\n    font-family: var(--base-font)\n    font-size: var(--txt-xs)\n  .f-form-text.-required\n    display: inline-flex\n    min-width: max-content\n    height: 1.25rem\n    padding: .0625rem .5rem\n    margin-left: .5rem\n    font-size: var(--txt-xxxxs)\n  .f-form-radio .wpcf7-list-item-label::before\n    display: inline-block\n    width: var(--icon-size)\n    height: var(--icon-size)\n    margin-right: .5rem\n    background: var(--clr-white)\n    border: var(--input-w) solid var(--input-color)\n  .f-form-radio-block__content\n    --px: 1rem\n    --border-w: 0\n    display: flex\n    flex-direction: column\n    padding: var(--py) var(--px)\n    border: .0625rem solid var(--input-color)\n\n【ロゴ・ビジュアル素材】\n  https://geeq.co.jp/wp-content/uploads/2024/03/test.png\n  https://www.geeq.co.jp/wp-content/themes/IGQ/favicon.ico\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq_mini.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_geeq.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_x.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_facebook.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_youtube.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/img_logo_linkedin.svg\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/images/logo_imagica_group.svg\n  https://sqripts.com/wp-content/uploads/2023/11/20231121_thumb-1.jpg\n\n【取得CSSファイル】\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?2024062305\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/print.css\n  https://www.geeq.co.jp/wp-content/plugins/bogo/includes/css/style.css?ver=3.9.3\n  https://www.geeq.co.jp/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7\n  https://www.geeq.co.jp/wp-content/themes/IGQ/style.css?ver=7.1\n  https://www.geeq.co.jp/wp-content/themes/IGQ/assets/css/style.css?ver=7.1\n  https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Bebas+Neue&display=swap&family=Lato:wght@400;700&display=swap\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_f8cb08ce16bbf77bdb90ec09b5fe536a.css\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_305a074b4d20a5ec83953e0635e1c3ae.css?1757498292\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_08082510c21edacd066a0efc00ad6105.css?ver=2.6.0.1.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_587aff57a2ad70e67f1856ec54d0efa1.css?ver=2.6.0.1.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_1a28f7e2d7d91bdf98483befd2416982.css?ver=1.0.0\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_a3bc4735f7f053e7665718edc0ffda85.css?ver=1.0.0\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_2bee417e5b769418966cae22e78d7c86.css?ver=2.2.1\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_292f3fc4f1681a95b7e05a895458fd59.css?ver=1.4.33\n  https://sqripts.com/wp-content/cache/autoptimize/css/autoptimize_single_ebeb8dd6a171516ba92abb74416c1d94.css?ver=4.23.13\n  https://sqripts.com/wp-content/plugins/wp-rss-aggregator//v4/css/build/pagination.min.css?ver=4.23.13\n  https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap"
 }
