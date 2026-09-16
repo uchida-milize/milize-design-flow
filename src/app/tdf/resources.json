@@ -1,3 +1,769 @@
 {
-  "selected_urls": "https://www.tdf-life.co.jp||カラー,ロゴ・CI,フォント"
+  "selected_urls": "https://www.tdf-life.co.jp||カラー,ロゴ・CI,フォント",
+  "css_info": {
+    "css_variables": {},
+    "hex_colors": "#E60044 | color, background, border-top, border-right, border-color | 出現79回 | [external-css]\n#CCCCCC | border-bottom, border, border-color, border-top, border-left | 出現73回 | [external-css]\n#5B6FBC | background, border-bottom, border-left, border, background-color | 出現39回 | [external-css]\n#333333 | color, background, border | 出現36回 | [external-css]\n#2A4198 | background, color, border, border-color, border-top | 出現31回 | [external-css]\n#666666 | color, border-top, border-right, background, border | 出現30回 | [external-css]\n#EEEEEE | background, box-shadow, border, border-color | 出現24回 | [external-css]\n#495996 | border-top, border-right, border-bottom, background | 出現15回 | [external-css]\n#999999 | border-top, border-right, border-color, background, background-color | 出現14回 | [external-css]\n#DADADA | border, box-shadow, border-top, border-bottom, border-left | 出現12回 | [external-css]\n#D9D5CC | border-top, border-right, border-left, border-bottom | 出現12回 | [external-css]\n#E2EFFF | background, box-shadow, border, border-color | 出現11回 | [external-css]\n#FFEAEF | background | 出現11回 | [external-css]\n#F3F3F3 | background | 出現8回 | [external-css]\n#2158A6 | color | 出現7回 | [external-css]\n#3575D0 | color | 出現7回 | [external-css]\n#C00039 | background, background-color, border-color | 出現7回 | [external-css]\n#EBEBEB | background | 出現6回 | [external-css]\n#FCFCFC | background | 出現6回 | [external-css]\n#F7F7F7 | background-color | 出現5回 | [external-css]\n#F8F8F8 | background | 出現5回 | [external-css]\n#E4E4E4 | background | 出現5回 | [external-css]\n#D4E8D6 | border-color, background | 出現5回 | [external-css]\n#F7F2E8 | background | 出現4回 | [external-css]\n#EFF5FB | background, background-color | 出現4回 | [external-css]\n#8E002A | border-top | 出現4回 | [external-css]\n#008768 | color, border, border-color, background | 出現4回 | [external-css]\n#650084 | color, border, border-color, background | 出現4回 | [external-css]\n#E8DEED | border-color, background | 出現4回 | [external-css]\n#22347A | border-bottom | 出現3回 | [external-css]",
+    "rgb_colors": [],
+    "fonts": [
+      "ヒラギノ角ゴPro W3"
+    ],
+    "button_styles": [
+      {
+        "selector": "★ .nav-btn-01._color-03._size-03._login（実際のボタン要素で2回使用）",
+        "properties": {
+          "display": "block",
+          "min-width": "180px",
+          "min-height": "33px",
+          "padding": "15px 34px",
+          "font-weight": "bold",
+          "font-size": "13px",
+          "color": "#e60044",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "4px",
+          "text-align": "center",
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "width": "auto",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "max-width": "none"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "★ .nav-btn-01._color-04._size-03._otoiawase2（実際のボタン要素で2回使用）",
+        "properties": {
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "width": "auto",
+          "font-size": "13px",
+          "display": "block",
+          "padding": "15px 34px",
+          "border-radius": "4px",
+          "color": "#333",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "max-width": "none",
+          "font-weight": "bold",
+          "text-align": "center"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "★ .nav-btn-01._color-01._size-01（実際のボタン要素で13回使用）",
+        "properties": {
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "width": "173px",
+          "font-size": "16px",
+          "display": "block",
+          "padding": "5px 23px",
+          "border-radius": "4px",
+          "color": "#333",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "height": "77px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "★ .nav-btn-01._color-03._size-02（実際のボタン要素で7回使用）",
+        "properties": {
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "width": "263px",
+          "padding": "5px 23px",
+          "font-size": "14px",
+          "display": "block",
+          "border-radius": "4px",
+          "color": "#333",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "height": "77px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "★ .nav-btn-01._color-02._size-01（実際のボタン要素で1回使用）",
+        "properties": {
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "width": "173px",
+          "font-size": "16px",
+          "display": "block",
+          "padding": "8px 22px",
+          "border-radius": "4px",
+          "color": "#fff",
+          "background": "#666",
+          "border": "none",
+          "border-bottom": "3px solid #4c4c4c",
+          "height": "77px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "★ .nav-btn-01._color-02._size-02（実際のボタン要素で1回使用）",
+        "properties": {
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "width": "263px",
+          "font-size": "14px",
+          "display": "block",
+          "padding": "8px 22px",
+          "border-radius": "4px",
+          "color": "#fff",
+          "background": "#666",
+          "border": "none",
+          "border-bottom": "3px solid #4c4c4c",
+          "height": "77px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-01",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "180px",
+          "min-height": "49px",
+          "padding": "10px 32px 9px 24px",
+          "font-size": "16px",
+          "color": "#333",
+          "text-align": "center",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-search-01",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "128px",
+          "max-height": "48px",
+          "padding": "10px 10px 10px 21px",
+          "font-size": "16px",
+          "color": "#333",
+          "text-align": "center",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "#header .btn-close-01:hover, #header .btn-close-01:active, #header .btn-close-01:focus",
+        "properties": {
+          "color": "#333",
+          "background": "linear-gradient(#fff, #eee)",
+          "background-color": "#f7f7f7",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "4px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "#header .nav-global li .btn-close-01:hover, #header .nav-global li .btn-close-01:active, #header .nav-global li .btn-close-01:focus",
+        "properties": {
+          "color": "#333",
+          "background": "linear-gradient(#fff, #eee)",
+          "background-color": "#f7f7f7",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "4px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-close-01",
+        "properties": {
+          "color": "#333",
+          "background": "linear-gradient(#fff, #eee)",
+          "background-color": "#f7f7f7",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "4px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-01:hover, .btn-01:active, .btn-01:focus",
+        "properties": {
+          "padding": "8px 32px 9px 24px",
+          "color": "#fff",
+          "background": "linear-gradient(rgba(255, 255, 255, 0), rgba(238, 238, 238, 0))",
+          "background-color": "#5b6fbc",
+          "border-color": "#5b6fbc",
+          "border-top": "3px solid #495996"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-01._color-02:hover, .btn-01._color-02:active, .btn-01._color-02:focus",
+        "properties": {
+          "padding": "8px 32px 9px 24px",
+          "color": "#fff",
+          "background": "linear-gradient(rgba(255, 255, 255, 0), rgba(238, 238, 238, 0))",
+          "background-color": "#5b6fbc",
+          "border-color": "#5b6fbc",
+          "border-top": "3px solid #495996"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-02",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "180px",
+          "min-height": "48px",
+          "padding": "10px 33px 8px 24px",
+          "font-weight": "bold",
+          "font-size": "16px",
+          "color": "#fff",
+          "text-align": "center",
+          "background": "#e60044",
+          "border-bottom": "3px solid #aa0032",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-search-01:hover, .btn-search-01:active, .btn-search-01:focus",
+        "properties": {
+          "padding": "8px 10px 10px 21px",
+          "color": "#fff",
+          "background": "linear-gradient(rgba(255, 255, 255, 0), rgba(238, 238, 238, 0))",
+          "background-color": "#5b6fbc",
+          "border-color": "#5b6fbc",
+          "border-top": "3px solid #495996"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".btn-pager-01 li a",
+        "properties": {
+          "display": "inline-block",
+          "height": "40px",
+          "padding": "5px 14px",
+          "color": "#333",
+          "background": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc",
+          "border-radius": "2.85px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "#advantage .btn-adv",
+        "properties": {
+          "display": "inline-block",
+          "min-width": "245px",
+          "min-height": "58px",
+          "padding": "16px 32px 10px 14px",
+          "font-size": "16px",
+          "color": "#333",
+          "text-align": "center",
+          "background": "#fff",
+          "border-radius": "3px",
+          "box-shadow": "0 0 6px -1px #666"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".nav-btn-01._color-01",
+        "properties": {
+          "color": "#333",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".nav-btn-01._color-03",
+        "properties": {
+          "color": "#333",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".nav-btn-01._color-04",
+        "properties": {
+          "color": "#333",
+          "background": "linear-gradient(rgba(255, 255, 255, .6), rgba(238, 238, 238, .6))",
+          "background-color": "#fff",
+          "border": "1px solid #ccc",
+          "border-bottom": "3px solid #ccc"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      }
+    ],
+    "card_styles": [
+      {
+        "selector": ".box-03",
+        "properties": {
+          "padding": "0 25px 15px",
+          "background": "#fff",
+          "border": "1px solid #d0dded",
+          "border-radius": "3px",
+          "box-shadow": "0 0 0 3px #e2efff inset"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-03 .cate-01",
+        "properties": {
+          "display": "inline-block",
+          "margin": "0 -10px 10px",
+          "padding": "8px 12px",
+          "font-weight": "bold",
+          "font-size": "14px",
+          "color": "#fff",
+          "background": "#2a4198",
+          "border-radius": "0 0 3px 3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-09",
+        "properties": {
+          "display": "block",
+          "border": "2px solid #06C755",
+          "border-radius": "2px",
+          "padding": "20px 15px",
+          "background-color": "#ffffff"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-05",
+        "properties": {
+          "padding": "16px 24px",
+          "background": "#fff",
+          "border": "1px solid #e60044",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-08",
+        "properties": {
+          "padding": "16px 24px",
+          "background": "#fff",
+          "border": "2px dotted #333333",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-09._pc .balloon-text",
+        "properties": {
+          "background-color": "#e5f9ed",
+          "padding": "5px 17px",
+          "border-radius": "21px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-01",
+        "properties": {
+          "padding": "22px 24px 24px",
+          "background": "#fff",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-04",
+        "properties": {
+          "background": "#fff",
+          "border": "1px solid #ccc",
+          "border-radius": "3px",
+          "box-shadow": "0 0 0 3px #eee inset"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-04 .hdg-01",
+        "properties": {
+          "padding": "12px 25px",
+          "font-weight": "bold",
+          "font-size": "20px",
+          "color": "#333",
+          "line-height": "1.5",
+          "border-bottom": "1px solid #ccc",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-06",
+        "properties": {
+          "display": "table",
+          "width": "100%",
+          "margin-top": "23px",
+          "padding": "4px",
+          "background": "#e4e4e4",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-06 .col._right",
+        "properties": {
+          "padding": "15px 23px",
+          "vertical-align": "middle",
+          "background": "#fff",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-07",
+        "properties": {
+          "margin-top": "28px",
+          "padding": "11px 0 8px",
+          "background": "#fff7d5",
+          "border-top": "3px solid #fff0b7",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-07 .lyt-col-01 > li",
+        "properties": {
+          "display": "table-cell",
+          "width": "33.3%",
+          "padding": "18px",
+          "background": "#fff",
+          "border-radius": "2px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-contact-02 .lyt-01 > li, .box-contact-02 .lyt-02 > li, .box-contact-02 .lyt-05 > li",
+        "properties": {
+          "padding": "10px",
+          "background": "#ffeaef",
+          "border-top": "3px solid #fbc9d6",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-product .list-tag li",
+        "properties": {
+          "display": "inline-block",
+          "margin": "4px 4px 0 0",
+          "padding": "2px 8px 3px",
+          "font-size": "12px",
+          "color": "#2a4198",
+          "background": "#d1d9ed",
+          "border": "1px solid #2a4198"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-product",
+        "properties": {
+          "display": "table",
+          "width": "100%",
+          "background": "#e2efff",
+          "border": "3px solid #e2efff",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "#advantage .box-adv-02",
+        "properties": {
+          "margin-top": "23px",
+          "padding": "34px 39px 38px",
+          "color": "#fff",
+          "background": "rgba(42, 65, 152, .78)",
+          "border-radius": "0"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-02",
+        "properties": {
+          "padding": "19px 22px 15px",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-contact-03",
+        "properties": {
+          "background": "#ffeaef",
+          "border-top": "3px solid #fbc9d6",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".box-product02",
+        "properties": {
+          "display": "table",
+          "width": "100%",
+          "background": "#2575fc",
+          "border-radius": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      }
+    ],
+    "form_styles": [
+      {
+        "selector": "#header .nav-utility-02 li .form-search",
+        "properties": {
+          "width": "193px",
+          "height": "32px",
+          "margin-left": "23px",
+          "padding": "0 32px 0 10px",
+          "background": "#f8f8f8",
+          "border": "1px solid #dadada",
+          "border-radius": "3px",
+          "box-shadow": "3px 3px 3px -2px #dadada inset"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-text-01, .form-text-02, .form-text-03",
+        "properties": {
+          "width": "241px",
+          "height": "44px",
+          "padding": "0 32px 0 10px",
+          "background": "#f8f8f8",
+          "border": "1px solid #dadada",
+          "border-radius": "4px",
+          "box-shadow": "3px 3px 3px -2px #dadada inset"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".content-top._weby input.webyform-search,\r\n.content-inner._webyContents input.webyform-search",
+        "properties": {
+          "height": "46px",
+          "background": "#f8f8f8",
+          "border": "1px solid #dadada",
+          "box-shadow": "3px 3px 3px -2px #dadada inset",
+          "width": "100%",
+          "padding-left": "20px",
+          "padding-right": "22px",
+          "border-radius": "0.3em"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-select-01",
+        "properties": {
+          "display": "inline-block",
+          "margin-right": "5px",
+          "background": "#f8f8f8",
+          "border": "1px solid #dadada",
+          "border-radius": "4px",
+          "box-shadow": "1px 1px 4px -1px #dadada inset"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-radio, .form-checkbox",
+        "properties": {
+          "display": "inline-block",
+          "padding": "8px 27px 8px 41px",
+          "border": "1px solid #ccc",
+          "border-radius": "4px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-select-01:before",
+        "properties": {
+          "display": "block",
+          "width": "28px",
+          "height": "100%",
+          "background": "linear-gradient(#fff, #eee)",
+          "border-left": "1px solid #dadada",
+          "border-radius": "0 4px 4px 0"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-radio:after",
+        "properties": {
+          "width": "10px",
+          "height": "10px",
+          "margin": "auto 0",
+          "background": "#5b6fbc",
+          "border-radius": "50%"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-radio-02:after",
+        "properties": {
+          "width": "10px",
+          "height": "10px",
+          "margin": "auto 0",
+          "background": "#5b6fbc",
+          "border-radius": "50%"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "/*.content-top._weby form.weby_searchForm dd input",
+        "properties": {
+          "border": "1px solid #FFF",
+          "border-radius": "0.3em",
+          "padding-right": "22px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "input[type=\"radio\"]:disabled + label",
+        "properties": {
+          "color": "#666",
+          "background": "#eee"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-radio:before, .form-checkbox:after",
+        "properties": {
+          "display": "block",
+          "background": "#fff",
+          "border": "1px solid #ccc"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-radio-02:before, .form-checkbox-02:after",
+        "properties": {
+          "display": "block",
+          "background": "#fff",
+          "border": "1px solid #ccc"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".content-top._weby form.weby_searchForm dt,\r\n.content-top._weby form.weby_searchForm dd,\r\n.content-inner._webyContents form.weby_searchForm dt,\r\n.content-inner._webyContents form.weby_searchForm dd",
+        "properties": {
+          "display": "table-cell",
+          "text-align": "center",
+          "vertical-align": "middle",
+          "padding": "3px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".content-top._weby form.weby_searchForm dt,\r\n.content-inner._webyContents form.weby_searchForm dt",
+        "properties": {
+          "color": "#FFF",
+          "font-weight": "bold",
+          "width": "60%"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "#header .nav-utility-02 > li .form-search",
+        "properties": {
+          "width": "100%",
+          "height": "44px",
+          "margin": "0",
+          "padding": "0 32px 0 10px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-select-01 > select",
+        "properties": {
+          "width": "100%",
+          "padding": "9px 54px 8px 10px",
+          "font-size": "16px",
+          "background": "none",
+          "border": "none"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "input[type=\"radio\"]:disabled + .form-radio:before",
+        "properties": {
+          "background": "#eee"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-checkbox:after",
+        "properties": {
+          "width": "20px",
+          "height": "20px",
+          "margin": "auto 0",
+          "border-radius": "2px"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": ".form-radio:before",
+        "properties": {
+          "border-radius": "50%"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      },
+      {
+        "selector": "input[type=\"radio\"]:checked + .form-radio, input[type=\"checkbox\"]:checked + .form-checkbox",
+        "properties": {
+          "height": "100%",
+          "background": "#e2efff"
+        },
+        "sourceUrl": "https://www.tdf-life.co.jp"
+      }
+    ],
+    "border_radii": [
+      "4px",
+      "3px",
+      "0.3em",
+      "50%",
+      "4px 4px 0 0",
+      "0 0 3px 3px",
+      "2px",
+      "2.85px",
+      "0 4px 4px 0",
+      "10px",
+      "100%",
+      "21px"
+    ],
+    "logo_urls": [
+      "https://www.tdf-life.co.jp/common/images/logo/logo_01.png",
+      "https://www.tdf-life.co.jp/common/images/logo/logo_02.png",
+      "https://www.tdf-life.co.jp/common/images/logo/logo_05.png",
+      "https://www.tdf-life.co.jp/common/images/logo/logo_03.png"
+    ],
+    "source_css_urls": [
+      "https://www.tdf-life.co.jp/common/css/main.css?20250403",
+      "https://www.tdf-life.co.jp/css/style.css?20250403"
+    ],
+    "extracted_at": "2026-09-16T06:56:34.346Z",
+    "source_urls": [
+      "https://www.tdf-life.co.jp"
+    ]
+  },
+  "css_summary": "【抽出カラー（頻度順）】\n  #E60044  color  出現79回  [external-css]\n  #CCCCCC  border-bottom  出現73回  [external-css]\n  #5B6FBC  background  出現39回  [external-css]\n  #333333  color  出現36回  [external-css]\n  #2A4198  background  出現31回  [external-css]\n  #666666  color  出現30回  [external-css]\n  #EEEEEE  background  出現24回  [external-css]\n  #495996  border-top  出現15回  [external-css]\n  #999999  border-top  出現14回  [external-css]\n  #DADADA  border  出現12回  [external-css]\n  #D9D5CC  border-top  出現12回  [external-css]\n  #E2EFFF  background  出現11回  [external-css]\n  #FFEAEF  background  出現11回  [external-css]\n  #F3F3F3  background  出現8回  [external-css]\n  #2158A6  color  出現7回  [external-css]\n\n【使用フォント】\n  ヒラギノ角ゴPro W3\n\n【角丸パターン】\n  4px\n  3px\n  0.3em\n  50%\n  4px 4px 0 0\n  0 0 3px 3px\n  2px\n  2.85px\n\n【ボタンスタイル】\n  ★ .nav-btn-01._color-03._size-03._login（実際のボタン要素で2回使用）\n    display: block\n    min-width: 180px\n    min-height: 33px\n    padding: 15px 34px\n    font-weight: bold\n    font-size: 13px\n  ★ .nav-btn-01._color-04._size-03._otoiawase2（実際のボタン要素で2回使用）\n    margin-right: auto\n    margin-left: auto\n    width: auto\n    font-size: 13px\n    display: block\n    padding: 15px 34px\n  ★ .nav-btn-01._color-01._size-01（実際のボタン要素で13回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 173px\n    font-size: 16px\n    display: block\n    padding: 5px 23px\n  ★ .nav-btn-01._color-03._size-02（実際のボタン要素で7回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 263px\n    padding: 5px 23px\n    font-size: 14px\n    display: block\n  ★ .nav-btn-01._color-02._size-01（実際のボタン要素で1回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 173px\n    font-size: 16px\n    display: block\n    padding: 8px 22px\n\n【カードスタイル】\n  .box-03\n    padding: 0 25px 15px\n    background: #fff\n    border: 1px solid #d0dded\n    border-radius: 3px\n    box-shadow: 0 0 0 3px #e2efff inset\n  .box-03 .cate-01\n    display: inline-block\n    margin: 0 -10px 10px\n    padding: 8px 12px\n    font-weight: bold\n    font-size: 14px\n    color: #fff\n  .box-09\n    display: block\n    border: 2px solid #06C755\n    border-radius: 2px\n    padding: 20px 15px\n    background-color: #ffffff\n  .box-05\n    padding: 16px 24px\n    background: #fff\n    border: 1px solid #e60044\n    border-radius: 3px\n  .box-08\n    padding: 16px 24px\n    background: #fff\n    border: 2px dotted #333333\n    border-radius: 3px\n\n【フォームスタイル】\n  #header .nav-utility-02 li .form-search\n    width: 193px\n    height: 32px\n    margin-left: 23px\n    padding: 0 32px 0 10px\n    background: #f8f8f8\n    border: 1px solid #dadada\n  .form-text-01, .form-text-02, .form-text-03\n    width: 241px\n    height: 44px\n    padding: 0 32px 0 10px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    border-radius: 4px\n  .content-top._weby input.webyform-search,\r\n.content-inner._webyContents input.webyform-search\n    height: 46px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    box-shadow: 3px 3px 3px -2px #dadada inset\n    width: 100%\n    padding-left: 20px\n  .form-select-01\n    display: inline-block\n    margin-right: 5px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    border-radius: 4px\n    box-shadow: 1px 1px 4px -1px #dadada inset\n  .form-radio, .form-checkbox\n    display: inline-block\n    padding: 8px 27px 8px 41px\n    border: 1px solid #ccc\n    border-radius: 4px\n\n【ロゴ・ビジュアル素材】\n  https://www.tdf-life.co.jp/common/images/logo/logo_01.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_02.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_05.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_03.png\n\n【取得CSSファイル】\n  https://www.tdf-life.co.jp/common/css/main.css?20250403\n  https://www.tdf-life.co.jp/css/style.css?20250403"
 }
