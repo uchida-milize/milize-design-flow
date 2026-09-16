@@ -91,6 +91,52 @@ const SKIP_PATTERNS = [
 ];
 
 // ──────────────────────────────────────────
+// ロゴの出典として信頼しないドメイン（買取/査定/比較/まとめ系サイト）
+// これらのページは対象企業について「言及」しているだけで、ページ自身のheaderロゴ・
+// favicon・OGP画像は大抵そのサイト自身のブランドであり、対象企業のロゴではない。
+// ──────────────────────────────────────────
+const LOGO_SOURCE_BLOCKLIST = [
+  /kaitori/i,
+  /satei/i,
+  /hikaku/i,
+  /chuko/i,
+  /matome/i,
+  /ranking/i,
+  /review/i,
+];
+
+/** ホスト名から末尾2ラベル（サブドメインを除いた実質的な登録ドメイン）を取り出す簡易版 */
+function baseDomain(hostname: string): string {
+  const parts = hostname.split('.');
+  return parts.length <= 2 ? hostname : parts.slice(-2).join('.');
+}
+
+/**
+ * 与えられたURL群から「対象企業の公式ドメイン」を推定する。
+ * Wikipedia/Wikidata・買取/比較系サイトを除外した上で最も頻出するドメインを採用する
+ * （フロントエンドの primaryDomain 選定ロジックと同じ考え方）。
+ * 判定できない場合は null を返し、呼び出し側は従来通り「最初に見つかったheaderロゴ」を採用する。
+ */
+function detectPrimaryDomain(urls: string[]): string | null {
+  const counts = new Map<string, number>();
+  for (const u of urls) {
+    try {
+      const host = new URL(u).hostname;
+      if (/(^|\.)wikipedia\.org$/i.test(host) || /(^|\.)wikidata\.org$/i.test(host)) continue;
+      if (LOGO_SOURCE_BLOCKLIST.some(re => re.test(host))) continue;
+      const base = baseDomain(host);
+      counts.set(base, (counts.get(base) ?? 0) + 1);
+    } catch { /* 不正なURLは無視 */ }
+  }
+  let best: string | null = null;
+  let bestCount = 0;
+  for (const [domain, count] of counts) {
+    if (count > bestCount) { best = domain; bestCount = count; }
+  }
+  return best;
+}
+
+// ──────────────────────────────────────────
 // HTML パーサー: stylesheet リンク・OGP・favicon・<style>タグ を取得
 // ──────────────────────────────────────────
 function parseHtmlMeta(html: string, baseUrl: string): {
@@ -1009,6 +1055,8 @@ export async function POST(req: NextRequest) {
   }
 
   const client_slug = body.client_slug as string | undefined;
+  // ロゴの出典検証用: このバッチの中で最も頻出するドメインを「対象企業の公式ドメイン」とみなす
+  const primaryDomain = detectPrimaryDomain(urls);
 
   // 集計用
   let allCssVars: Record<string, string> = {};
@@ -1041,13 +1089,26 @@ export async function POST(req: NextRequest) {
       } = parseHtmlMeta(html, pageUrl);
 
       // ロゴ・OGP を収集（Wikipediaのinfobox画像・header内の自社ロゴは「会社ロゴ」として最優先候補に別枠で積む）
-      if (infoboxImage) allInfoboxImgs.push(infoboxImage);
-      if (!headerLogoSvg && !headerLogoImg) {
-        // 最初に見つかったページのheaderロゴを採用する（selected_urlsは通常ドメイントップが先頭のため）
-        headerLogoSvg = pageHeaderLogoSvg;
-        headerLogoImg = pageHeaderLogoImg;
+      // 買取/査定/比較系サイト（対象企業について言及しているだけの第三者ページ）は
+      // ロゴの出典として信頼しない
+      let pageHost = '';
+      try { pageHost = new URL(pageUrl).hostname; } catch { /* 不正なURLは無視 */ }
+      const isBlockedLogoSource = LOGO_SOURCE_BLOCKLIST.some(re => re.test(pageHost));
+      const isPrimaryDomainPage = primaryDomain !== null && baseDomain(pageHost) === primaryDomain;
+
+      if (infoboxImage && !isBlockedLogoSource) allInfoboxImgs.push(infoboxImage);
+      if (!headerLogoSvg && !headerLogoImg && !isBlockedLogoSource) {
+        // primaryDomainが判明している場合、そのドメインのページのheaderロゴのみを信頼する
+        // （＝ どのURLが先に処理されても、公式ドメイン以外のheaderロゴで上書きされない）。
+        // 判明しない場合は従来通り「最初に見つかったページのheaderロゴ」を採用する。
+        if (primaryDomain === null || isPrimaryDomainPage) {
+          headerLogoSvg = pageHeaderLogoSvg;
+          headerLogoImg = pageHeaderLogoImg;
+        }
       }
-      [ogImage, favicon, ...logoImgs].filter(Boolean).forEach(u => allLogoUrls.push(u!));
+      if (!isBlockedLogoSource) {
+        [ogImage, favicon, ...logoImgs].filter(Boolean).forEach(u => allLogoUrls.push(u!));
+      }
 
       // ──────────────────────────
       // A-1. 自社 CSS を最大 10 本取得（CDN より優先）
