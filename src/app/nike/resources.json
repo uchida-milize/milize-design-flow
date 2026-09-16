@@ -1,3 +1,36 @@
 {
-  "selected_urls": "https://ja.wikipedia.org/wiki/NIKE, INC.||ロゴ・CI\nhttps://www.nike.com/||カラー,ロゴ・CI,フォント\nhttps://about.nike.com/ja/company||カラー,ロゴ・CI,フォント\nhttps://www.wikidata.org/wiki/Q483915||カラー,ロゴ・CI,フォント\nhttps://kaitorisatei.info/bwn/nike-logo||カラー,ロゴ・CI,フォント\nhttps://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon||カラー,ロゴ・CI,フォント"
+  "selected_urls": "https://ja.wikipedia.org/wiki/NIKE, INC.||ロゴ・CI\nhttps://www.nike.com/||カラー,ロゴ・CI,フォント\nhttps://about.nike.com/ja/company||カラー,ロゴ・CI,フォント\nhttps://www.wikidata.org/wiki/Q483915||カラー,ロゴ・CI,フォント\nhttps://kaitorisatei.info/bwn/nike-logo||カラー,ロゴ・CI,フォント\nhttps://about.nike.com/ja/magazine/the-nike-swoosh-logo-from-humble-beginnings-to-global-icon||カラー,ロゴ・CI,フォント",
+  "css_info": {
+    "css_variables": {},
+    "hex_colors": "#555555 | color | 出現9回 | [inline-style]\n#002BB8 | color | 出現6回 | [inline-style]\n#006600 | color | 出現4回 | [inline-style]\n#222222 | background-color | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#A2A9B1 | border-bottom | 出現1回 | [style-tag]\n#EAECF0 | outline | 出現1回 | [style-tag]\n#AAAAAA | border | 出現1回 | [style-tag]\n#F9F9F9 | background-color | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]",
+    "rgb_colors": [],
+    "fonts": [],
+    "button_styles": [],
+    "card_styles": [],
+    "form_styles": [],
+    "border_radii": [],
+    "logo_urls": [
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nikeworldheadquarters.jpg/1280px-Nikeworldheadquarters.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+      "https://ja.wikipedia.org/static/favicon/wikipedia.ico",
+      "https://ja.wikipedia.org/static/images/icons/wikipedia.png",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg",
+      "https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/250px-Logo_NIKE.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Blue_ribbon_sports_logo.png/250px-Blue_ribbon_sports_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Nike_swoosh_logo71.png/250px-Nike_swoosh_logo71.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Old_Nike_logo.jpg/250px-Old_Nike_logo.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+    ],
+    "source_css_urls": [
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022",
+      "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
+    ],
+    "extracted_at": "2026-09-16T02:02:37.761Z",
+    "source_urls": [
+      "https://ja.wikipedia.org/wiki/NIKE",
+      "INC."
+    ]
+  },
+  "css_summary": "【抽出カラー（頻度順）】\n  #555555  color  出現9回  [inline-style]\n  #002BB8  color  出現6回  [inline-style]\n  #006600  color  出現4回  [inline-style]\n  #222222  background-color  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #A2A9B1  border-bottom  出現1回  [style-tag]\n  #EAECF0  outline  出現1回  [style-tag]\n  #AAAAAA  border  出現1回  [style-tag]\n  #F9F9F9  background-color  出現1回  [style-tag]\n  #177860  color  出現1回  [style-tag]\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nikeworldheadquarters.jpg/1280px-Nikeworldheadquarters.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/250px-Logo_NIKE.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Blue_ribbon_sports_logo.png/250px-Blue_ribbon_sports_logo.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Nike_swoosh_logo71.png/250px-Nike_swoosh_logo71.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Old_Nike_logo.jpg/250px-Old_Nike_logo.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022"
 }
