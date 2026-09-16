@@ -74,6 +74,7 @@ export async function POST(req: NextRequest) {
         let humanInputDetected = false;
         let humanInputExtraReads = 0; // 検知後に追加で読むチャンク数（未使用変数として残す）
         let humanInputTimer: ReturnType<typeof setTimeout> | null = null; // interrupt イベント用タイマー（宣言）
+        let lastErrorMessage = ''; // Dify "error" イベントの最新メッセージ（致命的停止時のフォールバック通知用）
 
         while (true) {
           const { done, value } = await reader.read().catch(() => ({ done: true, value: undefined }));
@@ -101,11 +102,12 @@ export async function POST(req: NextRequest) {
               }
 
               if (data.event === 'error') {
-                const message = data.message || data.data?.error || data.data?.message || JSON.stringify(data).slice(0, 300);
-                log(`DIFY ERROR: ${message}`);
-                send({ error: `Difyワークフローエラー: ${message}` });
-                controller.close();
-                return;
+                // 個別ノードが例外分岐（続行）で捕捉したエラーもここに流れてくるため、
+                // 即座にストリームを打ち切らず、最後に見たエラーとして保持するのみに留める。
+                // ワークフローが本当に致命的に停止した場合は node_finished/workflow_finished が来ずに
+                // ストリームが終了するので、下のフォールバック処理で通知する。
+                lastErrorMessage = data.message || data.data?.error || data.data?.message || JSON.stringify(data).slice(0, 300);
+                log(`DIFY ERROR(継続監視): ${lastErrorMessage}`);
               }
 
               if (data.event === 'workflow_started') {
@@ -412,18 +414,23 @@ export async function POST(req: NextRequest) {
         }
 
         // フォールバック: workflow_finished が来ずにストリームが終了
-        // → 人間の入力ノードで停止したとみなす（URLがなくても送信）
         if (!workflowFinished && taskId) {
           send({ progress: progressVal, status: `FALLBACK: urls=${capturedUrls.length} ft="${formToken}"` });
-          send({
-            interrupted: true,
-            task_id: taskId,
-            workflow_run_id: workflowRunId,
-            form_token: formToken,
-            urls: capturedUrls,
-            progress: progressVal,
-            status: 'URL確認待ち',
-          });
+          if (!formToken && capturedUrls.length === 0 && lastErrorMessage) {
+            // Human Inputへの到達が確認できず、かつ致命的エラーを観測済み → 本当の停止として通知
+            send({ error: `Difyワークフローエラー: ${lastErrorMessage}` });
+          } else {
+            // 人間の入力ノードで停止したとみなす（URLがなくても送信）
+            send({
+              interrupted: true,
+              task_id: taskId,
+              workflow_run_id: workflowRunId,
+              form_token: formToken,
+              urls: capturedUrls,
+              progress: progressVal,
+              status: 'URL確認待ち',
+            });
+          }
         }
       } catch (err) {
         send({ error: String(err) });
