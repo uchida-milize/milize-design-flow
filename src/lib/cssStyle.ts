@@ -33,6 +33,25 @@ export function toCssVarStyle(vars: Record<string, string> | undefined): CSSProp
   return style as CSSProperties;
 }
 
+/**
+ * 抽出したボタンCSSが「アイコン専用ボタン」（検索/お気に入りアイコン等、元サイトでは
+ * テキストを表示しない前提の小さな正方形ボタン）かどうかを判定する。
+ * width/height（またはmin-width/min-height）が両方とも小さい固定値の場合に該当し、
+ * その場合はプレビューに長いラベル文字列を入れると縦に折り返して枠からはみ出す。
+ */
+export function isIconOnlyButtonStyle(properties: Record<string, string> | undefined): boolean {
+  if (!properties) return false;
+  const toPx = (v?: string): number | null => {
+    if (!v) return null;
+    const m = /^(\d+(?:\.\d+)?)px$/.exec(v.trim());
+    return m ? parseFloat(m[1]) : null;
+  };
+  const THRESHOLD = 48;
+  const w = toPx(properties.width) ?? toPx(properties['min-width']);
+  const h = toPx(properties.height) ?? toPx(properties['min-height']);
+  return w !== null && h !== null && w <= THRESHOLD && h <= THRESHOLD;
+}
+
 const NAMED_LIGHT_COLORS = new Set(['white', '#fff', '#ffffff', 'transparent']);
 
 /**

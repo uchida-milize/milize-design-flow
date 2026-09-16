@@ -11,7 +11,7 @@ import {
   type StyleBlock,
   type ResourcesJson,
 } from '@/lib/designExtract';
-import { toReactStyle, toCssVarStyle, isLightCssColor } from '@/lib/cssStyle';
+import { toReactStyle, toCssVarStyle, isLightCssColor, isIconOnlyButtonStyle } from '@/lib/cssStyle';
 
 const clientName = 'Apple Japan合同会社';
 const basePath = '/apple';
@@ -136,7 +136,7 @@ export default function ComponentsPage() {
                     style={{ maxHeight: 220, overflow: 'auto', background: needsDarkBackdrop ? '#1f2937' : undefined }}
                   >
                     <button style={{ padding: '10px 24px', fontSize: 14, cursor: 'pointer', ...toReactStyle(b.properties) }}>
-                      サンプルボタン
+                      {isIconOnlyButtonStyle(b.properties) ? '︙' : 'サンプルボタン'}
                     </button>
                   </div>
                   {needsDarkBackdrop && (
