@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --portal-bg: #f5f7fa;
+}
+
+.test-debug-0916b-portal * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.test-debug-0916b-portal {
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: #111827;
+}
+
+.test-debug-0916b-portal h1,
+.test-debug-0916b-portal h2,
+.test-debug-0916b-portal h3 {
+  font-weight: 700;
+}
+
+.test-debug-0916b-portal .portal-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.test-debug-0916b-portal .portal-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+.test-debug-0916b-portal .section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.test-debug-0916b-portal .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.test-debug-0916b-portal .section-desc {
+  font-size: 14px;
+  color: #6b7280;
+}
