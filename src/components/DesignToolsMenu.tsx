@@ -29,19 +29,29 @@ export function DesignToolsMenu() {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="font-bold text-sm"
+        aria-label="Design Tools"
         style={{
-          color: '#111827', letterSpacing: '-0.01em', background: 'none', border: 'none',
-          cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, padding: 0,
+          background: 'none', border: 'none', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', gap: 6, padding: 0,
         }}
       >
-        Design Tools
-        <span style={{
-          fontSize: 9, color: '#9ca3af', transform: open ? 'rotate(180deg)' : 'none',
-          transition: 'transform 0.15s ease',
-        }}>
-          ▾
-        </span>
+        <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+          <rect width="30" height="30" rx="8" fill="#111827" />
+          <text
+            x="15" y="21" textAnchor="middle"
+            fontFamily="Arial, Helvetica, sans-serif" fontWeight={700} fontSize={15}
+            fill="#ffffff"
+          >
+            D&apos;
+          </text>
+        </svg>
+        <svg
+          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4b5563" strokeWidth={2.75}
+          strokeLinecap="round" strokeLinejoin="round"
+          style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.15s ease', flexShrink: 0 }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
       </button>
 
       {open && (
