@@ -177,7 +177,17 @@ async function retightenSvgViewBox(
       .map((n) => Number(n.toFixed(3)))
       .join(' ');
 
-    const retargeted = svgText.replace(/viewBox\s*=\s*["'][^"']+["']/i, `viewBox="${newViewBox}"`);
+    // ルートの<svg>タグを対象に、viewBoxを詰め替えた上でwidth/height属性を除去する。
+    // width/height（例: 24px×24px）を残したままだと、そのアスペクト比が画像の
+    // 本来のサイズとしてobject-fit等の計算に使われ続け、正方形キャンバスの中に
+    // 新しいviewBoxが再度レターボックスされて詰めた効果が打ち消されてしまうため、
+    // 除去してviewBox自体のアスペクト比に委ねる（nullを許容する正規表現マッチのため
+    // rootTagが見つからない場合はフォールバックする）。
+    const rootMatch = /<svg\b[^>]*>/i.exec(svgText);
+    if (!rootMatch) return null;
+    let rootTag = rootMatch[0].replace(/viewBox\s*=\s*["'][^"']+["']/i, `viewBox="${newViewBox}"`);
+    rootTag = rootTag.replace(/\s(?:width|height)\s*=\s*["'][^"']*["']/gi, '');
+    const retargeted = svgText.slice(0, rootMatch.index) + rootTag + svgText.slice(rootMatch.index + rootMatch[0].length);
     return `data:image/svg+xml;utf8,${encodeURIComponent(retargeted)}`;
   } catch {
     return null;

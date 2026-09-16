@@ -228,7 +228,7 @@ export default async function ClientsIndex() {
             {`クライアント別アセット＆トンマナポータル`}
           </h1>
           <p className="text-sm leading-relaxed" style={{ whiteSpace: 'nowrap', color: '#6b7280' }}>
-            {`WEBサイトから各社のデザイン要素に関わる情報を抽出して、トンマナやコンポーネントのサンプル出力をおこない、利用可能な素材としてまとめます`}
+            {`WEBサイトから各社のデザイン要素に関わる情報を抽出して、トンマナやコンポーネントのサンプル出力をおこないます。`}
           </p>
         </div>
       </div>
