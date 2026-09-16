@@ -1,5 +1,6 @@
 import { ClientCardGrid } from '@/components/ClientCardGrid';
 import { DesignToolsMenu } from '@/components/DesignToolsMenu';
+import { MilizeLogo } from '@/components/MilizeLogo';
 
 const EXCLUDED_DIRS = new Set([
   'components',
@@ -211,12 +212,15 @@ export default async function ClientsIndex() {
   return (
     <div style={{ minHeight: '100vh', background: '#f7f9fc' }}>
       <header style={{ background: '#ffffff', borderBottom: '1px solid #e5e7eb' }}>
-        <div className="flex items-center" style={{ padding: '16px 24px', gap: 12 }}>
-          <DesignToolsMenu />
-          <span style={{ color: '#e5e7eb' }}>|</span>
-          <span className="text-xs font-medium" style={{ color: '#9ca3af' }}>
-            {`クライアント別アセット管理`}
-          </span>
+        <div className="flex items-center" style={{ padding: '16px 24px', gap: 12, justifyContent: 'space-between' }}>
+          <div className="flex items-center" style={{ gap: 12 }}>
+            <DesignToolsMenu />
+            <span style={{ color: '#e5e7eb' }}>|</span>
+            <span className="text-xs font-medium" style={{ color: '#9ca3af' }}>
+              {`クライアント別アセット管理`}
+            </span>
+          </div>
+          <MilizeLogo />
         </div>
       </header>
 
