@@ -2,13 +2,125 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/NVIDIA Corporation||ロゴ・CI\nhttps://www.nvidia.com/en-us/||カラー,ロゴ・CI,フォント",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#666666 | -webkit-box-shadow, box-shadow, color, stroke, fill | 出現17回 | [external-css+style-tag]\n#BADB80 | background | 出現16回 | [inline-style]\n#002BB8 | color | 出現15回 | [inline-style]\n#EEEEEE | background-color, border-bottom, color | 出現8回 | [style-tag]\n#77B801 | background | 出現6回 | [inline-style]\n#D6E9B2 | background | 出現6回 | [inline-style]\n#CCCCCC | border, background-color, box-shadow, color | 出現6回 | [external-css+style-tag]\n#333333 | border-top-color, color | 出現6回 | [external-css+style-tag]\n#006600 | color | 出現5回 | [inline-style]\n#F7F7F7 | background-image | 出現4回 | [style-tag]\n#A2A9B1 | border, border-left | 出現2回 | [style-tag]\n#B32424 | border-left | 出現2回 | [style-tag]\n#BF3C2C | color | 出現2回 | [style-tag]\n#AAAAAA | border, background | 出現2回 | [style-tag+external-css]\n#C5C5C5 | border | 出現2回 | [external-css]\n#DDDDDD | border | 出現2回 | [external-css]\n#454545 | color | 出現2回 | [external-css]\n#2B2B2B | color | 出現2回 | [external-css]\n#003EFF | border | 出現2回 | [external-css]\n#FFFA90 | background | 出現2回 | [external-css]\n#DAD55E | border | 出現2回 | [external-css]\n#777620 | color | 出現2回 | [external-css]\n#5F3F3F | color | 出現2回 | [external-css]\n#3366CC | border-left | 出現1回 | [style-tag]\n#FBFBFB | background-color | 出現1回 | [style-tag]\n#FEE7E6 | background-color | 出現1回 | [style-tag]\n#F28500 | border-left | 出現1回 | [style-tag]\n#FFCC33 | border-left | 出現1回 | [style-tag]\n#9932CC | border-left | 出現1回 | [style-tag]\n#177860 | color | 出現1回 | [style-tag]",
+    "hex_colors": "#76B900 | background-color, color, border, border-bottom, fill | 出現139回 | [external-css]\n#EEEEEE | background-color, border-bottom, color, background, border | 出現66回 | [style-tag+external-css]\n#666666 | -webkit-box-shadow, box-shadow, color, stroke, fill | 出現63回 | [external-css+style-tag]\n#CCCCCC | border, background-color, box-shadow, color, border-bottom | 出現53回 | [external-css+style-tag]\n#1A1A1A | background-color, color, border-bottom, background, border | 出現23回 | [external-css]\n#BADB80 | background | 出現16回 | [inline-style]\n#002BB8 | color | 出現15回 | [inline-style]\n#004831 | background-color, color, border | 出現15回 | [external-css]\n#BDBDBD | color | 出現15回 | [external-css]\n#333333 | border-top-color, color, background-color | 出現14回 | [external-css+style-tag]\n#AAAAAA | border, background, color, border-left, border-right | 出現14回 | [style-tag+external-css]\n#616161 | border-top, border-left, border-bottom, border-right, border | 出現14回 | [external-css]\n#999999 | color, fill | 出現11回 | [external-css]\n#DDDDDD | border, border-left, border-color, background, background-color | 出現8回 | [external-css]\n#F44336 | background-color, color | 出現8回 | [external-css]\n#76D300 | background-color | 出現7回 | [external-css]\n#888888 | color, border, border-color | 出現7回 | [external-css]\n#77B801 | background | 出現6回 | [inline-style]\n#D6E9B2 | background | 出現6回 | [inline-style]\n#141414 | background-color, background | 出現6回 | [external-css]\n#5897FB | background-color, border, border-color | 出現6回 | [external-css]\n#E51B00 | background-color, background-image | 出現6回 | [external-css]\n#028D05 | background-color, background-image | 出現6回 | [external-css]\n#006600 | color | 出現5回 | [inline-style]\n#F7F7F7 | background-image, background-color | 出現5回 | [style-tag+external-css]\n#BFBFBF | color | 出現5回 | [external-css]\n#007D04 | background-color, background-image | 出現5回 | [external-css]\n#FFEB3B | background-color, color | 出現4回 | [external-css]\n#747474 | color, fill, border-bottom | 出現4回 | [external-css]\n#BA1600 | background-image | 出現4回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
       "Arial",
-      "monospace"
+      "monospace",
+      "Lucida Grande",
+      "sans-serif",
+      "nvidia-sans",
+      "Trebuchet MS",
+      "GeForce-alt",
+      "GeForce",
+      "nvidia-sans-Regular",
+      "nvidia-sans-Light",
+      "DINWebPro-Medium",
+      "Font Awesome 5 Brands",
+      "Font Awesome 5 Pro",
+      "inherit"
     ],
     "button_styles": [
+      {
+        "selector": "★ .link-btn.btn-manual.lb_iframe.brand-green.regular-btn（実際のボタン要素で1回使用）",
+        "properties": {
+          "text-align": "center",
+          "display": "inline-block",
+          "min-width": "50px",
+          "border": "1px solid #CCC !important",
+          "color": "#fff",
+          "font-weight": "bold",
+          "font-size": "14px",
+          "line-height": "1",
+          "font-family": "\"nvidia-sans\",Helvetica,Arial,Sans-Serif",
+          "background-color": "#76b900",
+          "background": "#CCC !important"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": "★ .btn.btn-primary-alt（実際のボタン要素で1回使用）",
+        "properties": {
+          "padding": "14px 14px 10px 14px",
+          "font-family": "\"nvidia-sans\",Helvetica,Arial,Sans-Serif",
+          "font-size": "18px",
+          "padding-left": "20px",
+          "padding-top": "0",
+          "line-height": "20px",
+          "margin-top": "10px",
+          "margin-left": "10px",
+          "background-repeat": "no-repeat",
+          "background-image": "url(\"clientlibs_base/images/weibo-desktop.svg\")",
+          "display": "inline-block",
+          "text-align": "center",
+          "background-color": "#76b900",
+          "color": "#fff",
+          "margin": "0 auto"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".cartLayout .nv-button,.navigation .nv-button",
+        "properties": {
+          "background-color": "#76b900",
+          "border": "medium none",
+          "color": "#fff",
+          "display": "inline-block",
+          "font-size": "1em",
+          "font-weight": "bold",
+          "line-height": "1em",
+          "padding": "15px 25px 10px",
+          "text-align": "center",
+          "text-shadow": "none"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".btn-more",
+        "properties": {
+          "border": "1px solid #76b900",
+          "color": "#fff",
+          "font-weight": "bold",
+          "font-size": "18px",
+          "line-height": "1",
+          "font-family": "\"nvidia-sans\",Helvetica,Arial,Sans-Serif",
+          "background-color": "#76b900",
+          "text-align": "center",
+          "display": "inline-block",
+          "min-width": "50px",
+          "margin": "0 auto"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".shieldGames #games .ui-selectmenu-button span.ui-selectmenu-text",
+        "properties": {
+          "background-color": "#141414",
+          "color": "#fff",
+          "font-family": "nvidia-sans,Helvetica,Arial,Sans-Serif",
+          "font-size": "12px",
+          "padding": "10px 15px 8px 15px",
+          "text-align": "left",
+          "display": "block",
+          "line-height": "1.4"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".articlesGuidesFeed .hide.prev-next-btns .load-more-btn,.articlesGuidesFeed .hide.prev-next-btns .prev-btn,.articlesGuidesFeed .hide.prev-next-btns .next-btn",
+        "properties": {
+          "text-align": "center",
+          "display": "inline-block",
+          "min-width": "50px",
+          "border": "1px solid #76b900",
+          "color": "#fff",
+          "font-weight": "bold",
+          "font-size": "18px",
+          "line-height": "1",
+          "background-color": "#76b900"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
       {
         "selector": ".ui-button,.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,html .ui-button.ui-state-disabled:active,html .ui-button.ui-state-disabled:hover",
         "properties": {
@@ -40,339 +152,450 @@
         "sourceUrl": "https://www.nvidia.com/en-us/"
       },
       {
-        "selector": ".ui-button",
+        "selector": ".navigation .global-nav .subnav .subnav-container .subnav-right .breadcrumb-list .breadcrumb-element .breadcrumb-link.cta,.navigation .global-nav .subnav .subnav-container .subnav-right .breadcrumb-list .breadcrumb-element .breadcrumb-page-link.cta",
+        "properties": {
+          "margin-top": "0",
+          "margin-bottom": "0",
+          "background-color": "#76b900",
+          "font-weight": "bold",
+          "color": "white"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnTiles .row .sfg-btn-prev",
+        "properties": {
+          "width": "42px",
+          "height": "42px",
+          "background-color": "#76b900",
+          "background-image": "url(\"clientlibs_base/images/ic_chevron_left_fff_24px.svg\")",
+          "background-position": "center center",
+          "background-size": "cover",
+          "background-repeat": "no-repeat",
+          "border-radius": "0 2px 2px 0"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnTiles .row .sfg-btn-next",
+        "properties": {
+          "width": "42px",
+          "height": "42px",
+          "background-color": "#76b900",
+          "background-image": "url(\"clientlibs_base/images/ic_chevron_right_fff_24px.svg\")",
+          "background-position": "center center",
+          "background-size": "cover",
+          "background-repeat": "no-repeat",
+          "border-radius": "2px 0 0 2px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".fancybox-share__button",
+        "properties": {
+          "border": "0",
+          "border-radius": "3px",
+          "display": "inline-block",
+          "font-size": "14px",
+          "font-weight": "700",
+          "line-height": "40px",
+          "margin": "0 5px 10px 5px",
+          "min-width": "130px",
+          "padding": "0 15px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".link-btn.btn-cart.default-color",
+        "properties": {
+          "background-color": "#76b900",
+          "color": "#fff"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".link-btn.btn-manual.default-color",
+        "properties": {
+          "background-color": "#76b900",
+          "color": "#fff"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".link-btn.btn-retail.default-color",
+        "properties": {
+          "background-color": "#76b900",
+          "color": "#fff"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".link-btn.video-icon.btn-video.default-color",
+        "properties": {
+          "background-color": "#76b900",
+          "color": "#fff"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".shieldGames #games section.games-list .load-more .btn",
         "properties": {
           "display": "inline-block",
-          "line-height": "normal",
-          "margin-right": ".1em",
-          "padding": ".4em 1em",
           "text-align": "center",
-          "vertical-align": "middle"
+          "background-color": "#76b900",
+          "color": "#fff",
+          "margin": "0 auto",
+          "margin-top": "25px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": "input.ui-button.ui-icon-notext .ui-icon",
+        "selector": ".searchPagination .search-pagination .paginator .previous-page .pagination-btn,.searchPagination .search-pagination .paginator .next-page .pagination-btn",
         "properties": {
-          "height": "auto",
-          "padding": ".4em 1em",
-          "width": "auto"
+          "padding": "8px 10px",
+          "display": "inline-block",
+          "background": "#76b900"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-datepicker .ui-datepicker-buttonpane",
+        "selector": "/* Buttons */\n\n.fancybox-button",
         "properties": {
-          "background-image": "none",
-          "border-bottom": "0",
-          "border-left": "0",
-          "border-right": "0",
-          "margin": ".7em 0 0",
-          "padding": "0 .2em"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-datepicker .ui-datepicker-buttonpane button",
-        "properties": {
-          "margin": ".5em .2em .4em",
-          "padding": ".2em .6em .3em",
-          "width": "auto"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-dialog .ui-dialog-buttonpane",
-        "properties": {
-          "background-image": "none",
-          "border-width": "1px 0 0",
-          "margin-top": ".5em",
-          "padding": ".3em 1em .5em .4em",
-          "text-align": "left"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-button,.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited,a.ui-button,a:link.ui-button,a:visited.ui-button",
-        "properties": {
-          "color": "#454545"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-state-focus a,.ui-state-focus a:hover,.ui-state-focus a:link,.ui-state-focus a:visited,.ui-state-hover a,.ui-state-hover a:hover,.ui-state-hover a:link,.ui-state-hover a:visited,a.ui-button:focus,a.ui-button:hover",
-        "properties": {
-          "color": "#2b2b2b"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".cmp-accordion__button",
-        "properties": {
-          "display": "block",
-          "width": "100%",
-          "text-align": "left"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-button-icon-only",
-        "properties": {
-          "width": "2em"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-button-icon-only .ui-icon",
-        "properties": {
-          "margin-left": "-8px",
-          "margin-top": "-8px"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-button.ui-icon-notext .ui-icon",
-        "properties": {
-          "height": "2.1em",
-          "padding": "0",
-          "width": "2.1em"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": "button.ui-button::-moz-focus-inner,input.ui-button::-moz-focus-inner",
-        "properties": {
+          "background": "rgba(30, 30, 30, .6)",
           "border": "0",
-          "padding": "0"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-dialog .ui-dialog-buttonpane button",
-        "properties": {
-          "margin": ".5em .4em .5em 0"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-selectmenu-button.ui-button",
-        "properties": {
-          "text-align": "left",
-          "width": "14em"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-spinner-button",
-        "properties": {
-          "display": "block",
-          "font-size": ".5em",
-          "height": "50%",
+          "border-radius": "0",
+          "box-shadow": "none",
+          "display": "inline-block",
+          "height": "44px",
           "margin": "0",
-          "padding": "0",
-          "text-align": "center",
-          "width": "1.6em"
+          "padding": "10px",
+          "vertical-align": "top",
+          "width": "44px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-spinner a.ui-spinner-button",
-        "properties": {
-          "border-bottom-style": "none",
-          "border-right-style": "none",
-          "border-top-style": "none"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-widget button,.ui-widget input,.ui-widget select,.ui-widget textarea",
-        "properties": {
-          "font-family": "Arial,Helvetica,sans-serif",
-          "font-size": "1em"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       }
     ],
-    "card_styles": [],
+    "card_styles": [
+      {
+        "selector": ".columnLayout .column-container .column .card .column-1>.textcomp,.columnLayout .column-container .column .card .column-1>.textcomponentenhanced,.columnLayout .column-container .column .card .column-1>.button,.columnLayout .column-container .column .card .column-1>.videoComponent,.columnLayout .column-container .column .card .column-2>.textcomp,.columnLayout .column-container .column .card .column-2>.textcomponentenhanced,.columnLayout .column-container .column .card .column-2>.button,.columnLayout .column-container .column .card .column-2>.videoComponent,.columnLayout .column-container .column .card .column-3>.textcomp,.columnLayout .column-container .column .card .column-3>.textcomponentenhanced,.columnLayout .column-container .column .card .column-3>.button,.columnLayout .column-container .column .card .column-3>.videoComponent,.columnLayout .column-container .column .card .column-4>.textcomp,.columnLayout .column-container .column .card .column-4>.textcomponentenhanced,.columnLayout .column-container .column .card .column-4>.button,.columnLayout .column-container .column .card .column-4>.videoComponent",
+        "properties": {
+          "padding": "0 15px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".card",
+        "properties": {
+          "box-shadow": "0 8px 6px -6px #ccc"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnTiles .row .draggable .nvTile.card",
+        "properties": {
+          "box-shadow": "0 4px 5px 0 rgba(0,0,0,0.07),0 1px 10px 0 rgba(0,0,0,0.06),0 2px 4px -1px rgba(0,0,0,0.2)"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": "form div.creditcard div.form_row",
+        "properties": {
+          "margin-bottom": "12px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnLayout .column-container .column.small-12 .card",
+        "properties": {
+          "max-width": "420px",
+          "margin": "0 auto"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnLayout .column-container .column.medium-12 .card",
+        "properties": {
+          "max-width": "590px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnLayout .column-container .column.medium-6 .card",
+        "properties": {
+          "max-width": "590px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnLayout .column-container .column.small-6 .card",
+        "properties": {
+          "max-width": "420px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".columnTiles .row .scrolling-card-container",
+        "properties": {
+          "width": "1390px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".scrolling-card-container",
+        "properties": {
+          "width": "1290px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      }
+    ],
     "form_styles": [
       {
-        "selector": ".ui-checkboxradio-label .ui-icon-background",
+        "selector": ".select2-container--default .select2-selection--multiple .select2-selection__choice",
         "properties": {
-          "border": "0",
-          "border-radius": ".12em",
-          "box-shadow": "inset 1px 1px 1px #ccc"
+          "background-color": "#e4e4e4",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "margin-right": "5px",
+          "margin-top": "5px",
+          "padding": "0 5px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup",
+        "selector": ".select2-container--classic .select2-selection--multiple .select2-selection__choice",
         "properties": {
-          "border": "0",
-          "font-size": "1em",
-          "font-weight": "700",
-          "height": "auto",
-          "line-height": "1.5",
-          "margin": ".5em 0 0",
-          "padding": "2px .4em"
+          "background-color": "#e4e4e4",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "margin-right": "5px",
+          "margin-top": "5px",
+          "padding": "0 5px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": "input.ui-button.ui-icon-notext .ui-icon",
+        "selector": ".parsys .searchBox .search-box input[type=\"search\"]",
         "properties": {
-          "height": "auto",
-          "padding": ".4em 1em",
-          "width": "auto"
+          "border": "2px solid #eee",
+          "padding": "3px 0 0 0",
+          "font-weight": "normal",
+          "font-size": "28px",
+          "font-family": "nvidia-sans,Helvetica,Arial,Sans-Serif",
+          "color": "#666",
+          "line-height": "1",
+          "height": "40px",
+          "border-radius": "4px",
+          "-moz-border-radius": "4px",
+          "-webkit-border-radius": "4px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-checkboxradio-radio-label .ui-icon-background",
+        "selector": ".shieldGames #games .ui-selectmenu-button span.ui-selectmenu-text",
         "properties": {
-          "border": "0",
-          "border-radius": "1em",
-          "height": "1pc",
-          "width": "1pc"
+          "background-color": "#141414",
+          "color": "#fff",
+          "font-family": "nvidia-sans,Helvetica,Arial,Sans-Serif",
+          "font-size": "12px",
+          "padding": "10px 15px 8px 15px",
+          "text-align": "left",
+          "display": "block",
+          "line-height": "1.4"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-spinner-input",
+        "selector": ".select2-dropdown",
         "properties": {
-          "background": "0",
-          "border": "0",
-          "color": "inherit",
-          "margin": ".2em 2em .2em .4em",
-          "padding": ".222em 0",
-          "vertical-align": "middle"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-selectable-helper",
-        "properties": {
-          "border": "1px dotted #000"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".cmp-search__input",
-        "properties": {
-          "padding-left": "2rem",
-          "padding-right": "2rem",
-          "height": "100%",
+          "background-color": "white",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "display": "block",
           "width": "100%"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": "button.ui-button::-moz-focus-inner,input.ui-button::-moz-focus-inner",
+        "selector": ".select2-container--default .select2-selection--single",
         "properties": {
-          "border": "0",
-          "padding": "0"
+          "background-color": "#fff",
+          "border": "1px solid #aaa",
+          "border-radius": "4px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-controlgroup-vertical .ui-spinner-input",
+        "selector": ".select2-container--default .select2-selection--multiple",
         "properties": {
-          "width": "calc(100% - 2.4em)"
+          "background-color": "white",
+          "border": "1px solid #aaa",
+          "border-radius": "4px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon,.ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon",
+        "selector": ".select2-container--classic .select2-selection--single",
         "properties": {
-          "background-image": "none",
+          "background-color": "#f7f7f7",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "outline": "0",
+          "background-image": "linear-gradient(to bottom, white 50%, #eeeeee 100%)",
+          "background-repeat": "repeat-x"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".select2-container--classic .select2-selection--multiple",
+        "properties": {
+          "background-color": "white",
+          "border": "1px solid #aaa",
+          "border-radius": "4px",
+          "outline": "0"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": "form .form_field_text,form .form_field_textarea",
+        "properties": {
+          "background": "url(\"../../../etc/designs/default/images/social/fieldbg.gif\") repeat-x scroll center top #fff",
+          "border-color": "#7c7c7c #c3c3c3 #ddd",
           "border-style": "solid",
-          "border-width": "4px",
-          "height": "8px",
-          "width": "8px"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-datepicker .ui-datepicker-title select",
-        "properties": {
-          "font-size": "1em",
-          "margin": "1px 0"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-datepicker select.ui-datepicker-month,.ui-datepicker select.ui-datepicker-year",
-        "properties": {
-          "width": "45%"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-selectmenu-menu",
-        "properties": {
-          "display": "none",
+          "border-width": "1px",
+          "color": "#333",
+          "font-family": "\"Lucida Grande\",\"Lucida Sans Unicode\",Arial,Helvetica,sans-serif",
+          "font-size": "100%",
           "margin": "0",
-          "padding": "0"
+          "padding": "2px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-selectmenu-menu .ui-menu",
+        "selector": ".heroBanner .slider-container input[id^=slide1]:checked ~ #slides #controls label:nth-child(2):before",
         "properties": {
-          "padding-bottom": "1px"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-selectmenu-open",
-        "properties": {
-          "display": "block"
-        },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
-      },
-      {
-        "selector": ".ui-selectmenu-text",
-        "properties": {
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
           "display": "block",
-          "margin-right": "20px"
+          "border-radius": "10px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-selectmenu-button.ui-button",
+        "selector": ".heroBanner .slider-container input[id^=slide1]:checked ~ #slides #controls label:nth-child(2):after",
         "properties": {
-          "text-align": "left",
-          "width": "14em"
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-selectmenu-icon.ui-icon",
+        "selector": ".heroBanner .slider-container input[id^=slide1]:checked ~ #slides #controls label:nth-child(5):before",
         "properties": {
-          "margin-top": "0"
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-widget button,.ui-widget input,.ui-widget select,.ui-widget textarea",
+        "selector": ".heroBanner .slider-container input[id^=slide1]:checked ~ #slides #controls label:nth-child(5):after",
         "properties": {
-          "font-family": "Arial,Helvetica,sans-serif",
-          "font-size": "1em"
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       },
       {
-        "selector": ".ui-icon-radio-on",
+        "selector": ".heroBanner .slider-container input[id^=slide2]:checked ~ #slides #controls label:nth-child(3):before",
         "properties": {
-          "background-position": "-6pc -9pc"
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
         },
-        "sourceUrl": "https://www.nvidia.com/en-us/"
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".heroBanner .slider-container input[id^=slide2]:checked ~ #slides #controls label:nth-child(3):after",
+        "properties": {
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".heroBanner .slider-container input[id^=slide2]:checked ~ #slides #controls label:nth-child(1):before",
+        "properties": {
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".heroBanner .slider-container input[id^=slide2]:checked ~ #slides #controls label:nth-child(1):after",
+        "properties": {
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".heroBanner .slider-container input[id^=slide3]:checked ~ #slides #controls label:nth-child(4):before",
+        "properties": {
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
+      },
+      {
+        "selector": ".heroBanner .slider-container input[id^=slide3]:checked ~ #slides #controls label:nth-child(4):after",
+        "properties": {
+          "width": "25px",
+          "height": "2px",
+          "background-color": "#76b900",
+          "display": "block",
+          "border-radius": "10px"
+        },
+        "sourceUrl": "https://nvidianews.nvidia.com/news"
       }
     ],
     "border_radii": [
       "50%",
       ".12em",
       "1em",
-      "7px"
+      "7px",
+      "2px",
+      "10px",
+      ".1em",
+      "5px",
+      "0 2px 2px 0",
+      "2px 0 0 2px",
+      "4px",
+      "3px",
+      "6px",
+      "19px"
     ],
     "logo_urls": [
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/2788-2888_San_Tomas_Expwy.jpg/1280px-2788-2888_San_Tomas_Expwy.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
@@ -390,7 +613,9 @@
       "https://www.nvidia.com/content/nvidiaGDC/us/en_US/home/_jcr_content/root/responsivegrid/nv_carousel_10568374_1125374829/nv_teaser_copy.coreimg.jpeg/1789483677757/auto-robotaxi-hero-kv-blog-r7-1920x1080.jpeg",
       "https://www.nvidia.com/content/nvidiaGDC/us/en_US/home/_jcr_content/root/responsivegrid/nv_carousel_10568374_1125374829/nv_teaser_copy_20067_1598062812.coreimg.png/1789483678127/hyundai-kia-motional-cobrand-tech-blog-1920x1080.png",
       "https://developer.download.nvidia.com/images/og-default.jpg",
-      "https://developer.nvidia.com/assets/favicon-81bff16cada05fcff11e5711f7e6212bdc2e0a32ee57cd640a8cf66c87a6cbe6.ico"
+      "https://developer.nvidia.com/assets/favicon-81bff16cada05fcff11e5711f7e6212bdc2e0a32ee57cd640a8cf66c87a6cbe6.ico",
+      "https://nvidianews.nvidia.com/media/sites/219/images/social-image.jpg",
+      "https://nvidianews.nvidia.com/media/sites/219/images/favicon.ico"
     ],
     "source_css_urls": [
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
@@ -398,12 +623,22 @@
       "https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022",
       "https://www.nvidia.com/etc.clientlibs/nvidiaweb/clientlibs/clientlib-base.min.8684b0f16f804cac8396aa31fdf033e6.css",
       "https://www.nvidia.com/etc.clientlibs/nvidiaweb/clientlibs/clientlib-nvgdccart.min.d41d8cd98f00b204e9800998ecf8427e.css",
-      "https://developer.nvidia.com/assets/one-trust-bea625cf16a072ce5fdb0707a19f2645daf63c05eb1a016db72773eba008fc07.css"
+      "https://developer.nvidia.com/assets/one-trust-bea625cf16a072ce5fdb0707a19f2645daf63c05eb1a016db72773eba008fc07.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/common.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/main.min.b4994788cf1eaeed300a0aa7af53f3c8.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs_base.min.535b5b5300a53d096e23547fa1e63496.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs-all.min.a0519a25cf347ed8c36e40bebb34a411.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs-deep-learning.min.a7246548c1d8a2c1185ce7b8a07ce674.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs-locales.min.1c8759f790eff30604b2a8253bc0abc8.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/jquery.fancybox.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/select2.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/forms2.css",
+      "https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/ext-gnw.css"
     ],
-    "extracted_at": "2026-09-17T03:23:50.953Z",
+    "extracted_at": "2026-09-17T03:23:54.615Z",
     "source_urls": [
-      "https://developer.nvidia.com/contact"
+      "https://nvidianews.nvidia.com/news"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #666666  -webkit-box-shadow  出現17回  [external-css+style-tag]\n  #BADB80  background  出現16回  [inline-style]\n  #002BB8  color  出現15回  [inline-style]\n  #EEEEEE  background-color  出現8回  [style-tag]\n  #77B801  background  出現6回  [inline-style]\n  #D6E9B2  background  出現6回  [inline-style]\n  #CCCCCC  border  出現6回  [external-css+style-tag]\n  #333333  border-top-color  出現6回  [external-css+style-tag]\n  #006600  color  出現5回  [inline-style]\n  #F7F7F7  background-image  出現4回  [style-tag]\n  #A2A9B1  border  出現2回  [style-tag]\n  #B32424  border-left  出現2回  [style-tag]\n  #BF3C2C  color  出現2回  [style-tag]\n  #AAAAAA  border  出現2回  [style-tag+external-css]\n  #C5C5C5  border  出現2回  [external-css]\n\n【使用フォント】\n  Arial\n  monospace\n\n【角丸パターン】\n  50%\n  .12em\n  1em\n  7px\n\n【ボタンスタイル】\n  .ui-button,.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,html .ui-button.ui-state-disabled:active,html .ui-button.ui-state-disabled:hover\n    background: #f6f6f6\n    border: 1px solid #c5c5c5\n    color: #454545\n    font-weight: 400\n  .ui-button:focus,.ui-button:hover,.ui-state-focus,.ui-state-hover,.ui-widget-content .ui-state-focus,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-focus,.ui-widget-header .ui-state-hover\n    background: #ededed\n    border: 1px solid #ccc\n    color: #2b2b2b\n    font-weight: 400\n  .ui-button.ui-state-active:hover,.ui-button:active,.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active,a.ui-button:active\n    background: #007fff\n    border: 1px solid #003eff\n    color: #fff\n    font-weight: 400\n  .ui-button\n    display: inline-block\n    line-height: normal\n    margin-right: .1em\n    padding: .4em 1em\n    text-align: center\n    vertical-align: middle\n  input.ui-button.ui-icon-notext .ui-icon\n    height: auto\n    padding: .4em 1em\n    width: auto\n\n【フォームスタイル】\n  .ui-checkboxradio-label .ui-icon-background\n    border: 0\n    border-radius: .12em\n    box-shadow: inset 1px 1px 1px #ccc\n  .ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup\n    border: 0\n    font-size: 1em\n    font-weight: 700\n    height: auto\n    line-height: 1.5\n    margin: .5em 0 0\n  input.ui-button.ui-icon-notext .ui-icon\n    height: auto\n    padding: .4em 1em\n    width: auto\n  .ui-checkboxradio-radio-label .ui-icon-background\n    border: 0\n    border-radius: 1em\n    height: 1pc\n    width: 1pc\n  .ui-spinner-input\n    background: 0\n    border: 0\n    color: inherit\n    margin: .2em 2em .2em .4em\n    padding: .222em 0\n    vertical-align: middle\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/2788-2888_San_Tomas_Expwy.jpg/1280px-2788-2888_San_Tomas_Expwy.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/NVIDIA_logo.svg/250px-NVIDIA_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/120px-Nvidia_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://www.nvidia.com/content/dam/en-zz/Solutions/homepage/v2/sfg/nvidia-corporate-og-image-1200x630.jpg\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://www.nvidia.com/etc.clientlibs/nvidiaweb/clientlibs/clientlib-base.min.8684b0f16f804cac8396aa31fdf033e6.css\n  https://www.nvidia.com/etc.clientlibs/nvidiaweb/clientlibs/clientlib-nvgdccart.min.d41d8cd98f00b204e9800998ecf8427e.css\n  https://developer.nvidia.com/assets/one-trust-bea625cf16a072ce5fdb0707a19f2645daf63c05eb1a016db72773eba008fc07.css"
+  "css_summary": "【抽出カラー（頻度順）】\n  #76B900  background-color  出現139回  [external-css]\n  #EEEEEE  background-color  出現66回  [style-tag+external-css]\n  #666666  -webkit-box-shadow  出現63回  [external-css+style-tag]\n  #CCCCCC  border  出現53回  [external-css+style-tag]\n  #1A1A1A  background-color  出現23回  [external-css]\n  #BADB80  background  出現16回  [inline-style]\n  #002BB8  color  出現15回  [inline-style]\n  #004831  background-color  出現15回  [external-css]\n  #BDBDBD  color  出現15回  [external-css]\n  #333333  border-top-color  出現14回  [external-css+style-tag]\n  #AAAAAA  border  出現14回  [style-tag+external-css]\n  #616161  border-top  出現14回  [external-css]\n  #999999  color  出現11回  [external-css]\n  #DDDDDD  border  出現8回  [external-css]\n  #F44336  background-color  出現8回  [external-css]\n\n【使用フォント】\n  Arial\n  monospace\n  Lucida Grande\n  sans-serif\n  nvidia-sans\n  Trebuchet MS\n  GeForce-alt\n  GeForce\n  nvidia-sans-Regular\n  nvidia-sans-Light\n  DINWebPro-Medium\n  Font Awesome 5 Brands\n  Font Awesome 5 Pro\n  inherit\n\n【角丸パターン】\n  50%\n  .12em\n  1em\n  7px\n  2px\n  10px\n  .1em\n  5px\n\n【ボタンスタイル】\n  ★ .link-btn.btn-manual.lb_iframe.brand-green.regular-btn（実際のボタン要素で1回使用）\n    text-align: center\n    display: inline-block\n    min-width: 50px\n    border: 1px solid #CCC !important\n    color: #fff\n    font-weight: bold\n  ★ .btn.btn-primary-alt（実際のボタン要素で1回使用）\n    padding: 14px 14px 10px 14px\n    font-family: \"nvidia-sans\",Helvetica,Arial,Sans-Serif\n    font-size: 18px\n    padding-left: 20px\n    padding-top: 0\n    line-height: 20px\n  .cartLayout .nv-button,.navigation .nv-button\n    background-color: #76b900\n    border: medium none\n    color: #fff\n    display: inline-block\n    font-size: 1em\n    font-weight: bold\n  .btn-more\n    border: 1px solid #76b900\n    color: #fff\n    font-weight: bold\n    font-size: 18px\n    line-height: 1\n    font-family: \"nvidia-sans\",Helvetica,Arial,Sans-Serif\n  .shieldGames #games .ui-selectmenu-button span.ui-selectmenu-text\n    background-color: #141414\n    color: #fff\n    font-family: nvidia-sans,Helvetica,Arial,Sans-Serif\n    font-size: 12px\n    padding: 10px 15px 8px 15px\n    text-align: left\n\n【カードスタイル】\n  .columnLayout .column-container .column .card .column-1>.textcomp,.columnLayout .column-container .column .card .column-1>.textcomponentenhanced,.columnLayout .column-container .column .card .column-1>.button,.columnLayout .column-container .column .card .column-1>.videoComponent,.columnLayout .column-container .column .card .column-2>.textcomp,.columnLayout .column-container .column .card .column-2>.textcomponentenhanced,.columnLayout .column-container .column .card .column-2>.button,.columnLayout .column-container .column .card .column-2>.videoComponent,.columnLayout .column-container .column .card .column-3>.textcomp,.columnLayout .column-container .column .card .column-3>.textcomponentenhanced,.columnLayout .column-container .column .card .column-3>.button,.columnLayout .column-container .column .card .column-3>.videoComponent,.columnLayout .column-container .column .card .column-4>.textcomp,.columnLayout .column-container .column .card .column-4>.textcomponentenhanced,.columnLayout .column-container .column .card .column-4>.button,.columnLayout .column-container .column .card .column-4>.videoComponent\n    padding: 0 15px\n  .card\n    box-shadow: 0 8px 6px -6px #ccc\n  .columnTiles .row .draggable .nvTile.card\n    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.07),0 1px 10px 0 rgba(0,0,0,0.06),0 2px 4px -1px rgba(0,0,0,0.2)\n  form div.creditcard div.form_row\n    margin-bottom: 12px\n  .columnLayout .column-container .column.small-12 .card\n    max-width: 420px\n    margin: 0 auto\n\n【フォームスタイル】\n  .select2-container--default .select2-selection--multiple .select2-selection__choice\n    background-color: #e4e4e4\n    border: 1px solid #aaa\n    border-radius: 4px\n    margin-right: 5px\n    margin-top: 5px\n    padding: 0 5px\n  .select2-container--classic .select2-selection--multiple .select2-selection__choice\n    background-color: #e4e4e4\n    border: 1px solid #aaa\n    border-radius: 4px\n    margin-right: 5px\n    margin-top: 5px\n    padding: 0 5px\n  .parsys .searchBox .search-box input[type=\"search\"]\n    border: 2px solid #eee\n    padding: 3px 0 0 0\n    font-weight: normal\n    font-size: 28px\n    font-family: nvidia-sans,Helvetica,Arial,Sans-Serif\n    color: #666\n  .shieldGames #games .ui-selectmenu-button span.ui-selectmenu-text\n    background-color: #141414\n    color: #fff\n    font-family: nvidia-sans,Helvetica,Arial,Sans-Serif\n    font-size: 12px\n    padding: 10px 15px 8px 15px\n    text-align: left\n  .select2-dropdown\n    background-color: white\n    border: 1px solid #aaa\n    border-radius: 4px\n    display: block\n    width: 100%\n\n【ロゴ・ビジュアル素材】\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/2788-2888_San_Tomas_Expwy.jpg/1280px-2788-2888_San_Tomas_Expwy.jpg?utm_source=ja.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail\n  https://ja.wikipedia.org/static/favicon/wikipedia.ico\n  https://ja.wikipedia.org/static/images/icons/wikipedia.png\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ja.svg\n  https://ja.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-ja.svg\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/NVIDIA_logo.svg/250px-NVIDIA_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/120px-Nvidia_logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/20px-Commons-logo.svg.png?utm_source=ja.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\n  https://www.nvidia.com/content/dam/en-zz/Solutions/homepage/v2/sfg/nvidia-corporate-og-image-1200x630.jpg\n\n【取得CSSファイル】\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=ext.gadget.PDFLinkIcon%2CRedirectColor&amp;only=styles&amp;skin=vector-2022\n  https://ja.wikipedia.org/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector-2022\n  https://www.nvidia.com/etc.clientlibs/nvidiaweb/clientlibs/clientlib-base.min.8684b0f16f804cac8396aa31fdf033e6.css\n  https://www.nvidia.com/etc.clientlibs/nvidiaweb/clientlibs/clientlib-nvgdccart.min.d41d8cd98f00b204e9800998ecf8427e.css\n  https://developer.nvidia.com/assets/one-trust-bea625cf16a072ce5fdb0707a19f2645daf63c05eb1a016db72773eba008fc07.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/common.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/main.min.b4994788cf1eaeed300a0aa7af53f3c8.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs_base.min.535b5b5300a53d096e23547fa1e63496.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs-all.min.a0519a25cf347ed8c36e40bebb34a411.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs-deep-learning.min.a7246548c1d8a2c1185ce7b8a07ce674.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/clientlibs-locales.min.1c8759f790eff30604b2a8253bc0abc8.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/jquery.fancybox.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/select2.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/forms2.css\n  https://nvidianews.nvidia.com/media/themes/64d081263d633229694ae3db/css/ext-gnw.css"
 }
