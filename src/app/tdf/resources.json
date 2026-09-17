@@ -2,10 +2,13 @@
   "selected_urls": "https://ja.wikipedia.org/wiki/Ｔ＆Ｄフィナンシャル生命保険株式会社||ロゴ・CI\nhttps://www.tdf-life.co.jp||カラー,ロゴ・CI,フォント\nhttps://www.tdf-life.co.jp/||カラー,ロゴ・CI,フォント\nhttps://www.tdf-life.co.jp/company/profile.html||カラー,ロゴ・CI,フォント\nhttps://www.tdf-life.co.jp/minna_ni_yasashii/||カラー,ロゴ・CI,フォント\nhttps://www.td-holdings.co.jp/||カラー,ロゴ・CI,フォント\nhttps://www.td-system.co.jp/||カラー,ロゴ・CI,フォント",
   "css_info": {
     "css_variables": {},
-    "hex_colors": "#E60044 | color, background, border-top, border-right, border-color | 出現300回 | [external-css]\n#CCCCCC | border-bottom, border, border-color, border-top, border-left | 出現292回 | [external-css]\n#5B6FBC | background, border-bottom, border-left, border, background-color | 出現154回 | [external-css]\n#333333 | color, background, border | 出現136回 | [external-css]\n#2A4198 | background, color, border, border-color, border-top | 出現120回 | [external-css]\n#666666 | color, border-top, border-right, background, border | 出現120回 | [external-css]\n#EEEEEE | background, box-shadow, border, border-color | 出現96回 | [external-css]\n#495996 | border-top, border-right, border-bottom, background | 出現60回 | [external-css]\n#999999 | border-top, border-right, border-color, background, background-color | 出現56回 | [external-css]\n#DADADA | border, box-shadow, border-top, border-bottom, border-left | 出現48回 | [external-css]\n#D9D5CC | border-top, border-right, border-left, border-bottom | 出現48回 | [external-css]\n#E2EFFF | background, box-shadow, border, border-color | 出現44回 | [external-css]\n#FFEAEF | background | 出現44回 | [external-css]\n#F3F3F3 | background | 出現32回 | [external-css]\n#3575D0 | color | 出現28回 | [external-css]\n#C00039 | background, background-color, border-color | 出現28回 | [external-css]\n#2158A6 | color | 出現24回 | [external-css]\n#EBEBEB | background | 出現24回 | [external-css]\n#FCFCFC | background | 出現24回 | [external-css]\n#F7F7F7 | background-color | 出現20回 | [external-css]\n#F8F8F8 | background | 出現20回 | [external-css]\n#E4E4E4 | background | 出現20回 | [external-css]\n#D4E8D6 | border-color, background | 出現20回 | [external-css]\n#F7F2E8 | background | 出現16回 | [external-css]\n#EFF5FB | background, background-color | 出現16回 | [external-css]\n#8E002A | border-top | 出現16回 | [external-css]\n#008768 | color, border, border-color, background | 出現16回 | [external-css]\n#650084 | color, border, border-color, background | 出現16回 | [external-css]\n#E8DEED | border-color, background | 出現16回 | [external-css]\n#22347A | border-bottom | 出現12回 | [external-css]",
+    "hex_colors": "#E60044 | color, background, border-top, border-right, border-color | 出現300回 | [external-css]\n#CCCCCC | border-bottom, border, border-color, border-top, border-left | 出現295回 | [external-css]\n#5B6FBC | background, border-bottom, border-left, border, background-color | 出現154回 | [external-css]\n#333333 | color, background, border | 出現143回 | [external-css]\n#666666 | color, border-top, border-right, background, border | 出現133回 | [external-css]\n#2A4198 | background, color, border, border-color, border-top | 出現120回 | [external-css]\n#EEEEEE | background, box-shadow, border, border-color | 出現98回 | [external-css]\n#495996 | border-top, border-right, border-bottom, background | 出現60回 | [external-css]\n#999999 | border-top, border-right, border-color, background, background-color | 出現56回 | [external-css]\n#DADADA | border, box-shadow, border-top, border-bottom, border-left | 出現48回 | [external-css]\n#D9D5CC | border-top, border-right, border-left, border-bottom | 出現48回 | [external-css]\n#E2EFFF | background, box-shadow, border, border-color | 出現44回 | [external-css]\n#FFEAEF | background | 出現44回 | [external-css]\n#D60A17 | color, background, border-top, border-right | 出現39回 | [external-css]\n#EBEBEB | background, border-top, border-bottom, border | 出現38回 | [external-css]\n#F3F3F3 | background | 出現34回 | [external-css]\n#3575D0 | color | 出現28回 | [external-css]\n#C00039 | background, background-color, border-color | 出現28回 | [external-css]\n#F7F7F7 | background-color, background | 出現28回 | [external-css]\n#2158A6 | color | 出現24回 | [external-css]\n#FCFCFC | background | 出現24回 | [external-css]\n#006CB8 | color, border-color, background-color, background, border-bottom | 出現21回 | [external-css]\n#E0E0E0 | background-color, border, border-left, border-bottom, border-top | 出現21回 | [external-css]\n#F8F8F8 | background | 出現20回 | [external-css]\n#E4E4E4 | background | 出現20回 | [external-css]\n#D4E8D6 | border-color, background | 出現20回 | [external-css]\n#F7F2E8 | background | 出現16回 | [external-css]\n#EFF5FB | background, background-color | 出現16回 | [external-css]\n#8E002A | border-top | 出現16回 | [external-css]\n#008768 | color, border, border-color, background | 出現16回 | [external-css]",
     "rgb_colors": [],
     "fonts": [
-      "ヒラギノ角ゴPro W3"
+      "ヒラギノ角ゴPro W3",
+      "inherit",
+      "Hiragino Sans",
+      "slick"
     ],
     "button_styles": [
       {
@@ -147,6 +150,22 @@
         "sourceUrl": "https://www.tdf-life.co.jp/"
       },
       {
+        "selector": "★ .top_box_download_button（実際のボタン要素で1回使用）",
+        "properties": {
+          "padding": "20px",
+          "border-radius": ".3em",
+          "display": "block",
+          "color": "#fff",
+          "background": "#014f85",
+          "font-size": "1.25rem",
+          "line-height": "1.4",
+          "text-align": "center",
+          "padding-top": "50px",
+          "min-height": "280px"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
         "selector": "★ .btn-menu-01._category-01.dropdown-hook.icon-menu-info（実際のボタン要素で1回使用）",
         "properties": {
           "display": "inline-block",
@@ -176,6 +195,43 @@
           "padding-bottom": "5px"
         },
         "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
+      },
+      {
+        "selector": "★ .nav_button.js_toggle_button（実際のボタン要素で5回使用）",
+        "properties": {
+          "padding": "14px",
+          "display": "block",
+          "width": "100%",
+          "color": "#666",
+          "background": "#fff",
+          "font-size": "1.17rem",
+          "text-align": "left",
+          "padding-right": "2.82em"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
+        "selector": "★ .header_hamburger_button.js_toggle_button（実際のボタン要素で1回使用）",
+        "properties": {
+          "padding": "23px 7px 2px",
+          "display": "inline-block",
+          "color": "#fff",
+          "background": "#006cb8 url(data:image/png",
+          "background-size": "26px 24px",
+          "font-size": "0.56rem"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
+        "selector": "★ .button_close（実際のボタン要素で5回使用）",
+        "properties": {
+          "padding": "0.75em 0",
+          "display": "block",
+          "width": "100%",
+          "background": "#0e7dcc",
+          "text-align": "center"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
       },
       {
         "selector": ".btn-01",
@@ -270,65 +326,6 @@
           "background-color": "#5b6fbc",
           "border-color": "#5b6fbc",
           "border-top": "3px solid #495996"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": ".btn-02",
-        "properties": {
-          "display": "inline-block",
-          "min-width": "180px",
-          "min-height": "48px",
-          "padding": "10px 33px 8px 24px",
-          "font-weight": "bold",
-          "font-size": "16px",
-          "color": "#fff",
-          "text-align": "center",
-          "background": "#e60044",
-          "border-bottom": "3px solid #aa0032",
-          "border-radius": "3px"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": ".btn-search-01:hover, .btn-search-01:active, .btn-search-01:focus",
-        "properties": {
-          "padding": "8px 10px 10px 21px",
-          "color": "#fff",
-          "background": "linear-gradient(rgba(255, 255, 255, 0), rgba(238, 238, 238, 0))",
-          "background-color": "#5b6fbc",
-          "border-color": "#5b6fbc",
-          "border-top": "3px solid #495996"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": ".btn-pager-01 li a",
-        "properties": {
-          "display": "inline-block",
-          "height": "40px",
-          "padding": "5px 14px",
-          "color": "#333",
-          "background": "#fff",
-          "border": "1px solid #ccc",
-          "border-bottom": "3px solid #ccc",
-          "border-radius": "2.85px"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": "#advantage .btn-adv",
-        "properties": {
-          "display": "inline-block",
-          "min-width": "245px",
-          "min-height": "58px",
-          "padding": "16px 32px 10px 14px",
-          "font-size": "16px",
-          "color": "#333",
-          "text-align": "center",
-          "background": "#fff",
-          "border-radius": "3px",
-          "box-shadow": "0 0 6px -1px #666"
         },
         "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
       }
@@ -647,6 +644,27 @@
         "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
       },
       {
+        "selector": ".header_search input:not([type]),\r\n.header_search [type=\"text\"],\r\n.header_search [type=\"search\"]",
+        "properties": {
+          "padding": "1px",
+          "border": "none",
+          "border-radius": ".1em",
+          "display": "inline-block",
+          "width": "9.5em",
+          "background": "transparent",
+          "vertical-align": "middle"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
+        "selector": ".top_main-visual .carousel_change [type=\"button\"][aria-selected=\"true\"]",
+        "properties": {
+          "color": "#d80c18",
+          "background-color": "#d80c18"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
         "selector": "/*.content-top._weby form.weby_searchForm dd input",
         "properties": {
           "border": "1px solid #FFF",
@@ -682,6 +700,28 @@
         "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
       },
       {
+        "selector": ".header_search input:not([type]):focus,\r\n.header_search [type=\"text\"]:focus,\r\n.header_search [type=\"search\"]:focus",
+        "properties": {
+          "background-color": "#e0e0e0"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
+        "selector": ".header_search_sp input:not([type]):focus,\r\n.header_search_sp [type=\"text\"]:focus,\r\n.header_search_sp [type=\"search\"]:focus",
+        "properties": {
+          "background-color": "#e0e0e0"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
+        "selector": ".header_global-nav .nav_links > a:focus, .header_global-nav .nav_links > a:hover, .header_global-nav .nav_links > a.selected",
+        "properties": {
+          "color": "#0e7dcc",
+          "background": "linear-gradient(transparent 0, transparent 94%, #0e7dcc 94%, #0e7dcc 100%)"
+        },
+        "sourceUrl": "https://www.td-holdings.co.jp/"
+      },
+      {
         "selector": ".content-top._weby form.weby_searchForm dt,\r\n.content-top._weby form.weby_searchForm dd,\r\n.content-inner._webyContents form.weby_searchForm dt,\r\n.content-inner._webyContents form.weby_searchForm dd",
         "properties": {
           "display": "table-cell",
@@ -709,49 +749,6 @@
           "padding": "0 32px 0 10px"
         },
         "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": ".form-select-01 > select",
-        "properties": {
-          "width": "100%",
-          "padding": "9px 54px 8px 10px",
-          "font-size": "16px",
-          "background": "none",
-          "border": "none"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": "input[type=\"radio\"]:disabled + .form-radio:before",
-        "properties": {
-          "background": "#eee"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": ".form-checkbox:after",
-        "properties": {
-          "width": "20px",
-          "height": "20px",
-          "margin": "auto 0",
-          "border-radius": "2px"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": ".form-radio:before",
-        "properties": {
-          "border-radius": "50%"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
-      },
-      {
-        "selector": "input[type=\"radio\"]:checked + .form-radio, input[type=\"checkbox\"]:checked + .form-checkbox",
-        "properties": {
-          "height": "100%",
-          "background": "#e2efff"
-        },
-        "sourceUrl": "https://www.tdf-life.co.jp/minna_ni_yasashii/"
       }
     ],
     "border_radii": [
@@ -766,7 +763,13 @@
       "0 4px 4px 0",
       "10px",
       "100%",
-      "21px"
+      "21px",
+      ".1em",
+      ".2em .2em 0 0",
+      "0 0 .2em .2em",
+      "36px 36px 0 0",
+      ".2em",
+      ".3em"
     ],
     "logo_urls": [
       "https://www.tdf-life.co.jp/common/images/logo/logo_01.png",
@@ -774,17 +777,30 @@
       "https://www.tdf-life.co.jp/common/images/logo/logo_05.png",
       "https://www.tdf-life.co.jp/common/images/logo/logo_03.png",
       "https://www.tdf-life.co.jp/company/images/logo_profile_01.gif",
-      "https://www.tdf-life.co.jp/common/images/logo/logo_04.png"
+      "https://www.tdf-life.co.jp/common/images/logo/logo_04.png",
+      "https://www.td-holdings.co.jp/common/images/l_header/logo.png",
+      "https://www.td-holdings.co.jp/common/images/l_header/search_button.png",
+      "https://www.td-holdings.co.jp/common/images/l_header/logo_group.png",
+      "https://www.td-holdings.co.jp/common/images/l_header/megadown_group.jpg",
+      "https://www.td-holdings.co.jp/common/images/l_header/megadown_ir.jpg",
+      "https://www.td-holdings.co.jp/common/images/l_header/megadrop_company.jpg",
+      "https://www.td-holdings.co.jp/common/images/l_header/megadrop_csr.jpg",
+      "https://www.td-holdings.co.jp/common/images/l_header/megadrop_news.jpg",
+      "https://www.td-holdings.co.jp/images/index_logo_tds.png"
     ],
     "source_css_urls": [
       "https://www.tdf-life.co.jp/common/css/main.css?20250403",
       "https://www.tdf-life.co.jp/css/style.css?20250403",
-      "https://www.tdf-life.co.jp/common/css/main.css"
+      "https://www.tdf-life.co.jp/common/css/main.css",
+      "https://www.td-holdings.co.jp/common/css/common.css",
+      "https://www.td-holdings.co.jp/common/css/font_normal.css",
+      "https://www.td-holdings.co.jp/common/css/slick.css",
+      "https://www.td-holdings.co.jp/common/css/slick-theme.css"
     ],
-    "extracted_at": "2026-09-17T02:23:54.759Z",
+    "extracted_at": "2026-09-17T02:24:05.326Z",
     "source_urls": [
-      "https://www.tdf-life.co.jp/minna_ni_yasashii/"
+      "https://www.td-holdings.co.jp/"
     ]
   },
-  "css_summary": "【抽出カラー（頻度順）】\n  #E60044  color  出現300回  [external-css]\n  #CCCCCC  border-bottom  出現292回  [external-css]\n  #5B6FBC  background  出現154回  [external-css]\n  #333333  color  出現136回  [external-css]\n  #2A4198  background  出現120回  [external-css]\n  #666666  color  出現120回  [external-css]\n  #EEEEEE  background  出現96回  [external-css]\n  #495996  border-top  出現60回  [external-css]\n  #999999  border-top  出現56回  [external-css]\n  #DADADA  border  出現48回  [external-css]\n  #D9D5CC  border-top  出現48回  [external-css]\n  #E2EFFF  background  出現44回  [external-css]\n  #FFEAEF  background  出現44回  [external-css]\n  #F3F3F3  background  出現32回  [external-css]\n  #3575D0  color  出現28回  [external-css]\n\n【使用フォント】\n  ヒラギノ角ゴPro W3\n\n【角丸パターン】\n  4px\n  3px\n  0.3em\n  50%\n  4px 4px 0 0\n  0 0 3px 3px\n  2px\n  2.85px\n\n【ボタンスタイル】\n  ★ .nav-btn-01._color-03._size-03._login（実際のボタン要素で2回使用）\n    display: block\n    min-width: 180px\n    min-height: 33px\n    padding: 15px 34px\n    font-weight: bold\n    font-size: 13px\n  ★ .nav-btn-01._color-04._size-03._otoiawase2（実際のボタン要素で2回使用）\n    margin-right: auto\n    margin-left: auto\n    width: auto\n    font-size: 13px\n    display: block\n    padding: 15px 34px\n  ★ .nav-btn-01._color-01._size-01（実際のボタン要素で13回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 173px\n    font-size: 16px\n    display: block\n    padding: 5px 23px\n  ★ .nav-btn-01._color-03._size-02（実際のボタン要素で7回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 263px\n    padding: 5px 23px\n    font-size: 14px\n    display: block\n  ★ .btn-close-01.dropdown-close（実際のボタン要素で2回使用）\n    font-size: 14px\n    color: #333\n    text-align: center\n    border-bottom: 3px solid #ccc\n    height: 45px\n    padding: 10px 0\n\n【カードスタイル】\n  .box-03\n    padding: 0 25px 15px\n    background: #fff\n    border: 1px solid #d0dded\n    border-radius: 3px\n    box-shadow: 0 0 0 3px #e2efff inset\n  .box-03 .cate-01\n    display: inline-block\n    margin: 0 -10px 10px\n    padding: 8px 12px\n    font-weight: bold\n    font-size: 14px\n    color: #fff\n  .box-09\n    display: block\n    border: 2px solid #06C755\n    border-radius: 2px\n    padding: 20px 15px\n    background-color: #ffffff\n  .box-05\n    padding: 16px 24px\n    background: #fff\n    border: 1px solid #e60044\n    border-radius: 3px\n  .box-08\n    padding: 16px 24px\n    background: #fff\n    border: 2px dotted #333333\n    border-radius: 3px\n\n【フォームスタイル】\n  #header .nav-utility-02 li .form-search\n    width: 193px\n    height: 32px\n    margin-left: 23px\n    padding: 0 32px 0 10px\n    background: #f8f8f8\n    border: 1px solid #dadada\n  .form-text-01, .form-text-02, .form-text-03\n    width: 241px\n    height: 44px\n    padding: 0 32px 0 10px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    border-radius: 4px\n  .content-top._weby input.webyform-search,\r\n.content-inner._webyContents input.webyform-search\n    height: 46px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    box-shadow: 3px 3px 3px -2px #dadada inset\n    width: 100%\n    padding-left: 20px\n  .form-select-01\n    display: inline-block\n    margin-right: 5px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    border-radius: 4px\n    box-shadow: 1px 1px 4px -1px #dadada inset\n  .form-radio, .form-checkbox\n    display: inline-block\n    padding: 8px 27px 8px 41px\n    border: 1px solid #ccc\n    border-radius: 4px\n\n【ロゴ・ビジュアル素材】\n  https://www.tdf-life.co.jp/common/images/logo/logo_01.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_02.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_05.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_03.png\n  https://www.tdf-life.co.jp/company/images/logo_profile_01.gif\n  https://www.tdf-life.co.jp/common/images/logo/logo_04.png\n\n【取得CSSファイル】\n  https://www.tdf-life.co.jp/common/css/main.css?20250403\n  https://www.tdf-life.co.jp/css/style.css?20250403\n  https://www.tdf-life.co.jp/common/css/main.css"
+  "css_summary": "【抽出カラー（頻度順）】\n  #E60044  color  出現300回  [external-css]\n  #CCCCCC  border-bottom  出現295回  [external-css]\n  #5B6FBC  background  出現154回  [external-css]\n  #333333  color  出現143回  [external-css]\n  #666666  color  出現133回  [external-css]\n  #2A4198  background  出現120回  [external-css]\n  #EEEEEE  background  出現98回  [external-css]\n  #495996  border-top  出現60回  [external-css]\n  #999999  border-top  出現56回  [external-css]\n  #DADADA  border  出現48回  [external-css]\n  #D9D5CC  border-top  出現48回  [external-css]\n  #E2EFFF  background  出現44回  [external-css]\n  #FFEAEF  background  出現44回  [external-css]\n  #D60A17  color  出現39回  [external-css]\n  #EBEBEB  background  出現38回  [external-css]\n\n【使用フォント】\n  ヒラギノ角ゴPro W3\n  inherit\n  Hiragino Sans\n  slick\n\n【角丸パターン】\n  4px\n  3px\n  0.3em\n  50%\n  4px 4px 0 0\n  0 0 3px 3px\n  2px\n  2.85px\n\n【ボタンスタイル】\n  ★ .nav-btn-01._color-03._size-03._login（実際のボタン要素で2回使用）\n    display: block\n    min-width: 180px\n    min-height: 33px\n    padding: 15px 34px\n    font-weight: bold\n    font-size: 13px\n  ★ .nav-btn-01._color-04._size-03._otoiawase2（実際のボタン要素で2回使用）\n    margin-right: auto\n    margin-left: auto\n    width: auto\n    font-size: 13px\n    display: block\n    padding: 15px 34px\n  ★ .nav-btn-01._color-01._size-01（実際のボタン要素で13回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 173px\n    font-size: 16px\n    display: block\n    padding: 5px 23px\n  ★ .nav-btn-01._color-03._size-02（実際のボタン要素で7回使用）\n    margin-right: auto\n    margin-left: auto\n    width: 263px\n    padding: 5px 23px\n    font-size: 14px\n    display: block\n  ★ .btn-close-01.dropdown-close（実際のボタン要素で2回使用）\n    font-size: 14px\n    color: #333\n    text-align: center\n    border-bottom: 3px solid #ccc\n    height: 45px\n    padding: 10px 0\n\n【カードスタイル】\n  .box-03\n    padding: 0 25px 15px\n    background: #fff\n    border: 1px solid #d0dded\n    border-radius: 3px\n    box-shadow: 0 0 0 3px #e2efff inset\n  .box-03 .cate-01\n    display: inline-block\n    margin: 0 -10px 10px\n    padding: 8px 12px\n    font-weight: bold\n    font-size: 14px\n    color: #fff\n  .box-09\n    display: block\n    border: 2px solid #06C755\n    border-radius: 2px\n    padding: 20px 15px\n    background-color: #ffffff\n  .box-05\n    padding: 16px 24px\n    background: #fff\n    border: 1px solid #e60044\n    border-radius: 3px\n  .box-08\n    padding: 16px 24px\n    background: #fff\n    border: 2px dotted #333333\n    border-radius: 3px\n\n【フォームスタイル】\n  #header .nav-utility-02 li .form-search\n    width: 193px\n    height: 32px\n    margin-left: 23px\n    padding: 0 32px 0 10px\n    background: #f8f8f8\n    border: 1px solid #dadada\n  .form-text-01, .form-text-02, .form-text-03\n    width: 241px\n    height: 44px\n    padding: 0 32px 0 10px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    border-radius: 4px\n  .content-top._weby input.webyform-search,\r\n.content-inner._webyContents input.webyform-search\n    height: 46px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    box-shadow: 3px 3px 3px -2px #dadada inset\n    width: 100%\n    padding-left: 20px\n  .form-select-01\n    display: inline-block\n    margin-right: 5px\n    background: #f8f8f8\n    border: 1px solid #dadada\n    border-radius: 4px\n    box-shadow: 1px 1px 4px -1px #dadada inset\n  .form-radio, .form-checkbox\n    display: inline-block\n    padding: 8px 27px 8px 41px\n    border: 1px solid #ccc\n    border-radius: 4px\n\n【ロゴ・ビジュアル素材】\n  https://www.tdf-life.co.jp/common/images/logo/logo_01.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_02.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_05.png\n  https://www.tdf-life.co.jp/common/images/logo/logo_03.png\n  https://www.tdf-life.co.jp/company/images/logo_profile_01.gif\n  https://www.tdf-life.co.jp/common/images/logo/logo_04.png\n  https://www.td-holdings.co.jp/common/images/l_header/logo.png\n  https://www.td-holdings.co.jp/common/images/l_header/search_button.png\n  https://www.td-holdings.co.jp/common/images/l_header/logo_group.png\n  https://www.td-holdings.co.jp/common/images/l_header/megadown_group.jpg\n\n【取得CSSファイル】\n  https://www.tdf-life.co.jp/common/css/main.css?20250403\n  https://www.tdf-life.co.jp/css/style.css?20250403\n  https://www.tdf-life.co.jp/common/css/main.css\n  https://www.td-holdings.co.jp/common/css/common.css\n  https://www.td-holdings.co.jp/common/css/font_normal.css\n  https://www.td-holdings.co.jp/common/css/slick.css\n  https://www.td-holdings.co.jp/common/css/slick-theme.css"
 }
