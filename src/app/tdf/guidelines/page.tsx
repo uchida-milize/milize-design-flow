@@ -12,7 +12,7 @@ import {
   type ResourcesJson,
 } from '@/lib/designExtract';
 
-const clientName = 'Ｔ&Ｄフィナンシャル生命保険株式会社';
+const clientName = 'Ｔ＆Ｄフィナンシャル生命保険株式会社';
 const basePath = '/tdf';
 const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';

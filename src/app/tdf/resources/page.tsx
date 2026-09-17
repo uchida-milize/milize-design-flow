@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 
-const clientName = 'Ｔ&Ｄフィナンシャル生命保険株式会社';
+const clientName = 'Ｔ＆Ｄフィナンシャル生命保険株式会社';
 const basePath = '/tdf';
 
 const TOKEN_RE = /(https?:\/\/[^\s"',\]\}\)]+)|(#[0-9a-fA-F]{6,8}|#[0-9a-fA-F]{3}(?![0-9a-fA-F])|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(?:\s*,\s*[\d.]+)?\s*\))/g;

@@ -2,17 +2,17 @@ import { ClientPortalHeader } from '@/components/ClientPortalHeader';
 import { ClientLogoHero } from '@/components/ClientLogoHero';
 import { BrandIdentitySection } from '@/components/BrandIdentitySection';
 
-const clientName = 'Ｔ&Ｄフィナンシャル生命保険株式会社';
+const clientName = 'Ｔ＆Ｄフィナンシャル生命保険株式会社';
 const basePath = '/tdf';
 const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';
 
 const colorRatio = [
-  { hex: '#E60044', name: '#E60044', percent: 30.3 },
-  { hex: '#5B6FBC', name: '#5B6FBC', percent: 23.4 },
-  { hex: '#333333', name: '#333333', percent: 17.5 },
-  { hex: '#CCCCCC', name: '#CCCCCC', percent: 16.9 },
-  { hex: '#2A4198', name: '#2A4198', percent: 11.9 },
+  { hex: '#E60044', name: '#E60044', percent: 28.7 },
+  { hex: '#5B6FBC', name: '#5B6FBC', percent: 23.1 },
+  { hex: '#333333', name: '#333333', percent: 18 },
+  { hex: '#CCCCCC', name: '#CCCCCC', percent: 17.1 },
+  { hex: '#666666', name: '#666666', percent: 13.1 },
 ];
 
 export default function Home() {

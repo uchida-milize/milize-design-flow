@@ -13,7 +13,7 @@ import {
 } from '@/lib/designExtract';
 import { toReactStyle, toCssVarStyle, isLightCssColor, isIconOnlyButtonStyle } from '@/lib/cssStyle';
 
-const clientName = 'Ｔ&Ｄフィナンシャル生命保険株式会社';
+const clientName = 'Ｔ＆Ｄフィナンシャル生命保険株式会社';
 const basePath = '/tdf';
 const slug = basePath.replace(/^\//, '');
 const primaryColor = 'var(--primary-color)';
