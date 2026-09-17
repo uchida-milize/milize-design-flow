@@ -235,11 +235,42 @@ function parseHtmlMeta(html: string, baseUrl: string): {
   };
 }
 
+// header内のホームリンクが、ロゴではなく検索・メニュー・カート等のUIボタンである場合の
+// 目印（class/aria-label/id等によく現れるキーワード）。ヘッダーには複数のホームリンク相当の
+// 要素（例: モバイル用検索アイコンが "/" を指す等）が並ぶことがあり、単純に最初の一致を
+// ロゴと決め打ちすると検索アイコン等を誤って採用してしまうため、除外判定に使う。
+const HEADER_NON_LOGO_HINT = /search|menu|nav|toggle|hamburger|cart|icon-button|skip[-_]?to|account|login|sign[-_]?in/i;
+
+/** SVGのviewBox/width/heightから、正方形に近い小アイコン（虫眼鏡・ハンバーガー等）らしいかを判定する */
+function isSmallSquareIconSvg(svg: string): boolean {
+  const vbMatch = /viewBox=["']\s*([\d.-]+)\s+([\d.-]+)\s+([\d.-]+)\s+([\d.-]+)\s*["']/i.exec(svg);
+  let w: number | null = null;
+  let h: number | null = null;
+  if (vbMatch) {
+    w = parseFloat(vbMatch[3]);
+    h = parseFloat(vbMatch[4]);
+  } else {
+    const wMatch = /\bwidth=["']([\d.]+)["']/i.exec(svg);
+    const hMatch = /\bheight=["']([\d.]+)["']/i.exec(svg);
+    if (wMatch && hMatch) { w = parseFloat(wMatch[1]); h = parseFloat(hMatch[1]); }
+  }
+  if (w === null || h === null || !isFinite(w) || !isFinite(h) || w <= 0 || h <= 0) return false;
+  const aspect = w / h;
+  // ブランドロゴ（ワードマーク等）は横長になりやすく、検索・ハンバーガー等のUIアイコンは
+  // 正方形に近い小サイズ（概ね32px相当以下）であることが多い
+  return w <= 32 && h <= 32 && aspect >= 0.8 && aspect <= 1.25;
+}
+
 /**
  * <header>内で、サイトルート（"/" やそのドメインのトップURL）へのリンクの中にある
  * ロゴを取得する。多くのサイトでヘッダーロゴは自ドメインのトップページへのリンクで
  * 囲まれているという慣習を根拠にした、サイト非依存の検出方法。
  * <img>で埋め込まれていればURLを、インラインSVGならそのマークアップ自体を返す。
+ *
+ * header内には検索アイコンやハンバーガーメニュー等、"/" 相当へのリンクに見えるが
+ * ロゴではないUI要素が他にも存在し得るため、最初の一致を即採用せず、
+ * 明らかに非ロゴ（検索・メニュー等のUIアイコン）と判断できる候補はスキップして
+ * 次の候補を探す。
  */
 function extractHeaderLogo(html: string, baseUrl: string): { imgUrl: string | null; svgMarkup: string | null } {
   const headerOpenMatch = /<header\b[^>]*>/i.exec(html);
@@ -261,6 +292,7 @@ function extractHeaderLogo(html: string, baseUrl: string): { imgUrl: string | nu
   while ((am = anchorRe.exec(headerHtml)) !== null) {
     const href = am[1];
     const inner = am[2];
+    const anchorOuterStart = am[0].slice(0, am[0].indexOf('>') + 1);
     // "#" 等のプレースホルダーリンク（JS制御のトグル等）はホームリンクではないため除外
     if (!href || href === '#' || /^(javascript:|#)/i.test(href)) continue;
 
@@ -276,11 +308,23 @@ function extractHeaderLogo(html: string, baseUrl: string): { imgUrl: string | nu
     } catch { /* 相対URL解決失敗は候補から除外 */ }
     if (!isRootLink) continue;
 
+    // アンカー自身やその中身（aria-label等）に検索・メニュー等のUIヒントがあれば
+    // ロゴ候補として信頼しない
+    const looksLikeNonLogoControl = HEADER_NON_LOGO_HINT.test(anchorOuterStart) || HEADER_NON_LOGO_HINT.test(inner);
+
+    // 明らかに非ロゴ（検索・メニュー等のUIアイコン）と判断できる場合は採用せず、
+    // 次の候補を探す（見つからなければ呼び出し側の logoUrls/OGP/favicon にフォールバックする）
     const svgMatch = /<svg\b[\s\S]*?<\/svg>/i.exec(inner);
-    if (svgMatch) return { imgUrl: null, svgMarkup: svgMatch[0] };
+    if (svgMatch) {
+      if (looksLikeNonLogoControl || isSmallSquareIconSvg(svgMatch[0])) continue;
+      return { imgUrl: null, svgMarkup: svgMatch[0] };
+    }
 
     const imgMatch = /<img[^>]+src=["']([^"']+)["']/i.exec(inner);
-    if (imgMatch) return { imgUrl: toAbsolute(imgMatch[1], baseUrl), svgMarkup: null };
+    if (imgMatch) {
+      if (looksLikeNonLogoControl) continue;
+      return { imgUrl: toAbsolute(imgMatch[1], baseUrl), svgMarkup: null };
+    }
   }
   return { imgUrl: null, svgMarkup: null };
 }
@@ -1055,8 +1099,18 @@ export async function POST(req: NextRequest) {
   }
 
   const client_slug = body.client_slug as string | undefined;
-  // ロゴの出典検証用: このバッチの中で最も頻出するドメインを「対象企業の公式ドメイン」とみなす
-  const primaryDomain = detectPrimaryDomain(urls);
+  // ロゴの出典検証用の「対象企業の公式ドメイン」。
+  // Dify側から primary_url（クライアント作成時に指定した公式URL＝生成物一覧の「指定」URL）が
+  // 渡されていればそれを最優先で採用する。この値はワークフロー全体で固定のため、
+  // イテレーションが1URLずつ個別に本APIを呼び出す構成でも「今回のURLだけを見て
+  // 自分自身を公式ドメインとみなしてしまう」誤判定を避けられる
+  // （urls配列からの推定は、1URLのみのバッチだとそのURL自身が常に「最頻出」になり無力化するため）。
+  const primaryUrlParam = typeof body.primary_url === 'string' ? body.primary_url.trim() : '';
+  let primaryDomain: string | null = null;
+  if (primaryUrlParam) {
+    try { primaryDomain = baseDomain(new URL(primaryUrlParam).hostname); } catch { /* 不正なURLは無視してフォールバック */ }
+  }
+  if (primaryDomain === null) primaryDomain = detectPrimaryDomain(urls);
 
   // 集計用
   let allCssVars: Record<string, string> = {};
